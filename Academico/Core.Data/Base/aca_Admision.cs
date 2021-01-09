@@ -53,6 +53,7 @@ namespace Core.Data.Base
         public int IdCatalogoFichaAgua_Aspirante { get; set; }
         public bool TieneElectricidad_Aspirante { get; set; }
         public bool TieneHermanos_Aspirante { get; set; }
+        public Nullable<int> CantidadHermanos { get; set; }
         public int IdCatalogoFichaMotivo_Aspirante { get; set; }
         public int IdCatalogoFichaInst_Aspirante { get; set; }
         public int IdCatalogoFichaFinanc_Aspirante { get; set; }
@@ -73,7 +74,6 @@ namespace Core.Data.Base
         public string Correo_Padre { get; set; }
         public string Sexo_Padre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Padre { get; set; }
-        public string CodCatalogoSangre_Padre { get; set; }
         public string CodCatalogoCONADIS_Padre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Padre { get; set; }
         public string NumeroCarnetConadis_Padre { get; set; }
@@ -114,7 +114,6 @@ namespace Core.Data.Base
         public string Correo_Madre { get; set; }
         public string Sexo_Madre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Madre { get; set; }
-        public string CodCatalogoSangre_Madre { get; set; }
         public string CodCatalogoCONADIS_Madre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Madre { get; set; }
         public string NumeroCarnetConadis_Madre { get; set; }
@@ -155,7 +154,6 @@ namespace Core.Data.Base
         public string Correo_Representante { get; set; }
         public string Sexo_Representante { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Representante { get; set; }
-        public string CodCatalogoSangre_Representante { get; set; }
         public string CodCatalogoCONADIS_Representante { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Representante { get; set; }
         public string NumeroCarnetConadis_Representante { get; set; }
@@ -201,5 +199,28 @@ namespace Core.Data.Base
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public Nullable<int> IdProfesion_Padre { get; set; }
+        public Nullable<int> IdProfesion_Madre { get; set; }
+        public Nullable<int> IdProfesion_Representante { get; set; }
+    
+        public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
+        public virtual aca_Catalogo aca_Catalogo { get; set; }
+        public virtual aca_Catalogo aca_Catalogo1 { get; set; }
+        public virtual aca_Catalogo aca_Catalogo2 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha1 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha2 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha3 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha4 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha5 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha6 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha7 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha8 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha9 { get; set; }
+        public virtual aca_CatalogoFicha aca_CatalogoFicha10 { get; set; }
+        public virtual aca_Curso aca_Curso { get; set; }
+        public virtual aca_Jornada aca_Jornada { get; set; }
+        public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
+        public virtual aca_Sede aca_Sede { get; set; }
     }
 }

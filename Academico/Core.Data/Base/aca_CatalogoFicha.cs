@@ -25,6 +25,17 @@ namespace Core.Data.Base
             this.aca_SocioEconomico5 = new HashSet<aca_SocioEconomico>();
             this.aca_SocioEconomico6 = new HashSet<aca_SocioEconomico>();
             this.aca_Familia = new HashSet<aca_Familia>();
+            this.aca_Admision = new HashSet<aca_Admision>();
+            this.aca_Admision1 = new HashSet<aca_Admision>();
+            this.aca_Admision2 = new HashSet<aca_Admision>();
+            this.aca_Admision3 = new HashSet<aca_Admision>();
+            this.aca_Admision4 = new HashSet<aca_Admision>();
+            this.aca_Admision5 = new HashSet<aca_Admision>();
+            this.aca_Admision6 = new HashSet<aca_Admision>();
+            this.aca_Admision7 = new HashSet<aca_Admision>();
+            this.aca_Admision8 = new HashSet<aca_Admision>();
+            this.aca_Admision9 = new HashSet<aca_Admision>();
+            this.aca_Admision10 = new HashSet<aca_Admision>();
         }
     
         public int IdCatalogoFicha { get; set; }
@@ -58,5 +69,27 @@ namespace Core.Data.Base
         public virtual ICollection<aca_SocioEconomico> aca_SocioEconomico6 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Familia> aca_Familia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision4 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision5 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision6 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision7 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision8 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision9 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision10 { get; set; }
     }
 }

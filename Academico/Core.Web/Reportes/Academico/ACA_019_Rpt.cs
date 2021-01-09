@@ -54,6 +54,7 @@ namespace Core.Web.Reportes.Academico
             if (sede != null)
             {
                 Rector.Text = sede.NombreRector;
+                Secretaria.Text = sede.NombreSecretaria;
             }
 
         }

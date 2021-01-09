@@ -9,6 +9,7 @@ namespace Core.Web.Helps
     public interface ISessionValueProvider
     {
         string IdEmpresa { get; set; }
+        string IdEmpresaAdmision { get; set; }
         string IdUsuario { get; set; }
         string NomEmpresa { get; set; }
         string IdSucursal { get; set; }
@@ -50,6 +51,11 @@ namespace Core.Web.Helps
         {
             get { return _sessionValueProvider.IdEmpresa; }
             set { _sessionValueProvider.IdEmpresa = value; }
+        }
+        public static string IdEmpresaAdmision
+        {
+            get { return _sessionValueProvider.IdEmpresaAdmision; }
+            set { _sessionValueProvider.IdEmpresaAdmision = value; }
         }
         public static string NomEmpresa
         {
@@ -203,6 +209,7 @@ namespace Core.Web.Helps
     {
         private const string _IdUsuario = "FxAca_IdUsuario";
         private const string _IdEmpresa = "FxAca_IdEmpresa";
+        private const string _IdEmpresaAdmision = "FxAca_IdEmpresaAdmision";
         private const string _NomEmpresa = "FxAca_FIXED";
         private const string _IdSucursal = "FxAca_IdSucursal";
         private const string _IdNivel = "FxAca_IdNivel";
@@ -234,6 +241,11 @@ namespace Core.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_IdEmpresa]; }
             set { HttpContext.Current.Session[_IdEmpresa] = value; }
+        }
+        public string IdEmpresaAdmision
+        {
+            get { return (string)HttpContext.Current.Session[_IdEmpresaAdmision]; }
+            set { HttpContext.Current.Session[_IdEmpresaAdmision] = value; }
         }
         public string IdUsuario
         {

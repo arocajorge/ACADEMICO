@@ -49,6 +49,7 @@
           <Property Name="IdCatalogoFichaAgua_Aspirante" Type="int" Nullable="false" />
           <Property Name="TieneElectricidad_Aspirante" Type="bit" Nullable="false" />
           <Property Name="TieneHermanos_Aspirante" Type="bit" Nullable="false" />
+          <Property Name="CantidadHermanos" Type="int" />
           <Property Name="IdCatalogoFichaMotivo_Aspirante" Type="int" Nullable="false" />
           <Property Name="IdCatalogoFichaInst_Aspirante" Type="int" Nullable="false" />
           <Property Name="IdCatalogoFichaFinanc_Aspirante" Type="int" Nullable="false" />
@@ -69,7 +70,6 @@
           <Property Name="Correo_Padre" Type="varchar" MaxLength="100" />
           <Property Name="Sexo_Padre" Type="varchar" MaxLength="25" />
           <Property Name="FechaNacimiento_Padre" Type="datetime" />
-          <Property Name="CodCatalogoSangre_Padre" Type="varchar" MaxLength="25" />
           <Property Name="CodCatalogoCONADIS_Padre" Type="varchar" MaxLength="25" />
           <Property Name="PorcentajeDiscapacidad_Padre" Type="float" />
           <Property Name="NumeroCarnetConadis_Padre" Type="varchar" MaxLength="200" />
@@ -110,7 +110,6 @@
           <Property Name="Correo_Madre" Type="varchar" MaxLength="100" />
           <Property Name="Sexo_Madre" Type="varchar" MaxLength="25" />
           <Property Name="FechaNacimiento_Madre" Type="datetime" />
-          <Property Name="CodCatalogoSangre_Madre" Type="varchar" MaxLength="25" />
           <Property Name="CodCatalogoCONADIS_Madre" Type="varchar" MaxLength="25" />
           <Property Name="PorcentajeDiscapacidad_Madre" Type="float" />
           <Property Name="NumeroCarnetConadis_Madre" Type="varchar" MaxLength="200" />
@@ -151,7 +150,6 @@
           <Property Name="Correo_Representante" Type="varchar" MaxLength="100" />
           <Property Name="Sexo_Representante" Type="varchar" MaxLength="25" />
           <Property Name="FechaNacimiento_Representante" Type="datetime" />
-          <Property Name="CodCatalogoSangre_Representante" Type="varchar" MaxLength="25" />
           <Property Name="CodCatalogoCONADIS_Representante" Type="varchar" MaxLength="25" />
           <Property Name="PorcentajeDiscapacidad_Representante" Type="float" />
           <Property Name="NumeroCarnetConadis_Representante" Type="varchar" MaxLength="200" />
@@ -197,6 +195,9 @@
           <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
+          <Property Name="IdProfesion_Padre" Type="int" />
+          <Property Name="IdProfesion_Madre" Type="int" />
+          <Property Name="IdProfesion_Representante" Type="int" />
         </EntityType>
         <EntityType Name="aca_Alumno">
           <Key>
@@ -3234,6 +3235,244 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="NombreCampoAccion" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="OrdenCampoAccion" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_aca_Admision_aca_AnioLectivo">
+          <End Role="aca_AnioLectivo" Type="Self.aca_AnioLectivo" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Catalogo">
+          <End Role="aca_Catalogo" Type="Self.aca_Catalogo" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoPAREN_Padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Catalogo1">
+          <End Role="aca_Catalogo" Type="Self.aca_Catalogo" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoPAREN_Madre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Catalogo2">
+          <End Role="aca_Catalogo" Type="Self.aca_Catalogo" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoPAREN_Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaTipoViv_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha1">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaViv_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha10">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="0..1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaInst_Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha2">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaAgua_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha3">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaMotivo_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha4">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaInst_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha5">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaFinanc_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha6">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaVive_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha7">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaVive_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha8">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="0..1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaInst_Padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha9">
+          <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="0..1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaInst_Madre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Curso">
+          <End Role="aca_Curso" Type="Self.aca_Curso" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Curso">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Jornada">
+          <End Role="aca_Jornada" Type="Self.aca_Jornada" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Jornada">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdJornada" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdJornada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_NivelAcademico">
+          <End Role="aca_NivelAcademico" Type="Self.aca_NivelAcademico" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_NivelAcademico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Sede">
+          <End Role="aca_Sede" Type="Self.aca_Sede" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_aca_alumno_aca_Catalogo1">
           <End Role="aca_Catalogo" Type="Self.aca_Catalogo" Multiplicity="1" />
           <End Role="aca_Alumno" Type="Self.aca_Alumno" Multiplicity="*" />
@@ -6109,6 +6348,82 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
     [vwaca_Tematica].[OrdenCampoAccion] AS [OrdenCampoAccion]
     FROM [dbo].[vwaca_Tematica] AS [vwaca_Tematica]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_aca_Admision_aca_AnioLectivo" Association="Self.FK_aca_Admision_aca_AnioLectivo">
+            <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Catalogo" Association="Self.FK_aca_Admision_aca_Catalogo">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Catalogo1" Association="Self.FK_aca_Admision_aca_Catalogo1">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Catalogo2" Association="Self.FK_aca_Admision_aca_Catalogo2">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha" Association="Self.FK_aca_Admision_aca_CatalogoFicha">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha1" Association="Self.FK_aca_Admision_aca_CatalogoFicha1">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha10" Association="Self.FK_aca_Admision_aca_CatalogoFicha10">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha2" Association="Self.FK_aca_Admision_aca_CatalogoFicha2">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha3" Association="Self.FK_aca_Admision_aca_CatalogoFicha3">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha4" Association="Self.FK_aca_Admision_aca_CatalogoFicha4">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha5" Association="Self.FK_aca_Admision_aca_CatalogoFicha5">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha6" Association="Self.FK_aca_Admision_aca_CatalogoFicha6">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha7" Association="Self.FK_aca_Admision_aca_CatalogoFicha7">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha8" Association="Self.FK_aca_Admision_aca_CatalogoFicha8">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha9" Association="Self.FK_aca_Admision_aca_CatalogoFicha9">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Curso" Association="Self.FK_aca_Admision_aca_Curso">
+            <End Role="aca_Curso" EntitySet="aca_Curso" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Jornada" Association="Self.FK_aca_Admision_aca_Jornada">
+            <End Role="aca_Jornada" EntitySet="aca_Jornada" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_NivelAcademico" Association="Self.FK_aca_Admision_aca_NivelAcademico">
+            <End Role="aca_NivelAcademico" EntitySet="aca_NivelAcademico" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Sede" Association="Self.FK_aca_Admision_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
           <AssociationSet Name="FK_aca_alumno_aca_Catalogo1" Association="Self.FK_aca_alumno_aca_Catalogo1">
             <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
             <End Role="aca_Alumno" EntitySet="aca_Alumno" />
@@ -7243,6 +7558,82 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
           </AssociationSet>
           <EntitySet Name="aca_Admision" EntityType="ModelAcademico.aca_Admision" />
+          <AssociationSet Name="FK_aca_Admision_aca_AnioLectivo" Association="ModelAcademico.FK_aca_Admision_aca_AnioLectivo">
+            <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Catalogo" Association="ModelAcademico.FK_aca_Admision_aca_Catalogo">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Catalogo1" Association="ModelAcademico.FK_aca_Admision_aca_Catalogo1">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Catalogo2" Association="ModelAcademico.FK_aca_Admision_aca_Catalogo2">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha1" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha1">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha10" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha10">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha2" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha2">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha3" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha3">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha4" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha4">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha5" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha5">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha6" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha6">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha7" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha7">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha8" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha8">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha9" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha9">
+            <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Curso" Association="ModelAcademico.FK_aca_Admision_aca_Curso">
+            <End Role="aca_Curso" EntitySet="aca_Curso" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Jornada" Association="ModelAcademico.FK_aca_Admision_aca_Jornada">
+            <End Role="aca_Jornada" EntitySet="aca_Jornada" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_NivelAcademico" Association="ModelAcademico.FK_aca_Admision_aca_NivelAcademico">
+            <End Role="aca_NivelAcademico" EntitySet="aca_NivelAcademico" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Sede" Association="ModelAcademico.FK_aca_Admision_aca_Sede">
+            <End Role="aca_Sede" EntitySet="aca_Sede" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -7336,6 +7727,9 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_Materia" Relationship="ModelAcademico.FK_aca_Materia_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_Materia" />
           <NavigationProperty Name="aca_MatriculaCalificacionCualitativa" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionCualitativa_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_MatriculaCalificacionCualitativa" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision1" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo1" FromRole="aca_Catalogo" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision2" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo2" FromRole="aca_Catalogo" ToRole="aca_Admision" />
           </EntityType>
         <EntityType Name="aca_CatalogoTipo">
           <Key>
@@ -7376,6 +7770,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Paralelo_aca_Jornada" FromRole="aca_Jornada" ToRole="aca_AnioLectivo_Curso_Paralelo" />
           <NavigationProperty Name="aca_AnioLectivo_Paralelo_Profesor" Relationship="ModelAcademico.FK_aca_AnioLectivo_Paralelo_Profesor_aca_Jornada" FromRole="aca_Jornada" ToRole="aca_AnioLectivo_Paralelo_Profesor" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Jornada" FromRole="aca_Jornada" ToRole="aca_AnioLectivo_Curso_Materia" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_Jornada" FromRole="aca_Jornada" ToRole="aca_Admision" />
         </EntityType>
         <EntityType Name="aca_Menu">
           <Key>
@@ -7430,6 +7825,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_AnioLectivo_Sede_NivelAcademico" Relationship="ModelAcademico.FK_aca_AnioLectivo_Sede_NivelAcademico_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivo_Sede_NivelAcademico" />
           <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivoCalificacionHistorico" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_AnioLectivo_Curso_Materia" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_NivelAcademico" FromRole="aca_NivelAcademico" ToRole="aca_Admision" />
         </EntityType>
         <EntityType Name="aca_Paralelo">
           <Key>
@@ -7607,6 +8003,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivoCalificacionHistorico" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo_Curso_Materia" />
           <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_Curso" FromRole="aca_Curso" ToRole="aca_Admision" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Documento_aca_AnioLectivo_Jornada_Curso">
           <End Type="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Role="aca_AnioLectivo_Jornada_Curso" Multiplicity="1" />
@@ -7960,6 +8357,17 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_SocioEconomico5" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha5" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
           <NavigationProperty Name="aca_SocioEconomico6" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_CatalogoFicha6" FromRole="aca_CatalogoFicha" ToRole="aca_SocioEconomico" />
           <NavigationProperty Name="aca_Familia" Relationship="ModelAcademico.FK_aca_Familia_aca_CatalogoFicha" FromRole="aca_CatalogoFicha" ToRole="aca_Familia" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision1" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha1" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision2" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha10" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision3" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha2" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision4" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha3" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision5" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha4" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision6" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha5" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision7" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha6" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision8" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha7" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision9" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha8" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision10" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha9" FromRole="aca_CatalogoFicha" ToRole="aca_Admision" />
           </EntityType>
         <EntityType Name="aca_CatalogoTipoFicha">
           <Key>
@@ -11036,6 +11444,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_Menu_x_aca_Sede" Relationship="ModelAcademico.FK_aca_Menu_x_aca_Sede_aca_Sede" FromRole="aca_Sede" ToRole="aca_Menu_x_aca_Sede" />
           <NavigationProperty Name="aca_Menu_x_seg_usuario" Relationship="ModelAcademico.FK_aca_Menu_x_seg_usuario_aca_Sede" FromRole="aca_Sede" ToRole="aca_Menu_x_seg_usuario" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Sede" FromRole="aca_Sede" ToRole="aca_AnioLectivo_Curso_Materia" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_Sede" FromRole="aca_Sede" ToRole="aca_Admision" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Paralelo_aca_Sede">
           <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
@@ -11384,6 +11793,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_AnioLectivoParcial" Relationship="ModelAcademico.FK_aca_AnioLectivoParcial_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_AnioLectivoParcial" />
           <NavigationProperty Name="aca_MatriculaCondicional" Relationship="ModelAcademico.FK_aca_MatriculaCondicional_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_MatriculaCondicional" />
           <NavigationProperty Name="aca_PermisoMatricula" Relationship="ModelAcademico.FK_aca_PermisoMatricula_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_PermisoMatricula" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_AnioLectivo" FromRole="aca_AnioLectivo" ToRole="aca_Admision" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_aca_Curso">
           <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="0..1" />
@@ -12266,6 +12676,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="IdCatalogoFichaAgua_Aspirante" Type="Int32" Nullable="false" />
           <Property Name="TieneElectricidad_Aspirante" Type="Boolean" Nullable="false" />
           <Property Name="TieneHermanos_Aspirante" Type="Boolean" Nullable="false" />
+          <Property Name="CantidadHermanos" Type="Int32" />
           <Property Name="IdCatalogoFichaMotivo_Aspirante" Type="Int32" Nullable="false" />
           <Property Name="IdCatalogoFichaInst_Aspirante" Type="Int32" Nullable="false" />
           <Property Name="IdCatalogoFichaFinanc_Aspirante" Type="Int32" Nullable="false" />
@@ -12286,7 +12697,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="Correo_Padre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Sexo_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="FechaNacimiento_Padre" Type="DateTime" Precision="3" />
-          <Property Name="CodCatalogoSangre_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CodCatalogoCONADIS_Padre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PorcentajeDiscapacidad_Padre" Type="Double" />
           <Property Name="NumeroCarnetConadis_Padre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -12327,7 +12737,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="Correo_Madre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Sexo_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="FechaNacimiento_Madre" Type="DateTime" Precision="3" />
-          <Property Name="CodCatalogoSangre_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CodCatalogoCONADIS_Madre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PorcentajeDiscapacidad_Madre" Type="Double" />
           <Property Name="NumeroCarnetConadis_Madre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -12368,7 +12777,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="Correo_Representante" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Sexo_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="FechaNacimiento_Representante" Type="DateTime" Precision="3" />
-          <Property Name="CodCatalogoSangre_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CodCatalogoCONADIS_Representante" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PorcentajeDiscapacidad_Representante" Type="Double" />
           <Property Name="NumeroCarnetConadis_Representante" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -12414,7 +12822,267 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdProfesion_Padre" Type="Int32" />
+          <Property Name="IdProfesion_Madre" Type="Int32" />
+          <Property Name="IdProfesion_Representante" Type="Int32" />
+          <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_Admision_aca_AnioLectivo" FromRole="aca_Admision" ToRole="aca_AnioLectivo" />
+          <NavigationProperty Name="aca_Catalogo" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo" FromRole="aca_Admision" ToRole="aca_Catalogo" />
+          <NavigationProperty Name="aca_Catalogo1" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo1" FromRole="aca_Admision" ToRole="aca_Catalogo" />
+          <NavigationProperty Name="aca_Catalogo2" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo2" FromRole="aca_Admision" ToRole="aca_Catalogo" />
+          <NavigationProperty Name="aca_CatalogoFicha" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha1" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha1" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha2" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha10" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha3" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha2" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha4" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha3" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha5" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha4" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha6" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha5" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha7" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha6" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha8" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha7" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha9" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha8" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_CatalogoFicha10" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha9" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
+          <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_Admision_aca_Curso" FromRole="aca_Admision" ToRole="aca_Curso" />
+          <NavigationProperty Name="aca_Jornada" Relationship="ModelAcademico.FK_aca_Admision_aca_Jornada" FromRole="aca_Admision" ToRole="aca_Jornada" />
+          <NavigationProperty Name="aca_NivelAcademico" Relationship="ModelAcademico.FK_aca_Admision_aca_NivelAcademico" FromRole="aca_Admision" ToRole="aca_NivelAcademico" />
+          <NavigationProperty Name="aca_Sede" Relationship="ModelAcademico.FK_aca_Admision_aca_Sede" FromRole="aca_Admision" ToRole="aca_Sede" />
         </EntityType>
+        <Association Name="FK_aca_Admision_aca_AnioLectivo">
+          <End Type="ModelAcademico.aca_AnioLectivo" Role="aca_AnioLectivo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Catalogo">
+          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoPAREN_Padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Catalogo1">
+          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoPAREN_Madre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Catalogo2">
+          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoPAREN_Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaTipoViv_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha1">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaViv_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha10">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaInst_Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha2">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaAgua_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha3">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaMotivo_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha4">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaInst_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha5">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaFinanc_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha6">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaVive_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha7">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaVive_Aspirante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha8">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaInst_Padre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_CatalogoFicha9">
+          <End Type="ModelAcademico.aca_CatalogoFicha" Role="aca_CatalogoFicha" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_CatalogoFicha">
+              <PropertyRef Name="IdCatalogoFicha" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoFichaInst_Madre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Curso">
+          <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Curso">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Jornada">
+          <End Type="ModelAcademico.aca_Jornada" Role="aca_Jornada" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Jornada">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdJornada" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdJornada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_NivelAcademico">
+          <End Type="ModelAcademico.aca_NivelAcademico" Role="aca_NivelAcademico" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_NivelAcademico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdNivel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Sede">
+          <End Type="ModelAcademico.aca_Sede" Role="aca_Sede" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Sede">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdSede" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14926,6 +15594,9 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <EntitySetMapping Name="aca_Admision">
             <EntityTypeMapping TypeName="ModelAcademico.aca_Admision">
               <MappingFragment StoreEntitySet="aca_Admision">
+                <ScalarProperty Name="IdProfesion_Representante" ColumnName="IdProfesion_Representante" />
+                <ScalarProperty Name="IdProfesion_Madre" ColumnName="IdProfesion_Madre" />
+                <ScalarProperty Name="IdProfesion_Padre" ColumnName="IdProfesion_Padre" />
                 <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
                 <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
                 <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
@@ -14971,7 +15642,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="NumeroCarnetConadis_Representante" ColumnName="NumeroCarnetConadis_Representante" />
                 <ScalarProperty Name="PorcentajeDiscapacidad_Representante" ColumnName="PorcentajeDiscapacidad_Representante" />
                 <ScalarProperty Name="CodCatalogoCONADIS_Representante" ColumnName="CodCatalogoCONADIS_Representante" />
-                <ScalarProperty Name="CodCatalogoSangre_Representante" ColumnName="CodCatalogoSangre_Representante" />
                 <ScalarProperty Name="FechaNacimiento_Representante" ColumnName="FechaNacimiento_Representante" />
                 <ScalarProperty Name="Sexo_Representante" ColumnName="Sexo_Representante" />
                 <ScalarProperty Name="Correo_Representante" ColumnName="Correo_Representante" />
@@ -15012,7 +15682,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="NumeroCarnetConadis_Madre" ColumnName="NumeroCarnetConadis_Madre" />
                 <ScalarProperty Name="PorcentajeDiscapacidad_Madre" ColumnName="PorcentajeDiscapacidad_Madre" />
                 <ScalarProperty Name="CodCatalogoCONADIS_Madre" ColumnName="CodCatalogoCONADIS_Madre" />
-                <ScalarProperty Name="CodCatalogoSangre_Madre" ColumnName="CodCatalogoSangre_Madre" />
                 <ScalarProperty Name="FechaNacimiento_Madre" ColumnName="FechaNacimiento_Madre" />
                 <ScalarProperty Name="Sexo_Madre" ColumnName="Sexo_Madre" />
                 <ScalarProperty Name="Correo_Madre" ColumnName="Correo_Madre" />
@@ -15053,7 +15722,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="NumeroCarnetConadis_Padre" ColumnName="NumeroCarnetConadis_Padre" />
                 <ScalarProperty Name="PorcentajeDiscapacidad_Padre" ColumnName="PorcentajeDiscapacidad_Padre" />
                 <ScalarProperty Name="CodCatalogoCONADIS_Padre" ColumnName="CodCatalogoCONADIS_Padre" />
-                <ScalarProperty Name="CodCatalogoSangre_Padre" ColumnName="CodCatalogoSangre_Padre" />
                 <ScalarProperty Name="FechaNacimiento_Padre" ColumnName="FechaNacimiento_Padre" />
                 <ScalarProperty Name="Sexo_Padre" ColumnName="Sexo_Padre" />
                 <ScalarProperty Name="Correo_Padre" ColumnName="Correo_Padre" />
@@ -15074,6 +15742,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="IdCatalogoFichaFinanc_Aspirante" ColumnName="IdCatalogoFichaFinanc_Aspirante" />
                 <ScalarProperty Name="IdCatalogoFichaInst_Aspirante" ColumnName="IdCatalogoFichaInst_Aspirante" />
                 <ScalarProperty Name="IdCatalogoFichaMotivo_Aspirante" ColumnName="IdCatalogoFichaMotivo_Aspirante" />
+                <ScalarProperty Name="CantidadHermanos" ColumnName="CantidadHermanos" />
                 <ScalarProperty Name="TieneHermanos_Aspirante" ColumnName="TieneHermanos_Aspirante" />
                 <ScalarProperty Name="TieneElectricidad_Aspirante" ColumnName="TieneElectricidad_Aspirante" />
                 <ScalarProperty Name="IdCatalogoFichaAgua_Aspirante" ColumnName="IdCatalogoFichaAgua_Aspirante" />

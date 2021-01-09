@@ -81,6 +81,51 @@ namespace Core.Data.General
         }
 
 
+        public List<tb_parroquia_Info> get_listCombos(string IdCiudad, bool mostrar_anulados)
+        {
+            try
+            {
+                List<tb_parroquia_Info> Lista;
+
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    if (mostrar_anulados)
+                    {
+                            Lista = (from q in Context.tb_parroquia
+                                     where q.IdCiudad_Canton == IdCiudad
+                                     select new tb_parroquia_Info
+                                     {
+                                         IdCiudad_Canton = q.IdCiudad_Canton,
+                                         IdParroquia = q.IdParroquia,
+                                         cod_parroquia = q.cod_parroquia,
+                                         nom_parroquia = q.nom_parroquia,
+                                         estado = q.estado
+                                     }).ToList();
+                    }
+                    else
+                    {
+                            Lista = (from q in Context.tb_parroquia
+                                     where q.IdCiudad_Canton == IdCiudad
+                                     && q.estado == true
+                                     select new tb_parroquia_Info
+                                     {
+                                         IdCiudad_Canton = q.IdCiudad_Canton,
+                                         IdParroquia = q.IdParroquia,
+                                         cod_parroquia = q.cod_parroquia,
+                                         nom_parroquia = q.nom_parroquia,
+                                         estado = q.estado,
+                                     }).ToList();
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         private string get_id()
         {
             try

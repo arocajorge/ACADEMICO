@@ -20,6 +20,18 @@ namespace Core.Bus.General
                 throw;
             }
         }
+        public List<tb_ciudad_Info> get_listCombos(string IdProvincia, bool mostrar_anulados)
+        {
+            try
+            {
+                return odata.get_listCombos(IdProvincia, mostrar_anulados);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public tb_ciudad_Info get_info(string IdCiudad)
         {

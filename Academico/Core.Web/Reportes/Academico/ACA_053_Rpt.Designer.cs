@@ -89,9 +89,6 @@
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableRow3 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell15 = new DevExpress.XtraReports.UI.XRTableCell();
             this.groupFooterBand2 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.p_MostrarRetirados = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
@@ -428,7 +425,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable6.Font = new System.Drawing.Font("Verdana", 7F);
-            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(0.0002161662F, 42F);
+            this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(0.0002161662F, 23.5F);
             this.xrTable6.Name = "xrTable6";
             this.xrTable6.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
@@ -636,7 +633,7 @@
             new DevExpress.XtraReports.UI.GroupField("OrdenCurso", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("OrdenParalelo", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("pe_nombreCompleto", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.groupHeaderBand5.HeightF = 62F;
+            this.groupHeaderBand5.HeightF = 43.5F;
             this.groupHeaderBand5.Name = "groupHeaderBand5";
             // 
             // xrTable1
@@ -646,9 +643,8 @@
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 2, 5, 0, 100F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
-            this.xrTableRow2,
-            this.xrTableRow3});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(751F, 37F);
+            this.xrTableRow2});
+            this.xrTable1.SizeF = new System.Drawing.SizeF(751F, 18.5F);
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UsePadding = false;
             // 
@@ -669,30 +665,6 @@
             this.xrTableCell11.StylePriority.UseFont = false;
             this.xrTableCell11.Text = "xrTableCell2";
             this.xrTableCell11.Weight = 3.9999999999999996D;
-            // 
-            // xrTableRow3
-            // 
-            this.xrTableRow3.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell14,
-            this.xrTableCell15});
-            this.xrTableRow3.Name = "xrTableRow3";
-            this.xrTableRow3.Weight = 1D;
-            // 
-            // xrTableCell14
-            // 
-            this.xrTableCell14.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell14.Name = "xrTableCell14";
-            this.xrTableCell14.StylePriority.UseFont = false;
-            this.xrTableCell14.Text = "Observación:";
-            this.xrTableCell14.Weight = 0.60876960602009822D;
-            // 
-            // xrTableCell15
-            // 
-            this.xrTableCell15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Observacion]")});
-            this.xrTableCell15.Name = "xrTableCell15";
-            this.xrTableCell15.Text = "xrTableCell8";
-            this.xrTableCell15.Weight = 3.3912303939799018D;
             // 
             // groupFooterBand2
             // 
@@ -809,9 +781,6 @@
         private DevExpress.XtraReports.UI.XRTable xrTable1;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
-        private DevExpress.XtraReports.UI.XRTableRow xrTableRow3;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell14;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell15;
         private DevExpress.XtraReports.UI.XRLine xrLine1;
         private DevExpress.XtraReports.UI.GroupFooterBand groupFooterBand2;
         public DevExpress.XtraReports.Parameters.Parameter p_MostrarRetirados;

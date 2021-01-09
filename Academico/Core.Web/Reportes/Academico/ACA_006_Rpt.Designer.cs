@@ -497,7 +497,7 @@
             this.xrTableCell7.StylePriority.UseFont = false;
             this.xrTableCell7.StylePriority.UsePadding = false;
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
-            this.xrTableCell7.Text = "ESTADISTICA DE ESTUDIANTES MATRICULADOS POR CURSO Y SEXO";
+            this.xrTableCell7.Text = "ESTADISTICA RESUMEN DE ESTUDIANTES MATRICULADOS POR CURSO Y SEXO";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell7.Weight = 2D;
             // 

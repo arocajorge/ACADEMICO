@@ -310,9 +310,16 @@
       <Project>{01B5C318-17E8-4674-847E-C8FDA6DF7978}</Project>
       <Name>Core.Info</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Web\Core.Web.csproj">
+      <Project>{CE9336D9-BFBC-494D-B2E9-5268946970DB}</Project>
+      <Name>Core.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

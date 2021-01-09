@@ -60,6 +60,54 @@ namespace Core.Data.General
             }
         }
 
+        public List<tb_ciudad_Info> get_listCombos(string IdProvincia, bool mostrar_anulados)
+        {
+            try
+            {
+                List<tb_ciudad_Info> Lista;
+
+                using (EntitiesGeneral Context = new EntitiesGeneral())
+                {
+                    if (mostrar_anulados)
+                        Lista = (from q in Context.tb_ciudad
+                                 join p in Context.tb_provincia
+                                 on q.IdProvincia equals p.IdProvincia
+                                 where q.IdProvincia == IdProvincia
+                                 select new tb_ciudad_Info
+                                 {
+                                     IdProvincia = q.IdProvincia,
+                                     IdCiudad = q.IdCiudad,
+                                     Cod_Ciudad = q.Cod_Ciudad,
+                                     Descripcion_Ciudad = q.Descripcion_Ciudad,
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+
+                                 }).ToList();
+                    else
+                        Lista = (from q in Context.tb_ciudad
+                                 join p in Context.tb_provincia
+                                 on q.IdProvincia equals p.IdProvincia
+                                 where q.IdProvincia == IdProvincia
+                                 && q.Estado == "A"
+                                 select new tb_ciudad_Info
+                                 {
+                                     IdProvincia = q.IdProvincia,
+                                     IdCiudad = q.IdCiudad,
+                                     Cod_Ciudad = q.Cod_Ciudad,
+                                     Descripcion_Ciudad = q.Descripcion_Ciudad,
+                                     Estado = q.Estado,
+
+                                     EstadoBool = q.Estado == "A" ? true : false
+                                 }).ToList();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         private string get_id()
         {
             try

@@ -811,8 +811,14 @@ namespace Core.Data.Academico
                     CodCatalogoSangre = Entity_aca.CodCatalogoSangre,
                     CodCatalogoCONADIS = Entity_aca.CodCatalogoCONADIS,
                     NumeroCarnetConadis = Entity_aca.NumeroCarnetConadis,
-                    PorcentajeDiscapacidad = Entity_aca.PorcentajeDiscapacidad
-            };
+                    PorcentajeDiscapacidad = Entity_aca.PorcentajeDiscapacidad,
+                    LugarNacimiento = Entity_aca.LugarNacimiento,
+                    IdPais = Entity_aca.IdPais,
+                    Cod_Region = Entity_aca.Cod_Region,
+                    IdProvincia = Entity_aca.IdProvincia,
+                    IdCiudad = Entity_aca.IdCiudad,
+                    IdParroquia = Entity_aca.IdParroquia,
+                };
 
                 return info;
             }

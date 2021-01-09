@@ -201,7 +201,7 @@
             this.Colecturia.StylePriority.UseFont = false;
             this.Colecturia.StylePriority.UsePadding = false;
             this.Colecturia.StylePriority.UseTextAlignment = false;
-            this.Colecturia.Text = "CPA. Edison Gellibert Villagómez";
+            this.Colecturia.Text = "CPA. EDISON GELLIBERT VILLAGÓMEZ";
             this.Colecturia.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.Colecturia.Weight = 5.9574549106885915D;
             // 

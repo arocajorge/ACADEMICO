@@ -22,6 +22,18 @@ namespace Core.Bus.General
             }
         }
 
+        public List<tb_parroquia_Info> get_listCombos(string IdCiudad, bool mostrar_anulados)
+        {
+            try
+            {
+                return odata.get_listCombos(IdCiudad, mostrar_anulados);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public tb_parroquia_Info get_info(string IdParroquia)
         {
             try

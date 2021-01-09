@@ -47,6 +47,9 @@ namespace Core.Info.General
         public decimal IdEntidad { get; set; }
         public bool EstadoBool { get; set; }
         public string CodAlumno { get; set; }
+        public string anio { get; set; }
+        public string mes { get; set; }
+        public string dia { get; set; }
         #endregion
     }
 }

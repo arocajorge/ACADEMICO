@@ -32,6 +32,7 @@ namespace Core.Data.Base
             this.aca_AnioLectivoParcial = new HashSet<aca_AnioLectivoParcial>();
             this.aca_MatriculaCondicional = new HashSet<aca_MatriculaCondicional>();
             this.aca_PermisoMatricula = new HashSet<aca_PermisoMatricula>();
+            this.aca_Admision = new HashSet<aca_Admision>();
         }
     
         public int IdEmpresa { get; set; }
@@ -86,5 +87,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_MatriculaCondicional> aca_MatriculaCondicional { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_PermisoMatricula> aca_PermisoMatricula { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,30 +11,50 @@ namespace Core.Info.Academico
     {
         public int IdEmpresa { get; set; }
         public decimal IdAdmision { get; set; }
+        [Required(ErrorMessage = "El campo sede es obligatorio")]
         public int IdSede { get; set; }
+        [Required(ErrorMessage = "El campo año lectivo es obligatorio")]
         public int IdAnio { get; set; }
+        [Required(ErrorMessage = "El campo jornada es obligatorio")]
         public int IdJornada { get; set; }
+        [Required(ErrorMessage = "El campo nivel es obligatorio")]
         public int IdNivel { get; set; }
+        [Required(ErrorMessage = "El campo curso es obligatorio")]
         public int IdCurso { get; set; }
+        [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string Naturaleza_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo tipo de documento es obligatorio")]
         public string IdTipoDocumento_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo cédula del aspirante es obligatorio")]
         public string CedulaRuc_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo nombres del aspirante es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres del aspirante debe tener máximo 100 caracteres")]
         public string Nombres_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo apellidos del aspirante es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos del aspirante debe tener máximo 100 caracteres")]
         public string Apellidos_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo nombre completo del aspirante es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombre completo del aspirante debe tener máximo 200 caracteres")]
         public string NombreCompleto_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo direccion del aspirante es obligatorio")]
         public string Direccion_Aspirante { get; set; }
         public string Telefono_Aspirante { get; set; }
         public string Celular_Aspirante { get; set; }
         public string Correo_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo sexo del aspirante es obligatorio")]
         public string Sexo_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo fecha de nacimiento del aspirante es obligatorio")]
         public Nullable<System.DateTime> FechaNacimiento_Aspirante { get; set; }
         public string CodCatalogoSangre_Aspirante { get; set; }
         public string CodCatalogoCONADIS_Aspirante { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Aspirante { get; set; }
         public string NumeroCarnetConadis_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo grupo étnico del aspirante es obligatorio")]
         public Nullable<int> IdGrupoEtnico_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo religión del aspirante es obligatorio")]
         public Nullable<int> IdReligion_Aspirante { get; set; }
         public Nullable<bool> AsisteCentroCristiano_Aspirante { get; set; }
+        [Required(ErrorMessage = "El campo lugar de nacimiento del aspirante es obligatorio")]
         public string LugarNacimiento_Aspirante { get; set; }
         public string IdPais_Aspirante { get; set; }
         public string Cod_Region_Aspirante { get; set; }
@@ -47,6 +68,7 @@ namespace Core.Info.Academico
         public int IdCatalogoFichaAgua_Aspirante { get; set; }
         public bool TieneElectricidad_Aspirante { get; set; }
         public bool TieneHermanos_Aspirante { get; set; }
+        public Nullable<int> CantidadHermanos { get; set; }
         public int IdCatalogoFichaMotivo_Aspirante { get; set; }
         public int IdCatalogoFichaInst_Aspirante { get; set; }
         public int IdCatalogoFichaFinanc_Aspirante { get; set; }
@@ -67,7 +89,6 @@ namespace Core.Info.Academico
         public string Correo_Padre { get; set; }
         public string Sexo_Padre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Padre { get; set; }
-        public string CodCatalogoSangre_Padre { get; set; }
         public string CodCatalogoCONADIS_Padre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Padre { get; set; }
         public string NumeroCarnetConadis_Padre { get; set; }
@@ -108,7 +129,6 @@ namespace Core.Info.Academico
         public string Correo_Madre { get; set; }
         public string Sexo_Madre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Madre { get; set; }
-        public string CodCatalogoSangre_Madre { get; set; }
         public string CodCatalogoCONADIS_Madre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Madre { get; set; }
         public string NumeroCarnetConadis_Madre { get; set; }
@@ -149,7 +169,6 @@ namespace Core.Info.Academico
         public string Correo_Representante { get; set; }
         public string Sexo_Representante { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Representante { get; set; }
-        public string CodCatalogoSangre_Representante { get; set; }
         public string CodCatalogoCONADIS_Representante { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Representante { get; set; }
         public string NumeroCarnetConadis_Representante { get; set; }
@@ -195,5 +214,20 @@ namespace Core.Info.Academico
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public Nullable<int> IdProfesion_Padre { get; set; }
+        public Nullable<int> IdProfesion_Madre { get; set; }
+        public Nullable<int> IdProfesion_Representante { get; set; }
+
+
+        #region Campos que no exiten en la tabla
+        public double TotalIngresos { get; set; }
+        public int RepresentanteValido { get; set; }
+        public double TotalEgresos { get; set; }
+        public double Saldo { get; set; }
+        public bool info_valido_aspirante { get; set; }
+        public bool info_valido_padre { get; set; }
+        public bool info_valido_madre { get; set; }
+        public bool info_valido_representante { get; set; }
+        #endregion
     }
 }

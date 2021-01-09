@@ -34,6 +34,7 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
+            this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
             this.lbl = new DevExpress.XtraReports.UI.XRTableCell();
@@ -62,7 +63,6 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_MostrarRetirados = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSolicitud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrRichText1)).BeginInit();
@@ -92,6 +92,13 @@
             this.xrTable1});
             this.PageHeader.HeightF = 300F;
             this.PageHeader.Name = "PageHeader";
+            // 
+            // lbl_imagen
+            // 
+            this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.lbl_imagen.Name = "lbl_imagen";
+            this.lbl_imagen.SizeF = new System.Drawing.SizeF(140F, 60F);
+            this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // xrTable1
             // 
@@ -263,9 +270,9 @@
             this.Colecturia.StylePriority.UseFont = false;
             this.Colecturia.StylePriority.UsePadding = false;
             this.Colecturia.StylePriority.UseTextAlignment = false;
-            this.Colecturia.Text = "CPA. Edidon Gellibert Villagómez";
+            this.Colecturia.Text = "CPA. EDISON GELLIBERT VILLAGÓMEZ";
             this.Colecturia.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.Colecturia.Weight = 5.3191598777091436D;
+            this.Colecturia.Weight = 5.9574590444390338D;
             // 
             // xrTableCell16
             // 
@@ -277,7 +284,7 @@
             this.xrTableCell16.StylePriority.UsePadding = false;
             this.xrTableCell16.StylePriority.UseTextAlignment = false;
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell16.Weight = 4.8297969562175531D;
+            this.xrTableCell16.Weight = 4.1914977894876628D;
             // 
             // Secretaria
             // 
@@ -315,7 +322,7 @@
             this.xrTableCell143.StylePriority.UseTextAlignment = false;
             this.xrTableCell143.Text = "COORDINADOR DE COLECTURIA";
             this.xrTableCell143.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell143.Weight = 8.2478082936663331D;
+            this.xrTableCell143.Weight = 9.2375453119033146D;
             // 
             // xrTableCell3
             // 
@@ -328,7 +335,7 @@
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "\r\n";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell3.Weight = 7.4890099572149831D;
+            this.xrTableCell3.Weight = 6.4992729389780015D;
             // 
             // xrTableCell2
             // 
@@ -352,13 +359,6 @@
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_036_Info);
             this.objectDataSource1.Name = "objectDataSource1";
-            // 
-            // lbl_imagen
-            // 
-            this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.lbl_imagen.Name = "lbl_imagen";
-            this.lbl_imagen.SizeF = new System.Drawing.SizeF(140F, 60F);
-            this.lbl_imagen.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
             // ACA_036_Rpt
             // 

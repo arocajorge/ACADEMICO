@@ -291,7 +291,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                                  vt_fecha = a.vt_fecha,
                                  vt_Observacion = a.vt_Observacion,
                                  NomCurso = a.NomCurso,
-                                 NomJornada = a.NomCurso,
+                                 NomJornada = a.NomJornada,
                                  Saldo = a.Saldo,
                                  NomNivel = a.NomNivel,
                                  NomParalelo = a.NomParalelo,
