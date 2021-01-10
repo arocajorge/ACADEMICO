@@ -245,19 +245,27 @@ namespace Core.Admision.Controllers
             string return_naturaleza_madre = "";
             string return_naturaleza_representante = "";
 
-            if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento_Aspirante, info.Naturaleza_Aspirante, info.CedulaRuc_Aspirante, ref return_naturaleza))
+            if (!string.IsNullOrEmpty(info.IdTipoDocumento_Aspirante) && !string.IsNullOrEmpty(info.Naturaleza_Aspirante) && !string.IsNullOrEmpty(info.CedulaRuc_Aspirante))
             {
-                info.Naturaleza_Aspirante = return_naturaleza;
-                info.info_valido_aspirante = true;
+                if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento_Aspirante, info.Naturaleza_Aspirante, info.CedulaRuc_Aspirante, ref return_naturaleza))
+                {
+                    info.Naturaleza_Aspirante = return_naturaleza;
+                    info.info_valido_aspirante = true;
+                }
+                else
+                {
+                    msg = "Número de identificación del aspirante inválida";
+                    info.info_valido_aspirante = false;
+                    return false;
+                }
             }
             else
             {
-                msg = "Número de identificación del aspirante inválida";
                 info.info_valido_aspirante = false;
                 return false;
             }
 
-            if (info.IdTipoDocumento_Padre != "" && info.Naturaleza_Padre != "" && info.CedulaRuc_Padre != null)
+            if (!string.IsNullOrEmpty(info.IdTipoDocumento_Padre) && !string.IsNullOrEmpty(info.Naturaleza_Padre) && !string.IsNullOrEmpty(info.CedulaRuc_Padre))
             {
                 if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento_Padre, info.Naturaleza_Padre, info.CedulaRuc_Padre, ref return_naturaleza_padre))
                 {
@@ -276,7 +284,7 @@ namespace Core.Admision.Controllers
                 info.info_valido_padre = false;
             }
 
-            if (info.IdTipoDocumento_Madre != "" && info.Naturaleza_Madre != "" && info.CedulaRuc_Madre != null)
+            if (!string.IsNullOrEmpty(info.IdTipoDocumento_Madre) && !string.IsNullOrEmpty(info.Naturaleza_Madre) && !string.IsNullOrEmpty(info.CedulaRuc_Madre))
             {
                 if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento_Madre, info.Naturaleza_Madre, info.CedulaRuc_Madre, ref return_naturaleza_madre))
                 {
@@ -295,7 +303,7 @@ namespace Core.Admision.Controllers
                 info.info_valido_madre = false;
             }
 
-            if (info.IdTipoDocumento_Representante != "" && info.Naturaleza_Representante != "" && info.CedulaRuc_Representante != null)
+            if (!string.IsNullOrEmpty(info.IdTipoDocumento_Representante) && !string.IsNullOrEmpty(info.Naturaleza_Representante) && !string.IsNullOrEmpty(info.CedulaRuc_Representante))
             {
                 if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento_Representante, info.Naturaleza_Representante, info.CedulaRuc_Representante, ref return_naturaleza_representante))
                 {

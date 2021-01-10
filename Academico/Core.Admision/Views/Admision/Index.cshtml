@@ -423,12 +423,12 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoPadre" hidden>
                             <div class="mb-2">Marca</div>
-                            <input type="text" name="Marca_Padre" class="input w-full border flex-1">
+                            <input type="text" id="Marca_Padre" name="Marca_Padre" class="input w-full border flex-1">
                             @Html.ValidationMessageFor(q => q.Marca_Padre, "", new { @class = "text-danger" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6" id="ModeloVehiculoPadre" hidden>
                             <div class="mb-2">Modelo</div>
-                            <input type="text" name="Modelo_Padre" class="input w-full border flex-1">
+                            <input type="text" id="Modelo_Padre" name="Modelo_Padre" class="input w-full border flex-1">
                             @Html.ValidationMessageFor(q => q.Modelo_Padre, "", new { @class = "text-danger" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -643,12 +643,12 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoMadre" hidden>
                             <div class="mb-2">Marca</div>
-                            <input type="text" id="Marca_Madre" class="input w-full border flex-1">
+                            <input type="text" id="Marca_Madre" name="Marca_Madre" class="input w-full border flex-1">
                             @Html.ValidationMessageFor(q => q.Marca_Madre, "", new { @class = "text-danger" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6" id="ModeloVehiculoMadre" hidden>
                             <div class="mb-2">Modelo</div>
-                            <input type="text" id="Modelo_Madre" class="input w-full border flex-1">
+                            <input type="text" id="Modelo_Madre" name="Modelo_Madre" class="input w-full border flex-1">
                             @Html.ValidationMessageFor(q => q.Modelo_Madre, "", new { @class = "text-danger" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -1090,7 +1090,7 @@
                                 </div>
                                 <div class="intro-y col-span-12 sm:col-span-6">
                                     <div class="mb-2">¿Qué le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaMotivo_Aspirante, new SelectList(ViewBag.lst_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaInst_Aspirante" })
+                                    @Html.DropDownListFor(q => q.IdCatalogoFichaMotivo_Aspirante, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaMotivo_Aspirante" })
                                     @Html.ValidationMessageFor(q => q.IdCatalogoFichaMotivo_Aspirante, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="intro-y col-span-12 sm:col-span-6">
@@ -1102,7 +1102,7 @@
                                 </div>
                                 <div class="intro-y col-span-12 sm:col-span-6">
                                     <div class="mb-2">¿Cómo se informó de nuestra institución?*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Aspirante, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaMotivo_Aspirante" })
+                                    @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Aspirante, new SelectList(ViewBag.lst_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaInst_Aspirante" })
                                     @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Aspirante, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="intro-y col-span-12 sm:col-span-6">
@@ -1145,6 +1145,15 @@
 
         CargarRegion_Padre();
         CargarProvincia_Padre();
+        CargarParroquia_Padre();
+
+        CargarRegion_Madre();
+        CargarProvincia_Madre();
+        CargarParroquia_Madre();
+
+        CargarRegion_Representante();
+        CargarProvincia_Representante();
+        CargarParroquia_Representante();
 
         mostrar_CantidadHermanos();
 
