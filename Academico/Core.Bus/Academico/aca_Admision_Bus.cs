@@ -24,5 +24,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public aca_Admision_Info GetInfo_CedulaAspirante(int IdEmpresa, string CedulaRuc_Aspirante)
+        {
+            try
+            {
+                return odata.getInfo_CedulaAspirante(IdEmpresa, CedulaRuc_Aspirante);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

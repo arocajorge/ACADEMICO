@@ -1,20 +1,25 @@
 ﻿
-$(".form").keypress(function (e) {//Para deshabilitar el uso de la tecla "Enter"
-    if (e.which == 13) {
-        return false;
-    }
-});
+//$(".form").keypress(function (e) {
+//    if (e.which == 13) {
+//        return false;
+//    }
+//});
+
 function SiguienteAspirante() {
-    $("#DatosAspirante").hide();
-    $("#BtnAspirante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-    $("#DatosPadre").show();
-    $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    if ($("#AspiranteValido").val() == "1") {
+        $("#DatosAspirante").hide();
+        $("#BtnAspirante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+        $("#DatosPadre").show();
+        $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    }
 }
 function SiguientePadre() {
-    $("#DatosPadre").hide();
-    $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-    $("#DatosMadre").show();
-    $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    if ($("#PadreValido").val() == "1") {
+        $("#DatosPadre").hide();
+        $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+        $("#DatosMadre").show();
+        $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    }
 }
 function AnteriorPadre() {
     $("#DatosPadre").hide();
@@ -23,10 +28,13 @@ function AnteriorPadre() {
     $("#BtnAspirante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
 }
 function SiguienteMadre() {
-    $("#DatosMadre").hide();
-    $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-    $("#DatosRepresentante").show();
-    $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    if ($("#MadreValido").val() == "1")
+    {
+        $("#DatosMadre").hide();
+        $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+        $("#DatosRepresentante").show();
+        $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    }
 }
 function AnteriorMadre() {
     $("#DatosMadre").hide();
@@ -77,9 +85,11 @@ function Validar_cedula_ruc_Aspirante() {
             if (data.isValid == true) {
                 $("#error_documento_aspirante").hide();
                 $("#Naturaleza_Aspirante").val(data.return_naturaleza);
+                $("#AspiranteValido").val("1");
             }
             else {
                 $("#error_documento_aspirante").show();
+                $("#AspiranteValido").val("0");
             }
         },
         error: function (error) {
@@ -104,13 +114,14 @@ function Validar_cedula_ruc_Padre() {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            console.log(data);
             if (data.isValid == true) {
                 $("#error_documento_padre").hide();
                 $("#Naturaleza_Padre").val(data.return_naturaleza);
+                $("#PadreValido").val("1");
             }
             else {
                 $("#error_documento_padre").show();
+                $("#PadreValido").val("0");
             }
         },
         error: function (error) {
@@ -138,9 +149,11 @@ function Validar_cedula_ruc_Madre() {
             if (data.isValid == true) {
                 $("#error_documento_madre").hide();
                 $("#Naturaleza_Madre").val(data.return_naturaleza);
+                $("#MadreValido").val("1");
             }
             else {
                 $("#error_documento_madre").show();
+                $("#PadreValido").val("0");
             }
         },
         error: function (error) {
@@ -1166,18 +1179,18 @@ function mostrar_VehiculoRepresentante() {
 
 function sumar_ingresos() {
     var TotalIng = parseFloat($("#SueldoPadre").val()) + parseFloat($("#SueldoMadre").val()) + parseFloat($("#OtroIngresoPadre").val()) + parseFloat($("#OtroIngresoMadre").val());
-    $("#TotalIngreso").val(TotalIng);
+    $("#TotalIngresos").val(TotalIng);
     saldo();
 };
 
 function sumar_egresos() {
     var TotalGasto = parseFloat($("#GastoAlimentacion").val()) + parseFloat($("#GastoEducacion").val()) + parseFloat($("#GastoServicioBasico").val()) + parseFloat($("#GastoSalud").val()) + parseFloat($("#GastoArriendo").val()) + parseFloat($("#GastoPrestamo").val()) + parseFloat($("#OtroGasto").val());
-    $("#TotalGasto").val(TotalGasto);
+    $("#TotalEgresos").val(TotalGasto);
     saldo();
 };
 
 function saldo() {
-    var Total = parseFloat($("#TotalIngreso").val()) - parseFloat($("#TotalGasto").val());
+    var Total = parseFloat($("#TotalIngresos").val()) - parseFloat($("#TotalEgresos").val());
     $("#Saldo").val(Total);
 };
 
@@ -1276,7 +1289,11 @@ function get_info_x_num_cedula_aspirante() {
                 return;
             }
             if (data.IdAlumno != 0) {
-                alert("El alumno ya existe con el ID: " + data.IdAlumno);
+                alert("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
+                window.location.href = '/Admision/Index'
+            }
+            else if (data.IdAdmision != 0) {
+                alert("El aspirante ya fue registrado");
                 window.location.href = '/Admision/Index'
             }
             else {
@@ -1358,7 +1375,7 @@ function get_info_x_num_cedula_padre() {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            if (data == "") {
+            if (data.IdPersona == 0) {
                 return;
             }
             else{
@@ -1396,7 +1413,7 @@ function get_info_x_num_cedula_madre() {
     var tipo_doc = $("#IdTipoDocumento_Madre").val();
 
     if (cedula == null || cedula == "") {
-        vaciar_campos_padre();
+        vaciar_campos_madre();
         return;
     }
 
@@ -1404,7 +1421,7 @@ function get_info_x_num_cedula_madre() {
         if (cedula.length != 13) {
             alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
             $("#CedulaRuc_Madre").val("");
-            vaciar_campos_padre();
+            vaciar_campos_madre();
             return;
         }
     } else
@@ -1412,7 +1429,7 @@ function get_info_x_num_cedula_madre() {
             if (cedula.length != 10) {
                 alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
                 $("#CedulaRuc_Madre").val("");
-                vaciar_campos_padre();
+                vaciar_campos_madre();
                 return;
             }
         }
@@ -1428,7 +1445,7 @@ function get_info_x_num_cedula_madre() {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            if (data == "") {
+            if (data.IdPersona == 0) {
                 return;
             }
             else {
@@ -1466,7 +1483,7 @@ function get_info_x_num_cedula_representante() {
     var tipo_doc = $("#IdTipoDocumento_Representante").val();
 
     if (cedula == null || cedula == "") {
-        vaciar_campos_padre();
+        vaciar_campos_representante();
         return;
     }
 
@@ -1474,7 +1491,7 @@ function get_info_x_num_cedula_representante() {
         if (cedula.length != 13) {
             alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
             $("#CedulaRuc_Representante").val("");
-            vaciar_campos_padre();
+            vaciar_campos_representante();
             return;
         }
     } else
@@ -1482,7 +1499,7 @@ function get_info_x_num_cedula_representante() {
             if (cedula.length != 10) {
                 alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
                 $("#CedulaRuc_Representante").val("");
-                vaciar_campos_padre();
+                vaciar_campos_representante();
                 return;
             }
         }
@@ -1498,7 +1515,7 @@ function get_info_x_num_cedula_representante() {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            if (data == "") {
+            if (data.IdPersona == 0) {
                 return;
             }
             else {
@@ -1565,7 +1582,7 @@ function vaciar_campos_padre() {
     $("#Naturaleza_Padre").val("NATU");
     $("#IdTipoDocumento_Padre").val("CED");
     $("#CedulaRuc_Padre").val("");
-    $("#EstaFallecido_Padre").val(false);
+    $("#EstaFallecido_Padre").prop('checked', false);
     $("#Nombres_Padre").val("");
     $("#Apellidos_Padre").val("");
     $("#NombreCompleto_Padre").val("");
@@ -1582,9 +1599,9 @@ function vaciar_campos_padre() {
     $("#Telefono_Padre").val("");
     $("#Celular_Padre").val("");
     $("#Correo_Padre").val("");
-    $("#AsisteCentroCristiano_Padre").val(false);
-    $("#CasaPropia_Padre").val(false);
-    $("#VehiculoPropio_Padre").val(false);
+    $("#AsisteCentroCristiano_Padre").prop('checked', false);
+    $("#CasaPropia_Padre").prop('checked', false);
+    $("#VehiculoPropio_Padre").prop('checked', false);
     $("#Marca_Padre").val("");
     $("#Modelo_Padre").val("");
     $("#IdReligion_Padre").val("");
@@ -1607,7 +1624,7 @@ function vaciar_campos_madre() {
     $("#Naturaleza_Madre").val("NATU");
     $("#IdTipoDocumento_Madre").val("CED");
     $("#CedulaRuc_Madre").val("");
-    $("#EstaFallecido_Madre").val(false);
+    $("#EstaFallecido_Madre").prop('checked', false);
     $("#Nombres_Madre").val("");
     $("#Apellidos_Madre").val("");
     $("#NombreCompleto_Madre").val("");
@@ -1624,9 +1641,9 @@ function vaciar_campos_madre() {
     $("#Telefono_Madre").val("");
     $("#Celular_Madre").val("");
     $("#Correo_Madre").val("");
-    $("#AsisteCentroCristiano_Madre").val(false);
-    $("#CasaPropia_Madre").val(false);
-    $("#VehiculoPropio_Madre").val(false);
+    $("#AsisteCentroCristiano_Madre").prop('checked', false);
+    $("#CasaPropia_Madre").prop('checked', false);
+    $("#VehiculoPropio_Madre").prop('checked', false);
     $("#Marca_Madre").val("");
     $("#Modelo_Madre").val("");
     $("#IdReligion_Madre").val("");
@@ -1649,7 +1666,7 @@ function vaciar_campos_representante() {
     $("#Naturaleza_Representante").val("NATU");
     $("#IdTipoDocumento_Representante").val("CED");
     $("#CedulaRuc_Representante").val("");
-    $("#EstaFallecido_Representante").val(false);
+    $("#EstaFallecido_Representante").prop('checked', false);
     $("#Nombres_Representante").val("");
     $("#Apellidos_Representante").val("");
     $("#NombreCompleto_Representante").val("");
@@ -1666,9 +1683,9 @@ function vaciar_campos_representante() {
     $("#Telefono_Representante").val("");
     $("#Celular_Representante").val("");
     $("#Correo_Representante").val("");
-    $("#AsisteCentroCristiano_Representante").val(false);
-    $("#CasaPropia_Representante").val(false);
-    $("#VehiculoPropio_Representante").val(false);
+    $("#AsisteCentroCristiano_Representante").prop('checked',false);
+    $("#CasaPropia_Representante").prop('checked', false);
+    $("#VehiculoPropio_Representante").prop('checked', false);
     $("#Marca_Representante").val("");
     $("#Modelo_Representante").val("");
     $("#IdReligion_Representante").val("");

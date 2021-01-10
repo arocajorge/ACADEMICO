@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -229,6 +230,45 @@ namespace Core.Data.Academico
                 return true;
             }
             catch (Exception EX)
+            {
+
+                throw;
+            }
+        }
+        public aca_Admision_Info getInfo_CedulaAspirante(int IdEmpresa, string CedulaRuc_Aspirante)
+        {
+            try
+            {
+                aca_Admision_Info info = new aca_Admision_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_Admision a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.CedulaRuc_Aspirante = " + CedulaRuc_Aspirante.ToString();
+                    var ResultValue = command.ExecuteScalar();
+
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_Admision_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            CedulaRuc_Aspirante = reader["CedulaRuc_Aspirante"].ToString(),
+                            Nombres_Aspirante = reader["Nombres_Aspirante"].ToString(),
+                            Apellidos_Aspirante = reader["Apellidos_Aspirante"].ToString(),
+                            NombreCompleto_Aspirante = reader["NombreCompleto_Aspirante"].ToString(),
+                        };
+                    }
+                }
+                return info;
+            }
+            catch (Exception)
             {
 
                 throw;

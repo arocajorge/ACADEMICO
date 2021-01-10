@@ -221,6 +221,9 @@ namespace Core.Info.Academico
 
         #region Campos que no exiten en la tabla
         public double TotalIngresos { get; set; }
+        public int AspiranteValido { get; set; }
+        public int PadreValido { get; set; }
+        public int MadreValido { get; set; }
         public int RepresentanteValido { get; set; }
         public double TotalEgresos { get; set; }
         public double Saldo { get; set; }

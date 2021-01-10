@@ -106,6 +106,9 @@
                     @Html.HiddenFor(q => q.IdCatalogoPAREN_Padre, new { @id = "IdCatalogoPAREN_Padre" })
                     @Html.HiddenFor(q => q.IdCatalogoPAREN_Madre, new { @id = "IdCatalogoPAREN_Madre" })
                     @Html.HiddenFor(q => q.FechaActual, new { @id = "FechaActual" })
+                    @Html.HiddenFor(q => q.AspiranteValido, new { @id = "AspiranteValido" })
+                    @Html.HiddenFor(q => q.PadreValido, new { @id = "PadreValido" })
+                    @Html.HiddenFor(q => q.MadreValido, new { @id = "MadreValido" })
                     @Html.HiddenFor(q => q.RepresentanteValido, new { @id = "RepresentanteValido" })
                     
                     <div class="font-medium text-base">Datos de la admisión</div>
@@ -1072,7 +1075,7 @@
                                 </div>
                                 <div class="intro-y col-span-12 sm:col-span-3">
                                     <div class="mb-2">Total de ingresos*</div>
-                                    <input type="text" name="TotalGastos" id="TotalGastos" class="input w-full border flex-1" readonly="readonly">
+                                    <input type="text" name="TotalIngresos" id="TotalIngresos" class="input w-full border flex-1" readonly="readonly">
                                     @Html.ValidationMessageFor(q => q.TotalIngresos, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="intro-y col-span-12 sm:col-span-3">

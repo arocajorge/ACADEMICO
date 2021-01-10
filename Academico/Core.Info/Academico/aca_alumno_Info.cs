@@ -253,6 +253,10 @@ namespace Core.Info.Academico
         public string TelefonoRepresentante { get; set; }
         #endregion
 
+        #region Admision
+        public decimal IdAdmision { get; set; }
+        #endregion
+
         #endregion
     }
 }

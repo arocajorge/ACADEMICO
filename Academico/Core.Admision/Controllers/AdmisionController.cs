@@ -411,20 +411,24 @@ namespace Core.Admision.Controllers
             mes = mes - 1;
             resultado.mes = mes.ToString();
             resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
+
+            var info_admision = bus_admision.GetInfo_CedulaAspirante(IdEmpresa, pe_cedulaRuc);
+            resultado.IdAdmision = (info_admision==null ? 0 : info_admision.IdAdmision);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult get_info_x_num_cedula_persona(string pe_cedulaRuc = "")
         {
-            var resultado = bus_persona.get_info_x_num_cedula(pe_cedulaRuc);
-            if (resultado!=null)
-            {
-                resultado.anio = Convert.ToDateTime(resultado.pe_fechaNacimiento).Year.ToString();
-                var mes = Convert.ToDateTime(resultado.pe_fechaNacimiento).Month;
-                mes = mes - 1;
-                resultado.mes = mes.ToString();
-                resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
-            }
+            var resultado = new tb_persona_Info();
+            resultado = bus_persona.get_info_x_num_cedula(pe_cedulaRuc);
+            resultado = (resultado == null ? new tb_persona_Info() : resultado);
+
+            resultado.anio = Convert.ToDateTime(resultado.pe_fechaNacimiento).Year.ToString();
+            var mes = Convert.ToDateTime(resultado.pe_fechaNacimiento).Month;
+            mes = mes - 1;
+            resultado.mes = mes.ToString();
+            resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
+
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         #endregion
