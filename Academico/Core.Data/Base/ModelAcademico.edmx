@@ -97,6 +97,7 @@
           <Property Name="AnioVehiculo_Padre" Type="int" />
           <Property Name="CasaPropia_Padre" Type="bit" Nullable="false" />
           <Property Name="EstaFallecido_Padre" Type="bit" Nullable="false" />
+          <Property Name="IdProfesion_Padre" Type="int" />
           <Property Name="Naturaleza_Madre" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IdTipoDocumento_Madre" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="CedulaRuc_Madre" Type="varchar" MaxLength="50" Nullable="false" />
@@ -137,6 +138,7 @@
           <Property Name="AnioVehiculo_Madre" Type="int" />
           <Property Name="CasaPropia_Madre" Type="bit" Nullable="false" />
           <Property Name="EstaFallecido_Madre" Type="bit" Nullable="false" />
+          <Property Name="IdProfesion_Madre" Type="int" />
           <Property Name="Naturaleza_Representante" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IdTipoDocumento_Representante" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="CedulaRuc_Representante" Type="varchar" MaxLength="50" Nullable="false" />
@@ -177,6 +179,7 @@
           <Property Name="AnioVehiculo_Representante" Type="int" />
           <Property Name="CasaPropia_Representante" Type="bit" Nullable="false" />
           <Property Name="EstaFallecido_Representante" Type="bit" Nullable="false" />
+          <Property Name="IdProfesion_Representante" Type="int" />
           <Property Name="SueldoPadre" Type="float" Nullable="false" />
           <Property Name="SueldoMadre" Type="float" Nullable="false" />
           <Property Name="OtroIngresoPadre" Type="float" Nullable="false" />
@@ -188,6 +191,8 @@
           <Property Name="GastoArriendo" Type="float" Nullable="false" />
           <Property Name="GastoPrestamo" Type="float" Nullable="false" />
           <Property Name="OtroGasto" Type="float" Nullable="false" />
+          <Property Name="IdCatalogoESTADM" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="varchar" MaxLength="200" />
           <Property Name="FechaCreacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="varchar" MaxLength="200" />
@@ -195,9 +200,6 @@
           <Property Name="IdUsuarioAnulacion" Type="varchar" MaxLength="200" />
           <Property Name="FechaAnulacion" Type="datetime" />
           <Property Name="MotivoAnulacion" Type="varchar(max)" />
-          <Property Name="IdProfesion_Padre" Type="int" />
-          <Property Name="IdProfesion_Madre" Type="int" />
-          <Property Name="IdProfesion_Representante" Type="int" />
         </EntityType>
         <EntityType Name="aca_Alumno">
           <Key>
@@ -3285,6 +3287,18 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_aca_Admision_aca_Catalogo3">
+          <End Role="aca_Catalogo" Type="Self.aca_Catalogo" Multiplicity="1" />
+          <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoESTADM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_aca_Admision_aca_CatalogoFicha">
           <End Role="aca_CatalogoFicha" Type="Self.aca_CatalogoFicha" Multiplicity="1" />
           <End Role="aca_Admision" Type="Self.aca_Admision" Multiplicity="*" />
@@ -6364,6 +6378,10 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
             <End Role="aca_Admision" EntitySet="aca_Admision" />
           </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Catalogo3" Association="Self.FK_aca_Admision_aca_Catalogo3">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
           <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha" Association="Self.FK_aca_Admision_aca_CatalogoFicha">
             <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
             <End Role="aca_Admision" EntitySet="aca_Admision" />
@@ -7574,6 +7592,10 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
             <End Role="aca_Admision" EntitySet="aca_Admision" />
           </AssociationSet>
+          <AssociationSet Name="FK_aca_Admision_aca_Catalogo3" Association="ModelAcademico.FK_aca_Admision_aca_Catalogo3">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Admision" EntitySet="aca_Admision" />
+          </AssociationSet>
           <AssociationSet Name="FK_aca_Admision_aca_CatalogoFicha" Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha">
             <End Role="aca_CatalogoFicha" EntitySet="aca_CatalogoFicha" />
             <End Role="aca_Admision" EntitySet="aca_Admision" />
@@ -7730,6 +7752,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_Admision" />
           <NavigationProperty Name="aca_Admision1" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo1" FromRole="aca_Catalogo" ToRole="aca_Admision" />
           <NavigationProperty Name="aca_Admision2" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo2" FromRole="aca_Catalogo" ToRole="aca_Admision" />
+          <NavigationProperty Name="aca_Admision3" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo3" FromRole="aca_Catalogo" ToRole="aca_Admision" />
           </EntityType>
         <EntityType Name="aca_CatalogoTipo">
           <Key>
@@ -12724,6 +12747,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="AnioVehiculo_Padre" Type="Int32" />
           <Property Name="CasaPropia_Padre" Type="Boolean" Nullable="false" />
           <Property Name="EstaFallecido_Padre" Type="Boolean" Nullable="false" />
+          <Property Name="IdProfesion_Padre" Type="Int32" />
           <Property Name="Naturaleza_Madre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento_Madre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CedulaRuc_Madre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -12764,6 +12788,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="AnioVehiculo_Madre" Type="Int32" />
           <Property Name="CasaPropia_Madre" Type="Boolean" Nullable="false" />
           <Property Name="EstaFallecido_Madre" Type="Boolean" Nullable="false" />
+          <Property Name="IdProfesion_Madre" Type="Int32" />
           <Property Name="Naturaleza_Representante" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento_Representante" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CedulaRuc_Representante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -12804,6 +12829,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="AnioVehiculo_Representante" Type="Int32" />
           <Property Name="CasaPropia_Representante" Type="Boolean" Nullable="false" />
           <Property Name="EstaFallecido_Representante" Type="Boolean" Nullable="false" />
+          <Property Name="IdProfesion_Representante" Type="Int32" />
           <Property Name="SueldoPadre" Type="Double" Nullable="false" />
           <Property Name="SueldoMadre" Type="Double" Nullable="false" />
           <Property Name="OtroIngresoPadre" Type="Double" Nullable="false" />
@@ -12815,6 +12841,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="GastoArriendo" Type="Double" Nullable="false" />
           <Property Name="GastoPrestamo" Type="Double" Nullable="false" />
           <Property Name="OtroGasto" Type="Double" Nullable="false" />
+          <Property Name="IdCatalogoESTADM" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -12822,13 +12850,11 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdProfesion_Padre" Type="Int32" />
-          <Property Name="IdProfesion_Madre" Type="Int32" />
-          <Property Name="IdProfesion_Representante" Type="Int32" />
           <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_Admision_aca_AnioLectivo" FromRole="aca_Admision" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_Catalogo" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo" FromRole="aca_Admision" ToRole="aca_Catalogo" />
           <NavigationProperty Name="aca_Catalogo1" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo1" FromRole="aca_Admision" ToRole="aca_Catalogo" />
           <NavigationProperty Name="aca_Catalogo2" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo2" FromRole="aca_Admision" ToRole="aca_Catalogo" />
+          <NavigationProperty Name="aca_Catalogo3" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo3" FromRole="aca_Admision" ToRole="aca_Catalogo" />
           <NavigationProperty Name="aca_CatalogoFicha" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
           <NavigationProperty Name="aca_CatalogoFicha1" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha1" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
           <NavigationProperty Name="aca_CatalogoFicha2" Relationship="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha10" FromRole="aca_Admision" ToRole="aca_CatalogoFicha" />
@@ -12892,6 +12918,18 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Principal>
             <Dependent Role="aca_Admision">
               <PropertyRef Name="IdCatalogoPAREN_Representante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Admision_aca_Catalogo3">
+          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Admision">
+              <PropertyRef Name="IdCatalogoESTADM" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -15594,9 +15632,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <EntitySetMapping Name="aca_Admision">
             <EntityTypeMapping TypeName="ModelAcademico.aca_Admision">
               <MappingFragment StoreEntitySet="aca_Admision">
-                <ScalarProperty Name="IdProfesion_Representante" ColumnName="IdProfesion_Representante" />
-                <ScalarProperty Name="IdProfesion_Madre" ColumnName="IdProfesion_Madre" />
-                <ScalarProperty Name="IdProfesion_Padre" ColumnName="IdProfesion_Padre" />
                 <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
                 <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
                 <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
@@ -15604,6 +15639,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdCatalogoESTADM" ColumnName="IdCatalogoESTADM" />
                 <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
                 <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
                 <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
@@ -15615,6 +15652,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
                 <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
                 <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
+                <ScalarProperty Name="IdProfesion_Representante" ColumnName="IdProfesion_Representante" />
                 <ScalarProperty Name="EstaFallecido_Representante" ColumnName="EstaFallecido_Representante" />
                 <ScalarProperty Name="CasaPropia_Representante" ColumnName="CasaPropia_Representante" />
                 <ScalarProperty Name="AnioVehiculo_Representante" ColumnName="AnioVehiculo_Representante" />
@@ -15655,6 +15693,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="CedulaRuc_Representante" ColumnName="CedulaRuc_Representante" />
                 <ScalarProperty Name="IdTipoDocumento_Representante" ColumnName="IdTipoDocumento_Representante" />
                 <ScalarProperty Name="Naturaleza_Representante" ColumnName="Naturaleza_Representante" />
+                <ScalarProperty Name="IdProfesion_Madre" ColumnName="IdProfesion_Madre" />
                 <ScalarProperty Name="EstaFallecido_Madre" ColumnName="EstaFallecido_Madre" />
                 <ScalarProperty Name="CasaPropia_Madre" ColumnName="CasaPropia_Madre" />
                 <ScalarProperty Name="AnioVehiculo_Madre" ColumnName="AnioVehiculo_Madre" />
@@ -15695,6 +15734,7 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="CedulaRuc_Madre" ColumnName="CedulaRuc_Madre" />
                 <ScalarProperty Name="IdTipoDocumento_Madre" ColumnName="IdTipoDocumento_Madre" />
                 <ScalarProperty Name="Naturaleza_Madre" ColumnName="Naturaleza_Madre" />
+                <ScalarProperty Name="IdProfesion_Padre" ColumnName="IdProfesion_Padre" />
                 <ScalarProperty Name="EstaFallecido_Padre" ColumnName="EstaFallecido_Padre" />
                 <ScalarProperty Name="CasaPropia_Padre" ColumnName="CasaPropia_Padre" />
                 <ScalarProperty Name="AnioVehiculo_Padre" ColumnName="AnioVehiculo_Padre" />

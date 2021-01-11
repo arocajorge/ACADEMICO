@@ -242,11 +242,12 @@
         <EntityTypeShape EntityType="ModelAcademico.aca_MecanismoDePago" Width="1.5" PointX="38.375" PointY="1" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_aca_MecanismoDePago" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Matricula_Rubro_aca_MecanismoDePago" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Admision" Width="1.5" PointX="44.875" PointY="7.75" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Admision" Width="1.5" PointX="44.875" PointY="7.5" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Catalogo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Catalogo1" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Catalogo2" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Catalogo3" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha1" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_CatalogoFicha10" />

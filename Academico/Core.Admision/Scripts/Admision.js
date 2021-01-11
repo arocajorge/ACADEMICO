@@ -1,10 +1,20 @@
-﻿
-//$(".form").keypress(function (e) {
-//    if (e.which == 13) {
-//        return false;
-//    }
-//});
+﻿function ValidarEnter() {
+    $(document).ready(function () {
 
+        $('form').keypress(function (e) {
+            if (e == 13) {
+                return false;
+            }
+        });
+
+        $('input').keypress(function (e) {
+            if (e.which == 13) {
+                return false;
+            }
+        });
+
+    });
+}
 function SiguienteAspirante() {
     if ($("#AspiranteValido").val() == "1") {
         $("#DatosAspirante").hide();
@@ -15,6 +25,7 @@ function SiguienteAspirante() {
 }
 function SiguientePadre() {
     if ($("#PadreValido").val() == "1") {
+        ValidarDatosRegistroPadre();
         $("#DatosPadre").hide();
         $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
         $("#DatosMadre").show();
@@ -97,6 +108,54 @@ function Validar_cedula_ruc_Aspirante() {
     });
 };
 
+function MostrarRazonSocialPadre() {
+    var Tipo_documento = $("#IdTipoDocumento_Padre").val();
+    if (Tipo_documento == "JURI") {
+        $("#RazonSocial_Padre").show();
+    }
+    else {
+        $("#RazonSocial_Padre").hidden();
+    }
+}
+function MostrarRazonSocialMadre() {
+    var Tipo_documento = $("#IdTipoDocumento_Madre").val();
+    if (Tipo_documento == "JURI") {
+        $("#RazonSocial_Madre").show();
+    }
+    else {
+        $("#RazonSocial_Madre").hidden();
+    }
+}
+function MostrarRazonSocialRepresentante() {
+    var Tipo_documento = $("#IdTipoDocumento_Representante").val();
+    if (Tipo_documento == "JURI") {
+        $("#RazonSocial__Representante").show();
+    }
+    else {
+        $("#RazonSocial__Representante").hidden();
+    }
+}
+
+function ValidarDatosRegistroPadre() {
+    var Naturaleza= $("#Naturaleza_Padre").val();
+    var Tipo_documento= $("#IdTipoDocumento_Padre").val();
+    var Cedula_ruc = $("#CedulaRuc_Padre").val();
+    var Nombres = $("#Nombres_Padre").val();
+    var Apellidos = $("#Apellidos_Padre").val();
+    var NombreCompleto = $("#NombreCompleto_Padre").val();
+    var RazonSocial = $("#RazonSocial_Padre").val();
+    if (Naturaleza == "JURI") {
+        if (RazonSocial == "" && NombreCompleto == "") {
+            alert("Los datos del padre no son válidos, debe de ingresar razon social");
+        }         
+    }
+    else {
+        if (Nombres == "" || Apellidos == "" || NombreCompleto == "") {
+            alert("Los datos del padre no son válidos, debe de ingresar nombres y apellidos");
+        }
+    }
+}
+
 function Validar_cedula_ruc_Padre() {
     var datos = {
         naturaleza: $("#Naturaleza_Padre").val(),
@@ -117,6 +176,7 @@ function Validar_cedula_ruc_Padre() {
             if (data.isValid == true) {
                 $("#error_documento_padre").hide();
                 $("#Naturaleza_Padre").val(data.return_naturaleza);
+                
                 $("#PadreValido").val("1");
             }
             else {
@@ -753,6 +813,7 @@ function PadreRepresentante() {
 
     $("#Naturaleza_Representante").val(Naturaleza);
     $("#IdTipoDocumento_Representante").val(IdTipoDocumento);
+    MostrarRazonSocial("PADRE");
     $("#CedulaRuc_Representante").val(CedulaRuc);
     $("#EstaFallecido_Representante").prop('checked', EstaFallecido);
     $("#Nombres_Representante").val(Nombres);
@@ -889,6 +950,7 @@ function MadreRepresentante() {
 
     $("#Naturaleza_Representante").val(Naturaleza);
     $("#IdTipoDocumento_Representante").val(IdTipoDocumento);
+    MostrarRazonSocial("MADRE");
     $("#CedulaRuc_Representante").val(CedulaRuc);
     $("#EstaFallecido_Representante").prop('checked', EstaFallecido);
     $("#Nombres_Representante").val(Nombres);
@@ -976,6 +1038,7 @@ function MadreRepresentante() {
 function OtroRepresentante() {
     $("#Naturaleza_Representante").val("NATU");
     $("#IdTipoDocumento_Representante").val("CED");
+    MostrarRazonSocial("REPRESENTANTE");
     $("#CedulaRuc_Representante").val("");
     $("#EstaFallecido_Representante").prop('checked', false);
     $("#Nombres_Representante").val("");
@@ -1204,12 +1267,9 @@ function actualizar_nombre_completo_aspirante() {
 
 function actualizar_nombre_completo_padre() {
     var tipo_doc = $("#IdTipoDocumento_Padre").val();
-    if (tipo_doc == "CED") {
-        var apellido = $("#Apellidos_Padre").val();
-        var nombre = $("#Nombres_Padre").val();
-
-        var nombre_completo = apellido + ' ' + nombre;
-        $("#NombreCompleto_Padre").val(nombre_completo)
+    if (tipo_doc == "RUC") {
+        var razon_social = $("#RazonSocial_Padre").val();
+        $("#NombreCompleto_Padre").val(razon_social)
     }
     else {
         var razon_social = $("#RazonSocial_Padre").val();
@@ -1219,31 +1279,31 @@ function actualizar_nombre_completo_padre() {
 
 function actualizar_nombre_completo_madre() {
     var tipo_doc = $("#IdTipoDocumento_Madre").val();
-    if (tipo_doc == "CED") {
+    if (tipo_doc == "RUC") {
+        var razon_social = $("#RazonSocial_Madre").val();
+        $("#NombreCompleto_Madre").val(razon_social)
+    }
+    else {
         var apellido = $("#Apellidos_Madre").val();
         var nombre = $("#Nombres_Madre").val();
 
         var nombre_completo = apellido + ' ' + nombre;
         $("#NombreCompleto_Madre").val(nombre_completo)
     }
-    else {
-        var razon_social = $("#RazonSocial_Madre").val();
-        $("#NombreCompleto_Madre").val(razon_social)
-    }
 }
 
 function actualizar_nombre_completo_representante() {
     var tipo_doc = $("#IdTipoDocumento_Representante").val();
-    if (tipo_doc == "CED") {
+    if (tipo_doc == "RUC") {
+        var razon_social = $("#RazonSocial_Representante").val();
+        $("#NombreCompleto_Representante").val(razon_social)
+    }
+    else {
         var apellido = $("#Apellidos_Representante").val();
         var nombre = $("#Nombres_Representante").val();
 
         var nombre_completo = apellido + ' ' + nombre;
         $("#NombreCompleto_Representante").val(nombre_completo)
-    }
-    else {
-        var razon_social = $("#RazonSocial_Representante").val();
-        $("#NombreCompleto_Representante").val(razon_social)
     }
 }
 

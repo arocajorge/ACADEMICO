@@ -128,7 +128,12 @@ namespace Core.Admision.Controllers
                 IdParroquia_Padre = "",
                 IdParroquia_Madre = "",
                 IdParroquia_Representante = "",
-                FechaActual = DateTime.Now
+                FechaActual = DateTime.Now,
+                FechaNacimiento_Aspirante = DateTime.Now,
+                FechaNacimiento_Padre = DateTime.Now,
+                FechaNacimiento_Madre = DateTime.Now,
+                FechaNacimiento_Representante = DateTime.Now,
+                IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO)
             };
 
             cargar_combos(model);

@@ -175,7 +175,7 @@ namespace Core.Data.Reportes.Academico
                     + " /*PROMEDIO DE LOS 2 QUIMESTRES*/ "
                     + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, AN.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, "
                     + " cp.NomParalelo, cp.OrdenParalelo, pa.pe_nombreCompleto AS NombreAlumno, mc.IdMateria, mc.NomMateria, mc.NomMateriaGrupo, mc.OrdenMateria, mc.OrdenMateriaGrupo, mc.PromediarGrupo, mc.IdCatalogoTipoCalificacion, "
-                    + " CAST(mco.PromedioQuimestres AS varchar) AS Calificacion, CAST(mco.PromedioQuimestres AS numeric(18, 2)) AS CalificacionNumerica, 'PROMEDIO' AS Columna, 1 AS OrdenColumna, pp.pe_nombreCompleto AS NombreTutor "
+                    + " CAST(mco.PromedioQuimestres AS varchar) AS Calificacion, CAST(mco.PromedioQuimestres AS numeric(18, 2)) AS CalificacionNumerica, 'PROMEDIO' AS Columna, 3 AS OrdenColumna, pp.pe_nombreCompleto AS NombreTutor "
                     + " FROM     dbo.aca_Matricula AS m INNER JOIN "
                     + " dbo.aca_MatriculaCalificacion AS mco ON m.IdEmpresa = mco.IdEmpresa AND m.IdMatricula = mco.IdMatricula LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo AS AN ON m.IdEmpresa = AN.IdEmpresa AND m.IdAnio = AN.IdAnio LEFT OUTER JOIN "
@@ -1025,6 +1025,49 @@ namespace Core.Data.Reportes.Academico
 
                 ListaFinal.AddRange(lst_promedio_complementarias_PromQuimestre);
                 ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
+                #endregion
+
+                #region OPTATIVA SUPLETORIO
+                var lst_promedio_complementarias_PromQuimestre = new List<ACA_034_Info>();
+                foreach (var item in ListaComplementariasProm_Quimestre)
+                {
+                    lst_promedio_complementarias_PromQuimestre.Add(new ACA_034_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        IdMateria = 0,
+                        IdAlumno = item.IdAlumno,
+                        NombreAlumno = item.NombreAlumno,
+                        Codigo = item.Codigo,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        IdNivel = item.IdNivel,
+                        Descripcion = item.Descripcion,
+                        NomSede = item.NomSede,
+                        NomNivel = item.NomNivel,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomParalelo = item.NomParalelo,
+                        CodigoParalelo = item.CodigoParalelo,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        Calificacion = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
+                        CalificacionNumerica = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
+                        IdCatalogoTipoCalificacion = null,
+                        Columna = "PROMEDIO",
+                        NombreGrupo = "OPTATIVA",
+                        NombreMateria = "OPTATIVA",
+                        OrdenGrupo = 99,
+                        OrdenMateria = 99,
+                        OrdenColumna = 3,
+                        PromediarGrupo = 0
+                    });
+                }
                 #endregion
 
                 #region PromedioFinal

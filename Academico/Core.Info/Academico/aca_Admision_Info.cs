@@ -116,6 +116,7 @@ namespace Core.Info.Academico
         public Nullable<int> AnioVehiculo_Padre { get; set; }
         public bool CasaPropia_Padre { get; set; }
         public bool EstaFallecido_Padre { get; set; }
+        public Nullable<int> IdProfesion_Padre { get; set; }
         public string Naturaleza_Madre { get; set; }
         public string IdTipoDocumento_Madre { get; set; }
         public string CedulaRuc_Madre { get; set; }
@@ -156,6 +157,7 @@ namespace Core.Info.Academico
         public Nullable<int> AnioVehiculo_Madre { get; set; }
         public bool CasaPropia_Madre { get; set; }
         public bool EstaFallecido_Madre { get; set; }
+        public Nullable<int> IdProfesion_Madre { get; set; }
         public string Naturaleza_Representante { get; set; }
         public string IdTipoDocumento_Representante { get; set; }
         public string CedulaRuc_Representante { get; set; }
@@ -196,6 +198,7 @@ namespace Core.Info.Academico
         public Nullable<int> AnioVehiculo_Representante { get; set; }
         public bool CasaPropia_Representante { get; set; }
         public bool EstaFallecido_Representante { get; set; }
+        public Nullable<int> IdProfesion_Representante { get; set; }
         public double SueldoPadre { get; set; }
         public double SueldoMadre { get; set; }
         public double OtroIngresoPadre { get; set; }
@@ -207,6 +210,8 @@ namespace Core.Info.Academico
         public double GastoArriendo { get; set; }
         public double GastoPrestamo { get; set; }
         public double OtroGasto { get; set; }
+        public int IdCatalogoESTADM { get; set; }
+        public bool Estado { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
@@ -214,9 +219,6 @@ namespace Core.Info.Academico
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
-        public Nullable<int> IdProfesion_Padre { get; set; }
-        public Nullable<int> IdProfesion_Madre { get; set; }
-        public Nullable<int> IdProfesion_Representante { get; set; }
 
 
         #region Campos que no exiten en la tabla
@@ -232,6 +234,8 @@ namespace Core.Info.Academico
         public bool info_valido_madre { get; set; }
         public bool info_valido_representante { get; set; }
         public DateTime FechaActual { get; set; }
+        public string EstadoAdmision { get; set; }
+        public string FechaString { get; set; }
         #endregion
     }
 }

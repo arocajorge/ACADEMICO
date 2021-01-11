@@ -12,6 +12,19 @@ namespace Core.Bus.Academico
     {
         aca_Admision_Data odata = new aca_Admision_Data();
 
+        public List<aca_Admision_Info> GetList(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                return odata.getList(IdEmpresa, IdAnio);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool GuardarDB(aca_Admision_Info info)
         {
             try
@@ -30,6 +43,19 @@ namespace Core.Bus.Academico
             try
             {
                 return odata.getInfo_CedulaAspirante(IdEmpresa, CedulaRuc_Aspirante);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public aca_Admision_Info ConsultaAdmision(int IdEmpresa, int IdAnio, string CedulaRuc_Aspirante)
+        {
+            try
+            {
+                return odata.consultaAdmision(IdEmpresa, IdAnio, CedulaRuc_Aspirante);
             }
             catch (Exception)
             {

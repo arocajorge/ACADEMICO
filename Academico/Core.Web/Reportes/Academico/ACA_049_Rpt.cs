@@ -33,10 +33,21 @@ namespace Core.Web.Reportes.Academico
             bool MostrarRetirados = string.IsNullOrEmpty(p_MostrarRetirados.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarRetirados.Value);
 
             ACA_049_Bus bus_rpt = new ACA_049_Bus();
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             List<ACA_049_Info> lst_rpt = new List<ACA_049_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
 
             this.DataSource = lst_rpt;
+            var emp = bus_empresa.get_info(IdEmpresa);
+            if (emp != null)
+            {
+                if (emp.em_logo != null)
+                {
+                    ImageConverter obj = new ImageConverter();
+                    lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                }
+            }
+
             aca_Sede_Bus bus_sede = new aca_Sede_Bus();
             var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
             if (sede != null)

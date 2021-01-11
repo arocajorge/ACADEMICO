@@ -182,7 +182,8 @@ namespace Core.Info.Helps
             QUIM2 = 7,
             EXSUP = 8,
             TIPOCAL = 9,
-            ESTCONV = 10
+            ESTCONV = 10,
+            ESTADM = 11
         }
 
         public enum eCatalogoTipoCalificacion
@@ -254,7 +255,12 @@ namespace Core.Info.Helps
             PERMITIR = 19,
             NEGAR = 20
         }
-
+        public enum eTipoCatalogoAdmision
+        {
+            REGISTRADO = 47,
+            ADMITIDO = 48,
+            RECHAZADO = 49,
+        }
         public enum eTipoCatalogoSocioEconomico
         {
             VIVIENDA = 1,

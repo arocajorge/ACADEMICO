@@ -1,19 +1,23 @@
-﻿@{
+﻿@model Core.Info.Academico.aca_Admision_Info
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+} 
+<script src="~/Scripts/Consulta.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="~/Scripts/tabulator.min.js"></script>
 <!-- BEGIN: Mobile Menu -->
 <div class="mobile-menu md:hidden">
     <div class="mobile-menu-bar">
         <a href="" class="flex mr-auto">
-            <img alt="Midone Tailwind HTML Admin Template" class="w-6" src="dist/images/logo.svg">
+            <img title="Sistema de admisión" class="w-6" src="dist/images/logo.svg">
         </a>
         <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
     </div>
     <ul class="border-t border-theme-24 py-5 hidden">
         <li>
             <a href="@Url.Action("Index","Admision")" class="menu">
-                <div class="menu__icon"> <i data-feather="send"></i> </div>
-                <div class="menu__title"> Enviar admisión </div>
+                <div class="menu__icon"> <i data-feather="user-plus"></i> </div>
+                <div class="menu__title"> Registrar aspirante </div>
             </a>
         </li>
         <li>
@@ -25,22 +29,26 @@
     </ul>
 </div>
 <!-- END: Mobile Menu -->
+@using (Html.BeginForm("Index", "Consulta", FormMethod.Post, new { @class = "form", @role = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAnio, new { @id = "IdAnio" })
 <div class="flex">
     <!-- BEGIN: Simple Menu -->
     <nav class="side-nav side-nav--simple">
         <a href="" class="intro-x flex items-center pl-5 pt-4">
-            <img alt="Sistema de admisión académico" class="w-6" src="dist/images/logo.svg">
+            <img title="Sistema de admisión" class="w-6" src="dist/images/logo.svg">
         </a>
         <div class="side-nav__devider my-6"></div>
         <ul>
             <li>
-                <a href="@Url.Action("Index","Admision")" class="side-menu">
-                    <div class="side-menu__icon"> <i data-feather="send"></i> </div>
-                    <div class="side-menu__title"> Enviar admisión </div>
+                <a href="@Url.Action("Index", "Admision")" class="side-menu">
+                    <div class="side-menu__icon"> <i data-feather="user-plus"></i> </div>
+                    <div class="side-menu__title"> Registrar aspirante </div>
                 </a>
             </li>
             <li>
-                <a href="@Url.Action("Index","Consulta")" class="side-menu side-menu--active" > 
+                <a href="@Url.Action("Index", "Consulta")" class="side-menu side-menu--active" > 
                     <div class="side-menu__icon"> <i data-feather="search"></i> </div>
                     <div class="side-menu__title"> Consultar estado de admisión </div>
                 </a>
@@ -59,11 +67,11 @@
         <!-- END: Top Bar -->
         <div class="flex items-center mt-8">
             <h2 class="intro-y text-lg font-medium mr-auto">
-                Wizard Layout
+                Consultar estado de la admisión
             </h2>
         </div>
         <!-- BEGIN: Wizard Layout -->
-        <div class="intro-y box py-10 sm:py-20 mt-5">
+        @*<div class="intro-y box py-10 sm:py-20 mt-5">
             <div class="flex justify-center">
                 <button class="intro-y w-10 h-10 rounded-full button text-white bg-theme-1 mx-2">1</button>
                 <button class="intro-y w-10 h-10 rounded-full button bg-gray-200 dark:bg-dark-1 text-gray-600 mx-2">2</button>
@@ -111,8 +119,44 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>*@
         <!-- END: Wizard Layout -->
+        <div class="font-medium text-base"></div>
+        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+            <div class="intro-y col-span-12 sm:col-span-3">
+                <div class="mb-2">Cédula de identidad*</div>
+                <input type="text" name="CedulaRuc_Aspirante" id="CedulaRuc_Aspirante" class="input w-full border flex-1">
+            </div>
+            <div class="intro-y col-span-12 sm:col-span-3">
+                <button type="button" class="button w-full sm:w-16 bg-theme-1 text-white" id="tabulator-html-filter-go" onclick="Buscar();">Buscar</button>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Id Admision</th>
+                        <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Nombres del aspirante</th>
+                        <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Fecha de registro</th>
+                        <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Estado</th>
+                    </tr>
+                </thead>
+                <tbody id="Detalle">
+                    <tr>
+                        <td class="border-b dark:border-dark-5" id="IdAdmision"></td>
+                        <td class="border-b dark:border-dark-5" id="NombreCompleto_Aspirante"></td>
+                        <td class="border-b dark:border-dark-5" id="FechaIngreso_Aspirante"></td>
+                        <td class="border-b dark:border-dark-5" id="EstadoAdmision"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <!-- END: Content -->
 </div>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        ValidarEnter();
+    });
+</script>

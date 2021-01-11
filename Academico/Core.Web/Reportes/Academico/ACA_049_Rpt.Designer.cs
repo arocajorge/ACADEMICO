@@ -63,6 +63,7 @@
             this.p_IdAlumno = new DevExpress.XtraReports.Parameters.Parameter();
             this.groupHeaderBand1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrRichText1 = new DevExpress.XtraReports.UI.XRRichText();
+            this.PromedioMaterias_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             this.IdMatricula = new DevExpress.XtraReports.UI.XRLabel();
             this.groupFooterBand1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrTable5 = new DevExpress.XtraReports.UI.XRTable();
@@ -76,7 +77,6 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_MostrarRetirados = new DevExpress.XtraReports.Parameters.Parameter();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.PromedioMaterias_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSolicitud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrRichText1)).BeginInit();
@@ -375,7 +375,7 @@
             new DevExpress.XtraReports.UI.GroupField("OrdenJornada", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("NombreAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("IdAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.None)});
-            this.groupHeaderBand1.HeightF = 366.3333F;
+            this.groupHeaderBand1.HeightF = 329.1666F;
             this.groupHeaderBand1.Name = "groupHeaderBand1";
             this.groupHeaderBand1.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
             // 
@@ -386,9 +386,17 @@
             this.xrRichText1.Name = "xrRichText1";
             this.xrRichText1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
             this.xrRichText1.SerializableRtfString = resources.GetString("xrRichText1.SerializableRtfString");
-            this.xrRichText1.SizeF = new System.Drawing.SizeF(726.9998F, 162.5F);
+            this.xrRichText1.SizeF = new System.Drawing.SizeF(726.9998F, 128.3333F);
             this.xrRichText1.StylePriority.UseFont = false;
             this.xrRichText1.StylePriority.UsePadding = false;
+            // 
+            // PromedioMaterias_SubRpt
+            // 
+            this.PromedioMaterias_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 180.8333F);
+            this.PromedioMaterias_SubRpt.Name = "PromedioMaterias_SubRpt";
+            this.PromedioMaterias_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_049_Detalle_Rpt();
+            this.PromedioMaterias_SubRpt.SizeF = new System.Drawing.SizeF(727F, 20F);
+            this.PromedioMaterias_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromedioMaterias_SubRpt_BeforePrint);
             // 
             // IdMatricula
             // 
@@ -530,14 +538,6 @@
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_049_Info);
             this.objectDataSource1.Name = "objectDataSource1";
-            // 
-            // PromedioMaterias_SubRpt
-            // 
-            this.PromedioMaterias_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 180.8333F);
-            this.PromedioMaterias_SubRpt.Name = "PromedioMaterias_SubRpt";
-            this.PromedioMaterias_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_049_Detalle_Rpt();
-            this.PromedioMaterias_SubRpt.SizeF = new System.Drawing.SizeF(727F, 20F);
-            this.PromedioMaterias_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.PromedioMaterias_SubRpt_BeforePrint);
             // 
             // ACA_049_Rpt
             // 

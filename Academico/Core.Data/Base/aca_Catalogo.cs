@@ -30,6 +30,7 @@ namespace Core.Data.Base
             this.aca_Admision = new HashSet<aca_Admision>();
             this.aca_Admision1 = new HashSet<aca_Admision>();
             this.aca_Admision2 = new HashSet<aca_Admision>();
+            this.aca_Admision3 = new HashSet<aca_Admision>();
         }
     
         public int IdCatalogo { get; set; }
@@ -73,5 +74,7 @@ namespace Core.Data.Base
         public virtual ICollection<aca_Admision> aca_Admision1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Admision> aca_Admision2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_Admision> aca_Admision3 { get; set; }
     }
 }
