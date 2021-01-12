@@ -16,7 +16,7 @@
         <li>
             <a href="@Url.Action("Index", "Admision")" class="menu menu--active">
                 <div class="menu__icon"> <i data-feather="user-plus"></i></div>
-                <div class="menu__title"> Registrar aspirante </div>
+                <div class="menu__title"> Registrar admisión </div>
             </a>
         </li>
         <li>
@@ -30,15 +30,6 @@
 <!-- END: Mobile Menu -->
 @using (Html.BeginForm("Index", "Admision", FormMethod.Post, new { @class = "form", @role = "form" }))
 {
-    if (ViewBag.mensaje != null)
-    {
-        <div class="alert alert-warning alert-dismissible">
-            <h4>
-                <i data-feather="users" class="w-4 h-4 mr-2"></i> @ViewBag.mensaje
-            </h4>
-        </div>
-
-    }
 <div class="flex">
     <!-- BEGIN: Simple Menu -->
     <nav class="side-nav side-nav--simple">
@@ -50,7 +41,7 @@
             <li>
                 <a href="@Url.Action("Index","Admision")" class="side-menu side-menu--active">
                     <div class="side-menu__icon"> <i data-feather="user-plus"></i> </div>
-                    <div class="side-menu__title"> Registrar aspirante </div>
+                    <div class="side-menu__title"> Registrar admisión </div>
                 </a>
             </li>
             <li>
@@ -75,6 +66,17 @@
                 <h2 class="intro-y text-lg font-medium mr-auto">
                     Registro de admisión
                 </h2>
+            </div>
+            @if (ViewBag.mensaje != null)
+            {
+            <div class="rounded-md flex items-center px-5 py-4 mb-2 border border-theme-6 text-theme-6 dark:border-theme-6">
+                <i data-feather="alert-octagon" class="w-6 h-6 mr-2"></i> @ViewBag.mensaje <i data-feather="x" class="w-4 h-4 ml-auto"></i>
+            </div>
+            }
+            <div id="DivError" hidden>
+                <div class="rounded-md flex items-center px-5 py-4 mb-2 bg-theme-31 text-theme-6">
+                    <i data-feather="alert-octagon" class="w-6 h-6 mr-2"></i> <label id="MensajeError"></label>
+                </div>
             </div>
             <!-- BEGIN: Wizard Layout -->
             <div class="intro-y box py-10 sm:py-20 mt-5">
@@ -333,119 +335,119 @@
                             <input type="text" name="NombreCompleto_Padre" id="NombreCompleto_Padre" class="input w-full border flex-1">
                             @Html.ValidationMessageFor(q => q.NombreCompleto_Padre, "", new { @class = "text-danger" })
                         </div>
-                        <div class="intro-y col-span-12 sm:col-span-12" hidden>
-                            <div class="mb-2">Razon Social</div>
-                            <input type="text" name="RazonSocial_Padre" id="RazonSocial_Padre" class="input w-full border flex-1" placeholder="Solo ingresar este campo si el tipo de documento es RUC">
-                            @Html.ValidationMessageFor(q => q.RazonSocial_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Fecha de nacimiento*</div>
-                            <div class="relative mx-auto">
-                                <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> <i data-feather="calendar" class="w-4 h-4"></i> </div>
-                                <input type="text" name="FechaNacimiento_Padre" id="FechaNacimiento_Padre" class="datepicker input pl-12 border" data-single-mode="true">
-                                @Html.ValidationMessageFor(q => q.FechaNacimiento_Padre, "", new { @class = "text-danger" })
+                            <div class="intro-y col-span-12 sm:col-span-12">
+                                <div class="mb-2">Razon Social</div>
+                                <input type="text" name="RazonSocial_Padre" id="RazonSocial_Padre" class="input w-full border flex-1" placeholder="Solo ingresar este campo si el tipo de documento es RUC">
+                                @Html.ValidationMessageFor(q => q.RazonSocial_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Fecha de nacimiento*</div>
+                                <div class="relative mx-auto">
+                                    <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> <i data-feather="calendar" class="w-4 h-4"></i> </div>
+                                    <input type="text" name="FechaNacimiento_Padre" id="FechaNacimiento_Padre" class="datepicker input pl-12 border" data-single-mode="true">
+                                    @Html.ValidationMessageFor(q => q.FechaNacimiento_Padre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Pais</div>
+                                @Html.DropDownListFor(q => q.IdPais_Padre, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "input w-full border flex-1", @id = "IdPais_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdPais_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Región</div>
+                                @Html.DropDownListFor(q => q.Cod_Region_Padre, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "input w-full border flex-1", @id = "Cod_Region_Padre" })
+                                @Html.ValidationMessageFor(q => q.Cod_Region_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Provincia</div>
+                                @Html.DropDownListFor(q => q.IdProvincia_Padre, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "input w-full border flex-1", @id = "IdProvincia_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdProvincia_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Ciudad</div>
+                                @Html.DropDownListFor(q => q.IdCiudad_Padre, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdCiudad_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Parroquia</div>
+                                @Html.DropDownListFor(q => q.IdParroquia_Padre, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdParroquia_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2"></div>
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Sexo*</div>
+                                @Html.DropDownListFor(q => q.Sexo_Padre, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Sexo_Padre" })
+                                @Html.ValidationMessageFor(q => q.Sexo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Estado civil</div>
+                                @Html.DropDownListFor(q => q.IdEstadoCivil_Padre, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdEstadoCivil_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdEstadoCivil_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Grupo Etnico*</div>
+                                @Html.DropDownListFor(q => q.IdGrupoEtnico_Padre, new SelectList(ViewBag.lst_grupoetnico, "IdGrupoEtnico", "NomGrupoEtnico"), new { @class = "input w-full border flex-1", @id = "IdGrupoEtnico_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2"></div>
+
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Teléfono</div>
+                                <input type="text" name="Telefono_Padre" id="Telefono_Padre" class="input w-full border flex-1">
+                                @Html.ValidationMessageFor(q => q.Telefono_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Celular</div>
+                                <input type="text" name="Celular_Padre" id="Celular_Padre" class="input w-full border flex-1">
+                                @Html.ValidationMessageFor(q => q.Celular_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2">Correo</div>
+                                <input type="email" name="Correo_Padre" id="Correo_Padre" class="input w-full border flex-1">
+                                @Html.ValidationMessageFor(q => q.Correo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Religión*</div>
+                                @Html.DropDownListFor(q => q.IdReligion_Padre, new SelectList(ViewBag.lst_religion, "IdReligion", "NomReligion"), new { @class = "input w-full border flex-1", @id = "IdReligion_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdReligion_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Asiste a Centro Cristiano</div>
+                                <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Padre" id="AsisteCentroCristiano_Padre" class="show-code input input--switch border" type="checkbox">
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Tiene casa propia</div>
+                                <input data-target="#input-group-datepicker" name="CasaPropia_Padre" id="CasaPropia_Padre" class="show-code input input--switch border" type="checkbox">
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Tiene vehiculo propio</div>
+                                <input data-target="#input-group-datepicker" name="VehiculoPropio_Padre" id="VehiculoPropio_Padre" class="show-code input input--switch border" type="checkbox">
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoPadre" hidden>
+                                <div class="mb-2">Marca</div>
+                                <input type="text" id="Marca_Padre" name="Marca_Padre" class="input w-full border flex-1">
+                                @Html.ValidationMessageFor(q => q.Marca_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6" id="ModeloVehiculoPadre" hidden>
+                                <div class="mb-2">Modelo</div>
+                                <input type="text" id="Modelo_Padre" name="Modelo_Padre" class="input w-full border flex-1">
+                                @Html.ValidationMessageFor(q => q.Modelo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2">Dirección*</div>
+                                <input type="text" name="Direccion_Padre" id="Direccion_Padre" class="input w-full border flex-1">
+                                @Html.ValidationMessageFor(q => q.Direccion_Padre, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2">Sector</div>
+                                <input type="text" name="Sector_Padre" id="Sector_Padre" class="input w-full border flex-1">
+                                @Html.ValidationMessageFor(q => q.Sector_Padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Pais</div>
-                            @Html.DropDownListFor(q => q.IdPais_Padre, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "input w-full border flex-1", @id = "IdPais_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdPais_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Región</div>
-                            @Html.DropDownListFor(q => q.Cod_Region_Padre, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "input w-full border flex-1", @id = "Cod_Region_Padre" })
-                            @Html.ValidationMessageFor(q => q.Cod_Region_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Provincia</div>
-                            @Html.DropDownListFor(q => q.IdProvincia_Padre, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "input w-full border flex-1", @id = "IdProvincia_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdProvincia_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Ciudad</div>
-                            @Html.DropDownListFor(q => q.IdCiudad_Padre, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdCiudad_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Parroquia</div>
-                            @Html.DropDownListFor(q => q.IdParroquia_Padre, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdParroquia_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <div class="mb-2"></div>
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Sexo*</div>
-                            @Html.DropDownListFor(q => q.Sexo_Padre, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Sexo_Padre" })
-                            @Html.ValidationMessageFor(q => q.Sexo_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Estado civil</div>
-                            @Html.DropDownListFor(q => q.IdEstadoCivil_Padre, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdEstadoCivil_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdEstadoCivil_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Grupo Etnico*</div>
-                            @Html.DropDownListFor(q => q.IdGrupoEtnico_Padre, new SelectList(ViewBag.lst_grupoetnico, "IdGrupoEtnico", "NomGrupoEtnico"), new { @class = "input w-full border flex-1", @id = "IdGrupoEtnico_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2"></div>
-
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Teléfono</div>
-                            <input type="text" name="Telefono_Padre" id="Telefono_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Telefono_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Celular</div>
-                            <input type="text" name="Celular_Padre" id="Celular_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Celular_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <div class="mb-2">Correo</div>
-                            <input type="email" name="Correo_Padre" id="Correo_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Correo_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Religión*</div>
-                            @Html.DropDownListFor(q => q.IdReligion_Padre, new SelectList(ViewBag.lst_religion, "IdReligion", "NomReligion"), new { @class = "input w-full border flex-1", @id = "IdReligion_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdReligion_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Asiste a Centro Cristiano</div>
-                            <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Padre" id="AsisteCentroCristiano_Padre" class="show-code input input--switch border" type="checkbox">
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Tiene casa propia</div>
-                            <input data-target="#input-group-datepicker" name="CasaPropia_Padre" id="CasaPropia_Padre" class="show-code input input--switch border" type="checkbox">
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Tiene vehiculo propio</div>
-                            <input data-target="#input-group-datepicker" name="VehiculoPropio_Padre" id="VehiculoPropio_Padre" class="show-code input input--switch border" type="checkbox">
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoPadre" hidden>
-                            <div class="mb-2">Marca</div>
-                            <input type="text" id="Marca_Padre" name="Marca_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Marca_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6" id="ModeloVehiculoPadre" hidden>
-                            <div class="mb-2">Modelo</div>
-                            <input type="text" id="Modelo_Padre" name="Modelo_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Modelo_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <div class="mb-2">Dirección*</div>
-                            <input type="text" name="Direccion_Padre" id="Direccion_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Direccion_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-6">
-                            <div class="mb-2">Sector</div>
-                            <input type="text" name="Sector_Padre" id="Sector_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Sector_Padre, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
                     <div class="font-medium text-base">Datos de trabajo</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 sm:col-span-3">
@@ -1181,15 +1183,15 @@
         CargarCurso();
     });
 
-    $("#IdTipoDocumento_Padre").change(function () {
-        MostrarRazonSocialPAdre();
-    });
-    $("#IdTipoDocumento_Madre").change(function () {
-        MostrarRazonSocialMadre();
-    });
-    $("#IdTipoDocumento_Representante").change(function () {
-        MostrarRazonSocialRepresentante();
-    });
+    //$("#IdTipoDocumento_Padre").change(function () {
+    //    MostrarRazonSocialPadre();
+    //});
+    //$("#IdTipoDocumento_Madre").change(function () {
+    //    MostrarRazonSocialMadre();
+    //});
+    //$("#IdTipoDocumento_Representante").change(function () {
+    //    MostrarRazonSocialRepresentante();
+    //});
 
     $("#CedulaRuc_Aspirante").change(function () {
         Validar_cedula_ruc_Aspirante();

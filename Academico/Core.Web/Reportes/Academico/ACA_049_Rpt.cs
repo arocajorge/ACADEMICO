@@ -36,7 +36,7 @@ namespace Core.Web.Reportes.Academico
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             List<ACA_049_Info> lst_rpt = new List<ACA_049_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
-
+            Usuario.Text = "Elaborado por: "+usuario;
             this.DataSource = lst_rpt;
             var emp = bus_empresa.get_info(IdEmpresa);
             if (emp != null)

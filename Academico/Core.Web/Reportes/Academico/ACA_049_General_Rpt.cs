@@ -38,7 +38,7 @@ namespace Core.Web.Reportes.Academico
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
 
             this.DataSource = lst_rpt;
-
+            Usuario.Text = "Elaborado por: " + usuario;
             var emp = bus_empresa.get_info(IdEmpresa);
             if (emp != null)
             {

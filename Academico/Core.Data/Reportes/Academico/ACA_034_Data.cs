@@ -1027,11 +1027,11 @@ namespace Core.Data.Reportes.Academico
                 ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
                 #endregion
 
-                #region OPTATIVA SUPLETORIO
-                var lst_promedio_complementarias_PromQuimestre = new List<ACA_034_Info>();
-                foreach (var item in ListaComplementariasProm_Quimestre)
+                #region Optativa Mejoramiento
+                var lst_promedio_complementarias_Mejoramiento = new List<ACA_034_Info>();
+                foreach (var item in lst_promedio_complementarias_PromQuimestre)
                 {
-                    lst_promedio_complementarias_PromQuimestre.Add(new ACA_034_Info
+                    lst_promedio_complementarias_Mejoramiento.Add(new ACA_034_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
@@ -1056,21 +1056,154 @@ namespace Core.Data.Reportes.Academico
                         OrdenJornada = item.OrdenJornada,
                         OrdenCurso = item.OrdenCurso,
                         OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
-                        CalificacionNumerica = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
+                        Calificacion = null,
+                        CalificacionNumerica = null,
                         IdCatalogoTipoCalificacion = null,
-                        Columna = "PROMEDIO",
+                        Columna = "MEJORAMIENTO",
                         NombreGrupo = "OPTATIVA",
                         NombreMateria = "OPTATIVA",
                         OrdenGrupo = 99,
                         OrdenMateria = 99,
-                        OrdenColumna = 3,
+                        OrdenColumna = 4,
                         PromediarGrupo = 0
                     });
+                    ListaFinal.AddRange(lst_promedio_complementarias_Mejoramiento);
+                }
+                #endregion
+                
+                #region Optativa Supletorio
+                var lst_promedio_complementarias_PromSupletotrio = new List<ACA_034_Info>();
+                foreach (var item in lst_promedio_complementarias_PromQuimestre)
+                {
+                    lst_promedio_complementarias_PromSupletotrio.Add(new ACA_034_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        IdMateria = 0,
+                        IdAlumno = item.IdAlumno,
+                        NombreAlumno = item.NombreAlumno,
+                        Codigo = item.Codigo,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        IdNivel = item.IdNivel,
+                        Descripcion = item.Descripcion,
+                        NomSede = item.NomSede,
+                        NomNivel = item.NomNivel,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomParalelo = item.NomParalelo,
+                        CodigoParalelo = item.CodigoParalelo,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        Calificacion = null,
+                        CalificacionNumerica = null,
+                        IdCatalogoTipoCalificacion = null,
+                        Columna = "SUPLETORIO",
+                        NombreGrupo = "OPTATIVA",
+                        NombreMateria = "OPTATIVA",
+                        OrdenGrupo = 99,
+                        OrdenMateria = 99,
+                        OrdenColumna = 5,
+                        PromediarGrupo = 0
+                    });
+                    ListaFinal.AddRange(lst_promedio_complementarias_PromSupletotrio);
                 }
                 #endregion
 
-                #region PromedioFinal
+                #region Optativa Remedial
+                var lst_promedio_complementarias_Remedial = new List<ACA_034_Info>();
+                foreach (var item in lst_promedio_complementarias_PromQuimestre)
+                {
+                    lst_promedio_complementarias_Remedial.Add(new ACA_034_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        IdMateria = 0,
+                        IdAlumno = item.IdAlumno,
+                        NombreAlumno = item.NombreAlumno,
+                        Codigo = item.Codigo,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        IdNivel = item.IdNivel,
+                        Descripcion = item.Descripcion,
+                        NomSede = item.NomSede,
+                        NomNivel = item.NomNivel,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomParalelo = item.NomParalelo,
+                        CodigoParalelo = item.CodigoParalelo,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        Calificacion = null,
+                        CalificacionNumerica = null,
+                        IdCatalogoTipoCalificacion = null,
+                        Columna = "REMEDIAL",
+                        NombreGrupo = "OPTATIVA",
+                        NombreMateria = "OPTATIVA",
+                        OrdenGrupo = 99,
+                        OrdenMateria = 99,
+                        OrdenColumna = 6,
+                        PromediarGrupo = 0
+                    });
+                    ListaFinal.AddRange(lst_promedio_complementarias_Remedial);
+                }
+                #endregion
+
+                #region Optativa Gracia
+                var lst_promedio_complementarias_Gracia = new List<ACA_034_Info>();
+                foreach (var item in lst_promedio_complementarias_PromQuimestre)
+                {
+                    lst_promedio_complementarias_Gracia.Add(new ACA_034_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        IdMateria = 0,
+                        IdAlumno = item.IdAlumno,
+                        NombreAlumno = item.NombreAlumno,
+                        Codigo = item.Codigo,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        IdNivel = item.IdNivel,
+                        Descripcion = item.Descripcion,
+                        NomSede = item.NomSede,
+                        NomNivel = item.NomNivel,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomParalelo = item.NomParalelo,
+                        CodigoParalelo = item.CodigoParalelo,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        Calificacion = null,
+                        CalificacionNumerica = null,
+                        IdCatalogoTipoCalificacion = null,
+                        Columna = "GRACIA",
+                        NombreGrupo = "OPTATIVA",
+                        NombreMateria = "OPTATIVA",
+                        OrdenGrupo = 99,
+                        OrdenMateria = 99,
+                        OrdenColumna = 7,
+                        PromediarGrupo = 0
+                    });
+                    ListaFinal.AddRange(lst_promedio_complementarias_Gracia);
+                }
+                #endregion
+                
+                #region Optativa PromedioFinal
                 ListaComplementarias_PromedioFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
                 var ListaComplementariasProm_Final = ListaComplementarias_PromedioFinal.GroupBy(q => new
                 {
