@@ -36,6 +36,7 @@ namespace Core.Web.Reportes.Academico
             int IdCatalogoParcial = string.IsNullOrEmpty(p_IdCatalogoParcial.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
             int IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
             bool MostrarRetirados = string.IsNullOrEmpty(p_MostrarRetirados.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarRetirados.Value);
+            bool MostrarPromedios = string.IsNullOrEmpty(p_MostrarPromedios.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarPromedios.Value);
 
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
@@ -50,7 +51,7 @@ namespace Core.Web.Reportes.Academico
 
             ACA_014_Bus bus_rpt = new ACA_014_Bus();
             List<ACA_014_Info> lst_rpt = new List<ACA_014_Info>();
-            lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial, IdAlumno, MostrarRetirados);
+            lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdCatalogoParcial, IdAlumno, MostrarRetirados, MostrarPromedios);
             this.DataSource = lst_rpt;
 
         }

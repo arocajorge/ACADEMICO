@@ -57,18 +57,20 @@
         };
         settings.Columns.Add("IdMatricula", "ID").Width = Unit.Percentage(5);
         settings.Columns.Add("NomJornada", "Jornada").Width = Unit.Percentage(10);
-        settings.Columns.Add("NomNivel", "Nivel").Width = Unit.Percentage(15);
-        settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(15);
+        settings.Columns.Add("NomNivel", "Nivel").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(20);
         settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(5);
         settings.Columns.Add("pe_nombreCompleto", "Estudiante").Width = Unit.Percentage(20);
-        settings.Columns.Add("NomCatalogoESTMAT", "Estado").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "PromedioFinal";
-            column.Caption = "Promedio Final";
-            column.Width = Unit.Percentage(10);
-            column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-        });
+        settings.Columns.Add("NomCatalogoESTALU", "Estado Alumno").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomCatalogoESTMAT", "Estado Matricula").Width = Unit.Percentage(10);
+        
+        //settings.Columns.Add(column =>
+        //{
+        //    column.FieldName = "PromedioFinal";
+        //    column.Caption = "Promedio Final";
+        //    column.Width = Unit.Percentage(10);
+        //    column.PropertiesEdit.DisplayFormatString = "{0:n2}";
+        //});
 
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });

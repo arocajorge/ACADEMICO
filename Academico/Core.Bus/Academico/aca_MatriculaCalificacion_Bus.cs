@@ -199,20 +199,32 @@ namespace Core.Bus.Academico
                             var info_calificacion_modificar = GetInfo_Modificar(info_matricula.IdEmpresa, info_matricula.IdAnio, info_matricula.IdSede, info_matricula.IdNivel, info_matricula.IdJornada, info_matricula.IdCurso, info_matricula.IdParalelo, info.IdMateria, info_matricula.IdAlumno);
                             var info_anio = odata_anio.getInfo(info.IdEmpresa, info_matricula.IdAnio);
 
-                            decimal PromedioFinal = 0;
-                            decimal PromedioFinalTemp = 0;
+                            decimal? PromedioFinal = (decimal?)null;
+                            decimal? PromedioFinalTemp = (decimal?)null;
                             decimal PromedioMinimoPromocion = Math.Round(Convert.ToDecimal(info_anio.PromedioMinimoPromocion), 2, MidpointRounding.AwayFromZero);
 
                             if(info_calificacion_modificar!=null)
                             {
                                 string CampoMejoramiento = null;
-                                decimal PromedioFinalQ1 = Convert.ToDecimal(info_calificacion_modificar.PromedioFinalQ1);
-                                decimal PromedioFinalQ2 = Convert.ToDecimal(info_calificacion_modificar.PromedioFinalQ2);
-                                decimal ExamenMejoramiento = Convert.ToDecimal(info_calificacion_modificar.ExamenMejoramiento);
-                                decimal ExamenSupletorio = Convert.ToDecimal(info_calificacion_modificar.ExamenSupletorio);
-                                decimal ExamenRemedial = Convert.ToDecimal(info_calificacion_modificar.ExamenRemedial);
-                                decimal ExamenGracia = Convert.ToDecimal(info_calificacion_modificar.ExamenGracia);
-                                PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                                var PromedioFinalQ1 = info_calificacion_modificar.PromedioFinalQ1==null ? (decimal?)null : Convert.ToDecimal(info_calificacion_modificar.PromedioFinalQ1);
+                                var PromedioFinalQ2 = info_calificacion_modificar.PromedioFinalQ2 == null ? (decimal?)null : Convert.ToDecimal(info_calificacion_modificar.PromedioFinalQ2);
+                                var ExamenMejoramiento = info_calificacion_modificar.ExamenMejoramiento == null ? (decimal?)null : Convert.ToDecimal(info_calificacion_modificar.ExamenMejoramiento);
+                                var ExamenSupletorio = info_calificacion_modificar.ExamenSupletorio == null ? (decimal?)null : Convert.ToDecimal(info_calificacion_modificar.ExamenSupletorio);
+                                var ExamenRemedial = info_calificacion_modificar.ExamenRemedial == null ? (decimal?)null : Convert.ToDecimal(info_calificacion_modificar.ExamenRemedial);
+                                var ExamenGracia = info_calificacion_modificar.ExamenGracia == null ? (decimal?)null : Convert.ToDecimal(info_calificacion_modificar.ExamenGracia);
+
+                                if (PromedioFinalQ1!=null && PromedioFinalQ2!=null)
+                                {
+                                    PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                                }
+                                
+                                //decimal PromedioFinalQ1 = Convert.ToDecimal(info_calificacion_modificar.PromedioFinalQ1);
+                                //decimal PromedioFinalQ2 = Convert.ToDecimal(info_calificacion_modificar.PromedioFinalQ2);
+                                //decimal ExamenMejoramiento = Convert.ToDecimal(info_calificacion_modificar.ExamenMejoramiento);
+                                //decimal ExamenSupletorio = Convert.ToDecimal(info_calificacion_modificar.ExamenSupletorio);
+                                //decimal ExamenRemedial = Convert.ToDecimal(info_calificacion_modificar.ExamenRemedial);
+                                //decimal ExamenGracia = Convert.ToDecimal(info_calificacion_modificar.ExamenGracia);
+                                //PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
 
                                 if (PromedioFinalTemp < PromedioMinimoPromocion)
                                 {
@@ -266,12 +278,22 @@ namespace Core.Bus.Academico
 
                                 odata_calificacion.modicarPaseAnioDB(info);
 
-                                if (PromedioFinal < PromedioMinimoPromocion)
+                                if (PromedioFinal!=null)
                                 {
-                                    info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.SUPLENCIA);
-                                    info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REPROBADO);
-                                    odata_alumno.PaseAnioDB(info_alumno);
+                                    if (PromedioFinal < PromedioMinimoPromocion)
+                                    {
+                                        info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.SUPLENCIA);
+                                        info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REPROBADO);
+                                        odata_alumno.PaseAnioDB(info_alumno);
+                                    }
+                                    else
+                                    {
+                                        info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
+                                        info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO);
+                                        odata_alumno.PaseAnioDB(info_alumno);
+                                    }
                                 }
+                                
                             }
                         }
                     }

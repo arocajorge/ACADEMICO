@@ -85,24 +85,29 @@ namespace Core.Web.Areas.Academico.Controllers
                     var info_matricula = bus_matricula.GetInfo(item.IdEmpresa,item.IdMatricula);
                     var info_alumno = bus_alumno.GetInfo(item.IdEmpresa, info_matricula.IdAlumno);
                     var lst_agrupada = lst_x_matricula.GroupBy(q=>new {q.IdEmpresa, q.IdMatricula, q.IdMateria }).ToList();
-                    decimal PromedioFinal = 0;
-                    decimal PromedioGeneral = 0;
-                    decimal PromedioConductaGeneral = 0;
-                    decimal PromedioFinalTemp = 0;
                     decimal PromedioMinimoPromocion = Math.Round(Convert.ToDecimal(info_anio.PromedioMinimoPromocion),2,MidpointRounding.AwayFromZero);
-
+                    decimal? PromedioGeneral = 0;
                     foreach (var item_x_matricula in lst_x_matricula)
                     {
+                        
+                        decimal PromedioConductaGeneral = 0;
+                        decimal? PromedioFinal = (decimal?)null;
+                        decimal? PromedioFinalTemp = (decimal?)null;
                         string CampoMejoramiento = null;
                         //decimal PromedioFinalQ1 = Convert.ToDecimal((((item_x_matricula.CalificacionP1+ item_x_matricula.CalificacionP2+ item_x_matricula.CalificacionP3) /3) * Convert.ToDecimal(0.80)) + ((item_x_matricula.ExamenQ1) * Convert.ToDecimal(0.20)));
                         //decimal PromedioFinalQ2 = Convert.ToDecimal((((item_x_matricula.CalificacionP4 + item_x_matricula.CalificacionP5 + item_x_matricula.CalificacionP6) /3) * Convert.ToDecimal(0.80)) + ((item_x_matricula.ExamenQ2) * Convert.ToDecimal(0.20)));
-                        decimal PromedioFinalQ1 = Convert.ToDecimal(item_x_matricula.PromedioFinalQ1);
-                        decimal PromedioFinalQ2 = Convert.ToDecimal(item_x_matricula.PromedioFinalQ2);
-                        decimal ExamenMejoramiento = Convert.ToDecimal(item_x_matricula.ExamenMejoramiento);
-                        decimal ExamenSupletorio = Convert.ToDecimal(item_x_matricula.ExamenSupletorio);
-                        decimal ExamenRemedial = Convert.ToDecimal(item_x_matricula.ExamenRemedial);
-                        decimal ExamenGracia = Convert.ToDecimal(item_x_matricula.ExamenGracia);
-                        PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                        var PromedioFinalQ1 = item_x_matricula.PromedioFinalQ1==null ? (decimal?)null: Convert.ToDecimal(item_x_matricula.PromedioFinalQ1);
+                        var PromedioFinalQ2 = item_x_matricula.PromedioFinalQ2 == null ? (decimal?)null : Convert.ToDecimal(item_x_matricula.PromedioFinalQ2);
+                        var PromedioQuimestres = item_x_matricula.PromedioQuimestres == null ? (decimal?)null : Convert.ToDecimal(item_x_matricula.PromedioQuimestres);
+                        var ExamenMejoramiento = item_x_matricula.ExamenMejoramiento == null ? (decimal?)null : Convert.ToDecimal(item_x_matricula.ExamenMejoramiento);
+                        var ExamenSupletorio = item_x_matricula.ExamenSupletorio == null ? (decimal?)null : Convert.ToDecimal(item_x_matricula.ExamenSupletorio);
+                        var ExamenRemedial = item_x_matricula.ExamenRemedial == null ? (decimal?)null : Convert.ToDecimal(item_x_matricula.ExamenRemedial);
+                        var ExamenGracia = item_x_matricula.ExamenGracia == null ? (decimal?)null : Convert.ToDecimal(item_x_matricula.ExamenGracia);
+                        //PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                        if (PromedioFinalQ1 != null && PromedioFinalQ2 != null)
+                        {
+                            PromedioFinalTemp = Math.Round(Convert.ToDecimal((PromedioFinalQ1 + PromedioFinalQ2) / 2), 2, MidpointRounding.AwayFromZero);
+                        }
 
                         if (PromedioFinalTemp < PromedioMinimoPromocion)
                         {
@@ -180,6 +185,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             PromedioFinalQ2 = PromedioFinalQ2,
                             IdEquivalenciaPromedioQ2 = item_x_matricula.IdEquivalenciaPromedioQ2,
                             ExamenMejoramiento = item_x_matricula.ExamenMejoramiento,
+                            PromedioQuimestres = PromedioFinalTemp,
                             CampoMejoramiento = CampoMejoramiento,
                             ExamenSupletorio = item_x_matricula.ExamenSupletorio,
                             ExamenRemedial = item_x_matricula.ExamenRemedial,
@@ -193,9 +199,9 @@ namespace Core.Web.Areas.Academico.Controllers
                         {
                         }
                     }
-
-                    PromedioGeneral = Math.Round((PromedioGeneral / lst_agrupada.Count()), 2, MidpointRounding.AwayFromZero);
-                    item.PromedioFinal = PromedioGeneral;
+                    var PromedioGeneralCalculado = (PromedioGeneral == null ? (decimal?)null : Math.Round(Convert.ToDecimal((PromedioGeneral / lst_agrupada.Count())), 2, MidpointRounding.AwayFromZero));
+                    PromedioGeneral = (PromedioGeneral==null ? (decimal?)null : Math.Round(Convert.ToDecimal((PromedioGeneral / lst_agrupada.Count())), 2, MidpointRounding.AwayFromZero));
+                    item.PromedioFinal = PromedioGeneralCalculado;
                     
 
                     var PaseAnio = true;
@@ -219,10 +225,19 @@ namespace Core.Web.Areas.Academico.Controllers
                                 info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
                                 info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO);
                             }
+                        }
+                        else
+                        {
+                            info_alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.CURSANDO);
+                            info_alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO);
+                            PaseAnio = false;
+                            break;
                         } 
                     }
-                    var info_catalogo = bus_catalogo.GetInfo(info_alumno.IdCatalogoESTALU);
+                    var info_catalogo = bus_catalogo.GetInfo(info_alumno.IdCatalogoESTMAT);
                     item.NomCatalogoESTMAT = info_catalogo.NomCatalogo;
+                    var info_catalogo_ALU = bus_catalogo.GetInfo(info_alumno.IdCatalogoESTALU);
+                    item.NomCatalogoESTALU = info_catalogo_ALU.NomCatalogo;
                     item.PaseAnio = PaseAnio;
 
                     var info_conducta = bus_conducta.GetInfo(item.IdEmpresa, item.IdMatricula);
@@ -266,6 +281,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
                     item.IdCatalogoESTMAT = info_alumno.IdCatalogoESTMAT;
                     bus_matricula.ModificarEstadoMatricula(item);
+                    bus_alumno.PaseAnioDB(info_alumno);
                 }
             }
             Lista_MatriculaPaseAnio.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));

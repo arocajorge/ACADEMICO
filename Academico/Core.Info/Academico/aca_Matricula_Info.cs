@@ -78,6 +78,7 @@ namespace Core.Info.Academico
 
         public string ObservacionCambio { get; set; }
         public string NomCatalogoESTMAT { get; set; }
+        public string NomCatalogoESTALU { get; set; }
         public bool PaseAnio { get; set; }
 
         public bool EsRetirado { get; set; }

@@ -63,5 +63,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public decimal GetId(int IdEmpresa)
+        {
+            try
+            {
+                return odata.getId(IdEmpresa);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -183,7 +183,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_grupo = bus_grupo.GetInfo(model.IdEmpresa, Convert.ToInt32(model.IdMateriaGrupo));
             model.NomMateriaGrupo = (info_grupo == null ? "" : info_grupo.NomMateriaGrupo);
             model.OrdenMateriaGrupo = (info_grupo == null ? 0 : info_grupo.OrdenMateriaGrupo);
-
+            model.PromediarGrupo = info_grupo.PromediarGrupo??false;
             if (!bus_materia.ModificarDB(model))
             {
                 ViewBag.mensaje = "No se ha podido modificar el registro";

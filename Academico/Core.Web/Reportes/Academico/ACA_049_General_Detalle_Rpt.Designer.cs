@@ -59,8 +59,8 @@
             this.xrTableCell1 = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_MostrarRetirados = new DevExpress.XtraReports.Parameters.Parameter();
             this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
-            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.Promedio_SubRpt = new DevExpress.XtraReports.UI.XRSubreport();
+            this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
@@ -355,11 +355,6 @@
             this.GroupFooter1.HeightF = 30F;
             this.GroupFooter1.Name = "GroupFooter1";
             // 
-            // objectDataSource1
-            // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_049_General_Detalle_Info);
-            this.objectDataSource1.Name = "objectDataSource1";
-            // 
             // Promedio_SubRpt
             // 
             this.Promedio_SubRpt.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
@@ -367,6 +362,11 @@
             this.Promedio_SubRpt.ReportSource = new Core.Web.Reportes.Academico.ACA_049_General_Promedio_Rpt();
             this.Promedio_SubRpt.SizeF = new System.Drawing.SizeF(677F, 18F);
             this.Promedio_SubRpt.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Promedio_SubRpt_BeforePrint);
+            // 
+            // objectDataSource1
+            // 
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_049_General_Detalle_Info);
+            this.objectDataSource1.Name = "objectDataSource1";
             // 
             // ACA_049_General_Detalle_Rpt
             // 

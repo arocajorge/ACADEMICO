@@ -11,22 +11,22 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_034_Data
+    public class ACA_034_General_Data
     {
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
         aca_AnioLectivoEquivalenciaPromedio_Data odata_equivalencia = new aca_AnioLectivoEquivalenciaPromedio_Data();
-        public List<ACA_034_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
+        public List<ACA_034_General_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, decimal IdAlumno, bool MostrarRetirados)
         {
             try
             {
 
-                List<ACA_034_Info> Lista = new List<ACA_034_Info>();
-                List<ACA_034_Info> ListaFinal = new List<ACA_034_Info>();
+                List<ACA_034_General_Info> Lista = new List<ACA_034_General_Info>();
+                List<ACA_034_General_Info> ListaFinal = new List<ACA_034_General_Info>();
 
-                List<ACA_034_Info> Lista_Comportamiento_Proyectos = new List<ACA_034_Info>();
-                List<ACA_034_Info> ListaObligatorias = new List<ACA_034_Info>();
-                List<ACA_034_Info> ListaComplementarias = new List<ACA_034_Info>();
-                List<ACA_034_Info> ListaComplementariasIndividuales = new List<ACA_034_Info>();
+                List<ACA_034_General_Info> Lista_Comportamiento_Proyectos = new List<ACA_034_General_Info>();
+                List<ACA_034_General_Info> ListaObligatorias = new List<ACA_034_General_Info>();
+                List<ACA_034_General_Info> ListaComplementarias = new List<ACA_034_General_Info>();
+                List<ACA_034_General_Info> ListaComplementariasIndividuales = new List<ACA_034_General_Info>();
 
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
@@ -695,7 +695,7 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_034_Info
+                        Lista.Add(new ACA_034_General_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
@@ -751,586 +751,24 @@ namespace Core.Data.Reportes.Academico
                 var ListaComplementarias_Gracia = ListaComplementarias.Where(q => q.Columna == "GRACIA").ToList();
                 var ListaComplementarias_PromedioFinal = ListaComplementarias.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
 
-                #region IQuimestre
                 ListaComplementarias_IQuim.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                var ListaComplementariasProm_IQuim = ListaComplementarias_IQuim.GroupBy(q => new
-                {
-                    q.IdEmpresa,
-                    q.IdMatricula,
-                    q.IdAlumno,
-                    q.NombreAlumno,
-                    q.Codigo,
-                    q.IdAnio,
-                    q.IdSede,
-                    q.IdJornada,
-                    q.IdCurso,
-                    q.IdParalelo,
-                    q.IdNivel,
-                    q.Descripcion,
-                    q.NomSede,
-                    q.NomNivel,
-                    q.NomJornada,
-                    q.NomCurso,
-                    q.NomParalelo,
-                    q.CodigoParalelo,
-                    q.OrdenNivel,
-                    q.OrdenJornada,
-                    q.OrdenCurso,
-                    q.OrdenParalelo,
-                }).Select(q => new ACA_034_Info
-                {
-                    IdEmpresa = q.Key.IdEmpresa,
-                    IdMatricula = q.Key.IdMatricula,
-                    IdAlumno = q.Key.IdAlumno,
-                    NombreAlumno = q.Key.NombreAlumno,
-                    Codigo = q.Key.Codigo,
-                    IdAnio = q.Key.IdAnio,
-                    IdSede = q.Key.IdSede,
-                    IdJornada = q.Key.IdJornada,
-                    IdCurso = q.Key.IdCurso,
-                    IdParalelo = q.Key.IdParalelo,
-                    IdNivel = q.Key.IdNivel,
-                    Descripcion = q.Key.Descripcion,
-                    NomSede = q.Key.NomSede,
-                    NomNivel = q.Key.NomNivel,
-                    NomJornada = q.Key.NomJornada,
-                    NomCurso = q.Key.NomCurso,
-                    NomParalelo = q.Key.NomParalelo,
-                    CodigoParalelo = q.Key.CodigoParalelo,
-                    OrdenNivel = q.Key.OrdenNivel,
-                    OrdenJornada = q.Key.OrdenJornada,
-                    OrdenCurso = q.Key.OrdenCurso,
-                    OrdenParalelo = q.Key.OrdenParalelo,
-                    NoTieneCalificacion = q.Sum(g => g.NoTieneCalificacion),
-                    SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Calificacion)),
-                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
-                }).ToList();
-                ListaComplementariasProm_IQuim.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
-
-                var lst_promedio_complementarias_QuimI = new List<ACA_034_Info>();
-                foreach (var item in ListaComplementariasProm_IQuim)
-                {
-                    lst_promedio_complementarias_QuimI.Add(new ACA_034_Info
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        IdMateria = 0,
-                        IdAlumno = item.IdAlumno,
-                        NombreAlumno = item.NombreAlumno,
-                        Codigo = item.Codigo,
-                        IdAnio = item.IdAnio,
-                        IdSede = item.IdSede,
-                        IdJornada = item.IdJornada,
-                        IdCurso = item.IdCurso,
-                        IdParalelo = item.IdParalelo,
-                        IdNivel = item.IdNivel,
-                        Descripcion = item.Descripcion,
-                        NomSede = item.NomSede,
-                        NomNivel = item.NomNivel,
-                        NomJornada = item.NomJornada,
-                        NomCurso = item.NomCurso,
-                        NomParalelo = item.NomParalelo,
-                        CodigoParalelo = item.CodigoParalelo,
-                        OrdenNivel = item.OrdenNivel,
-                        OrdenJornada = item.OrdenJornada,
-                        OrdenCurso = item.OrdenCurso,
-                        OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
-                        CalificacionNumerica = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
-                        IdCatalogoTipoCalificacion = null,
-                        Columna = "I QUIMESTRE",
-                        NombreGrupo = "OPTATIVA",
-                        NombreMateria = "OPTATIVA",
-                        OrdenGrupo = 99,
-                        OrdenMateria = 99,
-                        OrdenColumna = 1,
-                        PromediarGrupo = 0
-                    });
-                }
-
-                ListaFinal.AddRange(lst_promedio_complementarias_QuimI);
-                ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                #endregion
-
-                #region IIQuimestre
                 ListaComplementarias_IIQuim.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                var ListaComplementariasProm_IIQuim = ListaComplementarias_IIQuim.GroupBy(q => new
-                {
-                    q.IdEmpresa,
-                    q.IdMatricula,
-                    q.IdAlumno,
-                    q.NombreAlumno,
-                    q.Codigo,
-                    q.IdAnio,
-                    q.IdSede,
-                    q.IdJornada,
-                    q.IdCurso,
-                    q.IdParalelo,
-                    q.IdNivel,
-                    q.Descripcion,
-                    q.NomSede,
-                    q.NomNivel,
-                    q.NomJornada,
-                    q.NomCurso,
-                    q.NomParalelo,
-                    q.CodigoParalelo,
-                    q.OrdenNivel,
-                    q.OrdenJornada,
-                    q.OrdenCurso,
-                    q.OrdenParalelo,
-                }).Select(q => new ACA_034_Info
-                {
-                    IdEmpresa = q.Key.IdEmpresa,
-                    IdMatricula = q.Key.IdMatricula,
-                    IdAlumno = q.Key.IdAlumno,
-                    NombreAlumno = q.Key.NombreAlumno,
-                    Codigo = q.Key.Codigo,
-                    IdAnio = q.Key.IdAnio,
-                    IdSede = q.Key.IdSede,
-                    IdJornada = q.Key.IdJornada,
-                    IdCurso = q.Key.IdCurso,
-                    IdParalelo = q.Key.IdParalelo,
-                    IdNivel = q.Key.IdNivel,
-                    Descripcion = q.Key.Descripcion,
-                    NomSede = q.Key.NomSede,
-                    NomNivel = q.Key.NomNivel,
-                    NomJornada = q.Key.NomJornada,
-                    NomCurso = q.Key.NomCurso,
-                    NomParalelo = q.Key.NomParalelo,
-                    CodigoParalelo = q.Key.CodigoParalelo,
-                    OrdenNivel = q.Key.OrdenNivel,
-                    OrdenJornada = q.Key.OrdenJornada,
-                    OrdenCurso = q.Key.OrdenCurso,
-                    OrdenParalelo = q.Key.OrdenParalelo,
-                    NoTieneCalificacion = q.Sum(g => g.NoTieneCalificacion),
-                    SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Calificacion)),
-                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
-                }).ToList();
-                ListaComplementariasProm_IIQuim.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
-
-                var lst_promedio_complementarias_QuimII = new List<ACA_034_Info>();
-                foreach (var item in ListaComplementariasProm_IIQuim)
-                {
-                    lst_promedio_complementarias_QuimII.Add(new ACA_034_Info
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        IdMateria = 0,
-                        IdAlumno = item.IdAlumno,
-                        NombreAlumno = item.NombreAlumno,
-                        Codigo = item.Codigo,
-                        IdAnio = item.IdAnio,
-                        IdSede = item.IdSede,
-                        IdJornada = item.IdJornada,
-                        IdCurso = item.IdCurso,
-                        IdParalelo = item.IdParalelo,
-                        IdNivel = item.IdNivel,
-                        Descripcion = item.Descripcion,
-                        NomSede = item.NomSede,
-                        NomNivel = item.NomNivel,
-                        NomJornada = item.NomJornada,
-                        NomCurso = item.NomCurso,
-                        NomParalelo = item.NomParalelo,
-                        CodigoParalelo = item.CodigoParalelo,
-                        OrdenNivel = item.OrdenNivel,
-                        OrdenJornada = item.OrdenJornada,
-                        OrdenCurso = item.OrdenCurso,
-                        OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
-                        CalificacionNumerica = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
-                        IdCatalogoTipoCalificacion = null,
-                        Columna = "II QUIMESTRE",
-                        NombreGrupo = "OPTATIVA",
-                        NombreMateria = "OPTATIVA",
-                        OrdenGrupo = 99,
-                        OrdenMateria = 99,
-                        OrdenColumna = 2,
-                        PromediarGrupo = 0
-                    });
-                }
-
-                ListaFinal.AddRange(lst_promedio_complementarias_QuimII);
-                ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                #endregion
-
-                #region PromedioQuimestres
                 ListaComplementarias_PromedioQuimestre.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                var ListaComplementariasProm_Quimestre = ListaComplementarias_PromedioQuimestre.GroupBy(q => new
-                {
-                    q.IdEmpresa,
-                    q.IdMatricula,
-                    q.IdAlumno,
-                    q.NombreAlumno,
-                    q.Codigo,
-                    q.IdAnio,
-                    q.IdSede,
-                    q.IdJornada,
-                    q.IdCurso,
-                    q.IdParalelo,
-                    q.IdNivel,
-                    q.Descripcion,
-                    q.NomSede,
-                    q.NomNivel,
-                    q.NomJornada,
-                    q.NomCurso,
-                    q.NomParalelo,
-                    q.CodigoParalelo,
-                    q.OrdenNivel,
-                    q.OrdenJornada,
-                    q.OrdenCurso,
-                    q.OrdenParalelo,
-                }).Select(q => new ACA_034_Info
-                {
-                    IdEmpresa = q.Key.IdEmpresa,
-                    IdMatricula = q.Key.IdMatricula,
-                    IdAlumno = q.Key.IdAlumno,
-                    NombreAlumno = q.Key.NombreAlumno,
-                    Codigo = q.Key.Codigo,
-                    IdAnio = q.Key.IdAnio,
-                    IdSede = q.Key.IdSede,
-                    IdJornada = q.Key.IdJornada,
-                    IdCurso = q.Key.IdCurso,
-                    IdParalelo = q.Key.IdParalelo,
-                    IdNivel = q.Key.IdNivel,
-                    Descripcion = q.Key.Descripcion,
-                    NomSede = q.Key.NomSede,
-                    NomNivel = q.Key.NomNivel,
-                    NomJornada = q.Key.NomJornada,
-                    NomCurso = q.Key.NomCurso,
-                    NomParalelo = q.Key.NomParalelo,
-                    CodigoParalelo = q.Key.CodigoParalelo,
-                    OrdenNivel = q.Key.OrdenNivel,
-                    OrdenJornada = q.Key.OrdenJornada,
-                    OrdenCurso = q.Key.OrdenCurso,
-                    OrdenParalelo = q.Key.OrdenParalelo,
-                    NoTieneCalificacion = q.Sum(g => g.NoTieneCalificacion),
-                    SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Calificacion)),
-                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
-                }).ToList();
-                ListaComplementariasProm_Quimestre.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
-
-                var lst_promedio_complementarias_PromQuimestre = new List<ACA_034_Info>();
-                foreach (var item in ListaComplementariasProm_Quimestre)
-                {
-                    lst_promedio_complementarias_PromQuimestre.Add(new ACA_034_Info
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        IdMateria = 0,
-                        IdAlumno = item.IdAlumno,
-                        NombreAlumno = item.NombreAlumno,
-                        Codigo = item.Codigo,
-                        IdAnio = item.IdAnio,
-                        IdSede = item.IdSede,
-                        IdJornada = item.IdJornada,
-                        IdCurso = item.IdCurso,
-                        IdParalelo = item.IdParalelo,
-                        IdNivel = item.IdNivel,
-                        Descripcion = item.Descripcion,
-                        NomSede = item.NomSede,
-                        NomNivel = item.NomNivel,
-                        NomJornada = item.NomJornada,
-                        NomCurso = item.NomCurso,
-                        NomParalelo = item.NomParalelo,
-                        CodigoParalelo = item.CodigoParalelo,
-                        OrdenNivel = item.OrdenNivel,
-                        OrdenJornada = item.OrdenJornada,
-                        OrdenCurso = item.OrdenCurso,
-                        OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
-                        CalificacionNumerica = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
-                        IdCatalogoTipoCalificacion = null,
-                        Columna = "PROMEDIO",
-                        NombreGrupo = "OPTATIVA",
-                        NombreMateria = "OPTATIVA",
-                        OrdenGrupo = 99,
-                        OrdenMateria = 99,
-                        OrdenColumna = 3,
-                        PromediarGrupo = 0
-                    });
-                }
-
-                ListaFinal.AddRange(lst_promedio_complementarias_PromQuimestre);
-                ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                #endregion
-
-                #region Optativa Mejoramiento
-                var lst_promedio_complementarias_Mejoramiento = new List<ACA_034_Info>();
-                foreach (var item in lst_promedio_complementarias_PromQuimestre)
-                {
-                    lst_promedio_complementarias_Mejoramiento.Add(new ACA_034_Info
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        IdMateria = 0,
-                        IdAlumno = item.IdAlumno,
-                        NombreAlumno = item.NombreAlumno,
-                        Codigo = item.Codigo,
-                        IdAnio = item.IdAnio,
-                        IdSede = item.IdSede,
-                        IdJornada = item.IdJornada,
-                        IdCurso = item.IdCurso,
-                        IdParalelo = item.IdParalelo,
-                        IdNivel = item.IdNivel,
-                        Descripcion = item.Descripcion,
-                        NomSede = item.NomSede,
-                        NomNivel = item.NomNivel,
-                        NomJornada = item.NomJornada,
-                        NomCurso = item.NomCurso,
-                        NomParalelo = item.NomParalelo,
-                        CodigoParalelo = item.CodigoParalelo,
-                        OrdenNivel = item.OrdenNivel,
-                        OrdenJornada = item.OrdenJornada,
-                        OrdenCurso = item.OrdenCurso,
-                        OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = null,
-                        CalificacionNumerica = null,
-                        IdCatalogoTipoCalificacion = null,
-                        Columna = "MEJORAMIENTO",
-                        NombreGrupo = "OPTATIVA",
-                        NombreMateria = "OPTATIVA",
-                        OrdenGrupo = 99,
-                        OrdenMateria = 99,
-                        OrdenColumna = 4,
-                        PromediarGrupo = 0
-                    });
-                    ListaFinal.AddRange(lst_promedio_complementarias_Mejoramiento);
-                }
-                #endregion
-                
-                #region Optativa Supletorio
-                var lst_promedio_complementarias_PromSupletotrio = new List<ACA_034_Info>();
-                foreach (var item in lst_promedio_complementarias_PromQuimestre)
-                {
-                    lst_promedio_complementarias_PromSupletotrio.Add(new ACA_034_Info
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        IdMateria = 0,
-                        IdAlumno = item.IdAlumno,
-                        NombreAlumno = item.NombreAlumno,
-                        Codigo = item.Codigo,
-                        IdAnio = item.IdAnio,
-                        IdSede = item.IdSede,
-                        IdJornada = item.IdJornada,
-                        IdCurso = item.IdCurso,
-                        IdParalelo = item.IdParalelo,
-                        IdNivel = item.IdNivel,
-                        Descripcion = item.Descripcion,
-                        NomSede = item.NomSede,
-                        NomNivel = item.NomNivel,
-                        NomJornada = item.NomJornada,
-                        NomCurso = item.NomCurso,
-                        NomParalelo = item.NomParalelo,
-                        CodigoParalelo = item.CodigoParalelo,
-                        OrdenNivel = item.OrdenNivel,
-                        OrdenJornada = item.OrdenJornada,
-                        OrdenCurso = item.OrdenCurso,
-                        OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = null,
-                        CalificacionNumerica = null,
-                        IdCatalogoTipoCalificacion = null,
-                        Columna = "SUPLETORIO",
-                        NombreGrupo = "OPTATIVA",
-                        NombreMateria = "OPTATIVA",
-                        OrdenGrupo = 99,
-                        OrdenMateria = 99,
-                        OrdenColumna = 5,
-                        PromediarGrupo = 0
-                    });
-                    ListaFinal.AddRange(lst_promedio_complementarias_PromSupletotrio);
-                }
-                #endregion
-
-                #region Optativa Remedial
-                var lst_promedio_complementarias_Remedial = new List<ACA_034_Info>();
-                foreach (var item in lst_promedio_complementarias_PromQuimestre)
-                {
-                    lst_promedio_complementarias_Remedial.Add(new ACA_034_Info
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        IdMateria = 0,
-                        IdAlumno = item.IdAlumno,
-                        NombreAlumno = item.NombreAlumno,
-                        Codigo = item.Codigo,
-                        IdAnio = item.IdAnio,
-                        IdSede = item.IdSede,
-                        IdJornada = item.IdJornada,
-                        IdCurso = item.IdCurso,
-                        IdParalelo = item.IdParalelo,
-                        IdNivel = item.IdNivel,
-                        Descripcion = item.Descripcion,
-                        NomSede = item.NomSede,
-                        NomNivel = item.NomNivel,
-                        NomJornada = item.NomJornada,
-                        NomCurso = item.NomCurso,
-                        NomParalelo = item.NomParalelo,
-                        CodigoParalelo = item.CodigoParalelo,
-                        OrdenNivel = item.OrdenNivel,
-                        OrdenJornada = item.OrdenJornada,
-                        OrdenCurso = item.OrdenCurso,
-                        OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = null,
-                        CalificacionNumerica = null,
-                        IdCatalogoTipoCalificacion = null,
-                        Columna = "REMEDIAL",
-                        NombreGrupo = "OPTATIVA",
-                        NombreMateria = "OPTATIVA",
-                        OrdenGrupo = 99,
-                        OrdenMateria = 99,
-                        OrdenColumna = 6,
-                        PromediarGrupo = 0
-                    });
-                    ListaFinal.AddRange(lst_promedio_complementarias_Remedial);
-                }
-                #endregion
-
-                #region Optativa Gracia
-                var lst_promedio_complementarias_Gracia = new List<ACA_034_Info>();
-                foreach (var item in lst_promedio_complementarias_PromQuimestre)
-                {
-                    lst_promedio_complementarias_Gracia.Add(new ACA_034_Info
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        IdMateria = 0,
-                        IdAlumno = item.IdAlumno,
-                        NombreAlumno = item.NombreAlumno,
-                        Codigo = item.Codigo,
-                        IdAnio = item.IdAnio,
-                        IdSede = item.IdSede,
-                        IdJornada = item.IdJornada,
-                        IdCurso = item.IdCurso,
-                        IdParalelo = item.IdParalelo,
-                        IdNivel = item.IdNivel,
-                        Descripcion = item.Descripcion,
-                        NomSede = item.NomSede,
-                        NomNivel = item.NomNivel,
-                        NomJornada = item.NomJornada,
-                        NomCurso = item.NomCurso,
-                        NomParalelo = item.NomParalelo,
-                        CodigoParalelo = item.CodigoParalelo,
-                        OrdenNivel = item.OrdenNivel,
-                        OrdenJornada = item.OrdenJornada,
-                        OrdenCurso = item.OrdenCurso,
-                        OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = null,
-                        CalificacionNumerica = null,
-                        IdCatalogoTipoCalificacion = null,
-                        Columna = "GRACIA",
-                        NombreGrupo = "OPTATIVA",
-                        NombreMateria = "OPTATIVA",
-                        OrdenGrupo = 99,
-                        OrdenMateria = 99,
-                        OrdenColumna = 7,
-                        PromediarGrupo = 0
-                    });
-                    ListaFinal.AddRange(lst_promedio_complementarias_Gracia);
-                }
-                #endregion
-                
-                #region Optativa PromedioFinal
+                ListaComplementarias_Mejoramiento.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
+                ListaComplementarias_Supletorio.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
+                ListaComplementarias_Remedial.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
+                ListaComplementarias_Gracia.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
                 ListaComplementarias_PromedioFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                var ListaComplementariasProm_Final = ListaComplementarias_PromedioFinal.GroupBy(q => new
-                {
-                    q.IdEmpresa,
-                    q.IdMatricula,
-                    q.IdAlumno,
-                    q.NombreAlumno,
-                    q.Codigo,
-                    q.IdAnio,
-                    q.IdSede,
-                    q.IdJornada,
-                    q.IdCurso,
-                    q.IdParalelo,
-                    q.IdNivel,
-                    q.Descripcion,
-                    q.NomSede,
-                    q.NomNivel,
-                    q.NomJornada,
-                    q.NomCurso,
-                    q.NomParalelo,
-                    q.CodigoParalelo,
-                    q.OrdenNivel,
-                    q.OrdenJornada,
-                    q.OrdenCurso,
-                    q.OrdenParalelo,
-                }).Select(q => new ACA_034_Info
-                {
-                    IdEmpresa = q.Key.IdEmpresa,
-                    IdMatricula = q.Key.IdMatricula,
-                    IdAlumno = q.Key.IdAlumno,
-                    NombreAlumno = q.Key.NombreAlumno,
-                    Codigo = q.Key.Codigo,
-                    IdAnio = q.Key.IdAnio,
-                    IdSede = q.Key.IdSede,
-                    IdJornada = q.Key.IdJornada,
-                    IdCurso = q.Key.IdCurso,
-                    IdParalelo = q.Key.IdParalelo,
-                    IdNivel = q.Key.IdNivel,
-                    Descripcion = q.Key.Descripcion,
-                    NomSede = q.Key.NomSede,
-                    NomNivel = q.Key.NomNivel,
-                    NomJornada = q.Key.NomJornada,
-                    NomCurso = q.Key.NomCurso,
-                    NomParalelo = q.Key.NomParalelo,
-                    CodigoParalelo = q.Key.CodigoParalelo,
-                    OrdenNivel = q.Key.OrdenNivel,
-                    OrdenJornada = q.Key.OrdenJornada,
-                    OrdenCurso = q.Key.OrdenCurso,
-                    OrdenParalelo = q.Key.OrdenParalelo,
-                    NoTieneCalificacion = q.Sum(g => g.NoTieneCalificacion),
-                    SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Calificacion)),
-                    PromedioCalculado = q.Max(g => g.Calificacion) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Calificacion)) / q.Count(g => !string.IsNullOrEmpty(g.Calificacion))
-                }).ToList();
-                ListaComplementariasProm_Final.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
 
-                var lst_promedio_complementarias_PromFinal = new List<ACA_034_Info>();
-                foreach (var item in ListaComplementariasProm_Final)
-                {
-                    lst_promedio_complementarias_PromFinal.Add(new ACA_034_Info
-                    {
-                        IdEmpresa = item.IdEmpresa,
-                        IdMatricula = item.IdMatricula,
-                        IdMateria = 0,
-                        IdAlumno = item.IdAlumno,
-                        NombreAlumno = item.NombreAlumno,
-                        Codigo = item.Codigo,
-                        IdAnio = item.IdAnio,
-                        IdSede = item.IdSede,
-                        IdJornada = item.IdJornada,
-                        IdCurso = item.IdCurso,
-                        IdParalelo = item.IdParalelo,
-                        IdNivel = item.IdNivel,
-                        Descripcion = item.Descripcion,
-                        NomSede = item.NomSede,
-                        NomNivel = item.NomNivel,
-                        NomJornada = item.NomJornada,
-                        NomCurso = item.NomCurso,
-                        NomParalelo = item.NomParalelo,
-                        CodigoParalelo = item.CodigoParalelo,
-                        OrdenNivel = item.OrdenNivel,
-                        OrdenJornada = item.OrdenJornada,
-                        OrdenCurso = item.OrdenCurso,
-                        OrdenParalelo = item.OrdenParalelo,
-                        Calificacion = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
-                        CalificacionNumerica = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
-                        IdCatalogoTipoCalificacion = null,
-                        Columna = "PROMEDIO FINAL",
-                        NombreGrupo = "OPTATIVA",
-                        NombreMateria = "OPTATIVA",
-                        OrdenGrupo = 99,
-                        OrdenMateria = 99,
-                        OrdenColumna = 9,
-                        PromediarGrupo = 0
-                    });
-                }
+                ListaFinal.AddRange(ListaComplementarias_IQuim);
+                ListaFinal.AddRange(ListaComplementarias_IIQuim);
+                ListaFinal.AddRange(ListaComplementarias_PromedioQuimestre);
+                ListaFinal.AddRange(ListaComplementarias_Mejoramiento);
+                ListaFinal.AddRange(ListaComplementarias_Supletorio);
+                ListaFinal.AddRange(ListaComplementarias_Remedial);
+                ListaFinal.AddRange(ListaComplementarias_Gracia);
+                ListaFinal.AddRange(ListaComplementarias_PromedioFinal);
 
-                ListaFinal.AddRange(lst_promedio_complementarias_PromFinal);
-                ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
-                #endregion
-                
                 var ListaPromediar = ListaFinal.Where(q => q.Columna == "PROMEDIO FINAL").ToList();
                 var ListaPromedioGeneral = ListaPromediar.GroupBy(q => new
                 {
@@ -1356,7 +794,7 @@ namespace Core.Data.Reportes.Academico
                     q.OrdenJornada,
                     q.OrdenCurso,
                     q.OrdenParalelo,
-                }).Select(q => new ACA_034_Info
+                }).Select(q => new ACA_034_General_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdMatricula = q.Key.IdMatricula,
@@ -1387,12 +825,12 @@ namespace Core.Data.Reportes.Academico
                 ListaPromedioGeneral.ForEach(q => { q.PromedioCalculado = (q.NoTieneCalificacion == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.NoTieneCalificacion == 0 ? q.SumaGeneral : (decimal?)null); });
 
                 
-                var lst_suma_general = new List<ACA_034_Info>();
-                var lst_promedio_general = new List<ACA_034_Info>();
-                var lst_equivalencia_general = new List<ACA_034_Info>();
+                var lst_suma_general = new List<ACA_034_General_Info>();
+                var lst_promedio_general = new List<ACA_034_General_Info>();
+                var lst_equivalencia_general = new List<ACA_034_General_Info>();
                 foreach (var item in ListaPromedioGeneral)
                 {
-                    lst_promedio_general.Add( new ACA_034_Info
+                    lst_promedio_general.Add( new ACA_034_General_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
@@ -1429,7 +867,7 @@ namespace Core.Data.Reportes.Academico
                         PromediarGrupo = 0
                     });
 
-                    lst_promedio_general.Add(new ACA_034_Info
+                    lst_promedio_general.Add(new ACA_034_General_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
@@ -1468,7 +906,7 @@ namespace Core.Data.Reportes.Academico
 
                     var PromedioGeneral = (item.PromedioCalculado == null ? (decimal?)null : item.PromedioCalculado);
                     var info_equivalencia = odata_equivalencia.getInfo_x_Promedio(IdEmpresa, IdAnio, PromedioGeneral);
-                    lst_promedio_general.Add(new ACA_034_Info
+                    lst_promedio_general.Add(new ACA_034_General_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,

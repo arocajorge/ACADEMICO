@@ -28,7 +28,7 @@
     </ul>
 </div>
 <!-- END: Mobile Menu -->
-@using (Html.BeginForm("Index", "Admision", FormMethod.Post, new { @class = "form", @role = "form" }))
+@using (Html.BeginForm("Index", "Admision", FormMethod.Post, new { @id="FormAdmision", @class = "form", enctype = "multipart/form-data" }))
 {
 <div class="flex">
     <!-- BEGIN: Simple Menu -->
@@ -68,7 +68,7 @@
                 </h2>
             </div>
             @if (ViewBag.mensaje != null)
-            {
+        {
             <div class="rounded-md flex items-center px-5 py-4 mb-2 border border-theme-6 text-theme-6 dark:border-theme-6">
                 <i data-feather="alert-octagon" class="w-6 h-6 mr-2"></i> @ViewBag.mensaje <i data-feather="x" class="w-4 h-4 ml-auto"></i>
             </div>
@@ -1130,6 +1130,15 @@
                                         @Html.ValidationMessageFor(q => q.OtroFinanciamiento_Aspirante, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
+                                <div class="intro-y col-span-12 sm:col-span-3">
+                                    <div class="mb-2"></div>
+                                </div>
+                                <div class="font-medium text-base">Archivos</div>
+                                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                                    <div class="intro-y col-span-12 sm:col-span-6">
+                                        <input type="file" multiple name="ArchivosAspirante" id="ArchivosAspirante">
+                                    </div>
+                                </div>
                                 <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                                     <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorSocioEconomico();">Anterior</button>
                                     <button type="submit" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
@@ -1144,38 +1153,38 @@
 }
 <script type="text/javascript">
     $(document).ready(function () {
-        ValidarEnter();
-        CargarJornada();
+    ValidarEnter();
+    CargarJornada();
 
-        CargarRegion_Aspirante();
-        CargarProvincia_Aspirante();
+    CargarRegion_Aspirante();
+    CargarProvincia_Aspirante();
 
-        CargarRegion_Padre();
-        CargarProvincia_Padre();
-        CargarParroquia_Padre();
+    CargarRegion_Padre();
+    CargarProvincia_Padre();
+    CargarParroquia_Padre();
 
-        CargarRegion_Madre();
-        CargarProvincia_Madre();
-        CargarParroquia_Madre();
+    CargarRegion_Madre();
+    CargarProvincia_Madre();
+    CargarParroquia_Madre();
 
-        CargarRegion_Representante();
-        CargarProvincia_Representante();
-        CargarParroquia_Representante();
+    CargarRegion_Representante();
+    CargarProvincia_Representante();
+    CargarParroquia_Representante();
 
-        mostrar_CantidadHermanos();
+    mostrar_CantidadHermanos();
 
-        mostrar_otro_motivo();
-        mostrar_otro_informacion_inst();
-        mostrar_otro_financiamiento();
+    mostrar_otro_motivo();
+    mostrar_otro_informacion_inst();
+    mostrar_otro_financiamiento();
 
-        mostrar_VehiculoPadre();
-        mostrar_VehiculoMadre();
-        mostrar_VehiculoRepresentante();
-    })
+    mostrar_VehiculoPadre();
+    mostrar_VehiculoMadre();
+    mostrar_VehiculoRepresentante();
+})
 
     $("#IdSede").change(function () {
-        CargarJornada();
-    });
+    CargarJornada();
+});
     $("#IdJornada").change(function () {
         CargarNivel();
     });

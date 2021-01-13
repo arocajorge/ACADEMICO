@@ -1,6 +1,6 @@
 ﻿namespace Core.Web.Reportes.Academico
 {
-    partial class ACA_034_Rpt
+    partial class ACA_034_General_Rpt
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ACA_034_Rpt));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ACA_034_General_Rpt));
             DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition1 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(40F);
             DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition2 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(40F);
             DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition crossTabColumnDefinition3 = new DevExpress.XtraReports.UI.CrossTab.CrossTabColumnDefinition(40F);
@@ -905,7 +905,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_034_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_034_General_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // crossTabGeneralStyle1
@@ -968,7 +968,7 @@
             this.groupHeaderBand5.Level = 1;
             this.groupHeaderBand5.Name = "groupHeaderBand5";
             // 
-            // ACA_034_Rpt
+            // ACA_034_General_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.TopMargin,
@@ -1006,7 +1006,7 @@
             this.crossTabDataStyle1,
             this.crossTabTotalStyle1});
             this.Version = "20.1";
-            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_034_Rpt_BeforePrint);
+            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_034_General_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable8)).EndInit();

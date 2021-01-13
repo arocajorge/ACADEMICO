@@ -34,10 +34,7 @@ function AnteriorPadre() {
 function SiguienteMadre() {
     if ($("#MadreValido").val() == "1")
     {
-        $("#DatosMadre").hide();
-        $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-        $("#DatosRepresentante").show();
-        $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        ValidarDatosRegistro_Madre();
     }
 }
 function AnteriorMadre() {
@@ -49,10 +46,7 @@ function AnteriorMadre() {
 function SiguienteRepresentante() {
     if ($("#RepresentanteValido").val() == "1")
     {
-        $("#DatosRepresentante").hide();
-        $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-        $("#DatosSocioEconomico").show();
-        $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        ValidarDatosRegistro_Representante();
     }
 }
 function AnteriorRepresentante() {
@@ -203,7 +197,85 @@ function ValidarDatosRegistro_Padre() {
         }
     }
 }
+function ValidarDatosRegistro_Madre() {
+    var Naturaleza = $("#Naturaleza_Madre").val();
+    var Tipo_documento = $("#IdTipoDocumento_Madre").val();
+    var Cedula_ruc = $("#CedulaRuc_Madre").val();
+    var Nombres = $("#Nombres_Madre").val();
+    var Apellidos = $("#Apellidos_Madre").val();
+    var NombreCompleto = $("#NombreCompleto_Madre").val();
+    var RazonSocial = $("#RazonSocial_Madre").val();
+    if (Naturaleza == "JURI") {
+        if (RazonSocial == "" && NombreCompleto == "") {
+            $("#MensajeError").html("Los datos de la madre no son válidos, debe de ingresar razon social");
+            $("#DivError").show();
+        }
+        else {
+            $("#MensajeError").html("");
+            $("#DivError").hide();
 
+            $("#DatosMadre").hide();
+            $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+            $("#DatosRepresentante").show();
+            $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        }
+    }
+    else {
+        if (Nombres == "" || Apellidos == "" || NombreCompleto == "") {
+            $("#MensajeError").html("Los datos de la madre no son válidos, debe de ingresar nombres y apellidos");
+            $("#DivError").show();
+        }
+        else {
+            $("#MensajeError").html("");
+            $("#DivError").hide();
+
+            $("#DatosMadre").hide();
+            $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+            $("#DatosRepresentante").show();
+            $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        }
+    }
+}
+
+function ValidarDatosRegistro_Representante() {
+    var Naturaleza = $("#Naturaleza_Representante").val();
+    var Tipo_documento = $("#IdTipoDocumento_Representante").val();
+    var Cedula_ruc = $("#CedulaRuc_Representante").val();
+    var Nombres = $("#Nombres_Representante").val();
+    var Apellidos = $("#Apellidos_Representante").val();
+    var NombreCompleto = $("#NombreCompleto_Representante").val();
+    var RazonSocial = $("#RazonSocial_Representante").val();
+    if (Naturaleza == "JURI") {
+        if (RazonSocial == "" && NombreCompleto == "") {
+            $("#MensajeError").html("Los datos del representante no son válidos, debe de ingresar razon social");
+            $("#DivError").show();
+        }
+        else {
+            $("#MensajeError").html("");
+            $("#DivError").hide();
+
+            $("#DatosRepresentante").hide();
+            $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+            $("#DatosSocioEconomico").show();
+            $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        }
+    }
+    else {
+        if (Nombres == "" || Apellidos == "" || NombreCompleto == "") {
+            $("#MensajeError").html("Los datos del representante no son válidos, debe de ingresar nombres y apellidos");
+            $("#DivError").show();
+        }
+        else {
+            $("#MensajeError").html("");
+            $("#DivError").hide();
+
+            $("#DatosRepresentante").hide();
+            $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+            $("#DatosSocioEconomico").show();
+            $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        }
+    }
+}
 function Validar_cedula_ruc_Padre() {
     var datos = {
         naturaleza: $("#Naturaleza_Padre").val(),
@@ -1827,3 +1899,4 @@ function vaciar_campos_representante() {
     $("#PorcentajeDiscapacidad_Representante").val("");
     $("#NumeroCarnetConadis_Representante").val("");
 }
+

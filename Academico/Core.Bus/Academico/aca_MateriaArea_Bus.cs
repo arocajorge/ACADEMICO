@@ -53,6 +53,42 @@ namespace Core.Bus.Academico
         {
             try
             {
+                return odata.guardarDB(info);
+                //var lst_anios = odata_anio.getList_update(info.IdEmpresa);
+                //if (odata.modificarDB(info))
+                //{
+                //    if (lst_anios.Count > 0)
+                //    {
+                //        foreach (var item in lst_anios)
+                //        {
+                //            var lst_curso_materia = odata_curso_materia.getList_Update_Area(info.IdEmpresa, item.IdAnio, info.IdMateriaArea);
+                //            if (lst_curso_materia.Count > 0)
+                //            {
+                //                foreach (var info_curso_materia in lst_curso_materia)
+                //                {
+                //                    info_curso_materia.NomMateriaArea = info.NomMateriaArea;
+                //                    info_curso_materia.OrdenMateriaArea = info.OrdenMateriaArea;
+                //                }
+
+                //                return (odata_curso_materia.modificarDB(lst_curso_materia));
+                //            }
+                //        }
+                //    }
+                //}
+                //return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ModificarDB(aca_MateriaArea_Info info)
+        {
+            try
+            {
+                //return odata.modificarDB(info);
                 var lst_anios = odata_anio.getList_update(info.IdEmpresa);
                 if (odata.modificarDB(info))
                 {
@@ -75,19 +111,6 @@ namespace Core.Bus.Academico
                     }
                 }
                 return true;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public bool ModificarDB(aca_MateriaArea_Info info)
-        {
-            try
-            {
-                return odata.modificarDB(info);
             }
             catch (Exception)
             {

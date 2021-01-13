@@ -97,6 +97,7 @@ namespace Core.Bus.Academico
                                     info_curso_materia.NomMateriaArea = info.NomMateriaArea;
                                     info_curso_materia.NomMateriaGrupo = info.NomMateriaGrupo;
                                     info_curso_materia.IdCatalogoTipoCalificacion = info.IdCatalogoTipoCalificacion;
+                                    info_curso_materia.PromediarGrupo = info.PromediarGrupo;
                                 }
 
                                 odata_curso_materia.modificarDB(lst_curso_materia);

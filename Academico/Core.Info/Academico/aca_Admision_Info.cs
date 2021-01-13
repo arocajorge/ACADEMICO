@@ -236,6 +236,7 @@ namespace Core.Info.Academico
         public DateTime FechaActual { get; set; }
         public string EstadoAdmision { get; set; }
         public string FechaString { get; set; }
+        public int CantidadArchivos { get; set; }
         #endregion
     }
 }

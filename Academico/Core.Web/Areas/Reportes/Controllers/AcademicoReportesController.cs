@@ -1343,6 +1343,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.IdCatalogoParcial = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             model.MostrarRetirados = false;
+            model.MostrarPromedios = true;
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -1362,6 +1363,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.p_MostrarPromedios.Value = model.MostrarPromedios;
 
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -1385,6 +1387,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.p_MostrarPromedios.Value = model.MostrarPromedios;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
@@ -2584,6 +2587,20 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
 
+            ACA_034_General_Rpt reportGeneral = new ACA_034_General_Rpt();
+            reportGeneral.p_IdEmpresa.Value = model.IdEmpresa;
+            reportGeneral.p_IdSede.Value = model.IdSede;
+            reportGeneral.p_IdAnio.Value = model.IdAnio;
+            reportGeneral.p_IdNivel.Value = model.IdNivel;
+            reportGeneral.p_IdJornada.Value = model.IdJornada;
+            reportGeneral.p_IdCurso.Value = model.IdCurso;
+            reportGeneral.p_IdParalelo.Value = model.IdParalelo;
+            reportGeneral.p_IdAlumno.Value = model.IdAlumno;
+            reportGeneral.p_MostrarRetirados.Value = model.MostrarRetirados;
+            reportGeneral.usuario = SessionFixed.IdUsuario;
+            reportGeneral.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportGeneral = reportGeneral;
+
             return View(model);
         }
         [HttpPost]
@@ -2603,6 +2620,21 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
+
+            ACA_034_General_Rpt reportGeneral = new ACA_034_General_Rpt();
+            reportGeneral.p_IdEmpresa.Value = model.IdEmpresa;
+            reportGeneral.p_IdSede.Value = model.IdSede;
+            reportGeneral.p_IdAnio.Value = model.IdAnio;
+            reportGeneral.p_IdNivel.Value = model.IdNivel;
+            reportGeneral.p_IdJornada.Value = model.IdJornada;
+            reportGeneral.p_IdCurso.Value = model.IdCurso;
+            reportGeneral.p_IdParalelo.Value = model.IdParalelo;
+            reportGeneral.p_IdAlumno.Value = model.IdAlumno;
+            reportGeneral.p_MostrarRetirados.Value = model.MostrarRetirados;
+            reportGeneral.usuario = SessionFixed.IdUsuario;
+            reportGeneral.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportGeneral = reportGeneral;
+
             return View(model);
         }
         #endregion

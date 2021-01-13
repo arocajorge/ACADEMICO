@@ -94,7 +94,7 @@
                             @Html.ValidationMessageFor(q => q.IdCatalogoParcial, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdCliente"></label>
                             @Html.DevExpress().CheckBoxFor(q => q.MostrarRetirados, settings =>
@@ -103,6 +103,17 @@
                                 settings.Text = "Mostrar retirados";
                             }).GetHtml()
                             @Html.ValidationMessageFor(q => q.MostrarRetirados, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="IdCliente"></label>
+                            @Html.DevExpress().CheckBoxFor(q => q.MostrarPromedios, settings =>
+                            {
+                                settings.Name = "MostrarPromedios";
+                                settings.Text = "Mostrar promedios";
+                            }).GetHtml()
+                            @Html.ValidationMessageFor(q => q.MostrarPromedios, "", new { @class = "text-danger" })
                         </div>
                     </div>
                 </div>

@@ -3,8 +3,10 @@ using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Info.General;
 using Core.Info.Helps;
+using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -141,7 +143,7 @@ namespace Core.Admision.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(aca_Admision_Info model)
+        public ActionResult Index(aca_Admision_Info model, IEnumerable<HttpPostedFileBase> ArchivosAspirante)
         {
             if (!validar(model, ref mensaje))
             {
@@ -155,6 +157,26 @@ namespace Core.Admision.Controllers
                 ViewBag.mensaje = "No se ha podido guardar el registro";
                 cargar_combos(model);
                 return View(model);
+            }
+            
+            if (ArchivosAspirante != null)
+            {
+                //var IdAdmision = bus_admision.GetId(model.IdEmpresa);
+                var FilePath = Server.MapPath("~/Content/aspirantes/"+model.IdAdmision);
+                if (!Directory.Exists(FilePath))
+                {
+                    Directory.CreateDirectory(FilePath);
+                }
+
+                foreach (var file in ArchivosAspirante)
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(FilePath, fileName);
+                        file.SaveAs(path);
+                    }
+                }
             }
 
             return RedirectToAction("Index");
@@ -250,6 +272,13 @@ namespace Core.Admision.Controllers
             string return_naturaleza_madre = "";
             string return_naturaleza_representante = "";
 
+            //if (info.CantidadArchivos == 0)
+            //{
+            //    msg = "Debe subir los documentos solicitados para la admisión";
+            //    info.info_valido_aspirante = false;
+            //    return false;
+            //}
+
             if (!string.IsNullOrEmpty(info.IdTipoDocumento_Aspirante) && !string.IsNullOrEmpty(info.Naturaleza_Aspirante) && !string.IsNullOrEmpty(info.CedulaRuc_Aspirante))
             {
                 if (cl_funciones.ValidaIdentificacion(info.IdTipoDocumento_Aspirante, info.Naturaleza_Aspirante, info.CedulaRuc_Aspirante, ref return_naturaleza))
@@ -266,6 +295,7 @@ namespace Core.Admision.Controllers
             }
             else
             {
+                msg = "Complete la información del aspirante";
                 info.info_valido_aspirante = false;
                 return false;
             }
@@ -286,7 +316,9 @@ namespace Core.Admision.Controllers
             }
             else
             {
+                msg = "Complete la información del padre";
                 info.info_valido_padre = false;
+                return false;
             }
 
             if (!string.IsNullOrEmpty(info.IdTipoDocumento_Madre) && !string.IsNullOrEmpty(info.Naturaleza_Madre) && !string.IsNullOrEmpty(info.CedulaRuc_Madre))
@@ -305,7 +337,9 @@ namespace Core.Admision.Controllers
             }
             else
             {
+                msg = "Complete la información de la madre";
                 info.info_valido_madre = false;
+                return false;
             }
 
             if (!string.IsNullOrEmpty(info.IdTipoDocumento_Representante) && !string.IsNullOrEmpty(info.Naturaleza_Representante) && !string.IsNullOrEmpty(info.CedulaRuc_Representante))
@@ -324,7 +358,9 @@ namespace Core.Admision.Controllers
             }
             else
             {
+                msg = "Complete la información del representante";
                 info.info_valido_representante = false;
+                return false;
             }
 
             if (info.info_valido_aspirante == true && info.info_valido_padre==true && info.info_valido_madre == true && info.info_valido_representante==true)
@@ -337,12 +373,9 @@ namespace Core.Admision.Controllers
             }
             else
             {
-                //msg = "Número de identificación del madre inválida";
+                msg = "Complete la información solicitada";
                 return false;
-            }
-
-
-            
+            }        
             return true;
         }
         #endregion
