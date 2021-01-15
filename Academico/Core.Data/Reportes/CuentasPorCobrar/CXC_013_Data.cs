@@ -231,6 +231,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                     #endregion
                     connection.Open();
                     SqlCommand command = new SqlCommand(query,connection);
+                    command.CommandTimeout = 5000;
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {

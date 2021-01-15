@@ -34,7 +34,7 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             int IdNivel = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
             int IdCurso = p_IdCurso.Value == null ? 0 : Convert.ToInt32(p_IdCurso.Value);
             int IdParalelo = p_IdParalelo.Value == null ? 0 : Convert.ToInt32(p_IdParalelo.Value);
-            decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
+            decimal IdAlumno = p_IdEmpresa.Value == null ? 0 : Convert.ToDecimal(p_IdAlumno.Value);
 
             CXC_011_Bus bus_rpt = new CXC_011_Bus();
             List<CXC_011_Info> lst_rpt = new List<CXC_011_Info>();

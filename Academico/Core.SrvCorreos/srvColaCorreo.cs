@@ -133,7 +133,6 @@ namespace Core.SrvCorreos
                                 rpt_CXC_002.p_IdEmpresa.Value = Parametros[0];
                                 rpt_CXC_002.p_IdSucursal.Value = Parametros[1];
                                 rpt_CXC_002.p_IdCobro.Value = Parametros[2];
-                                rpt_CXC_002.p_IdAlumno.Value = Parametros[3];
                             }
                             #endregion
 

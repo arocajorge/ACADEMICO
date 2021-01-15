@@ -266,7 +266,7 @@ namespace Core.Web.Areas.Banco.Controllers
                     IdTipoFlujo = item.IdTipoFlujo,
                     Descricion = item.Descricion,
                     Porcentaje = item.Porcentaje,
-                    Valor = Math.Round(((item.Porcentaje * Valor) / 100 ),2,MidpointRounding.AwayFromZero)
+                    Valor = (item.Porcentaje * Valor) / 100
                 });
             }
 
