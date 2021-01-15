@@ -22,8 +22,8 @@ namespace Core.TestServicios
                 tb_ColaCorreo_Bus busCorreo = new tb_ColaCorreo_Bus();
                 tb_ColaCorreoParametros_Bus busCorreoParam = new tb_ColaCorreoParametros_Bus();
                 tb_sis_reporte_x_tb_empresa_Bus bus_rep_x_emp = new tb_sis_reporte_x_tb_empresa_Bus();
-
                 tb_empresa_Bus busEmpresa = new tb_empresa_Bus();
+
                 #region Get correo por enviar
                 var CorreoInfo = busCorreo.GetInfoPendienteEnviar();
                 if (CorreoInfo == null)
@@ -106,8 +106,8 @@ namespace Core.TestServicios
                             {
                                 string[] Parametros = CorreoInfo.Parametros.Split(';');
                                 rpt_CXC_002.p_IdEmpresa.Value = Parametros[0];
-                                //rpt_CXC_002.p_IdSede.Value = Parametros[1];
-                                rpt_CXC_002.p_IdAlumno.Value = Parametros[2];
+                                rpt_CXC_002.p_IdSucursal.Value = Parametros[1];
+                                rpt_CXC_002.p_IdCobro.Value = Parametros[2];
                             }
                             #endregion
 
@@ -120,7 +120,7 @@ namespace Core.TestServicios
 
                             // Create a new attachment and put the PDF report into it.
                             mem.Seek(0, System.IO.SeekOrigin.Begin);
-                            Attachment att_CXC_002 = new Attachment(mem, "RECIBO DE CAJA.pdf", "application/pdf");
+                            Attachment att_CXC_002 = new Attachment(mem, "RECIBO DE  CAJA.pdf", "application/pdf");
                             mail.Attachments.Add(att_CXC_002);
 
                             AlternateView htmlView_CXC_002 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");

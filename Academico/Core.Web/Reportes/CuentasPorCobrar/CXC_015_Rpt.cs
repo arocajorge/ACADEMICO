@@ -22,13 +22,13 @@ namespace Core.Web.Reportes.CuentasPorCobrar
         {
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_usuario.Text = usuario;
-            int IdEmpresa = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-            int IdSede = p_IdSede.Value == null ? 0 : Convert.ToInt32(p_IdSede.Value);
-            int IdAnio = p_IdAnio.Value == null ? 0 : Convert.ToInt32(p_IdAnio.Value);
-            int IdJornada = p_IdJornada.Value == null ? 0 : Convert.ToInt32(p_IdJornada.Value);
-            int IdNivel = p_IdNivel.Value == null ? 0 : Convert.ToInt32(p_IdNivel.Value);
-            int IdCurso = p_IdCurso.Value == null ? 0 : Convert.ToInt32(p_IdCurso.Value);
-            int IdParalelo = p_IdParalelo.Value == null ? 0 : Convert.ToInt32(p_IdParalelo.Value);
+            int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
+            int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
+            int IdJornada = string.IsNullOrEmpty(p_IdJornada.Value.ToString()) ? 0 : Convert.ToInt32(p_IdJornada.Value);
+            int IdNivel = string.IsNullOrEmpty(p_IdNivel.Value.ToString()) ? 0 : Convert.ToInt32(p_IdNivel.Value);
+            int IdCurso = string.IsNullOrEmpty(p_IdCurso.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCurso.Value);
+            int IdParalelo = string.IsNullOrEmpty(p_IdParalelo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdParalelo.Value);
             decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
             DateTime Fecha = string.IsNullOrEmpty(p_FechaCorte.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_FechaCorte.Value.ToString());
             CXC_015_Bus bus_rpt = new CXC_015_Bus();
