@@ -47,6 +47,7 @@ namespace Core.Admision.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0); 
             var model = new aca_Admision_Info
             {
+                CedulaRuc_Aspirante = "0919571018",
                 IdEmpresa= IdEmpresa,
                 IdAnio = (info_anio==null ? 0 : info_anio.IdAnio),
                 IdSede=0,
