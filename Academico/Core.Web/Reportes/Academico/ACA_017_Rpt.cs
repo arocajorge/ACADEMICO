@@ -40,14 +40,14 @@ namespace Core.Web.Reportes.Academico
 
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
-            if (emp != null)
-            {
-                if (emp.em_logo != null)
-                {
-                    ImageConverter obj = new ImageConverter();
-                    lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
-                }
-            }
+            //if (emp != null)
+            //{
+            //    if (emp.em_logo != null)
+            //    {
+            //        ImageConverter obj = new ImageConverter();
+            //        lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+            //    }
+            //}
 
             aca_Sede_Bus bus_sede = new aca_Sede_Bus();
             var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
