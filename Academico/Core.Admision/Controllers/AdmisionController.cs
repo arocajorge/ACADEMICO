@@ -136,7 +136,8 @@ namespace Core.Admision.Controllers
                 FechaNacimiento_Padre = DateTime.Now,
                 FechaNacimiento_Madre = DateTime.Now,
                 FechaNacimiento_Representante = DateTime.Now,
-                IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO)
+                IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO),
+                Representante="O"
             };
 
             cargar_combos(model);
@@ -144,8 +145,9 @@ namespace Core.Admision.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(aca_Admision_Info model, IEnumerable<HttpPostedFileBase> ArchivosAspirante)
+        public ActionResult Index(aca_Admision_Info model, IList<HttpPostedFileBase> ArchivosAspirante)
         {
+
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -159,7 +161,7 @@ namespace Core.Admision.Controllers
                 cargar_combos(model);
                 return View(model);
             }
-            
+
             if (ArchivosAspirante != null)
             {
                 //var IdAdmision = bus_admision.GetId(model.IdEmpresa);
@@ -169,15 +171,56 @@ namespace Core.Admision.Controllers
                     Directory.CreateDirectory(FilePath);
                 }
 
-                foreach (var file in ArchivosAspirante)
+                for (int i = 0; i < ArchivosAspirante.Count(); i++)
                 {
-                    if (file.ContentLength > 0)
+                    var NombreArchivo = "Documento";
+                    if (i==0)
                     {
-                        var fileName = Path.GetFileName(file.FileName);
-                        var path = Path.Combine(FilePath, fileName);
-                        file.SaveAs(path);
+                        NombreArchivo = "CedulaEstudiante";
+                    }
+                    else if (i ==1)
+                    {
+                        NombreArchivo = "CedulaPadre";
+                    }
+                    else if (i ==2)
+                    {
+                        NombreArchivo = "CedulaMadre";
+                    }
+                    else if (i ==3)
+                    {
+                        NombreArchivo = "CedulaRepresentante";
+                    }
+                    
+                    HttpPostedFileBase file = ArchivosAspirante[i];
+                    if (file != null)
+                    {
+                        if (file.ContentLength > 0)
+                        {
+                            var fileName = Path.GetFileName(file.FileName);
+                            var extension = Path.GetExtension(file.FileName);
+                            var NombreArchivoGuardar = NombreArchivo + extension;
+                            var path = Path.Combine(FilePath, NombreArchivoGuardar);
+                            file.SaveAs(path);
+                        }
                     }
                 }
+
+                //var Secuencia = 0;
+                //foreach (var file in ArchivosAspirante)
+                //{
+                //    if (file!=null)
+                //    {
+                //        if (file.ContentLength > 0)
+                //        {
+                //            Secuencia++;
+                //            var fileName = Path.GetFileName(file.FileName);
+                //            var extension = Path.GetExtension(file.FileName);
+                //            var NombreArchivo = "Documento_" + Secuencia + extension;
+                //            var path = Path.Combine(FilePath, NombreArchivo);
+                //            file.SaveAs(path);
+                //        }
+                //    }
+                //}
             }
 
             return RedirectToAction("Index");
@@ -279,6 +322,161 @@ namespace Core.Admision.Controllers
             //    info.info_valido_aspirante = false;
             //    return false;
             //}
+            info.NombreCompleto_Aspirante = info.Apellidos_Aspirante + ' ' + info.Nombres_Aspirante;
+            info.FechaNacimiento_Aspirante = (info.FechaNacimiento_Aspirante == null ? (DateTime?)null : info.FechaNacimiento_Aspirante);
+            info.FechaNacimiento_Padre = (info.FechaNacimiento_Padre == null ? (DateTime?)null : info.FechaNacimiento_Padre);
+            info.FechaNacimiento_Madre = (info.FechaNacimiento_Madre == null ? (DateTime?)null : info.FechaNacimiento_Madre);
+
+            if (string.IsNullOrEmpty(info.RazonSocial_Padre))
+            {
+                info.NombreCompleto_Padre = info.Apellidos_Padre + ' ' + info.Nombres_Padre;
+            }
+            else
+            {
+                info.NombreCompleto_Padre = info.RazonSocial_Padre;
+            }
+
+            if (string.IsNullOrEmpty(info.RazonSocial_Madre))
+            {
+                info.NombreCompleto_Madre = info.Apellidos_Madre + ' ' + info.Nombres_Madre;
+            }
+            else
+            {
+                info.NombreCompleto_Madre = info.RazonSocial_Madre;
+            }
+
+            if (info.Representante == "P")
+            {
+                info.Naturaleza_Representante = info.Naturaleza_Padre;
+                info.IdTipoDocumento_Representante = info.IdTipoDocumento_Padre;
+                info.CedulaRuc_Representante = info.CedulaRuc_Padre;
+                info.Nombres_Representante = info.Nombres_Padre;
+                info.Apellidos_Representante = info.Apellidos_Padre;
+                info.NombreCompleto_Representante = info.Apellidos_Padre+' '+info.Nombres_Padre;
+                info.RazonSocial_Representante = info.RazonSocial_Padre;
+                info.Direccion_Representante = info.Direccion_Padre;
+                info.Telefono_Representante = info.Telefono_Padre;
+                info.Celular_Representante = info.Celular_Padre;
+                info.Correo_Representante = info.Correo_Padre;
+                info.Sexo_Representante = (info.Sexo_Padre == "" ? null : info.Sexo_Padre);
+                info.FechaNacimiento_Representante = (info.FechaNacimiento_Padre==null ? (DateTime?)null: info.FechaNacimiento_Padre);
+                info.CodCatalogoCONADIS_Representante = (info.CodCatalogoCONADIS_Padre == "" ? null : info.CodCatalogoCONADIS_Padre);
+                info.PorcentajeDiscapacidad_Representante = info.PorcentajeDiscapacidad_Padre;
+                info.NumeroCarnetConadis_Representante = info.NumeroCarnetConadis_Padre;
+                info.IdGrupoEtnico_Representante = (info.IdGrupoEtnico_Padre == 0 ? (int?)null : info.IdGrupoEtnico_Padre);
+                info.IdReligion_Representante = (info.IdReligion_Padre == 0 ? (int?)null : info.IdReligion_Padre);
+                info.IdEstadoCivil_Representante = (info.IdEstadoCivil_Padre == "" ? null : info.IdEstadoCivil_Padre);
+                info.AsisteCentroCristiano_Representante = info.AsisteCentroCristiano_Padre;
+                info.IdPais_Representante = (info.IdPais_Padre == "" ? null : info.IdPais_Padre);
+                info.Cod_Region_Representante = (info.Cod_Region_Padre == "" ? null : info.Cod_Region_Padre);
+                info.IdProvincia_Representante = (info.IdProvincia_Padre == "" ? null : info.IdProvincia_Padre);
+                info.IdCiudad_Representante = (info.IdCiudad_Padre == "" ? null : info.IdCiudad_Padre);
+                info.IdParroquia_Representante = (info.IdParroquia_Padre == "" ? null : info.IdParroquia_Padre);
+                info.Sector_Representante = info.Sector_Padre;
+                info.IdCatalogoPAREN_Representante = info.IdCatalogoPAREN_Padre;
+                info.IdCatalogoFichaInst_Representante = (info.IdCatalogoFichaInst_Padre == 0 ? (int?)null : info.IdCatalogoFichaInst_Padre);
+                info.EmpresaTrabajo_Representante = info.EmpresaTrabajo_Padre;
+                info.IdProfesion_Representante = (info.IdProfesion_Padre == 0 ? (int?)null : info.IdCatalogoFichaInst_Padre);
+                info.DireccionTrabajo_Representante = info.DireccionTrabajo_Padre;
+                info.TelefonoTrabajo_Representante = info.TelefonoTrabajo_Padre;
+                info.CargoTrabajo_Representante = info.CargoTrabajo_Padre;
+                info.AniosServicio_Representante = info.AniosServicio_Padre;
+                info.IngresoMensual_Representante = info.IngresoMensual_Padre;
+                info.VehiculoPropio_Representante = info.VehiculoPropio_Padre;
+                info.Marca_Representante = info.Marca_Padre;
+                info.Modelo_Representante = info.Modelo_Padre;
+                info.AnioVehiculo_Representante = info.AnioVehiculo_Padre;
+                info.CasaPropia_Representante = info.CasaPropia_Padre;
+                info.EstaFallecido_Representante = info.EstaFallecido_Padre;
+            }
+            else if (info.Representante == "M")
+            {
+                info.Naturaleza_Representante = info.Naturaleza_Madre;
+                info.IdTipoDocumento_Representante = info.IdTipoDocumento_Madre;
+                info.CedulaRuc_Representante = info.CedulaRuc_Madre;
+                info.Nombres_Representante = info.Nombres_Madre;
+                info.Apellidos_Representante = info.Apellidos_Madre;
+                info.NombreCompleto_Representante = info.Apellidos_Madre + ' ' + info.Nombres_Madre;
+                info.RazonSocial_Representante = info.RazonSocial_Madre;
+                info.Direccion_Representante = info.Direccion_Madre;
+                info.Telefono_Representante = info.Telefono_Madre;
+                info.Celular_Representante = info.Celular_Madre;
+                info.Correo_Representante = info.Correo_Madre;
+                info.Sexo_Representante = (info.Sexo_Madre == "" ? null : info.Sexo_Madre);
+                info.FechaNacimiento_Representante = (info.FechaNacimiento_Madre == null ? (DateTime?)null : info.FechaNacimiento_Madre);
+                info.CodCatalogoCONADIS_Representante = (info.CodCatalogoCONADIS_Madre == "" ? null : info.CodCatalogoCONADIS_Madre);
+                info.PorcentajeDiscapacidad_Representante = info.PorcentajeDiscapacidad_Madre;
+                info.NumeroCarnetConadis_Representante = info.NumeroCarnetConadis_Madre;
+                info.IdGrupoEtnico_Representante = (info.IdGrupoEtnico_Madre == 0 ? (int?)null : info.IdGrupoEtnico_Madre);
+                info.IdReligion_Representante = (info.IdReligion_Madre == 0 ? (int?)null : info.IdReligion_Madre);
+                info.IdEstadoCivil_Representante = (info.IdEstadoCivil_Madre == "" ? null : info.IdEstadoCivil_Madre);
+                info.AsisteCentroCristiano_Representante = info.AsisteCentroCristiano_Madre;
+                info.IdPais_Representante = (info.IdPais_Madre == "" ? null : info.IdPais_Madre);
+                info.Cod_Region_Representante = (info.Cod_Region_Madre == "" ? null : info.Cod_Region_Madre);
+                info.IdProvincia_Representante = (info.IdProvincia_Madre == "" ? null : info.IdProvincia_Madre);
+                info.IdCiudad_Representante = (info.IdCiudad_Madre == "" ? null : info.IdCiudad_Madre);
+                info.IdParroquia_Representante = (info.IdParroquia_Madre == "" ? null : info.IdParroquia_Madre);
+                info.Sector_Representante = info.Sector_Madre;
+                info.IdCatalogoPAREN_Representante = info.IdCatalogoPAREN_Madre;
+                info.IdCatalogoFichaInst_Representante = (info.IdCatalogoFichaInst_Madre == 0 ? (int?)null : info.IdCatalogoFichaInst_Madre);
+                info.EmpresaTrabajo_Representante = info.EmpresaTrabajo_Madre;
+                info.IdProfesion_Representante = (info.IdProfesion_Madre == 0 ? (int?)null : info.IdCatalogoFichaInst_Madre);
+                info.DireccionTrabajo_Representante = info.DireccionTrabajo_Madre;
+                info.TelefonoTrabajo_Representante = info.TelefonoTrabajo_Madre;
+                info.CargoTrabajo_Representante = info.CargoTrabajo_Madre;
+                info.AniosServicio_Representante = info.AniosServicio_Madre;
+                info.IngresoMensual_Representante = info.IngresoMensual_Madre;
+                info.VehiculoPropio_Representante = info.VehiculoPropio_Madre;
+                info.Marca_Representante = info.Marca_Madre;
+                info.Modelo_Representante = info.Modelo_Madre;
+                info.AnioVehiculo_Representante = info.AnioVehiculo_Madre;
+                info.CasaPropia_Representante = info.CasaPropia_Madre;
+                info.EstaFallecido_Representante = info.EstaFallecido_Madre;
+            }
+            else
+            {
+                info.Naturaleza_Representante = info.Naturaleza_Representante;
+                info.IdTipoDocumento_Representante = info.IdTipoDocumento_Representante;
+                info.CedulaRuc_Representante = info.CedulaRuc_Representante;
+                info.Nombres_Representante = info.Nombres_Representante;
+                info.Apellidos_Representante = info.Apellidos_Representante;
+                info.NombreCompleto_Representante = info.Apellidos_Representante + ' ' + info.Nombres_Representante;
+                info.RazonSocial_Representante = info.RazonSocial_Representante;
+                info.Direccion_Representante = info.Direccion_Representante;
+                info.Telefono_Representante = info.Telefono_Representante;
+                info.Celular_Representante = info.Celular_Representante;
+                info.Correo_Representante = info.Correo_Representante;
+                info.Sexo_Representante = (info.Sexo_Representante == "" ? null : info.Sexo_Representante);
+                info.FechaNacimiento_Representante = (info.FechaNacimiento_Representante == null ? (DateTime?)null : info.FechaNacimiento_Representante);
+                info.CodCatalogoCONADIS_Representante = (info.CodCatalogoCONADIS_Representante == "" ? null : info.CodCatalogoCONADIS_Representante);
+                info.PorcentajeDiscapacidad_Representante = info.PorcentajeDiscapacidad_Representante;
+                info.NumeroCarnetConadis_Representante = info.NumeroCarnetConadis_Representante;
+                info.IdGrupoEtnico_Representante = (info.IdGrupoEtnico_Representante == 0 ? (int?)null : info.IdGrupoEtnico_Representante);
+                info.IdReligion_Representante = (info.IdReligion_Representante == 0 ? (int?)null : info.IdReligion_Representante);
+                info.IdEstadoCivil_Representante = (info.IdEstadoCivil_Representante == "" ? null : info.IdEstadoCivil_Representante);
+                info.AsisteCentroCristiano_Representante = info.AsisteCentroCristiano_Representante;
+                info.IdPais_Representante = (info.IdPais_Representante == "" ? null : info.IdPais_Representante);
+                info.Cod_Region_Representante = (info.Cod_Region_Representante == "" ? null : info.Cod_Region_Representante);
+                info.IdProvincia_Representante = (info.IdProvincia_Representante == "" ? null : info.IdProvincia_Representante);
+                info.IdCiudad_Representante = (info.IdCiudad_Representante == "" ? null : info.IdCiudad_Representante);
+                info.IdParroquia_Representante = (info.IdParroquia_Representante == "" ? null : info.IdParroquia_Representante);
+                info.Sector_Representante = info.Sector_Representante;
+                info.IdCatalogoPAREN_Representante = info.IdCatalogoPAREN_Representante;
+                info.IdCatalogoFichaInst_Representante = (info.IdCatalogoFichaInst_Representante == 0 ? (int?)null : info.IdCatalogoFichaInst_Representante);
+                info.EmpresaTrabajo_Representante = info.EmpresaTrabajo_Representante;
+                info.IdProfesion_Representante = (info.IdProfesion_Representante == 0 ? (int?)null : info.IdCatalogoFichaInst_Representante);
+                info.DireccionTrabajo_Representante = info.DireccionTrabajo_Representante;
+                info.TelefonoTrabajo_Representante = info.TelefonoTrabajo_Representante;
+                info.CargoTrabajo_Representante = info.CargoTrabajo_Representante;
+                info.AniosServicio_Representante = info.AniosServicio_Representante;
+                info.IngresoMensual_Representante = info.IngresoMensual_Representante;
+                info.VehiculoPropio_Representante = info.VehiculoPropio_Representante;
+                info.Marca_Representante = info.Marca_Representante;
+                info.Modelo_Representante = info.Modelo_Representante;
+                info.AnioVehiculo_Representante = info.AnioVehiculo_Representante;
+                info.CasaPropia_Representante = info.CasaPropia_Representante;
+                info.EstaFallecido_Representante = info.EstaFallecido_Representante;
+            }
 
             if (!string.IsNullOrEmpty(info.IdTipoDocumento_Aspirante) && !string.IsNullOrEmpty(info.Naturaleza_Aspirante) && !string.IsNullOrEmpty(info.CedulaRuc_Aspirante))
             {
@@ -376,7 +574,8 @@ namespace Core.Admision.Controllers
             {
                 msg = "Complete la información solicitada";
                 return false;
-            }        
+            }
+  
             return true;
         }
         #endregion

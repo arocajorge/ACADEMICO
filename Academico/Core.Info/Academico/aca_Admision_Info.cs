@@ -25,36 +25,36 @@ namespace Core.Info.Academico
         public string Naturaleza_Aspirante { get; set; }
         [Required(ErrorMessage = "El campo tipo de documento es obligatorio")]
         public string IdTipoDocumento_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo cédula del aspirante es obligatorio")]
+        [Required(ErrorMessage = "El campo cédula es obligatorio")]
         public string CedulaRuc_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo nombres del aspirante es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres del aspirante debe tener máximo 100 caracteres")]
+        [Required(ErrorMessage = "El campo nombres es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo apellidos del aspirante es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos del aspirante debe tener máximo 100 caracteres")]
+        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Aspirante { get; set; }
         [Required(ErrorMessage = "El campo nombre completo del aspirante es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombre completo del aspirante debe tener máximo 200 caracteres")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombre completo debe tener máximo 200 caracteres")]
         public string NombreCompleto_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo direccion del aspirante es obligatorio")]
+        [Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Aspirante { get; set; }
         public string Telefono_Aspirante { get; set; }
         public string Celular_Aspirante { get; set; }
         public string Correo_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo sexo del aspirante es obligatorio")]
+        [Required(ErrorMessage = "El campo sexo es obligatorio")]
         public string Sexo_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo fecha de nacimiento del aspirante es obligatorio")]
+        [Required(ErrorMessage = "El campo fecha de nacimiento es obligatorio")]
         public Nullable<System.DateTime> FechaNacimiento_Aspirante { get; set; }
         public string CodCatalogoSangre_Aspirante { get; set; }
         public string CodCatalogoCONADIS_Aspirante { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Aspirante { get; set; }
         public string NumeroCarnetConadis_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo grupo étnico del aspirante es obligatorio")]
+        [Required(ErrorMessage = "El campo grupo étnico es obligatorio")]
         public Nullable<int> IdGrupoEtnico_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo religión del aspirante es obligatorio")]
+        [Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion_Aspirante { get; set; }
         public Nullable<bool> AsisteCentroCristiano_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo lugar de nacimiento del aspirante es obligatorio")]
+        [Required(ErrorMessage = "El campo lugar de nacimiento es obligatorio")]
         public string LugarNacimiento_Aspirante { get; set; }
         public string IdPais_Aspirante { get; set; }
         public string Cod_Region_Aspirante { get; set; }
@@ -78,21 +78,31 @@ namespace Core.Info.Academico
         public string OtroFinanciamiento_Aspirante { get; set; }
         public string Naturaleza_Padre { get; set; }
         public string IdTipoDocumento_Padre { get; set; }
+        [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Padre { get; set; }
+        [Required(ErrorMessage = "El campo nombres es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Padre { get; set; }
+        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Padre { get; set; }
         public string NombreCompleto_Padre { get; set; }
         public string RazonSocial_Padre { get; set; }
+        [Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Padre { get; set; }
         public string Telefono_Padre { get; set; }
+        [Required(ErrorMessage = "El campo celular es obligatorio")]
         public string Celular_Padre { get; set; }
+        [Required(ErrorMessage = "El campo correo es obligatorio")]
         public string Correo_Padre { get; set; }
+        [Required(ErrorMessage = "El campo sexo es obligatorio")]
         public string Sexo_Padre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Padre { get; set; }
         public string CodCatalogoCONADIS_Padre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Padre { get; set; }
         public string NumeroCarnetConadis_Padre { get; set; }
         public Nullable<int> IdGrupoEtnico_Padre { get; set; }
+        [Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion_Padre { get; set; }
         public string IdEstadoCivil_Padre { get; set; }
         public bool AsisteCentroCristiano_Padre { get; set; }
@@ -119,21 +129,31 @@ namespace Core.Info.Academico
         public Nullable<int> IdProfesion_Padre { get; set; }
         public string Naturaleza_Madre { get; set; }
         public string IdTipoDocumento_Madre { get; set; }
+        [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Madre { get; set; }
+        [Required(ErrorMessage = "El campo nombres es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Madre { get; set; }
+        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Madre { get; set; }
         public string NombreCompleto_Madre { get; set; }
         public string RazonSocial_Madre { get; set; }
+        [Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Madre { get; set; }
         public string Telefono_Madre { get; set; }
+        [Required(ErrorMessage = "El campo celular es obligatorio")]
         public string Celular_Madre { get; set; }
+        [Required(ErrorMessage = "El campo correo es obligatorio")]
         public string Correo_Madre { get; set; }
+        [Required(ErrorMessage = "El campo sexo es obligatorio")]
         public string Sexo_Madre { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Madre { get; set; }
         public string CodCatalogoCONADIS_Madre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Madre { get; set; }
         public string NumeroCarnetConadis_Madre { get; set; }
         public Nullable<int> IdGrupoEtnico_Madre { get; set; }
+        [Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion_Madre { get; set; }
         public string IdEstadoCivil_Madre { get; set; }
         public bool AsisteCentroCristiano_Madre { get; set; }
@@ -160,21 +180,31 @@ namespace Core.Info.Academico
         public Nullable<int> IdProfesion_Madre { get; set; }
         public string Naturaleza_Representante { get; set; }
         public string IdTipoDocumento_Representante { get; set; }
+        [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Representante { get; set; }
+        [Required(ErrorMessage = "El campo nombres es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Representante { get; set; }
+        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Representante { get; set; }
         public string NombreCompleto_Representante { get; set; }
         public string RazonSocial_Representante { get; set; }
+        [Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Representante { get; set; }
         public string Telefono_Representante { get; set; }
+        [Required(ErrorMessage = "El campo celular es obligatorio")]
         public string Celular_Representante { get; set; }
+        [Required(ErrorMessage = "El campo correo es obligatorio")]
         public string Correo_Representante { get; set; }
+        [Required(ErrorMessage = "El campo sexo es obligatorio")]
         public string Sexo_Representante { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Representante { get; set; }
         public string CodCatalogoCONADIS_Representante { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Representante { get; set; }
         public string NumeroCarnetConadis_Representante { get; set; }
         public Nullable<int> IdGrupoEtnico_Representante { get; set; }
+        [Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion_Representante { get; set; }
         public string IdEstadoCivil_Representante { get; set; }
         public bool AsisteCentroCristiano_Representante { get; set; }
@@ -237,6 +267,7 @@ namespace Core.Info.Academico
         public string EstadoAdmision { get; set; }
         public string FechaString { get; set; }
         public int CantidadArchivos { get; set; }
+        public string Representante { get; set; }
         #endregion
     }
 }

@@ -61,7 +61,18 @@ function AnteriorSocioEconomico() {
     $("#DatosRepresentante").show();
     $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
 }
-
+function SiguienteSocioEconomico() {
+    $("#DatosSocioEconomico").hide();
+    $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+    $("#DatosArchivos").show();
+    $("#BtnArchivos").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+}
+function AnteriorArchivos() {
+    $("#DatosArchivos").hide();
+    $("#BtnArchivos").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+    $("#DatosSocioEconomico").show();
+    $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+}
 
 function Validar_cedula_ruc_Aspirante() {
     var datos = {
@@ -95,33 +106,6 @@ function Validar_cedula_ruc_Aspirante() {
     });
 };
 
-//function MostrarRazonSocialPadre() {
-//    var Tipo_documento = $("#IdTipoDocumento_Padre").val();
-//    if (Tipo_documento == "RUC") {
-//        $("#Div_RazonSocial_Padre").show();
-//    }
-//    else {
-//        $("#Div_RazonSocial_Padre").hidden();
-//    }
-//}
-//function MostrarRazonSocialMadre() {
-//    var Tipo_documento = $("#IdTipoDocumento_Madre").val();
-//    if (Tipo_documento == "RUC") {
-//        $("#Div_RazonSocial_Madre").show();
-//    }
-//    else {
-//        $("#Div_RazonSocial_Madre").hidden();
-//    }
-//}
-//function MostrarRazonSocialRepresentante() {
-//    var Tipo_documento = $("#IdTipoDocumento_Representante").val();
-//    if (Tipo_documento == "RUC") {
-//        $("#Div_RazonSocial_Representante").show();
-//    }
-//    else {
-//        $("#Div_RazonSocial_Representante").hidden();
-//    }
-//}
 
 function ValidarDatosRegistro_Aspirante() {
     var Naturaleza = $("#Naturaleza_Aspirante").val();
@@ -137,7 +121,7 @@ function ValidarDatosRegistro_Aspirante() {
             $("#DivError").show();
         }
         else {
-            if (Nombres == "" || Apellidos == "" || NombreCompleto == "") {
+            if (Nombres == "" || Apellidos == "") {
                 $("#MensajeError").html("Los datos del aspirante no son válidos, debe de ingresar nombres y apellidos");
                 $("#DivError").show();
             }
@@ -167,7 +151,7 @@ function ValidarDatosRegistro_Padre() {
     var NombreCompleto = $("#NombreCompleto_Padre").val();
     var RazonSocial = $("#RazonSocial_Padre").val();
     if (Naturaleza == "JURI") {
-        if (RazonSocial == "" && NombreCompleto == "") {
+        if (RazonSocial == "") {
             $("#MensajeError").html("Los datos del padre no son válidos, debe de ingresar razon social");
             $("#DivError").show();
         }
@@ -182,7 +166,7 @@ function ValidarDatosRegistro_Padre() {
         }
     }
     else {
-        if (Nombres == "" || Apellidos == "" || NombreCompleto == "") {
+        if (Nombres == "" || Apellidos == "") {
             $("#MensajeError").html("Los datos del padre no son válidos, debe de ingresar nombres y apellidos");
             $("#DivError").show();
         }
@@ -206,7 +190,7 @@ function ValidarDatosRegistro_Madre() {
     var NombreCompleto = $("#NombreCompleto_Madre").val();
     var RazonSocial = $("#RazonSocial_Madre").val();
     if (Naturaleza == "JURI") {
-        if (RazonSocial == "" && NombreCompleto == "") {
+        if (RazonSocial == "") {
             $("#MensajeError").html("Los datos de la madre no son válidos, debe de ingresar razon social");
             $("#DivError").show();
         }
@@ -221,7 +205,7 @@ function ValidarDatosRegistro_Madre() {
         }
     }
     else {
-        if (Nombres == "" || Apellidos == "" || NombreCompleto == "") {
+        if (Nombres == "" || Apellidos == "") {
             $("#MensajeError").html("Los datos de la madre no son válidos, debe de ingresar nombres y apellidos");
             $("#DivError").show();
         }
@@ -245,37 +229,54 @@ function ValidarDatosRegistro_Representante() {
     var Apellidos = $("#Apellidos_Representante").val();
     var NombreCompleto = $("#NombreCompleto_Representante").val();
     var RazonSocial = $("#RazonSocial_Representante").val();
-    if (Naturaleza == "JURI") {
-        if (RazonSocial == "" && NombreCompleto == "") {
-            $("#MensajeError").html("Los datos del representante no son válidos, debe de ingresar razon social");
-            $("#DivError").show();
-        }
-        else {
-            $("#MensajeError").html("");
-            $("#DivError").hide();
+    var Representante = $("#Representante").val();
 
-            $("#DatosRepresentante").hide();
-            $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-            $("#DatosSocioEconomico").show();
-            $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
-        }
+    if (Representante=="P") {
+        $("#DatosRepresentante").hide();
+        $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+        $("#DatosSocioEconomico").show();
+        $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    }
+    else if (Representante == "M") {
+        $("#DatosRepresentante").hide();
+        $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+        $("#DatosSocioEconomico").show();
+        $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
     }
     else {
-        if (Nombres == "" || Apellidos == "" || NombreCompleto == "") {
-            $("#MensajeError").html("Los datos del representante no son válidos, debe de ingresar nombres y apellidos");
-            $("#DivError").show();
+        if (Naturaleza == "JURI") {
+            if (RazonSocial == "") {
+                $("#MensajeError").html("Los datos del representante no son válidos, debe de ingresar razon social");
+                $("#DivError").show();
+            }
+            else {
+                $("#MensajeError").html("");
+                $("#DivError").hide();
+
+                $("#DatosRepresentante").hide();
+                $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+                $("#DatosSocioEconomico").show();
+                $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+            }
         }
         else {
-            $("#MensajeError").html("");
-            $("#DivError").hide();
+            if (Nombres == "" || Apellidos == "") {
+                $("#MensajeError").html("Los datos del representante no son válidos, debe de ingresar nombres y apellidos");
+                $("#DivError").show();
+            }
+            else {
+                $("#MensajeError").html("");
+                $("#DivError").hide();
 
-            $("#DatosRepresentante").hide();
-            $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-            $("#DatosSocioEconomico").show();
-            $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+                $("#DatosRepresentante").hide();
+                $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+                $("#DatosSocioEconomico").show();
+                $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+            }
         }
     }
 }
+
 function Validar_cedula_ruc_Padre() {
     var datos = {
         naturaleza: $("#Naturaleza_Padre").val(),
@@ -890,399 +891,20 @@ function CargarParroquia_Representante() {
 };
 
 function PadreRepresentante() {
-    var Naturaleza = $("#Naturaleza_Padre").val();
-    var IdTipoDocumento = $("#IdTipoDocumento_Padre").val();
-    var CedulaRuc = $("#CedulaRuc_Padre").val();
-    var EstaFallecido = $("#EstaFallecido_Padre").prop('checked');
-    var Nombres = $("#Nombres_Padre").val();
-    var Apellidos = $("#Apellidos_Padre").val();
-    var NombreCompleto = $("#NombreCompleto_Padre").val();
-    var RazonSocial = $("#RazonSocial_Padre").val();
-    var FechaNacimiento = $("#FechaNacimiento_Padre").val();
-    var IdPais = $("#IdPais_Padre").val();
-    var Cod_Region = $("#Cod_Region_Padre").val();
-    var IdProvincia = $("#IdProvincia_Padre").val();
-    var IdCiudad = $("#IdCiudad_Padre").val();
-    var IdParroquia = $("#IdParroquia_Padre").val();
-    var Sexo = $("#Sexo_Padre").val();
-    var IdEstadoCivil = $("#IdEstadoCivil_Padre").val();
-    var IdGrupoEtnico = $("#IdGrupoEtnico_Padre").val();
-    var Telefono = $("#Telefono_Padre").val();
-    var Celular = $("#Celular_Padre").val();
-    var Correo = $("#Correo_Padre").val();
-    var IdReligion = $("#IdReligion_Padre").val();
-    var AsisteCentroCristiano = $("#AsisteCentroCristiano_Padre").prop('checked');
-    var CasaPropia = $("#CasaPropia_Padre").prop('checked');
-    var VehiculoPropio = $("#VehiculoPropio_Padre").prop('checked');
-    var Marca = $("#Marca_Padre").val();
-    var Modelo = $("#Modelo_Padre").val();
-    var Direccion = $("#Direccion_Padre").val();
-    var Sector = $("#Sector_Padre").val();
-    var EmpresaTrabajo = $("#EmpresaTrabajo_Padre").val();
-    var IdCatalogoFichaInst = $("#IdCatalogoFichaInst_Padre").val();
-    var IdProfesion = $("#IdProfesion_Padre").val();
-    var CargoTrabajo = $("#CargoTrabajo_Padre").val();
-    var TelefonoTrabajo = $("#TelefonoTrabajo_Padre").val();
-    var AniosServicio = $("#AniosServicio_Padre").val();
-    var IngresoMensual = $("#IngresoMensual_Padre").val();
-    var DireccionTrabajo = $("#DireccionTrabajo_Padre").val();
-    var CodCatalogoCONADIS = $("#CodCatalogoCONADIS_Padre").val();
-    var PorcentajeDiscapacidad = $("#PorcentajeDiscapacidad_Padre").val();
-    var NumeroCarnetConadis = $("#NumeroCarnetConadis_Padre").val();
-    var Parentezco = $("#IdCatalogoPAREN_Padre").val();
-
-    $("#Naturaleza_Representante").val(Naturaleza);
-    $("#IdTipoDocumento_Representante").val(IdTipoDocumento);
-    $("#CedulaRuc_Representante").val(CedulaRuc);
-    $("#EstaFallecido_Representante").prop('checked', EstaFallecido);
-    $("#Nombres_Representante").val(Nombres);
-    $("#Apellidos_Representante").val(Apellidos);
-    $("#NombreCompleto_Representante").val(NombreCompleto);
-    $("#RazonSocial_Representante").val(RazonSocial);
-    $("#FechaNacimiento_Representante").val(FechaNacimiento);
-    $("#IdPais_Representante").val(IdPais);
-    CargarRegion_Representante();
-    $("#Cod_Region_Representante").val(Cod_Region);
-    CargarProvincia_Representante();
-    $("#IdProvincia_Representante").val(IdProvincia);
-    CargaCiudad_Representante();
-    $("#IdCiudad_Representante").val(IdCiudad);
-    CargarParroquia_Representante();
-    $("#IdParroquia_Representante").val(IdParroquia);
-    $("#Sexo_Representante").val(Sexo);
-    $("#IdEstadoCivil_Representante").val(IdEstadoCivil);
-    $("#IdGrupoEtnico_Representante").val(IdGrupoEtnico);
-    $("#Telefono_Representante").val(Telefono);
-    $("#Celular_Representante").val(Celular);
-    $("#Correo_Representante").val(Correo);
-    $("#AsisteCentroCristiano_Representante").prop('checked', VehiculoPropio);
-    $("#CasaPropia_Representante").prop('checked', CasaPropia);
-    $("#VehiculoPropio_Representante").prop('checked', VehiculoPropio);
-    mostrar_VehiculoRepresentante();
-    $("#Marca_Representante").val(Marca);
-    $("#Modelo_Representante").val(Modelo);
-    $("#IdReligion_Representante").val(IdReligion);
-    $("#Direccion_Representante").val(Direccion);
-    $("#Sector_Representante").val(Sector);
-    $("#EmpresaTrabajo_Representante").val(EmpresaTrabajo);
-    $("#IdCatalogoFichaInst_Representante").val(IdCatalogoFichaInst);
-    $("#IdProfesion_Representante").val(IdProfesion);
-    $("#CargoTrabajo_Representante").val(CargoTrabajo);
-    $("#TelefonoTrabajo_Representante").val(TelefonoTrabajo);
-    $("#AniosServicio_Representante").val(AniosServicio);
-    $("#IngresoMensual_Representante").val(IngresoMensual);
-    $("#DireccionTrabajo_Representante").val(DireccionTrabajo);
-    $("#CodCatalogoCONADIS_Representante").val(CodCatalogoCONADIS);
-    $("#PorcentajeDiscapacidad_Representante").val(PorcentajeDiscapacidad);
-    $("#NumeroCarnetConadis_Representante").val(NumeroCarnetConadis);
-    $("#IdCatalogoPAREN_Representante").val(Parentezco);
-
-    $("#Naturaleza_Representante").prop('readonly', true);
-    $("#IdTipoDocumento_Representante").prop('readonly', true);
-    $("#CedulaRuc_Representante").prop('readonly', true);
-    $("#EstaFallecido_Representante").prop('readonly', true);
-    $("#Nombres_Representante").prop('readonly', true);
-    $("#Apellidos_Representante").prop('readonly', true);
-    $("#NombreCompleto_Representante").prop('readonly', true);
-    $("#RazonSocial_Representante").prop('readonly', true);
-    $("#FechaNacimiento_Representante").prop('readonly', true);
-    $("#IdPais_Representante").prop('readonly', true);
-    $("#Cod_Region_Representante").prop('readonly', true);
-    $("#IdProvincia_Representante").prop('readonly', true);
-    $("#IdCiudad_Representante").prop('readonly', true);
-    $("#IdParroquia_Representante").prop('readonly', true);
-    $("#Sexo_Representante").prop('readonly', true);
-    $("#IdEstadoCivil_Representante").prop('readonly', true);
-    $("#IdGrupoEtnico_Representante").prop('readonly', true);
-    $("#Telefono_Representante").prop('readonly', true);
-    $("#Celular_Representante").prop('readonly', true);
-    $("#Correo_Representante").prop('readonly', true);
-    $("#IdReligion_Representante").prop('readonly', true);
-    $("#AsisteCentroCristiano_Representante").prop('readonly', true);
-    $("#CasaPropia_Representante").prop('readonly', true);
-    $("#VehiculoPropio_Representante").prop('readonly', true);
-    $("#Marca_Representante").prop('readonly', true);
-    $("#Modelo_Representante").prop('readonly', true);
-    $("#Direccion_Representante").prop('readonly', true);
-    $("#Sector_Representante").prop('readonly', true);
-    $("#EmpresaTrabajo_Representante").prop('readonly', true);
-    $("#IdCatalogoFichaInst_Representante").prop('readonly', true);
-    $("#IdProfesion_Representante").prop('readonly', true);
-    $("#CargoTrabajo_Representante").prop('readonly', true);
-    $("#TelefonoTrabajo_Representante").prop('readonly', true);
-    $("#AniosServicio_Representante").prop('readonly', true);
-    $("#IngresoMensual_Representante").prop('readonly', true);
-    $("#DireccionTrabajo_Representante").prop('readonly', true);
-    $("#CodCatalogoCONADIS_Representante").prop('readonly', true);
-    $("#PorcentajeDiscapacidad_Representante").prop('readonly', true);
-    $("#NumeroCarnetConadis_Representante").prop('readonly', true);
-    $("#IdCatalogoPAREN_Representante").prop('readonly', true);
-
-    Validar_cedula_ruc_Representante();
+    $("#DivDatosRepresentante").hide();
+    $("#Representante").val("P");
+    $("#RepresentanteValido").val("1");
 }
 
 function MadreRepresentante() {
-    var Naturaleza = $("#Naturaleza_Madre").val();
-    var IdTipoDocumento = $("#IdTipoDocumento_Madre").val();
-    var CedulaRuc = $("#CedulaRuc_Madre").val();
-    var EstaFallecido = $("#EstaFallecido_Madre").prop('checked');
-    var Nombres = $("#Nombres_Madre").val();
-    var Apellidos = $("#Apellidos_Madre").val();
-    var NombreCompleto = $("#NombreCompleto_Madre").val();
-    var RazonSocial = $("#RazonSocial_Madre").val();
-    var FechaNacimiento = $("#FechaNacimiento_Madre").val();
-    var IdPais = $("#IdPais_Madre").val();
-    CargarRegion_Representante();
-    var Cod_Region = $("#Cod_Region_Madre").val();
-    CargarProvincia_Representante();
-    var IdProvincia = $("#IdProvincia_Madre").val();
-    CargaCiudad_Representante();
-    var IdCiudad = $("#IdCiudad_Madre").val();
-    CargarParroquia_Representante();
-    var IdParroquia = $("#IdParroquia_Madre").val();
-    var Sexo = $("#Sexo_Madre").val();
-    var IdEstadoCivil = $("#IdEstadoCivil_Madre").val();
-    var IdGrupoEtnico = $("#IdGrupoEtnico_Madre").val();
-    var Telefono = $("#Telefono_Madre").val();
-    var Celular = $("#Celular_Madre").val();
-    var Correo = $("#Correo_Madre").val();
-    var IdReligion = $("#IdReligion_Madre").val();
-    var AsisteCentroCristiano = $("#AsisteCentroCristiano_Madre").prop('checked');
-    var CasaPropia = $("#CasaPropia_Madre").prop('checked');
-    var VehiculoPropio = $("#VehiculoPropio_Madre").prop('checked');
-    var Marca = $("#Marca_Madre").val();
-    var Modelo = $("#Modelo_Madre").val();
-    var Direccion = $("#Direccion_Madre").val();
-    var Sector = $("#Sector_Madre").val();
-    var EmpresaTrabajo = $("#EmpresaTrabajo_Madre").val();
-    var IdCatalogoFichaInst = $("#IdCatalogoFichaInst_Madre").val();
-    var IdProfesion = $("#IdProfesion_Madre").val();
-    var CargoTrabajo = $("#CargoTrabajo_Madre").val();
-    var TelefonoTrabajo = $("#TelefonoTrabajo_Madre").val();
-    var AniosServicio = $("#AniosServicio_Madre").val();
-    var IngresoMensual = $("#IngresoMensual_Madre").val();
-    var DireccionTrabajo = $("#DireccionTrabajo_Madre").val();
-    var CodCatalogoCONADIS = $("#CodCatalogoCONADIS_Madre").val();
-    var PorcentajeDiscapacidad = $("#PorcentajeDiscapacidad_Madre").val();
-    var NumeroCarnetConadis = $("#NumeroCarnetConadis_Madre").val();
-    var Parentezco = $("#IdCatalogoPAREN_Madre").val();
-
-    $("#Naturaleza_Representante").val(Naturaleza);
-    $("#IdTipoDocumento_Representante").val(IdTipoDocumento);
-    $("#CedulaRuc_Representante").val(CedulaRuc);
-    $("#EstaFallecido_Representante").prop('checked', EstaFallecido);
-    $("#Nombres_Representante").val(Nombres);
-    $("#Apellidos_Representante").val(Apellidos);
-    $("#NombreCompleto_Representante").val(NombreCompleto);
-    $("#RazonSocial_Representante").val(RazonSocial);
-    $("#FechaNacimiento_Representante").val(FechaNacimiento);
-    $("#IdPais_Representante").val(IdPais);
-    $("#Cod_Region_Representante").val(Cod_Region);
-    $("#IdProvincia_Representante").val(IdProvincia);
-    $("#IdCiudad_Representante").val(IdCiudad);
-    $("#IdParroquia_Representante").val(IdParroquia);
-    $("#Sexo_Representante").val(Sexo);
-    $("#IdEstadoCivil_Representante").val(IdEstadoCivil);
-    $("#IdGrupoEtnico_Representante").val(IdGrupoEtnico);
-    $("#Telefono_Representante").val(Telefono);
-    $("#Celular_Representante").val(Celular);
-    $("#Correo_Representante").val(Correo);
-    $("#AsisteCentroCristiano_Representante").prop('checked', AsisteCentroCristiano);
-    $("#CasaPropia_Representante").prop('checked', CasaPropia);
-    $("#VehiculoPropio_Representante").prop('checked', VehiculoPropio)
-    mostrar_VehiculoRepresentante();
-    $("#Marca_Representante").val(Marca);
-    $("#Modelo_Representante").val(Modelo);
-    $("#IdReligion_Representante").val(IdReligion);
-    $("#Direccion_Representante").val(Direccion);
-    $("#Sector_Representante").val(Sector);
-    $("#EmpresaTrabajo_Representante").val(EmpresaTrabajo);
-    $("#IdCatalogoFichaInst_Representante").val(IdCatalogoFichaInst);
-    $("#IdProfesion_Representante").val(IdProfesion);
-    $("#CargoTrabajo_Representante").val(CargoTrabajo);
-    $("#TelefonoTrabajo_Representante").val(TelefonoTrabajo);
-    $("#AniosServicio_Representante").val(AniosServicio);
-    $("#IngresoMensual_Representante").val(IngresoMensual);
-    $("#DireccionTrabajo_Representante").val(DireccionTrabajo);
-    $("#CodCatalogoCONADIS_Representante").val(CodCatalogoCONADIS);
-    $("#PorcentajeDiscapacidad_Representante").val(PorcentajeDiscapacidad);
-    $("#NumeroCarnetConadis_Representante").val(NumeroCarnetConadis);
-    $("#IdCatalogoPAREN_Representante").val(Parentezco);
-
-    $("#Naturaleza_Representante").prop('readonly', true);
-    $("#IdTipoDocumento_Representante").prop('readonly', true);
-    $("#CedulaRuc_Representante").prop('readonly', true);
-    $("#EstaFallecido_Representante").prop('readonly', true);
-    $("#Nombres_Representante").prop('readonly', true);
-    $("#Apellidos_Representante").prop('readonly', true);
-    $("#NombreCompleto_Representante").prop('readonly', true);
-    $("#RazonSocial_Representante").prop('readonly', true);
-    $("#FechaNacimiento_Representante").prop('readonly', true);
-    $("#IdPais_Representante").prop('readonly', true);
-    $("#Cod_Region_Representante").prop('readonly', true);
-    $("#IdProvincia_Representante").prop('readonly', true);
-    $("#IdCiudad_Representante").prop('readonly', true);
-    $("#IdParroquia_Representante").prop('readonly', true);
-    $("#Sexo_Representante").prop('readonly', true);
-    $("#IdEstadoCivil_Representante").prop('readonly', true);
-    $("#IdGrupoEtnico_Representante").prop('readonly', true);
-    $("#Telefono_Representante").prop('readonly', true);
-    $("#Celular_Representante").prop('readonly', true);
-    $("#Correo_Representante").prop('readonly', true);
-    $("#IdReligion_Representante").prop('readonly', true);
-    $("#AsisteCentroCristiano_Representante").prop('readonly', true);
-    $("#CasaPropia_Representante").prop('readonly', true);
-    $("#VehiculoPropio_Representante").prop('readonly', true);
-    $("#Marca_Representante").prop('readonly', true);
-    $("#Modelo_Representante").prop('readonly', true);
-    $("#Direccion_Representante").prop('readonly', true);
-    $("#Sector_Representante").prop('readonly', true);
-    $("#EmpresaTrabajo_Representante").prop('readonly', true);
-    $("#IdCatalogoFichaInst_Representante").prop('readonly', true);
-    $("#IdProfesion_Representante").prop('readonly', true);
-    $("#CargoTrabajo_Representante").prop('readonly', true);
-    $("#TelefonoTrabajo_Representante").prop('readonly', true);
-    $("#AniosServicio_Representante").prop('readonly', true);
-    $("#IngresoMensual_Representante").prop('readonly', true);
-    $("#DireccionTrabajo_Representante").prop('readonly', true);
-    $("#CodCatalogoCONADIS_Representante").prop('readonly', true);
-    $("#PorcentajeDiscapacidad_Representante").prop('readonly', true);
-    $("#NumeroCarnetConadis_Representante").prop('readonly', true);
-    $("#IdCatalogoPAREN_Representante").prop('readonly', true);
-
-    Validar_cedula_ruc_Representante();
+    $("#DivDatosRepresentante").hide();
+    $("#Representante").val("M");
+    $("#RepresentanteValido").val("1");
 }
 
 function OtroRepresentante() {
-    $("#Naturaleza_Representante").val("NATU");
-    $("#IdTipoDocumento_Representante").val("CED");
-    $("#CedulaRuc_Representante").val("");
-    $("#EstaFallecido_Representante").prop('checked', false);
-    $("#Nombres_Representante").val("");
-    $("#Apellidos_Representante").val("");
-    $("#NombreCompleto_Representante").val("");
-    $("#RazonSocial_Representante").val("");
-    $("#FechaNacimiento_Representante").val("");
-    $("#IdPais_Representante").val("1");
-    CargarRegion_Representante();
-    $("#Cod_Region_Representante").val("00001");
-    CargarProvincia_Representante();
-    $("#IdProvincia_Representante").val("");
-    CargaCiudad_Representante();
-    $("#IdCiudad_Representante").val("");
-    CargarParroquia_Representante();
-    $("#IdParroquia_Representante").val("");
-    $("#Sexo_Representante").val("");
-    $("#IdEstadoCivil_Representante").val("");
-    $("#IdGrupoEtnico_Representante").val("");
-    $("#Telefono_Representante").val("");
-    $("#Celular_Representante").val("");
-    $("#Correo_Representante").val("");
-    $("#AsisteCentroCristiano_Representante").prop('checked', false);
-    $("#CasaPropia_Representante").prop('checked', false);
-    $("#VehiculoPropio_Representante").prop('checked', false);
-    mostrar_VehiculoRepresentante();
-    $("#Marca_Representante").val("");
-    $("#Modelo_Representante").val("");
-    $("#IdReligion_Representante").val("");
-    $("#Direccion_Representante").val("");
-    $("#Sector_Representante").val("");
-    $("#EmpresaTrabajo_Representante").val("");
-    $("#IdCatalogoFichaInst_Representante").val("");
-    $("#IdProfesion_Representante").val("");
-    $("#CargoTrabajo_Representante").val("");
-    $("#TelefonoTrabajo_Representante").val("");
-    $("#AniosServicio_Representante").val("");
-    $("#IngresoMensual_Representante").val("");
-    $("#DireccionTrabajo_Representante").val("");
-    $("#CodCatalogoCONADIS_Representante").val("");
-    $("#PorcentajeDiscapacidad_Representante").val("");
-    $("#NumeroCarnetConadis_Representante").val("");
-    /*
-    $("#Naturaleza_Representante").removeAttr('readonly');
-    $("#IdTipoDocumento_Representante").removeAttr('readonly');
-    $("#CedulaRuc_Representante").removeAttr('readonly');
-    $("#EstaFallecido_Representante").removeAttr('readonly');
-    $("#Nombres_Representante").removeAttr('readonly');
-    $("#Apellidos_Representante").removeAttr('readonly');
-    $("#NombreCompleto_Representante").removeAttr('readonly');
-    $("#RazonSocial_Representante").removeAttr('readonly');
-    $("#FechaNacimiento_Representante").removeAttr('readonly');
-    $("#IdPais_Representante").removeAttr('readonly');
-    $("#Cod_Region_Representante").removeAttr('readonly');
-    $("#IdProvincia_Representante").removeAttr('readonly');
-    $("#IdCiudad_Representante").removeAttr('readonly');
-    $("#IdParroquia_Representante").removeAttr('readonly');
-    $("#Sexo_Representante").removeAttr('readonly');
-    $("#IdEstadoCivil_Representante").removeAttr('readonly');
-    $("#IdGrupoEtnico_Representante").removeAttr('readonly');
-    $("#Telefono_Representante").removeAttr('readonly');
-    $("#Celular_Representante").removeAttr('readonly');
-    $("#Correo_Representante").removeAttr('readonly');
-    $("#IdReligion_Representante").removeAttr('readonly');
-    $("#AsisteCentroCristiano_Representante").removeAttr('readonly');
-    $("#CasaPropia_Representante").removeAttr('readonly');
-    $("#VehiculoPropio_Representante").removeAttr('readonly');
-    $("#Marca_Representante").removeAttr('readonly');
-    $("#Modelo_Representante").removeAttr('readonly');
-    $("#Direccion_Representante").removeAttr('readonly');
-    $("#Sector_Representante").removeAttr('readonly');
-    $("#EmpresaTrabajo_Representante").removeAttr('readonly');
-    $("#IdCatalogoFichaInst_Representante").removeAttr('readonly');
-    $("#IdProfesion_Representante").removeAttr('readonly');
-    $("#CargoTrabajo_Representante").removeAttr('readonly');
-    $("#TelefonoTrabajo_Representante").removeAttr('readonly');
-    $("#AniosServicio_Representante").removeAttr('readonly');
-    $("#IngresoMensual_Representante").removeAttr('readonly');
-    $("#DireccionTrabajo_Representante").removeAttr('readonly');
-    $("#CodCatalogoCONADIS_Representante").removeAttr('readonly');
-    $("#PorcentajeDiscapacidad_Representante").removeAttr('readonly');
-    $("#NumeroCarnetConadis_Representante").removeAttr('readonly');
-    $("#IdCatalogoPAREN_Representante").prop('readonly');
-    */
-
-    $("#Naturaleza_Representante").prop('readonly', false);
-    $("#IdTipoDocumento_Representante").prop('readonly', false);
-    $("#CedulaRuc_Representante").prop('readonly', false);
-    $("#EstaFallecido_Representante").prop('readonly', false);
-    $("#Nombres_Representante").prop('readonly', false);
-    $("#Apellidos_Representante").prop('readonly', false);
-    $("#NombreCompleto_Representante").prop('readonly', false);
-    $("#RazonSocial_Representante").prop('readonly', false);
-    $("#FechaNacimiento_Representante").prop('readonly', false);
-    $("#IdPais_Representante").prop('readonly', false);
-    $("#Cod_Region_Representante").prop('readonly', false);
-    $("#IdProvincia_Representante").prop('readonly', false);
-    $("#IdCiudad_Representante").prop('readonly', false);
-    $("#IdParroquia_Representante").prop('readonly', false);
-    $("#Sexo_Representante").prop('readonly', false);
-    $("#IdEstadoCivil_Representante").prop('readonly', false);
-    $("#IdGrupoEtnico_Representante").prop('readonly', false);
-    $("#Telefono_Representante").prop('readonly', false);
-    $("#Celular_Representante").prop('readonly', false);
-    $("#Correo_Representante").prop('readonly', false);
-    $("#IdReligion_Representante").prop('readonly', false);
-    $("#AsisteCentroCristiano_Representante").prop('readonly', false);
-    $("#CasaPropia_Representante").prop('readonly', false);
-    $("#VehiculoPropio_Representante").prop('readonly', false);
-    $("#Marca_Representante").prop('readonly', false);
-    $("#Modelo_Representante").prop('readonly', false);
-    $("#Direccion_Representante").prop('readonly', false);
-    $("#Sector_Representante").prop('readonly', false);
-    $("#EmpresaTrabajo_Representante").prop('readonly', false);
-    $("#IdCatalogoFichaInst_Representante").prop('readonly', false);
-    $("#IdProfesion_Representante").prop('readonly', false);
-    $("#CargoTrabajo_Representante").prop('readonly', false);
-    $("#TelefonoTrabajo_Representante").prop('readonly', false);
-    $("#AniosServicio_Representante").prop('readonly', false);
-    $("#IngresoMensual_Representante").prop('readonly', false);
-    $("#DireccionTrabajo_Representante").prop('readonly', false);
-    $("#CodCatalogoCONADIS_Representante").prop('readonly', false);
-    $("#PorcentajeDiscapacidad_Representante").prop('readonly', false);
-    $("#NumeroCarnetConadis_Representante").prop('readonly', false);
-    $("#IdCatalogoPAREN_Representante").prop('readonly', false);
-    $("#RepresentanteValido").val("0");
-    //$("#DivDatosRepresentante").show();
+    $("#DivDatosRepresentante").show();
+    $("#Representante").val("O");
 }
 
 function mostrar_otro_motivo() {
@@ -1374,59 +996,6 @@ function saldo() {
     $("#Saldo").val(Total);
 };
 
-function actualizar_nombre_completo_aspirante() {
-    var apellido = $("#Apellidos_Aspirante").val();
-    var nombre = $("#Nombres_Aspirante").val();
-
-    var nombre_completo = apellido + ' ' + nombre;
-    $("#NombreCompleto_Aspirante").val(nombre_completo)
-}
-
-function actualizar_nombre_completo_padre() {
-    var tipo_doc = $("#IdTipoDocumento_Padre").val();
-    if (tipo_doc == "RUC") {
-        var razon_social = $("#RazonSocial_Padre").val();
-        $("#NombreCompleto_Padre").val(razon_social)
-    }
-    else {
-        var apellido = $("#Apellidos_Padre").val();
-        var nombre = $("#Nombres_Padre").val();
-
-        var nombre_completo = apellido + ' ' + nombre;
-        $("#NombreCompleto_Padre").val(nombre_completo)
-    }
-}
-
-function actualizar_nombre_completo_madre() {
-    var tipo_doc = $("#IdTipoDocumento_Madre").val();
-    if (tipo_doc == "RUC") {
-        var razon_social = $("#RazonSocial_Madre").val();
-        $("#NombreCompleto_Madre").val(razon_social)
-    }
-    else {
-        var apellido = $("#Apellidos_Madre").val();
-        var nombre = $("#Nombres_Madre").val();
-
-        var nombre_completo = apellido + ' ' + nombre;
-        $("#NombreCompleto_Madre").val(nombre_completo)
-    }
-}
-
-function actualizar_nombre_completo_representante() {
-    var tipo_doc = $("#IdTipoDocumento_Representante").val();
-    if (tipo_doc == "RUC") {
-        var razon_social = $("#RazonSocial_Representante").val();
-        $("#NombreCompleto_Representante").val(razon_social)
-    }
-    else {
-        var apellido = $("#Apellidos_Representante").val();
-        var nombre = $("#Nombres_Representante").val();
-
-        var nombre_completo = apellido + ' ' + nombre;
-        $("#NombreCompleto_Representante").val(nombre_completo)
-    }
-}
-
 function get_info_x_num_cedula_aspirante() {
     var cedula = $("#CedulaRuc_Aspirante").val();
     var tipo_doc = $("#IdTipoDocumento_Aspirante").val();
@@ -1472,14 +1041,14 @@ function get_info_x_num_cedula_aspirante() {
             if (data == "") {
                 return;
             }
-            if (data.IdAlumno != 0) {
-                //alert("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
-                $("#MensajeError").html("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
-                $("#DivError").show();
-                $("#AspiranteValido").val("0");
-                //window.location.href = '/Admision/Index'
-            }
-            else if (data.IdAdmision != 0) {
+            //if (data.IdAlumno != 0) {
+            //    //alert("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
+            //    $("#MensajeError").html("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
+            //    $("#DivError").show();
+            //    $("#AspiranteValido").val("0");
+            //    //window.location.href = '/Admision/Index'
+            //}
+            if (data.IdAdmision != 0) {
                 $("#MensajeError").html("El aspirante ya fue registrado");
                 $("#DivError").show();
                 $("#AspiranteValido").val("0");
@@ -1487,19 +1056,20 @@ function get_info_x_num_cedula_aspirante() {
                 //window.location.href = '/Admision/Index'
             }
             else {
-                if (data.IdPersona != 0 && data.IdAlumno == 0) {
+                if (data.IdPersona != 0) {
                     $("#Naturaleza_Aspirante").val(data.pe_Naturaleza);
                     $("#IdTipoDocumento_Aspirante").val(data.IdTipoDocumento);
                     $("#Nombres_Aspirante").val(data.pe_nombre);
                     $("#Apellidos_Aspirante").val(data.pe_apellido);
-                    $("#NombreCompleto_Aspirante").val(data.pe_nombreCompleto);
                     $("#Sexo_Aspirante").val(data.pe_sexo);
                     //pe_fechaNacimiento.SetDate(new Date(data.anio, data.mes, data.dia));
                     $("#Direccion_Aspirante").val(data.Direccion);
                     $("#Telefono_Aspirante").val(data.pe_telfono_Contacto);
                     $("#Celular_Aspirante").val(data.Celular);
                     $("#Correo_Aspirante").val(data.Correo);
-                    $("#FechaNacimiento_Aspirante").val(new Date(data.anio, data.mes, data.dia));
+                    var FechaNacimiento = new Date(data.anio, data.mes, data.dia);
+                    var Fecha = FechaNacimiento.getDate() + '/' + (FechaNacimiento.getMonth() + 1) + '/' + FechaNacimiento.getFullYear();
+                    $("#FechaNacimiento_Aspirante").val(Fecha);
                     $("#CodCatalogoSangre_Aspirante").val(data.CodCatalogoSangre);
                     $("#CodCatalogoCONADIS_Aspirante").val(data.CodCatalogoCONADIS);
                     $("#PorcentajeDiscapacidad_Aspirante").val(data.PorcentajeDiscapacidad);
@@ -1579,7 +1149,6 @@ function get_info_x_num_cedula_padre() {
                 $("#IdTipoDocumento_Padre").val(data.IdTipoDocumento);
                 $("#Nombres_Padre").val(data.pe_nombre);
                 $("#Apellidos_Padre").val(data.pe_apellido);
-                $("#NombreCompleto_Padre").val(data.pe_nombreCompleto);
                 $("#RazonSocial_Padre").val(data.pe_razonSocial); 
                 $("#Sexo_Padre").val(data.pe_sexo);
                 //pe_fechaNacimiento.SetDate(new Date(data.anio, data.mes, data.dia));
@@ -1588,7 +1157,9 @@ function get_info_x_num_cedula_padre() {
                 $("#Celular_Padre").val(data.pe_celular);
                 $("#Correo_Padre").val(data.pe_correo);
                 $("#IdEstadoCivil_Padre").val(data.IdEstadoCivil);
-                $("#FechaNacimiento_Padre").val(new Date(data.anio, data.mes, data.dia));
+                var FechaNacimiento = new Date(data.anio, data.mes, data.dia);
+                var Fecha = FechaNacimiento.getDate() + '/' + (FechaNacimiento.getMonth() + 1) + '/' + FechaNacimiento.getFullYear();
+                $("#FechaNacimiento_Padre").val(Fecha);
                 $("#CodCatalogoCONADIS_Padre").val(data.CodCatalogoCONADIS);
                 $("#PorcentajeDiscapacidad_Padre").val(data.PorcentajeDiscapacidad);
                 $("#NumeroCarnetConadis_Padre").val(data.NumeroCarnetConadis);
@@ -1649,7 +1220,6 @@ function get_info_x_num_cedula_madre() {
                 $("#IdTipoDocumento_Madre").val(data.IdTipoDocumento);
                 $("#Nombres_Madre").val(data.pe_nombre);
                 $("#Apellidos_Madre").val(data.pe_apellido);
-                $("#NombreCompleto_Madre").val(data.pe_nombreCompleto);
                 $("#RazonSocial_Madre").val(data.pe_razonSocial);
                 $("#Sexo_Madre").val(data.pe_sexo);
                 //pe_fechaNacimiento.SetDate(new Date(data.anio, data.mes, data.dia));
@@ -1719,7 +1289,6 @@ function get_info_x_num_cedula_representante() {
                 $("#IdTipoDocumento_Representante").val(data.IdTipoDocumento);
                 $("#Nombres_Representante").val(data.pe_nombre);
                 $("#Apellidos_Representante").val(data.pe_apellido);
-                $("#NombreCompleto_Representante").val(data.pe_nombreCompleto);
                 $("#RazonSocial_Representante").val(data.pe_razonSocial);
                 $("#Sexo_Representante").val(data.pe_sexo);
                 //pe_fechaNacimiento.SetDate(new Date(data.anio, data.mes, data.dia));
@@ -1749,7 +1318,6 @@ function vaciar_campos_aspirante() {
     $("#IdTipoDocumento_Aspirante").val("CED");
     $("#Nombres_Aspirante").val("");
     $("#Apellidos_Aspirante").val("");
-    $("#NombreCompleto_Aspirante").val("");
     $("#Sexo_Aspirante").val("");
     $("#Direccion_Aspirante").val("");
     $("#Telefono_Aspirante").val("");
@@ -1781,7 +1349,6 @@ function vaciar_campos_padre() {
     $("#EstaFallecido_Padre").prop('checked', false);
     $("#Nombres_Padre").val("");
     $("#Apellidos_Padre").val("");
-    $("#NombreCompleto_Padre").val("");
     $("#RazonSocial_Padre").val("");
     $("#FechaNacimiento_Padre").val("");
     $("#IdPais_Padre").val("1");
@@ -1823,7 +1390,6 @@ function vaciar_campos_madre() {
     $("#EstaFallecido_Madre").prop('checked', false);
     $("#Nombres_Madre").val("");
     $("#Apellidos_Madre").val("");
-    $("#NombreCompleto_Madre").val("");
     $("#RazonSocial_Madre").val("");
     $("#FechaNacimiento_Madre").val("");
     $("#IdPais_Madre").val("1");
@@ -1865,7 +1431,6 @@ function vaciar_campos_representante() {
     $("#EstaFallecido_Representante").prop('checked', false);
     $("#Nombres_Representante").val("");
     $("#Apellidos_Representante").val("");
-    $("#NombreCompleto_Representante").val("");
     $("#RazonSocial_Representante").val("");
     $("#FechaNacimiento_Representante").val("");
     $("#IdPais_Representante").val("1");

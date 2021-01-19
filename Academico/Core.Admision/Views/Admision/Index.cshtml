@@ -101,6 +101,10 @@
                         <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnSocioEconomico">5</button>
                         <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos socioeconómicos</div>
                     </div>
+                    <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
+                        <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnArchivos">6</button>
+                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Archivos</div>
+                    </div>
                     <div class="wizard__line hidden lg:block w-2/3 bg-gray-200 dark:bg-dark-1 absolute mt-5"></div>
                 </div>
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosAspirante">
@@ -113,33 +117,33 @@
                     @Html.HiddenFor(q => q.MadreValido, new { @id = "MadreValido" })
                     @Html.HiddenFor(q => q.RepresentanteValido, new { @id = "RepresentanteValido" })
                     @Html.HiddenFor(q => q.IdCatalogoESTADM, new { @id = "IdCatalogoESTADM" })
-                    
+                    @Html.HiddenFor(q => q.Representante, new { @id = "Representante" })
                     <div class="font-medium text-base">Datos de la admisión</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Año lectivo*</div>
                             @Html.DropDownListFor(q => q.IdAnio, new SelectList(ViewBag.lst_anio, "IdAnio", "Descripcion"), new { @class = "input w-full border flex-1", @id = "IdAnio" })
-                            @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Sede*</div>
                             @Html.DropDownListFor(q => q.IdSede, new SelectList(ViewBag.lst_sede, "IdSede", "NomSede"), new { @class = "input w-full border flex-1", @id = "IdSede" })
-                            @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Jornada*</div>
                             @Html.DropDownListFor(q => q.IdJornada, new SelectList(ViewBag.lst_jornada, "IdJornada", "NomJornada"), new { @class = "input w-full border flex-1", @id = "IdJornada" })
-                            @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Nivel*</div>
                             @Html.DropDownListFor(q => q.IdNivel, new SelectList(ViewBag.lst_jornada, "IdNivel", "NomNivel"), new { @class = "input w-full border flex-1", @id = "IdNivel" })
-                            @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Curso*</div>
                             @Html.DropDownListFor(q => q.IdCurso, new SelectList(ViewBag.lst_jornada, "IdCurso", "NomCurso"), new { @class = "input w-full border flex-1", @id = "IdCurso" })
-                            @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
                             <div class="mb-2"></div>
@@ -150,72 +154,66 @@
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Naturaleza*</div>
                             @Html.DropDownListFor(q => q.Naturaleza_Aspirante, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Naturaleza_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.Naturaleza_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.Naturaleza_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tipo de documento*</div>
                             @Html.DropDownListFor(q => q.IdTipoDocumento_Aspirante, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdTipoDocumento_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.IdTipoDocumento_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdTipoDocumento_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Cédula de identidad*</div>
-                            @*<input type="text" name="CedulaRuc_Aspirante" id="CedulaRuc_Aspirante" class="input w-full border flex-1">*@
                             @Html.TextBoxFor(q=> q.CedulaRuc_Aspirante, new { @class = "input w-full border flex-1", @id= "CedulaRuc_Aspirante" })
                             @Html.ValidationMessageFor(q => q.CedulaRuc_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" }) 
                             <label id="error_documento_aspirante" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Nombres*</div>
-                            <input type="text" name="Nombres_Aspirante" id="Nombres_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Nombres_Aspirante, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Nombres_Aspirante, new { @class = "input w-full border flex-1", @id = "Nombres_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.Nombres_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Apellidos*</div>
-                            <input type="text" name="Apellidos_Aspirante" id="Apellidos_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Apellidos_Aspirante, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-12">
-                            <div class="mb-2">Nombres completos*</div>
-                            <input type="text" name="NombreCompleto_Aspirante" id="NombreCompleto_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.NombreCompleto_Aspirante, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Apellidos_Aspirante, new { @class = "input w-full border flex-1", @id = "Apellidos_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.Apellidos_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Lugar de nacimiento*</div>
-                            <input type="text" name="LugarNacimiento_Aspirante" id="LugarNacimiento_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.LugarNacimiento_Aspirante, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.LugarNacimiento_Aspirante, new { @class = "input w-full border flex-1", @id = "LugarNacimiento_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.LugarNacimiento_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Fecha de nacimiento*</div>
                             <div class="relative mx-auto">
                                 <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> <i data-feather="calendar" class="w-4 h-4"></i> </div>
                                 <input type="text" name="FechaNacimiento_Aspirante" id="FechaNacimiento_Aspirante" class="datepicker input pl-12 border" data-single-mode="true">
-                                @Html.ValidationMessageFor(q => q.FechaNacimiento_Aspirante, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.FechaNacimiento_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Pais</div>
                             @Html.DropDownListFor(q => q.IdPais_Aspirante, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "input w-full border flex-1", @id = "IdPais_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.IdPais_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdPais_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Región</div>
                             @Html.DropDownListFor(q => q.Cod_Region_Aspirante, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "input w-full border flex-1", @id = "Cod_Region_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.Cod_Region_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.Cod_Region_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Provincia</div>
                             @Html.DropDownListFor(q => q.IdProvincia_Aspirante, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "input w-full border flex-1", @id = "IdProvincia_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.IdProvincia_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdProvincia_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Ciudad</div>
                             @Html.DropDownListFor(q => q.IdCiudad_Aspirante, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.IdCiudad_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdCiudad_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Parroquia</div>
                             @Html.DropDownListFor(q => q.IdParroquia_Aspirante, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.IdParroquia_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdParroquia_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2"></div>
@@ -224,40 +222,40 @@
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Sexo*</div>
                             @Html.DropDownListFor(q => q.Sexo_Aspirante, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Sexo_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.Sexo_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.Sexo_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tipo de sangre</div>
                             @Html.DropDownListFor(q => q.CodCatalogoSangre_Aspirante, new SelectList(ViewBag.lst_tipo_sangre, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "CodCatalogoSangre_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.CodCatalogoSangre_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.CodCatalogoSangre_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Grupo Etnico*</div>
                             @Html.DropDownListFor(q => q.IdGrupoEtnico_Aspirante, new SelectList(ViewBag.lst_grupoetnico, "IdGrupoEtnico", "NomGrupoEtnico"), new { @class = "input w-full border flex-1", @id = "IdGrupoEtnico_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2"></div>
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Teléfono</div>
-                            <input type="text" name="Telefono_Aspirante" id="Telefono_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Telefono_Aspirante, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Telefono_Aspirante, new { @class = "input w-full border flex-1", @id = "Telefono_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.Telefono_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Celular</div>
-                            <input type="text" name="Celular_Aspirante" id="Celular_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Celular_Aspirante, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Celular_Aspirante, new { @class = "input w-full border flex-1", @id = "Celular_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.Celular_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Correo</div>
-                            <input type="email" name="Correo_Aspirante" id="Correo_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Correo_Aspirante, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Correo_Aspirante, new { @class = "input w-full border flex-1", @id = "Correo_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.Correo_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Religión*</div>
                             @Html.DropDownListFor(q => q.IdReligion_Aspirante, new SelectList(ViewBag.lst_religion, "IdReligion", "NomReligion"), new { @class = "input w-full border flex-1", @id = "IdReligion_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.IdReligion_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdReligion_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Asiste a CentroCristiano</div>
@@ -265,13 +263,13 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Dirección*</div>
-                            <input type="text" name="Direccion_Aspirante" id="Direccion_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Direccion_Aspirante, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Direccion_Aspirante, new { @class = "input w-full border flex-1", @id = "Direccion_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.Direccion_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Sector*</div>
-                            <input type="text" name="Sector_Aspirante" id="Sector_Aspirante" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Sector_Aspirante, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Sector_Aspirante, new { @class = "input w-full border flex-1", @id = "Sector_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.Sector_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
                             <div class="mb-2"></div>
@@ -282,15 +280,15 @@
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tipo de discapacidad</div>
                             @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Aspirante, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "CodCatalogoCONADIS_Aspirante" })
-                            @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Aspirante, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Porcentaje de discapacidad</div>
-                            <input type="text" name="PorcentajeDiscapacidad_Aspirante" id="PorcentajeDiscapacidad_Aspirante" class="input w-full border flex-1">
+                            @Html.TextBoxFor(q => q.PorcentajeDiscapacidad_Aspirante, new { @class = "input w-full border flex-1", @id = "PorcentajeDiscapacidad_Aspirante" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Numero de carnet</div>
-                            <input type="text" name="NumeroCarnetConadis_Aspirante" id="NumeroCarnetConadis_Aspirante" class="input w-full border flex-1">
+                            @Html.TextBoxFor(q => q.NumeroCarnetConadis_Aspirante, new { @class = "input w-full border flex-1", @id = "NumeroCarnetConadis_Aspirante" })
                         </div>
                     </div>
                     <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
@@ -303,76 +301,71 @@
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Naturaleza*</div>
                             @Html.DropDownListFor(q => q.Naturaleza_Padre, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Naturaleza_Padre" })
-                            @Html.ValidationMessageFor(q => q.Naturaleza_Padre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.Naturaleza_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tipo de documento*</div>
                             @Html.DropDownListFor(q => q.IdTipoDocumento_Padre, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdTipoDocumento_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdTipoDocumento_Padre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdTipoDocumento_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Cédula de identidad*</div>
-                            <input type="text" name="CedulaRuc_Padre" id="CedulaRuc_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.CedulaRuc_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.CedulaRuc_Padre, new { @class = "input w-full border flex-1", @id = "CedulaRuc_Padre" })
+                            @Html.ValidationMessageFor(q => q.CedulaRuc_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             <label id="error_documento_padre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Está fallecido</div>
                             <input data-target="#input-group-datepicker" name="EstaFallecido_Padre" id="EstaFallecido_Padre" class="show-code input input--switch border" type="checkbox">
-                            @Html.ValidationMessageFor(q => q.EstaFallecido_Padre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.EstaFallecido_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Nombres</div>
-                            <input type="text" name="Nombres_Padre" id="Nombres_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Nombres_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Nombres_Padre, new { @class = "input w-full border flex-1", @id = "Nombres_Padre" })
+                            @Html.ValidationMessageFor(q => q.Nombres_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Apellidos</div>
-                            <input type="text" name="Apellidos_Padre" id="Apellidos_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Apellidos_Padre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-12">
-                            <div class="mb-2">Nombres completos</div>
-                            <input type="text" name="NombreCompleto_Padre" id="NombreCompleto_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.NombreCompleto_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Apellidos_Padre, new { @class = "input w-full border flex-1", @id = "Apellidos_Padre" })
+                            @Html.ValidationMessageFor(q => q.Apellidos_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                             <div class="intro-y col-span-12 sm:col-span-12">
-                                <div class="mb-2">Razon Social</div>
-                                <input type="text" name="RazonSocial_Padre" id="RazonSocial_Padre" class="input w-full border flex-1" placeholder="Solo ingresar este campo si el tipo de documento es RUC">
-                                @Html.ValidationMessageFor(q => q.RazonSocial_Padre, "", new { @class = "text-danger" })
+                                <div class="mb-2">Razón Social</div>
+                                @Html.TextBoxFor(q => q.RazonSocial_Padre, new { @class = "input w-full border flex-1", @id = "RazonSocial_Padre", @placeholder = "Solo ingresar razón social si es tipo de documento es RUC" })
+                                @Html.ValidationMessageFor(q => q.RazonSocial_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Fecha de nacimiento*</div>
                                 <div class="relative mx-auto">
                                     <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> <i data-feather="calendar" class="w-4 h-4"></i> </div>
                                     <input type="text" name="FechaNacimiento_Padre" id="FechaNacimiento_Padre" class="datepicker input pl-12 border" data-single-mode="true">
-                                    @Html.ValidationMessageFor(q => q.FechaNacimiento_Padre, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessageFor(q => q.FechaNacimiento_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                                 </div>
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Pais</div>
                                 @Html.DropDownListFor(q => q.IdPais_Padre, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "input w-full border flex-1", @id = "IdPais_Padre" })
-                                @Html.ValidationMessageFor(q => q.IdPais_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdPais_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Región</div>
                                 @Html.DropDownListFor(q => q.Cod_Region_Padre, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "input w-full border flex-1", @id = "Cod_Region_Padre" })
-                                @Html.ValidationMessageFor(q => q.Cod_Region_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.Cod_Region_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Provincia</div>
                                 @Html.DropDownListFor(q => q.IdProvincia_Padre, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "input w-full border flex-1", @id = "IdProvincia_Padre" })
-                                @Html.ValidationMessageFor(q => q.IdProvincia_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdProvincia_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Ciudad</div>
                                 @Html.DropDownListFor(q => q.IdCiudad_Padre, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Padre" })
-                                @Html.ValidationMessageFor(q => q.IdCiudad_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdCiudad_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Parroquia</div>
                                 @Html.DropDownListFor(q => q.IdParroquia_Padre, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Padre" })
-                                @Html.ValidationMessageFor(q => q.IdParroquia_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdParroquia_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <div class="mb-2"></div>
@@ -380,17 +373,17 @@
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Sexo*</div>
                                 @Html.DropDownListFor(q => q.Sexo_Padre, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Sexo_Padre" })
-                                @Html.ValidationMessageFor(q => q.Sexo_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.Sexo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Estado civil</div>
                                 @Html.DropDownListFor(q => q.IdEstadoCivil_Padre, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdEstadoCivil_Padre" })
-                                @Html.ValidationMessageFor(q => q.IdEstadoCivil_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdEstadoCivil_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Grupo Etnico*</div>
                                 @Html.DropDownListFor(q => q.IdGrupoEtnico_Padre, new SelectList(ViewBag.lst_grupoetnico, "IdGrupoEtnico", "NomGrupoEtnico"), new { @class = "input w-full border flex-1", @id = "IdGrupoEtnico_Padre" })
-                                @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2"></div>
@@ -398,23 +391,23 @@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Teléfono</div>
-                                <input type="text" name="Telefono_Padre" id="Telefono_Padre" class="input w-full border flex-1">
-                                @Html.ValidationMessageFor(q => q.Telefono_Padre, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Telefono_Padre, new { @class = "input w-full border flex-1", @id = "Telefono_Padre" })
+                                @Html.ValidationMessageFor(q => q.Telefono_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Celular</div>
-                                <input type="text" name="Celular_Padre" id="Celular_Padre" class="input w-full border flex-1">
-                                @Html.ValidationMessageFor(q => q.Celular_Padre, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Celular_Padre, new { @class = "input w-full border flex-1", @id = "Celular_Padre" })
+                                @Html.ValidationMessageFor(q => q.Celular_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <div class="mb-2">Correo</div>
-                                <input type="email" name="Correo_Padre" id="Correo_Padre" class="input w-full border flex-1">
-                                @Html.ValidationMessageFor(q => q.Correo_Padre, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Correo_Padre, new { @class = "input w-full border flex-1", @id = "Correo_Padre" })
+                                @Html.ValidationMessageFor(q => q.Correo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Religión*</div>
                                 @Html.DropDownListFor(q => q.IdReligion_Padre, new SelectList(ViewBag.lst_religion, "IdReligion", "NomReligion"), new { @class = "input w-full border flex-1", @id = "IdReligion_Padre" })
-                                @Html.ValidationMessageFor(q => q.IdReligion_Padre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.IdReligion_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Asiste a Centro Cristiano</div>
@@ -430,66 +423,66 @@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoPadre" hidden>
                                 <div class="mb-2">Marca</div>
-                                <input type="text" id="Marca_Padre" name="Marca_Padre" class="input w-full border flex-1">
-                                @Html.ValidationMessageFor(q => q.Marca_Padre, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Marca_Padre, new { @class = "input w-full border flex-1", @id = "Marca_Padre" })
+                                @Html.ValidationMessageFor(q => q.Marca_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6" id="ModeloVehiculoPadre" hidden>
                                 <div class="mb-2">Modelo</div>
-                                <input type="text" id="Modelo_Padre" name="Modelo_Padre" class="input w-full border flex-1">
-                                @Html.ValidationMessageFor(q => q.Modelo_Padre, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Modelo_Padre, new { @class = "input w-full border flex-1", @id = "Modelo_Padre" })
+                                @Html.ValidationMessageFor(q => q.Modelo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <div class="mb-2">Dirección*</div>
-                                <input type="text" name="Direccion_Padre" id="Direccion_Padre" class="input w-full border flex-1">
-                                @Html.ValidationMessageFor(q => q.Direccion_Padre, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Direccion_Padre, new { @class = "input w-full border flex-1", @id = "Direccion_Padre" })
+                                @Html.ValidationMessageFor(q => q.Direccion_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <div class="mb-2">Sector</div>
-                                <input type="text" name="Sector_Padre" id="Sector_Padre" class="input w-full border flex-1">
-                                @Html.ValidationMessageFor(q => q.Sector_Padre, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.Sector_Padre, new { @class = "input w-full border flex-1", @id = "Sector_Padre" })
+                                @Html.ValidationMessageFor(q => q.Sector_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                         </div>
                     <div class="font-medium text-base">Datos de trabajo</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Empresa donde trabaja</div>
-                            <input type="text" name="EmpresaTrabajo_Padre" id="EmpresaTrabajo_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.EmpresaTrabajo_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.EmpresaTrabajo_Padre, new { @class = "input w-full border flex-1", @id = "EmpresaTrabajo_Padre" })
+                            @Html.ValidationMessageFor(q => q.EmpresaTrabajo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Instrucción</div>
                             @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Padre, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaInst_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Padre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Profesión</div>
                             @Html.DropDownListFor(q => q.IdProfesion_Padre, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "input w-full border flex-1", @id = "IdProfesion_Padre" })
-                            @Html.ValidationMessageFor(q => q.IdProfesion_Padre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdProfesion_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Cargo</div>
-                            <input type="text" name="CargoTrabajo_Padre" id="CargoTrabajo_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.CargoTrabajo_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.CargoTrabajo_Padre, new { @class = "input w-full border flex-1", @id = "CargoTrabajo_Padre" })
+                            @Html.ValidationMessageFor(q => q.CargoTrabajo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Teléfono</div>
-                            <input type="text" name="TelefonoTrabajo_Padre" id="TelefonoTrabajo_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.TelefonoTrabajo_Padre, new { @class = "input w-full border flex-1", @id = "TelefonoTrabajo_Padre" })
+                            @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Años de servicio</div>
-                            <input type="text" name="AniosServicio_Padre" id="AniosServicio_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.AniosServicio_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.AniosServicio_Padre, new { @class = "input w-full border flex-1", @id = "AniosServicio_Padre" })
+                            @Html.ValidationMessageFor(q => q.AniosServicio_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Ingreso mensual</div>
-                            <input type="text" name="IngresoMensual_Padre" id="IngresoMensual_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.IngresoMensual_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.IngresoMensual_Padre, new { @class = "input w-full border flex-1", @id = "IngresoMensual_Padre" })
+                            @Html.ValidationMessageFor(q => q.IngresoMensual_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
                             <div class="mb-2">Dirección</div>
-                            <input type="text" name="DireccionTrabajo_Padre" id="DireccionTrabajo_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.DireccionTrabajo_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.DireccionTrabajo_Padre, new { @class = "input w-full border flex-1", @id = "DireccionTrabajo_Padre" })
+                            @Html.ValidationMessageFor(q => q.DireccionTrabajo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
                             <div class="mb-2"></div>
@@ -500,17 +493,17 @@
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tipo de discapacidad</div>
                             @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Padre, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "CodCatalogoCONADIS_Padre" })
-                            @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Padre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Porcentaje de discapacidad</div>
-                            <input type="text" name="PorcentajeDiscapacidad_Padre" id="PorcentajeDiscapacidad_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.PorcentajeDiscapacidad_Padre, new { @class = "input w-full border flex-1", @id = "PorcentajeDiscapacidad_Padre" })
+                            @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Numero de carnet</div>
-                            <input type="text" name="NumeroCarnetConadis_Padre" id="NumeroCarnetConadis_Padre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Padre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.NumeroCarnetConadis_Padre, new { @class = "input w-full border flex-1", @id = "NumeroCarnetConadis_Padre" })
+                            @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                     </div>
                     <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
@@ -524,75 +517,70 @@
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Naturaleza*</div>
                             @Html.DropDownListFor(q => q.Naturaleza_Madre, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Naturaleza_Madre" })
-                            @Html.ValidationMessageFor(q => q.Naturaleza_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.Naturaleza_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tipo de documento*</div>
                             @Html.DropDownListFor(q => q.IdTipoDocumento_Madre, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdTipoDocumento_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdTipoDocumento_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdTipoDocumento_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Cédula de identidad*</div>
-                            <input type="text" name="CedulaRuc_Madre" id="CedulaRuc_Madre" class="input w-full border flex-1">
+                            @Html.TextBoxFor(q => q.CedulaRuc_Madre, new { @class = "input w-full border flex-1", @id = "CedulaRuc_Madre" })
                             <label id="error_documento_madre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Está fallecido</div>
                             <input data-target="#input-group-datepicker" name="EstaFallecido_Madre" id="EstaFallecido_Madre" class="show-code input input--switch border" type="checkbox">
-                            @Html.ValidationMessageFor(q => q.EstaFallecido_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.EstaFallecido_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Nombres</div>
-                            <input type="text" name="Nombres_Madre" id="Nombres_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Nombres_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Nombres_Madre, new { @class = "input w-full border flex-1", @id = "Nombres_Madre" })
+                            @Html.ValidationMessageFor(q => q.Nombres_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Apellidos</div>
-                            <input type="text" name="Apellidos_Madre" id="Apellidos_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Apellidos_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Apellidos_Madre, new { @class = "input w-full border flex-1", @id = "Apellidos_Madre" })
+                            @Html.ValidationMessageFor(q => q.Apellidos_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
-                            <div class="mb-2">Nombres completos</div>
-                            <input type="text" name="NombreCompleto_Madre" id="NombreCompleto_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.NombreCompleto_Madre, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="intro-y col-span-12 sm:col-span-12">
-                            <div class="mb-2">Razon Social</div>
-                            <input type="text" name="RazonSocial_Madre" id="RazonSocial_Madre" class="input w-full border flex-1" placeholder="Solo ingresar este campo si el tipo de documento es RUC">
-                            @Html.ValidationMessageFor(q => q.RazonSocial_Madre, "", new { @class = "text-danger" })
+                            <div class="mb-2">Razón Social</div>
+                            @Html.TextBoxFor(q => q.RazonSocial_Madre, new { @class = "input w-full border flex-1", @id = "RazonSocial_Madre", @placeholder = "Solo ingresar razón social si es tipo de documento es RUC" })
+                            @Html.ValidationMessageFor(q => q.RazonSocial_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Fecha de nacimiento*</div>
                             <div class="relative mx-auto">
                                 <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> <i data-feather="calendar" class="w-4 h-4"></i> </div>
                                 <input type="text" name="FechaNacimiento_Madre" id="FechaNacimiento_Madre" class="datepicker input pl-12 border" data-single-mode="true">
-                                @Html.ValidationMessageFor(q => q.FechaNacimiento_Madre, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(q => q.FechaNacimiento_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Pais</div>
                             @Html.DropDownListFor(q => q.IdPais_Madre, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "input w-full border flex-1", @id = "IdPais_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdPais_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdPais_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Región</div>
                             @Html.DropDownListFor(q => q.Cod_Region_Madre, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "input w-full border flex-1", @id = "Cod_Region_Madre" })
-                            @Html.ValidationMessageFor(q => q.Cod_Region_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.Cod_Region_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Provincia</div>
                             @Html.DropDownListFor(q => q.IdProvincia_Madre, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "input w-full border flex-1", @id = "IdProvincia_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdProvincia_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdProvincia_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Ciudad</div>
                             @Html.DropDownListFor(q => q.IdCiudad_Madre, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdCiudad_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdCiudad_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Parroquia</div>
                             @Html.DropDownListFor(q => q.IdParroquia_Madre, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdParroquia_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdParroquia_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2"></div>
@@ -600,17 +588,17 @@
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Sexo*</div>
                             @Html.DropDownListFor(q => q.Sexo_Madre, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Sexo_Madre" })
-                            @Html.ValidationMessageFor(q => q.Sexo_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.Sexo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Estado civil</div>
                             @Html.DropDownListFor(q => q.IdEstadoCivil_Madre, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdEstadoCivil_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdEstadoCivil_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdEstadoCivil_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Grupo Etnico*</div>
                             @Html.DropDownListFor(q => q.IdGrupoEtnico_Madre, new SelectList(ViewBag.lst_grupoetnico, "IdGrupoEtnico", "NomGrupoEtnico"), new { @class = "input w-full border flex-1", @id = "IdGrupoEtnico_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2"></div>
@@ -618,23 +606,23 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Teléfono</div>
-                            <input type="text" name="Telefono_Madre" id="Telefono_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Telefono_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Telefono_Madre, new { @class = "input w-full border flex-1", @id = "Telefono_Madre" })
+                            @Html.ValidationMessageFor(q => q.Telefono_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Celular</div>
-                            <input type="text" name="Celular_Madre" id="Celular_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Celular_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Celular_Madre, new { @class = "input w-full border flex-1", @id = "Celular_Madre" })
+                            @Html.ValidationMessageFor(q => q.Celular_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Correo</div>
-                            <input type="email" name="Correo_Madre" id="Correo_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Correo_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Correo_Madre, new { @class = "input w-full border flex-1", @id = "Correo_Madre" })
+                            @Html.ValidationMessageFor(q => q.Correo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Religión*</div>
                             @Html.DropDownListFor(q => q.IdReligion_Madre, new SelectList(ViewBag.lst_religion, "IdReligion", "NomReligion"), new { @class = "input w-full border flex-1", @id = "IdReligion_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdReligion_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdReligion_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Asiste a Centro Cristiano</div>
@@ -650,66 +638,66 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoMadre" hidden>
                             <div class="mb-2">Marca</div>
-                            <input type="text" id="Marca_Madre" name="Marca_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Marca_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Marca_Madre, new { @class = "input w-full border flex-1", @id = "Marca_Madre" })
+                            @Html.ValidationMessageFor(q => q.Marca_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6" id="ModeloVehiculoMadre" hidden>
                             <div class="mb-2">Modelo</div>
                             <input type="text" id="Modelo_Madre" name="Modelo_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Modelo_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.Modelo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Dirección*</div>
-                            <input type="text" name="Direccion_Madre" id="Direccion_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Direccion_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Direccion_Madre, new { @class = "input w-full border flex-1", @id = "Direccion_Madre" })
+                            @Html.ValidationMessageFor(q => q.Direccion_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Sector</div>
-                            <input type="text" name="Sector_Madre" id="Sector_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.Sector_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.Sector_Madre, new { @class = "input w-full border flex-1", @id = "Sector_Madre" })
+                            @Html.ValidationMessageFor(q => q.Sector_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                     </div>
                     <div class="font-medium text-base">Datos de trabajo</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Empresa donde trabaja</div>
-                            <input type="text" name="EmpresaTrabajo_Madre" id="EmpresaTrabajo_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.EmpresaTrabajo_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.EmpresaTrabajo_Madre, new { @class = "input w-full border flex-1", @id = "EmpresaTrabajo_Madre" })
+                            @Html.ValidationMessageFor(q => q.EmpresaTrabajo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Instrucción</div>
                             @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Madre, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaInst_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Profesión</div>
                             @Html.DropDownListFor(q => q.IdProfesion_Madre, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "input w-full border flex-1", @id = "IdProfesion_Madre" })
-                            @Html.ValidationMessageFor(q => q.IdProfesion_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.IdProfesion_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Cargo</div>
-                            <input type="text" name="CargoTrabajo_Madre" id="CargoTrabajo_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.CargoTrabajo_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.CargoTrabajo_Madre, new { @class = "input w-full border flex-1", @id = "CargoTrabajo_Madre" })
+                            @Html.ValidationMessageFor(q => q.CargoTrabajo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Teléfono</div>
-                            <input type="text" name="TelefonoTrabajo_Madre" id="TelefonoTrabajo_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.TelefonoTrabajo_Madre, new { @class = "input w-full border flex-1", @id = "TelefonoTrabajo_Madre" })
+                            @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Años de servicio</div>
-                            <input type="text" name="AniosServicio_Madre" id="AniosServicio_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.AniosServicio_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.AniosServicio_Madre, new { @class = "input w-full border flex-1", @id = "AniosServicio_Madre" })
+                            @Html.ValidationMessageFor(q => q.AniosServicio_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Ingreso mensual</div>
-                            <input type="text" name="IngresoMensual_Madre" id="IngresoMensual_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.IngresoMensual_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.IngresoMensual_Madre, new { @class = "input w-full border flex-1", @id = "IngresoMensual_Madre" })
+                            @Html.ValidationMessageFor(q => q.IngresoMensual_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
                             <div class="mb-2">Dirección</div>
-                            <input type="text" name="DireccionTrabajo_Madre" id="DireccionTrabajo_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.DireccionTrabajo_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.DireccionTrabajo_Madre, new { @class = "input w-full border flex-1", @id = "DireccionTrabajo_Madre" })
+                            @Html.ValidationMessageFor(q => q.DireccionTrabajo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
                             <div class="mb-2"></div>
@@ -720,17 +708,17 @@
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tipo de discapacidad</div>
                             @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Madre, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "CodCatalogoCONADIS_Madre" })
-                            @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Madre, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Porcentaje de discapacidad</div>
-                            <input type="text" name="PorcentajeDiscapacidad_Madre" id="PorcentajeDiscapacidad_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.PorcentajeDiscapacidad_Madre, new { @class = "input w-full border flex-1", @id = "PorcentajeDiscapacidad_Madre" })
+                            @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Numero de carnet</div>
-                            <input type="text" name="NumeroCarnetConadis_Madre" id="NumeroCarnetConadis_Madre" class="input w-full border flex-1">
-                            @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Madre, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(q => q.NumeroCarnetConadis_Madre, new { @class = "input w-full border flex-1", @id = "NumeroCarnetConadis_Madre" })
+                            @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                     </div>
                     <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
@@ -739,6 +727,10 @@
                     </div>
                 </div>
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosRepresentante" hidden>
+                    <div class="font-medium text-base">¿Quién es el representante?</div>
+                    <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="mb-2"></div>
+                    </div>
                     <div class="preview">
                         <div class="flex flex-wrap">
                             <button type="button" class="button w-24 mr-2 mb-2 flex items-center justify-center bg-theme-1 text-white" onclick="PadreRepresentante();" title="Padre es Representante"> <i data-feather="user-check" class="w-4 h-4 mr-2"></i> Padre </button>
@@ -746,410 +738,440 @@
                             <button type="button" class="button w-32 mr-2 mb-2 flex items-center justify-center border text-gray-700 dark:border-dark-5 dark:text-gray-300" onclick="OtroRepresentante();" title="Otra persona es Representante"> <i data-feather="users" class="w-4 h-4 mr-2"></i> Otros </button>
                         </div>
                     </div>
-                            <div id="DivDatosRepresentante">
-                                <div class="font-medium text-base">Datos del representante</div>
-                                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Parentezco*</div>
-                                        @Html.DropDownListFor(q => q.IdCatalogoPAREN_Representante, new SelectList(ViewBag.lst_parentesco, "IdCatalogo", "NomCatalogo"), new { @class = "input w-full border flex-1", @id = "IdCatalogoPAREN_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdCatalogoPAREN_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-9">
-                                        <div class="mb-2"></div>
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Naturaleza*</div>
-                                        @Html.DropDownListFor(q => q.Naturaleza_Representante, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Naturaleza_Representante" })
-                                        @Html.ValidationMessageFor(q => q.Naturaleza_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Tipo de documento*</div>
-                                        @Html.DropDownListFor(q => q.IdTipoDocumento_Representante, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdTipoDocumento_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdTipoDocumento_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Cédula de identidad*</div>
-                                        <input type="text" name="CedulaRuc_Representante" id="CedulaRuc_Representante" class="input w-full border flex-1">
-                                        <label id="error_documento_representante" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Está fallecido</div>
-                                        <input data-target="#input-group-datepicker" name="EstaFallecido_Representante" id="EstaFallecido_Representante" class="show-code input input--switch border" type="checkbox">
-                                        @Html.ValidationMessageFor(q => q.EstaFallecido_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-6">
-                                        <div class="mb-2">Nombres</div>
-                                        <input type="text" name="Nombres_Representante" id="Nombres_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Nombres_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-6">
-                                        <div class="mb-2">Apellidos</div>
-                                        <input type="text" name="Apellidos_Representante" id="Apellidos_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Apellidos_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-12">
-                                        <div class="mb-2">Nombres completos</div>
-                                        <input type="text" name="NombreCompleto_Representante" id="NombreCompleto_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.NombreCompleto_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-12">
-                                        <div class="mb-2">Razon Social</div>
-                                        <input type="text" name="RazonSocial_Representante" id="RazonSocial_Representante" class="input w-full border flex-1" placeholder="Solo ingresar este campo si el tipo de documento es RUC">
-                                        @Html.ValidationMessageFor(q => q.RazonSocial_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Fecha de nacimiento*</div>
-                                        <div class="relative mx-auto">
-                                            <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> <i data-feather="calendar" class="w-4 h-4"></i> </div>
-                                            <input type="text" name="FechaNacimiento_Representante" id="FechaNacimiento_Representante" class="datepicker input pl-12 border" data-single-mode="true">
-                                            @Html.ValidationMessageFor(q => q.FechaNacimiento_Representante, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Pais</div>
-                                        @Html.DropDownListFor(q => q.IdPais_Representante, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "input w-full border flex-1", @id = "IdPais_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdPais_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Región</div>
-                                        @Html.DropDownListFor(q => q.Cod_Region_Representante, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "input w-full border flex-1", @id = "Cod_Region_Representante" })
-                                        @Html.ValidationMessageFor(q => q.Cod_Region_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Provincia</div>
-                                        @Html.DropDownListFor(q => q.IdProvincia_Representante, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "input w-full border flex-1", @id = "IdProvincia_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdProvincia_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Ciudad</div>
-                                        @Html.DropDownListFor(q => q.IdCiudad_Representante, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdCiudad_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Parroquia</div>
-                                        @Html.DropDownListFor(q => q.IdParroquia_Representante, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdParroquia_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-6">
-                                        <div class="mb-2"></div>
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Sexo*</div>
-                                        @Html.DropDownListFor(q => q.Sexo_Representante, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Sexo_Representante" })
-                                        @Html.ValidationMessageFor(q => q.Sexo_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Estado civil</div>
-                                        @Html.DropDownListFor(q => q.IdEstadoCivil_Representante, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdEstadoCivil_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdEstadoCivil_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Grupo Etnico*</div>
-                                        @Html.DropDownListFor(q => q.IdGrupoEtnico_Representante, new SelectList(ViewBag.lst_grupoetnico, "IdGrupoEtnico", "NomGrupoEtnico"), new { @class = "input w-full border flex-1", @id = "IdGrupoEtnico_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2"></div>
-
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Teléfono</div>
-                                        <input type="text" name="Telefono_Representante" id="Telefono_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Telefono_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Celular</div>
-                                        <input type="text" name="Celular_Representante" id="Celular_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Celular_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-6">
-                                        <div class="mb-2">Correo</div>
-                                        <input type="email" name="Correo_Representante" id="Correo_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Correo_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Religión*</div>
-                                        @Html.DropDownListFor(q => q.IdReligion_Representante, new SelectList(ViewBag.lst_religion, "IdReligion", "NomReligion"), new { @class = "input w-full border flex-1", @id = "IdReligion_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdReligion_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Asiste a CentroCristiano</div>
-                                        <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Representante" id="AsisteCentroCristiano_Representante" class="show-code input input--switch border" type="checkbox">
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Tiene casa propia</div>
-                                        <input data-target="#input-group-datepicker" name="CasaPropia_Representante" id="CasaPropia_Representante" class="show-code input input--switch border" type="checkbox">
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Tiene vehiculo propio</div>
-                                        <input data-target="#input-group-datepicker" name="VehiculoPropio_Representante" id="VehiculoPropio_Representante" class="show-code input input--switch border" type="checkbox">
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoRepresentante" hidden>
-                                        <div class="mb-2">Marca</div>
-                                        <input type="text" name="Marca_Representante" id="Marca_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Marca_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-6" id="ModeloVehiculoRepresentante" hidden>
-                                        <div class="mb-2">Modelo</div>
-                                        <input type="text" name="Modelo_Representante" id="Modelo_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Modelo_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-6">
-                                        <div class="mb-2">Dirección*</div>
-                                        <input type="text" name="Direccion_Representante" id="Direccion_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Direccion_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Sector</div>
-                                        <input type="text" name="Sector_Representante" id="Sector_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.Sector_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-12">
-                                        <div class="mb-2"></div>
-                                    </div>
-                                </div>
-                                <div class="font-medium text-base">Datos de trabajo</div>
-                                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Empresa donde trabaja</div>
-                                        <input type="text" name="EmpresaTrabajo_Representante" id="EmpresaTrabajo_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.EmpresaTrabajo_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Instrucción</div>
-                                        @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Representante, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaInst_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Profesión</div>
-                                        @Html.DropDownListFor(q => q.IdProfesion_Representante, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "input w-full border flex-1", @id = "IdProfesion_Representante" })
-                                        @Html.ValidationMessageFor(q => q.IdProfesion_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Cargo</div>
-                                        <input type="text" name="CargoTrabajo_Representante" id="CargoTrabajo_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.CargoTrabajo_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Teléfono</div>
-                                        <input type="text" name="TelefonoTrabajo_Representante" id="TelefonoTrabajo_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Años de servicio</div>
-                                        <input type="text" name="AniosServicio_Representante" id="AniosServicio_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.AniosServicio_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Ingreso mensual</div>
-                                        <input type="text" name="IngresoMensual_Representante" id="IngresoMensual_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.IngresoMensual_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-12">
-                                        <div class="mb-2">Dirección</div>
-                                        <input type="text" name="DireccionTrabajo_Representante" id="DireccionTrabajo_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.DireccionTrabajo_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-12">
-                                        <div class="mb-2"></div>
-                                    </div>
-                                </div>
-                                <div class="font-medium text-base">Datos Conadis</div>
-                                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Tipo de discapacidad</div>
-                                        @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Representante, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "CodCatalogoCONADIS_Representante" })
-                                        @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Porcentaje de discapacidad</div>
-                                        <input type="text" name="PorcentajeDiscapacidad_Representante" id="PorcentajeDiscapacidad_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Representante, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="intro-y col-span-12 sm:col-span-3">
-                                        <div class="mb-2">Numero de carnet</div>
-                                        <input type="text" name="NumeroCarnetConadis_Representante" id="NumeroCarnetConadis_Representante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Representante, "", new { @class = "text-danger" })
-                                    </div>
+                    <div id="DivDatosRepresentante" hidden>
+                        <div class="font-medium text-base">Datos del representante</div>
+                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Parentezco*</div>
+                                @Html.DropDownListFor(q => q.IdCatalogoPAREN_Representante, new SelectList(ViewBag.lst_parentesco, "IdCatalogo", "NomCatalogo"), new { @class = "input w-full border flex-1", @id = "IdCatalogoPAREN_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoPAREN_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-9">
+                                <div class="mb-2"></div>
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Naturaleza*</div>
+                                @Html.DropDownListFor(q => q.Naturaleza_Representante, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Naturaleza_Representante" })
+                                @Html.ValidationMessageFor(q => q.Naturaleza_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Tipo de documento*</div>
+                                @Html.DropDownListFor(q => q.IdTipoDocumento_Representante, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdTipoDocumento_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdTipoDocumento_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Cédula de identidad*</div>
+                                @Html.TextBoxFor(q => q.CedulaRuc_Representante, new { @class = "input w-full border flex-1", @id = "CedulaRuc_Representante" })
+                                <label id="error_documento_representante" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Está fallecido</div>
+                                <input data-target="#input-group-datepicker" name="EstaFallecido_Representante" id="EstaFallecido_Representante" class="show-code input input--switch border" type="checkbox">
+                                @Html.ValidationMessageFor(q => q.EstaFallecido_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2">Nombres</div>
+                                @Html.TextBoxFor(q => q.Nombres_Representante, new { @class = "input w-full border flex-1", @id = "Nombres_Representante" })
+                                @Html.ValidationMessageFor(q => q.Nombres_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2">Apellidos</div>
+                                @Html.TextBoxFor(q => q.Apellidos_Representante, new { @class = "input w-full border flex-1", @id = "Apellidos_Representante" })
+                                @Html.ValidationMessageFor(q => q.Apellidos_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-12">
+                                <div class="mb-2">Razón Social</div>
+                                @Html.TextBoxFor(q => q.RazonSocial_Representante, new { @class = "input w-full border flex-1", @id = "RazonSocial_Representante", @placeholder = "Solo ingresar razón social si es tipo de documento es RUC" })
+                                @Html.ValidationMessageFor(q => q.RazonSocial_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Fecha de nacimiento*</div>
+                                <div class="relative mx-auto">
+                                    <div class="absolute rounded-l w-10 h-full flex items-center justify-center bg-gray-100 border text-gray-600 dark:bg-dark-1 dark:border-dark-4"> <i data-feather="calendar" class="w-4 h-4"></i> </div>
+                                    <input type="text" name="FechaNacimiento_Representante" id="FechaNacimiento_Representante" class="datepicker input pl-12 border" data-single-mode="true">
+                                    @Html.ValidationMessageFor(q => q.FechaNacimiento_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                                 </div>
                             </div>
-                            <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                                <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorRepresentante();">Anterior</button>
-                                <button type="button" class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteRepresentante();">Siguiente</button>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Pais</div>
+                                @Html.DropDownListFor(q => q.IdPais_Representante, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "input w-full border flex-1", @id = "IdPais_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdPais_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Región</div>
+                                @Html.DropDownListFor(q => q.Cod_Region_Representante, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "input w-full border flex-1", @id = "Cod_Region_Representante" })
+                                @Html.ValidationMessageFor(q => q.Cod_Region_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Provincia</div>
+                                @Html.DropDownListFor(q => q.IdProvincia_Representante, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "input w-full border flex-1", @id = "IdProvincia_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdProvincia_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Ciudad</div>
+                                @Html.DropDownListFor(q => q.IdCiudad_Representante, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdCiudad_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Parroquia</div>
+                                @Html.DropDownListFor(q => q.IdParroquia_Representante, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdParroquia_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2"></div>
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Sexo*</div>
+                                @Html.DropDownListFor(q => q.Sexo_Representante, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "Sexo_Representante" })
+                                @Html.ValidationMessageFor(q => q.Sexo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Estado civil</div>
+                                @Html.DropDownListFor(q => q.IdEstadoCivil_Representante, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "IdEstadoCivil_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdEstadoCivil_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Grupo Etnico*</div>
+                                @Html.DropDownListFor(q => q.IdGrupoEtnico_Representante, new SelectList(ViewBag.lst_grupoetnico, "IdGrupoEtnico", "NomGrupoEtnico"), new { @class = "input w-full border flex-1", @id = "IdGrupoEtnico_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2"></div>
+
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Teléfono</div>
+                                @Html.TextBoxFor(q => q.Telefono_Representante, new { @class = "input w-full border flex-1", @id = "Telefono_Representante" })
+                                @Html.ValidationMessageFor(q => q.Telefono_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Celular</div>
+                                @Html.TextBoxFor(q => q.Celular_Representante, new { @class = "input w-full border flex-1", @id = "Celular_Representante" })
+                                @Html.ValidationMessageFor(q => q.Celular_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2">Correo</div>
+                                @Html.TextBoxFor(q => q.Correo_Representante, new { @class = "input w-full border flex-1", @id = "Correo_Representante" })
+                                @Html.ValidationMessageFor(q => q.Correo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Religión*</div>
+                                @Html.DropDownListFor(q => q.IdReligion_Representante, new SelectList(ViewBag.lst_religion, "IdReligion", "NomReligion"), new { @class = "input w-full border flex-1", @id = "IdReligion_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdReligion_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Asiste a CentroCristiano</div>
+                                <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Representante" id="AsisteCentroCristiano_Representante" class="show-code input input--switch border" type="checkbox">
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Tiene casa propia</div>
+                                <input data-target="#input-group-datepicker" name="CasaPropia_Representante" id="CasaPropia_Representante" class="show-code input input--switch border" type="checkbox">
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Tiene vehiculo propio</div>
+                                <input data-target="#input-group-datepicker" name="VehiculoPropio_Representante" id="VehiculoPropio_Representante" class="show-code input input--switch border" type="checkbox">
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoRepresentante" hidden>
+                                <div class="mb-2">Marca</div>
+                                @Html.TextBoxFor(q => q.Marca_Representante, new { @class = "input w-full border flex-1", @id = "Marca_Representante" })
+                                @Html.ValidationMessageFor(q => q.Marca_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6" id="ModeloVehiculoRepresentante" hidden>
+                                <div class="mb-2">Modelo</div>
+                                @Html.TextBoxFor(q => q.Modelo_Representante, new { @class = "input w-full border flex-1", @id = "Modelo_Representante" })
+                                @Html.ValidationMessageFor(q => q.Modelo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-6">
+                                <div class="mb-2">Dirección*</div>
+                                @Html.TextBoxFor(q => q.Direccion_Representante, new { @class = "input w-full border flex-1", @id = "Direccion_Representante" })
+                                @Html.ValidationMessageFor(q => q.Direccion_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Sector</div>
+                                @Html.TextBoxFor(q => q.Sector_Representante, new { @class = "input w-full border flex-1", @id = "Sector_Representante" })
+                                @Html.ValidationMessageFor(q => q.Sector_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-12">
+                                <div class="mb-2"></div>
                             </div>
                         </div>
-                        <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosSocioEconomico" hidden>
-                            <div class="font-medium text-base">Datos SocioEconomico</div>
-                            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Vive con*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaVive_Aspirante, new SelectList(ViewBag.lst_vive, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaVive_Aspirante" })
-                                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaVive_Aspirante, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Tenencia de vivienda*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaViv_Aspirante, new SelectList(ViewBag.lst_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaViv_Aspirante" })
-                                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaViv_Aspirante, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Tipo de vivienda*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaTipoViv_Aspirante, new SelectList(ViewBag.lst_tipo_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaTipoViv_Aspirante" })
-                                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaTipoViv_Aspirante, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2"></div>
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Agua*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaAgua_Aspirante, new SelectList(ViewBag.lst_agua, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaAgua_Aspirante" })
-                                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaAgua_Aspirante, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Tiene luz eléctrica*</div>
-                                    <input data-target="#input-group-datepicker" name="TieneElectricidad_Aspirante" id="TieneElectricidad_Aspirante" class="show-code input input--switch border" type="checkbox">
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Tiene hermanos en la Institución</div>
-                                    <input data-target="#input-group-datepicker" name="TieneHermanos_Aspirante" id="TieneHermanos_Aspirante" class="show-code input input--switch border" type="checkbox">
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div id="cant_hermanos">
-                                        <div class="mb-2">Cuantos</div>
-                                        <input type="text" name="CantidadHermanos" id="CantidadHermanos" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.CantidadHermanos, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Sueldo Padre*</div>
-                                    @Html.TextBoxFor(q=> q.SueldoPadre,new { @class = "input w-full border flex-1", @id = "SueldoPadre" })
-                                    @*<input type="text" name="SueldoPadre" id="SueldoPadre" class="input w-full border flex-1">*@
-                                    @Html.ValidationMessageFor(q => q.SueldoPadre, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Otros ingresos Padre*</div>
-                                    <input type="text" name="OtroIngresoPadre" id="OtroIngresoPadre" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.OtroIngresoPadre, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Sueldo Madre*</div>
-                                    <input type="text" name="SueldoMadre" id="SueldoMadre" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.SueldoMadre, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Otros ingresos Madre*</div>
-                                    <input type="text" name="OtroIngresoMadre" id="OtroIngresoMadre" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.OtroIngresoMadre, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Gastos de Alimentacion*</div>
-                                    <input type="text" name="GastoAlimentacion" id="GastoAlimentacion" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.GastoAlimentacion, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Gastos de Educación*</div>
-                                    <input type="text" name="GastoEducacion" id="GastoEducacion" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.GastoEducacion, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Gastos de Servicios Básicos*</div>
-                                    <input type="text" name="GastoServicioBasico" id="GastoServicioBasico" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.GastoServicioBasico, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Gastos de Salud*</div>
-                                    <input type="text" name="GastoSalud" id="GastoSalud" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.GastoSalud, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Gastos de Arriendo*</div>
-                                    <input type="text" name="GastoArriendo" id="GastoArriendo" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.GastoArriendo, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Gastos de Préstamos*</div>
-                                    <input type="text" id="GastoPrestamo" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.GastoPrestamo, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Otros Gastos*</div>
-                                    <input type="text" name="OtroGasto" id="OtroGasto" class="input w-full border flex-1">
-                                    @Html.ValidationMessageFor(q => q.OtroGasto, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2"></div>
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Total de ingresos*</div>
-                                    <input type="text" name="TotalIngresos" id="TotalIngresos" class="input w-full border flex-1" readonly="readonly">
-                                    @Html.ValidationMessageFor(q => q.TotalIngresos, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Total de egresos*</div>
-                                    <input type="text" name="TotalEgresos" id="TotalEgresos" class="input w-full border flex-1" readonly="readonly">
-                                    @Html.ValidationMessageFor(q => q.TotalEgresos, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2">Saldo*</div>
-                                    <input type="text" name="Saldo" id="Saldo" class="input w-full border flex-1"readonly="readonly">
-                                    @Html.ValidationMessageFor(q => q.Saldo, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2"></div>
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-6">
-                                    <div class="mb-2">¿Qué le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaMotivo_Aspirante, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaMotivo_Aspirante" })
-                                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaMotivo_Aspirante, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-6">
-                                    <div id="otro_motivo_ingreso" hidden>
-                                        <div class="mb-2">Otro motivo de Ingreso*</div>
-                                        <input type="text" name="OtroMotivoIngreso_Aspirante" id="OtroMotivoIngreso_Aspirante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.OtroMotivoIngreso_Aspirante, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-6">
-                                    <div class="mb-2">¿Cómo se informó de nuestra institución?*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Aspirante, new SelectList(ViewBag.lst_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaInst_Aspirante" })
-                                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Aspirante, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-6">
-                                    <div id="otro_informacion_inst" hidden>
-                                        <div class="mb-2">Otras razones*</div>
-                                        <input type="text" name="OtroInformacionInst_Aspirante" id="OtroInformacionInst_Aspirante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.OtroInformacionInst_Aspirante, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-6">
-                                    <div class="mb-2">¿Cómo financiara los estudios?*</div>
-                                    @Html.DropDownListFor(q => q.IdCatalogoFichaFinanc_Aspirante, new SelectList(ViewBag.lst_financiamiento, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaFinanc_Aspirante" })
-                                    @Html.ValidationMessageFor(q => q.IdCatalogoFichaFinanc_Aspirante, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-6">
-                                    <div  id="otro_forma_financ" hidden>
-                                        <div class="mb-2">Otra forma de financiamiento*</div>
-                                        <input type="text" name="OtroFinanciamiento_Aspirante" id="OtroFinanciamiento_Aspirante" class="input w-full border flex-1">
-                                        @Html.ValidationMessageFor(q => q.OtroFinanciamiento_Aspirante, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="intro-y col-span-12 sm:col-span-3">
-                                    <div class="mb-2"></div>
-                                </div>
-                                <div class="font-medium text-base">Archivos</div>
-                                <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                                    <div class="intro-y col-span-12 sm:col-span-6">
-                                        <input type="file" multiple name="ArchivosAspirante" id="ArchivosAspirante">
-                                    </div>
-                                </div>
-                                <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
-                                    <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorSocioEconomico();">Anterior</button>
-                                    <button type="submit" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
-                                </div>
+                        <div class="font-medium text-base">Datos de trabajo</div>
+                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Empresa donde trabaja</div>
+                                @Html.TextBoxFor(q => q.EmpresaTrabajo_Representante, new { @class = "input w-full border flex-1", @id = "EmpresaTrabajo_Representante" })
+                                @Html.ValidationMessageFor(q => q.EmpresaTrabajo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Instrucción</div>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Representante, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaInst_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Profesión</div>
+                                @Html.DropDownListFor(q => q.IdProfesion_Representante, new SelectList(ViewBag.lst_profesion, "IdProfesion", "Descripcion"), new { @class = "input w-full border flex-1", @id = "IdProfesion_Representante" })
+                                @Html.ValidationMessageFor(q => q.IdProfesion_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Cargo</div>
+                                @Html.TextBoxFor(q => q.CargoTrabajo_Representante, new { @class = "input w-full border flex-1", @id = "CargoTrabajo_Representante" })
+                                @Html.ValidationMessageFor(q => q.CargoTrabajo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Teléfono</div>
+                                @Html.TextBoxFor(q => q.TelefonoTrabajo_Representante, new { @class = "input w-full border flex-1", @id = "TelefonoTrabajo_Representante" })
+                                @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Años de servicio</div>
+                                @Html.TextBoxFor(q => q.AniosServicio_Representante, new { @class = "input w-full border flex-1", @id = "AniosServicio_Representante" })
+                                @Html.ValidationMessageFor(q => q.AniosServicio_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Ingreso mensual</div>
+                                @Html.TextBoxFor(q => q.IngresoMensual_Representante, new { @class = "input w-full border flex-1", @id = "IngresoMensual_Representante" })
+                                @Html.ValidationMessageFor(q => q.IngresoMensual_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-12">
+                                <div class="mb-2">Dirección</div>
+                                @Html.TextBoxFor(q => q.DireccionTrabajo_Representante, new { @class = "input w-full border flex-1", @id = "DireccionTrabajo_Representante" })
+                                @Html.ValidationMessageFor(q => q.DireccionTrabajo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-12">
+                                <div class="mb-2"></div>
+                            </div>
+                        </div>
+                        <div class="font-medium text-base">Datos Conadis</div>
+                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Tipo de discapacidad</div>
+                                @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Representante, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "input w-full border flex-1", @id = "CodCatalogoCONADIS_Representante" })
+                                @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Porcentaje de discapacidad</div>
+                                @Html.TextBoxFor(q => q.PorcentajeDiscapacidad_Representante, new { @class = "input w-full border flex-1", @id = "PorcentajeDiscapacidad_Representante" })
+                                @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Numero de carnet</div>
+                                @Html.TextBoxFor(q => q.NumeroCarnetConadis_Representante, new { @class = "input w-full border flex-1", @id = "NumeroCarnetConadis_Representante" })
+                                @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                         </div>
                     </div>
-                    <!-- END: Wizard Layout -->
+                    <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                        <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorRepresentante();">Anterior</button>
+                        <button type="button" class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteRepresentante();">Siguiente</button>
+                    </div>
                 </div>
+                <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosSocioEconomico" hidden>
+                    <div class="font-medium text-base">Datos SocioEconomico</div>
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Vive con*</div>
+                            @Html.DropDownListFor(q => q.IdCatalogoFichaVive_Aspirante, new SelectList(ViewBag.lst_vive, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaVive_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaVive_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Tenencia de vivienda*</div>
+                            @Html.DropDownListFor(q => q.IdCatalogoFichaViv_Aspirante, new SelectList(ViewBag.lst_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaViv_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaViv_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Tipo de vivienda*</div>
+                            @Html.DropDownListFor(q => q.IdCatalogoFichaTipoViv_Aspirante, new SelectList(ViewBag.lst_tipo_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaTipoViv_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaTipoViv_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2"></div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Agua*</div>
+                            @Html.DropDownListFor(q => q.IdCatalogoFichaAgua_Aspirante, new SelectList(ViewBag.lst_agua, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaAgua_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaAgua_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Tiene luz eléctrica*</div>
+                            <input data-target="#input-group-datepicker" name="TieneElectricidad_Aspirante" id="TieneElectricidad_Aspirante" class="show-code input input--switch border" type="checkbox">
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Tiene hermanos en la Institución</div>
+                            <input data-target="#input-group-datepicker" name="TieneHermanos_Aspirante" id="TieneHermanos_Aspirante" class="show-code input input--switch border" type="checkbox">
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div id="cant_hermanos">
+                                <div class="mb-2">Cuantos</div>
+                                @Html.TextBoxFor(q => q.CantidadHermanos, new { @class = "input w-full border flex-1", @id = "CantidadHermanos" })
+                                @Html.ValidationMessageFor(q => q.CantidadHermanos, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Sueldo Padre*</div>
+                            @Html.TextBoxFor(q=> q.SueldoPadre,new { @class = "input w-full border flex-1", @id = "SueldoPadre" })
+                            @Html.ValidationMessageFor(q => q.SueldoPadre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Otros ingresos Padre*</div>
+                            @Html.TextBoxFor(q => q.OtroIngresoPadre, new { @class = "input w-full border flex-1", @id = "OtroIngresoPadre" })
+                            @Html.ValidationMessageFor(q => q.OtroIngresoPadre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Sueldo Madre*</div>
+                            @Html.TextBoxFor(q => q.SueldoMadre, new { @class = "input w-full border flex-1", @id = "SueldoMadre" })
+                            @Html.ValidationMessageFor(q => q.SueldoMadre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Otros ingresos Madre*</div>
+                            @Html.TextBoxFor(q => q.OtroIngresoMadre, new { @class = "input w-full border flex-1", @id = "OtroIngresoMadre" })
+                            @Html.ValidationMessageFor(q => q.OtroIngresoMadre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Gastos de Alimentacion*</div>
+                            @Html.TextBoxFor(q => q.GastoAlimentacion, new { @class = "input w-full border flex-1", @id = "GastoAlimentacion" })
+                            @Html.ValidationMessageFor(q => q.GastoAlimentacion, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Gastos de Educación*</div>
+                            @Html.TextBoxFor(q => q.GastoEducacion, new { @class = "input w-full border flex-1", @id = "GastoEducacion" })
+                            @Html.ValidationMessageFor(q => q.GastoEducacion, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Gastos de Servicios Básicos*</div>
+                            @Html.TextBoxFor(q => q.GastoServicioBasico, new { @class = "input w-full border flex-1", @id = "GastoServicioBasico" })
+                            @Html.ValidationMessageFor(q => q.GastoServicioBasico, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Gastos de Salud*</div>
+                            @Html.TextBoxFor(q => q.GastoSalud, new { @class = "input w-full border flex-1", @id = "GastoSalud" })
+                            @Html.ValidationMessageFor(q => q.GastoSalud, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Gastos de Arriendo*</div>
+                            @Html.TextBoxFor(q => q.GastoArriendo, new { @class = "input w-full border flex-1", @id = "GastoArriendo" })
+                            @Html.ValidationMessageFor(q => q.GastoArriendo, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Gastos de Préstamos*</div>
+                            @Html.TextBoxFor(q => q.GastoPrestamo, new { @class = "input w-full border flex-1", @id = "GastoPrestamo" })
+                            @Html.ValidationMessageFor(q => q.GastoPrestamo, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Otros Gastos*</div>
+                            @Html.TextBoxFor(q => q.OtroGasto, new { @class = "input w-full border flex-1", @id = "OtroGasto" })
+                            @Html.ValidationMessageFor(q => q.OtroGasto, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2"></div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Total de ingresos*</div>
+                            @Html.TextBoxFor(q => q.TotalIngresos, new { @class = "input w-full border flex-1", @id = "TotalIngresos", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(q => q.TotalIngresos, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Total de egresos*</div>
+                            @Html.TextBoxFor(q => q.TotalEgresos, new { @class = "input w-full border flex-1", @id = "TotalEgresos", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(q => q.TotalEgresos, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Saldo*</div>
+                            @Html.TextBoxFor(q => q.Saldo, new { @class = "input w-full border flex-1", @id = "Saldo", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(q => q.Saldo, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2"></div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-6">
+                            <div class="mb-2">¿Qué le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</div>
+                            @Html.DropDownListFor(q => q.IdCatalogoFichaMotivo_Aspirante, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaMotivo_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaMotivo_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-6">
+                            <div id="otro_motivo_ingreso" hidden>
+                                <div class="mb-2">Otro motivo de Ingreso*</div>
+                                @Html.TextBoxFor(q => q.OtroMotivoIngreso_Aspirante, new { @class = "input w-full border flex-1", @id = "OtroMotivoIngreso_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.OtroMotivoIngreso_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-6">
+                            <div class="mb-2">¿Cómo se informó de nuestra institución?*</div>
+                            @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Aspirante, new SelectList(ViewBag.lst_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaInst_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-6">
+                            <div id="otro_informacion_inst" hidden>
+                                <div class="mb-2">Otras razones*</div>
+                                @Html.TextBoxFor(q => q.OtroInformacionInst_Aspirante, new { @class = "input w-full border flex-1", @id = "OtroInformacionInst_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.OtroInformacionInst_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-6">
+                            <div class="mb-2">¿Cómo financiara los estudios?*</div>
+                            @Html.DropDownListFor(q => q.IdCatalogoFichaFinanc_Aspirante, new SelectList(ViewBag.lst_financiamiento, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "input w-full border flex-1", @id = "IdCatalogoFichaFinanc_Aspirante" })
+                            @Html.ValidationMessageFor(q => q.IdCatalogoFichaFinanc_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-6">
+                            <div  id="otro_forma_financ" hidden>
+                                <div class="mb-2">Otra forma de financiamiento*</div>
+                                @Html.TextBoxFor(q => q.OtroFinanciamiento_Aspirante, new { @class = "input w-full border flex-1", @id = "OtroFinanciamiento_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.OtroFinanciamiento_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2"></div>
+                        </div>
+                        <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                            <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorSocioEconomico();">Anterior</button>
+                            <button type="button" class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteSocioEconomico();">Siguiente</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosArchivos" hidden>
+                    <div class="font-medium text-base">Archivos</div>
+                    <div class="overflow-x-auto">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Nombre del Documento</th>
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Documento</th>
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="Detalle">
+                                <tr>
+                                    <td class="border-b dark:border-dark-5"> Cédula Aspirante</td>
+                                    <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivoCedulaAspirante"></td>
+                                    <td class="border-b dark:border-dark-5"></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-b dark:border-dark-5"> Cédula Padre</td>
+                                    <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivoCedulaPadre"></td>
+                                    <td class="border-b dark:border-dark-5"></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-b dark:border-dark-5"> Cédula Madre</td>
+                                    <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivosCedulaMadre"></td>
+                                    <td class="border-b dark:border-dark-5"></td>
+                                </tr>
+                                <tr>
+                                    <td class="border-b dark:border-dark-5"> Cédula Representante</td>
+                                    <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivosCedulaRepresentante"></td>
+                                    <td class="border-b dark:border-dark-5"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                        <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                            <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorArchivos();">Anterior</button>
+                            <button type="submit" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END: Wizard Layout -->
+        </div>
         <!-- END: Content -->
     </div>
 }
@@ -1215,43 +1237,6 @@
     });
     $("#CedulaRuc_Representante").change(function () {
         Validar_cedula_ruc_Representante();
-    });
-
-    $("#Nombres_Aspirante").blur(function () {
-        actualizar_nombre_completo_aspirante();
-    });
-    $("#Apellidos_Aspirante").blur(function () {
-        actualizar_nombre_completo_aspirante();
-    });
-
-    $("#Nombres_Padre").blur(function () {
-        actualizar_nombre_completo_padre();
-    });
-    $("#Apellidos_Padre").blur(function () {
-        actualizar_nombre_completo_padre();
-    });
-    $("#RazonSocial_Padre").blur(function () {
-        actualizar_nombre_completo_padre();
-    });
-
-    $("#Nombres_Madre").blur(function () {
-        actualizar_nombre_completo_madre();
-    });
-    $("#Apellidos_Madre").blur(function () {
-        actualizar_nombre_completo_madre();
-    });
-    $("#RazonSocial_Madre").blur(function () {
-        actualizar_nombre_completo_madre();
-    });
-
-    $("#Nombres_Representante").blur(function () {
-        actualizar_nombre_completo_representante();
-    });
-    $("#Apellidos_Representante").blur(function () {
-        actualizar_nombre_completo_representante();
-    });
-    $("#RazonSocial_Representante").blur(function () {
-        actualizar_nombre_completo_representante();
     });
 
     $("#CedulaRuc_Aspirante").change(function () {

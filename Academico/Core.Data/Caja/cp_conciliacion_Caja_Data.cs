@@ -1288,6 +1288,7 @@ namespace Core.Data.Caja
                 Entity.Total_Ing = info.Total_Ing;
 
                 Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                Entity.FechaModificacion = DateTime.Now;
                 #endregion
 
                 Context_ct.SaveChanges();
