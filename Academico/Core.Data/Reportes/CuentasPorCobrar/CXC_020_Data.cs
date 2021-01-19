@@ -175,19 +175,19 @@ namespace Core.Data.Reportes.Contabilidad
                     {
                         Lista.Add(new CXC_020_Info
                         {
-                            SaldoInicial = Convert.ToDouble(reader["SaldoInicial"]),
-                            Facturas = Convert.ToDouble(reader["Facturas"]),
-                            NotasDeDebito = Convert.ToDouble(reader["NotasDeDebito"]),
-                            SumanDebe = Convert.ToDouble(reader["SumanDebe"]),
-                            NotasCredito = Convert.ToDouble(reader["NotasCredito"]),
-                            PagoAnticipado = Convert.ToDouble(reader["PagoAnticipado"]),
-                            NetoNotaCredito = Convert.ToDouble(reader["NetoNotaCredito"]),
-                            Cobros = Convert.ToDouble(reader["Cobros"]),
-                            SaldoNeto = Convert.ToDouble(reader["SaldoNeto"]),
-                            SaldoAcreedorFinal = Convert.ToDouble(reader["SaldoAcreedorFinal"]),
-                            SaldoFinal = Convert.ToDouble(reader["SaldoFinal"]),
-                            SaldoCalculado = Convert.ToDouble(reader["SaldoCalculado"]),
-                            Diferencia = Convert.ToDouble(reader["Diferencia"]),
+                            SaldoInicial = reader["SaldoInicial"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SaldoInicial"]),
+                            Facturas = reader["Facturas"] == DBNull.Value ? 0 : Convert.ToDouble(reader["Facturas"]),
+                            NotasDeDebito = reader["NotasDeDebito"] == DBNull.Value ? 0 : Convert.ToDouble(reader["NotasDeDebito"]),
+                            SumanDebe = reader["SumanDebe"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SumanDebe"]),
+                            NotasCredito = reader["NotasCredito"] == DBNull.Value ? 0 : Convert.ToDouble(reader["NotasCredito"]),
+                            PagoAnticipado = reader["PagoAnticipado"] == DBNull.Value ? 0 : Convert.ToDouble(reader["PagoAnticipado"]),
+                            NetoNotaCredito = reader["NetoNotaCredito"] == DBNull.Value ? 0 : Convert.ToDouble(reader["NetoNotaCredito"]),
+                            Cobros = reader["Cobros"] == DBNull.Value ? 0 : Convert.ToDouble(reader["Cobros"]),
+                            SaldoNeto = reader["SaldoNeto"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SaldoNeto"]),
+                            SaldoAcreedorFinal = reader["SaldoAcreedorFinal"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SaldoAcreedorFinal"]),
+                            SaldoFinal = reader["SaldoFinal"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SaldoFinal"]),
+                            SaldoCalculado = reader["SaldoCalculado"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SaldoCalculado"]),
+                            Diferencia = reader["Diferencia"] == DBNull.Value ? 0 : Convert.ToDouble(reader["Diferencia"]),
                         });
                     }
                     reader.Close();
