@@ -1272,6 +1272,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.MostrarRetirados = false;
+            model.MostrarPromedios = true;
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -1292,6 +1293,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.p_MostrarComportamiento.Value = model.MostrarPromedios;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
@@ -1315,6 +1317,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
             report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.p_MostrarComportamiento.Value = model.MostrarPromedios;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;

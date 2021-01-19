@@ -35,6 +35,7 @@ namespace Core.Web.Reportes.Academico
             int IdCatalogoParcial = string.IsNullOrEmpty(p_IdCatalogoParcial.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
             int IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
             bool MostrarRetirados = string.IsNullOrEmpty(p_MostrarRetirados.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarRetirados.Value);
+            bool MostrarComportamiento = string.IsNullOrEmpty(p_MostrarComportamiento.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarComportamiento.Value);
 
             var emp = bus_empresa.get_info(IdEmpresa);
             if (emp != null)
@@ -88,6 +89,7 @@ namespace Core.Web.Reportes.Academico
             ((XRSubreport)sender).ReportSource.Parameters["p_IdEmpresa"].Value = p_IdEmpresa.Value == null ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdMatricula"].Value = IdMatricula.Value == null ? 0 : Convert.ToDecimal(IdMatricula.Value);
             ((XRSubreport)sender).ReportSource.Parameters["p_IdCatalogoParcial"].Value = p_IdCatalogoParcial.Value == null ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
+            ((XRSubreport)sender).ReportSource.Parameters["p_MostrarComportamiento"].Value = p_MostrarComportamiento.Value == null ? false : Convert.ToBoolean(p_MostrarComportamiento.Value);
 
             ((XRSubreport)sender).ReportSource.RequestParameters = false;
         }

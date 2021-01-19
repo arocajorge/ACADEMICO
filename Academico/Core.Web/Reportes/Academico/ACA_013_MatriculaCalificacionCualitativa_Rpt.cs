@@ -21,6 +21,7 @@ namespace Core.Web.Reportes.Academico
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             decimal IdMatricula = string.IsNullOrEmpty(p_IdMatricula.Value.ToString()) ? 0 : Convert.ToDecimal(p_IdMatricula.Value);
             int IdCatalogoParcial = string.IsNullOrEmpty(p_IdCatalogoParcial.Value.ToString()) ? 0 : Convert.ToInt32(p_IdCatalogoParcial.Value);
+            bool MostrarComportamiento = string.IsNullOrEmpty(p_MostrarComportamiento.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarComportamiento.Value);
 
             ACA_013_MatriculaCalificacionCualitativa_Bus bus_rpt = new ACA_013_MatriculaCalificacionCualitativa_Bus();
             List<ACA_013_MatriculaCalificacionCualitativa_Info> lst_rpt = new List<ACA_013_MatriculaCalificacionCualitativa_Info>();

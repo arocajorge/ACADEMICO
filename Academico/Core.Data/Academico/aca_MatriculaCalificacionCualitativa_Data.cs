@@ -368,7 +368,7 @@ namespace Core.Data.Academico
                             IdCatalogoParcial = Convert.ToInt32(reader["IdCatalogoParcial"]),
                             IdCalificacionCualitativa = string.IsNullOrEmpty(reader["IdCalificacionCualitativa"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCalificacionCualitativa"]),
                             Conducta = string.IsNullOrEmpty(reader["Conducta"].ToString()) ? (int?)null : Convert.ToInt32(reader["Conducta"]),
-                            MotivoConducta = string.IsNullOrEmpty(reader["IdCurso"].ToString()) ? null : reader["IdCurso"].ToString()
+                            MotivoConducta = string.IsNullOrEmpty(reader["MotivoConducta"].ToString()) ? null : reader["MotivoConducta"].ToString()
                         };
                     }
                 }

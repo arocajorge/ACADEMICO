@@ -50,6 +50,7 @@
             this.p_IdEmpresa = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdMatricula = new DevExpress.XtraReports.Parameters.Parameter();
             this.p_IdCatalogoParcial = new DevExpress.XtraReports.Parameters.Parameter();
+            this.p_MostrarComportamiento = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -270,7 +271,7 @@
             this.xrTableCell58.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell58.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Letra]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(?p_MostrarComportamiento==true, [Letra],\'\' )")});
             this.xrTableCell58.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell58.Multiline = true;
             this.xrTableCell58.Name = "xrTableCell58";
@@ -317,6 +318,11 @@
             this.p_IdCatalogoParcial.Name = "p_IdCatalogoParcial";
             this.p_IdCatalogoParcial.Visible = false;
             // 
+            // p_MostrarComportamiento
+            // 
+            this.p_MostrarComportamiento.Name = "p_MostrarComportamiento";
+            this.p_MostrarComportamiento.Visible = false;
+            // 
             // ACA_013_MatriculaCalificacionCualitativa_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -334,8 +340,9 @@
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdMatricula,
-            this.p_IdCatalogoParcial});
-            this.Version = "19.1";
+            this.p_IdCatalogoParcial,
+            this.p_MostrarComportamiento});
+            this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_013_MatriculaCalificacionCualitativa_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.objectDataSource1)).EndInit();
@@ -366,5 +373,6 @@
         public DevExpress.XtraReports.Parameters.Parameter p_IdEmpresa;
         public DevExpress.XtraReports.Parameters.Parameter p_IdMatricula;
         public DevExpress.XtraReports.Parameters.Parameter p_IdCatalogoParcial;
+        public DevExpress.XtraReports.Parameters.Parameter p_MostrarComportamiento;
     }
 }
