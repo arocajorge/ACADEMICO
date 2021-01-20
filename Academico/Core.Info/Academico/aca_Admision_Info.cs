@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Core.Info.Academico
 {
@@ -268,6 +269,12 @@ namespace Core.Info.Academico
         public string FechaString { get; set; }
         public int CantidadArchivos { get; set; }
         public string Representante { get; set; }
+        public HttpPostedFile FotoAspirante { get; set; }
+        public HttpPostedFile CedulaAspirante { get; set; }
+        public HttpPostedFile CedulaRepresentante { get; set; }
+        public HttpPostedFile RecordAcademicoAspirante { get; set; }
+        public HttpPostedFile PagoAlDiaAspirante { get; set; }
+        public HttpPostedFile CertificadoLaboral { get; set; }
         #endregion
     }
 }

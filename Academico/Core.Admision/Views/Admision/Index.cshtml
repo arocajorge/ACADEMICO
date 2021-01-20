@@ -105,6 +105,10 @@
                         <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnArchivos">6</button>
                         <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Archivos</div>
                     </div>
+                    <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
+                        <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnTerminos">6</button>
+                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Términos y Condiciones</div>
+                    </div>
                     <div class="wizard__line hidden lg:block w-2/3 bg-gray-200 dark:bg-dark-1 absolute mt-5"></div>
                 </div>
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosAspirante">
@@ -191,27 +195,27 @@
                             </div>
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Pais</div>
+                            <div class="mb-2">Pais*</div>
                             @Html.DropDownListFor(q => q.IdPais_Aspirante, new SelectList(ViewBag.lst_pais, "IdPais", "Nombre"), new { @class = "input w-full border flex-1", @id = "IdPais_Aspirante" })
                             @Html.ValidationMessageFor(q => q.IdPais_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Región</div>
+                            <div class="mb-2">Región*</div>
                             @Html.DropDownListFor(q => q.Cod_Region_Aspirante, new SelectList(ViewBag.lst_region, "Cod_Region", "Nom_region"), new { @class = "input w-full border flex-1", @id = "Cod_Region_Aspirante" })
                             @Html.ValidationMessageFor(q => q.Cod_Region_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Provincia</div>
+                            <div class="mb-2">Provincia*</div>
                             @Html.DropDownListFor(q => q.IdProvincia_Aspirante, new SelectList(ViewBag.lst_provincia, "IdProvincia", "Descripcion_Prov"), new { @class = "input w-full border flex-1", @id = "IdProvincia_Aspirante" })
                             @Html.ValidationMessageFor(q => q.IdProvincia_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Ciudad</div>
+                            <div class="mb-2">Ciudad*</div>
                             @Html.DropDownListFor(q => q.IdCiudad_Aspirante, new SelectList(ViewBag.lst_ciudad, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Aspirante" })
                             @Html.ValidationMessageFor(q => q.IdCiudad_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Parroquia</div>
+                            <div class="mb-2">Parroquia*</div>
                             @Html.DropDownListFor(q => q.IdParroquia_Aspirante, new SelectList(ViewBag.lst_parroquia, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Aspirante" })
                             @Html.ValidationMessageFor(q => q.IdParroquia_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
@@ -238,17 +242,17 @@
                             <div class="mb-2"></div>
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Teléfono</div>
+                            <div class="mb-2">Teléfono*</div>
                             @Html.TextBoxFor(q => q.Telefono_Aspirante, new { @class = "input w-full border flex-1", @id = "Telefono_Aspirante" })
                             @Html.ValidationMessageFor(q => q.Telefono_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Celular</div>
+                            <div class="mb-2">Celular*</div>
                             @Html.TextBoxFor(q => q.Celular_Aspirante, new { @class = "input w-full border flex-1", @id = "Celular_Aspirante" })
                             @Html.ValidationMessageFor(q => q.Celular_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
-                            <div class="mb-2">Correo</div>
+                            <div class="mb-2">Correo*</div>
                             @Html.TextBoxFor(q => q.Correo_Aspirante, new { @class = "input w-full border flex-1", @id = "Correo_Aspirante" })
                             @Html.ValidationMessageFor(q => q.Correo_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
@@ -258,7 +262,7 @@
                             @Html.ValidationMessageFor(q => q.IdReligion_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
-                            <div class="mb-2">Asiste a CentroCristiano</div>
+                            <div class="mb-2">Asiste a CentroCristiano*</div>
                             <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Aspirante" id="AsisteCentroCristiano_Aspirante" class="show-code input input--switch border" type="checkbox">
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -1141,7 +1145,8 @@
                             <tbody id="Detalle">
                                 <tr>
                                     <td class="border-b dark:border-dark-5"> Cédula Aspirante</td>
-                                    <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivoCedulaAspirante"></td>
+                                    @Html.EditorFor(model => model.FotoAspirante, new { htmlAttributes = new { @class = "input w-full border flex-1" } })
+                                    @Html.ValidationMessageFor(model => model.FotoAspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                                     <td class="border-b dark:border-dark-5"></td>
                                 </tr>
                                 <tr>
@@ -1165,6 +1170,20 @@
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                             <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorArchivos();">Anterior</button>
+                            <button type="button" class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteArchivos();">Siguiente</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosTerminos" hidden>
+                    <div class="font-medium text-base">Términos y Condiciones</div>
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">*</div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                        <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
+                            <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorTerminos();">Anterior</button>
                             <button type="submit" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
                         </div>
                     </div>

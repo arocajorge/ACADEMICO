@@ -1,6 +1,5 @@
 ﻿function ValidarEnter() {
     $(document).ready(function () {
-
         $('form').keypress(function (e) {
             if (e == 13) {
                 return false;
@@ -12,9 +11,16 @@
                 return false;
             }
         });
-
     });
 }
+function IrAlInicio() {
+    $(document).ready(function () {
+        $('body, html').animate({
+            scrollTop: '0px'
+        }, 300);
+    });
+}
+
 function SiguienteAspirante() {
     if ($("#AspiranteValido").val() == "1") {
         ValidarDatosRegistro_Aspirante();
@@ -73,6 +79,18 @@ function AnteriorArchivos() {
     $("#DatosSocioEconomico").show();
     $("#BtnSocioEconomico").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
 }
+function SiguienteArchivos() {
+    $("#DatosArchivos").hide();
+    $("#BtnArchivos").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+    $("#DatosTerminos").show();
+    $("#BtnTerminos").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+}
+function AnteriorTerminos() {
+    $("#DatosTerminos").hide();
+    $("#DatosTerminos").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+    $("#DatosArchivos").show();
+    $("#BtnArchivos").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+}
 
 function Validar_cedula_ruc_Aspirante() {
     var datos = {
@@ -108,36 +126,115 @@ function Validar_cedula_ruc_Aspirante() {
 
 
 function ValidarDatosRegistro_Aspirante() {
-    var Naturaleza = $("#Naturaleza_Aspirante").val();
-    var Tipo_documento = $("#IdTipoDocumento_Aspirante").val();
-    var Cedula_ruc = $("#CedulaRuc_Aspirante").val();
-    var Nombres = $("#Nombres_Aspirante").val();
-    var Apellidos = $("#Apellidos_Aspirante").val();
-    var NombreCompleto = $("#NombreCompleto_Aspirante").val();
+    var mensaje = "";
 
-    if (Cedula_ruc!="") {
-        if (Tipo_documento == "RUC") {
-            $("#MensajeError").html("Los datos del aspirante no son válidos, tipo de documento incorrecto");
-            $("#DivError").show();
-        }
-        else {
-            if (Nombres == "" || Apellidos == "") {
-                $("#MensajeError").html("Los datos del aspirante no son válidos, debe de ingresar nombres y apellidos");
-                $("#DivError").show();
-            }
-            else {
-                $("#MensajeError").html("");
-                $("#DivError").hide();
-
-                $("#DatosAspirante").hide();
-                $("#BtnAspirante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-                $("#DatosPadre").show();
-                $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
-            }
-        }
+    if ($("#IdAnio").val() == 0) {
+        mensaje += "año lectivo, ";
+    }
+    if ($("#IdSede").val() == 0) {
+        mensaje += "sede, ";
+    }
+    if ($("#IdJornada").val() == 0) {
+        mensaje += "jornada, ";
+    }
+    if ($("#IdNivel").val() == 0) {
+        mensaje += "nivel, ";
+    }
+    if ($("#IdCurso").val() == 0) {
+        mensaje += "curso, ";
+    }
+    if ($("#Naturaleza_Aspirante").val() == "") {
+        mensaje += "naturaleza, ";
+    }
+    if ($("#IdTipoDocumento_Aspirante").val() == "") {
+        mensaje += "tipo de documento, ";
     }
     else {
-        $("#MensajeError").html("Los datos del aspirante no son válidos, debe de ingresar número de cédula");
+        if ($("#IdTipoDocumento_Aspirante").val() == "RUC") {
+            mensaje += "tipo de documento no válido, ";
+            //$("#MensajeError").html("Los datos del aspirante no son válidos, tipo de documento incorrecto");
+            //$("#DivError").show();
+        }
+    }
+    if ($("#CedulaRuc_Aspirante").val() == "") {
+        mensaje += "número de cédula, ";
+        //$("#MensajeError").html("Los datos del aspirante no son válidos, debe de ingresar número de cédula");
+        //$("#DivError").show();
+    }
+    if ($("#Nombres_Aspirante").val() == "" || $("#Apellidos_Aspirante").val() == "") {
+        mensaje += "nombres y apellidos, ";
+        //$("#MensajeError").html("Los datos del aspirante no son válidos, debe de ingresar nombres y apellidos");
+        //$("#DivError").show();
+    }
+    if ($("#LugarNacimiento_Aspirante").val() == "") {
+        mensaje += "lugar de nacimiento, ";
+    }
+    if ($("#IdPais_Aspirante").val() == "") {
+        mensaje += "país, ";
+    }
+    if ($("#Cod_Region_Aspirante").val() == "") {
+        mensaje += "región, ";
+    }
+    if ($("#IdProvincia_Aspirante").val() == "") {
+        mensaje += "provincia, ";
+    }
+    if ($("#IdCiudad_Aspirante").val() == "") {
+        mensaje += "ciudad, ";
+    }
+    if ($("#IdParroquia_Aspirante").val() == "") {
+        mensaje += "parroquia, ";
+    }
+    if ($("#Sexo_Aspirante").val() == "") {
+        mensaje += "sexo, ";
+    }
+    if ($("#CodCatalogoSangre_Aspirante").val() == "") {
+        mensaje += "tipo de sangre, ";
+    }
+    if ($("#IdGrupoEtnico_Aspirante").val() == 0) {
+        mensaje += "grupo étnico, ";
+    }
+    if ($("#Telefono_Aspirante").val() == "") {
+        mensaje += "número de teléfono, ";
+    }
+    if ($("#Celular_Aspirante").val() == "") {
+        mensaje += "número de celular, ";
+    }
+    if ($("#Correo_Aspirante").val() == "") {
+        mensaje += "correo electrónico, ";
+    }
+    if ($("#IdReligion_Aspirante").val() == "") {
+        mensaje += "religión, ";
+    }
+    if ($("#AsisteCentroCristiano_Aspirante").val() == null) {
+        mensaje += "asiste o no a Centro Cristiano, ";
+    }
+    if ($("#Direccion_Aspirante").val() == "") {
+        mensaje += "dirección, ";
+    }
+    if ($("#Sector_Aspirante").val() == "") {
+        mensaje += "sector, ";
+    }
+    if ($("#CodCatalogoCONADIS_Aspirante").val() != "") {
+        if ($("#PorcentajeDiscapacidad_Aspirante").val() == "") {
+            mensaje += "porcentaje de discapacidad, ";
+        }
+        if ($("#NumeroCarnetConadis_Aspirante").val() == "") {
+            mensaje += "número de carnet de Conadis, ";
+        }
+    }
+
+    IrAlInicio();
+    if (mensaje == "") {
+        $("#MensajeError").html("");
+        $("#DivError").hide();
+
+        $("#DatosAspirante").hide();
+        $("#BtnAspirante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+        $("#DatosPadre").show();
+        $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    }
+    else {
+        $("#MensajeError").html("Ingresar o seleccionar: " + mensaje);
         $("#DivError").show();
     }
 }
@@ -150,35 +247,93 @@ function ValidarDatosRegistro_Padre() {
     var Apellidos = $("#Apellidos_Padre").val();
     var NombreCompleto = $("#NombreCompleto_Padre").val();
     var RazonSocial = $("#RazonSocial_Padre").val();
-    if (Naturaleza == "JURI") {
-        if (RazonSocial == "") {
-            $("#MensajeError").html("Los datos del padre no son válidos, debe de ingresar razon social");
-            $("#DivError").show();
-        }
-        else {
-            $("#MensajeError").html("");
-            $("#DivError").hide();
+    var mensaje = "";
 
-            $("#DatosPadre").hide();
-            $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-            $("#DatosMadre").show();
-            $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    if ($("#Naturaleza_Padre").val() == "") {
+        mensaje += "naturaleza, ";
+    }
+    if ($("#IdTipoDocumento_Padre").val() == "") {
+        mensaje += "tipo de documento, ";
+    }
+    if ($("#CedulaRuc_Padre").val() == "") {
+        mensaje += "número de cédula, ";
+    }
+    if ($("#Nombres_Padre").val() == "") {
+        mensaje += "nombres, ";
+    }
+    if ($("#Apellidos_Padre").val() == "") {
+        mensaje += "apellidos, ";
+    }
+    if ($("#LugarNacimiento_Aspirante").val() == "") {
+        mensaje += "lugar de nacimiento, ";
+    }
+    if ($("#IdPais_Aspirante").val() == "") {
+        mensaje += "país, ";
+    }
+    if ($("#Cod_Region_Aspirante").val() == "") {
+        mensaje += "región, ";
+    }
+    if ($("#IdProvincia_Aspirante").val() == "") {
+        mensaje += "provincia, ";
+    }
+    if ($("#IdCiudad_Aspirante").val() == "") {
+        mensaje += "ciudad, ";
+    }
+    if ($("#IdParroquia_Aspirante").val() == "") {
+        mensaje += "parroquia, ";
+    }
+    if ($("#Sexo_Aspirante").val() == "") {
+        mensaje += "sexo, ";
+    }
+    if ($("#CodCatalogoSangre_Aspirante").val() == "") {
+        mensaje += "tipo de sangre, ";
+    }
+    if ($("#IdGrupoEtnico_Aspirante").val() == 0) {
+        mensaje += "grupo étnico, ";
+    }
+    if ($("#Telefono_Aspirante").val() == "") {
+        mensaje += "número de teléfono, ";
+    }
+    if ($("#Celular_Aspirante").val() == "") {
+        mensaje += "número de celular, ";
+    }
+    if ($("#Correo_Aspirante").val() == "") {
+        mensaje += "correo electrónico, ";
+    }
+    if ($("#IdReligion_Aspirante").val() == "") {
+        mensaje += "religión, ";
+    }
+    if ($("#AsisteCentroCristiano_Aspirante").val() == null) {
+        mensaje += "asiste o no a Centro Cristiano, ";
+    }
+    if ($("#Direccion_Aspirante").val() == "") {
+        mensaje += "dirección, ";
+    }
+    if ($("#Sector_Aspirante").val() == "") {
+        mensaje += "sector, ";
+    }
+    if ($("#CodCatalogoCONADIS_Aspirante").val() != "") {
+        if ($("#PorcentajeDiscapacidad_Aspirante").val() == "") {
+            mensaje += "porcentaje de discapacidad, ";
+        }
+        if ($("#NumeroCarnetConadis_Aspirante").val() == "") {
+            mensaje += "número de carnet de Conadis, ";
         }
     }
-    else {
-        if (Nombres == "" || Apellidos == "") {
-            $("#MensajeError").html("Los datos del padre no son válidos, debe de ingresar nombres y apellidos");
-            $("#DivError").show();
-        }
-        else {
-            $("#MensajeError").html("");
-            $("#DivError").hide();
 
-            $("#DatosPadre").hide();
-            $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
-            $("#DatosMadre").show();
-            $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
-        }
+    IrAlInicio();
+    if (mensaje == "") {
+        $("#MensajeError").html("");
+        $("#DivError").hide();
+
+        $("#DatosAspirante").hide();
+        $("#BtnAspirante").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+        $("#DatosPadre").show();
+        $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+    }
+    else {
+        $("#MensajeError").html("Ingresar o seleccionar: " + mensaje);
+        $("#DivError").show();
     }
 }
 function ValidarDatosRegistro_Madre() {
@@ -1052,6 +1207,8 @@ function get_info_x_num_cedula_aspirante() {
                 $("#MensajeError").html("El aspirante ya fue registrado");
                 $("#DivError").show();
                 $("#AspiranteValido").val("0");
+
+                IrAlInicio();
                 //alert("El aspirante ya fue registrado");
                 //window.location.href = '/Admision/Index'
             }
