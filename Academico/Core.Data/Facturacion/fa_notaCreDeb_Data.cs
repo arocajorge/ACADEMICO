@@ -11,6 +11,7 @@ using Core.Info.General;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace Core.Data.Facturacion
@@ -907,8 +908,8 @@ namespace Core.Data.Facturacion
             {
                 EntitiesCaja dbCaj = new EntitiesCaja();
                 EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
-                using (EntitiesFacturacion db = new EntitiesFacturacion())
-                {
+                EntitiesFacturacion db = new EntitiesFacturacion();
+                
                     var lst = db.spfa_notaCreDeb_ParaContabilizarAcademico(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdNota).ToList();
                     var NCND = lst.Count > 0 ? lst[0] : null;
                     if (NCND == null)
@@ -945,7 +946,29 @@ namespace Core.Data.Facturacion
                         NCND.IdCtaCbleDebe = TipoNota.IdCtaCbleCXC;
                         NCND.IdCtaCbleHaber = TipoNota.IdCtaCble;
                     }
-                    
+
+                if (NCND.CreDeb.Trim() == "C")
+                {
+                    using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand();
+                        command.Connection = connection;
+                        command.CommandText = "select a.IdEmpresa, a.IdSucursal, a.IdBodega, a.IdNota, cs.IdCtaCble from fa_notaCreDeb as a join"
+                            + " fa_notaCreDeb_x_cxc_cobro as b on a.IdEmpresa = b.IdEmpresa_nt and a.IdSucursal = b.IdSucursal_nt and a.IdBodega = b.IdBodega_nt and a.IdNota = b.IdNota_nt join"
+                            + " cxc_cobro as c on b.IdEmpresa_cbr = c.IdEmpresa and b.IdSucursal_cbr = c.IdSucursal and b.IdCobro_cbr = c.IdCobro left join"
+                            + " cxc_cobro_det as d on c.IdEmpresa = d.IdEmpresa and c.IdSucursal = d.IdSucursal and c.IdCobro = d.IdCobro join"
+                            + " cxc_cobro_tipo_Param_conta_x_sucursal as cs on cs.IdEmpresa = c.IdEmpresa and cs.IdCobro_tipo = c.IdCobro_tipo"
+                            + " where a.IdEmpresa = " + info.IdEmpresa.ToString() + " and a.IdSucursal = " + info.IdSucursal.ToString() + " and a.IdBodega = " + info.IdBodega.ToString() + " and a.IdNota = " + info.IdNota.ToString() + " and d.IdCobro is null ";
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            NCND.IdCtaCbleDebe = reader["IdCtaCble"].ToString();
+                        }
+                    }
+                }
+                
+
                     #region Cabecera
                     ct_cbtecble_Info diario = new ct_cbtecble_Info
                     {
@@ -1050,8 +1073,7 @@ namespace Core.Data.Facturacion
                         return null;
 
                     return diario;
-                }
-
+            
                 
             }
             catch (Exception)
