@@ -431,6 +431,43 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Dificultad_Lectura, settings =>
+                                {
+                                    settings.Name = "Dificultad_Lectura";
+                                    settings.Text = "Dificultad en lectura";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Dificultad_Lectura, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Dificultad_Escritura, settings =>
+                                {
+                                    settings.Name = "Dificultad_Escritura";
+                                    settings.Text = "Dificultad en escritura";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Dificultad_Escritura, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Dificultad_Matematicas, settings =>
+                                {
+                                    settings.Name = "Dificultad_Matematicas";
+                                    settings.Text = "Dificultad en matematicas";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Dificultad_Matematicas, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <h4>Datos Conadis</h4><hr />
                 <div class="row">
                     <div class="col-md-12">

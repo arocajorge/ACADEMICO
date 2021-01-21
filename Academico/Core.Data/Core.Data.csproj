@@ -496,6 +496,9 @@
     <Compile Include="Base\VWACA_021.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwaca_Alumno.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\vwaca_Alumno_PeriodoActual.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
@@ -1580,9 +1583,6 @@
     </Compile>
     <Compile Include="Base\tb_sucursal_FormaPago_x_fa_NivelDescuento.cs">
       <DependentUpon>ModelGeneral.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\vwaca_Alumno.cs">
-      <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwaca_AlumnoDocumento.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>

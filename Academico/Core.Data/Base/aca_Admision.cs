@@ -39,7 +39,7 @@ namespace Core.Data.Base
         public string NumeroCarnetConadis_Aspirante { get; set; }
         public Nullable<int> IdGrupoEtnico_Aspirante { get; set; }
         public Nullable<int> IdReligion_Aspirante { get; set; }
-        public Nullable<bool> AsisteCentroCristiano_Aspirante { get; set; }
+        public bool AsisteCentroCristiano_Aspirante { get; set; }
         public string LugarNacimiento_Aspirante { get; set; }
         public string IdPais_Aspirante { get; set; }
         public string Cod_Region_Aspirante { get; set; }
@@ -204,6 +204,10 @@ namespace Core.Data.Base
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public bool Dificultad_Lectura { get; set; }
+        public bool Dificultad_Escritura { get; set; }
+        public bool Dificultad_Matematicas { get; set; }
+        public bool AceptaTerminos { get; set; }
     
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Catalogo aca_Catalogo { get; set; }

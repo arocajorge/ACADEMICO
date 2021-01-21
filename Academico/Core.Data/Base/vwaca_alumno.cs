@@ -51,5 +51,8 @@ namespace Core.Data.Base
         public Nullable<int> IdReligion { get; set; }
         public Nullable<bool> AsisteCentroCristiano { get; set; }
         public Nullable<int> IdGrupoEtnico { get; set; }
+        public Nullable<bool> Dificultad_Lectura { get; set; }
+        public Nullable<bool> Dificultad_Escritura { get; set; }
+        public Nullable<bool> Dificultad_Matematicas { get; set; }
     }
 }

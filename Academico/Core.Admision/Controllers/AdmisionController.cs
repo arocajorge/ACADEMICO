@@ -69,10 +69,10 @@ namespace Core.Admision.Controllers
                 CodCatalogoCONADIS_Padre = "",
                 CodCatalogoCONADIS_Madre= "",
                 CodCatalogoCONADIS_Representante = "",
-                IdGrupoEtnico_Aspirante = 0,
-                IdGrupoEtnico_Padre = 0,
-                IdGrupoEtnico_Madre = 0,
-                IdGrupoEtnico_Representante = 0,
+                IdGrupoEtnico_Aspirante = (int?)null,
+                IdGrupoEtnico_Padre = (int?)null,
+                IdGrupoEtnico_Madre = (int?)null,
+                IdGrupoEtnico_Representante = (int?)null,
                 IdEstadoCivil_Padre = "",
                 IdEstadoCivil_Madre = "",
                 IdEstadoCivil_Representante = "",
@@ -136,7 +136,7 @@ namespace Core.Admision.Controllers
                 FechaNacimiento_Madre = DateTime.Now,
                 FechaNacimiento_Representante = DateTime.Now,
                 IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO),
-                Representante="O"
+                Representante="O",
             };
 
             cargar_combos(model);
@@ -144,9 +144,8 @@ namespace Core.Admision.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(aca_Admision_Info model, IList<HttpPostedFileBase> ArchivosAspirante)
+        public ActionResult Index(aca_Admision_Info model)
         {
-
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -161,67 +160,66 @@ namespace Core.Admision.Controllers
                 return View(model);
             }
 
-            if (ArchivosAspirante != null)
+            var FilePath = Server.MapPath("~/Content/aspirantes/" + model.IdAdmision);
+            if (!Directory.Exists(FilePath))
             {
-                //var IdAdmision = bus_admision.GetId(model.IdEmpresa);
-                var FilePath = Server.MapPath("~/Content/aspirantes/"+model.IdAdmision);
-                if (!Directory.Exists(FilePath))
-                {
-                    Directory.CreateDirectory(FilePath);
-                }
-
-                for (int i = 0; i < ArchivosAspirante.Count(); i++)
-                {
-                    var NombreArchivo = "Documento";
-                    if (i==0)
-                    {
-                        NombreArchivo = "CedulaEstudiante";
-                    }
-                    else if (i ==1)
-                    {
-                        NombreArchivo = "CedulaPadre";
-                    }
-                    else if (i ==2)
-                    {
-                        NombreArchivo = "CedulaMadre";
-                    }
-                    else if (i ==3)
-                    {
-                        NombreArchivo = "CedulaRepresentante";
-                    }
-                    
-                    HttpPostedFileBase file = ArchivosAspirante[i];
-                    if (file != null)
-                    {
-                        if (file.ContentLength > 0)
-                        {
-                            var fileName = Path.GetFileName(file.FileName);
-                            var extension = Path.GetExtension(file.FileName);
-                            var NombreArchivoGuardar = NombreArchivo + extension;
-                            var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                            file.SaveAs(path);
-                        }
-                    }
-                }
-
-                //var Secuencia = 0;
-                //foreach (var file in ArchivosAspirante)
-                //{
-                //    if (file!=null)
-                //    {
-                //        if (file.ContentLength > 0)
-                //        {
-                //            Secuencia++;
-                //            var fileName = Path.GetFileName(file.FileName);
-                //            var extension = Path.GetExtension(file.FileName);
-                //            var NombreArchivo = "Documento_" + Secuencia + extension;
-                //            var path = Path.Combine(FilePath, NombreArchivo);
-                //            file.SaveAs(path);
-                //        }
-                //    }
-                //}
+                Directory.CreateDirectory(FilePath);
             }
 
+            if (model.FotoAspirante != null)
+            {
+                var NombreArchivo = "FotoAspirante";
+                var fileName = Path.GetFileName(model.FotoAspirante.FileName);
+                var extension = Path.GetExtension(model.FotoAspirante.FileName);
+                var NombreArchivoGuardar = NombreArchivo + extension;
+                var path = Path.Combine(FilePath, NombreArchivoGuardar);
+                model.FotoAspirante.SaveAs(path);
+            }
+            if (model.CedulaAspirante != null)
+            {
+                var NombreArchivo = "CedulaAspirante";
+                var fileName = Path.GetFileName(model.CedulaAspirante.FileName);
+                var extension = Path.GetExtension(model.CedulaAspirante.FileName);
+                var NombreArchivoGuardar = NombreArchivo + extension;
+                var path = Path.Combine(FilePath, NombreArchivoGuardar);
+                model.FotoAspirante.SaveAs(path);
+            }
+            if (model.CedulaRepresentante != null)
+            {
+                var NombreArchivo = "CedulaRepresentante";
+                var fileName = Path.GetFileName(model.CedulaRepresentante.FileName);
+                var extension = Path.GetExtension(model.CedulaRepresentante.FileName);
+                var NombreArchivoGuardar = NombreArchivo + extension;
+                var path = Path.Combine(FilePath, NombreArchivoGuardar);
+                model.FotoAspirante.SaveAs(path);
+            }
+            if (model.RecordAcademicoAspirante != null)
+            {
+                var NombreArchivo = "RecordAcademico";
+                var fileName = Path.GetFileName(model.RecordAcademicoAspirante.FileName);
+                var extension = Path.GetExtension(model.RecordAcademicoAspirante.FileName);
+                var NombreArchivoGuardar = NombreArchivo + extension;
+                var path = Path.Combine(FilePath, NombreArchivoGuardar);
+                model.FotoAspirante.SaveAs(path);
+            }
+            if (model.PagoAlDiaAspirante != null)
+            {
+                var NombreArchivo = "PagoAlDia";
+                var fileName = Path.GetFileName(model.PagoAlDiaAspirante.FileName);
+                var extension = Path.GetExtension(model.PagoAlDiaAspirante.FileName);
+                var NombreArchivoGuardar = NombreArchivo + extension;
+                var path = Path.Combine(FilePath, NombreArchivoGuardar);
+                model.FotoAspirante.SaveAs(path);
+            }
+            if (model.CertificadoLaboral != null)
+            {
+                var NombreArchivo = "CertificadoLaboral";
+                var fileName = Path.GetFileName(model.CertificadoLaboral.FileName);
+                var extension = Path.GetExtension(model.CertificadoLaboral.FileName);
+                var NombreArchivoGuardar = NombreArchivo + extension;
+                var path = Path.Combine(FilePath, NombreArchivoGuardar);
+                model.FotoAspirante.SaveAs(path);
+            }
             return RedirectToAction("Index");
         }
 
@@ -314,13 +312,86 @@ namespace Core.Admision.Controllers
             string return_naturaleza_padre = "";
             string return_naturaleza_madre = "";
             string return_naturaleza_representante = "";
+            if (info.FotoAspirante != null)
+            {
+                if (info.FotoAspirante.ContentLength > 0 && info.FotoAspirante.ContentLength >= 4000000)
+                {
+                    msg = "Peso de archivo (foto del aspirante) no permitido";
+                    return false;
+                }
+            }
+            else
+            {
+                msg = "Cargue el archivo (foto del aspirante)";
+                return false;
+            }
 
-            //if (info.CantidadArchivos == 0)
-            //{
-            //    msg = "Debe subir los documentos solicitados para la admisión";
-            //    info.info_valido_aspirante = false;
-            //    return false;
-            //}
+            if (info.CedulaAspirante != null)
+            {
+                if (info.CedulaAspirante.ContentLength > 0 && info.CedulaAspirante.ContentLength >= 4000000)
+                {
+                    msg = "Peso de archivo (cédula del aspirante) no permitido";
+                    return false;
+                }
+            }
+            else
+            {
+                msg = "Cargue el archivo (cédula del aspirante)";
+                return false;
+            }
+            if (info.CedulaRepresentante != null)
+            {
+                if (info.CedulaRepresentante.ContentLength > 0 && info.CedulaRepresentante.ContentLength >= 4000000)
+                {
+                    msg = "Peso de archivo (cédula del representante) no permitido";
+                    return false;
+                }
+            }
+            else
+            {
+                msg = "Cargue el archivo (cédula del representante)";
+                return false;
+            }
+            if (info.RecordAcademicoAspirante != null)
+            {
+                if (info.RecordAcademicoAspirante.ContentLength > 0 && info.RecordAcademicoAspirante.ContentLength >= 4000000)
+                {
+                    msg = "Peso de archivo (record académico del aspirante) no permitido";
+                    return false;
+                }
+            }
+            else
+            {
+                msg = "Cargue el archivo (record académico del aspirante)";
+                return false;
+            }
+            if (info.PagoAlDiaAspirante != null)
+            {
+                if (info.PagoAlDiaAspirante.ContentLength > 0 && info.PagoAlDiaAspirante.ContentLength >= 4000000)
+                {
+                    msg = "Peso de archivo (pago al día) no permitido";
+                    return false;
+                }
+            }
+            else
+            {
+                msg = "Cargue el archivo (pago al día)";
+                return false;
+            }
+            if (info.CertificadoLaboral != null)
+            {
+                if (info.CertificadoLaboral.ContentLength > 0 && info.CertificadoLaboral.ContentLength >= 4000000)
+                {
+                    msg = "Peso de archivo (certificado laboral) no permitido";
+                    return false;
+                }
+            }
+            else
+            {
+                msg = "Cargue el archivo (certificado laboral)";
+                return false;
+            }
+
             info.NombreCompleto_Aspirante = info.Apellidos_Aspirante + ' ' + info.Nombres_Aspirante;
             info.FechaNacimiento_Aspirante = (info.FechaNacimiento_Aspirante == null ? (DateTime?)null : info.FechaNacimiento_Aspirante);
             info.FechaNacimiento_Padre = (info.FechaNacimiento_Padre == null ? (DateTime?)null : info.FechaNacimiento_Padre);
@@ -665,6 +736,24 @@ namespace Core.Admision.Controllers
             mes = mes - 1;
             resultado.mes = mes.ToString();
             resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ValidarArchivos(HttpPostedFileBase FotoAspirante)
+        {
+            var resultado = "";
+
+            if (FotoAspirante==null)
+            {
+                resultado = "foto del aspirante, ";
+            }
+            else
+            {
+                if (FotoAspirante.ContentLength > 0 && FotoAspirante.ContentLength <= 100000)
+                {
+                    resultado = "peso no permitido para foto del aspirante, ";
+                }
+            }
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

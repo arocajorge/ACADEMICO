@@ -263,7 +263,8 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Asiste a CentroCristiano*</div>
-                            <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Aspirante" id="AsisteCentroCristiano_Aspirante" class="show-code input input--switch border" type="checkbox">
+                            @Html.CheckBoxFor(m => m.AsisteCentroCristiano_Aspirante, new { @class = "show-code input input--switch border", @id = "AsisteCentroCristiano_Aspirante" })
+                            @*<input da@*ta-target="#input-group-datepicker" name="AsisteCentroCristiano_Aspirante" id="AsisteCentroCristiano_Aspirante" class="show-code input input--switch border" type="checkbox">*@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Dirección*</div>
@@ -274,6 +275,19 @@
                             <div class="mb-2">Sector*</div>
                             @Html.TextBoxFor(q => q.Sector_Aspirante, new { @class = "input w-full border flex-1", @id = "Sector_Aspirante" })
                             @Html.ValidationMessageFor(q => q.Sector_Aspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Dificultad para lectura</div>
+                            @Html.CheckBoxFor(m => m.Dificultad_Lectura, new { @class = "show-code input input--switch border", @id = "Dificultad_Lectura" })
+                            
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Dificultad para escritura</div>
+                            @Html.CheckBoxFor(m => m.Dificultad_Escritura, new { @class = "show-code input input--switch border", @id = "Dificultad_Escritura" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Dificultad para matematicas</div>
+                            @Html.CheckBoxFor(m => m.Dificultad_Matematicas, new { @class = "show-code input input--switch border", @id = "Dificultad_Matematicas" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
                             <div class="mb-2"></div>
@@ -320,7 +334,8 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Está fallecido</div>
-                            <input data-target="#input-group-datepicker" name="EstaFallecido_Padre" id="EstaFallecido_Padre" class="show-code input input--switch border" type="checkbox">
+                            @Html.CheckBoxFor(m => m.EstaFallecido_Padre, new { @class = "show-code input input--switch border", @id = "EstaFallecido_Padre" })
+                            @*<input data-target="#input-group-datepicker" name="EstaFallecido_Padre" id="EstaFallecido_Padre" class="show-code input input--switch border" type="checkbox">*@
                             @Html.ValidationMessageFor(q => q.EstaFallecido_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -415,17 +430,20 @@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Asiste a Centro Cristiano</div>
-                                <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Padre" id="AsisteCentroCristiano_Padre" class="show-code input input--switch border" type="checkbox">
+                                @Html.CheckBoxFor(m => m.AsisteCentroCristiano_Padre, new { @class = "show-code input input--switch border", @id = "AsisteCentroCristiano_Padre" })
+                                @*<input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Padre" id="AsisteCentroCristiano_Padre" class="show-code input input--switch border" type="checkbox">*@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Tiene casa propia</div>
-                                <input data-target="#input-group-datepicker" name="CasaPropia_Padre" id="CasaPropia_Padre" class="show-code input input--switch border" type="checkbox">
+                                @Html.CheckBoxFor(m => m.CasaPropia_Padre, new { @class = "show-code input input--switch border", @id = "CasaPropia_Padre" })
+                                @*<input data-target="#input-group-datepicker" name="CasaPropia_Padre" id="CasaPropia_Padre" class="show-code input input--switch border" type="checkbox">*@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Tiene vehiculo propio</div>
-                                <input data-target="#input-group-datepicker" name="VehiculoPropio_Padre" id="VehiculoPropio_Padre" class="show-code input input--switch border" type="checkbox">
+                                @Html.CheckBoxFor(m => m.VehiculoPropio_Padre, new { @class = "show-code input input--switch border", @id = "VehiculoPropio_Padre" })
+                                @*<input data-target="#input-group-datepicker" name="VehiculoPropio_Padre" id="VehiculoPropio_Padre" class="show-code input input--switch border" type="checkbox">*@
                             </div>
-                            <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoPadre" hidden>
+                            <div class="intro-y col-span-12 sm:col-span-3" id="MarcaVehiculoPadre" hidden>
                                 <div class="mb-2">Marca</div>
                                 @Html.TextBoxFor(q => q.Marca_Padre, new { @class = "input w-full border flex-1", @id = "Marca_Padre" })
                                 @Html.ValidationMessageFor(q => q.Marca_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
@@ -434,6 +452,11 @@
                                 <div class="mb-2">Modelo</div>
                                 @Html.TextBoxFor(q => q.Modelo_Padre, new { @class = "input w-full border flex-1", @id = "Modelo_Padre" })
                                 @Html.ValidationMessageFor(q => q.Modelo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3" id="AnioVehiculoPadre" hidden>
+                                <div class="mb-2">Año</div>
+                                @Html.TextBoxFor(q => q.AnioVehiculo_Padre, new { @class = "input w-full border flex-1", @id = "AnioVehiculo_Padre" })
+                                @Html.ValidationMessageFor(q => q.AnioVehiculo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <div class="mb-2">Dirección*</div>
@@ -469,22 +492,22 @@
                             @Html.ValidationMessageFor(q => q.CargoTrabajo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Teléfono</div>
+                            <div class="mb-2">Teléfono*</div>
                             @Html.TextBoxFor(q => q.TelefonoTrabajo_Padre, new { @class = "input w-full border flex-1", @id = "TelefonoTrabajo_Padre" })
                             @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Años de servicio</div>
+                            <div class="mb-2">Años de servicio*</div>
                             @Html.TextBoxFor(q => q.AniosServicio_Padre, new { @class = "input w-full border flex-1", @id = "AniosServicio_Padre" })
                             @Html.ValidationMessageFor(q => q.AniosServicio_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">Ingreso mensual</div>
+                            <div class="mb-2">Ingreso mensual*</div>
                             @Html.TextBoxFor(q => q.IngresoMensual_Padre, new { @class = "input w-full border flex-1", @id = "IngresoMensual_Padre" })
                             @Html.ValidationMessageFor(q => q.IngresoMensual_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-12">
-                            <div class="mb-2">Dirección</div>
+                            <div class="mb-2">Dirección*</div>
                             @Html.TextBoxFor(q => q.DireccionTrabajo_Padre, new { @class = "input w-full border flex-1", @id = "DireccionTrabajo_Padre" })
                             @Html.ValidationMessageFor(q => q.DireccionTrabajo_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
@@ -535,7 +558,8 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Está fallecido</div>
-                            <input data-target="#input-group-datepicker" name="EstaFallecido_Madre" id="EstaFallecido_Madre" class="show-code input input--switch border" type="checkbox">
+                            @Html.CheckBoxFor(m => m.EstaFallecido_Madre, new { @class = "show-code input input--switch border", @id = "EstaFallecido_Madre" })
+                            @*<input data-target="#input-group-datepicker" name="EstaFallecido_Madre" id="EstaFallecido_Madre" class="show-code input input--switch border" type="checkbox">*@
                             @Html.ValidationMessageFor(q => q.EstaFallecido_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
@@ -630,17 +654,20 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Asiste a Centro Cristiano</div>
-                            <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Madre" id="AsisteCentroCristiano_Madre" class="show-code input input--switch border" type="checkbox">
+                            @Html.CheckBoxFor(m => m.AsisteCentroCristiano_Madre, new { @class = "show-code input input--switch border", @id = "AsisteCentroCristiano_Madre" })
+                            @*<input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Madre" id="AsisteCentroCristiano_Madre" class="show-code input input--switch border" type="checkbox">*@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tiene casa propia</div>
-                            <input data-target="#input-group-datepicker" name="CasaPropia_Madre" id="CasaPropia_Madre" class="show-code input input--switch border" type="checkbox">
+                            @Html.CheckBoxFor(m => m.CasaPropia_Madre, new { @class = "show-code input input--switch border", @id = "CasaPropia_Madre" })
+                            @*<input data-target="#input-group-datepicker" name="CasaPropia_Madre" id="CasaPropia_Madre" class="show-code input input--switch border" type="checkbox">*@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tiene vehiculo propio</div>
-                            <input data-target="#input-group-datepicker" name="VehiculoPropio_Madre" id="VehiculoPropio_Madre" class="show-code input input--switch border" type="checkbox">
+                            @Html.CheckBoxFor(m => m.VehiculoPropio_Madre, new { @class = "show-code input input--switch border", @id = "VehiculoPropio_Madre" })
+                            @*<input data-target="#input-group-datepicker" name="VehiculoPropio_Madre" id="VehiculoPropio_Madre" class="show-code input input--switch border" type="checkbox">*@
                         </div>
-                        <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoMadre" hidden>
+                        <div class="intro-y col-span-12 sm:col-span-3" id="MarcaVehiculoMadre" hidden>
                             <div class="mb-2">Marca</div>
                             @Html.TextBoxFor(q => q.Marca_Madre, new { @class = "input w-full border flex-1", @id = "Marca_Madre" })
                             @Html.ValidationMessageFor(q => q.Marca_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
@@ -649,6 +676,11 @@
                             <div class="mb-2">Modelo</div>
                             <input type="text" id="Modelo_Madre" name="Modelo_Madre" class="input w-full border flex-1">
                             @Html.ValidationMessageFor(q => q.Modelo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3" id="AnioVehiculoMadre" hidden>
+                            <div class="mb-2">Año</div>
+                            @Html.TextBoxFor(q => q.AnioVehiculo_Madre, new { @class = "input w-full border flex-1", @id = "AnioVehiculo_Madre" })
+                            @Html.ValidationMessageFor(q => q.AnioVehiculo_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Dirección*</div>
@@ -770,7 +802,8 @@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Está fallecido</div>
-                                <input data-target="#input-group-datepicker" name="EstaFallecido_Representante" id="EstaFallecido_Representante" class="show-code input input--switch border" type="checkbox">
+                                @Html.CheckBoxFor(m => m.EstaFallecido_Representante, new { @class = "show-code input input--switch border", @id = "EstaFallecido_Representante" })
+                                @*<input data-target="#input-group-datepicker" name="EstaFallecido_Representante" id="EstaFallecido_Representante" class="show-code input input--switch border" type="checkbox">*@
                                 @Html.ValidationMessageFor(q => q.EstaFallecido_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
@@ -865,17 +898,20 @@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Asiste a CentroCristiano</div>
-                                <input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Representante" id="AsisteCentroCristiano_Representante" class="show-code input input--switch border" type="checkbox">
+                                @Html.CheckBoxFor(m => m.AsisteCentroCristiano_Representante, new { @class = "show-code input input--switch border", @id = "AsisteCentroCristiano_Representante" })
+                                @*<input data-target="#input-group-datepicker" name="AsisteCentroCristiano_Representante" id="AsisteCentroCristiano_Representante" class="show-code input input--switch border" type="checkbox">*@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Tiene casa propia</div>
-                                <input data-target="#input-group-datepicker" name="CasaPropia_Representante" id="CasaPropia_Representante" class="show-code input input--switch border" type="checkbox">
+                                @Html.CheckBoxFor(m => m.CasaPropia_Representante, new { @class = "show-code input input--switch border", @id = "CasaPropia_Representante" })
+                                @*<input data-target="#input-group-datepicker" name="CasaPropia_Representante" id="CasaPropia_Representante" class="show-code input input--switch border" type="checkbox">*@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-3">
                                 <div class="mb-2">Tiene vehiculo propio</div>
-                                <input data-target="#input-group-datepicker" name="VehiculoPropio_Representante" id="VehiculoPropio_Representante" class="show-code input input--switch border" type="checkbox">
+                                @Html.CheckBoxFor(m => m.VehiculoPropio_Representante, new { @class = "show-code input input--switch border", @id = "VehiculoPropio_Representante" })
+                                @*<input data-target="#input-group-datepicker" name="VehiculoPropio_Representante" id="VehiculoPropio_Representante" class="show-code input input--switch border" type="checkbox">*@
                             </div>
-                            <div class="intro-y col-span-12 sm:col-span-6" id="MarcaVehiculoRepresentante" hidden>
+                            <div class="intro-y col-span-12 sm:col-span-3" id="MarcaVehiculoRepresentante" hidden>
                                 <div class="mb-2">Marca</div>
                                 @Html.TextBoxFor(q => q.Marca_Representante, new { @class = "input w-full border flex-1", @id = "Marca_Representante" })
                                 @Html.ValidationMessageFor(q => q.Marca_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
@@ -884,6 +920,11 @@
                                 <div class="mb-2">Modelo</div>
                                 @Html.TextBoxFor(q => q.Modelo_Representante, new { @class = "input w-full border flex-1", @id = "Modelo_Representante" })
                                 @Html.ValidationMessageFor(q => q.Modelo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3" id="AnioVehiculoRepresentante" hidden>
+                                <div class="mb-2">Año</div>
+                                @Html.TextBoxFor(q => q.AnioVehiculo_Representante, new { @class = "input w-full border flex-1", @id = "AnioVehiculo_Representante" })
+                                @Html.ValidationMessageFor(q => q.AnioVehiculo_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <div class="mb-2">Dirección*</div>
@@ -997,11 +1038,13 @@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tiene luz eléctrica*</div>
-                            <input data-target="#input-group-datepicker" name="TieneElectricidad_Aspirante" id="TieneElectricidad_Aspirante" class="show-code input input--switch border" type="checkbox">
+                            @Html.CheckBoxFor(m => m.TieneElectricidad_Aspirante, new { @class = "show-code input input--switch border", @id = "TieneElectricidad_Aspirante" })
+                            @*<input data-target="#input-group-datepicker" name="TieneElectricidad_Aspirante" id="TieneElectricidad_Aspirante" class="show-code input input--switch border" type="checkbox">*@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div class="mb-2">Tiene hermanos en la Institución</div>
-                            <input data-target="#input-group-datepicker" name="TieneHermanos_Aspirante" id="TieneHermanos_Aspirante" class="show-code input input--switch border" type="checkbox">
+                            @Html.CheckBoxFor(m => m.TieneHermanos_Aspirante, new { @class = "show-code input input--switch border", @id = "TieneHermanos_Aspirante" })
+                            @*<input data-target="#input-group-datepicker" name="TieneHermanos_Aspirante" id="TieneHermanos_Aspirante" class="show-code input input--switch border" type="checkbox">*@
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-3">
                             <div id="cant_hermanos">
@@ -1139,17 +1182,53 @@
                                 <tr>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Nombre del Documento</th>
                                     <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Documento</th>
-                                    <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Estado</th>
+                                    <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Observación</th>
                                 </tr>
                             </thead>
                             <tbody id="Detalle">
                                 <tr>
-                                    <td class="border-b dark:border-dark-5"> Cédula Aspirante</td>
-                                    @Html.EditorFor(model => model.FotoAspirante, new { htmlAttributes = new { @class = "input w-full border flex-1" } })
-                                    @Html.ValidationMessageFor(model => model.FotoAspirante, "", new { @class = "pristine-error text-theme-6 mt-2" })
-                                    <td class="border-b dark:border-dark-5"></td>
+                                    <td class="border-b dark:border-dark-5"> Foto Aspirante</td>
+                                    <td class="border-b dark:border-dark-5">
+                                        @Html.TextBoxFor(model => model.FotoAspirante, new { @type = "file", @id = "FotoAspirante" })
+                                    </td>
+                                    <td class="border-b dark:border-dark-5">Foto tamaño carnet a colores del postulante</td>
                                 </tr>
                                 <tr>
+                                    <td class="border-b dark:border-dark-5"> Cédula Aspirante</td>
+                                    <td class="border-b dark:border-dark-5">
+                                        @Html.TextBoxFor(model => model.CedulaAspirante, new { @type = "file", @id = "CedulaAspirante" })
+                                    </td>
+                                    <td class="border-b dark:border-dark-5">Copia a color de la cédula del aspirante</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-b dark:border-dark-5"> Cédula Representante</td>
+                                    <td class="border-b dark:border-dark-5">
+                                        @Html.TextBoxFor(model => model.CedulaRepresentante, new { @type = "file", @id = "CedulaRepresentante" })
+                                    </td>
+                                    <td class="border-b dark:border-dark-5">Copia a color de la cédula del representante</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-b dark:border-dark-5"> Record Academico del Aspirante</td>
+                                    <td class="border-b dark:border-dark-5">
+                                        @Html.TextBoxFor(model => model.RecordAcademicoAspirante, new { @type = "file", @id = "RecordAcademicoAspirante" })
+                                    </td>
+                                    <td class="border-b dark:border-dark-5">Copia del record académico actual del aspirante</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-b dark:border-dark-5"> Pago al día</td>
+                                    <td class="border-b dark:border-dark-5">
+                                        @Html.TextBoxFor(model => model.PagoAlDiaAspirante, new { @type = "file", @id = "PagoAlDiaAspirante" })
+                                    </td>
+                                    <td class="border-b dark:border-dark-5">Certificado de estar al día en los pagos de las pensiones (si el aspirante procede de una Institución Particular)</td>
+                                </tr>
+                                <tr>
+                                    <td class="border-b dark:border-dark-5"> Certificado laboral de los padres</td>
+                                    <td class="border-b dark:border-dark-5">
+                                        @Html.TextBoxFor(model => model.CertificadoLaboral, new { @type = "file", @id = "CertificadoLaboral" })
+                                    </td>
+                                    <td class="border-b dark:border-dark-5">Si padre y madre trabajan, deberá subir ambos documentos en un solo archivo pdf donde se detalle los ingresos y el tiempo que labora en la empresa</td>
+                                </tr>
+                                @*<tr>
                                     <td class="border-b dark:border-dark-5"> Cédula Padre</td>
                                     <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivoCedulaPadre"></td>
                                     <td class="border-b dark:border-dark-5"></td>
@@ -1163,7 +1242,7 @@
                                     <td class="border-b dark:border-dark-5"> Cédula Representante</td>
                                     <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivosCedulaRepresentante"></td>
                                     <td class="border-b dark:border-dark-5"></td>
-                                </tr>
+                                </tr>*@
                             </tbody>
                         </table>
                     </div>
@@ -1177,14 +1256,21 @@
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosTerminos" hidden>
                     <div class="font-medium text-base">Términos y Condiciones</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
-                        <div class="intro-y col-span-12 sm:col-span-3">
-                            <div class="mb-2">*</div>
+                        <div class="intro-y col-span-12 sm:col-span-12">
+                            <div class="mb-2">La presente declaración corresponde a la realidad de mis bienes, ingresos, obligaciones, compremetiendome a notificar previamente a la Unidad Educativa Liceo Cristiano de Guayaquil, cualquier variación que pueda alterar el significadode la misma hasta la cancelación de los valores por concepto de educación.
+                            Autorizo(amos) expresa e irrevocablemente a la Unidad Educativa Liceo Cristiano de Guayaquil, para que obtenga cuantas veces sea necesario y de cualquier fuente esta información.
+                            </div>
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-12">
+                            <div class="mb-2">
+                            @Html.CheckBoxFor(m => m.AceptaTerminos, new { @class = "show-code input input--switch border", @id = "AceptaTerminos" })
+                            </div>
                         </div>
                     </div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                             <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorTerminos();">Anterior</button>
-                            <button type="submit" class="button w-24 justify-center block bg-theme-1 text-white ml-2">Guardar</button>
+                            <button type="button" class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteTerminos();">Guardar</button>
                         </div>
                     </div>
                 </div>

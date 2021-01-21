@@ -33,12 +33,12 @@ function Buscar() {
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         success: function (data) {
-            console.log(data);
             if (data != null) {
                 $("#IdAdmision").html(data.IdAdmision);
                 $("#NombreCompleto_Aspirante").html(data.NombreCompleto_Aspirante);
                 $("#FechaIngreso_Aspirante").html(data.FechaString);
-                $("#EstadoAdmision").html(data.EstadoAdmision);
+                $("#EstadoAdmision").html(data.CodigoEstadoAdmision);
+                $("#SiguientePaso").html(data.EstadoAdmision);
             }
         },
         error: function (error) {

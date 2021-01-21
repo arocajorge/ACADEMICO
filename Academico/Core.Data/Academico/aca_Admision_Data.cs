@@ -283,7 +283,7 @@ namespace Core.Data.Academico
                         NumeroCarnetConadis_Aspirante = info.NumeroCarnetConadis_Aspirante,
                         IdGrupoEtnico_Aspirante = (info.IdGrupoEtnico_Aspirante==0 ? (int?)null : info.IdGrupoEtnico_Aspirante),
                         IdReligion_Aspirante = (info.IdReligion_Aspirante == 0 ? (int?)null : info.IdReligion_Aspirante),
-                        AsisteCentroCristiano_Aspirante = info.AsisteCentroCristiano_Aspirante??false,
+                        AsisteCentroCristiano_Aspirante = info.AsisteCentroCristiano_Aspirante,
                         LugarNacimiento_Aspirante = string.IsNullOrEmpty(info.LugarNacimiento_Aspirante)?null : info.LugarNacimiento_Aspirante,
                         IdPais_Aspirante = (info.IdPais_Aspirante == "" ? null : info.IdPais_Aspirante),
                         Cod_Region_Aspirante = (info.Cod_Region_Aspirante == "" ? null : info.Cod_Region_Aspirante),
@@ -440,6 +440,10 @@ namespace Core.Data.Academico
                         GastoPrestamo = info.GastoPrestamo,
                         OtroGasto = info.OtroGasto,
                         IdCatalogoESTADM = info.IdCatalogoESTADM,
+                        AceptaTerminos = info.AceptaTerminos,
+                        Dificultad_Escritura = info.Dificultad_Escritura,
+                        Dificultad_Lectura=info.Dificultad_Lectura,
+                        Dificultad_Matematicas=info.Dificultad_Matematicas,
                         Estado = true,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -465,7 +469,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT * FROM aca_Admision a "
-                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.CedulaRuc_Aspirante = " + CedulaRuc_Aspirante.ToString();
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.CedulaRuc_Aspirante = '" + CedulaRuc_Aspirante.ToString()+"'";
                     var ResultValue = command.ExecuteScalar();
 
                     if (ResultValue == null)
@@ -503,7 +507,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT a.IdEmpresa, a.IdAdmision, a.NombreCompleto_Aspirante, a.CedulaRuc_Aspirante, a.FechaIngreso_Aspirante, b.NomCatalogo EstadoAdmision FROM aca_Admision a "
+                    command.CommandText = "SELECT a.IdEmpresa, a.IdAdmision, a.NombreCompleto_Aspirante, a.CedulaRuc_Aspirante, a.FechaIngreso_Aspirante,b.Codigo CodigoEstadoAdmision, b.NomCatalogo EstadoAdmision FROM aca_Admision a "
                     + " left join aca_Catalogo b on a.IdCatalogoESTADM=b.IdCatalogo"
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.CedulaRuc_Aspirante = " + CedulaRuc_Aspirante.ToString();
                     var ResultValue = command.ExecuteScalar();
@@ -520,6 +524,7 @@ namespace Core.Data.Academico
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
                             CedulaRuc_Aspirante = reader["CedulaRuc_Aspirante"].ToString(),
+                            CodigoEstadoAdmision = reader["CodigoEstadoAdmision"].ToString(),
                             NombreCompleto_Aspirante = reader["NombreCompleto_Aspirante"].ToString(),
                             FechaIngreso_Aspirante = Convert.ToDateTime(reader["FechaIngreso_Aspirante"]),
                             EstadoAdmision = reader["EstadoAdmision"].ToString(),

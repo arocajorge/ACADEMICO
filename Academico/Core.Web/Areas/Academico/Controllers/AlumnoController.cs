@@ -532,6 +532,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdProvincia_madre = "09",
                 IdCiudad_madre = "09",
                 IdParroquia_madre = "09",
+                Dificultad_Escritura=false,
+                Dificultad_Lectura=false,
+                Dificultad_Matematicas=false,
                 lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>()
             };
 

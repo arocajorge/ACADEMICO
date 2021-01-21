@@ -53,7 +53,7 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
     
-        public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_CatalogoFicha aca_CatalogoFicha { get; set; }
+        public virtual aca_Alumno aca_Alumno { get; set; }
     }
 }

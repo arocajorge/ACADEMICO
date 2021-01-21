@@ -50,7 +50,6 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_PermisoMatricula> vwaca_PermisoMatricula { get; set; }
         public virtual DbSet<aca_CatalogoFicha> aca_CatalogoFicha { get; set; }
         public virtual DbSet<aca_CatalogoTipoFicha> aca_CatalogoTipoFicha { get; set; }
-        public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
         public virtual DbSet<aca_AnioLectivo_Paralelo_Profesor> aca_AnioLectivo_Paralelo_Profesor { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Plantilla_Parametrizacion> aca_AnioLectivo_Curso_Plantilla_Parametrizacion { get; set; }
         public virtual DbSet<vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion> vwaca_AnioLectivo_Curso_Plantilla_Parametrizacion { get; set; }
@@ -59,7 +58,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AlumnoDocumento> aca_AlumnoDocumento { get; set; }
         public virtual DbSet<vwaca_AlumnoDocumento> vwaca_AlumnoDocumento { get; set; }
         public virtual DbSet<vwaca_Hermanos> vwaca_Hermanos { get; set; }
-        public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
         public virtual DbSet<aca_Reporte_x_seg_usuario> aca_Reporte_x_seg_usuario { get; set; }
         public virtual DbSet<aca_Reporte_x_tb_empresa> aca_Reporte_x_tb_empresa { get; set; }
         public virtual DbSet<aca_Reporte> aca_Reporte { get; set; }
@@ -138,6 +136,8 @@ namespace Core.Data.Base
         public virtual DbSet<aca_parametro> aca_parametro { get; set; }
         public virtual DbSet<aca_MecanismoDePago> aca_MecanismoDePago { get; set; }
         public virtual DbSet<aca_Admision> aca_Admision { get; set; }
+        public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
+        public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {

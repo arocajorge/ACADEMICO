@@ -576,7 +576,7 @@ namespace Core.Data.Academico
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
                     + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, cm.NomCatalogo AS NomCatalogoESTMAT, "
-                    + " c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, p.AsisteCentroCristiano, p.IdGrupoEtnico "
+                    + " c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, p.AsisteCentroCristiano, p.IdGrupoEtnico, a.Dificultad_Escritura, a.Dificultad_Lectura, a.Dificultad_Matematicas "
                     + " FROM dbo.aca_Alumno AS a INNER JOIN "
                     + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
                     + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
@@ -627,7 +627,10 @@ namespace Core.Data.Academico
                             LugarNacimiento = string.IsNullOrEmpty(reader["LugarNacimiento"].ToString()) ? null : reader["LugarNacimiento"].ToString(),
                             IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
                             AsisteCentroCristiano = string.IsNullOrEmpty(reader["AsisteCentroCristiano"].ToString()) ? false : Convert.ToBoolean(reader["AsisteCentroCristiano"]),
-                            IdGrupoEtnico = string.IsNullOrEmpty(reader["IdGrupoEtnico"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdGrupoEtnico"])
+                            IdGrupoEtnico = string.IsNullOrEmpty(reader["IdGrupoEtnico"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdGrupoEtnico"]),
+                            Dificultad_Escritura = string.IsNullOrEmpty(reader["Dificultad_Escritura"].ToString()) ? false : Convert.ToBoolean(reader["Dificultad_Escritura"]),
+                            Dificultad_Lectura = string.IsNullOrEmpty(reader["Dificultad_Lectura"].ToString()) ? false : Convert.ToBoolean(reader["Dificultad_Lectura"]),
+                            Dificultad_Matematicas = string.IsNullOrEmpty(reader["Dificultad_Matematicas"].ToString()) ? false : Convert.ToBoolean(reader["Dificultad_Matematicas"])
                         };
                     }
                 }
@@ -901,6 +904,9 @@ namespace Core.Data.Academico
                         IdParroquia = info.IdParroquia,
                         Sector = info.Sector,
                         LugarNacimiento = info.LugarNacimiento,
+                        Dificultad_Lectura=info.Dificultad_Lectura,
+                        Dificultad_Escritura=info.Dificultad_Escritura,
+                        Dificultad_Matematicas = info.Dificultad_Matematicas,
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
@@ -938,6 +944,9 @@ namespace Core.Data.Academico
                     Entity.IdParroquia = info.IdParroquia;
                     Entity.Sector = info.Sector;
                     Entity.LugarNacimiento = info.LugarNacimiento;
+                    Entity.Dificultad_Lectura = info.Dificultad_Lectura;
+                    Entity.Dificultad_Escritura = info.Dificultad_Escritura;
+                    Entity.Dificultad_Matematicas = info.Dificultad_Matematicas;
 
                     Context.SaveChanges();
                 }
