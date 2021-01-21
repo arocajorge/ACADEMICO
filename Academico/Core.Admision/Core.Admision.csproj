@@ -264,6 +264,7 @@
     <Content Include="dist\images\.DS_Store" />
     <Content Include="dist\images\placeholders\.DS_Store" />
     <Content Include="dist\json\location.json" />
+    <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Consulta.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

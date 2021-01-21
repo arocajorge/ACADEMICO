@@ -21,6 +21,15 @@ namespace Core.Data.Reportes.Academico
                 List<ACA_068_Info> ListaComplementarias = new List<ACA_068_Info>();
                 List<ACA_068_Info> ListaPromediadaComplementarias = new List<ACA_068_Info>();
 
+                int IdNivelIni = IdNivel;
+                int IdNivelFin = IdNivel == 0 ? 9999999 : IdNivel;
+
+                int IdCursoIni = IdCurso;
+                int IdCursoFin = IdCurso == 0 ? 9999999 : IdCurso;
+
+                int IdParaleloIni = IdParalelo;
+                int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
+
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -48,13 +57,20 @@ namespace Core.Data.Reportes.Academico
                     + " (SELECT IdEmpresa, IdMatricula "
                     + " FROM      dbo.aca_AlumnoRetiro AS r "
                     + " WHERE(Estado = 1)) AS ret ON m.IdEmpresa = ret.IdEmpresa AND m.IdMatricula = ret.IdMatricula "
-                    + " WHERE mco.IdEmpresa = @IdEmpresa "
-                    + " and m.IdAnio = @IdAnio "
-                    + " and m.IdSede = @IdSede "
-                    + " and m.IdNivel = @IdNivel "
-                    + " and m.IdJornada = @IdJornada "
-                    + " and m.IdCurso = @IdCurso "
-                    + " and m.IdParalelo = @IdParalelo "
+                    //+ " WHERE mco.IdEmpresa = @IdEmpresa "
+                    //+ " and m.IdAnio = @IdAnio "
+                    //+ " and m.IdSede = @IdSede "
+                    //+ " and m.IdNivel = @IdNivel "
+                    //+ " and m.IdJornada = @IdJornada "
+                    //+ " and m.IdCurso = @IdCurso "
+                    //+ " and m.IdParalelo = @IdParalelo "
+                    + " WHERE m.IdEmpresa = " + IdEmpresa.ToString()
+                    + " and m.IdAnio = " + IdAnio.ToString()
+                    + " and m.IdSede = " + IdSede.ToString()
+                    + " and m.IdJornada = " + IdJornada.ToString()
+                    + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
+                    + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
+                    + " and m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
                     + " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
                     + " and mc.PromediarGrupo = 0 "
                     + " and mc.IdCatalogoTipoCalificacion = 40 "
@@ -82,13 +98,20 @@ namespace Core.Data.Reportes.Academico
                     + " (SELECT IdEmpresa, IdMatricula "
                     + " FROM      dbo.aca_AlumnoRetiro AS r "
                     + " WHERE(Estado = 1)) AS ret ON m.IdEmpresa = ret.IdEmpresa AND m.IdMatricula = ret.IdMatricula "
-                    + " WHERE mco.IdEmpresa = @IdEmpresa "
-                    + " and m.IdAnio = @IdAnio "
-                    + " and m.IdSede = @IdSede "
-                    + " and m.IdNivel = @IdNivel "
-                    + " and m.IdJornada = @IdJornada "
-                    + " and m.IdCurso = @IdCurso "
-                    + " and m.IdParalelo = @IdParalelo "
+                    //+ " WHERE mco.IdEmpresa = @IdEmpresa "
+                    //+ " and m.IdAnio = @IdAnio "
+                    //+ " and m.IdSede = @IdSede "
+                    //+ " and m.IdNivel = @IdNivel "
+                    //+ " and m.IdJornada = @IdJornada "
+                    //+ " and m.IdCurso = @IdCurso "
+                    //+ " and m.IdParalelo = @IdParalelo "
+                    + " WHERE m.IdEmpresa = " + IdEmpresa.ToString()
+                    + " and m.IdAnio = " + IdAnio.ToString()
+                    + " and m.IdSede = " + IdSede.ToString()
+                    + " and m.IdJornada = " + IdJornada.ToString()
+                    + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
+                    + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
+                    + " and m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
                     + " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
                     + " and mc.PromediarGrupo = 1 "
                     + " and mc.IdCatalogoTipoCalificacion = 40 "
