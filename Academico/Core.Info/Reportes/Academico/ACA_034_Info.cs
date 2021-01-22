@@ -8,7 +8,6 @@ namespace Core.Info.Reportes.Academico
 {
     public class ACA_034_Info
     {
-        public int Num { get; set; }
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }
@@ -48,5 +47,6 @@ namespace Core.Info.Reportes.Academico
         public Nullable<decimal> PromedioFinalCalculado { get; set; }
         public Nullable<decimal> SumaGeneral { get; set; }
         public int NoTieneCalificacion { get; set; }
+        public int Secuencial { get; set; }
     }
 }
