@@ -109,7 +109,7 @@
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(727F, 240F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(677F, 240F);
             this.xrTable1.StylePriority.UseFont = false;
             this.xrTable1.StylePriority.UseTextAlignment = false;
             this.xrTable1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
@@ -140,7 +140,7 @@
             this.txtSolicitud.Name = "txtSolicitud";
             this.txtSolicitud.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
             this.txtSolicitud.SerializableRtfString = resources.GetString("txtSolicitud.SerializableRtfString");
-            this.txtSolicitud.SizeF = new System.Drawing.SizeF(726.9998F, 343.3333F);
+            this.txtSolicitud.SizeF = new System.Drawing.SizeF(676.9998F, 360F);
             this.txtSolicitud.StylePriority.UseFont = false;
             this.txtSolicitud.StylePriority.UsePadding = false;
             // 
@@ -231,7 +231,7 @@
             new DevExpress.XtraReports.UI.GroupField("OrdenCurso", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("OrdenJornada", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("pe_nombreCompleto", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.groupHeaderBand6.HeightF = 343.3333F;
+            this.groupHeaderBand6.HeightF = 360F;
             this.groupHeaderBand6.Name = "groupHeaderBand6";
             this.groupHeaderBand6.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
             // 
@@ -244,12 +244,12 @@
             // xrTable5
             // 
             this.xrTable5.Font = new System.Drawing.Font("Verdana", 9F);
-            this.xrTable5.LocationFloat = new DevExpress.Utils.PointFloat(0.0001831055F, 60F);
+            this.xrTable5.LocationFloat = new DevExpress.Utils.PointFloat(0.0001780192F, 60F);
             this.xrTable5.Name = "xrTable5";
             this.xrTable5.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow45,
             this.xrTableRow46});
-            this.xrTable5.SizeF = new System.Drawing.SizeF(726.9998F, 40F);
+            this.xrTable5.SizeF = new System.Drawing.SizeF(676.9998F, 40F);
             this.xrTable5.StylePriority.UseFont = false;
             this.xrTable5.StylePriority.UseTextAlignment = false;
             this.xrTable5.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
@@ -277,7 +277,7 @@
             this.Rector.StylePriority.UsePadding = false;
             this.Rector.StylePriority.UseTextAlignment = false;
             this.Rector.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.Rector.Weight = 5.9574590444390338D;
+            this.Rector.Weight = 6.1689685802826979D;
             // 
             // xrTableCell16
             // 
@@ -289,7 +289,7 @@
             this.xrTableCell16.StylePriority.UsePadding = false;
             this.xrTableCell16.StylePriority.UseTextAlignment = false;
             this.xrTableCell16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell16.Weight = 3.5531986227577725D;
+            this.xrTableCell16.Weight = 3.1301802483370049D;
             // 
             // Secretaria
             // 
@@ -303,7 +303,7 @@
             this.Secretaria.StylePriority.UsePadding = false;
             this.Secretaria.StylePriority.UseTextAlignment = false;
             this.Secretaria.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.Secretaria.Weight = 5.9574549106885915D;
+            this.Secretaria.Weight = 6.1689637492656946D;
             // 
             // xrTableRow46
             // 
@@ -327,7 +327,7 @@
             this.xrTableCell143.StylePriority.UseTextAlignment = false;
             this.xrTableCell143.Text = "RECTOR";
             this.xrTableCell143.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell143.Weight = 9.2375453119033146D;
+            this.xrTableCell143.Weight = 9.5655087939913024D;
             // 
             // xrTableCell3
             // 
@@ -340,7 +340,7 @@
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "\r\n";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell3.Weight = 5.50953592074102D;
+            this.xrTableCell3.Weight = 4.8536100377360105D;
             // 
             // xrTableCell2
             // 
@@ -353,7 +353,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "SECRETARIA GENERAL";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell2.Weight = 9.2375398017564869D;
+            this.xrTableCell2.Weight = 9.5655022026735086D;
             // 
             // objectDataSource1
             // 
@@ -383,7 +383,7 @@
             this.objectDataSource2});
             this.DataSource = this.objectDataSource2;
             this.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
+            this.Margins = new System.Drawing.Printing.Margins(100, 50, 50, 50);
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;

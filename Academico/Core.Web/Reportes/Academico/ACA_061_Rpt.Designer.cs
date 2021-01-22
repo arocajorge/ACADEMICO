@@ -175,7 +175,7 @@
             this.Inspector.StylePriority.UseFont = false;
             this.Inspector.StylePriority.UsePadding = false;
             this.Inspector.StylePriority.UseTextAlignment = false;
-            this.Inspector.Text = "Ing. David Cañola";
+            this.Inspector.Text = "ING DAVID CAÑOLA";
             this.Inspector.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.Inspector.Weight = 5.9574590444390338D;
             // 
@@ -202,7 +202,7 @@
             this.Colecturia.StylePriority.UseFont = false;
             this.Colecturia.StylePriority.UsePadding = false;
             this.Colecturia.StylePriority.UseTextAlignment = false;
-            this.Colecturia.Text = "CPA. Edison Gellibert Villagómez";
+            this.Colecturia.Text = "CPA. EDISON GELLIBERT VILLAGÓMEZ";
             this.Colecturia.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.Colecturia.Weight = 5.9574549106885915D;
             // 

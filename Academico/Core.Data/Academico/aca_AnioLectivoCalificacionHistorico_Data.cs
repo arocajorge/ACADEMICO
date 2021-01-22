@@ -181,7 +181,7 @@ namespace Core.Data.Academico
                         IdEmpresa = info.IdEmpresa,
                         IdAnio = info.IdAnio,
                         IdAlumno = info.IdAlumno,
-                        IdMatricula = info.IdAlumno,
+                        IdMatricula = info.IdMatricula,
                         IdNivel =info.IdNivel,
                         IdCurso = info.IdCurso,
                         AntiguaInstitucion= info.AntiguaInstitucion,

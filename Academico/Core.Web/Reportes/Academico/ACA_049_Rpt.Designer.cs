@@ -384,7 +384,7 @@
             this.xrRichText1.Name = "xrRichText1";
             this.xrRichText1.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
             this.xrRichText1.SerializableRtfString = resources.GetString("xrRichText1.SerializableRtfString");
-            this.xrRichText1.SizeF = new System.Drawing.SizeF(676.9998F, 110F);
+            this.xrRichText1.SizeF = new System.Drawing.SizeF(675.9998F, 110F);
             this.xrRichText1.StylePriority.UseFont = false;
             this.xrRichText1.StylePriority.UsePadding = false;
             // 
@@ -594,7 +594,7 @@
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.Margins = new System.Drawing.Printing.Margins(99, 50, 50, 38);
+            this.Margins = new System.Drawing.Printing.Margins(100, 50, 50, 38);
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = System.Drawing.Printing.PaperKind.A4;

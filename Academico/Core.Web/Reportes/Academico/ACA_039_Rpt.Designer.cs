@@ -134,7 +134,7 @@
             this.txtSolicitud.Name = "txtSolicitud";
             this.txtSolicitud.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 5, 5, 100F);
             this.txtSolicitud.SerializableRtfString = resources.GetString("txtSolicitud.SerializableRtfString");
-            this.txtSolicitud.SizeF = new System.Drawing.SizeF(726.9998F, 400F);
+            this.txtSolicitud.SizeF = new System.Drawing.SizeF(726.9998F, 420F);
             this.txtSolicitud.StylePriority.UseFont = false;
             this.txtSolicitud.StylePriority.UsePadding = false;
             // 
@@ -189,7 +189,7 @@
             new DevExpress.XtraReports.UI.GroupField("OrdenJornada", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("NombreAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending),
             new DevExpress.XtraReports.UI.GroupField("IdAlumno", DevExpress.XtraReports.UI.XRColumnSortOrder.None)});
-            this.groupHeaderBand1.HeightF = 400F;
+            this.groupHeaderBand1.HeightF = 420F;
             this.groupHeaderBand1.Name = "groupHeaderBand1";
             this.groupHeaderBand1.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBand;
             // 
