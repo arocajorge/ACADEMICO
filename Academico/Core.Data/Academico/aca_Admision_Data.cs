@@ -509,7 +509,7 @@ namespace Core.Data.Academico
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT a.IdEmpresa, a.IdAdmision, a.NombreCompleto_Aspirante, a.CedulaRuc_Aspirante, a.FechaIngreso_Aspirante,b.Codigo CodigoEstadoAdmision, b.NomCatalogo EstadoAdmision FROM aca_Admision a "
                     + " left join aca_Catalogo b on a.IdCatalogoESTADM=b.IdCatalogo"
-                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.CedulaRuc_Aspirante = " + CedulaRuc_Aspirante.ToString();
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.CedulaRuc_Aspirante = '" + CedulaRuc_Aspirante.ToString()+"'";
                     var ResultValue = command.ExecuteScalar();
 
                     if (ResultValue == null)

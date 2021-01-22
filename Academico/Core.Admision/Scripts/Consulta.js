@@ -17,6 +17,7 @@
 }
 
 function Buscar() {
+    var url_sistema = GetPathServer();
     var datos = {
         IdEmpresa: $("#IdEmpresa").val(),
         IdAnio: $("#IdAnio").val(),
@@ -26,7 +27,7 @@ function Buscar() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Consulta/ConsultaAdmision',
+        url: url_sistema + '/Consulta/ConsultaAdmision',
         async: false,
         bDeferRender: true,
         bProcessing: true,

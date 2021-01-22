@@ -220,9 +220,9 @@
             this.lbl_representante = new DevExpress.XtraReports.UI.XRTableCell();
             this.p_IdSede = new DevExpress.XtraReports.Parameters.Parameter();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
+            this.fotoAlumno = new DevExpress.XtraReports.UI.XRPictureBox();
             this.lbl_imagen = new DevExpress.XtraReports.UI.XRPictureBox();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
-            this.fotoAlumno = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
@@ -2782,6 +2782,19 @@
             this.ReportHeader.HeightF = 458.0001F;
             this.ReportHeader.Name = "ReportHeader";
             // 
+            // fotoAlumno
+            // 
+            this.fotoAlumno.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.fotoAlumno.EditOptions.Enabled = true;
+            this.fotoAlumno.LocationFloat = new DevExpress.Utils.PointFloat(609F, 0F);
+            this.fotoAlumno.Name = "fotoAlumno";
+            this.fotoAlumno.SizeF = new System.Drawing.SizeF(100F, 115.0001F);
+            this.fotoAlumno.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            this.fotoAlumno.StylePriority.UseBorders = false;
+            this.fotoAlumno.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.fotoAlumno_BeforePrint);
+            // 
             // lbl_imagen
             // 
             this.lbl_imagen.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
@@ -2793,15 +2806,6 @@
             // 
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_001_Info);
             this.objectDataSource1.Name = "objectDataSource1";
-            // 
-            // fotoAlumno
-            // 
-            this.fotoAlumno.EditOptions.Enabled = true;
-            this.fotoAlumno.LocationFloat = new DevExpress.Utils.PointFloat(609F, 0F);
-            this.fotoAlumno.Name = "fotoAlumno";
-            this.fotoAlumno.SizeF = new System.Drawing.SizeF(100F, 115.0001F);
-            this.fotoAlumno.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.fotoAlumno.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.fotoAlumno_BeforePrint);
             // 
             // ACA_001_Rpt
             // 

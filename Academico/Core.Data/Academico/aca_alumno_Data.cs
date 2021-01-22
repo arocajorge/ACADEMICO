@@ -821,6 +821,7 @@ namespace Core.Data.Academico
                     IdProvincia = Entity_aca.IdProvincia,
                     IdCiudad = Entity_aca.IdCiudad,
                     IdParroquia = Entity_aca.IdParroquia,
+                    Sector = Entity_aca.Sector,
                     pe_fechaNacimiento = Entity_aca.pe_fechaNacimiento,
                     IdReligion = Entity_aca.IdReligion,
                     IdGrupoEtnico = Entity_aca.IdGrupoEtnico,

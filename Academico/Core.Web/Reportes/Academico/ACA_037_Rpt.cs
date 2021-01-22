@@ -58,7 +58,6 @@ namespace Core.Web.Reportes.Academico
                 if (info_sede != null)
                 {
                     NomSede = info_sede.NomSede;
-
                 }
 
                 TITULO.Text = NomSede;

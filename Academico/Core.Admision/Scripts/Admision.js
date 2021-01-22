@@ -90,6 +90,8 @@ function AnteriorTerminos() {
 }
 
 function Validar_cedula_ruc_Aspirante() {
+    var url_sistema = GetPathServer();
+    console.log(url_sistema);
     var datos = {
         naturaleza: $("#Naturaleza_Aspirante").val(),
         tipo_documento: $("#IdTipoDocumento_Aspirante").val(),
@@ -99,7 +101,7 @@ function Validar_cedula_ruc_Aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/Validar_cedula_ruc',
+        url: url_sistema + '/Admision/Validar_cedula_ruc',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -771,6 +773,7 @@ function ValidarDatosSocioEconomico() {
     }
 }
 function Validar_cedula_ruc_Padre() {
+    var url_sistema = GetPathServer();
     var datos = {
         naturaleza: $("#Naturaleza_Padre").val(),
         tipo_documento: $("#IdTipoDocumento_Padre").val(),
@@ -780,7 +783,7 @@ function Validar_cedula_ruc_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/Validar_cedula_ruc',
+        url: url_sistema+'/Admision/Validar_cedula_ruc',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -804,6 +807,7 @@ function Validar_cedula_ruc_Padre() {
 };
 
 function Validar_cedula_ruc_Madre() {
+    var url_sistema = GetPathServer();
     var datos = {
         naturaleza: $("#Naturaleza_Madre").val(),
         tipo_documento: $("#IdTipoDocumento_Madre").val(),
@@ -813,7 +817,7 @@ function Validar_cedula_ruc_Madre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/Validar_cedula_ruc',
+        url: url_sistema+'/Admision/Validar_cedula_ruc',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -836,6 +840,7 @@ function Validar_cedula_ruc_Madre() {
 };
 
 function Validar_cedula_ruc_Representante() {
+    var url_sistema = GetPathServer();
     var datos = {
         naturaleza: $("#Naturaleza_Representante").val(),
         tipo_documento: $("#IdTipoDocumento_Representante").val(),
@@ -845,7 +850,7 @@ function Validar_cedula_ruc_Representante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/Validar_cedula_ruc',
+        url: url_sistema+'/Admision/Validar_cedula_ruc',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -868,6 +873,7 @@ function Validar_cedula_ruc_Representante() {
 };
 
 function CargarJornada() {
+    var url_sistema = GetPathServer();
     var datos = {
         IdEmpresa: $("#IdEmpresa").val(),
         IdAnio: $("#IdAnio").val(),
@@ -877,7 +883,7 @@ function CargarJornada() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarJornada',
+        url: url_sistema+'/Admision/CargarJornada',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -898,6 +904,7 @@ function CargarJornada() {
 };
 
 function CargarNivel() {
+    var url_sistema = GetPathServer();
     var datos = {
         IdEmpresa: $("#IdEmpresa").val(),
         IdAnio: $("#IdAnio").val(),
@@ -908,7 +915,7 @@ function CargarNivel() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarNivel',
+        url: url_sistema+ '/Admision/CargarNivel',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -929,6 +936,7 @@ function CargarNivel() {
 };
 
 function CargarCurso() {
+    var url_sistema = GetPathServer();
     var datos = {
         IdEmpresa: $("#IdEmpresa").val(),
         IdAnio: $("#IdAnio").val(),
@@ -940,7 +948,7 @@ function CargarCurso() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarCurso',
+        url: url_sistema+ '/Admision/CargarCurso',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -960,6 +968,7 @@ function CargarCurso() {
 };
 
 function CargarRegion_Aspirante() {
+    var url_sistema = GetPathServer();
     $("#Cod_Region_Aspirante").empty();
     var datos = {
         IdPais: $("#IdPais_Aspirante").val(),
@@ -967,7 +976,7 @@ function CargarRegion_Aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarRegion',
+        url: url_sistema+ '/Admision/CargarRegion',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -986,6 +995,7 @@ function CargarRegion_Aspirante() {
 };
 
 function CargarProvincia_Aspirante() {
+    var url_sistema = GetPathServer();
     $("#IdProvincia_Aspirante").empty();
     var datos = {
         IdPais: $("#IdPais_Aspirante").val(),
@@ -993,7 +1003,7 @@ function CargarProvincia_Aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarProvincia',
+        url:url_sistema+ '/Admision/CargarProvincia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1013,6 +1023,7 @@ function CargarProvincia_Aspirante() {
 };
 
 function CargaCiudad_Aspirante() {
+    var url_sistema = GetPathServer();
     $("#IdCiudad_Aspirante").empty();
     var datos = {
         IdProvincia: $("#IdProvincia_Aspirante").val(),
@@ -1020,7 +1031,7 @@ function CargaCiudad_Aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarCiudad',
+        url: url_sistema + '/Admision/CargarCiudad',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1040,6 +1051,7 @@ function CargaCiudad_Aspirante() {
 };
 
 function CargarParroquia_Aspirante() {
+    var url_sistema = GetPathServer();
     $("#IdParroquia_Aspirante").empty();
     var datos = {
         IdCiudad: $("#IdCiudad_Aspirante").val(),
@@ -1047,7 +1059,7 @@ function CargarParroquia_Aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarParroquia',
+        url: url_sistema+ '/Admision/CargarParroquia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1066,6 +1078,7 @@ function CargarParroquia_Aspirante() {
 };
 
 function CargarRegion_Padre() {
+    var url_sistema = GetPathServer();
     $("#Cod_Region_Padre").empty();
     var datos = {
         IdPais: $("#IdPais_Padre").val(),
@@ -1073,7 +1086,7 @@ function CargarRegion_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarRegion',
+        url: url_sistema+ '/Admision/CargarRegion',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1092,6 +1105,7 @@ function CargarRegion_Padre() {
 };
 
 function CargarProvincia_Padre() {
+    var url_sistema = GetPathServer();
     $("#IdProvincia_Padre").empty();
     var datos = {
         IdPais: $("#IdPais_Padre").val()
@@ -1099,7 +1113,7 @@ function CargarProvincia_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarProvincia',
+        url: url_sistema+ '/Admision/CargarProvincia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1119,6 +1133,7 @@ function CargarProvincia_Padre() {
 };
 
 function CargaCiudad_Padre() {
+    var url_sistema = GetPathServer();
     $("#IdCiudad_Padre").empty();
     var datos = {
         IdProvincia: $("#IdProvincia_Padre").val(),
@@ -1126,7 +1141,7 @@ function CargaCiudad_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarCiudad',
+        url: url_sistema+ '/Admision/CargarCiudad',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1146,6 +1161,7 @@ function CargaCiudad_Padre() {
 };
 
 function CargarParroquia_Padre() {
+    var url_sistema = GetPathServer();
     $("#IdParroquia_Padre").empty();
     var datos = {
         IdCiudad: $("#IdCiudad_Padre").val(),
@@ -1153,7 +1169,7 @@ function CargarParroquia_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarParroquia',
+        url: url_sistema+ '/Admision/CargarParroquia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1172,6 +1188,7 @@ function CargarParroquia_Padre() {
 };
 
 function CargarRegion_Madre() {
+    var url_sistema = GetPathServer();
     $("#Cod_Region_Madre").empty();
     var datos = {
         IdPais: $("#IdPais_Madre").val(),
@@ -1179,7 +1196,7 @@ function CargarRegion_Madre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarRegion',
+        url: url_sistema+ '/Admision/CargarRegion',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1198,6 +1215,7 @@ function CargarRegion_Madre() {
 };
 
 function CargarProvincia_Madre() {
+    var url_sistema = GetPathServer();
     $("#IdProvincia_Madre").empty();
     var datos = {
         IdPais: $("#IdPais_Madre").val()
@@ -1205,7 +1223,7 @@ function CargarProvincia_Madre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarProvincia',
+        url: url_sistema + '/Admision/CargarProvincia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1225,6 +1243,7 @@ function CargarProvincia_Madre() {
 };
 
 function CargaCiudad_Madre() {
+    var url_sistema = GetPathServer();
     $("#IdCiudad_Madre").empty();
     var datos = {
         IdProvincia: $("#IdProvincia_Madre").val(),
@@ -1232,7 +1251,7 @@ function CargaCiudad_Madre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarCiudad',
+        url: url_sistema+ '/Admision/CargarCiudad',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1252,6 +1271,7 @@ function CargaCiudad_Madre() {
 };
 
 function CargarParroquia_Madre() {
+    var url_sistema = GetPathServer();
     $("#IdParroquia_Madre").empty();
     var datos = {
         IdCiudad: $("#IdCiudad_Madre").val(),
@@ -1259,7 +1279,7 @@ function CargarParroquia_Madre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarParroquia',
+        url: url_sistema + '/Admision/CargarParroquia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1278,6 +1298,7 @@ function CargarParroquia_Madre() {
 };
 
 function CargarRegion_Representante() {
+    var url_sistema = GetPathServer();
     $("#Cod_Region_Representante").empty();
     var datos = {
         IdPais: $("#IdPais_Representante").val(),
@@ -1285,7 +1306,7 @@ function CargarRegion_Representante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarRegion',
+        url: url_sistema + '/Admision/CargarRegion',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1304,6 +1325,7 @@ function CargarRegion_Representante() {
 };
 
 function CargarProvincia_Representante() {
+    var url_sistema = GetPathServer();
     $("#IdProvincia_Representante").empty();
     var datos = {
         IdPais: $("#IdPais_Representante").val()
@@ -1311,7 +1333,7 @@ function CargarProvincia_Representante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarProvincia',
+        url: url_sistema + '/Admision/CargarProvincia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1331,6 +1353,7 @@ function CargarProvincia_Representante() {
 };
 
 function CargaCiudad_Representante() {
+    var url_sistema = GetPathServer();
     $("#IdCiudad_Representante").empty();
     var datos = {
         IdProvincia: $("#IdProvincia_Representante").val(),
@@ -1338,7 +1361,7 @@ function CargaCiudad_Representante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarCiudad',
+        url: url_sistema + '/Admision/CargarCiudad',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1358,6 +1381,7 @@ function CargaCiudad_Representante() {
 };
 
 function CargarParroquia_Representante() {
+    var url_sistema = GetPathServer();
     $("#IdParroquia_Representante").empty();
     var datos = {
         IdCiudad: $("#IdCiudad_Representante").val(),
@@ -1365,7 +1389,7 @@ function CargarParroquia_Representante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/CargarParroquia',
+        url: url_sistema + '/Admision/CargarParroquia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1524,7 +1548,7 @@ function get_info_x_num_cedula_aspirante() {
                 return;
             }
         }
-
+    var url_sistema = GetPathServer();
     var datos = {
         IdEmpresa: $("#IdEmpresa").val(),
         pe_cedulaRuc: cedula
@@ -1532,7 +1556,7 @@ function get_info_x_num_cedula_aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/get_info_x_num_cedula',
+        url: url_sistema + '/Admision/get_info_x_num_cedula',
         async: false,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -1589,8 +1613,10 @@ function get_info_x_num_cedula_aspirante() {
                     $("#IdCiudad_Aspirante").val(data.IdCiudad);
                     CargarParroquia_Aspirante();
                     $("#IdParroquia_Aspirante").val(data.IdParroquia);
-                    $("#Sector_Aspirante").val(data.NumeroCarnetConadis);
-                    $("#IdCiudad_Aspirante").val(data.NumeroCarnetConadis);
+                    $("#Sector_Aspirante").val(data.Sector);
+                    $("#CodCatalogoCONADIS_Aspirante").val(data.CodCatalogoCONADIS);
+                    $("#PorcentajeDiscapacidad_Aspirante").val(data.PorcentajeDiscapacidad);
+                    $("#NumeroCarnetConadis_Aspirante").val(data.NumeroCarnetConadis);
 
                     $("#MensajeError").html("");
                     $("#DivError").hide();
@@ -1635,13 +1661,14 @@ function get_info_x_num_cedula_padre() {
             }
         }
 
+    var url_sistema = GetPathServer();
     var datos = {
         pe_cedulaRuc: cedula
     }
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/get_info_x_num_cedula_persona',
+        url: url_sistema + '/Admision/get_info_x_num_cedula_persona',
         async: false,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -1706,13 +1733,14 @@ function get_info_x_num_cedula_madre() {
             }
         }
 
+    var url_sistema = GetPathServer();
     var datos = {
         pe_cedulaRuc: cedula
     }
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/get_info_x_num_cedula_persona',
+        url: url_sistema + '/Admision/get_info_x_num_cedula_persona',
         async: false,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -1778,13 +1806,14 @@ function get_info_x_num_cedula_representante() {
             }
         }
 
+    var url_sistema = GetPathServer();
     var datos = {
         pe_cedulaRuc: cedula
     }
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: '/Admision/get_info_x_num_cedula_persona',
+        url: url_sistema + '/Admision/get_info_x_num_cedula_persona',
         async: false,
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
