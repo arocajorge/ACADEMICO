@@ -44,6 +44,13 @@
     <script src="~/AdminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="~/Scripts/ScriptsGenerales.js"></script>
     <script src="~/Scripts/moment.min.js"></script>
+    <script>
+        function AbrirAdmision() {
+            var location = GetPathServer();
+            var win = window.open(location +"/Academico/Admision", '_blank');
+            win.focus();
+        }
+    </script>
     @RenderSection("scripts", required: false)
     @Html.DevExpress().GetStyleSheets(
            new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout },
@@ -71,14 +78,7 @@
                         <span class="logo-lg"><strong>Fixed</strong> Académico</span>
                     </a>
                     <div id="alerta" hidden>
-                        <a class="navbar-fixed-top" data-toggle="dropdown" href="@Url.Action("Index","Admision",new { Area = "Academico" },"")" aria-expanded="false">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="badge badge-warning navbar-badge" id="CantidadAdmisiones"></span>
-                        </a>
-                        @*<div class="dropdown-menu dropdown-menu-lg dropdown-menu-left" style="left: 0px; right: inherit;">
-                            <span class="dropdown-item dropdown-header">15 Notifications</span>
-                            <a href="#" class="dropdown-item dropdown-footer">Ir a Admisiones</a>
-                        </div>*@
+                        <a class="navbar-fixed-top" href="@Url.Action("Index","Admision",new { Area = "Academico" },null)"><i class="fa fa-bell-o"></i><span class="badge badge-warning navbar-badge" id="CantidadAdmisiones"></span></a>
                     </div>
                     
                 </div>
