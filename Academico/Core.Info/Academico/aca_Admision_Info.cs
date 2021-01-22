@@ -10,6 +10,7 @@ namespace Core.Info.Academico
 {
     public class aca_Admision_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdAdmision { get; set; }
         [Required(ErrorMessage = "El campo sede es obligatorio")]
@@ -346,6 +347,14 @@ namespace Core.Info.Academico
         public string EstadoAdmision { get; set; }
         public string FechaString { get; set; }
         public int CantidadArchivos { get; set; }
+        public string Descripcion { get; set; }
+        public string NomSede { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomCurso { get; set; }
+        public int OrdenCurso { get; set; }
+        public int OrdenNivel { get; set; }
+        public int OrdenJornada { get; set; }
         public string Representante { get; set; }
         [Required(ErrorMessage = "El campo foto del aspirante es obligatorio")]
         public HttpPostedFileBase FotoAspirante { get; set; }

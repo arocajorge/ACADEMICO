@@ -304,7 +304,6 @@ namespace Core.Web.Areas.Academico.Controllers
             return info_persona;
         }
         #endregion
-
         #region CombosPadre
         public ActionResult ComboBoxPartial_Pais_padre()
         {

@@ -61,6 +61,8 @@
         )
 </head>
 <body class="fixed skin-blue layout-top-nav">
+    <input type="text" id="txt_ManejaAdmision" name="txt_ManejaAdmision" value="@Core.Web.Helps.SessionFixed.ManejaAdmision" />
+    <input type="text" id="txt_IdUsuario" name="txt_IdUsuario" value="@Core.Web.Helps.SessionFixed.IdUsuario" />
     <div class="wrapper">
         <header class="main-header">
             <nav class="navbar navbar-inverse navbar-static-top" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; padding: 0 15px; height: 50px; font-size: 25px;line-height: 50px; font-weight: 300;">
@@ -68,6 +70,17 @@
                     <a class="navbar-brand text-center center-block" href="#myModal" data-toggle="modal">
                         <span class="logo-lg"><strong>Fixed</strong> Académico</span>
                     </a>
+                    <div id="alerta" hidden>
+                        <a class="navbar-fixed-top" data-toggle="dropdown" href="@Url.Action("Index","Admision",new { Area = "Academico" },"")" aria-expanded="false">
+                            <i class="fa fa-bell-o"></i>
+                            <span class="badge badge-warning navbar-badge" id="CantidadAdmisiones"></span>
+                        </a>
+                        @*<div class="dropdown-menu dropdown-menu-lg dropdown-menu-left" style="left: 0px; right: inherit;">
+                            <span class="dropdown-item dropdown-header">15 Notifications</span>
+                            <a href="#" class="dropdown-item dropdown-footer">Ir a Admisiones</a>
+                        </div>*@
+                    </div>
+                    
                 </div>
             </nav>
             <!-- Logo -->
@@ -141,3 +154,37 @@
     <!-- ./wrapper -->
 </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    function ActualizarNotificacion() {
+        if ($("#txt_ManejaAdmision").val() == "True") {
+            $("#alerta").show();
+
+            var datos = {
+                IdUsuario: $("#txt_IdUsuario").val()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("CantidadAdmisiones", "Admision", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("#CantidadAdmisiones").html(data);
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else {
+            $("#alerta").hide();
+        }
+    }
+    setInterval(ActualizarNotificacion, 5000);
+});
+</script>

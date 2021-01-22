@@ -1508,6 +1508,7 @@ namespace Core.Data.Reportes.Academico
                 ListaFinal.AddRange(lst_promedio_general);
                 Lista_Comportamiento_Proyectos = Lista.Where(q => q.IdMateria == 0).ToList();
                 ListaFinal.AddRange(Lista_Comportamiento_Proyectos);
+                ListaFinal.ForEach(q=>q.Num=1);
                 return ListaFinal;
             }
             catch (Exception ex)

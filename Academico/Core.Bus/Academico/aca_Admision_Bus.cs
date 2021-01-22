@@ -12,11 +12,11 @@ namespace Core.Bus.Academico
     {
         aca_Admision_Data odata = new aca_Admision_Data();
 
-        public List<aca_Admision_Info> GetList(int IdEmpresa, int IdAnio)
+        public List<aca_Admision_Info> GetList(int IdEmpresa, int IdSede, int IdAnio)
         {
             try
             {
-                return odata.getList(IdEmpresa, IdAnio);
+                return odata.getList(IdEmpresa, IdSede, IdAnio);
             }
             catch (Exception)
             {

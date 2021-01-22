@@ -39,6 +39,7 @@ namespace Core.Data.Base
         public Nullable<int> IdMenu { get; set; }
         public string IPUsuario { get; set; }
         public string IPImpresora { get; set; }
+        public Nullable<bool> ManejaAdmision { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<seg_usuario_x_aca_Sede> seg_usuario_x_aca_Sede { get; set; }

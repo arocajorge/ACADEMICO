@@ -99,6 +99,7 @@ namespace Core.Web.Controllers
             {
                 SessionFixed.IdUsuario = usuario.IdUsuario;
                 SessionFixed.EsContador = Convert.ToString(usuario.EsContador);
+                SessionFixed.ManejaAdmision = Convert.ToString(usuario.ManejaAdmision);
                 SessionFixed.EsSuperAdmin = usuario.es_super_admin.ToString();
                 SessionFixed.IdCaja = bus_caja.GetIdCajaPorUsuario(model.IdEmpresa, SessionFixed.IdUsuario).ToString();
                 var lista = bus_usuario_x_sede.get_list(model.IdEmpresa, model.IdSede, usuario.IdUsuario, false);

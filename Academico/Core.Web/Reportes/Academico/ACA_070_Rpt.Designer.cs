@@ -118,7 +118,7 @@
             // 
             // PageHeader
             // 
-            this.PageHeader.HeightF = 488F;
+            this.PageHeader.HeightF = 0F;
             this.PageHeader.Name = "PageHeader";
             // 
             // xrRichText1

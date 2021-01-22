@@ -24,6 +24,7 @@ namespace Core.Web.Helps
         string IdNivelDescuento { get; set; }
         string IdEntidad { get; set; }
         string EsSuperAdmin { get; set; }
+        string ManejaAdmision { get; set; }
         string IdProducto_padre_dist { get; set; }
         string Idtipo_cliente { get; set; }
         string EsContador { get; set; }
@@ -135,6 +136,11 @@ namespace Core.Web.Helps
             set { _sessionValueProvider.EsSuperAdmin = value; }
         }
 
+        public static string ManejaAdmision
+        {
+            get { return _sessionValueProvider.ManejaAdmision; }
+            set { _sessionValueProvider.ManejaAdmision = value; }
+        }
         public static string IdProducto_padre_dist
         {
             get { return _sessionValueProvider.IdProducto_padre_dist; }
@@ -223,6 +229,7 @@ namespace Core.Web.Helps
         private const string _IdEntidad = "Fx_IdEntidadParam";
         private const string _IdNivelDescuento = "Fx_IdNivelDescuento";
         private const string _EsSuperAdmin = "Fx_EsSuperAdmin";
+        private const string _ManejaAdmision = "Fx_ManejaAdmision";
         private const string _IdProducto_padre_dist = "Fx_IdProducto_padre_dist";
         private const string _Idtipo_cliente = "Fx_Idtipo_cliente";
         private const string _EsContador = "Fx_EsContador";
@@ -319,6 +326,12 @@ namespace Core.Web.Helps
         {
             get { return (string)HttpContext.Current.Session[_EsSuperAdmin]; }
             set { HttpContext.Current.Session[_EsSuperAdmin] = value; }
+        }
+
+        public string ManejaAdmision
+        {
+            get { return (string)HttpContext.Current.Session[_ManejaAdmision]; }
+            set { HttpContext.Current.Session[_ManejaAdmision] = value; }
         }
 
         public string IdProducto_padre_dist

@@ -211,6 +211,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Academico\AcademicoAreaRegistration.cs" />
+    <Compile Include="Areas\Academico\Controllers\AdmisionController.cs" />
     <Compile Include="Areas\Academico\Controllers\AlumnoController.cs" />
     <Compile Include="Areas\Academico\Controllers\AlumnoFamiliaController.cs" />
     <Compile Include="Areas\Academico\Controllers\AlumnoPeriodoActualController.cs" />
@@ -9705,6 +9706,10 @@
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbNivel.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbJornada.cshtml" />
     <Content Include="Areas\Reportes\Views\FacturacionReportes\_CmbCurso.cshtml" />
+    <Content Include="Areas\Academico\Views\Admision\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\Admision\_GridViewPartial_Admision.cshtml" />
+    <Content Include="Areas\Academico\Views\Admision\_ComboBoxPartial_Anio_Consulta.cshtml" />
+    <Content Include="Areas\Academico\Views\Admision\_ComboBoxPartial_Sede.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

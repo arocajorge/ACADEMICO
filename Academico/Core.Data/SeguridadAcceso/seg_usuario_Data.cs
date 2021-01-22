@@ -149,7 +149,8 @@ namespace Core.Data.SeguridadAcceso
                         IdMenu = Entity.IdMenu,
                         IPImpresora = Entity.IPImpresora,
                         IPMaquina = Entity.IPUsuario,
-                        EsContador = Entity.EsContador
+                        EsContador = Entity.EsContador,
+                        ManejaAdmision = Entity.ManejaAdmision
                     };
                 }
 
@@ -182,7 +183,8 @@ namespace Core.Data.SeguridadAcceso
                         IPImpresora = info.IPImpresora,
                         IPUsuario = info.IPMaquina,
                         Fecha_Transaccion = DateTime.Now,
-                        EsContador = info.EsContador
+                        EsContador = info.EsContador,
+                        ManejaAdmision = info.ManejaAdmision==null ? false : info.ManejaAdmision
                     };
                     Context.seg_usuario.Add(Entity);
                     
@@ -246,6 +248,7 @@ namespace Core.Data.SeguridadAcceso
                     Entity.IPImpresora = info.IPImpresora;
                     Entity.IPUsuario = info.IPMaquina;
                     Entity.EsContador = info.EsContador;
+                    Entity.ManejaAdmision = info.ManejaAdmision == null ? false : info.ManejaAdmision;
                     var lst = Context.seg_usuario_x_aca_Sede.Where(q => q.IdUsuario == info.IdUsuario).ToList();
                     Context.seg_usuario_x_aca_Sede.RemoveRange(lst);
 

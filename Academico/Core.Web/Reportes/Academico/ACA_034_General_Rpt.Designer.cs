@@ -718,7 +718,7 @@
             // crossTabHeaderCell1
             // 
             this.crossTabHeaderCell1.ColumnIndex = 0;
-            this.crossTabHeaderCell1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.crossTabHeaderCell1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Bold);
             this.crossTabHeaderCell1.Name = "crossTabHeaderCell1";
             this.crossTabHeaderCell1.RowIndex = 0;
             this.crossTabHeaderCell1.RowSpan = 5;
@@ -729,7 +729,7 @@
             // 
             this.crossTabDataCell1.ColumnIndex = 1;
             this.crossTabDataCell1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "[Columna]==\'PROMEDIO FINAL\'")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Font.Bold", "[Columna]==\'PROMEDIO FINAL\' || [Columna]==\'PROMEDIO GENERAL\'\n")});
             this.crossTabDataCell1.Font = new System.Drawing.Font("Verdana", 7.5F);
             this.crossTabDataCell1.Name = "crossTabDataCell1";
             this.crossTabDataCell1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 1, 1, 100F);

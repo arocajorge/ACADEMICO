@@ -8,6 +8,7 @@ namespace Core.Info.Reportes.Academico
 {
     public class ACA_034_Info
     {
+        public int Num { get; set; }
         public int IdEmpresa { get; set; }
         public int IdAnio { get; set; }
         public int IdSede { get; set; }

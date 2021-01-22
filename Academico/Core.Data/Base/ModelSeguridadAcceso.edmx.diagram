@@ -5,13 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9998931b6fe3449684425cfad95f8b1e" Name="Diagram1" ZoomLevel="94">
-        <EntityTypeShape EntityType="ModelSeguridadAcceso.seg_usuario" Width="1.5" PointX="0.75" PointY="1.25" />
         <EntityTypeShape EntityType="ModelSeguridadAcceso.seg_usuario_x_aca_Sede" Width="1.5" PointX="3.125" PointY="4.625" />
-        <AssociationConnector Association="ModelSeguridadAcceso.FK_seg_usuario_x_aca_Sede_seg_usuario" />
         <EntityTypeShape EntityType="ModelSeguridadAcceso.seg_Usuario_x_Empresa" Width="1.5" PointX="3.375" PointY="0.5" />
-        <AssociationConnector Association="ModelSeguridadAcceso.FK_seg_Usuario_x_Empresa_seg_usuario" />
         <EntityTypeShape EntityType="ModelSeguridadAcceso.vwseg_usuario_x_aca_Sede" Width="1.5" PointX="7.25" PointY="0.5" />
-        <EntityTypeShape EntityType="ModelSeguridadAcceso.vwseg_usuario_x_tb_sucursal" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ModelSeguridadAcceso.vwseg_usuario_x_tb_sucursal" Width="2.375" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="ModelSeguridadAcceso.seg_usuario" Width="1.5" PointX="0.875" PointY="1" />
+        <AssociationConnector Association="ModelSeguridadAcceso.FK_seg_usuario_x_aca_Sede_seg_usuario" />
+        <AssociationConnector Association="ModelSeguridadAcceso.FK_seg_Usuario_x_Empresa_seg_usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

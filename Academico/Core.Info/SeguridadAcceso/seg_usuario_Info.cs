@@ -26,6 +26,7 @@ namespace Core.Info.SeguridadAcceso
         public string IPMaquina { get; set; }
         public string IPImpresora { get; set; }
         public Nullable<bool> EsContador { get; set; }
+        public Nullable<bool> ManejaAdmision { get; set; }
 
         #region Campos que no existen en la tabla
         public List<seg_usuario_x_aca_Sede_Info> lst_usuario_sede { get; set; }
