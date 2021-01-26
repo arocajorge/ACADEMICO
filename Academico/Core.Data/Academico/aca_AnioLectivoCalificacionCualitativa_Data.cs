@@ -316,7 +316,7 @@ namespace Core.Data.Academico
                 using (EntitiesAcademico db = new EntitiesAcademico())
                 {
                     var PromedioRedondeado = Math.Round(Convert.ToDecimal(PromedioFinal), 2, MidpointRounding.AwayFromZero);
-                    var Entity = db.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && PromedioRedondeado <= q.Calificacion).FirstOrDefault();
+                    var Entity = db.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Calificacion <= PromedioRedondeado).FirstOrDefault();
                     if (Entity == null)
                         return null;
 

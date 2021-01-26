@@ -789,7 +789,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 info_matricula.lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
                 info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
                 info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
-
+                info_matricula.lst_MatriculaCalificacionCualitativaPromedio = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
                 if (lst_materias_cuantitativas != null && lst_materias_cuantitativas.Count > 0)
                 {
                     foreach (var item in lst_materias_cuantitativas)
@@ -838,6 +838,13 @@ namespace Core.Web.Areas.Academico.Controllers
 
                             }
                         }
+                        var info_calificacion_cualitativa_promedio = new aca_MatriculaCalificacionCualitativaPromedio_Info
+                        {
+                            IdProfesor = item.IdProfesor,
+                            IdMateria = item.IdMateria
+                        };
+
+                        info_matricula.lst_MatriculaCalificacionCualitativaPromedio.Add(info_calificacion_cualitativa_promedio);
                     }
                 }
                 #endregion

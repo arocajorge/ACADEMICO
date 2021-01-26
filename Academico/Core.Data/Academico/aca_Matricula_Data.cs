@@ -613,6 +613,23 @@ namespace Core.Data.Academico
                         }
                     }
 
+                    if (info.lst_MatriculaCalificacionCualitativaPromedio.Count > 0)
+                    {
+                        foreach (var item in info.lst_MatriculaCalificacionCualitativaPromedio)
+                        {
+                            aca_MatriculaCalificacionCualitativaPromedio Entity_CalificacionCualitativaPromedio = new aca_MatriculaCalificacionCualitativaPromedio
+                            {
+                                IdEmpresa = info.IdEmpresa,
+                                IdMatricula = info.IdMatricula,
+                                IdMateria = item.IdMateria,
+                                IdProfesor = item.IdProfesor,
+                                IdUsuarioCreacion = info.IdUsuarioCreacion,
+                                FechaCreacion = DateTime.Now
+                            };
+                            Context.aca_MatriculaCalificacionCualitativaPromedio.Add(Entity_CalificacionCualitativaPromedio);
+                        }
+                    }
+
                     aca_MatriculaConducta Entity_Conducta = new aca_MatriculaConducta
                     {
                         IdEmpresa = info.IdEmpresa,

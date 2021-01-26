@@ -408,10 +408,19 @@ namespace Core.Data.Academico
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            Naturaleza_Aspirante = string.IsNullOrEmpty(reader["Naturaleza_Aspirante"].ToString()) ? null : reader["Naturaleza_Aspirante"].ToString(),
+                            IdTipoDocumento_Aspirante = string.IsNullOrEmpty(reader["IdTipoDocumento_Aspirante"].ToString()) ? null : reader["IdTipoDocumento_Aspirante"].ToString(),
                             CedulaRuc_Aspirante = reader["CedulaRuc_Aspirante"].ToString(),
                             Nombres_Aspirante = reader["Nombres_Aspirante"].ToString(),
                             Apellidos_Aspirante = reader["Apellidos_Aspirante"].ToString(),
                             NombreCompleto_Aspirante = reader["NombreCompleto_Aspirante"].ToString(),
+                            Direccion_Aspirante = string.IsNullOrEmpty(reader["Direccion_Aspirante"].ToString()) ? null : reader["Direccion_Aspirante"].ToString(),
+                            Telefono_Aspirante = string.IsNullOrEmpty(reader["Telefono_Aspirante"].ToString()) ? null : reader["Telefono_Aspirante"].ToString(),
                         };
                     }
                 }
