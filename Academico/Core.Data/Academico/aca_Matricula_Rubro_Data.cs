@@ -338,15 +338,137 @@ namespace Core.Data.Academico
             }
         }
 
-        public List<aca_Matricula_Rubro_Info> getList_FactMasiva(int IdEmpresa, int IdAnio, int IdPeriodo)
+        public List<aca_Matricula_Rubro_Info> getList_FactMasiva(int IdEmpresa, int IdAnio, int IdPeriodo, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo)
         {
             try
             {
                 List<aca_Matricula_Rubro_Info> Lista = new List<aca_Matricula_Rubro_Info>();
 
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query_PorFacturar = "SELECT a.IdEmpresa, a.IdMatricula, a.IdAnio, a.IdPeriodo, a.IdPlantilla, a.IdRubro, a.IdProducto, a.Subtotal, a.IdCod_Impuesto_Iva, a.Porcentaje, a.ValorIVA, a.Total, CASE WHEN j.AplicaProntoPago = 1 AND d .FechaProntoPago > CAST(getdate() "
+                    + " AS date) THEN CAST(k.Subtotal AS float) -(CASE WHEN l.AplicaParaTodo = 1 THEN(CASE WHEN l.TipoDescuento = '$' THEN CAST(l.Valor AS FLOAT) ELSE ROUND(CAST(k.Subtotal AS float) * (l.Valor / 100), 2) END) "
+                    + " ELSE(CASE WHEN k.TipoDescuento_descuentoDet = '$' THEN CAST(k.Valor_descuentoDet AS FLOAT) ELSE ROUND(CAST(k.Subtotal AS float) * (k.Valor_descuentoDet / 100), 2) END) END) ELSE CAST(k.Subtotal AS float) "
+                    + " + CAST(k.ValorIVA AS FLOAT) END + k.ValorIVA AS ValorProntoPago, c.NomRubro + CASE WHEN c.NumeroCuotas > 1 THEN + ' ' + CAST(e.Secuencia AS varchar) + '/' + CAST(c.NumeroCuotas AS varchar) "
+                    + " ELSE '' END + ' ' + f.smes + ' ' + CAST(YEAR(d.FechaDesde) AS varchar) AS Observacion, h.IdAlumno, d.FechaDesde, d.FechaProntoPago, b.IdTerminoPago, i.IdCliente, m.Codigo, n.pe_nombreCompleto AS Alumno, h.IdEmpresa_rol, "
+                    + " h.IdEmpleado, h.IdSede, h.IdNivel, h.IdJornada, h.IdCurso, h.IdParalelo "
+                    + " FROM     dbo.aca_Matricula_Rubro AS a INNER JOIN "
+                    + " dbo.aca_MecanismoDePago AS b ON a.IdEmpresa = b.IdEmpresa AND a.IdMecanismo = b.IdMecanismo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Rubro AS c ON a.IdAnio = c.IdAnio AND a.IdEmpresa = c.IdEmpresa AND a.IdRubro = c.IdRubro AND a.IdRubro = c.IdRubro LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Periodo AS d ON a.IdEmpresa = d.IdEmpresa AND a.IdAnio = d.IdAnio AND a.IdPeriodo = d.IdPeriodo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Rubro_Periodo AS e ON a.IdEmpresa = e.IdEmpresa AND a.IdRubro = e.IdRubro AND a.IdPeriodo = e.IdPeriodo AND a.IdAnio = e.IdAnio LEFT OUTER JOIN "
+                    + " dbo.tb_mes AS f ON d.IdMes = f.idMes LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS g ON a.IdEmpresa = g.IdEmpresa AND a.IdAnio = g.IdAnio INNER JOIN "
+                    + " dbo.aca_Matricula AS h ON a.IdEmpresa = h.IdEmpresa AND a.IdMatricula = h.IdMatricula LEFT OUTER JOIN "
+                        + " (SELECT IdEmpresa, IdPersona, MAX(IdCliente) AS IdCliente "
+                        + " FROM      dbo.fa_cliente "
+                        + " GROUP BY IdEmpresa, IdPersona) AS i ON h.IdPersonaF = i.IdPersona AND h.IdEmpresa = i.IdEmpresa LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Rubro AS j ON j.IdEmpresa = a.IdEmpresa AND j.IdAnio = a.IdAnio AND j.IdRubro = a.IdRubro LEFT OUTER JOIN "
+                    + " dbo.aca_Plantilla_Rubro AS k ON a.IdEmpresa = k.IdEmpresa AND a.IdAnio = k.IdAnio AND a.IdPlantilla = k.IdPlantilla AND a.IdRubro = k.IdRubro LEFT OUTER JOIN "
+                    + " dbo.aca_Plantilla AS l ON l.IdEmpresa = k.IdEmpresa AND l.IdAnio = k.IdAnio AND l.IdPlantilla = k.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno AS m ON h.IdEmpresa = m.IdEmpresa AND h.IdAlumno = m.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS n ON m.IdPersona = n.IdPersona "
+                    + " WHERE(a.FechaFacturacion IS NULL) AND(NOT EXISTS "
+                    + " (SELECT IdEmpresa "
+                        + " FROM      dbo.aca_AlumnoRetiro AS ret "
+                        + " WHERE(IdEmpresa = a.IdEmpresa) AND(IdMatricula = a.IdMatricula) AND(Estado = 1))) "
+                    + " and a.IdAnio= " + IdAnio.ToString()
+                    + " and h.IdSede= " + IdSede.ToString()
+                    + " and h.IdJornada= " + IdJornada.ToString()
+                    + " and h.IdNivel= " + IdNivel.ToString()
+                    + " and h.IdCurso= " + IdCurso.ToString()
+                    + " and h.IdParalelo= " + IdParalelo.ToString()
+                    + " and a.IdPeriodo= " + IdPeriodo.ToString();
+                    #endregion
+
+                    SqlCommand command_PorFacturar = new SqlCommand(query_PorFacturar, connection);
+                    command_PorFacturar.CommandTimeout = 0;
+                    SqlDataReader reader_PorFacturar = command_PorFacturar.ExecuteReader();
+                    while (reader_PorFacturar.Read())
+                    {
+                        Lista.Add(new aca_Matricula_Rubro_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader_PorFacturar["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader_PorFacturar["IdMatricula"]),
+                            IdAnio = Convert.ToInt32(reader_PorFacturar["IdAnio"]),
+                            IdPeriodo = Convert.ToInt32(reader_PorFacturar["IdPeriodo"]),
+                            IdPlantilla = Convert.ToInt32(reader_PorFacturar["IdPlantilla"]),
+                            IdRubro = Convert.ToInt32(reader_PorFacturar["IdRubro"]),
+                            IdProducto = Convert.ToDecimal(reader_PorFacturar["IdProducto"]),
+                            Subtotal = Convert.ToDecimal(reader_PorFacturar["Subtotal"]),
+                            ValorIVA = Convert.ToDecimal(reader_PorFacturar["ValorIVA"]),
+                            Porcentaje = Convert.ToDecimal(reader_PorFacturar["Porcentaje"]),
+                            IdAlumno = Convert.ToDecimal(reader_PorFacturar["Total"]),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader_PorFacturar["Alumno"].ToString()) ? null : reader_PorFacturar["Alumno"].ToString(),
+                            Codigo = string.IsNullOrEmpty(reader_PorFacturar["Codigo"].ToString()) ? null : reader_PorFacturar["Codigo"].ToString(),
+                            Total = Convert.ToDecimal(reader_PorFacturar["Total"]),
+                            IdCod_Impuesto_Iva = string.IsNullOrEmpty(reader_PorFacturar["IdCod_Impuesto_Iva"].ToString()) ? null : reader_PorFacturar["IdCod_Impuesto_Iva"].ToString(),
+                            ValorProntoPago = Convert.ToDecimal(reader_PorFacturar["ValorProntoPago"]),
+                            vt_Observacion = string.IsNullOrEmpty(reader_PorFacturar["Observacion"].ToString()) ? null : reader_PorFacturar["Observacion"].ToString(),
+                            Procesado = true,
+                            FechaDesde = Convert.ToDateTime(reader_PorFacturar["FechaDesde"]),
+                            FechaProntoPago = Convert.ToDateTime(reader_PorFacturar["FechaProntoPago"]),
+                            IdTerminoPago = string.IsNullOrEmpty(reader_PorFacturar["IdTerminoPago"].ToString()) ? null : reader_PorFacturar["IdTerminoPago"].ToString(),
+                            IdCliente = Convert.ToInt32(reader_PorFacturar["IdCliente"]),
+                            IdEmpresa_rol = string.IsNullOrEmpty(reader_PorFacturar["IdEmpresa_rol"].ToString()) ? (int?)null : Convert.ToInt32(reader_PorFacturar["IdEmpresa_rol"]),
+                            IdEmpleado = string.IsNullOrEmpty(reader_PorFacturar["IdEmpleado"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader_PorFacturar["IdEmpleado"]),
+                        });
+                    }
+                    reader_PorFacturar.Close();
+
+
+                    #region Query
+                    string query_FacturaMasiva = "SELECT a.IdEmpresa, a.IdAnio, a.IdPeriodo, a.IdSucursal, a.IdBodega, a.IdCbteVta, b.IdAlumno, d.pe_nombreCompleto, a.Total, f.Correo, e.vt_autorizacion, b.IdSede, b.IdNivel, b.IdJornada, b.IdCurso, b.IdParalelo "
+                    + " FROM dbo.aca_Matricula_Rubro AS a INNER JOIN "
+                    + " dbo.aca_Matricula AS b ON a.IdEmpresa = b.IdEmpresa AND a.IdMatricula = b.IdMatricula INNER JOIN "
+                    + " dbo.aca_Alumno AS c ON b.IdEmpresa = c.IdEmpresa AND b.IdAlumno = c.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS d ON c.IdPersona = d.IdPersona INNER JOIN "
+                    + " dbo.fa_factura AS e ON e.IdEmpresa = a.IdEmpresa AND e.IdSucursal = a.IdSucursal AND e.IdBodega = a.IdBodega AND e.IdCbteVta = a.IdCbteVta INNER JOIN "
+                    + " dbo.fa_cliente_contactos AS f ON e.IdEmpresa = f.IdEmpresa AND e.IdCliente = f.IdCliente "
+                    + " WHERE(e.AplicacionMasiva = 1) AND(NOT EXISTS "
+                    + " (SELECT IdEmpresa "
+                    + " FROM      dbo.aca_AlumnoRetiro AS z "
+                    + " WHERE(a.IdEmpresa = IdEmpresa) AND(a.IdMatricula = IdMatricula))) "
+                    + " and a.IdAnio= " + IdAnio.ToString()
+                    + " and a.IdSede= " + IdSede.ToString()
+                    + " and a.IdJornada= " + IdJornada.ToString()
+                    + " and a.IdNivel= " + IdNivel.ToString()
+                    + " and a.IdCurso= " + IdCurso.ToString()
+                    + " and a.IdParalelo= " + IdParalelo.ToString()
+                    + " and a.IdPeriodo= " + IdPeriodo.ToString();
+                    #endregion
+                    SqlCommand command_FacturaMasiva = new SqlCommand(query_FacturaMasiva, connection);
+                    command_FacturaMasiva.CommandTimeout = 0;
+                    SqlDataReader reader_FacturaMasiva = command_FacturaMasiva.ExecuteReader();
+                    while (reader_FacturaMasiva.Read())
+                    {
+                        Lista.Add(new aca_Matricula_Rubro_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader_FacturaMasiva["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader_FacturaMasiva["IdAnio"]),
+                            IdPeriodo = Convert.ToInt32(reader_FacturaMasiva["IdPeriodo"]),
+                            IdAlumno = Convert.ToDecimal(reader_FacturaMasiva["Total"]),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader_FacturaMasiva["pe_nombreCompleto"].ToString()) ? null : reader_FacturaMasiva["pe_nombreCompleto"].ToString(),
+                            Total = Convert.ToDecimal(reader_FacturaMasiva["NumeroCarnetConadis"]),
+                            IdSucursal = string.IsNullOrEmpty(reader_FacturaMasiva["IdSucursal"].ToString()) ? (int?)null : Convert.ToInt32(reader_FacturaMasiva["IdSucursal"]),
+                            IdBodega = string.IsNullOrEmpty(reader_FacturaMasiva["IdBodega"].ToString()) ? (int?)null : Convert.ToInt32(reader_FacturaMasiva["IdBodega"]),
+                            IdCbteVta = string.IsNullOrEmpty(reader_FacturaMasiva["IdCbteVta"].ToString()) ? (int?)null : Convert.ToInt32(reader_FacturaMasiva["IdCbteVta"]),
+                            Correo = string.IsNullOrEmpty(reader_FacturaMasiva["Correo"].ToString()) ? null : reader_FacturaMasiva["Correo"].ToString(),
+                            vt_autorizacion = string.IsNullOrEmpty(reader_FacturaMasiva["vt_autorizacion"].ToString()) ? null : reader_FacturaMasiva["vt_autorizacion"].ToString(),
+                            Procesado = true
+                        });
+                    }
+                    reader_FacturaMasiva.Close();
+
+                }
+                /*
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
                     var lst = Context.vwaca_Matricula_Rubro_PorFacturarMasiva.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPeriodo == IdPeriodo).ToList();
+
                     foreach (var q in lst)
                     {
                         var info = new aca_Matricula_Rubro_Info
@@ -399,7 +521,7 @@ namespace Core.Data.Academico
                         });
                     }
                 }
-                
+                */
                 Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000") + q.IdMatricula.ToString("000000") + q.IdPeriodo.ToString("0000") + q.IdRubro.ToString("000000"));
                 return Lista;
             }

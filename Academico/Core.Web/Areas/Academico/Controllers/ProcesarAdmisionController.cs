@@ -4,7 +4,6 @@ using Core.Info.Academico;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
-using DevExpress.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,9 +11,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Core.Admision.Controllers
+namespace Core.Web.Areas.Academico.Controllers
 {
-    public class AdmisionController : Controller
+    public class ProcesarAdmisionController : Controller
     {
         #region Variables
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
@@ -38,108 +37,35 @@ namespace Core.Admision.Controllers
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
+        aca_ProcesarAdmision_List Lista_ProcesarAdmision = new aca_ProcesarAdmision_List();
+
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
 
+        #region Index
         public ActionResult Index()
         {
-            int IdEmpresa = 1;
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0); 
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
+
             var model = new aca_Admision_Info
             {
-                IdEmpresa= IdEmpresa,
-                IdAnio = (info_anio==null ? 0 : info_anio.IdAnio),
-                IdSede=0,
-                IdJornada=0,
-                IdNivel=0,
-                IdCurso=0,
-                Naturaleza_Aspirante = "NATU",
-                Naturaleza_Padre = "NATU",
-                Naturaleza_Madre = "NATU",
-                Naturaleza_Representante = "NATU",
-                IdTipoDocumento_Aspirante = "CED",
-                IdTipoDocumento_Madre = "CED",
-                IdTipoDocumento_Padre = "CED",
-                IdTipoDocumento_Representante = "CED",
-                IdReligion_Aspirante = 0,
-                IdReligion_Padre = 0,
-                IdReligion_Madre = 0,
-                IdReligion_Representante = 0,
-                CodCatalogoCONADIS_Aspirante = "",
-                CodCatalogoCONADIS_Padre = "",
-                CodCatalogoCONADIS_Madre= "",
-                CodCatalogoCONADIS_Representante = "",
-                IdGrupoEtnico_Aspirante = (int?)null,
-                IdGrupoEtnico_Padre = (int?)null,
-                IdGrupoEtnico_Madre = (int?)null,
-                IdGrupoEtnico_Representante = (int?)null,
-                IdEstadoCivil_Padre = "",
-                IdEstadoCivil_Madre = "",
-                IdEstadoCivil_Representante = "",
-                AsisteCentroCristiano_Aspirante = false,
-                AsisteCentroCristiano_Padre = false,
-                AsisteCentroCristiano_Madre = false,
-                AsisteCentroCristiano_Representante = false,
-                CodCatalogoSangre_Aspirante = "",
-                Sexo_Aspirante = "",
-                Sexo_Padre = "SEXO_MAS",
-                Sexo_Madre = "SEXO_FEM",
-                Sector_Representante = "",
-                Sector_Aspirante = "",
-                Sector_Padre = "",
-                Sector_Madre = "",
-                IdPais_Aspirante = "1",
-                IdPais_Padre = "1",
-                IdPais_Madre= "1",
-                Cod_Region_Aspirante = "00001",
-                Cod_Region_Padre = "00001",
-                Cod_Region_Madre = "00001",
-                Cod_Region_Representante = "00001",
-                IdProvincia_Aspirante = "09",
-                IdProvincia_Padre = "09",
-                IdProvincia_Madre = "09",
-                IdProvincia_Representante = "09",
-                IdProfesion_Madre=0,
-                IdProfesion_Padre=0,
-                IdProfesion_Representante=0,
-                IdCatalogoFichaInst_Madre = 0,
-                IdCatalogoFichaInst_Padre=0,
-                IdCatalogoFichaInst_Representante=0,
-                IdCatalogoPAREN_Madre = Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA),
-                IdCatalogoPAREN_Padre = Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA),
-                IdCatalogoPAREN_Representante = Convert.ToInt32(cl_enumeradores.eTipoParentezco.OTROS),
-                SueldoPadre = 0,
-                SueldoMadre= 0,
-                OtroIngresoMadre = 0,
-                OtroIngresoPadre = 0,
-                GastoAlimentacion = 0,
-                GastoArriendo = 0,
-                GastoPrestamo = 0,
-                GastoEducacion = 0,
-                GastoSalud = 0,
-                GastoServicioBasico = 0,
-                OtroGasto = 0,
-                TotalEgresos = 0,
-                TotalIngresos = 0,
-                Saldo = 0,
-                IdCiudad_Aspirante = "",
-                IdCiudad_Madre = "",
-                IdCiudad_Padre = "",
-                IdCiudad_Representante = "",
-                IdParroquia_Aspirante = "",
-                IdParroquia_Padre = "",
-                IdParroquia_Madre = "",
-                IdParroquia_Representante = "",
-                FechaActual = DateTime.Now,
-                FechaNacimiento_Aspirante = DateTime.Now,
-                FechaNacimiento_Padre = DateTime.Now,
-                FechaNacimiento_Madre = DateTime.Now,
-                FechaNacimiento_Representante = DateTime.Now,
-                IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO),
-                Representante="O",
+                IdEmpresa = IdEmpresa,
+                IdAnio = (info_anio == null ? 0 : info_anio.IdAnio),
+                IdSede = Convert.ToInt32(SessionFixed.IdSede),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
+            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList(model.IdEmpresa, model.IdAnio, model.IdSede);
+            Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model);
             return View(model);
         }
@@ -147,82 +73,44 @@ namespace Core.Admision.Controllers
         [HttpPost]
         public ActionResult Index(aca_Admision_Info model)
         {
-            if (!validar(model, ref mensaje))
-            {
-                ViewBag.mensaje = mensaje;
-                cargar_combos(model);
-                return View(model);
-            }
-
-            if (!bus_admision.GuardarDB(model))
-            {
-                ViewBag.mensaje = "No se ha podido guardar el registro";
-                cargar_combos(model);
-                return View(model);
-            }
-
-            var FilePath = Server.MapPath("~/Content/aspirantes/" + model.IdAdmision);
-            if (!Directory.Exists(FilePath))
-            {
-                Directory.CreateDirectory(FilePath);
-            }
-
-            if (model.FotoAspirante != null)
-            {
-                var NombreArchivo = "FotoAspirante";
-                var fileName = Path.GetFileName(model.FotoAspirante.FileName);
-                var extension = Path.GetExtension(model.FotoAspirante.FileName);
-                var NombreArchivoGuardar = NombreArchivo + extension;
-                var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
-            }
-            if (model.CedulaAspirante != null)
-            {
-                var NombreArchivo = "CedulaAspirante";
-                var fileName = Path.GetFileName(model.CedulaAspirante.FileName);
-                var extension = Path.GetExtension(model.CedulaAspirante.FileName);
-                var NombreArchivoGuardar = NombreArchivo + extension;
-                var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
-            }
-            if (model.CedulaRepresentante != null)
-            {
-                var NombreArchivo = "CedulaRepresentante";
-                var fileName = Path.GetFileName(model.CedulaRepresentante.FileName);
-                var extension = Path.GetExtension(model.CedulaRepresentante.FileName);
-                var NombreArchivoGuardar = NombreArchivo + extension;
-                var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
-            }
-            if (model.RecordAcademicoAspirante != null)
-            {
-                var NombreArchivo = "RecordAcademico";
-                var fileName = Path.GetFileName(model.RecordAcademicoAspirante.FileName);
-                var extension = Path.GetExtension(model.RecordAcademicoAspirante.FileName);
-                var NombreArchivoGuardar = NombreArchivo + extension;
-                var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
-            }
-            if (model.PagoAlDiaAspirante != null)
-            {
-                var NombreArchivo = "PagoAlDia";
-                var fileName = Path.GetFileName(model.PagoAlDiaAspirante.FileName);
-                var extension = Path.GetExtension(model.PagoAlDiaAspirante.FileName);
-                var NombreArchivoGuardar = NombreArchivo + extension;
-                var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
-            }
-            if (model.CertificadoLaboral != null)
-            {
-                var NombreArchivo = "CertificadoLaboral";
-                var fileName = Path.GetFileName(model.CertificadoLaboral.FileName);
-                var extension = Path.GetExtension(model.CertificadoLaboral.FileName);
-                var NombreArchivoGuardar = NombreArchivo + extension;
-                var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
-            }
-            return RedirectToAction("Index");
+            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList(model.IdEmpresa, model.IdAnio, model.IdSede);
+            Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            cargar_combos(model);
+            return View(model);
         }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ProcesarAdmision(bool Nuevo = false, bool Modificar = false, bool Anular = false)
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List<aca_Admision_Info> model = Lista_ProcesarAdmision.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_ProcesarAdmision", model);
+        }
+        #endregion
+
+        #region Acciones
+        public ActionResult Consultar(int IdEmpresa = 0, decimal IdAdmision = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_Admision_Info model = bus_admision.GetInfo(IdEmpresa, IdAdmision);
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            //if (Exito)
+            //    ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(model);
+            return View(model);
+        }
+        #endregion
 
         #region Metodos
         private void cargar_combos(aca_Admision_Info model)
@@ -256,8 +144,8 @@ namespace Core.Admision.Controllers
             var lst_tipo_vivienda = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.TIPOVIVIENDA), false);
             var lst_vivienda = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVIENDA), false);
             var lst_agua = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.AGUA), false);
-            var lst_ing_institucion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.MOTIVOING), false);          
-            var lst_institucion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTITUCION), false);         
+            var lst_ing_institucion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.MOTIVOING), false);
+            var lst_institucion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTITUCION), false);
             var lst_financiamiento = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.ESTUDIOS), false);
 
             var lst_profesion = bus_profesion.GetList(false);
@@ -423,14 +311,14 @@ namespace Core.Admision.Controllers
                 info.CedulaRuc_Representante = info.CedulaRuc_Padre;
                 info.Nombres_Representante = info.Nombres_Padre;
                 info.Apellidos_Representante = info.Apellidos_Padre;
-                info.NombreCompleto_Representante = info.Apellidos_Padre+' '+info.Nombres_Padre;
+                info.NombreCompleto_Representante = info.Apellidos_Padre + ' ' + info.Nombres_Padre;
                 info.RazonSocial_Representante = info.RazonSocial_Padre;
                 info.Direccion_Representante = info.Direccion_Padre;
                 info.Telefono_Representante = info.Telefono_Padre;
                 info.Celular_Representante = info.Celular_Padre;
                 info.Correo_Representante = info.Correo_Padre;
                 info.Sexo_Representante = (info.Sexo_Padre == "" ? null : info.Sexo_Padre);
-                info.FechaNacimiento_Representante = (info.FechaNacimiento_Padre==null ? (DateTime?)null: info.FechaNacimiento_Padre);
+                info.FechaNacimiento_Representante = (info.FechaNacimiento_Padre == null ? (DateTime?)null : info.FechaNacimiento_Padre);
                 info.CodCatalogoCONADIS_Representante = (info.CodCatalogoCONADIS_Padre == "" ? null : info.CodCatalogoCONADIS_Padre);
                 info.PorcentajeDiscapacidad_Representante = info.PorcentajeDiscapacidad_Padre;
                 info.NumeroCarnetConadis_Representante = info.NumeroCarnetConadis_Padre;
@@ -633,7 +521,7 @@ namespace Core.Admision.Controllers
                 return false;
             }
 
-            if (info.info_valido_aspirante == true && info.info_valido_padre==true && info.info_valido_madre == true && info.info_valido_representante==true)
+            if (info.info_valido_aspirante == true && info.info_valido_padre == true && info.info_valido_madre == true && info.info_valido_representante == true)
             {
                 if (info.CedulaRuc_Padre != null && info.CedulaRuc_Madre != null && (info.CedulaRuc_Padre == info.CedulaRuc_Madre))
                 {
@@ -646,65 +534,24 @@ namespace Core.Admision.Controllers
                 msg = "Complete la información solicitada";
                 return false;
             }
-  
+
             return true;
         }
         #endregion
 
         #region JSON
-        public JsonResult CargarJornada(int IdEmpresa = 0, int IdAnio=0, int IdSede = 0)
+        public JsonResult CantidadAdmisiones(string IdUsuario = "")
         {
-            var lst_jornada = bus_jornada.GetList_Combos(IdEmpresa, IdAnio, IdSede);
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0);
+            var IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
 
-            var resultado = (lst_jornada == null ? new List<aca_Jornada_Info>() : lst_jornada);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult CargarNivel(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada=0)
-        {
-            var lst_nivel = bus_nivel.GetList(IdEmpresa, IdAnio, IdSede);
-
-            var resultado = (lst_nivel == null ? new List<aca_NivelAcademico_Info>() : lst_nivel);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult CargarCurso(int IdEmpresa = 0, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0)
-        {
-            var lst_curso = bus_curso.GetList_Combos(IdEmpresa, IdAnio, IdSede, IdJornada, IdNivel);
-
-            var resultado = (lst_curso == null ? new List<aca_Curso_Info>() : lst_curso);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult CargarRegion(string IdPais= "")
-        {
-            var lst_region = bus_region.get_list(IdPais, false);
-            lst_region.Add(new tb_region_Info { Cod_Region = "", Nom_region = "--- Seleccione ---" });
-            var resultado = (lst_region == null ? new List<tb_region_Info>() : lst_region);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult CargarProvincia(string IdPais = "")
-        {
-            var lst_provincia = bus_provincia.get_list(IdPais, false);
-            lst_provincia.Add(new tb_provincia_Info { IdProvincia = "", Descripcion_Prov = "--- Seleccione ---" });
-
-            var resultado = (lst_provincia == null ? new List<tb_provincia_Info>() : lst_provincia);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult CargarCiudad(string IdProvincia="")
-        {
-            var lst_ciudad = bus_ciudad.get_listCombos(IdProvincia, false);
-            lst_ciudad.Add(new tb_ciudad_Info { IdCiudad = "", Descripcion_Ciudad = "--- Seleccione ---" });
-
-            var resultado = (lst_ciudad == null ? new List<tb_ciudad_Info>() : lst_ciudad);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult CargarParroquia(string IdCiudad="")
-        {
-            var lst_parroquia = bus_parroquia.get_listCombos(IdCiudad, false);
-            lst_parroquia.Add(new tb_parroquia_Info { IdParroquia = "", nom_parroquia = "--- Seleccione ---" });
-
-            var resultado = (lst_parroquia == null ? new List<tb_parroquia_Info>() : lst_parroquia);
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-        public JsonResult Validar_cedula_ruc(string naturaleza = "", string tipo_documento = "", string cedula_ruc = "")
+            var lst_admisiones = bus_admision.GetList(IdEmpresa,IdSede, IdAnio);
+            var cantidad = lst_admisiones.Count();
+            return Json(cantidad, JsonRequestBehavior.AllowGet);
+    }
+    public JsonResult Validar_cedula_ruc(string naturaleza = "", string tipo_documento = "", string cedula_ruc = "")
         {
             var return_naturaleza = "";
             var isValid = cl_funciones.ValidaIdentificacion(tipo_documento, naturaleza, cedula_ruc, ref return_naturaleza);
@@ -722,7 +569,7 @@ namespace Core.Admision.Controllers
             resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
 
             var info_admision = bus_admision.GetInfo_CedulaAspirante(IdEmpresa, pe_cedulaRuc);
-            resultado.IdAdmision = (info_admision==null ? 0 : info_admision.IdAdmision);
+            resultado.IdAdmision = (info_admision == null ? 0 : info_admision.IdAdmision);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
@@ -740,24 +587,26 @@ namespace Core.Admision.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ValidarArchivos(HttpPostedFileBase FotoAspirante)
-        {
-            var resultado = "";
-
-            if (FotoAspirante==null)
-            {
-                resultado = "foto del aspirante, ";
-            }
-            else
-            {
-                if (FotoAspirante.ContentLength > 0 && FotoAspirante.ContentLength <= 100000)
-                {
-                    resultado = "peso no permitido para foto del aspirante, ";
-                }
-            }
-
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
         #endregion
+    }
+}
+
+public class aca_ProcesarAdmision_List
+{
+    string Variable = "aca_ProcesarAdmision_Info";
+    public List<aca_Admision_Info> get_list(decimal IdTransaccionSession)
+    {
+        if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+        {
+            List<aca_Admision_Info> list = new List<aca_Admision_Info>();
+
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+        return (List<aca_Admision_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+    }
+
+    public void set_list(List<aca_Admision_Info> list, decimal IdTransaccionSession)
+    {
+        HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
     }
 }

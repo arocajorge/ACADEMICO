@@ -946,6 +946,68 @@ namespace Core.Data.Reportes.Academico
                 ListaFinal.AddRange(lst_promedio_general);
                 Lista_Comportamiento_Proyectos = Lista.Where(q => q.IdMateria == 0).ToList();
                 ListaFinal.AddRange(Lista_Comportamiento_Proyectos);
+
+                #region Secuencial
+                var lstAlumnos = ListaFinal.GroupBy(q => new { q.IdAlumno, q.NombreAlumno }).Select(q => new ACA_034_Info
+                {
+                    IdAlumno = q.Key.IdAlumno,
+                    NombreAlumno = q.Key.NombreAlumno,
+                    Secuencial = 0
+                }).OrderBy(q => q.NombreAlumno).ToList();
+
+                int Secuencial = 1;
+                foreach (var item in lstAlumnos)
+                {
+                    item.Secuencial = Secuencial++;
+                }
+                ListaFinal = (from a in ListaFinal
+                              join b in lstAlumnos
+                              on a.IdAlumno equals b.IdAlumno
+                              select new ACA_034_General_Info
+                              {
+                                  IdEmpresa = a.IdEmpresa,
+                                  IdAnio = a.IdAnio,
+                                  IdSede = a.IdSede,
+                                  IdNivel = a.IdNivel,
+                                  IdJornada = a.IdJornada,
+                                  IdCurso = a.IdCurso,
+                                  IdParalelo = a.IdParalelo,
+                                  IdAlumno = a.IdAlumno,
+                                  IdMatricula = a.IdMatricula,
+                                  IdMateria = a.IdMateria,
+                                  NombreMateria = a.NombreMateria,
+                                  NombreGrupo = a.NombreGrupo,
+                                  OrdenMateria = a.OrdenMateria,
+                                  OrdenGrupo = a.OrdenGrupo,
+                                  PromediarGrupo = a.PromediarGrupo,
+                                  IdCatalogoTipoCalificacion = a.IdCatalogoTipoCalificacion,
+                                  Codigo = a.Codigo,
+                                  NombreAlumno = a.NombreAlumno,
+                                  Descripcion = a.Descripcion,
+                                  NomSede = a.NomSede,
+                                  NomNivel = a.NomNivel,
+                                  OrdenNivel = a.OrdenNivel,
+                                  NomJornada = a.NomJornada,
+                                  OrdenJornada = a.OrdenJornada,
+                                  NomCurso = a.NomCurso,
+                                  OrdenCurso = a.OrdenCurso,
+                                  CodigoParalelo = a.CodigoParalelo,
+                                  NomParalelo = a.NomParalelo,
+                                  OrdenParalelo = a.OrdenParalelo,
+                                  NombreTutor = a.NombreTutor,
+                                  Calificacion = a.Calificacion,
+                                  CalificacionNumerica = a.CalificacionNumerica,
+                                  Columna = a.Columna,
+                                  OrdenColumna = a.OrdenColumna,
+                                  PromedioCalculado = a.PromedioCalculado,
+                                  SupletorioCalculado = a.SupletorioCalculado,
+                                  PromedioFinalCalculado = a.PromedioFinalCalculado,
+                                  SumaGeneral = a.SumaGeneral,
+                                  NoTieneCalificacion = a.NoTieneCalificacion,
+                                  Secuencial = b.Secuencial
+                              }).ToList();
+                #endregion
+
                 return ListaFinal;
             }
             catch (Exception ex)

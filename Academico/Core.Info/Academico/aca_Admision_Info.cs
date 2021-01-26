@@ -363,6 +363,10 @@ namespace Core.Info.Academico
         public HttpPostedFileBase RecordAcademicoAspirante { get; set; }
         public HttpPostedFileBase PagoAlDiaAspirante { get; set; }
         public HttpPostedFileBase CertificadoLaboral { get; set; }
+        public int IdPersona_Aspirante { get; set; }
+        public int IdPersona_Padre { get; set; }
+        public int IdPersona_Madre { get; set; }
+        public int IdPersona_Representante { get; set; }
         #endregion
     }
 }

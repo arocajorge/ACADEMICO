@@ -46,6 +46,7 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
         public List<aca_AnioLectivo_Periodo_Info> GetList(int IdEmpresa, int IdAnio, bool MostrarAnulados)
         {
             try

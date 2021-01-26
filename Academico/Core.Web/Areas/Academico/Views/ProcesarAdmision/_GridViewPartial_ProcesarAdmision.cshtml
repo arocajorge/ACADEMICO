@@ -1,8 +1,8 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_Admision";
-        settings.CallbackRouteValues = new { Controller = "Alumno", Action = "GridViewPartial_Admision",  Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
+        settings.Name = "GridViewPartial_ProcesarAdmision";
+        settings.CallbackRouteValues = new { Controller = "ProcesarAdmision", Action = "GridViewPartial_ProcesarAdmision",  Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
         settings.KeyFieldName = "IdAdmision";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
@@ -60,9 +60,9 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                ViewContext.Writer.Write(
-                    Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAlumno = DataBinder.Eval(tc.DataItem, "IdAdmision") }) + "&nbsp;"
-                );
+                //ViewContext.Writer.Write(
+                //    Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAdmision = DataBinder.Eval(tc.DataItem, "IdAdmision") }) + "&nbsp;"
+                //);
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
@@ -88,16 +88,6 @@
             column.EditFormSettings.Visible = DefaultBoolean.True;
         });
         settings.Columns.Add("EstadoAdmision", "Estado").Width = Unit.Percentage(10);
-        //settings.Columns.Add(column =>
-        //{
-        //    column.FieldName = "Estado";
-        //    column.Caption = "Estado";
-        //    column.Width = System.Web.UI.WebControls.Unit.Percentage(8);
-        //    column.EditorProperties().CheckBox(sp =>
-        //    {
-
-        //    });
-        //});
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
     });
 }

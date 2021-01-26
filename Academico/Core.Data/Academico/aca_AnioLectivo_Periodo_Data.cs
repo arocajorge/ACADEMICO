@@ -318,7 +318,7 @@ namespace Core.Data.Academico
                     Entity.FechaModificacion = DateTime.Now;
                     Entity.IdSucursal = info.IdSucursal;
                     Entity.IdPuntoVta = info.IdPuntoVta;
-                    Entity.Procesado = true;
+                    //Entity.Procesado = true;
                     Entity.FechaProceso = DateTime.Now;
                     Entity.TotalAlumnos = info.lst_det_fact_masiva.Count();
                     Entity.TotalValorFacturado = info.lst_det_fact_masiva.Sum(q=>q.Total);

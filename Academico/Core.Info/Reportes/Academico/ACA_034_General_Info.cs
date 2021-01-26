@@ -47,5 +47,6 @@ namespace Core.Info.Reportes.Academico
         public Nullable<decimal> PromedioFinalCalculado { get; set; }
         public Nullable<decimal> SumaGeneral { get; set; }
         public int NoTieneCalificacion { get; set; }
+        public int Secuencial { get; set; }
     }
 }

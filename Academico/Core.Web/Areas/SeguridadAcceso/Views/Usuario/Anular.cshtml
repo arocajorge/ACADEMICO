@@ -102,6 +102,17 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="bo_EsBodega"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.ManejaAdmision, settings =>
+                                {
+                                    settings.Name = "ManejaAdmision";
+                                    settings.Text = "Maneja Admision";
+                                }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.ManejaAdmision, "", new { @class = "text-danger" })
+                </div>
+            </div>
             <div class="col-md-2">
                 <div class="form-group" id="div_admin" hidden>
                     <label for="contrasena_admin">Contraseña Administrador</label>

@@ -30,6 +30,7 @@ namespace Core.Info.Helps
         public string IdCtaCble { get; set; }
         public string IdCtaCbleFin { get; set; }
         public bool mostrarAnulados { get; set; }
+        public bool MostrarPromedios { get; set; }
         public bool mostrar_observacion_completa { get; set; }
         public int IdBodega { get; set; }
         public string CodDocumentoTipo { get; set; }

@@ -63,11 +63,11 @@ namespace Core.Bus.Academico
             }
         }
 
-        public List<aca_Matricula_Rubro_Info> getList_FactMasiva(int IdEmpresa, int IdAnio, int IdPeriodo)
+        public List<aca_Matricula_Rubro_Info> getList_FactMasiva(int IdEmpresa, int IdAnio, int IdPeriodo, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo)
         {
             try
             {
-                return odata.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo);
+                return odata.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo, IdSede, IdJornada, IdNivel, IdCurso, IdParalelo);
             }
             catch (Exception)
             {

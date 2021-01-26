@@ -1,0 +1,2061 @@
+﻿@using System.Web.UI.WebControls;
+@model Core.Info.Academico.aca_Admision_Info
+@{
+    ViewBag.Title = "Consultar admision";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+@using (Html.BeginForm("Consultar", "ProcesarAdmision", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdAdmision, new { @id = "IdAdmision" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    @Html.HiddenFor(q => q.IdPersona_Aspirante, new { @id = "IdPersona_Aspirante" })
+    @Html.HiddenFor(q => q.IdPersona_Padre, new { @id = "IdPersona_Padre" })
+    @Html.HiddenFor(q => q.IdPersona_Madre, new { @id = "IdPersona_Madre" })
+    @Html.HiddenFor(q => q.IdPersona_Representante, new { @id = "IdPersona_Representante" })
+
+    if (ViewBag.mensaje != null)
+    {
+        <div class="alert alert-warning alert-dismissible">
+            <h4>
+                <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+            </h4>
+        </div>
+
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="info_persona.Naturaleza_Aspirante">Naturaleza*</label>
+                    @Html.DropDownListFor(q => q.Naturaleza_Aspirante, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Naturaleza_Aspirante", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.Naturaleza_Aspirante, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="info_persona.IdTipoDocumento_Aspirante">Tipo documento*</label>
+                    @Html.DropDownListFor(q => q.IdTipoDocumento_Aspirante, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento_Aspirante", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.IdTipoDocumento_Aspirante, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="info_persona.CedulaAspirante">Número documento*</label>
+                    @Html.TextBoxFor(q => q.CedulaAspirante, new { @class = "form-control", @id = "CedulaAspirante", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.CedulaAspirante, "", new { @class = "text-danger" })
+                    <label id="error_documento" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="">Fecha de ingreso</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.FechaIngreso_Aspirante, settings =>
+                           {
+                               settings.Name = "FechaIngreso_Aspirante";
+                               settings.Properties.UseMaskBehavior = true;
+                               settings.Properties.EditFormat = EditFormat.Date;
+                               settings.Properties.EditFormatString = "dd/MM/yyyy";
+                               settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                               settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                               settings.Properties.AllowMouseWheel = false;
+                               settings.ReadOnly = true;
+                           }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.FechaIngreso_Aspirante, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal">&nbsp;</label>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdSucursal">&nbsp;</label>
+                    <button type="button" class="btn btn-primary form-control" title="Otras opciones" onclick="MostrarModalBotones();">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="info_persona.Apellidos_Aspirante">Apellidos</label>
+                    @Html.TextBoxFor(q => q.Apellidos_Aspirante, new { @class = "form-control", @id = "Apellidos_Aspirante" })
+                    @Html.ValidationMessageFor(q => q.Apellidos_Aspirante, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="info_persona.Nombres_Aspirante">Nombres</label>
+                    @Html.TextBoxFor(q => q.Nombres_Aspirante, new { @class = "form-control", @id = "Nombres_Aspirante" })
+                    @Html.ValidationMessageFor(q => q.Nombres_Aspirante, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="info_persona.NombreCompleto_Aspirante">Nombre completo</label>
+                    @Html.TextBoxFor(q => q.NombreCompleto_Aspirante, new { @class = "form-control", @id = "NombreCompleto_Aspirante" })
+                    @Html.ValidationMessageFor(q => q.NombreCompleto_Aspirante, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="Tabs" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tb_alumno" aria-controls="general" role="tab" data-toggle="tab"><b>Datos del aspirante</b></a>
+            </li>
+            @*<li>
+                <a href="#tb_foto" aria-controls="foto" role="tab" data-toggle="tab"><b>Foto del alumno</b></a>
+            </li>*@
+            <li>
+                <a href="#tb_padre" aria-controls="otros" role="tab" data-toggle="tab"><b>Datos del padre</b></a>
+            </li>
+            <li>
+                <a href="#tb_madre" aria-controls="otros" role="tab" data-toggle="tab"><b>Datos de la madre</b></a>
+            </li>
+            @*<li>
+                <a href="#tb_documento" aria-controls="otros" role="tab" data-toggle="tab"><b>Documentos en archivo</b></a>
+            </li>*@
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" style="padding-top: 20px">
+
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_alumno">
+                <h4>Datos Generales</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Telefonos">Lugar de nacimiento</label>
+                                @Html.TextBoxFor(q => q.LugarNacimiento_Aspirante, new { @class = "form-control", @id = "LugarNacimiento_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.LugarNacimiento_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Fecha de nacimiento</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.FechaNacimiento_Aspirante, settings =>
+                            {
+                                settings.Name = "FechaNacimiento_Aspirante";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.AllowMouseWheel = false;
+                            }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.FechaNacimiento_Aspirante, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Sexo_Aspirante">Sexo</label>
+                                @Html.DropDownListFor(q => q.Sexo_Aspirante, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Sexo_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.Sexo_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Sexo_Aspirante">Tipo de sangre</label>
+                                @Html.DropDownListFor(q => q.CodCatalogoSangre_Aspirante, new SelectList(ViewBag.lst_tipo_sangre, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Sexo_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.CodCatalogoSangre_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Grupo Etnico</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdGrupoEtnico_Aspirante, settings =>
+                               {
+                                   settings.Name = "IdGrupoEtnico_Aspirante";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdGrupoEtnico", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomGrupoEtnico", "Grupo Etnico").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdGrupoEtnico";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomGrupoEtnico";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_grupoetnico).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdGrupoEtnico_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Religión</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdReligion_Aspirante, settings =>
+                               {
+                                   settings.Name = "IdReligion";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdReligion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomReligion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_religion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdReligion_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.AsisteCentroCristiano_Aspirante, settings =>
+                                {
+                                    settings.Name = "AsisteCentroCristiano_Aspirante";
+                                    settings.Text = "Asiste a Centro Cristiano";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.AsisteCentroCristiano_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Teléfono</label>
+                                @Html.TextBoxFor(q => q.Telefono_Aspirante, new { @class = "form-control", @id = "Telefono_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.Telefono_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="pe_CedulaAspirante">Cedula Aspirante</label>
+                                @Html.TextBoxFor(q => q.CedulaAspirante, new { @class = "form-control", @id = "CedulaAspirante" })
+                                @Html.ValidationMessageFor(q => q.CedulaAspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Correo Aspirante</label>
+                                @Html.TextBoxFor(q => q.Correo_Aspirante, new { @class = "form-control", @id = "Correo_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.Correo_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Direccion_Aspirante">Dirección</label>
+                                @Html.TextAreaFor(q => q.Direccion_Aspirante, new { @class = "form-control", @rows = "2", @id = "Direccion_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.Direccion_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">País</label>
+                                @Html.Partial("_ComboBoxPartial_Pais", Model)
+                                @Html.ValidationMessageFor(q => q.IdPais_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Región</label>
+                                @Html.Partial("_ComboBoxPartial_Region", Model)
+                                @Html.ValidationMessageFor(q => q.Cod_Region_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Provincia</label>
+                                @Html.Partial("_ComboBoxPartial_Provincia", Model)
+                                @Html.ValidationMessageFor(q => q.IdProvincia_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Ciudad</label>
+                                @Html.Partial("_ComboBoxPartial_Ciudad", Model)
+                                @Html.ValidationMessageFor(q => q.IdCiudad_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Parroquia</label>
+                                @Html.Partial("_ComboBoxPartial_Parroquia", Model)
+                                @Html.ValidationMessageFor(q => q.IdParroquia_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Direccion_Aspirante">Sector</label>
+                                @Html.TextBoxFor(q => q.Sector_Aspirante, new { @class = "form-control", @rows = "2", @id = "Sector_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.Sector_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Dificultad_Lectura, settings =>
+                                {
+                                    settings.Name = "Dificultad_Lectura";
+                                    settings.Text = "Dificultad en lectura";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Dificultad_Lectura, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Dificultad_Escritura, settings =>
+                                {
+                                    settings.Name = "Dificultad_Escritura";
+                                    settings.Text = "Dificultad en escritura";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Dificultad_Escritura, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.Dificultad_Matematicas, settings =>
+                                {
+                                    settings.Name = "Dificultad_Matematicas";
+                                    settings.Text = "Dificultad en matematicas";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.Dificultad_Matematicas, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>Datos Conadis</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Sexo_Aspirante">Tipo de discapacidad</label>
+                                @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Aspirante, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoCONADIS" })
+                                @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Porcentaje de discapacidad</label>
+                                @Html.TextBoxFor(q => q.PorcentajeDiscapacidad_Aspirante, new { @class = "form-control", @id = "PorcentajeDiscapacidad_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Número de carnet</label>
+                                @Html.TextBoxFor(q => q.NumeroCarnetConadis_Aspirante, new { @class = "form-control", @id = "NumeroCarnetConadis_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_padre">
+                <h4>Datos Generales</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="info_persona.Naturaleza_Aspirante">Naturaleza*</label>
+                                @Html.DropDownListFor(q => q.Naturaleza_Padre, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Naturaleza_Padre" })
+                                @Html.ValidationMessageFor(q => q.Naturaleza_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="info_persona.IdTipoDocumento_Aspirante">Tipo documento*</label>
+                                @Html.DropDownListFor(q => q.IdTipoDocumento_Padre, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdTipoDocumento_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="info_persona.CedulaAspirante">Número documento*</label>
+                                @Html.TextBoxFor(q => q.CedulaRuc_Padre, new { @class = "form-control", @id = "CedulaRuc_Padre" })
+                                @Html.ValidationMessageFor(q => q.CedulaRuc_Padre, "", new { @class = "text-danger" })
+                                <label id="error_documento_padre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                            </div>
+                        </div>
+                        @*<div class="col-md-offset-1 col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.SeFactura_padre, settings =>
+                        {
+                            settings.Name = "SeFactura_padre";
+                            settings.Text = "Se factura";
+                            settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){SeFactura_madre.SetChecked(false); mostrar_cliente_padre();mostrar_cliente_madre(); }";
+                        }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.SeFactura_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.EsRepresentante_padre, settings =>
+                                {
+                                    settings.Name = "EsRepresentante_padre";
+                                    settings.Text = "Es Representante";
+                                    settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){EsRepresentante_madre.SetChecked(false);}";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EsRepresentante_padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="info_persona.Apellidos_Aspirante">Apellidos</label>
+                                @Html.TextBoxFor(q => q.Apellidos_Padre, new { @class = "form-control", @id = "Apellidos_Padre" })
+                                @Html.ValidationMessageFor(q => q.Apellidos_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="info_persona.Nombres_Aspirante">Nombres</label>
+                                @Html.TextBoxFor(q => q.Nombres_Padre, new { @class = "form-control", @id = "Nombres_Padre" })
+                                @Html.ValidationMessageFor(q => q.Nombres_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.EstaFallecido_Padre, settings =>
+                                {
+                                    settings.Name = "EstaFallecido_Padre";
+                                    settings.Text = "Está fallecido";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EstaFallecido_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.Apellidos_Aspirante">Nombre completo</label>
+                                @Html.TextBoxFor(q => q.NombreCompleto_Padre, new { @class = "form-control", @id = "NombreCompleto_Padre" })
+                                @Html.ValidationMessageFor(q => q.NombreCompleto_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.Apellidos_Aspirante">Razón Social</label>
+                                @Html.TextBoxFor(q => q.RazonSocial_Padre, new { @class = "form-control", @id = "RazonSocial_Padre" })
+                                @Html.ValidationMessageFor(q => q.RazonSocial_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Fecha de nacimiento</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.FechaNacimiento_Padre, settings =>
+                            {
+                                settings.Name = "FechaNacimiento_Padre";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.AllowMouseWheel = false;
+                            }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.FechaNacimiento_Padre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Sexo_Aspirante">Sexo</label>
+                                @Html.DropDownListFor(q => q.Sexo_Padre, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Sexo_Padre" })
+                                @Html.ValidationMessageFor(q => q.Sexo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEstadoCivil">Estado civil</label>
+                                @Html.DropDownListFor(q => q.IdEstadoCivil_Padre, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdEstadoCivil_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdEstadoCivil_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Teléfono</label>
+                                @Html.TextBoxFor(q => q.Telefono_Padre, new { @class = "form-control", @id = "Telefono_Padre" })
+                                @Html.ValidationMessageFor(q => q.Telefono_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="pe_CedulaAspirante">Celular</label>
+                                @Html.TextBoxFor(q => q.Celular_Padre, new { @class = "form-control", @id = "Celular_Padre" })
+                                @Html.ValidationMessageFor(q => q.Celular_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">País</label>
+                                @Html.Partial("_ComboBoxPartial_Pais_padre", Model)
+                                @Html.ValidationMessageFor(q => q.IdPais_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Región</label>
+                                @Html.Partial("_ComboBoxPartial_Region_padre", Model)
+                                @Html.ValidationMessageFor(q => q.Cod_Region_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Provincia</label>
+                                @Html.Partial("_ComboBoxPartial_Provincia_padre", Model)
+                                @Html.ValidationMessageFor(q => q.IdProvincia_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Ciudad</label>
+                                @Html.Partial("_ComboBoxPartial_Ciudad_padre", Model)
+                                @Html.ValidationMessageFor(q => q.IdCiudad_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Parroquia</label>
+                                @Html.Partial("_ComboBoxPartial_Parroquia_padre", Model)
+                                @Html.ValidationMessageFor(q => q.IdParroquia_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Direccion_Aspirante">Sector</label>
+                                @Html.TextBoxFor(q => q.Sector_Padre, new { @class = "form-control", @rows = "2", @id = "Sector_Padre" })
+                                @Html.ValidationMessageFor(q => q.Sector_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Religión</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdReligion_Padre, settings =>
+                               {
+                                   settings.Name = "IdReligion_Padre";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdReligion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomReligion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_religion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdReligion_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.AsisteCentroCristiano_Padre, settings =>
+                                {
+                                    settings.Name = "AsisteCentroCristiano_Padre";
+                                    settings.Text = "Asiste a Centro Cristiano";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.AsisteCentroCristiano_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Correo_Aspirante</label>
+                                @Html.TextBoxFor(q => q.Correo_Padre, new { @class = "form-control", @id = "Correo_Padre" })
+                                @Html.ValidationMessageFor(q => q.Correo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.CasaPropia_Padre, settings =>
+                            {
+                                settings.Name = "CasaPropia_Padre";
+                                settings.Text = "Tiene casa propia";
+                            }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.CasaPropia_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.VehiculoPropio_Padre, settings =>
+                            {
+                                settings.Name = "VehiculoPropio_Padre";
+                                settings.Text = "Tiene vehiculo propio";
+                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_vehiculo_padre();}";
+                            }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.VehiculoPropio_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="vehiculo_padre">
+                    <div class="col-md-12">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Marca</label>
+                                @Html.TextBoxFor(q => q.Marca_Padre, new { @class = "form-control", @id = "Marca_Padre" })
+                                @Html.ValidationMessageFor(q => q.Marca_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Modelo</label>
+                                @Html.TextBoxFor(q => q.Modelo_Padre, new { @class = "form-control", @id = "Modelo_Padre" })
+                                @Html.ValidationMessageFor(q => q.Modelo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Año</label>
+                                @Html.TextBoxFor(q => q.AnioVehiculo_Padre, new { @class = "form-control", @id = "AnioVehiculo_Padre" })
+                                @Html.ValidationMessageFor(q => q.AnioVehiculo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Direccion_Aspirante">Dirección</label>
+                                @Html.TextAreaFor(q => q.Direccion_Padre, new { @class = "form-control", @rows = "2", @id = "Direccion_Padre" })
+                                @Html.ValidationMessageFor(q => q.Direccion_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>Datos de trabajo</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Empresa donde trabaja</label>
+                                @Html.TextBoxFor(q => q.EmpresaTrabajo_Padre, new { @class = "form-control", @id = "EmpresaTrabajo_Padre" })
+                                @Html.ValidationMessageFor(q => q.EmpresaTrabajo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEstadoCivil">Instrucción</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Madre, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaInst_Madre" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEstadoCivil">Profesión</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdProfesion_Padre, settings =>
+                                {
+                                    settings.Name = "IdProfesion_Padre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("IdProfesion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion", "Profesión").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "IdProfesion";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion";
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                }).BindList(ViewBag.lst_profesion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdProfesion_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Cargo</label>
+                                @Html.TextBoxFor(q => q.CargoTrabajo_Padre, new { @class = "form-control", @id = "CargoTrabajo_Padre" })
+                                @Html.ValidationMessageFor(q => q.CargoTrabajo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Teléfono</label>
+                                @Html.TextBoxFor(q => q.TelefonoTrabajo_Padre, new { @class = "form-control", @id = "TelefonoTrabajo_Padre" })
+                                @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Años de servicio</label>
+                                @Html.TextBoxFor(q => q.AniosServicio_Padre, new { @class = "form-control", @id = "AniosServicio_Padre" })
+                                @Html.ValidationMessageFor(q => q.AniosServicio_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Ingreso mensual</label>
+                                @Html.TextBoxFor(q => q.IngresoMensual_Padre, new { @class = "form-control", @id = "IngresoMensual_Padre" })
+                                @Html.ValidationMessageFor(q => q.IngresoMensual_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Dirección</label>
+                                @Html.TextBoxFor(q => q.DireccionTrabajo_Padre, new { @class = "form-control", @id = "DireccionTrabajo_Padre" })
+                                @Html.ValidationMessageFor(q => q.DireccionTrabajo_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>Datos Conadis</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Sexo_Aspirante">Tipo de discapacidad</label>
+                                @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Padre, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoCONADIS_Padre" })
+                                @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Porcentaje de discapacidad</label>
+                                @Html.TextBoxFor(q => q.PorcentajeDiscapacidad_Padre, new { @class = "form-control", @id = "PorcentajeDiscapacidad_Padre" })
+                                @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Número de carnet</label>
+                                @Html.TextBoxFor(q => q.NumeroCarnetConadis_Padre, new { @class = "form-control", @id = "NumeroCarnetConadis_Padre" })
+                                @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Padre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_madre">
+                <h4>Datos Generales</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="info_persona.Naturaleza_Aspirante">Naturaleza*</label>
+                                @Html.DropDownListFor(q => q.Naturaleza_Madre, new SelectList(ViewBag.lst_tipo_naturaleza, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Naturaleza_Madre" })
+                                @Html.ValidationMessageFor(q => q.Naturaleza_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="info_persona.IdTipoDocumento_Aspirante">Tipo documento*</label>
+                                @Html.DropDownListFor(q => q.IdTipoDocumento_Madre, new SelectList(ViewBag.lst_tipo_doc, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdTipoDocumento_Madre" })
+                                @Html.ValidationMessageFor(q => q.IdTipoDocumento_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="info_persona.CedulaAspirante">Número documento*</label>
+                                @Html.TextBoxFor(q => q.Celular_Madre, new { @class = "form-control", @id = "Celular_Madre" })
+                                @Html.ValidationMessageFor(q => q.Celular_Madre, "", new { @class = "text-danger" })
+                                <label id="error_documento_madre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
+                            </div>
+                        </div>
+                        @*<div class="col-md-offset-1 col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.SeFactura_madre, settings =>
+                        {
+                            settings.Name = "SeFactura_madre";
+                            settings.Text = "Se factura";
+                            settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){SeFactura_padre.SetChecked(false); mostrar_cliente_madre(); mostrar_cliente_padre();}";
+                        }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.SeFactura_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.EsRepresentante_madre, settings =>
+                                {
+                                    settings.Name = "EsRepresentante_madre";
+                                    settings.Text = "Es Representante";
+                                    settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){EsRepresentante_padre.SetChecked(false);}";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EsRepresentante_madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="info_persona.Apellidos_Aspirante">Apellidos</label>
+                                @Html.TextBoxFor(q => q.Apellidos_Madre, new { @class = "form-control", @id = "Apellidos_Madre" })
+                                @Html.ValidationMessageFor(q => q.Apellidos_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="info_persona.Nombres_Aspirante">Nombres</label>
+                                @Html.TextBoxFor(q => q.Nombres_Madre, new { @class = "form-control", @id = "Nombres_Madre" })
+                                @Html.ValidationMessageFor(q => q.Nombres_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.EstaFallecido_Madre, settings =>
+                                {
+                                    settings.Name = "EstaFallecido_Madre";
+                                    settings.Text = "Está fallecida";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.EstaFallecido_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.Apellidos_Aspirante">Nombre completo</label>
+                                @Html.TextBoxFor(q => q.NombreCompleto_Madre, new { @class = "form-control", @id = "NombreCompleto_Madre" })
+                                @Html.ValidationMessageFor(q => q.NombreCompleto_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="info_persona.Apellidos_Aspirante">Razón Social</label>
+                                @Html.TextBoxFor(q => q.RazonSocial_Madre, new { @class = "form-control", @id = "RazonSocial_Madre" })
+                                @Html.ValidationMessageFor(q => q.RazonSocial_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="">Fecha de nacimiento</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    @Html.DevExpress().DateEditFor(q => q.FechaNacimiento_Madre, settings =>
+                            {
+                                settings.Name = "FechaNacimiento_Madre";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.AllowMouseWheel = false;
+                            }).GetHtml()
+                                    @Html.ValidationMessageFor(q => q.FechaNacimiento_Madre, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Sexo_Aspirante">Sexo</label>
+                                @Html.DropDownListFor(q => q.Sexo_Madre, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Sexo_Madre" })
+                                @Html.ValidationMessageFor(q => q.Sexo_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEstadoCivil">Estado civil</label>
+                                @Html.DropDownListFor(q => q.IdEstadoCivil_Madre, new SelectList(ViewBag.lst_estado_civil, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "IdEstadoCivil_Madre" })
+                                @Html.ValidationMessageFor(q => q.IdEstadoCivil_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Teléfono</label>
+                                @Html.TextBoxFor(q => q.Telefono_Madre, new { @class = "form-control", @id = "Telefono_Madre" })
+                                @Html.ValidationMessageFor(q => q.Telefono_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="pe_CedulaAspirante">Celular</label>
+                                @Html.TextBoxFor(q => q.Celular_Madre, new { @class = "form-control", @id = "Celular_Madre" })
+                                @Html.ValidationMessageFor(q => q.Celular_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">País</label>
+                                @Html.Partial("_ComboBoxPartial_Pais_madre", Model)
+                                @Html.ValidationMessageFor(q => q.IdPais_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Región</label>
+                                @Html.Partial("_ComboBoxPartial_Region_madre", Model)
+                                @Html.ValidationMessageFor(q => q.Cod_Region_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Provincia</label>
+                                @Html.Partial("_ComboBoxPartial_Provincia_madre", Model)
+                                @Html.ValidationMessageFor(q => q.IdProvincia_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Ciudad</label>
+                                @Html.Partial("_ComboBoxPartial_Ciudad_madre", Model)
+                                @Html.ValidationMessageFor(q => q.IdCiudad_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Pais">Parroquia</label>
+                                @Html.Partial("_ComboBoxPartial_Parroquia_madre", Model)
+                                @Html.ValidationMessageFor(q => q.IdParroquia_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Direccion_Aspirante">Sector</label>
+                                @Html.TextBoxFor(q => q.Sector_Madre, new { @class = "form-control", @rows = "2", @id = "Sector_Madre" })
+                                @Html.ValidationMessageFor(q => q.Sector_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Religión</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdReligion_Madre, settings =>
+                               {
+                                   settings.Name = "IdReligion_Madre";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdReligion";
+                                   settings.Properties.ValueType = typeof(int);
+                                   settings.Properties.TextField = "NomReligion";
+                                   settings.Properties.NullText = "== Seleccione ==";
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                               }).BindList(ViewBag.lst_religion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdReligion_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.AsisteCentroCristiano_Madre, settings =>
+                                {
+                                    settings.Name = "AsisteCentroCristiano_Madre";
+                                    settings.Text = "Asiste a Centro Cristiano";
+                                }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.AsisteCentroCristiano_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Correo </label>
+                                @Html.TextBoxFor(q => q.Correo_Madre, new { @class = "form-control", @id = "Correo_Madre" })
+                                @Html.ValidationMessageFor(q => q.Correo_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.CasaPropia_Madre, settings =>
+                            {
+                                settings.Name = "CasaPropia_Madre";
+                                settings.Text = "Tiene casa propia";
+                            }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.CasaPropia_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.VehiculoPropio_Madre, settings =>
+                            {
+                                settings.Name = "VehiculoPropio_Madre";
+                                settings.Text = "Tiene vehiculo propio";
+                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_vehiculo_madre();}";
+                            }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.VehiculoPropio_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="vehiculo_madre">
+                    <div class="col-md-12">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Marca</label>
+                                @Html.TextBoxFor(q => q.Marca_Madre, new { @class = "form-control", @id = "Marca_Madre" })
+                                @Html.ValidationMessageFor(q => q.Marca_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Modelo</label>
+                                @Html.TextBoxFor(q => q.Modelo_Madre, new { @class = "form-control", @id = "Modelo_Madre" })
+                                @Html.ValidationMessageFor(q => q.Modelo_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Año</label>
+                                @Html.TextBoxFor(q => q.AnioVehiculo_Madre, new { @class = "form-control", @id = "AnioVehiculo_Madre" })
+                                @Html.ValidationMessageFor(q => q.AnioVehiculo_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Direccion_Aspirante">Dirección</label>
+                                @Html.TextAreaFor(q => q.Direccion_Madre, new { @class = "form-control", @rows = "2", @id = "Direccion_Madre" })
+                                @Html.ValidationMessageFor(q => q.Direccion_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="row" id="DatosFacturacionMadre">
+                    <div class="col-md-12">
+                        <h4>Datos de Cliente</h4><hr />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="Idtipo_cliente">Tipo cliente</label>
+                                        @Html.DevExpress().ComboBoxFor(q => q.Idtipo_cliente_madre, settings =>
+                                {
+                                    settings.Name = "Idtipo_cliente_madre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("Idtipo_cliente", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "Idtipo_cliente";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion_tip_cliente";
+                                    //Boton para seleccionar ningun registro
+                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                    //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info_tipo_cliente()}";
+                                    settings.Properties.AllowNull = true;
+
+                                }).BindList(ViewBag.lst_clientetipo).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.Idtipo_cliente_padre, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="IdCiudad">Ciudad*</label>
+                                        @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_madre_fact, settings =>
+                               {
+                                   settings.Name = "IdCiudad_madre_fact";
+                                   settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                   settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                   settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                   settings.Properties.Columns.Add("Descripcion_Ciudad", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                   //Campo ID
+                                   settings.Properties.ValueField = "IdCiudad";
+                                   settings.Properties.ValueType = typeof(string);
+                                   settings.Properties.TextField = "Descripcion_Ciudad";
+                                   //Boton para seleccionar ningun registro
+                                   settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                   settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                   settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_madre_fact.PerformCallback(); }";
+                               }).BindList(ViewBag.lst_ciudad).GetHtml()
+                                        @Html.ValidationMessageFor(q => q.IdCiudad_madre_fact, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="parroquia">Parroquia*</label>
+                                        @Html.Partial("_cmb_parroquia_madre", Model)
+                                        @Html.ValidationMessageFor(q => q.IdParroquia_madre_fact, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+                <h4>Datos de trabajo</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Empresa donde trabaja</label>
+                                @Html.TextBoxFor(q => q.EmpresaTrabajo_Madre, new { @class = "form-control", @id = "EmpresaTrabajo_Madre" })
+                                @Html.ValidationMessageFor(q => q.EmpresaTrabajo_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEstadoCivil">Instrucción</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Madre, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaInst_Madre" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEstadoCivil">Profesión</label>
+                                @Html.DevExpress().ComboBoxFor(q => q.IdProfesion_Madre, settings =>
+                                {
+                                    settings.Name = "IdProfesion_Madre";
+                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                    settings.Properties.Columns.Add("IdProfesion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                    settings.Properties.Columns.Add("Descripcion", "Profesión").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                    //Campo ID
+                                    settings.Properties.ValueField = "IdProfesion";
+                                    settings.Properties.ValueType = typeof(int);
+                                    settings.Properties.TextField = "Descripcion";
+                                    settings.Properties.NullText = "== Seleccione ==";
+                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                }).BindList(ViewBag.lst_profesion).GetHtml()
+                                @Html.ValidationMessageFor(q => q.IdProfesion_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Cargo</label>
+                                @Html.TextBoxFor(q => q.CargoTrabajo_Madre, new { @class = "form-control", @id = "CargoTrabajo_Madre" })
+                                @Html.ValidationMessageFor(q => q.CargoTrabajo_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Teléfono</label>
+                                @Html.TextBoxFor(q => q.TelefonoTrabajo_Madre, new { @class = "form-control", @id = "TelefonoTrabajo_Madre" })
+                                @Html.ValidationMessageFor(q => q.TelefonoTrabajo_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Años de servicio</label>
+                                @Html.TextBoxFor(q => q.AniosServicio_Madre, new { @class = "form-control", @id = "AniosServicio_Madre" })
+                                @Html.ValidationMessageFor(q => q.AniosServicio_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Ingreso mensual</label>
+                                @Html.TextBoxFor(q => q.IngresoMensual_Madre, new { @class = "form-control", @id = "IngresoMensual_Madre" })
+                                @Html.ValidationMessageFor(q => q.IngresoMensual_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="Correo_Aspirante">Dirección</label>
+                                @Html.TextBoxFor(q => q.DireccionTrabajo_Madre, new { @class = "form-control", @id = "DireccionTrabajo_Madre" })
+                                @Html.ValidationMessageFor(q => q.DireccionTrabajo_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h4>Datos Conadis</h4><hr />
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="Sexo_Aspirante">Tipo de discapacidad</label>
+                                @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Madre, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoCONADIS_Madre" })
+                                @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Porcentaje de discapacidad</label>
+                                @Html.TextBoxFor(q => q.PorcentajeDiscapacidad_Madre, new { @class = "form-control", @id = "PorcentajeDiscapacidad_Madre" })
+                                @Html.ValidationMessageFor(q => q.PorcentajeDiscapacidad_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Telefonos">Número de carnet</label>
+                                @Html.TextBoxFor(q => q.NumeroCarnetConadis_Madre, new { @class = "form-control", @id = "NumeroCarnetConadis_Madre" })
+                                @Html.ValidationMessageFor(q => q.NumeroCarnetConadis_Madre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            @*<div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_documento">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.Action("GridViewPartial_AlumnoDocumento")
+                    </div>
+                </div>
+            </div>*@
+        </div>
+    </div>
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("Index", "Admision", new { Area = "Academico" }, null)">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+<script type="text/javascript">
+        $(function () {
+            mostrar_vehiculo_padre();
+            mostrar_vehiculo_madre();
+            mostrar_cliente_padre();
+            mostrar_cliente_madre();
+        })
+        //$("#CedulaAspirante").blur(function () {
+        //    Validar_cedula_ruc();
+        //});
+
+        $("#CedulaRuc_Padre").change(function () {
+            Validar_cedula_ruc_padre();
+        });
+
+        $("#CedulaRuc_Madre").change(function () {
+            Validar_cedula_ruc_madre();
+        });
+
+        $("#Apellidos_Aspirante").change(function () {
+            actualizar_nombre_completo();
+        });
+        $("#Nombres_Aspirante").change(function () {
+            actualizar_nombre_completo();
+        });
+
+        $("#Apellidos_Padre").change(function () {
+            actualizar_nombre_completo_padre("N");
+        });
+        $("#Nombres_Padre").change(function () {
+            actualizar_nombre_completo_padre("N");
+        });
+        $("#RazonSocial_Padre").change(function () {
+            actualizar_nombre_completo_padre("R");
+        });
+
+        $("#Apellidos_Madre").change(function () {
+            actualizar_nombre_completo_madre("N");
+        });
+        $("#Nombres_Madre").change(function () {
+            actualizar_nombre_completo_madre("N");
+        });
+        $("#RazonSocial_Madre").change(function () {
+            actualizar_nombre_completo_madre("R");
+        });
+
+        $("#CedulaRuc_Aspirante").change(function () {
+            get_info_x_num_cedula();
+        });
+
+        $("#CedulaRuc_Padre").change(function () {
+            get_info_x_num_cedula_padre();
+        });
+
+        $("#CedulaRuc_Madre").change(function () {
+            get_info_x_num_cedula_madre();
+        });
+
+        $("#CedulaRuc_Aspirante").change(function () {
+            var tipo_doc = $("#IdTipoDocumento_Aspirante").val();
+            var cedula = $("#CedulaRuc_Aspirante").val();
+
+            if (tipo_doc == "RUC") {
+                if (cedula.length > 13) {
+                    var len = $("#CedulaRuc_Aspirante").val();
+                    len = len.substring(0, 13);
+                    $("#CedulaRuc_Aspirante").val(len);
+                }
+            }
+            else
+                if (tipo_doc == "CED") {
+                    if (cedula.length > 10) {
+                        var len = $("#CedulaRuc_Aspirante").val();
+                        len = len.substring(0, 10);
+                        $("#CedulaRuc_Aspirante").val(len);
+                    }
+                }
+        });
+
+        $("#CedulaRuc_Padre").change(function () {
+            var tipo_doc = $("#IdTipoDocumento_Padre").val();
+            var cedula = $("#CedulaRuc_Padre").val();
+
+            if (tipo_doc == "RUC") {
+                if (cedula.length > 13) {
+                    var len = $("#CedulaRuc_Padre").val();
+                    len = len.substring(0, 13);
+                    $("#CedulaRuc_Padre").val(len);
+                }
+
+            }
+            else
+                if (tipo_doc == "CED") {
+                    if (cedula.length > 10) {
+                        var len = $("#CedulaRuc_Padre").val();
+                        len = len.substring(0, 10);
+                        $("#CedulaRuc_Padre").val(len);
+                    }
+                }
+        });
+
+        $("#CedulaRuc_Madre").change(function () {
+            var tipo_doc = $("#IdTipoDocumento_Madre").val();
+            var cedula = $("#CedulaRuc_Madre").val();
+
+            if (tipo_doc == "RUC") {
+                if (cedula.length > 13) {
+                    var len = $("#CedulaRuc_Madre").val();
+                    len = len.substring(0, 13);
+                    $("#CedulaRuc_Madre").val(len);
+                }
+
+            }
+            else
+                if (tipo_doc == "CED") {
+                    if (cedula.length > 10) {
+                        var len = $("#CedulaRuc_Madre").val();
+                        len = len.substring(0, 10);
+                        $("#CedulaRuc_Madre").val(len);
+                    }
+                }
+        });
+
+        function actualizar_nombre_completo() {
+            var apellido = $("#Apellidos_Aspirante").val();
+            var nombre = $("#Nombres_Aspirante").val();
+
+            var nombre_completo = apellido + ' ' + nombre;
+            $("#NombreCompleto_Aspirante").val(nombre_completo)
+        }
+
+        function get_info_x_num_cedula() {
+            var cedula = $("#CedulaAspirante").val();
+            var tipo_doc = $("#IdTipoDocumento_Aspirante").val();
+
+            if (cedula == null) {
+                vaciar_campos_persona();
+                return;
+            }
+
+            if (tipo_doc == "RUC") {
+                if (cedula.length != 13) {
+                    alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
+                    $("#CedulaAspirante").val("");
+                    vaciar_campos_persona();
+                    return;
+                }
+            } else
+                if (tipo_doc == "CED") {
+                    if (cedula.length != 10) {
+                        alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
+                        $("#CedulaAspirante").val("");
+                        vaciar_campos_persona();
+                        return;
+                    }
+                }
+
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                CedulaAspirante: cedula
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_info_x_num_cedula", "Admision",new { Area = "Academico"})',
+                async: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data == "") {
+                        return;
+                    }
+
+                    if (data.IdAlumno != 0) {
+                        alert("El alumno ya existe con el ID: " + data.IdAlumo);
+                        window.location.href = '@Url.Action("Index", "Alumno", new { Area = "Academico" })'
+                    }
+                    else {
+                        if (data.IdPersona != 0 && data.IdAlumno == 0) {
+                            //$("#IdPersona").val(data.IdPersona);
+                            $("#Naturaleza_Aspirante").val(data.pe_Naturaleza);
+                            $("#IdTipoDocumento_Aspirante").val(data.IdTipoDocumento);
+                            $("#Nombres_Aspirante").val(data.pe_nombre);
+                            $("#Apellidos_Aspirante").val(data.pe_apellido);
+                            $("#NombreCompleto_Aspirante").val(data.pe_nombreCompleto);
+                            $("#Sexo_Aspirante").val(data.pe_sexo);
+                            FechaNacimiento_Aspirante.SetDate(new Date(data.anio, data.mes, data.dia));
+                            $("#Correo_Aspirante").val(data.pe_correo);
+                            $("#Celular_Aspirante").val(data.pe_celular);
+                            $("#Direccion_Aspirante").val(data.pe_direccion);
+                            $("#pe_telfono_Contacto").val(data.pe_telfono_Contacto);
+                            $("#CodCatalogoSangre_Aspirante").val(data.CodCatalogoSangre);
+                            $("#CodCatalogoCONADIS_Aspirante").val(data.CodCatalogoCONADIS);
+                            $("#NumeroCarnetConadis_Aspirante").val(data.NumeroCarnetConadis);
+                            $("#PorcentajeDiscapacidad_Aspirante").val(data.PorcentajeDiscapacidad);
+                            IdReligion_Aspirante.SetValue(data.IdReligion);
+                            AsisteCentroCristiano_Aspirante.SetChecked(data.AsisteCentroCristiano);
+                            IdGrupoEtnico_Aspirante.SetValue(data.IdGrupoEtnico);
+                        }
+                        else {
+                            vaciar_campos_persona();
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        }
+
+        function get_info_x_num_cedula_padre() {
+            var cedula = $("#CedulaRuc_Padre").val();
+            var tipo_doc = $("#IdTipoDocumento_Padre").val();
+
+            if (cedula == null) {
+                vaciar_campos_padre();
+                return;
+            }
+
+            if (tipo_doc == "RUC") {
+                if (cedula.length != 13) {
+                    alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
+                    $("#CedulaRuc_Padre").val("");
+                    vaciar_campos_padre();
+                    return;
+                }
+            } else
+                if (tipo_doc == "CED") {
+                    if (cedula.length != 10) {
+                        alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
+                        $("#CedulaRuc_Padre").val("");
+                        vaciar_campos_padre();
+                        return;
+                    }
+                }
+
+            var datos = {
+                pe_cedulaRuc: cedula
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_info_x_num_cedula_persona", "Admision",new { Area = "Academico"})',
+                async: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data == "") {
+                        return;
+                    }
+                    else {
+                        if (data.IdPersona != 0) {
+                            $("#Naturaleza_Padre").val(data.pe_Naturaleza);
+                            $("#IdTipoDocumento_Padre").val(data.IdTipoDocumento);
+                            $("#Nombres_Padre").val(data.pe_nombre);
+                            $("#Apellidos_Padre").val(data.pe_apellido);
+                            $("#RazonSocial_Padre").val(data.pe_razonSocial); 
+                            $("#Sexo_Padre").val(data.pe_sexo);
+                            FechaNacimiento_Padre.SetDate(new Date(data.anio, data.mes, data.dia));
+                            $$("#Direccion_Padre").val(data.pe_direccion);
+                            $("#Telefono_Padre").val(data.pe_telfono_Contacto);
+                            $("#Celular_Padre").val(data.pe_celular);
+                            $("#Correo_Padre").val(data.pe_correo);
+                            $("#IdEstadoCivil_Padre").val(data.IdEstadoCivil);
+                            IdProfesion_Padre.SetValue(data.IdProfesion);
+                            $("#CodCatalogoCONADIS_Padre").val(data.CodCatalogoCONADIS);
+                            $("#PorcentajeDiscapacidad_Padre").val(data.PorcentajeDiscapacidad);
+                            $("#NumeroCarnetConadis_Padre").val(data.NumeroCarnetConadis);
+                            $("#IdGrupoEtnico_Padre").val(data.IdGrupoEtnico);
+                            $("#IdReligion_Padre").val(data.IdReligion);
+                            $("#IdProfesion_Padre").val(data.IdProfesion);
+                            AsisteCentroCristiano_padre.SetChecked(data.AsisteCentroCristiano);
+
+                            mostrar_vehiculo_padre();
+                        }
+                        else {
+                            vaciar_campos_padre();
+                            IdPais_Padre.SetValue(data.IdPais);
+                            Cod_Region_Padre.SetValue(data.Cod_Region);
+                            IdProvincia_Padre.SetValue(data.IdProvincia);
+                            IdCiudad_Padre.SetValue(data.IdCiudad);
+                            IdParroquia_Padre.SetValue(data.IdParroquia);
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        }
+
+        function get_info_x_num_cedula_madre() {
+            var cedula = $("#CedulaRuc_Madre").val();
+            var tipo_doc = $("#IdTipoDocumento_Madre").val();
+
+            if (cedula == null) {
+                vaciar_campos_madre();
+                return;
+            }
+
+            if (tipo_doc == "RUC") {
+                if (cedula.length != 13) {
+                    alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
+                    $("#Celular_Madre").val("");
+                    vaciar_campos_padre();
+                    return;
+                }
+            } else
+                if (tipo_doc == "CED") {
+                    if (cedula.length != 10) {
+                        alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
+                        $("#Celular_Madre").val("");
+                        vaciar_campos_madre();
+                        return;
+                    }
+                }
+
+            var datos = {
+                pe_cedulaRuc: cedula
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("get_info_x_num_cedula_persona", "Admision",new { Area = "Academico"})',
+                async: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data == "") {
+                        return;
+                    }
+                    else {
+                        if (data.IdPersona != 0) {
+                            $("#IdPersona_Madre").val(data.IdPersona);
+                            $("#Naturaleza_Madre").val(data.pe_Naturaleza);
+                            $("#IdTipoDocumento_Madre").val(data.IdTipoDocumento);
+                            $("#Nombres_Madre").val(data.pe_nombre);
+                            $("#Apellidos_Madre").val(data.pe_apellido);
+                            $("#RazonSocial_Madre").val(data.pe_razonSocial);
+                            $("#Sexo_Madre").val(data.pe_sexo);
+                            $("#Direccion_Madre").val(data.pe_direccion);
+                            $("#Telefono_Madre").val(data.pe_telfono_Contacto);
+                            $("#Celular_Madre").val(data.pe_celular);
+                            $("#Correo_Madre").val(data.pe_correo);
+                            $("#IdEstadoCivil_Madre").val(data.IdEstadoCivil);
+                            FechaNacimiento_Madre.SetDate(new Date(data.anio, data.mes, data.dia));
+                            ("#FechaNacimiento_Madre").val(Fecha);
+                            $("#CodCatalogoCONADIS_Madre").val(data.CodCatalogoCONADIS);
+                            $("#PorcentajeDiscapacidad_Madre").val(data.PorcentajeDiscapacidad);
+                            $("#NumeroCarnetConadis_Madre").val(data.NumeroCarnetConadis);
+                            $("#IdGrupoEtnico_Madre").val(data.IdGrupoEtnico);
+                            $("#IdReligion_Madre").val(data.IdReligion);
+                            $("#IdProfesion_Madre").val(data.IdProfesion);
+                            AsisteCentroCristiano_padre.SetChecked(data.AsisteCentroCristiano);
+
+                            mostrar_vehiculo_madre();
+                        }
+                        else {
+                            vaciar_campos_madre();
+                            IdPais_Madre.SetValue(data.IdPais);
+                            Cod_Region_Madre.SetValue(data.Cod_Region);
+                            IdProvincia_Madre.SetValue(data.IdProvincia);
+                            IdCiudad_Madre.SetValue(data.IdCiudad);
+                            IdParroquia_madre.SetValue(data.IdParroquia);
+                        }
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        }
+
+        function vaciar_campos_persona() {
+            $("#IdPersona_Aspirante").val(0);
+            $("#Nombres_Aspirante").val("");
+            $("#Apellidos_Aspirante").val("");
+            $("#NombreCompleto_Aspirante").val("");
+            $("#Sexo_Aspirante").val("");
+            FechaNacimiento_Aspirante.SetDate(null);
+            $("#Correo_Aspirante").val("");
+            $("#Celular_Aspirante").val("");
+            $("#Direccion_Aspirante").val("");
+            $("#Telefono_Aspirante").val("");
+            $("#CodCatalogoSangre_Aspirante").val("");
+            $("#CodCatalogoCONADIS").val("");
+            $("#NumeroCarnetConadis").val("");
+            $("#PorcentajeDiscapacidad").val("");
+            IdReligion.SetValue(null);
+            IdGrupoEtnico_Aspirante.SetValue(null);
+            AsisteCentroCristiano.SetChecked(false);
+        }
+
+        function vaciar_campos_padre() {
+            $("#IdPersona_padre").val(0);
+            $("#Nombres_Padre").val("");
+            $("#Apellidos_Aspirante_padre").val("");
+            $("#NombreCompleto_Aspirante_padre").val("");
+            $("#RazonSocial_Padre").val("");
+            FechaNacimiento_Padre.SetDate(null);
+            $("#Correo_Padre").val("");
+            $("#Celular_Padre").val("");
+            $("#Direccion_Padre").val("");
+            $("#Telefono_Padre").val("");
+            $("#CodCatalogoSangre_Aspirante_padre").val("");
+            $("#CodCatalogoCONADIS_Padre").val("");
+            $("#NumeroCarnetConadis_Padre").val("");
+            $("#PorcentajeDiscapacidad_Padre").val("");
+            $("#IdEstadoCivil_Padre").val("");
+            $("#Sexo_Padre").val("");
+            //$("#IdProfesion_Padre").val("0");
+            IdProfesion_Padre.SetValue(null);
+            $("#EmpresaTrabajo_Padre").val("");
+            $("#DireccionTrabajo_Padre").val("");
+            $("#TelefonoTrabajo_Padre").val("");
+            $("#CargoTrabajo_Padre").val("");
+            $("#AniosServicio_Padre").val("");
+            $("#IngresoMensual_Padre").val("0");
+            VehiculoPropio_Padre.SetChecked(false);
+            CasaPropia_padre.SetChecked(false);
+            $("#Marca_Padre").val("");
+            $("#Modelo_Padre").val("");
+            $("#AnioVehiculo_Padre").val("");
+            IdReligion_padre.SetValue(null);
+            AsisteCentroCristiano_padre.SetChecked(false);
+            IdPais_padre.SetValue(null);
+            Cod_Region_padre.SetValue(null);
+            IdProvincia_padre.SetValue(null);
+            IdCiudad_padre.SetValue(null);
+            IdParroquia_padre.SetValue(null);
+            $("#Sector_Padre").val("");
+
+            mostrar_vehiculo_padre();
+        }
+
+        function vaciar_campos_madre() {
+            $("#IdPersona_madre").val(0);
+            $("#Nombres_Madre").val("");
+            $("#Apellidos_Madre").val("");
+            $("#NombreCompleto_Madre").val("");
+            $("#RazonSocial_Madre").val("");
+            FechaNacimiento_Madre.SetDate(null);
+            $("#Correo_Madre").val("");
+            $("#Celular_Madre").val("");
+            $("#Direccion_Madre").val("");
+            $("#Telefono_Madre").val("");
+            $("#CodCatalogoSangre_Aspirante_madre").val("");
+            $("#CodCatalogoCONADIS_Madre").val("");
+            $("#NumeroCarnetConadis_Madre").val("");
+            $("#PorcentajeDiscapacidad_Madre").val("");
+            $("#IdEstadoCivil_Madre").val("");
+            $("#Sexo_Madre").val("");
+            //$("#IdProfesion_Madre").val("0");
+            IdProfesion_Madre.SetValue(null);
+            $("#EmpresaTrabajo_Madre").val("");
+            $("#DireccionTrabajo_Madre").val("");
+            $("#TelefonoTrabajo_Madre").val("");
+            $("#CargoTrabajo_Madre").val("");
+            $("#AniosServicio_Madre").val("");
+            $("#IngresoMensual_Madre").val("0");
+            VehiculoPropio_Madre.SetChecked(false);
+            CasaPropia_madre.SetChecked(false);
+            $("#Marca_Madre").val("");
+            $("#Modelo_Madre").val("");
+            $("#AnioVehiculo_Madre").val("");
+            IdReligion_madre.SetValue(null);
+            AsisteCentroCristiano_madre.SetChecked(false);
+            IdPais_Madre.SetValue(null);
+            Cod_Region_Madre.SetValue(null);
+            IdProvincia_Madre.SetValue(null);
+            IdCiudad_Madre.SetValue(null);
+            IdParroquia_madre.SetValue(null);
+            $("#Sector_madre").val("");
+
+            mostrar_vehiculo_madre();
+        }
+
+
+
+        function Validar_cedula_ruc() {
+            var datos = {
+                naturaleza: $("#Naturaleza_Aspirante").val(),
+                tipo_documento: $("#IdTipoDocumento_Aspirante").val(),
+                cedula_ruc: $("#CedulaAspirante").val(),
+            }
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("Validar_cedula_ruc", "Alumno", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    if (data.isValid == true) {
+                        $("#error_documento").hide();
+                        $("#Naturaleza_Aspirante").val(data.return_naturaleza);
+                    }
+                    else {
+                        $("#error_documento").show();
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        };
+
+        function Validar_cedula_ruc_padre() {
+            var datos = {
+                naturaleza: $("#Naturaleza_Aspirante_padre").val(),
+                tipo_documento: $("#IdTipoDocumento_Aspirante_padre").val(),
+                cedula_ruc: $("#Celular_Padre").val(),
+            }
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("Validar_cedula_ruc", "Alumno", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.isValid == true) {
+                        $("#error_documento_padre").hide();
+                        $("#Naturaleza_Aspirante_padre").val(data.return_naturaleza);
+                    }
+                    else {
+                        $("#error_documento_padre").show();
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        };
+
+        function Validar_cedula_ruc_madre() {
+            var datos = {
+                naturaleza: $("#Naturaleza_Madre").val(),
+                tipo_documento: $("#IdTipoDocumento_Madre").val(),
+                cedula_ruc: $("#Celular_Madre").val(),
+            }
+
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("Validar_cedula_ruc", "Alumno", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.isValid == true) {
+                        $("#error_documento_madre").hide();
+                        $("#Naturaleza_Madre").val(data.return_naturaleza);
+                    }
+                    else {
+                        $("#error_documento_madre").show();
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        };
+
+        function validar_se_factura_padre() {
+            SeFactura_madre.SetChecked(false);
+            //if (SeFactura_madre.GetChecked() == true) {
+            //    SeFactura_padre.GetChecked(false);
+            //}
+        };
+
+        function validar_se_factura_padre() {
+            //    SeFactura_padre.GetChecked(false);
+            //}
+        };
+
+        function nombre_imagen() {
+            var datos = {
+                IdAlumno: $("#IdAlumno").val()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("nombre_imagen", "Alumno", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                },
+                error: function (error) {
+                }
+            });
+        }
+        function actualizar_div() {
+            var datos = {
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("actualizar_div", "Alumno", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+
+
+                    //$("#uploadedImage").load();
+                    //$("#uploadedImage").attr("src",Url.Content(Core.Erp.Web.Helps.SessionFixed.NombreImagen));
+
+                },
+                error: function (error) {
+                }
+            });
+        }
+
+        function actualizar_nombre_completo_padre(Tipo) {
+            console.log(Tipo);
+            if (Tipo == "N") {
+                var apellido = $("#Apellidos_Aspirante_padre").val();
+                var nombre = $("#Nombres_Padre").val();
+
+                var nombre_completo = apellido + ' ' + nombre;
+                $("#NombreCompleto_Aspirante_padre").val(nombre_completo)
+            }
+            else {
+                var razon_social = $("#RazonSocial_Padre").val();
+                $("#NombreCompleto_Aspirante_padre").val(razon_social)
+            }
+        }
+
+        function actualizar_nombre_completo_madre(Tipo) {
+            console.log(Tipo);
+            if (Tipo == "N") {
+                var apellido = $("#Apellidos_Madre").val();
+                var nombre = $("#Nombres_Madre").val();
+
+                var nombre_completo = apellido + ' ' + nombre;
+                $("#NombreCompleto_Madre").val(nombre_completo)
+            }
+            else {
+                var razon_social = $("#RazonSocial_Madre").val();
+                $("#NombreCompleto_Madre").val(razon_social)
+            }
+        }
+
+        function mostrar_vehiculo_padre() {
+            if (VehiculoPropio_Padre.GetValue() == true) {
+                $("#vehiculo_padre").show();
+            }
+            else {
+                $("#vehiculo_padre").hide();
+            }
+        }
+
+        function mostrar_vehiculo_madre() {
+            if (VehiculoPropio_Madre.GetValue() == true) {
+                $("#vehiculo_madre").show();
+            }
+            else {
+                $("#vehiculo_madre").hide();
+            }
+        }
+
+        function VerFichaSocioEconomica() {
+            var location = GetPathServer();
+            if ($("#IdAlumno").val() != 0 || $("#IdAlumno").val() != "") {
+                var datos = {
+                    IdEmpresa: $("#IdEmpresa").val(),
+                    IdAlumno: $("#IdAlumno").val()
+                }
+                $.ajax({
+                    type: 'POST',
+                    data: JSON.stringify(datos),
+                    url: '@Url.Action("VerFichaSocioEconomica", "Alumno", new { Area = "Academico" })',
+                    async: false,
+                    bDeferRender: true,
+                    bProcessing: true,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        console.log(data);
+                        if(data.SocioEconomico != 0){
+                            var win = window.open(location + "/Academico/SocioEconomico/Modificar?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdSocioEconomico=" + data.SocioEconomico+"&Exito=false", '_blank');
+                            win.focus();
+                        }
+                        else{
+                            var win = window.open(location + "/Academico/SocioEconomico/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa +"&IdAlumno=" + $("#IdAlumno").val(), '_blank');
+                            win.focus();
+                        }
+                    },
+                    error: function (error) {
+                    }
+                });
+            }
+            else{
+                alert("Debe seleccionar alumno");
+            }
+        }
+
+        function mostrar_cliente_padre() {
+            if (SeFactura_padre.GetValue() == true) {
+                
+                $("#DatosFacturacionPadre").show();
+            }
+            else {
+                $("#DatosFacturacionPadre").hide();
+            }
+        }
+
+        function mostrar_cliente_madre() {
+            if (SeFactura_madre.GetValue() == true) {
+                $("#DatosFacturacionMadre").show();
+            }
+            else {
+                $("#DatosFacturacionMadre").hide();
+            }
+        }
+    </script>

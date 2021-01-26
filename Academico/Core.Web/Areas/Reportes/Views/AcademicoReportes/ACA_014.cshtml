@@ -1,4 +1,4 @@
-﻿@model Core.Info.Academico.aca_MatriculaCalificacionParcial_Info
+﻿@model Core.Info.Helps.cl_filtros_Info
 @{
     ViewBag.Title = "Record académico quimestral";
     if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
@@ -33,28 +33,28 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Año Lectivo</label>
-                            @Html.Partial("_ComboBoxPartial_AnioAlumno", Model)
+                            @Html.Partial("_ComboBoxPartial_Anio", Model)
                             @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdEmpresa">Sede</label>
-                            @Html.Partial("_CmbSedeAlumno", Model)
+                            @Html.Partial("_CmbSede", Model)
                             @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Jornada</label>
-                            @Html.Partial("_CmbJornadaAlumno", Model)
+                            @Html.Partial("_CmbJornada", Model)
                             @*@Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
                             <label for="IdEmpresa">Nivel Académico</label>
-                            @Html.Partial("_CmbNivelAlumno", Model)
+                            @Html.Partial("_CmbNivel", Model)
                             @*@Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
@@ -65,21 +65,21 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="IdEmpresa">Curso</label>
-                            @Html.Partial("_CmbCursoAlumno", Model)
+                            @Html.Partial("_CmbCurso", Model)
                             @*@Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Paralelo</label>
-                            @Html.Partial("_ComboBoxPartial_ParaleloAlumno", Model)
+                            @Html.Partial("_ComboBoxPartial_Paralelo", Model)
                             @*@Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="IdEmpresa">Alumno</label>
-                            @Html.Partial("_ComboBoxPartial_Alumno", Model)
+                            @Html.Partial("_CmbAlumno", Model.IdAlumno)
                             @*@Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
@@ -97,12 +97,12 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdCliente"></label>
-                            @Html.DevExpress().CheckBoxFor(q => q.MostrarRetirados, settings =>
+                            @Html.DevExpress().CheckBoxFor(q => q.mostrarAnulados, settings =>
                             {
-                                settings.Name = "MostrarRetirados";
+                                settings.Name = "mostrarAnulados";
                                 settings.Text = "Mostrar retirados";
                             }).GetHtml()
-                            @Html.ValidationMessageFor(q => q.MostrarRetirados, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(q => q.mostrarAnulados, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-2">

@@ -1327,7 +1327,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         #endregion
 
         #region ACA_014
-        private void cargar_combos_ACA_014(aca_MatriculaCalificacionParcial_Info model)
+        private void cargar_combos_ACA_014(cl_filtros_Info model)
         {
             aca_CatalogoTipo_Bus bus_catalogo = new aca_CatalogoTipo_Bus();
             var lst_quimestre = new List<aca_CatalogoTipo_Info>();
@@ -1339,13 +1339,13 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
         public ActionResult ACA_014()
         {
-            aca_MatriculaCalificacionParcial_Info model = new aca_MatriculaCalificacionParcial_Info();
+            cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.IdCatalogoParcial = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
-            model.MostrarRetirados = false;
+            model.mostrarAnulados = false;
             model.MostrarPromedios = true;
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
@@ -1365,7 +1365,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
-            report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.p_MostrarRetirados.Value = model.mostrarAnulados;
             report.p_MostrarPromedios.Value = model.MostrarPromedios;
 
             report.usuario = SessionFixed.IdUsuario;
@@ -1376,7 +1376,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult ACA_014(aca_MatriculaCalificacionParcial_Info model)
+        public ActionResult ACA_014(cl_filtros_Info model)
         {
             ACA_014_Rpt report = new ACA_014_Rpt();
 
@@ -1389,7 +1389,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_IdCatalogoParcial.Value = model.IdCatalogoParcial;
-            report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.p_MostrarRetirados.Value = model.mostrarAnulados;
             report.p_MostrarPromedios.Value = model.MostrarPromedios;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
@@ -2211,6 +2211,62 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
         [HttpPost]
         public ActionResult ACA_028(aca_MatriculaCalificacion_Info model)
+        {
+            ACA_028_Rpt report = new ACA_028_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+            cargar_combos_ACA_028(model);
+            return View(model);
+        }
+
+        #endregion
+
+        #region ACA_028_Secretarias
+        public ActionResult ACA_028_Secretarias()
+        {
+            aca_MatriculaCalificacion_Info model = new aca_MatriculaCalificacion_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
+
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+            var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
+            var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_Tutor(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, true);
+            Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            ACA_028_Rpt report = new ACA_028_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            cargar_combos_ACA_028(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_028_Secretarias(aca_MatriculaCalificacion_Info model)
         {
             ACA_028_Rpt report = new ACA_028_Rpt();
 

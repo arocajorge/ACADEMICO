@@ -86,15 +86,23 @@ namespace Core.Data.Reportes.Academico
                    + " from aca_AlumnoRetiro as r "
                    + " where r.Estado = 1 "
                    + " ) as ret on m.IdEmpresa = ret.IdEmpresa and m.IdMatricula = ret.IdMatricula "
-                    + " where mc.IdEmpresa = @IdEmpresa "
-                    + " and m.IdAnio = @IdAnio "
-                    + " and m.IdSede = @IdSede "
-                    + " and m.IdJornada = @IdJornada "
-                    + " and m.IdNivel = @IdNivel "
-                    + " and m.IdCurso = @IdCurso "
-                    + " and m.IdParalelo = case when @IdParalelo = 0 then m.IdParalelo else @IdParalelo end "
-                    + " and m.IdAlumno = case when @IdAlumno = 0 then m.IdAlumno else @IdAlumno end "
-                    + " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
+                   + " where mc.IdEmpresa = @IdEmpresa "
+                   + " and m.IdAnio = @IdAnio "
+                   + " and m.IdSede = @IdSede ";
+
+                    if (IdAlumno==0)
+                    {
+                        query += " and m.IdJornada = @IdJornada "
+                        + " and m.IdNivel = @IdNivel "
+                        + " and m.IdCurso = @IdCurso "
+                        + " and m.IdParalelo = case when @IdParalelo = 0 then m.IdParalelo else @IdParalelo end ";
+                    }
+                    else
+                    {
+                        query += " and m.IdAlumno = case when @IdAlumno = 0 then m.IdAlumno else @IdAlumno end ";
+                    }
+
+                    query += " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
                     + " UNION ALL "
                     + " ( "
                     + " /*CALIFICACIONES CUALITATIVAS*/ "
@@ -158,14 +166,22 @@ namespace Core.Data.Reportes.Academico
                     + " left join aca_AnioLectivoCalificacionCualitativa pq2 on pq2.IdEmpresa = pr.IdEmpresa and pq2.IdAnio = m.IdAnio and pq2.IdCalificacionCualitativa = pr.IdCalificacionCualitativaQ2 "
                     + " left join aca_AnioLectivoCalificacionCualitativa pf on pf.IdEmpresa = pr.IdEmpresa and pf.IdAnio = m.IdAnio and pf.IdCalificacionCualitativa = pr.IdCalificacionCualitativaFinal "
                     + " where mc.IdEmpresa = @IdEmpresa "
-                    + " and m.IdAnio = @IdAnio "
-                    + " and m.IdSede = @IdSede "
-                    + " and m.IdJornada = @IdJornada "
-                    + " and m.IdNivel = @IdNivel "
-                    + " and m.IdCurso = @IdCurso "
-                    + " and m.IdParalelo = case when @IdParalelo = 0 then m.IdParalelo else @IdParalelo end "
-                    + " and m.IdAlumno = case when @IdAlumno = 0 then m.IdAlumno else @IdAlumno end "
-                    + " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
+                   + " and m.IdAnio = @IdAnio "
+                   + " and m.IdSede = @IdSede ";
+
+                    if (IdAlumno == 0)
+                    {
+                        query += " and m.IdJornada = @IdJornada "
+                        + " and m.IdNivel = @IdNivel "
+                        + " and m.IdCurso = @IdCurso "
+                        + " and m.IdParalelo = case when @IdParalelo = 0 then m.IdParalelo else @IdParalelo end ";
+                    }
+                    else
+                    {
+                        query += " and m.IdAlumno = case when @IdAlumno = 0 then m.IdAlumno else @IdAlumno end ";
+                    }
+
+                    query += " and isnull(ret.IdMatricula, 0) = case when @MostrarRetirados = 1 then isnull(ret.IdMatricula, 0) else 0 end "
                     + " ) a "
                     + " group by "
                     + " a.IdEmpresa, a.IdAnio, a.IdSede, a.IdNivel, a.IdJornada, a.IdCurso, a.IdParalelo, a.IdAlumno, a.IdMatricula, a.IdMateria, "
@@ -282,96 +298,7 @@ namespace Core.Data.Reportes.Academico
                     q.Promedio_PR = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.Promedio_PR : null);
                     q.EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioPF : "");
                 });
-                /*
-                using (EntitiesReportes Context = new EntitiesReportes())
-                {
-                    Context.Database.CommandTimeout=5000;
-                    var lst = Context.SPACA_014(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados).ToList();
-
-                    foreach (var q in lst)
-                    {
-                        Lista.Add(new ACA_014_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatricula = q.IdMatricula,
-                            IdMateria = q.IdMateria,
-                            IdAlumno = q.IdAlumno,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            Codigo = q.Codigo,
-                            IdAnio = q.IdAnio,
-                            IdSede = q.IdSede,
-                            IdNivel = q.IdNivel,
-                            IdJornada = q.IdJornada,
-                            IdCurso = q.IdCurso,
-                            IdParalelo = q.IdParalelo,
-                            CodigoParalelo = q.CodigoParalelo,
-                            Descripcion = q.Descripcion,
-                            NomSede = q.NomSede,
-                            NomNivel = q.NomNivel,
-                            NomJornada = q.NomJornada,
-                            NomMateria = q.NomMateria,
-                            NomCurso = q.NomCurso,
-                            NomParalelo = q.NomParalelo,
-                            OrdenNivel = q.OrdenNivel,
-                            OrdenJornada = q.OrdenJornada,
-                            OrdenCurso = q.OrdenCurso,
-                            OrdenParalelo = q.OrdenParalelo,
-                            OrdenMateriaGrupo = q.OrdenMateriaGrupo,
-                            OrdenMateriaArea = q.OrdenMateriaArea,
-                            OrdenMateria = q.OrdenMateria,
-                            PromediarGrupo = q.PromediarGrupo,
-                            EsObligatorio = q.EsObligatorio,
-                            NomMateriaArea = q.NomMateriaArea,
-                            NomMateriaGrupo = q.NomMateriaGrupo,
-                            CalificacionP1 = q.CalificacionP1,
-                            CalificacionP2=q.CalificacionP2,
-                            CalificacionP3=q.CalificacionP3,
-                            ExamenQ1=q.ExamenQ1,
-                            PorcentajePromedioQ1 = q.PorcentajePromedioQ1,
-                            PorcentajeExamenQ1 =q.PorcentajeExamenQ1,
-                            PromedioFinalQ1 = q.PromedioFinalQ1,
-                            EquivalenciaPromedioP1 = q.EquivalenciaPromedioP1,
-                            EquivalenciaPromedioP2 = q.EquivalenciaPromedioP2,
-                            EquivalenciaPromedioP3 = q.EquivalenciaPromedioP3,
-                            EquivalenciaPromedioEQ1 = q.EquivalenciaPromedioEQ1,
-                            EquivalenciaPromedioQ1 = q.EquivalenciaPromedioQ1,
-                            CalificacionP4 = (IdCatalogoParcial== Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)? q.CalificacionP4 : null),
-                            CalificacionP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP5 :null),
-                            CalificacionP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CalificacionP6 : null),
-                            ExamenQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenQ2 :null),
-                            PorcentajePromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PorcentajePromedioQ2 : null),
-                            PorcentajeExamenQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PorcentajeExamenQ2 : null),
-                            PromedioFinalQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioFinalQ2 : null),
-                            ExamenSupletorio = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenSupletorio: null),
-                            ExamenMejoramiento = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenMejoramiento : null),
-                            ExamenGracia = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenGracia : null),
-                            ExamenRemedial = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.ExamenRemedial:null),
-                            CampoMejoramiento = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.CampoMejoramiento : null),
-                            PromedioFinal = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioFinal :null),
-                            EquivalenciaPromedioP4 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)? q.EquivalenciaPromedioP4 : ""),
-                            EquivalenciaPromedioP5 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioP5 : ""),
-                            EquivalenciaPromedioP6 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioP6 :""),
-                            EquivalenciaPromedioEQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioEQ2 :""),
-                            EquivalenciaPromedioQ2 = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioQ2 : ""),
-                            PromedioQuimestres_PF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.PromedioQuimestres_PF : null),
-                            Promedio_PR = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.Promedio_PR : null),
-                            EquivalenciaPromedioPF = (IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ? q.EquivalenciaPromedioPF :""),
-                            IdEquivalenciaPromedioPF = q.IdEquivalenciaPromedioPF,
-                            IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion,
-                            NombreRepresentante = q.NombreRepresentante,
-                            NombreInspector = q.NombreInspector,
-                            NoMostrarPromedioQ1 = q.PromedioFinalQ1==null ? 1 : 0,
-                            NoMostrarPromedioQ2 = q.PromedioFinalQ2 == null ? 1 : 0,
-                            NoMostrarPromedioQuim = q.PromedioQuimestres_PF == null ? 1 : 0,
-                            NoMostrarPromedioFinal= q.PromedioFinal == null ? 1 : 0,
-                            //PromedioGrupoQ1Double = (q.IdCatalogoTipoCalificacion== Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)) ? Convert.ToDecimal(q.PromedioFinalQ1) : (decimal?)null,
-                            //PromedioGrupoQ2Double = (q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)) ? Convert.ToDecimal(q.PromedioFinalQ2) : (decimal?)null,
-                            //PromedioQuimestresGrupoDouble = (q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)) ? Convert.ToDecimal(q.PromedioQuimestres_PF) : (decimal?)null,
-                            //PromedioFinalGrupoDouble = (q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)) ? Convert.ToDecimal(q.PromedioFinal) : (decimal?)null
-                        });
-                    }
-                }
-                */
+                
                 #region Agrupar por "Promedio agrupado"
                 int TipoCatalogoCuantitativo = Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI);
                 var lstAgrupada = Lista.Where(q => q.IdCatalogoTipoCalificacion == TipoCatalogoCuantitativo && q.PromediarGrupo == true).GroupBy(q => new

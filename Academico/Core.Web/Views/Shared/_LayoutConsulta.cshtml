@@ -61,6 +61,8 @@
         )
 </head>
 <body class="fixed skin-blue layout-top-nav">
+    <input type="text" id="txt_ManejaAdmision" name="txt_ManejaAdmision" value="@Core.Web.Helps.SessionFixed.ManejaAdmision" />
+    <input type="text" id="txt_IdUsuario" name="txt_IdUsuario" value="@Core.Web.Helps.SessionFixed.IdUsuario" />
     <div class="wrapper">
         <header class="main-header">
             <nav class="navbar navbar-inverse navbar-static-top" style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif; padding: 0 15px; height: 50px; font-size: 25px;line-height: 50px; font-weight: 300;">
@@ -68,6 +70,12 @@
                     <a class="navbar-brand text-center center-block" href="#myModal" data-toggle="modal">
                         <span class="logo-lg"><strong>Fixed</strong> Académico</span>
                     </a>
+                    <div id="alerta" hidden>
+                        <a class="navbar-fixed-top" href="@Url.Action("Index","ProcesarAdmision",new { Area = "Academico" },null)">
+                            <i class="fa fa-bell-o" style="color:white; font-size:15px; padding:0px 0px 0px 30px"></i>
+                            <span class="label label-warning " id="CantidadAdmisiones" style="position:absolute; top:10px; left:40px; text-align: center; font-size: 9px; padding: 2px 3px;line-height: 1; "></span>
+                        </a>
+                    </div>
                 </div>
             </nav>
             <!-- Logo -->
@@ -123,3 +131,37 @@
     <!-- ./wrapper -->
 </body>
 </html>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    function ActualizarNotificacion() {
+        if ($("#txt_ManejaAdmision").val() == "True") {
+            $("#alerta").show();
+
+            var datos = {
+                IdUsuario: $("#txt_IdUsuario").val()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("CantidadAdmisiones", "Admision", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    $("#CantidadAdmisiones").html(data);
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else {
+            $("#alerta").hide();
+        }
+    }
+    setInterval(ActualizarNotificacion, 5000);
+});
+</script>

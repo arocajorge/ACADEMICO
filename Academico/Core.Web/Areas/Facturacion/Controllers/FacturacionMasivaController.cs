@@ -85,6 +85,52 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
         #endregion
 
+        #region Combos
+        public ActionResult ComboBoxPartial_Anio()
+        {
+            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+        }
+        public ActionResult CmbSede()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            return PartialView("_CmbSede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
+        }
+        public ActionResult CmbJornada()
+        {
+
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            //int IdNivel = (Request.Params["IdNivel"] != null) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            return PartialView("_CmbJornada", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede });
+        }
+        public ActionResult CmbNivel()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            return PartialView("_CmbNivel", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada });
+        }
+        public ActionResult CmbCurso()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdNivel = !string.IsNullOrEmpty(Request.Params["IdNivel"]) ? int.Parse(Request.Params["IdNivel"]) : -1;
+
+            return PartialView("_CmbCurso", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel });
+        }
+        public ActionResult ComboBoxPartial_Paralelo()
+        {
+            int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
+            int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            int IdNivel = !string.IsNullOrEmpty(Request.Params["IdNivel"]) ? int.Parse(Request.Params["IdNivel"]) : -1;
+            int IdCurso = !string.IsNullOrEmpty(Request.Params["IdCurso"]) ? int.Parse(Request.Params["IdCurso"]) : -1;
+
+            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada, IdNivel = IdNivel, IdCurso = IdCurso });
+        }
+        #endregion
+
         #region Detalle
         [ValidateInput(false)]
         public ActionResult GridViewPartial_FacturacionMasivaDet()
@@ -127,10 +173,18 @@ namespace Core.Web.Areas.Facturacion.Controllers
             ViewBag.Anular = inf.Anular;
             #endregion
 
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
             aca_AnioLectivo_Periodo_Info model = bus_periodo.GetInfo(IdEmpresa, IdAnio, IdPeriodo);
             model.IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal);
             model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
-            model.lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdJornada = 0;
+            model.IdNivel = 0;
+            model.IdCurso = 0;
+            model.IdParalelo = 0;
+
+            //model.lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo);
+            model.lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(model.IdEmpresa, model.IdAnio, model.IdPeriodo, model.IdSede, model.IdJornada, model.IdNivel, model.IdCurso, model.IdParalelo);
             Lista_FactMasivaDet.set_list(model.lst_det_fact_masiva, model.IdTransaccionSession);
             ViewBag.MostrarBoton = true;
             if (model.Procesado==true)
@@ -219,6 +273,14 @@ namespace Core.Web.Areas.Facturacion.Controllers
                     IdUsuarioCreacion = SessionFixed.IdUsuario
                 });
             }
+
+            return Json(Mensaje, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult Buscar(int IdEmpresa, int IdAnio, int IdPeriodo, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, decimal IdTransaccionSession)
+        {
+            string Mensaje = string.Empty;
+            var lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo, IdSede, IdJornada, IdNivel, IdCurso, IdParalelo);
+            Lista_FactMasivaDet.set_list(lst_det_fact_masiva, IdTransaccionSession);
 
             return Json(Mensaje, JsonRequestBehavior.AllowGet);
         }

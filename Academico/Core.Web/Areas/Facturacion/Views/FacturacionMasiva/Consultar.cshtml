@@ -49,6 +49,52 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label for="IdEmpresa">Sede</label>
+                    @Html.Partial("_CmbSede", Model)
+                    @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Jornada</label>
+                    @Html.Partial("_CmbJornada", Model)
+                    @*@Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="IdEmpresa">Nivel Académico</label>
+                    @Html.Partial("_CmbNivel", Model)
+                    @*@Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="IdEmpresa">Curso</label>
+                    @Html.Partial("_CmbCurso", Model)
+                    @*@Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Paralelo</label>
+                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
+                    @*@Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="IdPuntoVta">Punto de venta*</label>
@@ -56,7 +102,13 @@
                     @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label for="IdPuntoVta">   </label>
+                    <button type="button" class="btn btn-primary form-control" id="btn_enviarCorreo" onclick="Buscar();">Buscar</button>
+                </div>
+            </div>
+            <div class="col-md-2">
                 <div class="form-group">
                     <label for="IdPuntoVta">   </label>
                     <button type="button" class="btn btn-primary form-control" id="btn_enviarCorreo" onclick="EnviarCorreoAutorizados();">Enviar avisos de pago</button>
@@ -64,6 +116,7 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="row">
             <div class="col-md-12">
@@ -109,5 +162,34 @@
             }
         });
     }
-    
+
+    function Buscar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdPeriodo: $("#IdPeriodo").val(),
+            IdSede: IdSede.GetValue(),
+            IdJornada: IdJornada.GetValue(),
+            IdNivel: IdNivel.GetValue(),
+            IdCurso: IdCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("Buscar", "FacturacionMasiva", new { Area = "Facturacion" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_FacturacionMasivaDet.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
 </script>
