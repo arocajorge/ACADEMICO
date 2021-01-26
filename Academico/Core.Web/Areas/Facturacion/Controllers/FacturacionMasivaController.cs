@@ -276,7 +276,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             return Json(Mensaje, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult Buscar(int IdEmpresa, int IdAnio, int IdPeriodo, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo, decimal IdTransaccionSession)
+        public JsonResult Buscar(int IdEmpresa, int IdPeriodo, int IdAnio = 0, int IdSede = 0, int IdJornada = 0, int IdNivel = 0, int IdCurso = 0, int IdParalelo = 0, decimal IdTransaccionSession = 0)
         {
             string Mensaje = string.Empty;
             var lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo, IdSede, IdJornada, IdNivel, IdCurso, IdParalelo);

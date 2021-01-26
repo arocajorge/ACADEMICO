@@ -308,22 +308,38 @@ namespace Core.Data.Academico
         {
             try
             {
-                using (EntitiesAcademico Context = new EntitiesAcademico())
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
-                    aca_AnioLectivo_Periodo Entity = Context.aca_AnioLectivo_Periodo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPeriodo == info.IdPeriodo);
-                    if (Entity == null)
-                        return false;
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "SELECT COUNT(IdEmpresa) IdEmpresa "
+                                        +" FROM aca_Matricula_Rubro"
+                                        +" WHERE IdEmpresa = "+info.IdEmpresa.ToString()+" AND IdPeriodo = "+info.IdPeriodo.ToString()+" AND IdAnio = "+info.IdAnio.ToString()
+                                        +" AND FechaFacturacion IS NULL";
+                    
+                    var ResultValue = command.ExecuteScalar();
+                    if( ResultValue == null)
+                    {
+                        using (EntitiesAcademico Context = new EntitiesAcademico())
+                        {
+                            aca_AnioLectivo_Periodo Entity = Context.aca_AnioLectivo_Periodo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPeriodo == info.IdPeriodo);
+                            if (Entity == null)
+                                return false;
 
-                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
-                    Entity.FechaModificacion = DateTime.Now;
-                    Entity.IdSucursal = info.IdSucursal;
-                    Entity.IdPuntoVta = info.IdPuntoVta;
-                    //Entity.Procesado = true;
-                    Entity.FechaProceso = DateTime.Now;
-                    Entity.TotalAlumnos = info.lst_det_fact_masiva.Count();
-                    Entity.TotalValorFacturado = info.lst_det_fact_masiva.Sum(q=>q.Total);
+                            Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                            Entity.FechaModificacion = DateTime.Now;
+                            Entity.IdSucursal = info.IdSucursal;
+                            Entity.IdPuntoVta = info.IdPuntoVta;
+                            //Entity.Procesado = true;
+                            Entity.FechaProceso = DateTime.Now;
+                            Entity.TotalAlumnos = info.lst_det_fact_masiva.Count();
+                            Entity.TotalValorFacturado = info.lst_det_fact_masiva.Sum(q => q.Total);
 
-                    Context.SaveChanges();
+                            Context.SaveChanges();
+                            //command.ExecuteNonQuery();
+                        }
+                    }
                 }
 
                 return true;

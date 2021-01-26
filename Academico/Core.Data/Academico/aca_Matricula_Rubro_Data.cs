@@ -375,13 +375,22 @@ namespace Core.Data.Academico
                     + " (SELECT IdEmpresa "
                         + " FROM      dbo.aca_AlumnoRetiro AS ret "
                         + " WHERE(IdEmpresa = a.IdEmpresa) AND(IdMatricula = a.IdMatricula) AND(Estado = 1))) "
-                    + " and a.IdAnio= " + IdAnio.ToString()
-                    + " and h.IdSede= " + IdSede.ToString()
-                    + " and h.IdJornada= " + IdJornada.ToString()
-                    + " and h.IdNivel= " + IdNivel.ToString()
-                    + " and h.IdCurso= " + IdCurso.ToString()
-                    + " and h.IdParalelo= " + IdParalelo.ToString()
-                    + " and a.IdPeriodo= " + IdPeriodo.ToString();
+                        + " and a.IdEmpresa= " + IdEmpresa.ToString()
+                        + " and a.IdPeriodo= " + IdPeriodo.ToString();
+
+                    if (IdAnio > 0)
+                        query_PorFacturar += " and a.IdAnio= " + IdAnio.ToString();
+                    if (IdSede > 0)
+                        query_PorFacturar += " and a.IdSede= " + IdSede.ToString();
+                    if (IdNivel > 0)
+                        query_PorFacturar += " and a.IdNivel= " + IdNivel.ToString();
+                    if (IdJornada > 0)
+                        query_PorFacturar += " and a.IdJornada= " + IdJornada.ToString();
+                    if (IdCurso > 0)
+                        query_PorFacturar += " and a.IdCurso= " + IdCurso.ToString();
+                    if (IdParalelo > 0)
+                        query_PorFacturar += " and a.IdParalelo= " + IdParalelo.ToString();
+                    
                     #endregion
 
                     SqlCommand command_PorFacturar = new SqlCommand(query_PorFacturar, connection);
@@ -401,14 +410,14 @@ namespace Core.Data.Academico
                             Subtotal = Convert.ToDecimal(reader_PorFacturar["Subtotal"]),
                             ValorIVA = Convert.ToDecimal(reader_PorFacturar["ValorIVA"]),
                             Porcentaje = Convert.ToDecimal(reader_PorFacturar["Porcentaje"]),
-                            IdAlumno = Convert.ToDecimal(reader_PorFacturar["Total"]),
+                            IdAlumno = Convert.ToDecimal(reader_PorFacturar["IdAlumno"]),
                             pe_nombreCompleto = string.IsNullOrEmpty(reader_PorFacturar["Alumno"].ToString()) ? null : reader_PorFacturar["Alumno"].ToString(),
                             Codigo = string.IsNullOrEmpty(reader_PorFacturar["Codigo"].ToString()) ? null : reader_PorFacturar["Codigo"].ToString(),
                             Total = Convert.ToDecimal(reader_PorFacturar["Total"]),
                             IdCod_Impuesto_Iva = string.IsNullOrEmpty(reader_PorFacturar["IdCod_Impuesto_Iva"].ToString()) ? null : reader_PorFacturar["IdCod_Impuesto_Iva"].ToString(),
                             ValorProntoPago = Convert.ToDecimal(reader_PorFacturar["ValorProntoPago"]),
                             vt_Observacion = string.IsNullOrEmpty(reader_PorFacturar["Observacion"].ToString()) ? null : reader_PorFacturar["Observacion"].ToString(),
-                            Procesado = true,
+                            Procesado = false,
                             FechaDesde = Convert.ToDateTime(reader_PorFacturar["FechaDesde"]),
                             FechaProntoPago = Convert.ToDateTime(reader_PorFacturar["FechaProntoPago"]),
                             IdTerminoPago = string.IsNullOrEmpty(reader_PorFacturar["IdTerminoPago"].ToString()) ? null : reader_PorFacturar["IdTerminoPago"].ToString(),
@@ -432,13 +441,21 @@ namespace Core.Data.Academico
                     + " (SELECT IdEmpresa "
                     + " FROM      dbo.aca_AlumnoRetiro AS z "
                     + " WHERE(a.IdEmpresa = IdEmpresa) AND(a.IdMatricula = IdMatricula))) "
-                    + " and a.IdAnio= " + IdAnio.ToString()
-                    + " and a.IdSede= " + IdSede.ToString()
-                    + " and a.IdJornada= " + IdJornada.ToString()
-                    + " and a.IdNivel= " + IdNivel.ToString()
-                    + " and a.IdCurso= " + IdCurso.ToString()
-                    + " and a.IdParalelo= " + IdParalelo.ToString()
+                    + " and a.IdEmpresa= " + IdEmpresa.ToString()
                     + " and a.IdPeriodo= " + IdPeriodo.ToString();
+
+                    if (IdAnio > 0)
+                        query_PorFacturar += " and a.IdAnio= " + IdAnio.ToString();
+                    if (IdSede > 0)
+                        query_PorFacturar += " and a.IdSede= " + IdSede.ToString();
+                    if (IdNivel > 0)
+                        query_PorFacturar += " and a.IdNivel= " + IdNivel.ToString();
+                    if (IdJornada > 0)
+                        query_PorFacturar += " and a.IdJornada= " + IdJornada.ToString();
+                    if (IdCurso > 0)
+                        query_PorFacturar += " and a.IdCurso= " + IdCurso.ToString();
+                    if (IdParalelo > 0)
+                        query_PorFacturar += " and a.IdParalelo= " + IdParalelo.ToString();
                     #endregion
                     SqlCommand command_FacturaMasiva = new SqlCommand(query_FacturaMasiva, connection);
                     command_FacturaMasiva.CommandTimeout = 0;
@@ -450,7 +467,7 @@ namespace Core.Data.Academico
                             IdEmpresa = Convert.ToInt32(reader_FacturaMasiva["IdEmpresa"]),
                             IdAnio = Convert.ToInt32(reader_FacturaMasiva["IdAnio"]),
                             IdPeriodo = Convert.ToInt32(reader_FacturaMasiva["IdPeriodo"]),
-                            IdAlumno = Convert.ToDecimal(reader_FacturaMasiva["Total"]),
+                            IdAlumno = Convert.ToDecimal(reader_FacturaMasiva["IdAlumno"]),
                             pe_nombreCompleto = string.IsNullOrEmpty(reader_FacturaMasiva["pe_nombreCompleto"].ToString()) ? null : reader_FacturaMasiva["pe_nombreCompleto"].ToString(),
                             Total = Convert.ToDecimal(reader_FacturaMasiva["NumeroCarnetConadis"]),
                             IdSucursal = string.IsNullOrEmpty(reader_FacturaMasiva["IdSucursal"].ToString()) ? (int?)null : Convert.ToInt32(reader_FacturaMasiva["IdSucursal"]),
