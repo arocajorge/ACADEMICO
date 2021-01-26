@@ -187,6 +187,15 @@ namespace Core.Info.Academico
         public bool EstaFallecido_Padre { get; set; }
         [Required(ErrorMessage = "El campo profesión es obligatorio")]
         public Nullable<int> IdProfesion_Padre { get; set; }
+        [Required(ErrorMessage = "El campo se factura es obligatorio")]
+        public bool SeFactura_Padre { get; set; }
+        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        public int Idtipo_cliente_Padre { get; set; }
+        public string IdTipoCredito_Padre { get; set; }
+        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        public string IdCiudad_Padre_Fact { get; set; }
+        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        public string IdParroquia_Padre_Fact { get; set; }
         [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string Naturaleza_Madre { get; set; }
         [Required(ErrorMessage = "El campo tipo documento es obligatorio")]
@@ -257,6 +266,15 @@ namespace Core.Info.Academico
         public bool CasaPropia_Madre { get; set; }
         public bool EstaFallecido_Madre { get; set; }
         public Nullable<int> IdProfesion_Madre { get; set; }
+        [Required(ErrorMessage = "El campo se factura es obligatorio")]
+        public bool SeFactura_Madre { get; set; }
+        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        public int Idtipo_cliente_Madre { get; set; }
+        public string IdTipoCredito_Madre { get; set; }
+        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        public string IdCiudad_Madre_Fact { get; set; }
+        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        public string IdParroquia_Madre_Fact { get; set; }
         public string Naturaleza_Representante { get; set; }
         public string IdTipoDocumento_Representante { get; set; }
         [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
@@ -308,6 +326,15 @@ namespace Core.Info.Academico
         public bool CasaPropia_Representante { get; set; }
         public bool EstaFallecido_Representante { get; set; }
         public Nullable<int> IdProfesion_Representante { get; set; }
+        [Required(ErrorMessage = "El campo se factura es obligatorio")]
+        public bool SeFactura_Representante { get; set; }
+        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        public int Idtipo_cliente_Representante { get; set; }
+        public string IdTipoCredito_Representante { get; set; }
+        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        public string IdCiudad_Representante_Fact { get; set; }
+        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        public string IdParroquia_Representante_Fact { get; set; }
         public double SueldoPadre { get; set; }
         public double SueldoMadre { get; set; }
         public double OtroIngresoPadre { get; set; }

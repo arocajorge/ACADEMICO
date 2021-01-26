@@ -102,6 +102,11 @@
           <Property Name="CasaPropia_Padre" Type="bit" Nullable="false" />
           <Property Name="EstaFallecido_Padre" Type="bit" Nullable="false" />
           <Property Name="IdProfesion_Padre" Type="int" />
+          <Property Name="SeFactura_Padre" Type="bit" Nullable="false" />
+          <Property Name="Idtipo_cliente_Padre" Type="int" />
+          <Property Name="IdTipoCredito_Padre" Type="varchar" MaxLength="20" />
+          <Property Name="IdCiudad_Padre_Fact" Type="varchar" MaxLength="25" />
+          <Property Name="IdParroquia_Padre_Fact" Type="varchar" MaxLength="25" />
           <Property Name="Naturaleza_Madre" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IdTipoDocumento_Madre" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="CedulaRuc_Madre" Type="varchar" MaxLength="50" Nullable="false" />
@@ -143,6 +148,11 @@
           <Property Name="CasaPropia_Madre" Type="bit" Nullable="false" />
           <Property Name="EstaFallecido_Madre" Type="bit" Nullable="false" />
           <Property Name="IdProfesion_Madre" Type="int" />
+          <Property Name="SeFactura_Madre" Type="bit" Nullable="false" />
+          <Property Name="Idtipo_cliente_Madre" Type="int" />
+          <Property Name="IdTipoCredito_Madre" Type="varchar" MaxLength="20" />
+          <Property Name="IdCiudad_Madre_Fact" Type="varchar" MaxLength="25" />
+          <Property Name="IdParroquia_Madre_Fact" Type="varchar" MaxLength="25" />
           <Property Name="Naturaleza_Representante" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="IdTipoDocumento_Representante" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="CedulaRuc_Representante" Type="varchar" MaxLength="50" Nullable="false" />
@@ -184,6 +194,11 @@
           <Property Name="CasaPropia_Representante" Type="bit" Nullable="false" />
           <Property Name="EstaFallecido_Representante" Type="bit" Nullable="false" />
           <Property Name="IdProfesion_Representante" Type="int" />
+          <Property Name="SeFactura_Representante" Type="bit" Nullable="false" />
+          <Property Name="Idtipo_cliente_Representante" Type="int" />
+          <Property Name="IdTipoCredito_Representante" Type="varchar" MaxLength="20" />
+          <Property Name="IdCiudad_Representante_Fact" Type="varchar" MaxLength="25" />
+          <Property Name="IdParroquia_Representante_Fact" Type="varchar" MaxLength="25" />
           <Property Name="SueldoPadre" Type="float" Nullable="false" />
           <Property Name="SueldoMadre" Type="float" Nullable="false" />
           <Property Name="OtroIngresoPadre" Type="float" Nullable="false" />
@@ -7538,6 +7553,56 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_MecanismoDePago" EntitySet="aca_MecanismoDePago" />
             <End Role="aca_Matricula_Rubro" EntitySet="aca_Matricula_Rubro" />
           </AssociationSet>
+          <EntitySet Name="aca_Alumno" EntityType="ModelAcademico.aca_Alumno" />
+          <EntitySet Name="vwaca_Alumno" EntityType="ModelAcademico.vwaca_Alumno" />
+          <AssociationSet Name="FK_aca_alumno_aca_Catalogo1" Association="ModelAcademico.FK_aca_alumno_aca_Catalogo1">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_alumno_aca_Catalogo2" Association="ModelAcademico.FK_aca_alumno_aca_Catalogo2">
+            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_alumno_aca_Curso" Association="ModelAcademico.FK_aca_alumno_aca_Curso">
+            <End Role="aca_Curso" EntitySet="aca_Curso" />
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AlumnoDocumento_aca_Alumno" Association="ModelAcademico.FK_aca_AlumnoDocumento_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_AlumnoDocumento" EntitySet="aca_AlumnoDocumento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_familia_aca_alumno" Association="ModelAcademico.FK_aca_familia_aca_alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_Familia" EntitySet="aca_Familia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_Matricula_aca_alumno" Association="ModelAcademico.FK_aca_Matricula_aca_alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_MatriculaCondicional_aca_Alumno" Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_MatriculaCondicional" EntitySet="aca_MatriculaCondicional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_PermisoMatricula_aca_Alumno" Association="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_PermisoMatricula" EntitySet="aca_PermisoMatricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_SocioEconomico_aca_Alumno" Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
+          </AssociationSet>
           <EntitySet Name="aca_Admision" EntityType="ModelAcademico.aca_Admision" />
           <AssociationSet Name="FK_aca_Admision_aca_AnioLectivo" Association="ModelAcademico.FK_aca_Admision_aca_AnioLectivo">
             <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
@@ -7618,56 +7683,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <AssociationSet Name="FK_aca_Admision_aca_Sede" Association="ModelAcademico.FK_aca_Admision_aca_Sede">
             <End Role="aca_Sede" EntitySet="aca_Sede" />
             <End Role="aca_Admision" EntitySet="aca_Admision" />
-          </AssociationSet>
-          <EntitySet Name="aca_Alumno" EntityType="ModelAcademico.aca_Alumno" />
-          <EntitySet Name="vwaca_Alumno" EntityType="ModelAcademico.vwaca_Alumno" />
-          <AssociationSet Name="FK_aca_alumno_aca_Catalogo1" Association="ModelAcademico.FK_aca_alumno_aca_Catalogo1">
-            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_alumno_aca_Catalogo2" Association="ModelAcademico.FK_aca_alumno_aca_Catalogo2">
-            <End Role="aca_Catalogo" EntitySet="aca_Catalogo" />
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_alumno_aca_Curso" Association="ModelAcademico.FK_aca_alumno_aca_Curso">
-            <End Role="aca_Curso" EntitySet="aca_Curso" />
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AlumnoDocumento_aca_Alumno" Association="ModelAcademico.FK_aca_AlumnoDocumento_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_AlumnoDocumento" EntitySet="aca_AlumnoDocumento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" Association="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_AnioLectivoCalificacionHistorico" EntitySet="aca_AnioLectivoCalificacionHistorico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_familia_aca_alumno" Association="ModelAcademico.FK_aca_familia_aca_alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_Familia" EntitySet="aca_Familia" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_Matricula_aca_alumno" Association="ModelAcademico.FK_aca_Matricula_aca_alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_Matricula" EntitySet="aca_Matricula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" Association="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_MatriculaCalificacionParticipacion" EntitySet="aca_MatriculaCalificacionParticipacion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_MatriculaCondicional_aca_Alumno" Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_MatriculaCondicional" EntitySet="aca_MatriculaCondicional" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_PermisoMatricula_aca_Alumno" Association="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_PermisoMatricula" EntitySet="aca_PermisoMatricula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_SocioEconomico_aca_Alumno" Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_SocioEconomico" EntitySet="aca_SocioEconomico" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
@@ -7760,12 +7775,12 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_Materia" Relationship="ModelAcademico.FK_aca_Materia_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_Materia" />
           <NavigationProperty Name="aca_MatriculaCalificacionCualitativa" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionCualitativa_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_MatriculaCalificacionCualitativa" />
           <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo1" FromRole="aca_Catalogo" ToRole="aca_Alumno" />
+          <NavigationProperty Name="aca_Alumno1" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo2" FromRole="aca_Catalogo" ToRole="aca_Alumno" />
           <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo" FromRole="aca_Catalogo" ToRole="aca_Admision" />
           <NavigationProperty Name="aca_Admision1" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo1" FromRole="aca_Catalogo" ToRole="aca_Admision" />
           <NavigationProperty Name="aca_Admision2" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo2" FromRole="aca_Catalogo" ToRole="aca_Admision" />
           <NavigationProperty Name="aca_Admision3" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo3" FromRole="aca_Catalogo" ToRole="aca_Admision" />
-          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo1" FromRole="aca_Catalogo" ToRole="aca_Alumno" />
-          <NavigationProperty Name="aca_Alumno1" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo2" FromRole="aca_Catalogo" ToRole="aca_Alumno" />
           </EntityType>
         <EntityType Name="aca_CatalogoTipo">
           <Key>
@@ -8038,8 +8053,8 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivoCalificacionHistorico" />
           <NavigationProperty Name="aca_AnioLectivo_Curso_Materia" Relationship="ModelAcademico.FK_aca_AnioLectivo_Curso_Materia_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo_Curso_Materia" />
           <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_AnioLectivo_aca_Curso" FromRole="aca_Curso" ToRole="aca_AnioLectivo" />
-          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_Curso" FromRole="aca_Curso" ToRole="aca_Admision" />
           <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_alumno_aca_Curso" FromRole="aca_Curso" ToRole="aca_Alumno" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_Admision_aca_Curso" FromRole="aca_Curso" ToRole="aca_Admision" />
         </EntityType>
         <Association Name="FK_aca_AnioLectivo_Curso_Documento_aca_AnioLectivo_Jornada_Curso">
           <End Type="ModelAcademico.aca_AnioLectivo_Jornada_Curso" Role="aca_AnioLectivo_Jornada_Curso" Multiplicity="1" />
@@ -12409,6 +12424,271 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aca_Alumno">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="IdCatalogoESTMAT" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" />
+          <Property Name="IdCatalogoESTALU" Type="Int32" Nullable="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IdPais" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Sector" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Dificultad_Lectura" Type="Boolean" />
+          <Property Name="Dificultad_Escritura" Type="Boolean" />
+          <Property Name="Dificultad_Matematicas" Type="Boolean" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aca_Catalogo" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo1" FromRole="aca_Alumno" ToRole="aca_Catalogo" />
+          <NavigationProperty Name="aca_Catalogo1" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo2" FromRole="aca_Alumno" ToRole="aca_Catalogo" />
+          <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_alumno_aca_Curso" FromRole="aca_Alumno" ToRole="aca_Curso" />
+          <NavigationProperty Name="aca_AlumnoDocumento" Relationship="ModelAcademico.FK_aca_AlumnoDocumento_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AlumnoDocumento" />
+          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AnioLectivoCalificacionHistorico" />
+          <NavigationProperty Name="aca_Familia" Relationship="ModelAcademico.FK_aca_familia_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Familia" />
+          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Matricula" />
+          <NavigationProperty Name="aca_MatriculaCalificacionParticipacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_MatriculaCalificacionParticipacion" />
+          <NavigationProperty Name="aca_MatriculaCalificacionParticipacion1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" FromRole="aca_Alumno" ToRole="aca_MatriculaCalificacionParticipacion" />
+          <NavigationProperty Name="aca_MatriculaCondicional" Relationship="ModelAcademico.FK_aca_MatriculaCondicional_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_MatriculaCondicional" />
+          <NavigationProperty Name="aca_PermisoMatricula" Relationship="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_PermisoMatricula" />
+          <NavigationProperty Name="aca_SocioEconomico" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_SocioEconomico" />
+        </EntityType>
+        <EntityType Name="vwaca_Alumno">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="pe_Naturaleza" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="IdTipoDocumento" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="IdCatalogoESTMAT" />
+            <PropertyRef Name="IdCatalogoESTALU" />
+            <PropertyRef Name="FechaIngreso" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="CodCatalogoSangre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PorcentajeDiscapacidad" Type="Double" />
+          <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="IdCatalogoESTMAT" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" />
+          <Property Name="IdCatalogoESTALU" Type="Int32" Nullable="false" />
+          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NomCatalogoESTMAT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="NomCatalogoESTALU" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LugarNacimiento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="IdPais" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IdProvincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Sector" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdReligion" Type="Int32" />
+          <Property Name="AsisteCentroCristiano" Type="Boolean" />
+          <Property Name="IdGrupoEtnico" Type="Int32" />
+          <Property Name="Dificultad_Lectura" Type="Boolean" />
+          <Property Name="Dificultad_Escritura" Type="Boolean" />
+          <Property Name="Dificultad_Matematicas" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_aca_alumno_aca_Catalogo1">
+          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Alumno">
+              <PropertyRef Name="IdCatalogoESTMAT" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_alumno_aca_Catalogo2">
+          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Catalogo">
+              <PropertyRef Name="IdCatalogo" />
+            </Principal>
+            <Dependent Role="aca_Alumno">
+              <PropertyRef Name="IdCatalogoESTALU" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_alumno_aca_Curso">
+          <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="0..1" />
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Curso">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Principal>
+            <Dependent Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdCurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AlumnoDocumento_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AlumnoDocumento" Role="aca_AlumnoDocumento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_AlumnoDocumento">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_familia_aca_alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Familia" Role="aca_Familia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_Familia">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_Matricula_aca_alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_Matricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCalificacionParticipacion">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_MatriculaCondicional_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_MatriculaCondicional" Role="aca_MatriculaCondicional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_MatriculaCondicional">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_PermisoMatricula_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_PermisoMatricula" Role="aca_PermisoMatricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_PermisoMatricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_SocioEconomico_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_SocioEconomico">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="aca_Admision">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -12461,6 +12741,10 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="OtroMotivoIngreso_Aspirante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="OtroInformacionInst_Aspirante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="OtroFinanciamiento_Aspirante" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Dificultad_Lectura" Type="Boolean" Nullable="false" />
+          <Property Name="Dificultad_Escritura" Type="Boolean" Nullable="false" />
+          <Property Name="Dificultad_Matematicas" Type="Boolean" Nullable="false" />
+          <Property Name="AceptaTerminos" Type="Boolean" Nullable="false" />
           <Property Name="Naturaleza_Padre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento_Padre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CedulaRuc_Padre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -12502,6 +12786,11 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="CasaPropia_Padre" Type="Boolean" Nullable="false" />
           <Property Name="EstaFallecido_Padre" Type="Boolean" Nullable="false" />
           <Property Name="IdProfesion_Padre" Type="Int32" />
+          <Property Name="SeFactura_Padre" Type="Boolean" Nullable="false" />
+          <Property Name="Idtipo_cliente_Padre" Type="Int32" />
+          <Property Name="IdTipoCredito_Padre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_Padre_Fact" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia_Padre_Fact" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Naturaleza_Madre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento_Madre" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CedulaRuc_Madre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -12543,6 +12832,11 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="CasaPropia_Madre" Type="Boolean" Nullable="false" />
           <Property Name="EstaFallecido_Madre" Type="Boolean" Nullable="false" />
           <Property Name="IdProfesion_Madre" Type="Int32" />
+          <Property Name="SeFactura_Madre" Type="Boolean" Nullable="false" />
+          <Property Name="Idtipo_cliente_Madre" Type="Int32" />
+          <Property Name="IdTipoCredito_Madre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_Madre_Fact" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia_Madre_Fact" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="Naturaleza_Representante" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="IdTipoDocumento_Representante" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CedulaRuc_Representante" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -12584,6 +12878,11 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="CasaPropia_Representante" Type="Boolean" Nullable="false" />
           <Property Name="EstaFallecido_Representante" Type="Boolean" Nullable="false" />
           <Property Name="IdProfesion_Representante" Type="Int32" />
+          <Property Name="SeFactura_Representante" Type="Boolean" Nullable="false" />
+          <Property Name="Idtipo_cliente_Representante" Type="Int32" />
+          <Property Name="IdTipoCredito_Representante" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdCiudad_Representante_Fact" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="IdParroquia_Representante_Fact" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="SueldoPadre" Type="Double" Nullable="false" />
           <Property Name="SueldoMadre" Type="Double" Nullable="false" />
           <Property Name="OtroIngresoPadre" Type="Double" Nullable="false" />
@@ -12604,10 +12903,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
           <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Dificultad_Lectura" Type="Boolean" Nullable="false" />
-          <Property Name="Dificultad_Escritura" Type="Boolean" Nullable="false" />
-          <Property Name="Dificultad_Matematicas" Type="Boolean" Nullable="false" />
-          <Property Name="AceptaTerminos" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="aca_AnioLectivo" Relationship="ModelAcademico.FK_aca_Admision_aca_AnioLectivo" FromRole="aca_Admision" ToRole="aca_AnioLectivo" />
           <NavigationProperty Name="aca_Catalogo" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo" FromRole="aca_Admision" ToRole="aca_Catalogo" />
           <NavigationProperty Name="aca_Catalogo1" Relationship="ModelAcademico.FK_aca_Admision_aca_Catalogo1" FromRole="aca_Admision" ToRole="aca_Catalogo" />
@@ -12876,271 +13171,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <Dependent Role="aca_Admision">
               <PropertyRef Name="IdEmpresa" />
               <PropertyRef Name="IdSede" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="aca_Alumno">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAlumno" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" />
-          <Property Name="IdCatalogoESTMAT" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" />
-          <Property Name="IdCatalogoESTALU" Type="Int32" Nullable="false" />
-          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="LugarNacimiento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="IdPais" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdProvincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdParroquia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Sector" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Dificultad_Lectura" Type="Boolean" />
-          <Property Name="Dificultad_Escritura" Type="Boolean" />
-          <Property Name="Dificultad_Matematicas" Type="Boolean" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aca_Catalogo" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo1" FromRole="aca_Alumno" ToRole="aca_Catalogo" />
-          <NavigationProperty Name="aca_Catalogo1" Relationship="ModelAcademico.FK_aca_alumno_aca_Catalogo2" FromRole="aca_Alumno" ToRole="aca_Catalogo" />
-          <NavigationProperty Name="aca_Curso" Relationship="ModelAcademico.FK_aca_alumno_aca_Curso" FromRole="aca_Alumno" ToRole="aca_Curso" />
-          <NavigationProperty Name="aca_AlumnoDocumento" Relationship="ModelAcademico.FK_aca_AlumnoDocumento_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AlumnoDocumento" />
-          <NavigationProperty Name="aca_AnioLectivoCalificacionHistorico" Relationship="ModelAcademico.FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_AnioLectivoCalificacionHistorico" />
-          <NavigationProperty Name="aca_Familia" Relationship="ModelAcademico.FK_aca_familia_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Familia" />
-          <NavigationProperty Name="aca_Matricula" Relationship="ModelAcademico.FK_aca_Matricula_aca_alumno" FromRole="aca_Alumno" ToRole="aca_Matricula" />
-          <NavigationProperty Name="aca_MatriculaCalificacionParticipacion" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_MatriculaCalificacionParticipacion" />
-          <NavigationProperty Name="aca_MatriculaCalificacionParticipacion1" Relationship="ModelAcademico.FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1" FromRole="aca_Alumno" ToRole="aca_MatriculaCalificacionParticipacion" />
-          <NavigationProperty Name="aca_MatriculaCondicional" Relationship="ModelAcademico.FK_aca_MatriculaCondicional_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_MatriculaCondicional" />
-          <NavigationProperty Name="aca_PermisoMatricula" Relationship="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_PermisoMatricula" />
-          <NavigationProperty Name="aca_SocioEconomico" Relationship="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" FromRole="aca_Alumno" ToRole="aca_SocioEconomico" />
-        </EntityType>
-        <EntityType Name="vwaca_Alumno">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdPersona" />
-            <PropertyRef Name="pe_Naturaleza" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="IdTipoDocumento" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdCatalogoESTMAT" />
-            <PropertyRef Name="IdCatalogoESTALU" />
-            <PropertyRef Name="FechaIngreso" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
-          <Property Name="CodCatalogoSangre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="PorcentajeDiscapacidad" Type="Double" />
-          <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" />
-          <Property Name="IdCatalogoESTMAT" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" />
-          <Property Name="IdCatalogoESTALU" Type="Int32" Nullable="false" />
-          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NomCatalogoESTMAT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomCatalogoESTALU" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="LugarNacimiento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="IdPais" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdProvincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdParroquia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Sector" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdReligion" Type="Int32" />
-          <Property Name="AsisteCentroCristiano" Type="Boolean" />
-          <Property Name="IdGrupoEtnico" Type="Int32" />
-          <Property Name="Dificultad_Lectura" Type="Boolean" />
-          <Property Name="Dificultad_Escritura" Type="Boolean" />
-          <Property Name="Dificultad_Matematicas" Type="Boolean" />
-        </EntityType>
-        <Association Name="FK_aca_alumno_aca_Catalogo1">
-          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Catalogo">
-              <PropertyRef Name="IdCatalogo" />
-            </Principal>
-            <Dependent Role="aca_Alumno">
-              <PropertyRef Name="IdCatalogoESTMAT" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_alumno_aca_Catalogo2">
-          <End Type="ModelAcademico.aca_Catalogo" Role="aca_Catalogo" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Catalogo">
-              <PropertyRef Name="IdCatalogo" />
-            </Principal>
-            <Dependent Role="aca_Alumno">
-              <PropertyRef Name="IdCatalogoESTALU" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_alumno_aca_Curso">
-          <End Type="ModelAcademico.aca_Curso" Role="aca_Curso" Multiplicity="0..1" />
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Curso">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCurso" />
-            </Principal>
-            <Dependent Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdCurso" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AlumnoDocumento_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AlumnoDocumento" Role="aca_AlumnoDocumento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_AlumnoDocumento">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_AnioLectivoCalificacionHistorico_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_AnioLectivoCalificacionHistorico" Role="aca_AnioLectivoCalificacionHistorico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_AnioLectivoCalificacionHistorico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_familia_aca_alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Familia" Role="aca_Familia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_Familia">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_Matricula_aca_alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_Matricula" Role="aca_Matricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_Matricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCalificacionParticipacion_aca_Alumno1">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCalificacionParticipacion" Role="aca_MatriculaCalificacionParticipacion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCalificacionParticipacion">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_MatriculaCondicional_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_MatriculaCondicional" Role="aca_MatriculaCondicional" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_MatriculaCondicional">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_PermisoMatricula_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_PermisoMatricula" Role="aca_PermisoMatricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_PermisoMatricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_SocioEconomico_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_SocioEconomico" Role="aca_SocioEconomico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_SocioEconomico">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -15577,206 +15607,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="aca_Admision">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_Admision">
-              <MappingFragment StoreEntitySet="aca_Admision">
-                <ScalarProperty Name="AceptaTerminos" ColumnName="AceptaTerminos" />
-                <ScalarProperty Name="Dificultad_Matematicas" ColumnName="Dificultad_Matematicas" />
-                <ScalarProperty Name="Dificultad_Escritura" ColumnName="Dificultad_Escritura" />
-                <ScalarProperty Name="Dificultad_Lectura" ColumnName="Dificultad_Lectura" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdCatalogoESTADM" ColumnName="IdCatalogoESTADM" />
-                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
-                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
-                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
-                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
-                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
-                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
-                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
-                <ScalarProperty Name="OtroIngresoMadre" ColumnName="OtroIngresoMadre" />
-                <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
-                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
-                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
-                <ScalarProperty Name="IdProfesion_Representante" ColumnName="IdProfesion_Representante" />
-                <ScalarProperty Name="EstaFallecido_Representante" ColumnName="EstaFallecido_Representante" />
-                <ScalarProperty Name="CasaPropia_Representante" ColumnName="CasaPropia_Representante" />
-                <ScalarProperty Name="AnioVehiculo_Representante" ColumnName="AnioVehiculo_Representante" />
-                <ScalarProperty Name="Modelo_Representante" ColumnName="Modelo_Representante" />
-                <ScalarProperty Name="Marca_Representante" ColumnName="Marca_Representante" />
-                <ScalarProperty Name="VehiculoPropio_Representante" ColumnName="VehiculoPropio_Representante" />
-                <ScalarProperty Name="IngresoMensual_Representante" ColumnName="IngresoMensual_Representante" />
-                <ScalarProperty Name="AniosServicio_Representante" ColumnName="AniosServicio_Representante" />
-                <ScalarProperty Name="CargoTrabajo_Representante" ColumnName="CargoTrabajo_Representante" />
-                <ScalarProperty Name="TelefonoTrabajo_Representante" ColumnName="TelefonoTrabajo_Representante" />
-                <ScalarProperty Name="DireccionTrabajo_Representante" ColumnName="DireccionTrabajo_Representante" />
-                <ScalarProperty Name="EmpresaTrabajo_Representante" ColumnName="EmpresaTrabajo_Representante" />
-                <ScalarProperty Name="IdCatalogoFichaInst_Representante" ColumnName="IdCatalogoFichaInst_Representante" />
-                <ScalarProperty Name="IdCatalogoPAREN_Representante" ColumnName="IdCatalogoPAREN_Representante" />
-                <ScalarProperty Name="Sector_Representante" ColumnName="Sector_Representante" />
-                <ScalarProperty Name="IdParroquia_Representante" ColumnName="IdParroquia_Representante" />
-                <ScalarProperty Name="IdCiudad_Representante" ColumnName="IdCiudad_Representante" />
-                <ScalarProperty Name="IdProvincia_Representante" ColumnName="IdProvincia_Representante" />
-                <ScalarProperty Name="Cod_Region_Representante" ColumnName="Cod_Region_Representante" />
-                <ScalarProperty Name="IdPais_Representante" ColumnName="IdPais_Representante" />
-                <ScalarProperty Name="AsisteCentroCristiano_Representante" ColumnName="AsisteCentroCristiano_Representante" />
-                <ScalarProperty Name="IdEstadoCivil_Representante" ColumnName="IdEstadoCivil_Representante" />
-                <ScalarProperty Name="IdReligion_Representante" ColumnName="IdReligion_Representante" />
-                <ScalarProperty Name="IdGrupoEtnico_Representante" ColumnName="IdGrupoEtnico_Representante" />
-                <ScalarProperty Name="NumeroCarnetConadis_Representante" ColumnName="NumeroCarnetConadis_Representante" />
-                <ScalarProperty Name="PorcentajeDiscapacidad_Representante" ColumnName="PorcentajeDiscapacidad_Representante" />
-                <ScalarProperty Name="CodCatalogoCONADIS_Representante" ColumnName="CodCatalogoCONADIS_Representante" />
-                <ScalarProperty Name="FechaNacimiento_Representante" ColumnName="FechaNacimiento_Representante" />
-                <ScalarProperty Name="Sexo_Representante" ColumnName="Sexo_Representante" />
-                <ScalarProperty Name="Correo_Representante" ColumnName="Correo_Representante" />
-                <ScalarProperty Name="Celular_Representante" ColumnName="Celular_Representante" />
-                <ScalarProperty Name="Telefono_Representante" ColumnName="Telefono_Representante" />
-                <ScalarProperty Name="Direccion_Representante" ColumnName="Direccion_Representante" />
-                <ScalarProperty Name="RazonSocial_Representante" ColumnName="RazonSocial_Representante" />
-                <ScalarProperty Name="NombreCompleto_Representante" ColumnName="NombreCompleto_Representante" />
-                <ScalarProperty Name="Apellidos_Representante" ColumnName="Apellidos_Representante" />
-                <ScalarProperty Name="Nombres_Representante" ColumnName="Nombres_Representante" />
-                <ScalarProperty Name="CedulaRuc_Representante" ColumnName="CedulaRuc_Representante" />
-                <ScalarProperty Name="IdTipoDocumento_Representante" ColumnName="IdTipoDocumento_Representante" />
-                <ScalarProperty Name="Naturaleza_Representante" ColumnName="Naturaleza_Representante" />
-                <ScalarProperty Name="IdProfesion_Madre" ColumnName="IdProfesion_Madre" />
-                <ScalarProperty Name="EstaFallecido_Madre" ColumnName="EstaFallecido_Madre" />
-                <ScalarProperty Name="CasaPropia_Madre" ColumnName="CasaPropia_Madre" />
-                <ScalarProperty Name="AnioVehiculo_Madre" ColumnName="AnioVehiculo_Madre" />
-                <ScalarProperty Name="Modelo_Madre" ColumnName="Modelo_Madre" />
-                <ScalarProperty Name="Marca_Madre" ColumnName="Marca_Madre" />
-                <ScalarProperty Name="VehiculoPropio_Madre" ColumnName="VehiculoPropio_Madre" />
-                <ScalarProperty Name="IngresoMensual_Madre" ColumnName="IngresoMensual_Madre" />
-                <ScalarProperty Name="AniosServicio_Madre" ColumnName="AniosServicio_Madre" />
-                <ScalarProperty Name="CargoTrabajo_Madre" ColumnName="CargoTrabajo_Madre" />
-                <ScalarProperty Name="TelefonoTrabajo_Madre" ColumnName="TelefonoTrabajo_Madre" />
-                <ScalarProperty Name="DireccionTrabajo_Madre" ColumnName="DireccionTrabajo_Madre" />
-                <ScalarProperty Name="EmpresaTrabajo_Madre" ColumnName="EmpresaTrabajo_Madre" />
-                <ScalarProperty Name="IdCatalogoFichaInst_Madre" ColumnName="IdCatalogoFichaInst_Madre" />
-                <ScalarProperty Name="IdCatalogoPAREN_Madre" ColumnName="IdCatalogoPAREN_Madre" />
-                <ScalarProperty Name="Sector_Madre" ColumnName="Sector_Madre" />
-                <ScalarProperty Name="IdParroquia_Madre" ColumnName="IdParroquia_Madre" />
-                <ScalarProperty Name="IdCiudad_Madre" ColumnName="IdCiudad_Madre" />
-                <ScalarProperty Name="IdProvincia_Madre" ColumnName="IdProvincia_Madre" />
-                <ScalarProperty Name="Cod_Region_Madre" ColumnName="Cod_Region_Madre" />
-                <ScalarProperty Name="IdPais_Madre" ColumnName="IdPais_Madre" />
-                <ScalarProperty Name="AsisteCentroCristiano_Madre" ColumnName="AsisteCentroCristiano_Madre" />
-                <ScalarProperty Name="IdEstadoCivil_Madre" ColumnName="IdEstadoCivil_Madre" />
-                <ScalarProperty Name="IdReligion_Madre" ColumnName="IdReligion_Madre" />
-                <ScalarProperty Name="IdGrupoEtnico_Madre" ColumnName="IdGrupoEtnico_Madre" />
-                <ScalarProperty Name="NumeroCarnetConadis_Madre" ColumnName="NumeroCarnetConadis_Madre" />
-                <ScalarProperty Name="PorcentajeDiscapacidad_Madre" ColumnName="PorcentajeDiscapacidad_Madre" />
-                <ScalarProperty Name="CodCatalogoCONADIS_Madre" ColumnName="CodCatalogoCONADIS_Madre" />
-                <ScalarProperty Name="FechaNacimiento_Madre" ColumnName="FechaNacimiento_Madre" />
-                <ScalarProperty Name="Sexo_Madre" ColumnName="Sexo_Madre" />
-                <ScalarProperty Name="Correo_Madre" ColumnName="Correo_Madre" />
-                <ScalarProperty Name="Celular_Madre" ColumnName="Celular_Madre" />
-                <ScalarProperty Name="Telefono_Madre" ColumnName="Telefono_Madre" />
-                <ScalarProperty Name="Direccion_Madre" ColumnName="Direccion_Madre" />
-                <ScalarProperty Name="RazonSocial_Madre" ColumnName="RazonSocial_Madre" />
-                <ScalarProperty Name="NombreCompleto_Madre" ColumnName="NombreCompleto_Madre" />
-                <ScalarProperty Name="Apellidos_Madre" ColumnName="Apellidos_Madre" />
-                <ScalarProperty Name="Nombres_Madre" ColumnName="Nombres_Madre" />
-                <ScalarProperty Name="CedulaRuc_Madre" ColumnName="CedulaRuc_Madre" />
-                <ScalarProperty Name="IdTipoDocumento_Madre" ColumnName="IdTipoDocumento_Madre" />
-                <ScalarProperty Name="Naturaleza_Madre" ColumnName="Naturaleza_Madre" />
-                <ScalarProperty Name="IdProfesion_Padre" ColumnName="IdProfesion_Padre" />
-                <ScalarProperty Name="EstaFallecido_Padre" ColumnName="EstaFallecido_Padre" />
-                <ScalarProperty Name="CasaPropia_Padre" ColumnName="CasaPropia_Padre" />
-                <ScalarProperty Name="AnioVehiculo_Padre" ColumnName="AnioVehiculo_Padre" />
-                <ScalarProperty Name="Modelo_Padre" ColumnName="Modelo_Padre" />
-                <ScalarProperty Name="Marca_Padre" ColumnName="Marca_Padre" />
-                <ScalarProperty Name="VehiculoPropio_Padre" ColumnName="VehiculoPropio_Padre" />
-                <ScalarProperty Name="IngresoMensual_Padre" ColumnName="IngresoMensual_Padre" />
-                <ScalarProperty Name="AniosServicio_Padre" ColumnName="AniosServicio_Padre" />
-                <ScalarProperty Name="CargoTrabajo_Padre" ColumnName="CargoTrabajo_Padre" />
-                <ScalarProperty Name="TelefonoTrabajo_Padre" ColumnName="TelefonoTrabajo_Padre" />
-                <ScalarProperty Name="DireccionTrabajo_Padre" ColumnName="DireccionTrabajo_Padre" />
-                <ScalarProperty Name="EmpresaTrabajo_Padre" ColumnName="EmpresaTrabajo_Padre" />
-                <ScalarProperty Name="IdCatalogoFichaInst_Padre" ColumnName="IdCatalogoFichaInst_Padre" />
-                <ScalarProperty Name="IdCatalogoPAREN_Padre" ColumnName="IdCatalogoPAREN_Padre" />
-                <ScalarProperty Name="Sector_Padre" ColumnName="Sector_Padre" />
-                <ScalarProperty Name="IdParroquia_Padre" ColumnName="IdParroquia_Padre" />
-                <ScalarProperty Name="IdCiudad_Padre" ColumnName="IdCiudad_Padre" />
-                <ScalarProperty Name="IdProvincia_Padre" ColumnName="IdProvincia_Padre" />
-                <ScalarProperty Name="Cod_Region_Padre" ColumnName="Cod_Region_Padre" />
-                <ScalarProperty Name="IdPais_Padre" ColumnName="IdPais_Padre" />
-                <ScalarProperty Name="AsisteCentroCristiano_Padre" ColumnName="AsisteCentroCristiano_Padre" />
-                <ScalarProperty Name="IdEstadoCivil_Padre" ColumnName="IdEstadoCivil_Padre" />
-                <ScalarProperty Name="IdReligion_Padre" ColumnName="IdReligion_Padre" />
-                <ScalarProperty Name="IdGrupoEtnico_Padre" ColumnName="IdGrupoEtnico_Padre" />
-                <ScalarProperty Name="NumeroCarnetConadis_Padre" ColumnName="NumeroCarnetConadis_Padre" />
-                <ScalarProperty Name="PorcentajeDiscapacidad_Padre" ColumnName="PorcentajeDiscapacidad_Padre" />
-                <ScalarProperty Name="CodCatalogoCONADIS_Padre" ColumnName="CodCatalogoCONADIS_Padre" />
-                <ScalarProperty Name="FechaNacimiento_Padre" ColumnName="FechaNacimiento_Padre" />
-                <ScalarProperty Name="Sexo_Padre" ColumnName="Sexo_Padre" />
-                <ScalarProperty Name="Correo_Padre" ColumnName="Correo_Padre" />
-                <ScalarProperty Name="Celular_Padre" ColumnName="Celular_Padre" />
-                <ScalarProperty Name="Telefono_Padre" ColumnName="Telefono_Padre" />
-                <ScalarProperty Name="Direccion_Padre" ColumnName="Direccion_Padre" />
-                <ScalarProperty Name="RazonSocial_Padre" ColumnName="RazonSocial_Padre" />
-                <ScalarProperty Name="NombreCompleto_Padre" ColumnName="NombreCompleto_Padre" />
-                <ScalarProperty Name="Apellidos_Padre" ColumnName="Apellidos_Padre" />
-                <ScalarProperty Name="Nombres_Padre" ColumnName="Nombres_Padre" />
-                <ScalarProperty Name="CedulaRuc_Padre" ColumnName="CedulaRuc_Padre" />
-                <ScalarProperty Name="IdTipoDocumento_Padre" ColumnName="IdTipoDocumento_Padre" />
-                <ScalarProperty Name="Naturaleza_Padre" ColumnName="Naturaleza_Padre" />
-                <ScalarProperty Name="OtroFinanciamiento_Aspirante" ColumnName="OtroFinanciamiento_Aspirante" />
-                <ScalarProperty Name="OtroInformacionInst_Aspirante" ColumnName="OtroInformacionInst_Aspirante" />
-                <ScalarProperty Name="OtroMotivoIngreso_Aspirante" ColumnName="OtroMotivoIngreso_Aspirante" />
-                <ScalarProperty Name="IdCatalogoFichaVive_Aspirante" ColumnName="IdCatalogoFichaVive_Aspirante" />
-                <ScalarProperty Name="IdCatalogoFichaFinanc_Aspirante" ColumnName="IdCatalogoFichaFinanc_Aspirante" />
-                <ScalarProperty Name="IdCatalogoFichaInst_Aspirante" ColumnName="IdCatalogoFichaInst_Aspirante" />
-                <ScalarProperty Name="IdCatalogoFichaMotivo_Aspirante" ColumnName="IdCatalogoFichaMotivo_Aspirante" />
-                <ScalarProperty Name="CantidadHermanos" ColumnName="CantidadHermanos" />
-                <ScalarProperty Name="TieneHermanos_Aspirante" ColumnName="TieneHermanos_Aspirante" />
-                <ScalarProperty Name="TieneElectricidad_Aspirante" ColumnName="TieneElectricidad_Aspirante" />
-                <ScalarProperty Name="IdCatalogoFichaAgua_Aspirante" ColumnName="IdCatalogoFichaAgua_Aspirante" />
-                <ScalarProperty Name="IdCatalogoFichaViv_Aspirante" ColumnName="IdCatalogoFichaViv_Aspirante" />
-                <ScalarProperty Name="IdCatalogoFichaTipoViv_Aspirante" ColumnName="IdCatalogoFichaTipoViv_Aspirante" />
-                <ScalarProperty Name="FechaIngreso_Aspirante" ColumnName="FechaIngreso_Aspirante" />
-                <ScalarProperty Name="Sector_Aspirante" ColumnName="Sector_Aspirante" />
-                <ScalarProperty Name="IdParroquia_Aspirante" ColumnName="IdParroquia_Aspirante" />
-                <ScalarProperty Name="IdCiudad_Aspirante" ColumnName="IdCiudad_Aspirante" />
-                <ScalarProperty Name="IdProvincia_Aspirante" ColumnName="IdProvincia_Aspirante" />
-                <ScalarProperty Name="Cod_Region_Aspirante" ColumnName="Cod_Region_Aspirante" />
-                <ScalarProperty Name="IdPais_Aspirante" ColumnName="IdPais_Aspirante" />
-                <ScalarProperty Name="LugarNacimiento_Aspirante" ColumnName="LugarNacimiento_Aspirante" />
-                <ScalarProperty Name="AsisteCentroCristiano_Aspirante" ColumnName="AsisteCentroCristiano_Aspirante" />
-                <ScalarProperty Name="IdReligion_Aspirante" ColumnName="IdReligion_Aspirante" />
-                <ScalarProperty Name="IdGrupoEtnico_Aspirante" ColumnName="IdGrupoEtnico_Aspirante" />
-                <ScalarProperty Name="NumeroCarnetConadis_Aspirante" ColumnName="NumeroCarnetConadis_Aspirante" />
-                <ScalarProperty Name="PorcentajeDiscapacidad_Aspirante" ColumnName="PorcentajeDiscapacidad_Aspirante" />
-                <ScalarProperty Name="CodCatalogoCONADIS_Aspirante" ColumnName="CodCatalogoCONADIS_Aspirante" />
-                <ScalarProperty Name="CodCatalogoSangre_Aspirante" ColumnName="CodCatalogoSangre_Aspirante" />
-                <ScalarProperty Name="FechaNacimiento_Aspirante" ColumnName="FechaNacimiento_Aspirante" />
-                <ScalarProperty Name="Sexo_Aspirante" ColumnName="Sexo_Aspirante" />
-                <ScalarProperty Name="Correo_Aspirante" ColumnName="Correo_Aspirante" />
-                <ScalarProperty Name="Celular_Aspirante" ColumnName="Celular_Aspirante" />
-                <ScalarProperty Name="Telefono_Aspirante" ColumnName="Telefono_Aspirante" />
-                <ScalarProperty Name="Direccion_Aspirante" ColumnName="Direccion_Aspirante" />
-                <ScalarProperty Name="NombreCompleto_Aspirante" ColumnName="NombreCompleto_Aspirante" />
-                <ScalarProperty Name="Apellidos_Aspirante" ColumnName="Apellidos_Aspirante" />
-                <ScalarProperty Name="Nombres_Aspirante" ColumnName="Nombres_Aspirante" />
-                <ScalarProperty Name="CedulaRuc_Aspirante" ColumnName="CedulaRuc_Aspirante" />
-                <ScalarProperty Name="IdTipoDocumento_Aspirante" ColumnName="IdTipoDocumento_Aspirante" />
-                <ScalarProperty Name="Naturaleza_Aspirante" ColumnName="Naturaleza_Aspirante" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
-                <ScalarProperty Name="IdAdmision" ColumnName="IdAdmision" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="aca_Alumno">
             <EntityTypeMapping TypeName="ModelAcademico.aca_Alumno">
               <MappingFragment StoreEntitySet="aca_Alumno">
@@ -15854,6 +15684,221 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
                 <ScalarProperty Name="Codigo" ColumnName="Codigo" />
                 <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_Admision">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_Admision">
+              <MappingFragment StoreEntitySet="aca_Admision">
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdCatalogoESTADM" ColumnName="IdCatalogoESTADM" />
+                <ScalarProperty Name="OtroGasto" ColumnName="OtroGasto" />
+                <ScalarProperty Name="GastoPrestamo" ColumnName="GastoPrestamo" />
+                <ScalarProperty Name="GastoArriendo" ColumnName="GastoArriendo" />
+                <ScalarProperty Name="GastoSalud" ColumnName="GastoSalud" />
+                <ScalarProperty Name="GastoServicioBasico" ColumnName="GastoServicioBasico" />
+                <ScalarProperty Name="GastoEducacion" ColumnName="GastoEducacion" />
+                <ScalarProperty Name="GastoAlimentacion" ColumnName="GastoAlimentacion" />
+                <ScalarProperty Name="OtroIngresoMadre" ColumnName="OtroIngresoMadre" />
+                <ScalarProperty Name="OtroIngresoPadre" ColumnName="OtroIngresoPadre" />
+                <ScalarProperty Name="SueldoMadre" ColumnName="SueldoMadre" />
+                <ScalarProperty Name="SueldoPadre" ColumnName="SueldoPadre" />
+                <ScalarProperty Name="IdParroquia_Representante_Fact" ColumnName="IdParroquia_Representante_Fact" />
+                <ScalarProperty Name="IdCiudad_Representante_Fact" ColumnName="IdCiudad_Representante_Fact" />
+                <ScalarProperty Name="IdTipoCredito_Representante" ColumnName="IdTipoCredito_Representante" />
+                <ScalarProperty Name="Idtipo_cliente_Representante" ColumnName="Idtipo_cliente_Representante" />
+                <ScalarProperty Name="SeFactura_Representante" ColumnName="SeFactura_Representante" />
+                <ScalarProperty Name="IdProfesion_Representante" ColumnName="IdProfesion_Representante" />
+                <ScalarProperty Name="EstaFallecido_Representante" ColumnName="EstaFallecido_Representante" />
+                <ScalarProperty Name="CasaPropia_Representante" ColumnName="CasaPropia_Representante" />
+                <ScalarProperty Name="AnioVehiculo_Representante" ColumnName="AnioVehiculo_Representante" />
+                <ScalarProperty Name="Modelo_Representante" ColumnName="Modelo_Representante" />
+                <ScalarProperty Name="Marca_Representante" ColumnName="Marca_Representante" />
+                <ScalarProperty Name="VehiculoPropio_Representante" ColumnName="VehiculoPropio_Representante" />
+                <ScalarProperty Name="IngresoMensual_Representante" ColumnName="IngresoMensual_Representante" />
+                <ScalarProperty Name="AniosServicio_Representante" ColumnName="AniosServicio_Representante" />
+                <ScalarProperty Name="CargoTrabajo_Representante" ColumnName="CargoTrabajo_Representante" />
+                <ScalarProperty Name="TelefonoTrabajo_Representante" ColumnName="TelefonoTrabajo_Representante" />
+                <ScalarProperty Name="DireccionTrabajo_Representante" ColumnName="DireccionTrabajo_Representante" />
+                <ScalarProperty Name="EmpresaTrabajo_Representante" ColumnName="EmpresaTrabajo_Representante" />
+                <ScalarProperty Name="IdCatalogoFichaInst_Representante" ColumnName="IdCatalogoFichaInst_Representante" />
+                <ScalarProperty Name="IdCatalogoPAREN_Representante" ColumnName="IdCatalogoPAREN_Representante" />
+                <ScalarProperty Name="Sector_Representante" ColumnName="Sector_Representante" />
+                <ScalarProperty Name="IdParroquia_Representante" ColumnName="IdParroquia_Representante" />
+                <ScalarProperty Name="IdCiudad_Representante" ColumnName="IdCiudad_Representante" />
+                <ScalarProperty Name="IdProvincia_Representante" ColumnName="IdProvincia_Representante" />
+                <ScalarProperty Name="Cod_Region_Representante" ColumnName="Cod_Region_Representante" />
+                <ScalarProperty Name="IdPais_Representante" ColumnName="IdPais_Representante" />
+                <ScalarProperty Name="AsisteCentroCristiano_Representante" ColumnName="AsisteCentroCristiano_Representante" />
+                <ScalarProperty Name="IdEstadoCivil_Representante" ColumnName="IdEstadoCivil_Representante" />
+                <ScalarProperty Name="IdReligion_Representante" ColumnName="IdReligion_Representante" />
+                <ScalarProperty Name="IdGrupoEtnico_Representante" ColumnName="IdGrupoEtnico_Representante" />
+                <ScalarProperty Name="NumeroCarnetConadis_Representante" ColumnName="NumeroCarnetConadis_Representante" />
+                <ScalarProperty Name="PorcentajeDiscapacidad_Representante" ColumnName="PorcentajeDiscapacidad_Representante" />
+                <ScalarProperty Name="CodCatalogoCONADIS_Representante" ColumnName="CodCatalogoCONADIS_Representante" />
+                <ScalarProperty Name="FechaNacimiento_Representante" ColumnName="FechaNacimiento_Representante" />
+                <ScalarProperty Name="Sexo_Representante" ColumnName="Sexo_Representante" />
+                <ScalarProperty Name="Correo_Representante" ColumnName="Correo_Representante" />
+                <ScalarProperty Name="Celular_Representante" ColumnName="Celular_Representante" />
+                <ScalarProperty Name="Telefono_Representante" ColumnName="Telefono_Representante" />
+                <ScalarProperty Name="Direccion_Representante" ColumnName="Direccion_Representante" />
+                <ScalarProperty Name="RazonSocial_Representante" ColumnName="RazonSocial_Representante" />
+                <ScalarProperty Name="NombreCompleto_Representante" ColumnName="NombreCompleto_Representante" />
+                <ScalarProperty Name="Apellidos_Representante" ColumnName="Apellidos_Representante" />
+                <ScalarProperty Name="Nombres_Representante" ColumnName="Nombres_Representante" />
+                <ScalarProperty Name="CedulaRuc_Representante" ColumnName="CedulaRuc_Representante" />
+                <ScalarProperty Name="IdTipoDocumento_Representante" ColumnName="IdTipoDocumento_Representante" />
+                <ScalarProperty Name="Naturaleza_Representante" ColumnName="Naturaleza_Representante" />
+                <ScalarProperty Name="IdParroquia_Madre_Fact" ColumnName="IdParroquia_Madre_Fact" />
+                <ScalarProperty Name="IdCiudad_Madre_Fact" ColumnName="IdCiudad_Madre_Fact" />
+                <ScalarProperty Name="IdTipoCredito_Madre" ColumnName="IdTipoCredito_Madre" />
+                <ScalarProperty Name="Idtipo_cliente_Madre" ColumnName="Idtipo_cliente_Madre" />
+                <ScalarProperty Name="SeFactura_Madre" ColumnName="SeFactura_Madre" />
+                <ScalarProperty Name="IdProfesion_Madre" ColumnName="IdProfesion_Madre" />
+                <ScalarProperty Name="EstaFallecido_Madre" ColumnName="EstaFallecido_Madre" />
+                <ScalarProperty Name="CasaPropia_Madre" ColumnName="CasaPropia_Madre" />
+                <ScalarProperty Name="AnioVehiculo_Madre" ColumnName="AnioVehiculo_Madre" />
+                <ScalarProperty Name="Modelo_Madre" ColumnName="Modelo_Madre" />
+                <ScalarProperty Name="Marca_Madre" ColumnName="Marca_Madre" />
+                <ScalarProperty Name="VehiculoPropio_Madre" ColumnName="VehiculoPropio_Madre" />
+                <ScalarProperty Name="IngresoMensual_Madre" ColumnName="IngresoMensual_Madre" />
+                <ScalarProperty Name="AniosServicio_Madre" ColumnName="AniosServicio_Madre" />
+                <ScalarProperty Name="CargoTrabajo_Madre" ColumnName="CargoTrabajo_Madre" />
+                <ScalarProperty Name="TelefonoTrabajo_Madre" ColumnName="TelefonoTrabajo_Madre" />
+                <ScalarProperty Name="DireccionTrabajo_Madre" ColumnName="DireccionTrabajo_Madre" />
+                <ScalarProperty Name="EmpresaTrabajo_Madre" ColumnName="EmpresaTrabajo_Madre" />
+                <ScalarProperty Name="IdCatalogoFichaInst_Madre" ColumnName="IdCatalogoFichaInst_Madre" />
+                <ScalarProperty Name="IdCatalogoPAREN_Madre" ColumnName="IdCatalogoPAREN_Madre" />
+                <ScalarProperty Name="Sector_Madre" ColumnName="Sector_Madre" />
+                <ScalarProperty Name="IdParroquia_Madre" ColumnName="IdParroquia_Madre" />
+                <ScalarProperty Name="IdCiudad_Madre" ColumnName="IdCiudad_Madre" />
+                <ScalarProperty Name="IdProvincia_Madre" ColumnName="IdProvincia_Madre" />
+                <ScalarProperty Name="Cod_Region_Madre" ColumnName="Cod_Region_Madre" />
+                <ScalarProperty Name="IdPais_Madre" ColumnName="IdPais_Madre" />
+                <ScalarProperty Name="AsisteCentroCristiano_Madre" ColumnName="AsisteCentroCristiano_Madre" />
+                <ScalarProperty Name="IdEstadoCivil_Madre" ColumnName="IdEstadoCivil_Madre" />
+                <ScalarProperty Name="IdReligion_Madre" ColumnName="IdReligion_Madre" />
+                <ScalarProperty Name="IdGrupoEtnico_Madre" ColumnName="IdGrupoEtnico_Madre" />
+                <ScalarProperty Name="NumeroCarnetConadis_Madre" ColumnName="NumeroCarnetConadis_Madre" />
+                <ScalarProperty Name="PorcentajeDiscapacidad_Madre" ColumnName="PorcentajeDiscapacidad_Madre" />
+                <ScalarProperty Name="CodCatalogoCONADIS_Madre" ColumnName="CodCatalogoCONADIS_Madre" />
+                <ScalarProperty Name="FechaNacimiento_Madre" ColumnName="FechaNacimiento_Madre" />
+                <ScalarProperty Name="Sexo_Madre" ColumnName="Sexo_Madre" />
+                <ScalarProperty Name="Correo_Madre" ColumnName="Correo_Madre" />
+                <ScalarProperty Name="Celular_Madre" ColumnName="Celular_Madre" />
+                <ScalarProperty Name="Telefono_Madre" ColumnName="Telefono_Madre" />
+                <ScalarProperty Name="Direccion_Madre" ColumnName="Direccion_Madre" />
+                <ScalarProperty Name="RazonSocial_Madre" ColumnName="RazonSocial_Madre" />
+                <ScalarProperty Name="NombreCompleto_Madre" ColumnName="NombreCompleto_Madre" />
+                <ScalarProperty Name="Apellidos_Madre" ColumnName="Apellidos_Madre" />
+                <ScalarProperty Name="Nombres_Madre" ColumnName="Nombres_Madre" />
+                <ScalarProperty Name="CedulaRuc_Madre" ColumnName="CedulaRuc_Madre" />
+                <ScalarProperty Name="IdTipoDocumento_Madre" ColumnName="IdTipoDocumento_Madre" />
+                <ScalarProperty Name="Naturaleza_Madre" ColumnName="Naturaleza_Madre" />
+                <ScalarProperty Name="IdParroquia_Padre_Fact" ColumnName="IdParroquia_Padre_Fact" />
+                <ScalarProperty Name="IdCiudad_Padre_Fact" ColumnName="IdCiudad_Padre_Fact" />
+                <ScalarProperty Name="IdTipoCredito_Padre" ColumnName="IdTipoCredito_Padre" />
+                <ScalarProperty Name="Idtipo_cliente_Padre" ColumnName="Idtipo_cliente_Padre" />
+                <ScalarProperty Name="SeFactura_Padre" ColumnName="SeFactura_Padre" />
+                <ScalarProperty Name="IdProfesion_Padre" ColumnName="IdProfesion_Padre" />
+                <ScalarProperty Name="EstaFallecido_Padre" ColumnName="EstaFallecido_Padre" />
+                <ScalarProperty Name="CasaPropia_Padre" ColumnName="CasaPropia_Padre" />
+                <ScalarProperty Name="AnioVehiculo_Padre" ColumnName="AnioVehiculo_Padre" />
+                <ScalarProperty Name="Modelo_Padre" ColumnName="Modelo_Padre" />
+                <ScalarProperty Name="Marca_Padre" ColumnName="Marca_Padre" />
+                <ScalarProperty Name="VehiculoPropio_Padre" ColumnName="VehiculoPropio_Padre" />
+                <ScalarProperty Name="IngresoMensual_Padre" ColumnName="IngresoMensual_Padre" />
+                <ScalarProperty Name="AniosServicio_Padre" ColumnName="AniosServicio_Padre" />
+                <ScalarProperty Name="CargoTrabajo_Padre" ColumnName="CargoTrabajo_Padre" />
+                <ScalarProperty Name="TelefonoTrabajo_Padre" ColumnName="TelefonoTrabajo_Padre" />
+                <ScalarProperty Name="DireccionTrabajo_Padre" ColumnName="DireccionTrabajo_Padre" />
+                <ScalarProperty Name="EmpresaTrabajo_Padre" ColumnName="EmpresaTrabajo_Padre" />
+                <ScalarProperty Name="IdCatalogoFichaInst_Padre" ColumnName="IdCatalogoFichaInst_Padre" />
+                <ScalarProperty Name="IdCatalogoPAREN_Padre" ColumnName="IdCatalogoPAREN_Padre" />
+                <ScalarProperty Name="Sector_Padre" ColumnName="Sector_Padre" />
+                <ScalarProperty Name="IdParroquia_Padre" ColumnName="IdParroquia_Padre" />
+                <ScalarProperty Name="IdCiudad_Padre" ColumnName="IdCiudad_Padre" />
+                <ScalarProperty Name="IdProvincia_Padre" ColumnName="IdProvincia_Padre" />
+                <ScalarProperty Name="Cod_Region_Padre" ColumnName="Cod_Region_Padre" />
+                <ScalarProperty Name="IdPais_Padre" ColumnName="IdPais_Padre" />
+                <ScalarProperty Name="AsisteCentroCristiano_Padre" ColumnName="AsisteCentroCristiano_Padre" />
+                <ScalarProperty Name="IdEstadoCivil_Padre" ColumnName="IdEstadoCivil_Padre" />
+                <ScalarProperty Name="IdReligion_Padre" ColumnName="IdReligion_Padre" />
+                <ScalarProperty Name="IdGrupoEtnico_Padre" ColumnName="IdGrupoEtnico_Padre" />
+                <ScalarProperty Name="NumeroCarnetConadis_Padre" ColumnName="NumeroCarnetConadis_Padre" />
+                <ScalarProperty Name="PorcentajeDiscapacidad_Padre" ColumnName="PorcentajeDiscapacidad_Padre" />
+                <ScalarProperty Name="CodCatalogoCONADIS_Padre" ColumnName="CodCatalogoCONADIS_Padre" />
+                <ScalarProperty Name="FechaNacimiento_Padre" ColumnName="FechaNacimiento_Padre" />
+                <ScalarProperty Name="Sexo_Padre" ColumnName="Sexo_Padre" />
+                <ScalarProperty Name="Correo_Padre" ColumnName="Correo_Padre" />
+                <ScalarProperty Name="Celular_Padre" ColumnName="Celular_Padre" />
+                <ScalarProperty Name="Telefono_Padre" ColumnName="Telefono_Padre" />
+                <ScalarProperty Name="Direccion_Padre" ColumnName="Direccion_Padre" />
+                <ScalarProperty Name="RazonSocial_Padre" ColumnName="RazonSocial_Padre" />
+                <ScalarProperty Name="NombreCompleto_Padre" ColumnName="NombreCompleto_Padre" />
+                <ScalarProperty Name="Apellidos_Padre" ColumnName="Apellidos_Padre" />
+                <ScalarProperty Name="Nombres_Padre" ColumnName="Nombres_Padre" />
+                <ScalarProperty Name="CedulaRuc_Padre" ColumnName="CedulaRuc_Padre" />
+                <ScalarProperty Name="IdTipoDocumento_Padre" ColumnName="IdTipoDocumento_Padre" />
+                <ScalarProperty Name="Naturaleza_Padre" ColumnName="Naturaleza_Padre" />
+                <ScalarProperty Name="AceptaTerminos" ColumnName="AceptaTerminos" />
+                <ScalarProperty Name="Dificultad_Matematicas" ColumnName="Dificultad_Matematicas" />
+                <ScalarProperty Name="Dificultad_Escritura" ColumnName="Dificultad_Escritura" />
+                <ScalarProperty Name="Dificultad_Lectura" ColumnName="Dificultad_Lectura" />
+                <ScalarProperty Name="OtroFinanciamiento_Aspirante" ColumnName="OtroFinanciamiento_Aspirante" />
+                <ScalarProperty Name="OtroInformacionInst_Aspirante" ColumnName="OtroInformacionInst_Aspirante" />
+                <ScalarProperty Name="OtroMotivoIngreso_Aspirante" ColumnName="OtroMotivoIngreso_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaVive_Aspirante" ColumnName="IdCatalogoFichaVive_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaFinanc_Aspirante" ColumnName="IdCatalogoFichaFinanc_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaInst_Aspirante" ColumnName="IdCatalogoFichaInst_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaMotivo_Aspirante" ColumnName="IdCatalogoFichaMotivo_Aspirante" />
+                <ScalarProperty Name="CantidadHermanos" ColumnName="CantidadHermanos" />
+                <ScalarProperty Name="TieneHermanos_Aspirante" ColumnName="TieneHermanos_Aspirante" />
+                <ScalarProperty Name="TieneElectricidad_Aspirante" ColumnName="TieneElectricidad_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaAgua_Aspirante" ColumnName="IdCatalogoFichaAgua_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaViv_Aspirante" ColumnName="IdCatalogoFichaViv_Aspirante" />
+                <ScalarProperty Name="IdCatalogoFichaTipoViv_Aspirante" ColumnName="IdCatalogoFichaTipoViv_Aspirante" />
+                <ScalarProperty Name="FechaIngreso_Aspirante" ColumnName="FechaIngreso_Aspirante" />
+                <ScalarProperty Name="Sector_Aspirante" ColumnName="Sector_Aspirante" />
+                <ScalarProperty Name="IdParroquia_Aspirante" ColumnName="IdParroquia_Aspirante" />
+                <ScalarProperty Name="IdCiudad_Aspirante" ColumnName="IdCiudad_Aspirante" />
+                <ScalarProperty Name="IdProvincia_Aspirante" ColumnName="IdProvincia_Aspirante" />
+                <ScalarProperty Name="Cod_Region_Aspirante" ColumnName="Cod_Region_Aspirante" />
+                <ScalarProperty Name="IdPais_Aspirante" ColumnName="IdPais_Aspirante" />
+                <ScalarProperty Name="LugarNacimiento_Aspirante" ColumnName="LugarNacimiento_Aspirante" />
+                <ScalarProperty Name="AsisteCentroCristiano_Aspirante" ColumnName="AsisteCentroCristiano_Aspirante" />
+                <ScalarProperty Name="IdReligion_Aspirante" ColumnName="IdReligion_Aspirante" />
+                <ScalarProperty Name="IdGrupoEtnico_Aspirante" ColumnName="IdGrupoEtnico_Aspirante" />
+                <ScalarProperty Name="NumeroCarnetConadis_Aspirante" ColumnName="NumeroCarnetConadis_Aspirante" />
+                <ScalarProperty Name="PorcentajeDiscapacidad_Aspirante" ColumnName="PorcentajeDiscapacidad_Aspirante" />
+                <ScalarProperty Name="CodCatalogoCONADIS_Aspirante" ColumnName="CodCatalogoCONADIS_Aspirante" />
+                <ScalarProperty Name="CodCatalogoSangre_Aspirante" ColumnName="CodCatalogoSangre_Aspirante" />
+                <ScalarProperty Name="FechaNacimiento_Aspirante" ColumnName="FechaNacimiento_Aspirante" />
+                <ScalarProperty Name="Sexo_Aspirante" ColumnName="Sexo_Aspirante" />
+                <ScalarProperty Name="Correo_Aspirante" ColumnName="Correo_Aspirante" />
+                <ScalarProperty Name="Celular_Aspirante" ColumnName="Celular_Aspirante" />
+                <ScalarProperty Name="Telefono_Aspirante" ColumnName="Telefono_Aspirante" />
+                <ScalarProperty Name="Direccion_Aspirante" ColumnName="Direccion_Aspirante" />
+                <ScalarProperty Name="NombreCompleto_Aspirante" ColumnName="NombreCompleto_Aspirante" />
+                <ScalarProperty Name="Apellidos_Aspirante" ColumnName="Apellidos_Aspirante" />
+                <ScalarProperty Name="Nombres_Aspirante" ColumnName="Nombres_Aspirante" />
+                <ScalarProperty Name="CedulaRuc_Aspirante" ColumnName="CedulaRuc_Aspirante" />
+                <ScalarProperty Name="IdTipoDocumento_Aspirante" ColumnName="IdTipoDocumento_Aspirante" />
+                <ScalarProperty Name="Naturaleza_Aspirante" ColumnName="Naturaleza_Aspirante" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAdmision" ColumnName="IdAdmision" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

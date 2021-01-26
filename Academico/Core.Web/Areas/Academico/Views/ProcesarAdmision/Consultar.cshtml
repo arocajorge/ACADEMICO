@@ -60,9 +60,9 @@
             </div>
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="info_persona.CedulaAspirante">Número documento*</label>
-                    @Html.TextBoxFor(q => q.CedulaAspirante, new { @class = "form-control", @id = "CedulaAspirante", @disabled = "disabled" })
-                    @Html.ValidationMessageFor(q => q.CedulaAspirante, "", new { @class = "text-danger" })
+                    <label for="info_persona.Celular_Aspirante">Número documento*</label>
+                    @Html.TextBoxFor(q => q.CedulaRuc_Aspirante, new { @class = "form-control", @id = "CedulaRuc_Aspirante", @disabled = "disabled" })
+                    @Html.ValidationMessageFor(q => q.CedulaRuc_Aspirante, "", new { @class = "text-danger" })
                     <label id="error_documento" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                 </div>
             </div>
@@ -269,9 +269,9 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="pe_CedulaAspirante">Cedula Aspirante</label>
-                                @Html.TextBoxFor(q => q.CedulaAspirante, new { @class = "form-control", @id = "CedulaAspirante" })
-                                @Html.ValidationMessageFor(q => q.CedulaAspirante, "", new { @class = "text-danger" })
+                                <label for="pe_Celular_Aspirante">Celular Aspirante</label>
+                                @Html.TextBoxFor(q => q.Celular_Aspirante, new { @class = "form-control", @id = "Celular_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.Celular_Aspirante, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -428,7 +428,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="info_persona.CedulaAspirante">Número documento*</label>
+                                <label for="info_persona.Celular_Aspirante">Número documento*</label>
                                 @Html.TextBoxFor(q => q.CedulaRuc_Padre, new { @class = "form-control", @id = "CedulaRuc_Padre" })
                                 @Html.ValidationMessageFor(q => q.CedulaRuc_Padre, "", new { @class = "text-danger" })
                                 <label id="error_documento_padre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
@@ -558,7 +558,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="pe_CedulaAspirante">Celular</label>
+                                <label for="pe_Celular_Aspirante">Celular</label>
                                 @Html.TextBoxFor(q => q.Celular_Padre, new { @class = "form-control", @id = "Celular_Padre" })
                                 @Html.ValidationMessageFor(q => q.Celular_Padre, "", new { @class = "text-danger" })
                             </div>
@@ -850,7 +850,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="info_persona.CedulaAspirante">Número documento*</label>
+                                <label for="info_persona.Celular_Aspirante">Número documento*</label>
                                 @Html.TextBoxFor(q => q.Celular_Madre, new { @class = "form-control", @id = "Celular_Madre" })
                                 @Html.ValidationMessageFor(q => q.Celular_Madre, "", new { @class = "text-danger" })
                                 <label id="error_documento_madre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
@@ -980,7 +980,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label for="pe_CedulaAspirante">Celular</label>
+                                <label for="pe_Celular_Aspirante">Celular</label>
                                 @Html.TextBoxFor(q => q.Celular_Madre, new { @class = "form-control", @id = "Celular_Madre" })
                                 @Html.ValidationMessageFor(q => q.Celular_Madre, "", new { @class = "text-danger" })
                             </div>
@@ -1338,7 +1338,7 @@
             mostrar_cliente_padre();
             mostrar_cliente_madre();
         })
-        //$("#CedulaAspirante").blur(function () {
+        //$("#Celular_Aspirante").blur(function () {
         //    Validar_cedula_ruc();
         //});
 
@@ -1463,7 +1463,7 @@
         }
 
         function get_info_x_num_cedula() {
-            var cedula = $("#CedulaAspirante").val();
+            var cedula = $("#Celular_Aspirante").val();
             var tipo_doc = $("#IdTipoDocumento_Aspirante").val();
 
             if (cedula == null) {
@@ -1474,7 +1474,7 @@
             if (tipo_doc == "RUC") {
                 if (cedula.length != 13) {
                     alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
-                    $("#CedulaAspirante").val("");
+                    $("#Celular_Aspirante").val("");
                     vaciar_campos_persona();
                     return;
                 }
@@ -1482,7 +1482,7 @@
                 if (tipo_doc == "CED") {
                     if (cedula.length != 10) {
                         alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
-                        $("#CedulaAspirante").val("");
+                        $("#Celular_Aspirante").val("");
                         vaciar_campos_persona();
                         return;
                     }
@@ -1490,7 +1490,7 @@
 
             var datos = {
                 IdEmpresa: $("#IdEmpresa").val(),
-                CedulaAspirante: cedula
+                Celular_Aspirante: cedula
             }
             $.ajax({
                 type: 'POST',
@@ -1814,7 +1814,7 @@
             var datos = {
                 naturaleza: $("#Naturaleza_Aspirante").val(),
                 tipo_documento: $("#IdTipoDocumento_Aspirante").val(),
-                cedula_ruc: $("#CedulaAspirante").val(),
+                cedula_ruc: $("#Celular_Aspirante").val(),
             }
 
             $.ajax({

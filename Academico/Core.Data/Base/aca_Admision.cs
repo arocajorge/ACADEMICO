@@ -61,6 +61,10 @@ namespace Core.Data.Base
         public string OtroMotivoIngreso_Aspirante { get; set; }
         public string OtroInformacionInst_Aspirante { get; set; }
         public string OtroFinanciamiento_Aspirante { get; set; }
+        public bool Dificultad_Lectura { get; set; }
+        public bool Dificultad_Escritura { get; set; }
+        public bool Dificultad_Matematicas { get; set; }
+        public bool AceptaTerminos { get; set; }
         public string Naturaleza_Padre { get; set; }
         public string IdTipoDocumento_Padre { get; set; }
         public string CedulaRuc_Padre { get; set; }
@@ -102,6 +106,11 @@ namespace Core.Data.Base
         public bool CasaPropia_Padre { get; set; }
         public bool EstaFallecido_Padre { get; set; }
         public Nullable<int> IdProfesion_Padre { get; set; }
+        public bool SeFactura_Padre { get; set; }
+        public Nullable<int> Idtipo_cliente_Padre { get; set; }
+        public string IdTipoCredito_Padre { get; set; }
+        public string IdCiudad_Padre_Fact { get; set; }
+        public string IdParroquia_Padre_Fact { get; set; }
         public string Naturaleza_Madre { get; set; }
         public string IdTipoDocumento_Madre { get; set; }
         public string CedulaRuc_Madre { get; set; }
@@ -143,6 +152,11 @@ namespace Core.Data.Base
         public bool CasaPropia_Madre { get; set; }
         public bool EstaFallecido_Madre { get; set; }
         public Nullable<int> IdProfesion_Madre { get; set; }
+        public bool SeFactura_Madre { get; set; }
+        public Nullable<int> Idtipo_cliente_Madre { get; set; }
+        public string IdTipoCredito_Madre { get; set; }
+        public string IdCiudad_Madre_Fact { get; set; }
+        public string IdParroquia_Madre_Fact { get; set; }
         public string Naturaleza_Representante { get; set; }
         public string IdTipoDocumento_Representante { get; set; }
         public string CedulaRuc_Representante { get; set; }
@@ -184,6 +198,11 @@ namespace Core.Data.Base
         public bool CasaPropia_Representante { get; set; }
         public bool EstaFallecido_Representante { get; set; }
         public Nullable<int> IdProfesion_Representante { get; set; }
+        public bool SeFactura_Representante { get; set; }
+        public Nullable<int> Idtipo_cliente_Representante { get; set; }
+        public string IdTipoCredito_Representante { get; set; }
+        public string IdCiudad_Representante_Fact { get; set; }
+        public string IdParroquia_Representante_Fact { get; set; }
         public double SueldoPadre { get; set; }
         public double SueldoMadre { get; set; }
         public double OtroIngresoPadre { get; set; }
@@ -204,10 +223,6 @@ namespace Core.Data.Base
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
-        public bool Dificultad_Lectura { get; set; }
-        public bool Dificultad_Escritura { get; set; }
-        public bool Dificultad_Matematicas { get; set; }
-        public bool AceptaTerminos { get; set; }
     
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Catalogo aca_Catalogo { get; set; }
