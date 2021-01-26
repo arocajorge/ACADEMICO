@@ -421,7 +421,7 @@ namespace Core.Data.Academico
                             FechaDesde = Convert.ToDateTime(reader_PorFacturar["FechaDesde"]),
                             FechaProntoPago = Convert.ToDateTime(reader_PorFacturar["FechaProntoPago"]),
                             IdTerminoPago = string.IsNullOrEmpty(reader_PorFacturar["IdTerminoPago"].ToString()) ? null : reader_PorFacturar["IdTerminoPago"].ToString(),
-                            IdCliente = Convert.ToInt32(reader_PorFacturar["IdCliente"]),
+                            IdCliente = Convert.ToDecimal(reader_PorFacturar["IdCliente"]),
                             IdEmpresa_rol = string.IsNullOrEmpty(reader_PorFacturar["IdEmpresa_rol"].ToString()) ? (int?)null : Convert.ToInt32(reader_PorFacturar["IdEmpresa_rol"]),
                             IdEmpleado = string.IsNullOrEmpty(reader_PorFacturar["IdEmpleado"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader_PorFacturar["IdEmpleado"]),
                         });
@@ -469,7 +469,7 @@ namespace Core.Data.Academico
                             IdPeriodo = Convert.ToInt32(reader_FacturaMasiva["IdPeriodo"]),
                             IdAlumno = Convert.ToDecimal(reader_FacturaMasiva["IdAlumno"]),
                             pe_nombreCompleto = string.IsNullOrEmpty(reader_FacturaMasiva["pe_nombreCompleto"].ToString()) ? null : reader_FacturaMasiva["pe_nombreCompleto"].ToString(),
-                            Total = Convert.ToDecimal(reader_FacturaMasiva["NumeroCarnetConadis"]),
+                            Total = Convert.ToDecimal(reader_FacturaMasiva["Total"]),
                             IdSucursal = string.IsNullOrEmpty(reader_FacturaMasiva["IdSucursal"].ToString()) ? (int?)null : Convert.ToInt32(reader_FacturaMasiva["IdSucursal"]),
                             IdBodega = string.IsNullOrEmpty(reader_FacturaMasiva["IdBodega"].ToString()) ? (int?)null : Convert.ToInt32(reader_FacturaMasiva["IdBodega"]),
                             IdCbteVta = string.IsNullOrEmpty(reader_FacturaMasiva["IdCbteVta"].ToString()) ? (int?)null : Convert.ToInt32(reader_FacturaMasiva["IdCbteVta"]),

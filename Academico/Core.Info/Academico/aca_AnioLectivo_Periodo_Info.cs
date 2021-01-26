@@ -38,11 +38,11 @@ namespace Core.Info.Academico
         public string NomPeriodo { get; set; }
         public List<aca_Matricula_Rubro_Info> lst_det_fact_masiva { get; set; }
         public int Orden { get; set; }
-        public int IdSede { get; set; }
-        public int IdJornada { get; set; }
-        public int IdNivel { get; set; }
-        public int IdCurso { get; set; }
-        public int IdParalelo { get; set; }
+        public Nullable<int> IdSede { get; set; }
+        public Nullable<int> IdJornada { get; set; }
+        public Nullable<int> IdNivel { get; set; }
+        public Nullable<int> IdCurso { get; set; }
+        public Nullable<int> IdParalelo { get; set; }
         #endregion
     }
 }

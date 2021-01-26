@@ -184,7 +184,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
             model.IdParalelo = 0;
 
             //model.lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo);
-            model.lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(model.IdEmpresa, model.IdAnio, model.IdPeriodo, model.IdSede, model.IdJornada, model.IdNivel, model.IdCurso, model.IdParalelo);
+            model.lst_det_fact_masiva = bus_MatRubro.getList_FactMasiva(model.IdEmpresa, model.IdAnio, model.IdPeriodo, model.IdSede??0, model.IdJornada??0, model.IdNivel??0, model.IdCurso??0, model.IdParalelo??0);
             Lista_FactMasivaDet.set_list(model.lst_det_fact_masiva, model.IdTransaccionSession);
             ViewBag.MostrarBoton = true;
             if (model.Procesado==true)

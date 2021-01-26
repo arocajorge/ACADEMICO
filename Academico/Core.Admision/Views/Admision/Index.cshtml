@@ -339,6 +339,11 @@
                             @*<input data-target="#input-group-datepicker" name="EstaFallecido_Padre" id="EstaFallecido_Padre" class="show-code input input--switch border" type="checkbox">*@
                             @Html.ValidationMessageFor(q => q.EstaFallecido_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Se factura</div>
+                            @Html.CheckBoxFor(m => m.SeFactura_Padre, new { @class = "show-code input input--switch border", @id = "SeFactura_Padre" })
+                            @Html.ValidationMessageFor(q => q.SeFactura_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Nombres</div>
                             @Html.TextBoxFor(q => q.Nombres_Padre, new { @class = "input w-full border flex-1", @id = "Nombres_Padre" })
@@ -562,6 +567,11 @@
                             @Html.CheckBoxFor(m => m.EstaFallecido_Madre, new { @class = "show-code input input--switch border", @id = "EstaFallecido_Madre" })
                             @*<input data-target="#input-group-datepicker" name="EstaFallecido_Madre" id="EstaFallecido_Madre" class="show-code input input--switch border" type="checkbox">*@
                             @Html.ValidationMessageFor(q => q.EstaFallecido_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                        </div>
+                        <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="mb-2">Se factura</div>
+                            @Html.CheckBoxFor(m => m.SeFactura_Madre, new { @class = "show-code input input--switch border", @id = "SeFactura_Madre" })
+                            @Html.ValidationMessageFor(q => q.SeFactura_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
                         <div class="intro-y col-span-12 sm:col-span-6">
                             <div class="mb-2">Nombres</div>
@@ -806,6 +816,11 @@
                                 @Html.CheckBoxFor(m => m.EstaFallecido_Representante, new { @class = "show-code input input--switch border", @id = "EstaFallecido_Representante" })
                                 @*<input data-target="#input-group-datepicker" name="EstaFallecido_Representante" id="EstaFallecido_Representante" class="show-code input input--switch border" type="checkbox">*@
                                 @Html.ValidationMessageFor(q => q.EstaFallecido_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Se factura</div>
+                                @Html.CheckBoxFor(m => m.SeFactura_Representante, new { @class = "show-code input input--switch border", @id = "SeFactura_Representante" })
+                                @Html.ValidationMessageFor(q => q.SeFactura_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-6">
                                 <div class="mb-2">Nombres</div>

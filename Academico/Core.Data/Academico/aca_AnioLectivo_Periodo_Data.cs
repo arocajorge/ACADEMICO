@@ -321,24 +321,37 @@ namespace Core.Data.Academico
                     var ResultValue = command.ExecuteScalar();
                     if( ResultValue == null)
                     {
-                        using (EntitiesAcademico Context = new EntitiesAcademico())
-                        {
-                            aca_AnioLectivo_Periodo Entity = Context.aca_AnioLectivo_Periodo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPeriodo == info.IdPeriodo);
-                            if (Entity == null)
-                                return false;
+                        command.CommandText = "update aca_AnioLectivo_Periodo set "
+                         + " IdUsuarioModificacion = " + info.IdUsuarioModificacion
+                         + " FechaModificacion = " + DateTime.Now
+                         + " IdSucursal = " + info.IdSucursal.ToString()
+                         + " IdPuntoVta = " + info.IdPuntoVta.ToString()
+                         + " Procesado = " + true
+                         + " FechaProceso = " + DateTime.Now
+                         + " TotalAlumnos = " + info.lst_det_fact_masiva.Count()
+                         + " TotalValorFacturado = " + info.lst_det_fact_masiva.Sum(q => q.Total)
+                         + " WHERE IdEmpresa = " + info.IdEmpresa.ToString() + " and IdAnio = " + info.IdAnio.ToString() + " and IdPeriodo = " + info.IdPeriodo.ToString();
+                        command.ExecuteNonQuery();
 
-                            Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
-                            Entity.FechaModificacion = DateTime.Now;
-                            Entity.IdSucursal = info.IdSucursal;
-                            Entity.IdPuntoVta = info.IdPuntoVta;
-                            //Entity.Procesado = true;
-                            Entity.FechaProceso = DateTime.Now;
-                            Entity.TotalAlumnos = info.lst_det_fact_masiva.Count();
-                            Entity.TotalValorFacturado = info.lst_det_fact_masiva.Sum(q => q.Total);
 
-                            Context.SaveChanges();
-                            //command.ExecuteNonQuery();
-                        }
+                        //using (EntitiesAcademico Context = new EntitiesAcademico())
+                        //{
+                        //    aca_AnioLectivo_Periodo Entity = Context.aca_AnioLectivo_Periodo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPeriodo == info.IdPeriodo);
+                        //    if (Entity == null)
+                        //        return false;
+
+                        //    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                        //    Entity.FechaModificacion = DateTime.Now;
+                        //    Entity.IdSucursal = info.IdSucursal;
+                        //    Entity.IdPuntoVta = info.IdPuntoVta;
+                        //    //Entity.Procesado = true;
+                        //    Entity.FechaProceso = DateTime.Now;
+                        //    Entity.TotalAlumnos = info.lst_det_fact_masiva.Count();
+                        //    Entity.TotalValorFacturado = info.lst_det_fact_masiva.Sum(q => q.Total);
+
+                        //    Context.SaveChanges();
+                        //    //command.ExecuteNonQuery();
+                        //}
                     }
                 }
 
