@@ -25,6 +25,19 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_Admision_Info> GetList_Academico(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                return odata.getList_Academico(IdEmpresa, IdSede, IdAnio);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool GuardarDB(aca_Admision_Info info)
         {
             try
@@ -86,6 +99,18 @@ namespace Core.Bus.Academico
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public bool ModificarEstadoEnProceso(aca_Admision_Info info)
+        {
+            try
+            {
+                return odata.modificarEstadoEnProceso(info);
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }

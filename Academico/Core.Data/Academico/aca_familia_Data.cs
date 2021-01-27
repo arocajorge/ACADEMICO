@@ -334,10 +334,16 @@ namespace Core.Data.Academico
                             pe_nombre = string.IsNullOrEmpty(reader["pe_nombre"].ToString()) ? null : reader["pe_nombre"].ToString(),
                             pe_apellido = string.IsNullOrEmpty(reader["pe_apellido"].ToString()) ? null : reader["pe_apellido"].ToString(),
                             pe_nombreCompleto = reader["pe_nombreCompleto"].ToString(),
+                            pe_razonSocial = string.IsNullOrEmpty(reader["pe_razonSocial"].ToString()) ? null : reader["pe_razonSocial"].ToString(),
                             pe_sexo = string.IsNullOrEmpty(reader["pe_sexo"].ToString()) ? null : reader["pe_sexo"].ToString(),
                             IdEstadoCivil = string.IsNullOrEmpty(reader["IdEstadoCivil"].ToString()) ? null : reader["IdEstadoCivil"].ToString(),
                             pe_fechaNacimiento = string.IsNullOrEmpty(reader["pe_fechaNacimiento"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["pe_fechaNacimiento"]),
                             EstaFallecido = Convert.ToBoolean(reader["EstaFallecido"]),
+                            CodCatalogoCONADIS = string.IsNullOrEmpty(reader["CodCatalogoCONADIS"].ToString()) ? null : reader["CodCatalogoCONADIS"].ToString(),
+                            NumeroCarnetConadis = string.IsNullOrEmpty(reader["NumeroCarnetConadis"].ToString()) ? null : reader["NumeroCarnetConadis"].ToString(),
+                            PorcentajeDiscapacidad = string.IsNullOrEmpty(reader["PorcentajeDiscapacidad"].ToString()) ? (double?)null : Convert.ToDouble(reader["CodCatalogoCONADIS"]),
+                            pe_telfono_Contacto = string.IsNullOrEmpty(reader["pe_telfono_Contacto"].ToString()) ? null : reader["pe_telfono_Contacto"].ToString(),
+                            IdProfesion = string.IsNullOrEmpty(reader["IdProfesion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion"]),
                             Estado = Convert.ToBoolean(reader["Estado"])
                         };
                     }
@@ -460,6 +466,7 @@ namespace Core.Data.Academico
                             IngresoMensual = string.IsNullOrEmpty(reader["IngresoMensual"].ToString()) ? (double?)null : Convert.ToDouble(reader["IngresoMensual"]),
                             VehiculoPropio = Convert.ToBoolean(reader["VehiculoPropio"]),
                             Marca = string.IsNullOrEmpty(reader["Marca"].ToString()) ? null : reader["Marca"].ToString(),
+                            AnioVehiculo = string.IsNullOrEmpty(reader["AnioVehiculo"].ToString()) ? (int?)null : Convert.ToInt32(reader["AnioVehiculo"]),
                             Modelo = string.IsNullOrEmpty(reader["Modelo"].ToString()) ? null : reader["Modelo"].ToString(),
                             CasaPropia = Convert.ToBoolean(reader["CasaPropia"]),
                             IdTipoDocumento = reader["IdTipoDocumento"].ToString(),
@@ -472,6 +479,13 @@ namespace Core.Data.Academico
                             IdEstadoCivil = string.IsNullOrEmpty(reader["IdEstadoCivil"].ToString()) ? null : reader["IdEstadoCivil"].ToString(),
                             pe_fechaNacimiento = string.IsNullOrEmpty(reader["pe_fechaNacimiento"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["pe_fechaNacimiento"]),
                             EstaFallecido = Convert.ToBoolean(reader["EstaFallecido"]),
+                            IdPais = string.IsNullOrEmpty(reader["IdPais"].ToString()) ? null : reader["IdPais"].ToString(),
+                            IdCiudad = string.IsNullOrEmpty(reader["IdCiudad"].ToString()) ? null : reader["IdCiudad"].ToString(),
+                            IdProvincia = string.IsNullOrEmpty(reader["IdProvincia"].ToString()) ? null : reader["IdProvincia"].ToString(),
+                            Cod_Region = string.IsNullOrEmpty(reader["Cod_Region"].ToString()) ? null : reader["Cod_Region"].ToString(),
+                            IdParroquia = string.IsNullOrEmpty(reader["IdParroquia"].ToString()) ? null : reader["IdParroquia"].ToString(),
+                            Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(), 
+                             
                             Estado = Convert.ToBoolean(reader["Estado"])
                         };
                     }

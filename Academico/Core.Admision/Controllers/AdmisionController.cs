@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Info.General;
@@ -38,6 +39,8 @@ namespace Core.Admision.Controllers
         tb_parroquia_Bus bus_parroquia = new tb_parroquia_Bus();
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
+        fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
+        fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -138,6 +141,21 @@ namespace Core.Admision.Controllers
                 FechaNacimiento_Representante = DateTime.Now,
                 IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO),
                 Representante="O",
+                Idtipo_cliente_Padre = 1,
+                Idtipo_cliente_Madre = 1,
+                Idtipo_cliente_Representante = 1,
+                IdCiudad_Padre_Fact = "09",
+                IdParroquia_Padre_Fact = "09",
+                IdTipoCredito_Padre = "CON",
+                IdCiudad_Madre_Fact = "09",
+                IdParroquia_Madre_Fact = "09",
+                IdTipoCredito_Madre = "CON",
+                IdCiudad_Representante_Fact = "09",
+                IdParroquia_Representante_Fact = "09",
+                IdTipoCredito_Representante = "CON",
+                SeFactura_Padre = false,
+                SeFactura_Madre = false,
+                SeFactura_Representante = false,
             };
 
             cargar_combos(model);
@@ -269,6 +287,11 @@ namespace Core.Admision.Controllers
             var lst_grupoetnico = bus_grupoetnico.GetList(false);
             lst_grupoetnico.Add(new tb_GrupoEtnico_Info { IdGrupoEtnico = 0, NomGrupoEtnico = "--- Seleccione ---" });
 
+            var lst_termino_pago = bus_termino_pago.get_list(false);
+            var lst_clientetipo = bus_clientetipo.get_list(model.IdEmpresa, false);
+            var lst_ciudad_factura = bus_ciudad.get_list("", false);
+            var lst_parroquia_factura = new List<tb_parroquia_Info>();
+
             var lst_parentesco = bus_aca_catalogo.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.PAREN), false);
             var lst_pais = bus_pais.get_list(false);
             lst_pais.Add(new tb_pais_Info { IdPais = "", Nombre = "--- Seleccione ---" });
@@ -305,6 +328,10 @@ namespace Core.Admision.Controllers
             ViewBag.lst_ing_institucion = lst_ing_institucion;
             ViewBag.lst_institucion = lst_institucion;
             ViewBag.lst_financiamiento = lst_financiamiento;
+            ViewBag.lst_termino_pago = lst_termino_pago;
+            ViewBag.lst_clientetipo = lst_clientetipo;
+            ViewBag.lst_ciudad_factura = lst_ciudad_factura;
+            ViewBag.lst_parroquia_factura = lst_parroquia_factura;
         }
 
         private bool validar(aca_Admision_Info info, ref string msg)
@@ -459,6 +486,11 @@ namespace Core.Admision.Controllers
                 info.AnioVehiculo_Representante = info.AnioVehiculo_Padre;
                 info.CasaPropia_Representante = info.CasaPropia_Padre;
                 info.EstaFallecido_Representante = info.EstaFallecido_Padre;
+                //info.SeFactura_Representante = info.SeFactura_Padre;
+                //info.Idtipo_cliente_Representante = info.Idtipo_cliente_Padre;
+                //info.IdTipoCredito_Representante = info.IdTipoCredito_Padre;
+                //info.IdCiudad_Representante_Fact = info.IdCiudad_Padre_Fact;
+                //info.IdParroquia_Representante_Fact = info.IdParroquia_Padre_Fact;
             }
             else if (info.Representante == "M")
             {
@@ -503,6 +535,11 @@ namespace Core.Admision.Controllers
                 info.AnioVehiculo_Representante = info.AnioVehiculo_Madre;
                 info.CasaPropia_Representante = info.CasaPropia_Madre;
                 info.EstaFallecido_Representante = info.EstaFallecido_Madre;
+                //info.SeFactura_Representante = info.SeFactura_Madre;
+                //info.Idtipo_cliente_Representante = info.Idtipo_cliente_Madre;
+                //info.IdTipoCredito_Representante = info.IdTipoDocumento_Madre;
+                //info.IdCiudad_Representante_Fact = info.IdCiudad_Madre_Fact;
+                //info.IdParroquia_Representante_Fact = info.IdParroquia_Madre_Fact;
             }
             else
             {
@@ -547,6 +584,11 @@ namespace Core.Admision.Controllers
                 info.AnioVehiculo_Representante = info.AnioVehiculo_Representante;
                 info.CasaPropia_Representante = info.CasaPropia_Representante;
                 info.EstaFallecido_Representante = info.EstaFallecido_Representante;
+                info.SeFactura_Representante = info.SeFactura_Representante;
+                info.Idtipo_cliente_Representante = info.Idtipo_cliente_Representante;
+                info.IdTipoCredito_Representante = info.IdTipoDocumento_Representante;
+                info.IdCiudad_Representante_Fact = info.IdCiudad_Representante_Fact;
+                info.IdParroquia_Representante_Fact = info.IdParroquia_Representante_Fact;
             }
 
             if (!string.IsNullOrEmpty(info.IdTipoDocumento_Aspirante) && !string.IsNullOrEmpty(info.Naturaleza_Aspirante) && !string.IsNullOrEmpty(info.CedulaRuc_Aspirante))

@@ -1,7 +1,7 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
     settings.Name = "IdAnio";
-    settings.CallbackRouteValues = new { Controller = "Admision", Action = "ComboBoxPartial_Anio", Area = "Academico" };    
+    settings.CallbackRouteValues = new { Controller = "ProcesarAdmision", Action = "ComboBoxPartial_Anio", Area = "Academico" };    
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdAnio", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);

@@ -1,7 +1,7 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
-    settings.Name = "IdPais_padre";
-    settings.CallbackRouteValues = new { Controller = "Alumno", Action = "ComboBoxPartial_Pais_padre", Area = "Academico" };    
+    settings.Name = "IdPais_Padre";
+    settings.CallbackRouteValues = new { Controller = "ProcesarAdmision", Action = "ComboBoxPartial_Pais_padre", Area = "Academico" };    
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdPais", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -12,5 +12,5 @@
     settings.Properties.TextField = "Nombre";
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { Cod_Region_padre.PerformCallback(); }";
+    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { Cod_Region_Padre.PerformCallback(); }";
 }).BindList(new Core.Bus.General.tb_pais_Bus().get_list(false)).Bind(Model.IdPais_Padre).GetHtml()

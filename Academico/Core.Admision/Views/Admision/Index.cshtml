@@ -123,6 +123,9 @@
                     @Html.HiddenFor(q => q.RepresentanteValido, new { @id = "RepresentanteValido" })
                     @Html.HiddenFor(q => q.IdCatalogoESTADM, new { @id = "IdCatalogoESTADM" })
                     @Html.HiddenFor(q => q.Representante, new { @id = "Representante" })
+                    @Html.HiddenFor(q => q.IdTipoCredito_Padre, new { @id = "IdTipoCredito_Padre" })
+                    @Html.HiddenFor(q => q.IdTipoCredito_Madre, new { @id = "IdTipoCredito_Madre" })
+                    @Html.HiddenFor(q => q.IdTipoCredito_Representante, new { @id = "IdTipoCredito_Representante" })
                     <div class="font-medium text-base">Datos de la admisión</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 sm:col-span-3">
@@ -333,13 +336,13 @@
                             @Html.ValidationMessageFor(q => q.CedulaRuc_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             <label id="error_documento_padre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                         </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="intro-y col-span-12 sm:col-span-1">
                             <div class="mb-2">Está fallecido</div>
                             @Html.CheckBoxFor(m => m.EstaFallecido_Padre, new { @class = "show-code input input--switch border", @id = "EstaFallecido_Padre" })
                             @*<input data-target="#input-group-datepicker" name="EstaFallecido_Padre" id="EstaFallecido_Padre" class="show-code input input--switch border" type="checkbox">*@
                             @Html.ValidationMessageFor(q => q.EstaFallecido_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="intro-y col-span-12 sm:col-span-1">
                             <div class="mb-2">Se factura</div>
                             @Html.CheckBoxFor(m => m.SeFactura_Padre, new { @class = "show-code input input--switch border", @id = "SeFactura_Padre" })
                             @Html.ValidationMessageFor(q => q.SeFactura_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
@@ -521,6 +524,29 @@
                             <div class="mb-2"></div>
                         </div>
                     </div>
+                    <div id="DatosFacturacionPadre">
+                        <div class="font-medium text-base">Datos de Facturaciòn</div>
+                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Tipo de cliente</div>
+                                @Html.DropDownListFor(q => q.Idtipo_cliente_Padre, new SelectList(ViewBag.lst_clientetipo, "Idtipo_cliente", "Descripcion_tip_cliente"), new { @class = "input w-full border flex-1", @id = "Idtipo_cliente_Padre" })
+                                @Html.ValidationMessageFor(q => q.Idtipo_cliente_Padre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Ciudad</div>
+                                @Html.DropDownListFor(q => q.IdCiudad_Padre_Fact, new SelectList(ViewBag.lst_ciudad_factura, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Padre_Fact" })
+                                @Html.ValidationMessageFor(q => q.IdCiudad_Padre_Fact, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Parroquia</div>
+                                @Html.DropDownListFor(q => q.IdParroquia_Padre_Fact, new SelectList(ViewBag.lst_parroquia_factura, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Padre_Fact" })
+                                @Html.ValidationMessageFor(q => q.IdParroquia_Padre_Fact, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-12">
+                                <div class="mb-2"></div>
+                            </div>
+                        </div> 
+                    </div>
                     <div class="font-medium text-base">Datos Conadis</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 sm:col-span-3">
@@ -562,13 +588,13 @@
                             @Html.TextBoxFor(q => q.CedulaRuc_Madre, new { @class = "input w-full border flex-1", @id = "CedulaRuc_Madre" })
                             <label id="error_documento_madre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                         </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="intro-y col-span-12 sm:col-span-1">
                             <div class="mb-2">Está fallecido</div>
                             @Html.CheckBoxFor(m => m.EstaFallecido_Madre, new { @class = "show-code input input--switch border", @id = "EstaFallecido_Madre" })
                             @*<input data-target="#input-group-datepicker" name="EstaFallecido_Madre" id="EstaFallecido_Madre" class="show-code input input--switch border" type="checkbox">*@
                             @Html.ValidationMessageFor(q => q.EstaFallecido_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
                         </div>
-                        <div class="intro-y col-span-12 sm:col-span-3">
+                        <div class="intro-y col-span-12 sm:col-span-1">
                             <div class="mb-2">Se factura</div>
                             @Html.CheckBoxFor(m => m.SeFactura_Madre, new { @class = "show-code input input--switch border", @id = "SeFactura_Madre" })
                             @Html.ValidationMessageFor(q => q.SeFactura_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
@@ -750,6 +776,29 @@
                             <div class="mb-2"></div>
                         </div>
                     </div>
+                    <div id="DatosFacturacionMadre">
+                        <div class="font-medium text-base">Datos de Facturaciòn</div>
+                        <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Tipo de cliente</div>
+                                @Html.DropDownListFor(q => q.Idtipo_cliente_Madre, new SelectList(ViewBag.lst_clientetipo, "Idtipo_cliente", "Descripcion_tip_cliente"), new { @class = "input w-full border flex-1", @id = "Idtipo_cliente_Madre" })
+                                @Html.ValidationMessageFor(q => q.Idtipo_cliente_Madre, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Ciudad</div>
+                                @Html.DropDownListFor(q => q.IdCiudad_Madre_Fact, new SelectList(ViewBag.lst_ciudad_factura, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Madre_Fact" })
+                                @Html.ValidationMessageFor(q => q.IdCiudad_Madre_Fact, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-3">
+                                <div class="mb-2">Parroquia</div>
+                                @Html.DropDownListFor(q => q.IdParroquia_Madre_Fact, new SelectList(ViewBag.lst_parroquia_factura, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Madre_Fact" })
+                                @Html.ValidationMessageFor(q => q.IdParroquia_Madre_Fact, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                            </div>
+                            <div class="intro-y col-span-12 sm:col-span-12">
+                                <div class="mb-2"></div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="font-medium text-base">Datos Conadis</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 sm:col-span-3">
@@ -776,7 +825,9 @@
                 <div class="px-5 sm:px-20 mt-10 pt-10 border-t border-gray-200 dark:border-dark-5" id="DatosRepresentante" hidden>
                     <div class="font-medium text-base">¿Quién es el representante?</div>
                     <div class="intro-y col-span-12 sm:col-span-3">
-                        <div class="mb-2"></div>
+                        <div class="mb-2">
+                            <div id="RepresentanteParensco"></div>
+                        </div>
                     </div>
                     <div class="preview">
                         <div class="flex flex-wrap">
@@ -811,13 +862,13 @@
                                 @Html.TextBoxFor(q => q.CedulaRuc_Representante, new { @class = "input w-full border flex-1", @id = "CedulaRuc_Representante" })
                                 <label id="error_documento_representante" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                             </div>
-                            <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="intro-y col-span-12 sm:col-span-1">
                                 <div class="mb-2">Está fallecido</div>
                                 @Html.CheckBoxFor(m => m.EstaFallecido_Representante, new { @class = "show-code input input--switch border", @id = "EstaFallecido_Representante" })
                                 @*<input data-target="#input-group-datepicker" name="EstaFallecido_Representante" id="EstaFallecido_Representante" class="show-code input input--switch border" type="checkbox">*@
                                 @Html.ValidationMessageFor(q => q.EstaFallecido_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
                             </div>
-                            <div class="intro-y col-span-12 sm:col-span-3">
+                            <div class="intro-y col-span-12 sm:col-span-1">
                                 <div class="mb-2">Se factura</div>
                                 @Html.CheckBoxFor(m => m.SeFactura_Representante, new { @class = "show-code input input--switch border", @id = "SeFactura_Representante" })
                                 @Html.ValidationMessageFor(q => q.SeFactura_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
@@ -1000,6 +1051,29 @@
                             </div>
                             <div class="intro-y col-span-12 sm:col-span-12">
                                 <div class="mb-2"></div>
+                            </div>
+                        </div>
+                        <div id="DatosFacturacionRepresentante">
+                            <div class="font-medium text-base">Datos de Facturaciòn</div>
+                            <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
+                                <div class="intro-y col-span-12 sm:col-span-3">
+                                    <div class="mb-2">Tipo de cliente</div>
+                                    @Html.DropDownListFor(q => q.Idtipo_cliente_Representante, new SelectList(ViewBag.lst_clientetipo, "Idtipo_cliente", "Descripcion_tip_cliente"), new { @class = "input w-full border flex-1", @id = "Idtipo_cliente_Representante" })
+                                    @Html.ValidationMessageFor(q => q.Idtipo_cliente_Representante, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                                </div>
+                                <div class="intro-y col-span-12 sm:col-span-3">
+                                    <div class="mb-2">Ciudad</div>
+                                    @Html.DropDownListFor(q => q.IdCiudad_Representante_Fact, new SelectList(ViewBag.lst_ciudad_factura, "IdCiudad", "Descripcion_Ciudad"), new { @class = "input w-full border flex-1", @id = "IdCiudad_Representante_Fact" })
+                                    @Html.ValidationMessageFor(q => q.IdCiudad_Representante_Fact, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                                </div>
+                                <div class="intro-y col-span-12 sm:col-span-3">
+                                    <div class="mb-2">Parroquia</div>
+                                    @Html.DropDownListFor(q => q.IdParroquia_Representante_Fact, new SelectList(ViewBag.lst_parroquia_factura, "IdParroquia", "nom_parroquia"), new { @class = "input w-full border flex-1", @id = "IdParroquia_Representante_Fact" })
+                                    @Html.ValidationMessageFor(q => q.IdParroquia_Representante_Fact, "", new { @class = "pristine-error text-theme-6 mt-2" })
+                                </div>
+                                <div class="intro-y col-span-12 sm:col-span-12">
+                                    <div class="mb-2"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="font-medium text-base">Datos Conadis</div>
@@ -1325,11 +1399,19 @@
     mostrar_VehiculoPadre();
     mostrar_VehiculoMadre();
     mostrar_VehiculoRepresentante();
+
+    mostrar_Vehiculo_Padre();
+    mostrar_Vehiculo_Madre();
+    mostrar_Vehiculo_Representante();
+
+    CargarParroquia_Facturacion_Padre();
+    CargarParroquia_Facturacion_Madre();
+    CargarParroquia_Facturacion_Representante();
 })
 
     $("#IdSede").change(function () {
     CargarJornada();
-});
+    });
     $("#IdJornada").change(function () {
         CargarNivel();
     });
@@ -1478,4 +1560,24 @@
         mostrar_VehiculoRepresentante();
     });
 
+    $("#SeFactura_Padre").change(function () {
+        MostrarFacturacion_Padre();
+    });
+    $("#SeFactura_Madre").change(function () {
+        MostrarFacturacion_Madre();
+    });
+    $("#SeFactura_Representante").change(function () {
+        MostrarFacturacion_Representante();
+    });
+
+    $("#IdCiudad_Padre_Fact").change(function () {
+        CargarParroquia_Facturacion_Padre();
+    });
+    $("#IdCiudad_Madre_Fact").change(function () {
+        CargarParroquia_Facturacion_Madre();
+    });
+    $("#IdCiudad_Representante_Fact").change(function () {
+        CargarParroquia_Facturacion_Representante();
+    });
+    
 </script>

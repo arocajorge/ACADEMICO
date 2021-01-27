@@ -1,7 +1,7 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
-    settings.Name = "IdProvincia";
-    settings.CallbackRouteValues = new { Controller = "Alumno", Action = "ComboBoxPartial_Provincia", Area = "Academico" };
+    settings.Name = "IdProvincia_Aspirante";
+    settings.CallbackRouteValues = new { Controller = "ProcesarAdmision", Action = "ComboBoxPartial_Provincia", Area = "Academico" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdProvincia", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -12,6 +12,6 @@
     settings.Properties.TextField = "Descripcion_Prov";
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdPais'] = IdPais.GetValue(); e.customArgs['Cod_Region'] = Cod_Region.GetValue(); }";
-    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdCiudad.PerformCallback();}";
+    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdPais'] = IdPais_Aspirante.GetValue(); e.customArgs['Cod_Region'] = Cod_Region_Aspirante.GetValue(); }";
+    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdCiudad_Aspirante.PerformCallback();}";
 }).BindList(new Core.Bus.General.tb_provincia_Bus().get_list(Model.IdPais_Aspirante, false)).Bind(Model.IdProvincia_Aspirante).GetHtml()

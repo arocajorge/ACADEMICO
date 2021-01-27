@@ -373,6 +373,18 @@ function ValidarDatosRegistro_Padre() {
         }
     }
 
+    if ($("#SeFactura_Padre").prop('checked') == true) {
+        if ($("#Idtipo_cliente_Padre").val() == "0") {
+            mensaje += "tipo de cliente, ";
+        }
+        if ($("#IdCiudad_Padre_Fact").val() == "") {
+            mensaje += "ciudad para facturacion, ";
+        }
+        if ($("#IdParroquia_Padre_Fact").val() == "") {
+            mensaje += "parroquia para facturacion, ";
+        }
+    }
+
     IrAlInicio();
     if (mensaje == "") {
         $("#MensajeError").html("");
@@ -508,6 +520,18 @@ function ValidarDatosRegistro_Madre() {
         }
         if ($("#NumeroCarnetConadis_Madre").val() == "") {
             mensaje += "número de carnet de Conadis, ";
+        }
+    }
+
+    if ($("#SeFactura_Madre").prop('checked') == true) {
+        if ($("#Idtipo_cliente_Madre").val() == "0") {
+            mensaje += "tipo de cliente, ";
+        }
+        if ($("#IdCiudad_Madre_Fact").val() == "") {
+            mensaje += "ciudad para facturacion, ";
+        }
+        if ($("#IdParroquia_Madre_Fact").val() == "") {
+            mensaje += "parroquia para facturacion, ";
         }
     }
 
@@ -649,6 +673,18 @@ function ValidarDatosRegistro_Representante() {
             if ($("#NumeroCarnetConadis_Representante").val() == "") {
                 mensaje += "número de carnet de Conadis, ";
             }
+        }
+    }
+
+    if ($("#SeFactura_Representante").prop('checked') == true) {
+        if ($("#Idtipo_cliente_Representante").val() == "0") {
+            mensaje += "tipo de cliente, ";
+        }
+        if ($("#IdCiudad_Representante_Fact").val() == "") {
+            mensaje += "ciudad para facturacion, ";
+        }
+        if ($("#IdParroquia_Representante_Fact").val() == "") {
+            mensaje += "parroquia para facturacion, ";
         }
     }
 
@@ -1408,18 +1444,21 @@ function CargarParroquia_Representante() {
 };
 
 function PadreRepresentante() {
+    $("#RepresentanteParensco").html("Padre");
     $("#DivDatosRepresentante").hide();
     $("#Representante").val("P");
     $("#RepresentanteValido").val("1");
 }
 
 function MadreRepresentante() {
+    $("#RepresentanteParensco").html("Madre");
     $("#DivDatosRepresentante").hide();
     $("#Representante").val("M");
     $("#RepresentanteValido").val("1");
 }
 
 function OtroRepresentante() {
+    $("#RepresentanteParensco").html("Otro");
     $("#DivDatosRepresentante").show();
     $("#Representante").val("O");
 }
@@ -1499,6 +1538,48 @@ function mostrar_VehiculoRepresentante() {
         $("#MarcaVehiculoRepresentante").hide();
         $("#ModeloVehiculoRepresentante").hide();
         $("#AnioVehiculoRepresentante").hide();
+    }
+}
+
+function MostrarFacturacion_Padre() {
+    if ($("#SeFactura_Padre").prop('checked') == true) {
+        $("#SeFactura_Madre").prop('checked', false);
+        $("#SeFactura_Representante").prop('checked', false);
+        MostrarFacturacion_Madre();
+        MostrarFacturacion_Representante();
+
+        $("#DatosFacturacionPadre").show();
+    }
+    else {
+        $("#DatosFacturacionPadre").hide();
+    }
+}
+
+function MostrarFacturacion_Madre () {
+    if ($("#SeFactura_Madre").prop('checked') == true) {
+        $("#SeFactura_Padre").prop('checked', false);
+        $("#SeFactura_Representante").prop('checked', false);
+        MostrarFacturacion_Padre();
+        MostrarFacturacion_Representante();
+
+        $("#DatosFacturacionMadre").show();
+    }
+    else {
+        $("#DatosFacturacionMadre").hide();
+    }
+}
+
+function MostrarFacturacion_Representante() {
+    if ($("#SeFactura_Representante").prop('checked') == true) {
+        $("#SeFactura_Madre").prop('checked', false);
+        $("#SeFactura_Padre").prop('checked', false);
+        MostrarFacturacion_Madre();
+        MostrarFacturacion_Padre();
+
+        $("#DatosFacturacionRepresentante").show();
+    }
+    else {
+        $("#DatosFacturacionRepresentante").hide();
     }
 }
 
@@ -2096,4 +2177,85 @@ function ValidarArchivos() {
         $("#MensajeError").html(mensaje);
         $("#DivError").show();
     }
+};
+
+function CargarParroquia_Facturacion_Padre() {
+    var url_sistema = GetPathServer();
+    $("#IdParroquia_Padre_Fact").empty();
+    var datos = {
+        IdCiudad: $("#IdCiudad_Padre_Fact").val(),
+    }
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        url: url_sistema + '/Admision/CargarParroquia',
+        async: false,
+        bDeferRender: true,
+        bProcessing: true,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            if (data != "") {
+                $.each(data, function (i, row) {
+                    $("#IdParroquia_Padre_Fact").append("<option value=" + row.IdParroquia + ">" + row.nom_parroquia + "</option>");
+                });
+            }
+        },
+        error: function (error) {
+        }
+    });
+};
+
+function CargarParroquia_Facturacion_Madre() {
+    var url_sistema = GetPathServer();
+    $("#IdParroquia_Madre_Fact").empty();
+    var datos = {
+        IdCiudad: $("#IdCiudad_Madre_Fact").val(),
+    }
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        url: url_sistema + '/Admision/CargarParroquia',
+        async: false,
+        bDeferRender: true,
+        bProcessing: true,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            if (data != "") {
+                $.each(data, function (i, row) {
+                    $("#IdParroquia_Madre_Fact").append("<option value=" + row.IdParroquia + ">" + row.nom_parroquia + "</option>");
+                });
+            }
+        },
+        error: function (error) {
+        }
+    });
+};
+
+function CargarParroquia_Facturacion_Representante() {
+    var url_sistema = GetPathServer();
+    $("#IdParroquia_Representante_Fact").empty();
+    var datos = {
+        IdCiudad: $("#IdCiudad_Representante_Fact").val(),
+    }
+    $.ajax({
+        type: 'POST',
+        data: JSON.stringify(datos),
+        url: url_sistema + '/Admision/CargarParroquia',
+        async: false,
+        bDeferRender: true,
+        bProcessing: true,
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        success: function (data) {
+            if (data != "") {
+                $.each(data, function (i, row) {
+                    $("#IdParroquia_Representante_Fact").append("<option value=" + row.IdParroquia + ">" + row.nom_parroquia + "</option>");
+                });
+            }
+        },
+        error: function (error) {
+        }
+    });
 };

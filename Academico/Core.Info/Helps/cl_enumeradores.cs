@@ -258,8 +258,8 @@ namespace Core.Info.Helps
         public enum eTipoCatalogoAdmision
         {
             REGISTRADO = 47,
-            ADMITIDO = 48,
-            RECHAZADO = 49,
+            ENPROCESO = 48,
+            PREMATRICULADO = 49,
         }
         public enum eTipoCatalogoSocioEconomico
         {

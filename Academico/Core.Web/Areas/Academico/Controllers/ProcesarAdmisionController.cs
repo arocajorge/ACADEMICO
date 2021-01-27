@@ -1,4 +1,5 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Info.Academico;
 using Core.Info.General;
@@ -38,6 +39,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         aca_ProcesarAdmision_List Lista_ProcesarAdmision = new aca_ProcesarAdmision_List();
+        fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
+        fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
 
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
@@ -86,6 +89,151 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_Admision_Info> model = Lista_ProcesarAdmision.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_ProcesarAdmision", model);
+        }
+        #endregion
+
+        #region Combos
+        public ActionResult ComboBoxPartial_Pais()
+        {
+            return PartialView("_ComboBoxPartial_Pais", new aca_Admision_Info());
+        }
+        public ActionResult ComboBoxPartial_Region()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            return PartialView("_ComboBoxPartial_Region", new aca_Admision_Info { IdPais_Aspirante = IdPais });
+        }
+        public ActionResult ComboBoxPartial_Provincia()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            return PartialView("_ComboBoxPartial_Provincia", new aca_Admision_Info { IdPais_Aspirante = IdPais, Cod_Region_Aspirante = Cod_Region });
+        }
+        public ActionResult ComboBoxPartial_Ciudad()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia"] != null) ? Convert.ToString(Request.Params["IdProvincia"]) : "";
+            return PartialView("_ComboBoxPartial_Ciudad", new aca_Admision_Info { IdPais_Aspirante = IdPais, Cod_Region_Aspirante = Cod_Region, IdProvincia_Aspirante = IdProvincia });
+        }
+        public ActionResult ComboBoxPartial_Parroquia()
+        {
+            string IdPais = (Request.Params["IdPais"] != null) ? Convert.ToString(Request.Params["IdPais"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region"] != null) ? Convert.ToString(Request.Params["Cod_Region"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia"] != null) ? Convert.ToString(Request.Params["IdProvincia"]) : "";
+            string IdCiudad = (Request.Params["IdCiudad"] != null) ? Convert.ToString(Request.Params["IdCiudad"]) : "";
+            return PartialView("_ComboBoxPartial_Parroquia", new aca_Admision_Info { IdPais_Aspirante = IdPais, Cod_Region_Aspirante = Cod_Region, IdProvincia_Aspirante = IdProvincia, IdCiudad_Aspirante = IdCiudad });
+        }
+
+        public ActionResult cmb_parroquia_padre()
+        {
+            string IdCiudadPadre = (Request.Params["fx_IdCiudad_padre_fact"] != null) ? Request.Params["fx_IdCiudad_padre_fact"].ToString() : "";
+            return PartialView("_cmb_parroquia_padre", new aca_Admision_Info { IdCiudad_Padre_Fact = IdCiudadPadre });
+        }
+        public ActionResult cmb_parroquia_madre()
+        {
+            string IdCiudadMadre = (Request.Params["fx_IdCiudad_madre_fact"] != null) ? Request.Params["fx_IdCiudad_madre_fact"].ToString() : "";
+            return PartialView("_cmb_parroquia_madre", new aca_Admision_Info { IdCiudad_Madre_Fact = IdCiudadMadre });
+        }
+        public ActionResult cmb_parroquia_representante()
+        {
+            string IdCiudadMadre = (Request.Params["fx_IdCiudad_representante_fact"] != null) ? Request.Params["fx_IdCiudad_representante_fact"].ToString() : "";
+            return PartialView("_cmb_parroquia_representante", new aca_Admision_Info { IdCiudad_Representante_Fact = IdCiudadMadre });
+        }
+        #endregion
+        #region CombosPadre
+        public ActionResult ComboBoxPartial_Pais_padre()
+        {
+            return PartialView("_ComboBoxPartial_Pais_padre", new aca_Admision_Info());
+        }
+        public ActionResult ComboBoxPartial_Region_padre()
+        {
+            string IdPais = (Request.Params["IdPais_padre"] != null) ? Convert.ToString(Request.Params["IdPais_padre"]) : "";
+            return PartialView("_ComboBoxPartial_Region_padre", new aca_Admision_Info { IdPais_Padre = IdPais });
+        }
+        public ActionResult ComboBoxPartial_Provincia_padre()
+        {
+            string IdPais = (Request.Params["IdPais_padre"] != null) ? Convert.ToString(Request.Params["IdPais_padre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_padre"] != null) ? Convert.ToString(Request.Params["Cod_Region_padre"]) : "";
+            return PartialView("_ComboBoxPartial_Provincia_padre", new aca_Admision_Info { IdPais_Padre = IdPais, Cod_Region_Padre = Cod_Region });
+        }
+        public ActionResult ComboBoxPartial_Ciudad_padre()
+        {
+            string IdPais = (Request.Params["IdPais_padre"] != null) ? Convert.ToString(Request.Params["IdPais_padre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_padre"] != null) ? Convert.ToString(Request.Params["Cod_Region_padre"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_padre"] != null) ? Convert.ToString(Request.Params["IdProvincia_padre"]) : "";
+            return PartialView("_ComboBoxPartial_Ciudad_padre", new aca_Admision_Info { IdPais_Padre = IdPais, Cod_Region_Padre = Cod_Region, IdProvincia_Aspirante = IdProvincia });
+        }
+        public ActionResult ComboBoxPartial_Parroquia_padre()
+        {
+            string IdPais = (Request.Params["IdPais_padre"] != null) ? Convert.ToString(Request.Params["IdPais_padre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_padre"] != null) ? Convert.ToString(Request.Params["Cod_Region_padre"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_padre"] != null) ? Convert.ToString(Request.Params["IdProvincia_padre"]) : "";
+            string IdCiudad = (Request.Params["IdCiudad_padre"] != null) ? Convert.ToString(Request.Params["IdCiudad_padre"]) : "";
+            return PartialView("_ComboBoxPartial_Parroquia_padre", new aca_Admision_Info { IdPais_Padre = IdPais, Cod_Region_Padre = Cod_Region, IdProvincia_Padre = IdProvincia, IdCiudad_Padre = IdCiudad });
+        }
+        #endregion
+        #region CombosMadre
+        public ActionResult ComboBoxPartial_Pais_madre()
+        {
+            return PartialView("_ComboBoxPartial_Pais_madre", new aca_Admision_Info());
+        }
+        public ActionResult ComboBoxPartial_Region_madre()
+        {
+            string IdPais = (Request.Params["IdPais_madre"] != null) ? Convert.ToString(Request.Params["IdPais_madre"]) : "";
+            return PartialView("_ComboBoxPartial_Region_madre", new aca_Admision_Info { IdPais_Madre = IdPais });
+        }
+        public ActionResult ComboBoxPartial_Provincia_madre()
+        {
+            string IdPais = (Request.Params["IdPais_madre"] != null) ? Convert.ToString(Request.Params["IdPais_madre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_madre"] != null) ? Convert.ToString(Request.Params["Cod_Region_madre"]) : "";
+            return PartialView("_ComboBoxPartial_Provincia_madre", new aca_Admision_Info { IdPais_Madre = IdPais, Cod_Region_Madre = Cod_Region });
+        }
+        public ActionResult ComboBoxPartial_Ciudad_madre()
+        {
+            string IdPais = (Request.Params["IdPais_madre"] != null) ? Convert.ToString(Request.Params["IdPais_madre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_madre"] != null) ? Convert.ToString(Request.Params["Cod_Region_madre"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_madre"] != null) ? Convert.ToString(Request.Params["IdProvincia_madre"]) : "";
+            return PartialView("_ComboBoxPartial_Ciudad_madre", new aca_Admision_Info { IdPais_Madre = IdPais, Cod_Region_Madre = Cod_Region, IdProvincia_Madre = IdProvincia });
+        }
+        public ActionResult ComboBoxPartial_Parroquia_madre()
+        {
+            string IdPais = (Request.Params["IdPais_madre"] != null) ? Convert.ToString(Request.Params["IdPais_madre"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_madre"] != null) ? Convert.ToString(Request.Params["Cod_Region_madre"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_madre"] != null) ? Convert.ToString(Request.Params["IdProvincia_madre"]) : "";
+            string IdCiudad = (Request.Params["IdCiudad_madre"] != null) ? Convert.ToString(Request.Params["IdCiudad_madre"]) : "";
+            return PartialView("_ComboBoxPartial_Parroquia_madre", new aca_Admision_Info { IdPais_Madre = IdPais, Cod_Region_Madre = Cod_Region, IdProvincia_Madre = IdProvincia, IdCiudad_Madre = IdCiudad });
+        }
+        #endregion
+        #region CombosMadre
+        public ActionResult ComboBoxPartial_Pais_representante()
+        {
+            return PartialView("_ComboBoxPartial_Pais_representante", new aca_Admision_Info());
+        }
+        public ActionResult ComboBoxPartial_Region_representante()
+        {
+            string IdPais = (Request.Params["IdPais_representante"] != null) ? Convert.ToString(Request.Params["IdPais_representante"]) : "";
+            return PartialView("_ComboBoxPartial_Region_representante", new aca_Admision_Info { IdPais_Representante = IdPais });
+        }
+        public ActionResult ComboBoxPartial_Provincia_representante()
+        {
+            string IdPais = (Request.Params["IdPais_representante"] != null) ? Convert.ToString(Request.Params["IdPais_representante"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_representante"] != null) ? Convert.ToString(Request.Params["Cod_Region_representante"]) : "";
+            return PartialView("_ComboBoxPartial_Provincia_representante", new aca_Admision_Info { IdPais_Representante = IdPais, Cod_Region_Representante = Cod_Region });
+        }
+        public ActionResult ComboBoxPartial_Ciudad_representante()
+        {
+            string IdPais = (Request.Params["IdPais_representante"] != null) ? Convert.ToString(Request.Params["IdPais_representante"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_representante"] != null) ? Convert.ToString(Request.Params["Cod_Region_representante"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_representante"] != null) ? Convert.ToString(Request.Params["IdProvincia_representante"]) : "";
+            return PartialView("_ComboBoxPartial_Ciudad_representante", new aca_Admision_Info { IdPais_Representante = IdPais, Cod_Region_Representante = Cod_Region, IdProvincia_Representante = IdProvincia });
+        }
+        public ActionResult ComboBoxPartial_Parroquia_representante()
+        {
+            string IdPais = (Request.Params["IdPais_representante"] != null) ? Convert.ToString(Request.Params["IdPais_representante"]) : "";
+            string Cod_Region = (Request.Params["Cod_Region_representante"] != null) ? Convert.ToString(Request.Params["Cod_Region_representante"]) : "";
+            string IdProvincia = (Request.Params["IdProvincia_representante"] != null) ? Convert.ToString(Request.Params["IdProvincia_representante"]) : "";
+            string IdCiudad = (Request.Params["IdCiudad_representante"] != null) ? Convert.ToString(Request.Params["IdCiudad_representante"]) : "";
+            return PartialView("_ComboBoxPartial_Parroquia_representante", new aca_Admision_Info { IdPais_Representante = IdPais, Cod_Region_Representante = Cod_Region, IdProvincia_Representante = IdProvincia, IdCiudad_Representante = IdCiudad });
         }
         #endregion
 
@@ -165,6 +313,11 @@ namespace Core.Web.Areas.Academico.Controllers
             var lst_ciudad = new List<tb_ciudad_Info>();
             var lst_parroquia = new List<tb_parroquia_Info>();
 
+            var lst_termino_pago = bus_termino_pago.get_list(false);
+            var lst_clientetipo = bus_clientetipo.get_list(model.IdEmpresa, false);
+            var lst_ciudad_factura = bus_ciudad.get_list("", false);
+            var lst_parroquia_factura = new List<tb_parroquia_Info>();
+
             ViewBag.lst_anio = lst_anio;
             ViewBag.lst_sede = lst_sede;
             ViewBag.lst_jornada = lst_jornada;
@@ -193,6 +346,10 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_ing_institucion = lst_ing_institucion;
             ViewBag.lst_institucion = lst_institucion;
             ViewBag.lst_financiamiento = lst_financiamiento;
+            ViewBag.lst_termino_pago = lst_termino_pago;
+            ViewBag.lst_clientetipo = lst_clientetipo;
+            ViewBag.lst_ciudad_factura = lst_ciudad_factura;
+            ViewBag.lst_parroquia_factura = lst_parroquia_factura;
         }
 
         private bool validar(aca_Admision_Info info, ref string msg)
@@ -547,18 +704,17 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0);
             var IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
 
-            var lst_admisiones = bus_admision.GetList(IdEmpresa,IdSede, IdAnio);
+            var lst_admisiones = bus_admision.GetList_Academico(IdEmpresa,IdSede, IdAnio);
             var cantidad = lst_admisiones.Count();
             return Json(cantidad, JsonRequestBehavior.AllowGet);
     }
-    public JsonResult Validar_cedula_ruc(string naturaleza = "", string tipo_documento = "", string cedula_ruc = "")
+        public JsonResult Validar_cedula_ruc(string naturaleza = "", string tipo_documento = "", string cedula_ruc = "")
         {
             var return_naturaleza = "";
             var isValid = cl_funciones.ValidaIdentificacion(tipo_documento, naturaleza, cedula_ruc, ref return_naturaleza);
 
             return Json(new { isValid = isValid, return_naturaleza = return_naturaleza }, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult get_info_x_num_cedula(int IdEmpresa = 0, string pe_cedulaRuc = "")
         {
             var resultado = bus_alumno.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
@@ -584,6 +740,40 @@ namespace Core.Web.Areas.Academico.Controllers
             mes = mes - 1;
             resultado.mes = mes.ToString();
             resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ProcesarAdmision(int IdEmpresa = 0, decimal IdAdmision=0)
+        {
+            var resultado = "";
+            var info_admision = bus_admision.GetInfo(IdEmpresa, IdAdmision);
+            if (info_admision!=null)
+            {
+                if (info_admision.IdCatalogoESTADM == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO))
+                {
+                    info_admision.IdUsuarioModificacion = SessionFixed.IdUsuario;
+                    info_admision.IdUsuarioRevision = SessionFixed.IdUsuario;
+                    info_admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.ENPROCESO);
+
+                    if (bus_admision.ModificarEstadoEnProceso(info_admision))
+                    {
+                        resultado = "La admisión esta en proceso de revisión";
+                    }
+                    else
+                    {
+                        resultado = "El registro no se ha actualizado";
+                    }
+                }
+                else
+                {
+                    resultado = "La admisión ya esta siendo procesada por otro usuario: " + info_admision.IdUsuarioRevision;
+                }   
+            }
+            else
+            {
+                resultado = "No existe el registro";
+            }
+            
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }

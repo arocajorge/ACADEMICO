@@ -1,5 +1,6 @@
 ﻿using Core.Data.Base;
 using Core.Info.Academico;
+using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -21,7 +22,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT a.IdEmpresa, a.IdAdmision, a.IdSede, a.IdAnio, a.IdJornada, a.IdNivel, a.IdCurso, a.CedulaRuc_Aspirante, a.NombreCompleto_Aspirante, a.IdCatalogoESTADM, an.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, "
-                    + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado "
+                    + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado, a.IdUsuarioRevision, a.FechaIngreso_Aspirante "
                     + " FROM     dbo.aca_Admision AS a LEFT OUTER JOIN "
                     + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
@@ -31,6 +32,71 @@ namespace Core.Data.Academico
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
                     + " and a.IdSede = " + IdSede.ToString()
                     +" and a.IdAnio = " + IdAnio.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Admision_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            CedulaRuc_Aspirante = reader["CedulaRuc_Aspirante"].ToString(),
+                            NombreCompleto_Aspirante = string.IsNullOrEmpty(reader["NombreCompleto_Aspirante"].ToString()) ? null : reader["NombreCompleto_Aspirante"].ToString(),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
+                            NomJornada = string.IsNullOrEmpty(reader["NomJornada"].ToString()) ? null : reader["NomJornada"].ToString(),
+                            NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
+                            NomCurso = string.IsNullOrEmpty(reader["NomCurso"].ToString()) ? null : reader["NomCurso"].ToString(),
+                            OrdenJornada = string.IsNullOrEmpty(reader["OrdenJornada"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenJornada"]),
+                            OrdenNivel = string.IsNullOrEmpty(reader["OrdenNivel"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenNivel"]),
+                            OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenCurso"]),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            EstadoAdmision = string.IsNullOrEmpty(reader["EstadoAdmision"].ToString()) ? null : reader["EstadoAdmision"].ToString(),
+                            IdCatalogoESTADM = Convert.ToInt32(reader["IdCatalogoESTADM"]),
+                            FechaIngreso_Aspirante = Convert.ToDateTime(reader["FechaIngreso_Aspirante"]),
+                            IdUsuarioRevision = string.IsNullOrEmpty(reader["IdUsuarioRevision"].ToString()) ? null : reader["IdUsuarioRevision"].ToString(),
+                        });
+                    }
+                    reader.Close();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<aca_Admision_Info> getList_Academico(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                List<aca_Admision_Info> Lista = new List<aca_Admision_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    #region Query
+                    string query = "SELECT a.IdEmpresa, a.IdAdmision, a.IdSede, a.IdAnio, a.IdJornada, a.IdNivel, a.IdCurso, a.CedulaRuc_Aspirante, a.NombreCompleto_Aspirante, a.IdCatalogoESTADM, an.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, "
+                    + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, a.IdCatalogoESTADM, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado "
+                    + " FROM     dbo.aca_Admision AS a LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON a.IdEmpresa = nj.IdEmpresa AND a.IdAnio = nj.IdAnio AND a.IdSede = nj.IdSede AND a.IdNivel = nj.IdNivel AND a.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON a.IdEmpresa = sn.IdEmpresa AND a.IdAnio = sn.IdAnio AND a.IdSede = sn.IdSede AND a.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS an ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
+                    + " and a.IdSede = " + IdSede.ToString()
+                    + " and a.IdAnio = " + IdAnio.ToString()
+                    + " and a.IdCatalogoESTADM = "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO);
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -190,6 +256,11 @@ namespace Core.Data.Academico
                         AnioVehiculo_Padre = info.AnioVehiculo_Padre,
                         CasaPropia_Padre = info.CasaPropia_Padre,
                         EstaFallecido_Padre = info.EstaFallecido_Padre,
+                        SeFactura_Padre = info.SeFactura_Padre,
+                        Idtipo_cliente_Padre = info.Idtipo_cliente_Padre,
+                        IdTipoCredito_Padre = info.IdTipoCredito_Padre,
+                        IdCiudad_Padre_Fact = info.IdCiudad_Padre_Fact,
+                        IdParroquia_Padre_Fact = info.IdParroquia_Padre_Fact,
                         Naturaleza_Madre = info.Naturaleza_Madre,
                         IdTipoDocumento_Madre = info.IdTipoDocumento_Madre,
                         CedulaRuc_Madre = info.CedulaRuc_Madre,
@@ -231,6 +302,11 @@ namespace Core.Data.Academico
                         AnioVehiculo_Madre = info.AnioVehiculo_Madre,
                         CasaPropia_Madre = info.CasaPropia_Madre,
                         EstaFallecido_Madre = info.EstaFallecido_Madre,
+                        SeFactura_Madre = info.SeFactura_Madre,
+                        Idtipo_cliente_Madre = info.Idtipo_cliente_Madre,
+                        IdTipoCredito_Madre = info.IdTipoCredito_Madre,
+                        IdCiudad_Madre_Fact = info.IdCiudad_Madre_Fact,
+                        IdParroquia_Madre_Fact = info.IdParroquia_Madre_Fact,
                         Naturaleza_Representante = info.Naturaleza_Representante,
                         IdTipoDocumento_Representante = info.IdTipoDocumento_Representante,
                         CedulaRuc_Representante = info.CedulaRuc_Representante,
@@ -272,6 +348,11 @@ namespace Core.Data.Academico
                         AnioVehiculo_Representante = info.AnioVehiculo_Representante,
                         CasaPropia_Representante = info.CasaPropia_Representante,
                         EstaFallecido_Representante = info.EstaFallecido_Representante,
+                        SeFactura_Representante = info.SeFactura_Representante,
+                        Idtipo_cliente_Representante = info.Idtipo_cliente_Representante,
+                        IdTipoCredito_Representante = info.IdTipoCredito_Representante,
+                        IdCiudad_Representante_Fact = info.IdCiudad_Representante_Fact,
+                        IdParroquia_Representante_Fact = info.IdParroquia_Representante_Fact,
                         SueldoPadre = info.SueldoPadre,
                         SueldoMadre = info.SueldoMadre,
                         OtroIngresoPadre = info.OtroIngresoPadre,
@@ -498,7 +579,11 @@ namespace Core.Data.Academico
                             CasaPropia_Padre = string.IsNullOrEmpty(reader["CasaPropia_Padre"].ToString()) ? false : Convert.ToBoolean(reader["CasaPropia_Padre"]),
                             EstaFallecido_Padre = string.IsNullOrEmpty(reader["EstaFallecido_Padre"].ToString()) ? false : Convert.ToBoolean(reader["EstaFallecido_Padre"]),
                             IdProfesion_Padre = string.IsNullOrEmpty(reader["IdProfesion_Padre"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion_Padre"]),
-                            //SeFactura_Padre = string.IsNullOrEmpty(reader["SeFactura_Padre"].ToString()) ? false : Convert.ToBoolean(reader["SeFactura_Padre"]),
+                            SeFactura_Padre = string.IsNullOrEmpty(reader["SeFactura_Padre"].ToString()) ? false : Convert.ToBoolean(reader["SeFactura_Padre"]),
+                            IdCiudad_Padre_Fact = string.IsNullOrEmpty(reader["IdCiudad_Padre_Fact"].ToString()) ? null : reader["IdCiudad_Padre_Fact"].ToString(),
+                            IdTipoCredito_Padre = string.IsNullOrEmpty(reader["IdTipoCredito_Padre"].ToString()) ? null : reader["IdTipoCredito_Padre"].ToString(),
+                            IdParroquia_Padre_Fact = string.IsNullOrEmpty(reader["IdParroquia_Padre_Fact"].ToString()) ? null : reader["IdParroquia_Padre_Fact"].ToString(),
+                            Idtipo_cliente_Padre = string.IsNullOrEmpty(reader["Idtipo_cliente_Padre"].ToString()) ? (int?)null : Convert.ToInt32(reader["Idtipo_cliente_Padre"]),     
                             Naturaleza_Madre = string.IsNullOrEmpty(reader["Naturaleza_Madre"].ToString()) ? null : reader["Naturaleza_Madre"].ToString(),
                             IdTipoDocumento_Madre = string.IsNullOrEmpty(reader["IdTipoDocumento_Madre"].ToString()) ? null : reader["IdTipoDocumento_Madre"].ToString(),
                             CedulaRuc_Madre = string.IsNullOrEmpty(reader["CedulaRuc_Madre"].ToString()) ? null : reader["CedulaRuc_Madre"].ToString(),
@@ -540,7 +625,11 @@ namespace Core.Data.Academico
                             CasaPropia_Madre = string.IsNullOrEmpty(reader["CasaPropia_Madre"].ToString()) ? false : Convert.ToBoolean(reader["CasaPropia_Madre"]),
                             EstaFallecido_Madre = string.IsNullOrEmpty(reader["EstaFallecido_Madre"].ToString()) ? false : Convert.ToBoolean(reader["EstaFallecido_Madre"]),
                             IdProfesion_Madre = string.IsNullOrEmpty(reader["IdProfesion_Madre"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion_Madre"]),
-                            //SeFactura_Madre = string.IsNullOrEmpty(reader["SeFactura_Madre"].ToString()) ? false : Convert.ToBoolean(reader["SeFactura_Madre"]),
+                            SeFactura_Madre = string.IsNullOrEmpty(reader["SeFactura_Madre"].ToString()) ? false : Convert.ToBoolean(reader["SeFactura_Madre"]),
+                            IdCiudad_Madre_Fact = string.IsNullOrEmpty(reader["IdCiudad_Madre_Fact"].ToString()) ? null : reader["IdCiudad_Madre_Fact"].ToString(),
+                            IdTipoCredito_Madre = string.IsNullOrEmpty(reader["IdTipoCredito_Madre"].ToString()) ? null : reader["IdTipoCredito_Madre"].ToString(),
+                            IdParroquia_Madre_Fact = string.IsNullOrEmpty(reader["IdParroquia_Madre_Fact"].ToString()) ? null : reader["IdParroquia_Madre_Fact"].ToString(),
+                            Idtipo_cliente_Madre = string.IsNullOrEmpty(reader["Idtipo_cliente_Madre"].ToString()) ? (int?)null : Convert.ToInt32(reader["Idtipo_cliente_Madre"]),
                             Naturaleza_Representante = string.IsNullOrEmpty(reader["Naturaleza_Representante"].ToString()) ? null : reader["Naturaleza_Representante"].ToString(),
                             IdTipoDocumento_Representante = string.IsNullOrEmpty(reader["IdTipoDocumento_Representante"].ToString()) ? null : reader["IdTipoDocumento_Representante"].ToString(),
                             CedulaRuc_Representante = string.IsNullOrEmpty(reader["CedulaRuc_Representante"].ToString()) ? null : reader["CedulaRuc_Representante"].ToString(),
@@ -582,7 +671,11 @@ namespace Core.Data.Academico
                             CasaPropia_Representante = string.IsNullOrEmpty(reader["CasaPropia_Representante"].ToString()) ? false : Convert.ToBoolean(reader["CasaPropia_Representante"]),
                             EstaFallecido_Representante = string.IsNullOrEmpty(reader["EstaFallecido_Representante"].ToString()) ? false : Convert.ToBoolean(reader["EstaFallecido_Representante"]),
                             IdProfesion_Representante = string.IsNullOrEmpty(reader["IdProfesion_Representante"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion_Representante"]),
-                            //SeFactura_Representante = string.IsNullOrEmpty(reader["SeFactura_Representante"].ToString()) ? false : Convert.ToBoolean(reader["SeFactura_Representante"]),
+                            SeFactura_Representante = string.IsNullOrEmpty(reader["SeFactura_Representante"].ToString()) ? false : Convert.ToBoolean(reader["SeFactura_Representante"]),
+                            IdCiudad_Representante_Fact = string.IsNullOrEmpty(reader["IdCiudad_Representante_Fact"].ToString()) ? null : reader["IdCiudad_Representante_Fact"].ToString(),
+                            IdTipoCredito_Representante = string.IsNullOrEmpty(reader["IdTipoCredito_Representante"].ToString()) ? null : reader["IdTipoCredito_Representante"].ToString(),
+                            IdParroquia_Representante_Fact = string.IsNullOrEmpty(reader["IdParroquia_Representante_Fact"].ToString()) ? null : reader["IdParroquia_Representante_Fact"].ToString(),
+                            Idtipo_cliente_Representante = string.IsNullOrEmpty(reader["Idtipo_cliente_Representante"].ToString()) ? (int?)null : Convert.ToInt32(reader["Idtipo_cliente_Representante"]),
                             SueldoPadre = string.IsNullOrEmpty(reader["SueldoPadre"].ToString()) ? 0 : Convert.ToDouble(reader["SueldoPadre"]),
                             SueldoMadre = string.IsNullOrEmpty(reader["SueldoMadre"].ToString()) ? 0 : Convert.ToDouble(reader["SueldoMadre"]),
                             OtroIngresoPadre = string.IsNullOrEmpty(reader["OtroIngresoPadre"].ToString()) ? 0 : Convert.ToDouble(reader["OtroIngresoPadre"]),
@@ -596,6 +689,7 @@ namespace Core.Data.Academico
                             OtroGasto = string.IsNullOrEmpty(reader["OtroGasto"].ToString()) ? 0 : Convert.ToDouble(reader["OtroGasto"]),
                             Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
                             IdCatalogoESTADM = Convert.ToInt32(reader["IdCatalogoESTADM"]),
+                            IdUsuarioRevision = string.IsNullOrEmpty(reader["IdUsuarioRevision"].ToString()) ? null : reader["IdUsuarioRevision"].ToString(),
                         };
                     }
                 }
@@ -604,6 +698,31 @@ namespace Core.Data.Academico
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public bool modificarEstadoEnProceso(aca_Admision_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Admision Entity = Context.aca_Admision.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAdmision == info.IdAdmision);
+                    if (Entity == null) return false;
+
+                    Entity.IdUsuarioRevision = info.IdUsuarioRevision;
+                    Entity.FechaRevision = DateTime.Now;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
+                    Entity.IdCatalogoESTADM = info.IdCatalogoESTADM;
+
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }

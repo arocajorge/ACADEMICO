@@ -1,7 +1,7 @@
 ﻿@Html.DevExpress().ComboBox(settings =>
 {
-    settings.Name = "IdParroquia";
-    settings.CallbackRouteValues = new { Controller = "Alumno", Action = "ComboBoxPartial_Parroquia", Area = "Academico" };
+    settings.Name = "IdParroquia_Aspirante";
+    settings.CallbackRouteValues = new { Controller = "ProcesarAdmision", Action = "ComboBoxPartial_Parroquia", Area = "Academico" };
     settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
     settings.Properties.DisplayFormatString = "[{0}] - {1}";
     settings.Properties.Columns.Add("IdParroquia", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -12,5 +12,5 @@
     settings.Properties.TextField = "nom_parroquia";
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdPais'] = IdPais.GetValue(); e.customArgs['Cod_Region'] = Cod_Region.GetValue();e.customArgs['IdProvincia'] = IdProvincia.GetValue(); e.customArgs['IdCiudad'] = IdCiudad.GetValue(); }";
+    settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdPais'] = IdPais_Aspirante.GetValue(); e.customArgs['Cod_Region'] = Cod_Region_Aspirante.GetValue();e.customArgs['IdProvincia'] = IdProvincia_Aspirante.GetValue(); e.customArgs['IdCiudad'] = IdCiudad_Aspirante.GetValue(); }";
 }).BindList(new Core.Bus.General.tb_parroquia_Bus().get_list(Model.IdCiudad_Aspirante, false)).Bind(Model.IdParroquia_Aspirante).GetHtml()

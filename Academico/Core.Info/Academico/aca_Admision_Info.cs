@@ -190,7 +190,7 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo se factura es obligatorio")]
         public bool SeFactura_Padre { get; set; }
         [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
-        public int Idtipo_cliente_Padre { get; set; }
+        public Nullable<int> Idtipo_cliente_Padre { get; set; }
         public string IdTipoCredito_Padre { get; set; }
         [Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad_Padre_Fact { get; set; }
@@ -269,7 +269,7 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo se factura es obligatorio")]
         public bool SeFactura_Madre { get; set; }
         [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
-        public int Idtipo_cliente_Madre { get; set; }
+        public Nullable<int> Idtipo_cliente_Madre { get; set; }
         public string IdTipoCredito_Madre { get; set; }
         [Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad_Madre_Fact { get; set; }
@@ -329,7 +329,7 @@ namespace Core.Info.Academico
         [Required(ErrorMessage = "El campo se factura es obligatorio")]
         public bool SeFactura_Representante { get; set; }
         [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
-        public int Idtipo_cliente_Representante { get; set; }
+        public Nullable<int> Idtipo_cliente_Representante { get; set; }
         public string IdTipoCredito_Representante { get; set; }
         [Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad_Representante_Fact { get; set; }
@@ -352,6 +352,8 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public string IdUsuarioRevision { get; set; }
+        public Nullable<System.DateTime> FechaRevision { get; set; }
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }

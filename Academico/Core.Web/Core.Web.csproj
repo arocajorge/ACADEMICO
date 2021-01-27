@@ -9710,7 +9710,7 @@
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_ProcesarAdmision.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Anio_Consulta.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Sede.cshtml" />
-    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_028_Secretarias.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_072.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Ciudad.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Ciudad_madre.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Ciudad_padre.cshtml" />
@@ -9733,6 +9733,14 @@
     <Content Include="Areas\Facturacion\Views\FacturacionMasiva\_CmbNivel.cshtml" />
     <Content Include="Areas\Facturacion\Views\FacturacionMasiva\_CmbCurso.cshtml" />
     <Content Include="Areas\Facturacion\Views\FacturacionMasiva\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Ciudad_representante.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Pais_representante.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Parroquia_representante.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Provincia_representante.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Region_representante.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_cmb_parroquia_padre.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_cmb_parroquia_madre.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_cmb_parroquia_representante.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
