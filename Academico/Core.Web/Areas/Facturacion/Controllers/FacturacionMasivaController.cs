@@ -204,8 +204,8 @@ namespace Core.Web.Areas.Facturacion.Controllers
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
 
-            model.lst_det_fact_masiva = Lista_FactMasivaDet.get_list(model.IdTransaccionSession);
-
+            model.lst_det_fact_masiva = Lista_FactMasivaDet.get_list(model.IdTransaccionSession).Where(q=> q.Procesado == false).ToList();
+            
             var info_periodo_anterior = new aca_AnioLectivo_Periodo_Info();
             var periodo_anterior = model.IdPeriodo - 1;
             if (periodo_anterior!=0)
@@ -219,13 +219,16 @@ namespace Core.Web.Areas.Facturacion.Controllers
                 cargar_combos();
                 return View(model);
             }
-
-            if (!bus_periodo.Modificar_FacturacionMasiva(model))
+            if (model.lst_det_fact_masiva.Count > 0)
             {
-                ViewBag.mensaje = "No se ha podido guardar el registro";
-                cargar_combos();
-                return View(model);
+                if (!bus_periodo.Modificar_FacturacionMasiva(model))
+                {
+                    ViewBag.mensaje = "No se ha podido guardar el registro";
+                    cargar_combos();
+                    return View(model);
+                }
             }
+            
             return RedirectToAction("Consultar", new { IdEmpresa = model.IdEmpresa, IdAnio = model.IdAnio, IdPeriodo=model.IdPeriodo, Exito = true });
         }
         #endregion
