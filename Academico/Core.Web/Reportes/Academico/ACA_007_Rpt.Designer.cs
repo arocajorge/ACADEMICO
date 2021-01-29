@@ -345,7 +345,7 @@
             this.xrTableCell7.StylePriority.UseFont = false;
             this.xrTableCell7.StylePriority.UsePadding = false;
             this.xrTableCell7.StylePriority.UseTextAlignment = false;
-            this.xrTableCell7.Text = "ESTADISTICAS DE ESTUDIANTES MATRICULADOS POR DIA Y TIPO DE PLANTILLA";
+            this.xrTableCell7.Text = "ESTADISTICAS DE ESTUDIANTES MATRICULADOS POR DIA Y TIPO DE PENSION";
             this.xrTableCell7.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell7.Weight = 2D;
             // 
