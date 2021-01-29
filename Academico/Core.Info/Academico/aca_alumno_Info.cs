@@ -219,9 +219,79 @@ namespace Core.Info.Academico
         public string Sector_madre { get; set; }
         #endregion
 
+        #region Datos representante
+        public int IdCatalogo_representante { get; set; }
+        public decimal IdPersona_representante { get; set; }
+        public string IdTipoDocumento_representante { get; set; }
+        public string pe_Naturaleza_representante { get; set; }
+        [Required(ErrorMessage = "El campo nombre completo es obligatorio")]
+        [StringLength(200, MinimumLength = 2, ErrorMessage = "el campo nombre completo debe tener mínimo 2 caracter y máximo 200 caracteres")]
+        public string pe_nombreCompleto_representante { get; set; }
+        [StringLength(150, MinimumLength = 0, ErrorMessage = "el campo razón social debe tener máximo 150 caracteres")]
+        public string pe_razonSocial_representante { get; set; }
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
+        public string pe_apellido_representante { get; set; }
+        [StringLength(100, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
+        public string pe_nombre_representante { get; set; }
+        public string pe_cedulaRuc_representante { get; set; }
+        public string Direccion_representante { get; set; }
+        public string pe_telfono_Contacto_representante { get; set; }
+        public string Celular_representante { get; set; }
+        public string Correo_representante { get; set; }
+        public string pe_sexo_representante { get; set; }
+        public string IdEstadoCivil_representante { get; set; }
+        public Nullable<System.DateTime> pe_fechaNacimiento_representante { get; set; }
+        public string CodCatalogoSangre_representante { get; set; }
+        public string CodCatalogoCONADIS_representante { get; set; }
+        public Nullable<double> PorcentajeDiscapacidad_representante { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 200 caracteres")]
+        public string NumeroCarnetConadis_representante { get; set; }
+        public bool SeFactura_representante { get; set; }
+        public bool EsRepresentante_representante { get; set; }
+        public Nullable<int> IdCatalogoFichaInst_representante { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo empresa debe tener máximo 200")]
+        public string EmpresaTrabajo_representante { get; set; }
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo dirección debe tener máximo 500")]
+        public string DireccionTrabajo_representante { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo telefono debe tener máximo 200")]
+        public string TelefonoTrabajo_representante { get; set; }
+        [StringLength(200, MinimumLength = 0, ErrorMessage = "el campo cargo debe tener máximo 200")]
+        public string CargoTrabajo_representante { get; set; }
+        public Nullable<int> AniosServicio_representante { get; set; }
+        public Nullable<double> IngresoMensual_representante { get; set; }
+        public bool VehiculoPropio_representante { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo marca debe tener máximo 50")]
+        public string Marca_representante { get; set; }
+        [StringLength(50, MinimumLength = 0, ErrorMessage = "el campo modelo debe tener máximo 50")]
+        public string Modelo_representante { get; set; }
+        public bool CasaPropia_representante { get; set; }
+        public Nullable<int> IdProfesion_representante { get; set; }
+        public bool info_valido_representante { get; set; }
+        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        public int Idtipo_cliente_representante { get; set; }
+        public string IdTipoCredito_representante { get; set; }
+        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        public string IdCiudad_representante_fact { get; set; }
+        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        public string IdParroquia_representante_fact { get; set; }
+        [Required(ErrorMessage = "El campo sucursal es obligatorio")]
+        public Nullable<int> AnioVehiculo_representante { get; set; }
+        public Nullable<int> IdReligion_representante { get; set; }
+        public Nullable<bool> AsisteCentroCristiano_representante { get; set; }
+        public bool EstaFallecido_representante { get; set; }
+        public string IdPais_representante { get; set; }
+        public string Cod_Region_representante { get; set; }
+        public string IdProvincia_representante { get; set; }
+        public string IdCiudad_representante { get; set; }
+        public string IdParroquia_representante { get; set; }
+        [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 500 caracteres")]
+        public string Sector_representante { get; set; }
+        #endregion
+
         public tb_persona_Info info_persona_alumno { get; set; }
         public tb_persona_Info info_persona_padre { get; set; }
         public tb_persona_Info info_persona_madre { get; set; }
+        public tb_persona_Info info_persona_representante { get; set; }
         public string anio { get; set; }
         public string mes { get; set; }
         public string dia { get; set; }

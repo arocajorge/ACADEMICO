@@ -9741,6 +9741,15 @@
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_cmb_parroquia_padre.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_cmb_parroquia_madre.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_cmb_parroquia_representante.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\Modificar.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Curso.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Paralelo.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Plantilla.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_CmbEmpleado.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_Documentos.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_DetallePlantilla.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_PreMatriculaRubro.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Anio.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

@@ -103,6 +103,8 @@
     <Compile Include="Academico\aca_PlantillaTipo_Info.cs" />
     <Compile Include="Academico\aca_Plantilla_Info.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Info.cs" />
+    <Compile Include="Academico\aca_PreMatricula_Info.cs" />
+    <Compile Include="Academico\aca_PreMatricula_Rubro_Info.cs" />
     <Compile Include="Academico\aca_Profesor_Info.cs" />
     <Compile Include="Academico\aca_Reporte_Info.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Info.cs" />

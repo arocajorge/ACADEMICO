@@ -96,7 +96,7 @@ namespace Core.Data.Academico
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
                     + " and a.IdSede = " + IdSede.ToString()
                     + " and a.IdAnio = " + IdAnio.ToString()
-                    + " and a.IdCatalogoESTADM = "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO);
+                    + " and a.IdCatalogoESTADM != "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.PREMATRICULADO);
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);

@@ -144,7 +144,7 @@ $(document).ready(function() {
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("CantidadAdmisiones", "Admision", new { Area = "Academico" })',
+                url: '@Url.Action("CantidadAdmisiones", "ProcesarAdmision", new { Area = "Academico" })',
                 async: false,
                 bDeferRender: true,
                 bProcessing: true,

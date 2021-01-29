@@ -17,6 +17,7 @@ namespace Core.Info.Academico
         #region Campos que no existen en la tabla
         public string IdStringDoc { get; set; }
         public string NomDocumento { get; set; }
+        public string Ruta { get; set; }
         public bool seleccionado { get; set; }
         #endregion
     }

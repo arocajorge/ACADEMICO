@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Info.General;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -29,14 +30,14 @@ namespace Core.Info.Academico
         public string IdTipoDocumento_Aspirante { get; set; }
         [Required(ErrorMessage = "El campo cédula es obligatorio")]
         public string CedulaRuc_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo nombres es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
+        //[Required(ErrorMessage = "El campo nombres es obligatorio")]
+        //[StringLength(0, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
+        //[Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        //[StringLength(0, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Aspirante { get; set; }
-        [Required(ErrorMessage = "El campo nombre completo del aspirante es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombre completo debe tener máximo 200 caracteres")]
+        //[Required(ErrorMessage = "El campo nombre completo del aspirante es obligatorio")]
+        //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombre completo debe tener máximo 200 caracteres")]
         public string NombreCompleto_Aspirante { get; set; }
         [Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Aspirante { get; set; }
@@ -115,11 +116,11 @@ namespace Core.Info.Academico
         public string IdTipoDocumento_Padre { get; set; }
         [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Padre { get; set; }
-        [Required(ErrorMessage = "El campo nombres es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
+        //[Required(ErrorMessage = "El campo nombres es obligatorio")]
+        //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Padre { get; set; }
-        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
+        //[Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Padre { get; set; }
         public string NombreCompleto_Padre { get; set; }
         public string RazonSocial_Padre { get; set; }
@@ -202,11 +203,11 @@ namespace Core.Info.Academico
         public string IdTipoDocumento_Madre { get; set; }
         [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Madre { get; set; }
-        [Required(ErrorMessage = "El campo nombres es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
+        //[Required(ErrorMessage = "El campo nombres es obligatorio")]
+        //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Madre { get; set; }
-        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
+        //[Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Madre { get; set; }
         public string NombreCompleto_Madre { get; set; }
         public string RazonSocial_Madre { get; set; }
@@ -279,11 +280,11 @@ namespace Core.Info.Academico
         public string IdTipoDocumento_Representante { get; set; }
         [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Representante { get; set; }
-        [Required(ErrorMessage = "El campo nombres es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
+        //[Required(ErrorMessage = "El campo nombres es obligatorio")]
+        //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Representante { get; set; }
-        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
-        [StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
+        //[Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Representante { get; set; }
         public string NombreCompleto_Representante { get; set; }
         public string RazonSocial_Representante { get; set; }
@@ -354,6 +355,7 @@ namespace Core.Info.Academico
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public string IdUsuarioRevision { get; set; }
         public Nullable<System.DateTime> FechaRevision { get; set; }
+        public Nullable<System.DateTime> FechaPreMatriculacion { get; set; }
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
@@ -392,10 +394,40 @@ namespace Core.Info.Academico
         public HttpPostedFileBase RecordAcademicoAspirante { get; set; }
         public HttpPostedFileBase PagoAlDiaAspirante { get; set; }
         public HttpPostedFileBase CertificadoLaboral { get; set; }
-        public int IdPersona_Aspirante { get; set; }
-        public int IdPersona_Padre { get; set; }
-        public int IdPersona_Madre { get; set; }
-        public int IdPersona_Representante { get; set; }
+        #endregion
+
+        #region PreMatricula
+        public decimal IdAlumno { get; set; }
+        public decimal IdPersona_Aspirante { get; set; }
+        public decimal IdPersona_Padre { get; set; }
+        public decimal IdPersona_Madre { get; set; }
+        public decimal IdPersona_Representante { get; set; }
+        public tb_persona_Info info_persona_alumno { get; set; }
+        public tb_persona_Info info_persona_padre { get; set; }
+        public tb_persona_Info info_persona_madre { get; set; }
+        public tb_persona_Info info_persona_representante { get; set; }
+        public Nullable<int> IdCatalogoESTPREMAT { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdParalelo { get; set; }
+        public int IdPlantilla { get; set; }
+        public int IdMecanismo { get; set; }
+        public string Observacion { get; set; }
+        public DateTime Fecha { get; set; }
+        public bool EsPatrocinado { get; set; }
+        public decimal IdMecanismoDet { get; set; }
+        public Nullable<int> IdEmpresa_rol { get; set; }
+        public Nullable<decimal> IdEmpleado { get; set; }
+        public string IdCatalogo_FormaPago { get; set; }
+        public bool AplicaDescuentoNomina { get; set; }
+        public int IdPuntoVta { get; set; }
+        public string vt_serie1 { get; set; }
+        public string vt_serie2 { get; set; }
+        public string vt_NumFactura { get; set; }
+        public string IdComboCurso { get; set; }
+        public double ValorPlantilla { get; set; }
+        public double ValorPlantillaProntoPago { get; set; }
+        public List<aca_AnioLectivo_Curso_Documento_Info> lst_documentos { get; set; }
+        public int IdCatalogoPAREN_OtroFamiliar { get; set; }
         #endregion
     }
 }

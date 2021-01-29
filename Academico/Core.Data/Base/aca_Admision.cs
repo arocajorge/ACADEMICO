@@ -14,6 +14,12 @@ namespace Core.Data.Base
     
     public partial class aca_Admision
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public aca_Admision()
+        {
+            this.aca_PreMatricula = new HashSet<aca_PreMatricula>();
+        }
+    
         public int IdEmpresa { get; set; }
         public decimal IdAdmision { get; set; }
         public int IdSede { get; set; }
@@ -225,6 +231,7 @@ namespace Core.Data.Base
         public string IdUsuarioAnulacion { get; set; }
         public Nullable<System.DateTime> FechaAnulacion { get; set; }
         public string MotivoAnulacion { get; set; }
+        public Nullable<System.DateTime> FechaPreMatriculacion { get; set; }
     
         public virtual aca_AnioLectivo aca_AnioLectivo { get; set; }
         public virtual aca_Catalogo aca_Catalogo { get; set; }
@@ -246,5 +253,7 @@ namespace Core.Data.Base
         public virtual aca_Jornada aca_Jornada { get; set; }
         public virtual aca_NivelAcademico aca_NivelAcademico { get; set; }
         public virtual aca_Sede aca_Sede { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_PreMatricula> aca_PreMatricula { get; set; }
     }
 }

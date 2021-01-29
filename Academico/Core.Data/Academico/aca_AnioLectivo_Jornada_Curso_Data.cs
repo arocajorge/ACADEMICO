@@ -105,6 +105,46 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPreMatricula(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Jornada_Curso_Info> Lista = new List<aca_AnioLectivo_Jornada_Curso_Info>();
+
+                using (EntitiesAcademico odata = new EntitiesAcademico())
+                {
+                    int IdCursoIni = 0;
+                    int IdCursoFin = 0;
+
+                    IdCursoIni = 0;
+                    IdCursoFin = 999999;
+                    var lst = odata.vwaca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin).OrderBy(q => q.OrdenCurso).ToList();
+
+                    lst.ForEach(q =>
+                    {
+                        Lista.Add(new aca_AnioLectivo_Jornada_Curso_Info
+                        {
+                            IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
+                            IdSede = q.IdSede,
+                            IdNivel = q.IdNivel,
+                            IdJornada = q.IdJornada,
+                            IdCurso = q.IdCurso,
+                            NomCurso = q.ComboCurso,
+                            OrdenCurso = q.OrdenCurso
+                        });
+                    });
+                }
+
+                Lista.ForEach(v => { v.IdComboCurso = v.IdEmpresa.ToString("0000") + v.IdAnio.ToString("0000") + v.IdSede.ToString("0000") + v.IdNivel.ToString("0000") + v.IdJornada.ToString("0000") + v.IdCurso.ToString("0000"); });
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPromoverAlumno(int IdEmpresa, decimal IdAlumno, int IdAnio, string Validar)
         {
             try

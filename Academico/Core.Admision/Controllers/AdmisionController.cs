@@ -486,11 +486,11 @@ namespace Core.Admision.Controllers
                 info.AnioVehiculo_Representante = info.AnioVehiculo_Padre;
                 info.CasaPropia_Representante = info.CasaPropia_Padre;
                 info.EstaFallecido_Representante = info.EstaFallecido_Padre;
-                //info.SeFactura_Representante = info.SeFactura_Padre;
-                //info.Idtipo_cliente_Representante = info.Idtipo_cliente_Padre;
-                //info.IdTipoCredito_Representante = info.IdTipoCredito_Padre;
-                //info.IdCiudad_Representante_Fact = info.IdCiudad_Padre_Fact;
-                //info.IdParroquia_Representante_Fact = info.IdParroquia_Padre_Fact;
+                info.SeFactura_Representante = info.SeFactura_Padre;
+                info.Idtipo_cliente_Representante = info.Idtipo_cliente_Padre;
+                info.IdTipoCredito_Representante = info.IdTipoCredito_Padre;
+                info.IdCiudad_Representante_Fact = info.IdCiudad_Padre_Fact;
+                info.IdParroquia_Representante_Fact = info.IdParroquia_Padre_Fact;
             }
             else if (info.Representante == "M")
             {
@@ -535,11 +535,11 @@ namespace Core.Admision.Controllers
                 info.AnioVehiculo_Representante = info.AnioVehiculo_Madre;
                 info.CasaPropia_Representante = info.CasaPropia_Madre;
                 info.EstaFallecido_Representante = info.EstaFallecido_Madre;
-                //info.SeFactura_Representante = info.SeFactura_Madre;
-                //info.Idtipo_cliente_Representante = info.Idtipo_cliente_Madre;
-                //info.IdTipoCredito_Representante = info.IdTipoDocumento_Madre;
-                //info.IdCiudad_Representante_Fact = info.IdCiudad_Madre_Fact;
-                //info.IdParroquia_Representante_Fact = info.IdParroquia_Madre_Fact;
+                info.SeFactura_Representante = info.SeFactura_Madre;
+                info.Idtipo_cliente_Representante = info.Idtipo_cliente_Madre;
+                info.IdTipoCredito_Representante = info.IdTipoDocumento_Madre;
+                info.IdCiudad_Representante_Fact = info.IdCiudad_Madre_Fact;
+                info.IdParroquia_Representante_Fact = info.IdParroquia_Madre_Fact;
             }
             else
             {

@@ -48,6 +48,17 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_AnioLectivo_Jornada_Curso_Info> GetListCursoPreMatricula(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                return odata.GetListCursoPreMatricula(IdEmpresa, IdAnio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public aca_AnioLectivo_Jornada_Curso_Info GetInfoCursoMatricula(int IdEmpresa, int IdAnio, decimal IdMatricula)
         {
             try

@@ -19,6 +19,8 @@ namespace Core.Data.Base
         {
             this.aca_Matricula = new HashSet<aca_Matricula>();
             this.aca_Matricula_Rubro = new HashSet<aca_Matricula_Rubro>();
+            this.aca_PreMatricula_Rubro = new HashSet<aca_PreMatricula_Rubro>();
+            this.aca_PreMatricula = new HashSet<aca_PreMatricula>();
         }
     
         public int IdEmpresa { get; set; }
@@ -40,5 +42,9 @@ namespace Core.Data.Base
         public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_PreMatricula_Rubro> aca_PreMatricula_Rubro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aca_PreMatricula> aca_PreMatricula { get; set; }
     }
 }

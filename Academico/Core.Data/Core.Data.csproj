@@ -105,6 +105,7 @@
     <Compile Include="Academico\aca_MatriculaCondicional_Det_Data.cs" />
     <Compile Include="Academico\aca_MatriculaConducta_Data.cs" />
     <Compile Include="Academico\aca_Matricula_Data.cs" />
+    <Compile Include="Academico\aca_PreMatricula_Rubro_Data.cs" />
     <Compile Include="Academico\aca_Matricula_Rubro_Data.cs" />
     <Compile Include="Academico\aca_MecanismoDePago_Data.cs" />
     <Compile Include="Academico\aca_Menu_Data.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Academico\aca_PlantillaTipo_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Data.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Data.cs" />
+    <Compile Include="Academico\aca_PreMatricula_Data.cs" />
     <Compile Include="Academico\aca_Profesor_Data.cs" />
     <Compile Include="Academico\aca_Reporte_Data.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Data.cs" />
@@ -191,6 +193,12 @@
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_PlantillaTipo.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_PreMatricula.cs">
+      <DependentUpon>ModelAcademico.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Base\aca_PreMatricula_Rubro.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\aca_Reporte.cs">
