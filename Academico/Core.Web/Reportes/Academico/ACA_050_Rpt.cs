@@ -35,6 +35,8 @@ namespace Core.Web.Reportes.Academico
             ACA_050_Bus bus_rpt = new ACA_050_Bus();
             List<ACA_050_Info> lst_rpt = new List<ACA_050_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            lbl_usuario.Text = usuario;
 
             this.DataSource = lst_rpt;
             aca_Sede_Bus bus_sede = new aca_Sede_Bus();
@@ -44,7 +46,16 @@ namespace Core.Web.Reportes.Academico
                 Rector.Text = sede.NombreRector;
                 Secretaria.Text = sede.NombreSecretaria;
             }
-
+            tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+            var emp = bus_empresa.get_info(IdEmpresa);
+            if (emp != null)
+            {
+                if (emp.em_logo != null)
+                {
+                    ImageConverter obj = new ImageConverter();
+                    lbl_imagen.Image = (Image)obj.ConvertFrom(emp.em_logo);
+                }
+            }
         }
 
         private void Promedio_SubRpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)

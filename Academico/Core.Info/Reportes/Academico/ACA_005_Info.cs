@@ -107,5 +107,9 @@ namespace Core.Info.Reportes.Academico
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
         public int IdAnio { get; set; }
+        public string Dificultad_Escritura { get; set; }
+        public string Dificultad_Lectura { get; set; }
+        public string Dificultad_Matematicas { get; set; }
+        public string cedulaRepresentante { get; set; }
     }
 }
