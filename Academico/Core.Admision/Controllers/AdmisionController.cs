@@ -201,7 +201,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.CedulaAspirante.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.CedulaAspirante.SaveAs(path);
             }
             if (model.CedulaRepresentante != null)
             {
@@ -210,7 +210,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.CedulaRepresentante.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.CedulaRepresentante.SaveAs(path);
             }
             if (model.RecordAcademicoAspirante != null)
             {
@@ -219,7 +219,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.RecordAcademicoAspirante.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.RecordAcademicoAspirante.SaveAs(path);
             }
             if (model.PagoAlDiaAspirante != null)
             {
@@ -228,7 +228,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.PagoAlDiaAspirante.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.PagoAlDiaAspirante.SaveAs(path);
             }
             if (model.CertificadoLaboral != null)
             {
@@ -237,7 +237,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.CertificadoLaboral.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.CertificadoLaboral.SaveAs(path);
             }
             return RedirectToAction("Index");
         }
@@ -537,7 +537,7 @@ namespace Core.Admision.Controllers
                 info.EstaFallecido_Representante = info.EstaFallecido_Madre;
                 info.SeFactura_Representante = info.SeFactura_Madre;
                 info.Idtipo_cliente_Representante = info.Idtipo_cliente_Madre;
-                info.IdTipoCredito_Representante = info.IdTipoDocumento_Madre;
+                info.IdTipoCredito_Representante = info.IdTipoCredito_Madre;
                 info.IdCiudad_Representante_Fact = info.IdCiudad_Madre_Fact;
                 info.IdParroquia_Representante_Fact = info.IdParroquia_Madre_Fact;
             }
@@ -586,7 +586,7 @@ namespace Core.Admision.Controllers
                 info.EstaFallecido_Representante = info.EstaFallecido_Representante;
                 info.SeFactura_Representante = info.SeFactura_Representante;
                 info.Idtipo_cliente_Representante = info.Idtipo_cliente_Representante;
-                info.IdTipoCredito_Representante = info.IdTipoDocumento_Representante;
+                info.IdTipoCredito_Representante = info.IdTipoCredito_Representante;
                 info.IdCiudad_Representante_Fact = info.IdCiudad_Representante_Fact;
                 info.IdParroquia_Representante_Fact = info.IdParroquia_Representante_Fact;
             }
@@ -782,24 +782,24 @@ namespace Core.Admision.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ValidarArchivos(HttpPostedFileBase FotoAspirante)
-        {
-            var resultado = "";
+        //public JsonResult ValidarArchivos(HttpPostedFileBase FotoAspirante)
+        //{
+        //    var resultado = "";
 
-            if (FotoAspirante==null)
-            {
-                resultado = "foto del aspirante, ";
-            }
-            else
-            {
-                if (FotoAspirante.ContentLength > 0 && FotoAspirante.ContentLength <= 100000)
-                {
-                    resultado = "peso no permitido para foto del aspirante, ";
-                }
-            }
+        //    if (FotoAspirante==null)
+        //    {
+        //        resultado = "foto del aspirante, ";
+        //    }
+        //    else
+        //    {
+        //        if (FotoAspirante.ContentLength > 0 && FotoAspirante.ContentLength <= 100000)
+        //        {
+        //            resultado = "peso no permitido para foto del aspirante, ";
+        //        }
+        //    }
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(resultado, JsonRequestBehavior.AllowGet);
+        //}
         #endregion
     }
 }

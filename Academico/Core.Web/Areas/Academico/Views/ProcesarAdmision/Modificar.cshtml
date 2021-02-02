@@ -2267,7 +2267,7 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("get_info_x_num_cedula", "Admision",new { Area = "Academico"})',
+                url: '@Url.Action("get_info_x_num_cedula", "ProcesarAdmision",new { Area = "Academico"})',
                 async: false,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -2359,6 +2359,7 @@
                             $("#IdTipoDocumento_Padre").val(data.IdTipoDocumento);
                             $("#Nombres_Padre").val(data.pe_nombre);
                             $("#Apellidos_Padre").val(data.pe_apellido);
+                            $("#NombreCompleto_Padre").val(data.pe_nombreCompleto);
                             $("#RazonSocial_Padre").val(data.pe_razonSocial);
                             $("#Sexo_Padre").val(data.pe_sexo);
                             FechaNacimiento_Padre.SetDate(new Date(data.anio, data.mes, data.dia));
@@ -2375,7 +2376,7 @@
                             $("#IdReligion_Padre").val(data.IdReligion);
                             $("#IdProfesion_Padre").val(data.IdProfesion);
                             AsisteCentroCristiano_Padre.SetChecked(data.AsisteCentroCristiano);
-
+                            SeFactura_Padre.SetChecked(false);
                             mostrar_vehiculo_padre();
                         }
                         else {
@@ -2442,6 +2443,7 @@
                             $("#IdTipoDocumento_Madre").val(data.IdTipoDocumento);
                             $("#Nombres_Madre").val(data.pe_nombre);
                             $("#Apellidos_Madre").val(data.pe_apellido);
+                            $("#NombreCompleto_Madre").val(data.pe_nombreCompleto);
                             $("#RazonSocial_Madre").val(data.pe_razonSocial);
                             $("#Sexo_Madre").val(data.pe_sexo);
                             $("#Direccion_Madre").val(data.pe_direccion);
@@ -2457,8 +2459,8 @@
                             $("#IdGrupoEtnico_Madre").val(data.IdGrupoEtnico);
                             $("#IdReligion_Madre").val(data.IdReligion);
                             $("#IdProfesion_Madre").val(data.IdProfesion);
-                            AsisteCentroCristiano_padre.SetChecked(data.AsisteCentroCristiano);
-
+                            AsisteCentroCristiano_Madre.SetChecked(data.AsisteCentroCristiano);
+                            SeFactura_Madre.SetChecked(false);
                             mostrar_vehiculo_madre();
                         }
                         else {
@@ -2524,6 +2526,7 @@
                         $("#IdTipoDocumento_Representante").val(data.IdTipoDocumento);
                         $("#Nombres_Representante").val(data.pe_nombre);
                         $("#Apellidos_Representante").val(data.pe_apellido);
+                        $("#NombreCompleto_Representante").val(data.pe_nombreCompleto);
                         $("#RazonSocial_Representante").val(data.pe_razonSocial);
                         $("#Sexo_Representante").val(data.pe_sexo);
                         $("#Direccion_Representante").val(data.pe_direccion);
@@ -2532,15 +2535,14 @@
                         $("#Correo_Representante").val(data.pe_correo);
                         $("#IdEstadoCivil_Representante").val(data.IdEstadoCivil);
                         FechaNacimiento_Representante.SetDate(new Date(data.anio, data.mes, data.dia));
-                        ("#FechaNacimiento_Representante").val(Fecha);
                         $("#CodCatalogoCONADIS_Representante").val(data.CodCatalogoCONADIS);
                         $("#PorcentajeDiscapacidad_Representante").val(data.PorcentajeDiscapacidad);
                         $("#NumeroCarnetConadis_Representante").val(data.NumeroCarnetConadis);
                         $("#IdGrupoEtnico_Representante").val(data.IdGrupoEtnico);
                         $("#IdReligion_Representante").val(data.IdReligion);
                         $("#IdProfesion_Representante").val(data.IdProfesion);
-                        AsisteCentroCristiano_padre.SetChecked(data.AsisteCentroCristiano);
-
+                        AsisteCentroCristiano_Representante.SetChecked(data.AsisteCentroCristiano);
+                        SeFactura_Representante.SetChecked(false);
                         mostrar_vehiculo_madre();
                     }
                     else {

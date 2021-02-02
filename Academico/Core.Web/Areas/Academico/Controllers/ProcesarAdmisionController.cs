@@ -423,6 +423,10 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Admision_Info model = bus_admision.GetInfo(IdEmpresa, IdAdmision);
+            model.CodCatalogoCONADIS_Aspirante = model.CodCatalogoCONADIS_Aspirante == null ? "" : model.CodCatalogoCONADIS_Aspirante;
+            model.CodCatalogoCONADIS_Madre = model.CodCatalogoCONADIS_Madre == null ? "" : model.CodCatalogoCONADIS_Madre;
+            model.CodCatalogoCONADIS_Padre = model.CodCatalogoCONADIS_Padre == null ? "" : model.CodCatalogoCONADIS_Padre;
+            model.CodCatalogoCONADIS_Representante = model.CodCatalogoCONADIS_Representante == null ? "" : model.CodCatalogoCONADIS_Representante;
 
             if (model == null)
                 return RedirectToAction("Index");
@@ -571,6 +575,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!validar_PreMatricula(info_prematricula, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model);
                 return View(model);
             }
@@ -578,6 +583,7 @@ namespace Core.Web.Areas.Academico.Controllers
             if (!bus_prematricula.GuardarDB(info_prematricula))
             {
                 ViewBag.mensaje = "No se ha podido guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
                 cargar_combos(model);
                 return View(model);
             }
@@ -1109,9 +1115,39 @@ namespace Core.Web.Areas.Academico.Controllers
                 info.info_alumno.info_valido_representante = false;
             }
 
-            if (info.IdParalelo==0)
+            if (info.info_alumno.pe_cedulaRuc_madre == info.info_alumno.pe_cedulaRuc_padre)
             {
-                msg = "Seleccione paralelo";
+                msg = "No se puede registrar a la misma persona como padre y madre";
+                return false;
+            }
+
+            if (info.info_alumno.SeFactura_madre ==false && info.info_alumno.SeFactura_padre== false && info.info_alumno.SeFactura_representante==false)
+            {
+                msg = "Debe seleccionar a una persona para facturar";
+                return false;
+            }
+            else
+            {
+                if (info.info_alumno.SeFactura_madre == true && info.info_alumno.SeFactura_padre == true)
+                {
+                    msg = "Debe seleccionar a una sola persona para facturar";
+                    return false;
+                }
+                if (info.info_alumno.SeFactura_madre == true && info.info_alumno.SeFactura_representante == true)
+                {
+                    msg = "Debe seleccionar a una sola persona para facturar";
+                    return false;
+                }
+                if (info.info_alumno.SeFactura_padre == true && info.info_alumno.SeFactura_representante == true)
+                {
+                    msg = "Debe seleccionar a una sola persona para facturar";
+                    return false;
+                }
+            }
+
+            if (info.IdCurso==0)
+            {
+                msg = "Seleccione curso";
                 return false;
             }
 
@@ -1745,6 +1781,34 @@ namespace Core.Web.Areas.Academico.Controllers
 
 
             return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ProcesarAdmision(int IdEmpresa = 0, decimal IdAdmision = 0)
+        {
+            var info_admision = bus_admision.GetInfo(IdEmpresa, IdAdmision);
+            var mensaje = "";
+            if (info_admision.IdUsuarioRevision == null)
+            {
+                info_admision.IdUsuarioRevision = SessionFixed.IdUsuario;
+                info_admision.IdUsuarioModificacion = SessionFixed.IdUsuario;
+                info_admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.ENPROCESO);
+
+                
+                if (bus_admision.ModificarEstadoEnProceso(info_admision))
+                {
+                    mensaje = "El estado de la admisión cambió a proceso de revisión";
+                }
+                else
+                {
+                    mensaje = "El estado de la admisión no se ha actualizado";
+                }
+            }
+            else
+            {
+                mensaje = "La admisión ya esta siendo revisando por: " + info_admision.IdUsuarioRevision + " desde: " + info_admision.FechaRevision.ToString();
+            }
+            
+            
+            return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

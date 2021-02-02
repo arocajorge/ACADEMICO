@@ -1779,7 +1779,17 @@ function get_info_x_num_cedula_padre() {
                 $("#IdGrupoEtnico_Padre").val(data.IdGrupoEtnico);
                 $("#IdReligion_Padre").val(data.IdReligion);
                 $("#IdProfesion_Padre").val(data.IdProfesion);
-                $("#AsisteCentroCristiano_Padre").prop("checked", data.AsisteCentroCristiano);               
+                $("#AsisteCentroCristiano_Padre").prop("checked", data.AsisteCentroCristiano);
+
+                $("#IdPais_Padre").val("");
+                CargarRegion_Padre();
+                $("#Cod_Region_Padre").val("");
+                CargarProvincia_Padre();
+                $("#IdProvincia_Padre").val("");
+                CargaCiudad_Padre();
+                $("#IdCiudad_Padre").val("");
+                CargarParroquia_Padre();
+                $("#IdParroquia_Padre").val("");
             }
         },
         error: function (error) {
@@ -1853,6 +1863,16 @@ function get_info_x_num_cedula_madre() {
                 $("#IdReligion_Madre").val(data.IdReligion);
                 $("#IdProfesion_Madre").val(data.IdProfesion);
                 $("#AsisteCentroCristiano_Madre").prop("checked", data.AsisteCentroCristiano);
+
+                $("#IdPais_Madre").val("");
+                CargarRegion_Madre();
+                $("#Cod_Region_Madre").val("");
+                CargarProvincia_Madre();
+                $("#IdProvincia_Madre").val("");
+                CargaCiudad_Madre();
+                $("#IdCiudad_Madre").val("");
+                CargarParroquia_Madre();
+                $("#IdParroquia_Madre").val("");
             }
         },
         error: function (error) {
@@ -1926,6 +1946,16 @@ function get_info_x_num_cedula_representante() {
                 $("#IdReligion_Representante").val(data.IdReligion);
                 $("#IdProfesion_Representante").val(data.IdProfesion);
                 $("#AsisteCentroCristiano_Representante").prop("checked", data.AsisteCentroCristiano);
+
+                $("#IdPais_Representante").val("");
+                CargarRegion_Representante();
+                $("#Cod_Region_Representante").val("");
+                CargarProvincia_Representante();
+                $("#IdProvincia_Representante").val("");
+                CargaCiudad_Representante();
+                $("#IdCiudad_Representante").val("");
+                CargarParroquia_Representante();
+                $("#IdParroquia_Representante").val("");
             }
         },
         error: function (error) {

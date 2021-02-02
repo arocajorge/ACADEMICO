@@ -823,6 +823,7 @@ namespace Core.Data.Academico
                     IdParroquia = Entity_aca.IdParroquia,
                     Sector = Entity_aca.Sector,
                     pe_fechaNacimiento = Entity_aca.pe_fechaNacimiento,
+                    pe_sexo = Entity_aca.pe_sexo,
                     IdReligion = Entity_aca.IdReligion,
                     IdGrupoEtnico = Entity_aca.IdGrupoEtnico,
                     AsisteCentroCristiano = Entity_aca.AsisteCentroCristiano

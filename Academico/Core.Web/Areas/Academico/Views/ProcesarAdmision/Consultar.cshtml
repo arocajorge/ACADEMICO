@@ -185,15 +185,15 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="Sexo_Aspirante">Sexo</label>
+                                <label>Sexo</label>
                                 @Html.DropDownListFor(q => q.Sexo_Aspirante, new SelectList(ViewBag.lst_sexo, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Sexo_Aspirante" })
                                 @Html.ValidationMessageFor(q => q.Sexo_Aspirante, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label for="Sexo_Aspirante">Tipo de sangre</label>
-                                @Html.DropDownListFor(q => q.CodCatalogoSangre_Aspirante, new SelectList(ViewBag.lst_tipo_sangre, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "Sexo_Aspirante" })
+                                <label>Tipo de sangre</label>
+                                @Html.DropDownListFor(q => q.CodCatalogoSangre_Aspirante, new SelectList(ViewBag.lst_tipo_sangre, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoSangre_Aspirante" })
                                 @Html.ValidationMessageFor(q => q.CodCatalogoSangre_Aspirante, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -383,7 +383,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="Sexo_Aspirante">Tipo de discapacidad</label>
-                                @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Aspirante, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoCONADIS" })
+                                @Html.DropDownListFor(q => q.CodCatalogoCONADIS_Aspirante, new SelectList(ViewBag.lst_tipo_discapacidad, "CodCatalogo", "ca_descripcion"), new { @class = "form-control", @id = "CodCatalogoCONADIS_Aspirante" })
                                 @Html.ValidationMessageFor(q => q.CodCatalogoCONADIS_Aspirante, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -780,8 +780,8 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="IdEstadoCivil">Instrucción</label>
-                                @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Madre, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaInst_Madre" })
-                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Madre, "", new { @class = "text-danger" })
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Padre, new SelectList(ViewBag.lst_instruccion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaInst_Padre" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Padre, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -897,8 +897,8 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="info_persona.Celular_Aspirante">Número documento*</label>
-                                @Html.TextBoxFor(q => q.Celular_Madre, new { @class = "form-control", @id = "Celular_Madre" })
-                                @Html.ValidationMessageFor(q => q.Celular_Madre, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.CedulaRuc_Madre, new { @class = "form-control", @id = "CedulaRuc_Madre" })
+                                @Html.ValidationMessageFor(q => q.CedulaRuc_Madre, "", new { @class = "text-danger" })
                                 <label id="error_documento_madre" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                             </div>
                         </div>
@@ -1369,8 +1369,8 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="info_persona.Celular_Aspirante">Número documento*</label>
-                                @Html.TextBoxFor(q => q.Celular_Representante, new { @class = "form-control", @id = "Celular_Representante" })
-                                @Html.ValidationMessageFor(q => q.Celular_Representante, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(q => q.CedulaRuc_Representante, new { @class = "form-control", @id = "CedulaRuc_Representante" })
+                                @Html.ValidationMessageFor(q => q.CedulaRuc_Representante, "", new { @class = "text-danger" })
                                 <label id="error_documento_Representante" style="color:red" hidden> <i class="icon fa fa-warning"></i> Número de identificación inválida</label>
                             </div>
                         </div>
@@ -1989,7 +1989,7 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("get_info_x_num_cedula", "Admision",new { Area = "Academico"})',
+                url: '@Url.Action("get_info_x_num_cedula", "ProcesarAdmision",new { Area = "Academico"})',
                 async: false,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -2067,7 +2067,7 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("get_info_x_num_cedula_persona", "Admision",new { Area = "Academico"})',
+                url: '@Url.Action("get_info_x_num_cedula_persona", "ProcesarAdmision",new { Area = "Academico"})',
                 async: false,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -2148,7 +2148,7 @@
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("get_info_x_num_cedula_persona", "Admision",new { Area = "Academico"})',
+                url: '@Url.Action("get_info_x_num_cedula_persona", "ProcesarAdmision",new { Area = "Academico"})',
                 async: false,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -2171,7 +2171,7 @@
                             $("#Correo_Madre").val(data.pe_correo);
                             $("#IdEstadoCivil_Madre").val(data.IdEstadoCivil);
                             FechaNacimiento_Madre.SetDate(new Date(data.anio, data.mes, data.dia));
-                            ("#FechaNacimiento_Madre").val(Fecha);
+                            //("#FechaNacimiento_Madre").val(Fecha);
                             $("#CodCatalogoCONADIS_Madre").val(data.CodCatalogoCONADIS);
                             $("#PorcentajeDiscapacidad_Madre").val(data.PorcentajeDiscapacidad);
                             $("#NumeroCarnetConadis_Madre").val(data.NumeroCarnetConadis);
