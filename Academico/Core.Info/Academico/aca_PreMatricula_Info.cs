@@ -42,6 +42,7 @@ namespace Core.Info.Academico
         public aca_Alumno_Info info_alumno { get; set; }
         public List<aca_PreMatricula_Rubro_Info> lst_PreMatriculaRubro { get; set; }
         public List<aca_AlumnoDocumento_Info> lst_Documentos { get; set; }
+        public aca_SocioEconomico_Info info_socioeconomico { get; set; }
         public bool info_valido_padre { get; set; }
         public bool info_valido_madre { get; set; }
         public bool info_valido_representante { get; set; }

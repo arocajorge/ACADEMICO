@@ -2158,11 +2158,11 @@ function ValidarArchivos() {
     }
 
     if ($('#CedulaRepresentante').val() == "") {
-        mensaje += "seleccione archivo para cédula del aspirante, ";
+        mensaje += "seleccione archivo para cédula del representante, ";
     }
     else {
         if ($("#CedulaRepresentante")[0].files[0].size > 0 && $("#CedulaRepresentante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo cédula del aspirante ha superado el peso máximo, ";
+            mensaje += "el archivo cédula del representante ha superado el peso máximo, ";
         }
     }
 

@@ -11,6 +11,7 @@ namespace Core.Data.Academico
 {
     public class aca_PreMatricula_Data
     {
+        aca_AlumnoDocumento_Data odata_AlumnoDocumento = new aca_AlumnoDocumento_Data();
         public decimal getId(int IdEmpresa)
         {
             try
@@ -96,6 +97,69 @@ namespace Core.Data.Academico
                             Context.aca_PreMatricula_Rubro.Add(Entity_Det);
                         }
                     }
+
+                    #region Documentos por alumno
+                    //Obtengo lista de documentos por curso
+                    var Secuencia = odata_AlumnoDocumento.getSecuencia(info.IdEmpresa, info.IdAlumno);
+                    var lstDocPorCurso = Context.aca_AnioLectivo_Curso_Documento.Where(q => q.IdEmpresa == info.IdEmpresa
+                  && q.IdSede == info.IdSede
+                  && q.IdAnio == info.IdAnio
+                  && q.IdNivel == info.IdNivel
+                  && q.IdJornada == info.IdJornada
+                  && q.IdCurso == info.IdCurso).ToList();
+
+                    //Recorro lista de documentos por curso
+                    foreach (var item in lstDocPorCurso)
+                    {
+                        //Valido si en la lista de los seleccionados existe el documento
+                        var Documento = info.lst_Documentos.Where(q => q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                        //Si no existe como seleccionado
+                        if (Documento == null)
+                        {
+                            //Valido si existe en la lista de documentos por alumno
+                            var DocumentoAlumno = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                            if (DocumentoAlumno == null)
+                            {
+                                //Si no existe lo agrego con estado false
+                                Context.aca_AlumnoDocumento.Add(new aca_AlumnoDocumento
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAlumno = info.IdAlumno,
+                                    IdDocumento = item.IdDocumento,
+                                    Secuencia = Secuencia++,
+                                    EnArchivo = false
+                                });
+                            }
+                            else
+                            {
+                                //Si existe lo modifico y le pongo estado false
+                                DocumentoAlumno.EnArchivo = false;
+                            }
+                        }
+                        else
+                        {
+                            //Si existe como seleccionado valido si existe en la tabla de documentos por alumno
+                            var DocumentoAlumnoE = Context.aca_AlumnoDocumento.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.IdDocumento == item.IdDocumento).FirstOrDefault();
+                            if (DocumentoAlumnoE == null)
+                            {
+                                //Si no existe lo agrego con estado true
+                                Context.aca_AlumnoDocumento.Add(new aca_AlumnoDocumento
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAlumno = info.IdAlumno,
+                                    IdDocumento = item.IdDocumento,
+                                    Secuencia = Secuencia++,
+                                    EnArchivo = true
+                                });
+                            }
+                            else
+                            {
+                                //Si existe lo modifico y le pongo estado true
+                                DocumentoAlumnoE.EnArchivo = true;
+                            }
+                        }
+                    }
+                    #endregion
 
                     aca_Admision Entity_Admision = Context.aca_Admision.FirstOrDefault(q => q.IdEmpresa == info.IdAdmision);
                     if (Entity_Admision == null)

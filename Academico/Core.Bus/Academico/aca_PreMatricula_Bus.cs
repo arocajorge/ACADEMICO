@@ -25,6 +25,7 @@ namespace Core.Bus.Academico
         fa_TerminoPago_Data odata_terminopago = new fa_TerminoPago_Data();
         fa_formaPago_Data odata_formapago = new fa_formaPago_Data();
         fa_Vendedor_Data odata_vendedor = new fa_Vendedor_Data();
+        aca_SocioEconomico_Data odata_socioeconomico = new aca_SocioEconomico_Data();
         fa_cliente_x_fa_Vendedor_x_sucursal_Data odata_vendedor_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_Data();
 
         public bool GuardarDB(aca_PreMatricula_Info info)
@@ -556,6 +557,44 @@ namespace Core.Bus.Academico
                         }
                     }
                 }
+
+                var info_socio_economico = odata_socioeconomico.getInfo_by_Alumno(info.IdEmpresa, info.IdAlumno);
+
+                if (info_socio_economico == null)
+                {
+                    odata_socioeconomico.guardarDB(info.info_socioeconomico);
+                }
+                else
+                {
+                    info_socio_economico.IdCatalogoFichaVi = info.info_socioeconomico.IdCatalogoFichaVi;
+                    info_socio_economico.IdCatalogoFichaTVi = info.info_socioeconomico.IdCatalogoFichaTVi;
+                    info_socio_economico.IdCatalogoFichaAg = info.info_socioeconomico.IdCatalogoFichaAg;
+                    info_socio_economico.TieneElectricidad = info.info_socioeconomico.TieneElectricidad;
+                    info_socio_economico.TieneHermanos = info.info_socioeconomico.TieneHermanos;
+                    info_socio_economico.CantidadHermanos = info.info_socioeconomico.CantidadHermanos;
+                    info_socio_economico.SueldoPadre = info.info_socioeconomico.SueldoPadre;
+                    info_socio_economico.SueldoMadre = info.info_socioeconomico.SueldoMadre;
+                    info_socio_economico.OtroIngresoMadre = info.info_socioeconomico.OtroIngresoMadre;
+                    info_socio_economico.OtroIngresoPadre = info.info_socioeconomico.OtroIngresoPadre;
+                    info_socio_economico.GastoAlimentacion = info.info_socioeconomico.GastoAlimentacion;
+                    info_socio_economico.GastoEducacion = info.info_socioeconomico.GastoEducacion;
+                    info_socio_economico.GastoServicioBasico = info.info_socioeconomico.GastoServicioBasico;
+                    info_socio_economico.GastoSalud = info.info_socioeconomico.GastoSalud;
+                    info_socio_economico.GastoArriendo = info.info_socioeconomico.GastoArriendo;
+                    info_socio_economico.GastoPrestamo = info.info_socioeconomico.GastoPrestamo;
+                    info_socio_economico.OtroGasto = info.info_socioeconomico.OtroGasto;
+                    info_socio_economico.IdCatalogoFichaMot = info.info_socioeconomico.IdCatalogoFichaMot;
+                    info_socio_economico.IdCatalogoFichaIns = info.info_socioeconomico.IdCatalogoFichaIns;
+                    info_socio_economico.IdCatalogoFichaFin = info.info_socioeconomico.IdCatalogoFichaFin;
+                    info_socio_economico.IdCatalogoFichaVive = info.info_socioeconomico.IdCatalogoFichaVive;
+                    info_socio_economico.OtroFinanciamiento = info.info_socioeconomico.OtroFinanciamiento;
+                    info_socio_economico.OtroInformacionInst = info.info_socioeconomico.OtroInformacionInst;
+                    info_socio_economico.OtroMotivoIngreso = info.info_socioeconomico.OtroMotivoIngreso;
+                    info_socio_economico.IdUsuarioModificacion = info.info_socioeconomico.IdUsuarioModificacion;
+                    odata_socioeconomico.modificarDB(info_socio_economico);
+                }
+                
+
                 return odata_prematricula.guardarDB(info);
 
 

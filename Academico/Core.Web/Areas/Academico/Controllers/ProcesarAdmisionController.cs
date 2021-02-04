@@ -19,6 +19,11 @@ namespace Core.Web.Areas.Academico.Controllers
     public class ProcesarAdmisionController : Controller
     {
         #region Variables
+        aca_SocioEconomico_Bus bus_socio_economico = new aca_SocioEconomico_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+        aca_Matricula_List Lista_Matricula = new aca_Matricula_List();
+        aca_CatalogoFicha_Bus bus_catalogo_socioeconomico = new aca_CatalogoFicha_Bus();
+
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         tb_GrupoEtnico_Bus bus_grupoetnico = new tb_GrupoEtnico_Bus();
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
@@ -83,6 +88,7 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_Academico(model.IdEmpresa, model.IdAnio, model.IdSede);
+            lst_admisiones.ForEach(q => q.IdUsuarioSesion = SessionFixed.IdUsuario);
             Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model);
             return View(model);
@@ -92,6 +98,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Index(aca_Admision_Info model)
         {
             List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_Academico(model.IdEmpresa, model.IdAnio, model.IdSede);
+            lst_admisiones.ForEach(q=> q.IdUsuarioSesion = SessionFixed.IdUsuario);
             Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model);
             return View(model);
@@ -547,30 +554,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 }
             }
 
-            info_prematricula.lst_PreMatriculaRubro = lst_DetallePlantilla;         
-            //info_prematricula.lst_Documentos = lst_DetalleDocumentos;
-            //string[] array_doc = IDs_Doc.Split(',');
-            //var lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>();
-            //if (IDs_Doc != "")
-            //{
-            //    foreach (var item in array_doc)
-            //    {
-            //        var existe_documento = bus_alumno_documento.GetInfo(info_prematricula.IdEmpresa, info_prematricula.IdAlumno, Convert.ToInt32(item));
-            //        if (existe_documento == null)
-            //        {
-            //            var info_doc = new aca_AlumnoDocumento_Info
-            //            {
-            //                IdEmpresa = info_prematricula.IdEmpresa,
-            //                IdAlumno = info_prematricula.IdAlumno,
-            //                IdDocumento = Convert.ToInt32(item),
-            //                EnArchivo = true
-            //            };
-
-            //            lst_alumno_documentos.Add(info_doc);
-            //        }
-            //    }
-            //}
-
+            info_prematricula.lst_PreMatriculaRubro = lst_DetallePlantilla;
+            info_prematricula.lst_Documentos = lst_alumno_documentos;
 
             if (!validar_PreMatricula(info_prematricula, ref mensaje))
             {
@@ -595,6 +580,21 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Metodos
         private void cargar_combos(aca_Admision_Info model)
         {
+            var lst_vivienda = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVIENDA), false);
+            ViewBag.lst_vivienda = lst_vivienda;
+            var lst_tipo_vivienda = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.TIPOVIVIENDA), false);
+            ViewBag.lst_tipo_vivienda = lst_tipo_vivienda;
+            var lst_agua = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.AGUA), false);
+            ViewBag.lst_agua = lst_agua;
+            var lst_ing_institucion = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.MOTIVOING), false);
+            ViewBag.lst_ing_institucion = lst_ing_institucion;
+            var lst_institucion = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTITUCION), false);
+            ViewBag.lst_institucion = lst_institucion;
+            var lst_financiamiento = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.ESTUDIOS), false);
+            ViewBag.lst_financiamiento = lst_financiamiento;
+            var lst_vivecon = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVECON), false);
+            ViewBag.lst_vivecon = lst_vivecon;
+
             var lst_anio = bus_anio.GetList_Matricula(model.IdEmpresa, false);
 
             var lst_sede = bus_sede.GetList(model.IdEmpresa, false);
@@ -619,14 +619,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
             var lst_instruccion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTRUCCION), false);
             lst_instruccion.Add(new aca_CatalogoFicha_Info { IdCatalogoFicha = 0, NomCatalogoFicha = "--- Seleccione ---" });
-
-            var lst_vive = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVECON), false);
-            var lst_tipo_vivienda = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.TIPOVIVIENDA), false);
-            var lst_vivienda = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVIENDA), false);
-            var lst_agua = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.AGUA), false);
-            var lst_ing_institucion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.MOTIVOING), false);
-            var lst_institucion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTITUCION), false);
-            var lst_financiamiento = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.ESTUDIOS), false);
 
             var lst_profesion = bus_profesion.GetList(false);
             lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "--- Seleccione ---" });
@@ -671,13 +663,6 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_ciudad = lst_ciudad;
             ViewBag.lst_parroquia = lst_parroquia;
             ViewBag.lst_parentesco = lst_parentesco;
-            ViewBag.lst_vive = lst_vive;
-            ViewBag.lst_tipo_vivienda = lst_tipo_vivienda;
-            ViewBag.lst_vivienda = lst_vivienda;
-            ViewBag.lst_agua = lst_agua;
-            ViewBag.lst_ing_institucion = lst_ing_institucion;
-            ViewBag.lst_institucion = lst_institucion;
-            ViewBag.lst_financiamiento = lst_financiamiento;
             ViewBag.lst_termino_pago = lst_termino_pago;
             ViewBag.lst_clientetipo = lst_clientetipo;
             ViewBag.lst_ciudad_factura = lst_ciudad_factura;
@@ -1486,6 +1471,37 @@ namespace Core.Web.Areas.Academico.Controllers
                 info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
             }
 
+            var info_SocioEconomico = new aca_SocioEconomico_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdAlumno = info_Alumno == null ? 0 : info_Alumno.IdAlumno,
+                IdCatalogoFichaVi = model.IdCatalogoFichaViv_Aspirante,
+                IdCatalogoFichaTVi = model.IdCatalogoFichaTipoViv_Aspirante,
+                IdCatalogoFichaAg = model.IdCatalogoFichaAgua_Aspirante,
+                TieneElectricidad = model.TieneElectricidad_Aspirante,
+                TieneHermanos = model.TieneHermanos_Aspirante,
+                CantidadHermanos = model.CantidadHermanos,
+                SueldoPadre = model.SueldoPadre,
+                SueldoMadre = model.SueldoMadre,
+                OtroIngresoMadre = model.OtroIngresoMadre,
+                OtroIngresoPadre = model.OtroIngresoPadre,
+                GastoAlimentacion = model.GastoAlimentacion,
+                GastoEducacion = model.GastoEducacion,
+                GastoServicioBasico = model.GastoServicioBasico,
+                GastoSalud = model.GastoSalud,
+                GastoArriendo = model.GastoArriendo,
+                GastoPrestamo = model.GastoPrestamo,
+                OtroGasto = model.OtroGasto,
+                IdCatalogoFichaMot = model.IdCatalogoFichaMotivo_Aspirante,
+                IdCatalogoFichaIns = model.IdCatalogoFichaInst_Aspirante,
+                IdCatalogoFichaFin = model.IdCatalogoFichaFinanc_Aspirante,
+                IdCatalogoFichaVive = model.IdCatalogoFichaVive_Aspirante,
+                OtroFinanciamiento = model.OtroFinanciamiento_Aspirante,
+                OtroInformacionInst = model.OtroInformacionInst_Aspirante,
+                OtroMotivoIngreso = model.OtroMotivoIngreso_Aspirante,
+                IdUsuarioModificacion = model.IdUsuarioModificacion,
+        };
+
             var info_PreMatricula = new aca_PreMatricula_Info
             {
                 IdEmpresa = model.IdEmpresa,
@@ -1512,6 +1528,8 @@ namespace Core.Web.Areas.Academico.Controllers
             };
 
             info_PreMatricula.info_alumno = info_Alumno;
+            info_PreMatricula.info_socioeconomico = info_SocioEconomico;
+
             if (model.CedulaRuc_Representante == model.CedulaRuc_Padre || model.CedulaRuc_Representante == model.CedulaRuc_Madre)
             {
                 info_PreMatricula.OtraPersonaFamiliar = false;
@@ -1574,6 +1592,76 @@ namespace Core.Web.Areas.Academico.Controllers
             resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ActualizarDocumentosSeleccionados(string IdComboCurso = "", string Seleccionados = "")
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_detalle = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            lst_detalle.ForEach(q=>q.seleccionado=false);
+            if (Seleccionados != null && Seleccionados != "")
+            {
+                string[] array = Seleccionados.Split(',');
+                foreach (var item in array)
+                {
+                    var info = lst_detalle.Where(q => q.IdStringDoc == item).FirstOrDefault();
+                    if (info != null)
+                    {
+                        lst_detalle.Where(q => q.IdStringDoc == item).FirstOrDefault().seleccionado = true;
+                    }
+                }
+                Lista_DocumentosMatricula.set_list(lst_detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+            return Json(lst_detalle, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SumarValores(int IdAnio = 0, int IdPlantilla = 0, string Seleccionados = "")
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            decimal Total = 0;
+            decimal TotalProntoPago = 0;
+            decimal ValorRubro = 0;
+            decimal ValorDescuento = 0;
+            var lst_detalle = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            if (Seleccionados != null && Seleccionados != "")
+            {
+                string[] array = Seleccionados.Split(',');
+                var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
+
+                foreach (var item in array)
+                {
+                    var info = lst_detalle.Where(q => q.IdString == item).FirstOrDefault();
+                    if (info!=null)
+                    {
+                        lst_detalle.Where(q => q.IdString == item).FirstOrDefault().seleccionado = true;
+                    }
+
+                    var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, info.IdPeriodo);
+                    if (info.AplicaProntoPago == true)
+                    {
+                        if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
+                        {
+                            ValorRubro = info.ValorProntoPago;
+                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                        }
+                        else
+                        {
+                            ValorRubro = info.Total;
+                            TotalProntoPago = TotalProntoPago + Math.Round((ValorRubro), 2, MidpointRounding.AwayFromZero);
+                        }
+
+                        Total = Total + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
+                    }
+                    else
+                    {
+                        ValorRubro = info.Total;
+                        Total = Total + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
+                        TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                    }
+
+                }
+                ListaPreMatriculaRubro.set_list(lst_detalle ,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+            return Json(new { ValorPlantilla = Total, ValorPlantillaProntoPago = TotalProntoPago }, JsonRequestBehavior.AllowGet);
         }
         public JsonResult EnlistarDocumentos(int IdEmpresa = 0, decimal IdAdmision=0)
         {

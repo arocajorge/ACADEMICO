@@ -38,7 +38,26 @@
     function GetSelectedFieldValuesCallback_Doc(values) {
         //Capture all selected keys
         documentoIDs = values.join(',');
-        console.log(documentoIDs);
+
+        var datos = {
+            IdComboCurso: IdComboCurso.GetValue(),
+            Seleccionados: documentoIDs
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("ActualizarDocumentosSeleccionados", "ProcesarAdmision", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+
+            },
+            error: function (error) {
+            }
+        });
     }
 
     function GetSelectedFieldValuesCallback_Total(values) {
@@ -205,6 +224,9 @@
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
                 <a href="#tb_admision" aria-controls="general" role="tab" data-toggle="tab"><b>Datos de la admisión</b></a>
+            </li>
+            <li>
+                <a href="#tb_admisioneconomica" aria-controls="admisioneconomica" role="tab" data-toggle="tab"><b>Ficha SocioEconómica</b></a>
             </li>
             <li>
                 <a href="#tb_admisiondocumentos" aria-controls="admisiondocumentos" role="tab" data-toggle="tab"><b>Documentos de la admisión</b></a>
@@ -1867,6 +1889,238 @@
                     </div>
                 </div>
             </div>
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_admisioneconomica">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">El alumno vive con</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaVive_Aspirante, new SelectList(ViewBag.lst_vivecon, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaVive_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaVive_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Tenencia de vivienda*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaTipoViv_Aspirante, new SelectList(ViewBag.lst_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaTipoViv_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaTipoViv_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Tipo de vivienda*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaViv_Aspirante, new SelectList(ViewBag.lst_tipo_vivienda, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaViv_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaViv_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Agua*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaAgua_Aspirante, new SelectList(ViewBag.lst_agua, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaAgua_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaAgua_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.TieneElectricidad_Aspirante, settings =>
+                            {
+                                settings.Name = "TieneElectricidad_Aspirante";
+                                settings.Text = "Luz electrica";
+                            }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.TieneElectricidad_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="bo_EsBodega"></label>
+                                @Html.DevExpress().CheckBoxFor(q => q.TieneHermanos_Aspirante, settings =>
+                            {
+                                settings.Name = "TieneHermanos_Aspirante";
+                                settings.Text = "Tiene hermanos en la institución";
+                                settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_div();}";
+                            }).GetHtml()
+                                @Html.ValidationMessageFor(q => q.TieneHermanos_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2" id="cant_hermanos" hidden>
+                            <div class="form-group">
+                                <label for="IdEmpresa">Cantidad de hermanos</label>
+                                @Html.TextBoxFor(q => q.CantidadHermanos, new { @class = "form-control", @id = "CantidadHermanos" })
+                                @Html.ValidationMessageFor(m => m.CantidadHermanos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Sueldo padre*</label>
+                                @Html.TextBoxFor(q => q.SueldoPadre, new { @class = "form-control", @id = "SueldoPadre" })
+                                @Html.ValidationMessageFor(m => m.SueldoPadre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Sueldo madre*</label>
+                                @Html.TextBoxFor(q => q.SueldoMadre, new { @class = "form-control", @id = "SueldoMadre" })
+                                @Html.ValidationMessageFor(m => m.SueldoMadre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otros ingresos Padre*</label>
+                                @Html.TextBoxFor(q => q.OtroIngresoPadre, new { @class = "form-control", @id = "OtroIngresoPadre" })
+                                @Html.ValidationMessageFor(m => m.OtroIngresoPadre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otros ingresos Madre*</label>
+                                @Html.TextBoxFor(q => q.OtroIngresoMadre, new { @class = "form-control", @id = "OtroIngresoMadre" })
+                                @Html.ValidationMessageFor(m => m.OtroIngresoMadre, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos alimentacion*</label>
+                                @Html.TextBoxFor(q => q.GastoAlimentacion, new { @class = "form-control", @id = "GastoAlimentacion" })
+                                @Html.ValidationMessageFor(m => m.GastoAlimentacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos educación*</label>
+                                @Html.TextBoxFor(q => q.GastoEducacion, new { @class = "form-control", @id = "GastoEducacion" })
+                                @Html.ValidationMessageFor(m => m.GastoEducacion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos servicios basico*</label>
+                                @Html.TextBoxFor(q => q.GastoServicioBasico, new { @class = "form-control", @id = "GastoServicioBasico" })
+                                @Html.ValidationMessageFor(m => m.GastoServicioBasico, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos salud*</label>
+                                @Html.TextBoxFor(q => q.GastoSalud, new { @class = "form-control", @id = "GastoSalud" })
+                                @Html.ValidationMessageFor(m => m.GastoSalud, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos arriendo*</label>
+                                @Html.TextBoxFor(q => q.GastoArriendo, new { @class = "form-control", @id = "GastoArriendo" })
+                                @Html.ValidationMessageFor(m => m.GastoArriendo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Gastos préstamo*</label>
+                                @Html.TextBoxFor(q => q.GastoPrestamo, new { @class = "form-control", @id = "GastoPrestamo" })
+                                @Html.ValidationMessageFor(m => m.GastoPrestamo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otros gastos*</label>
+                                @Html.TextBoxFor(q => q.OtroGasto, new { @class = "form-control", @id = "OtroGasto" })
+                                @Html.ValidationMessageFor(m => m.OtroGasto, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Total de ingresos*</label>
+                                @Html.TextBoxFor(q => q.TotalIngresos, new { @class = "form-control", @id = "TotalIngresos", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(m => m.TotalIngresos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Total de gastos*</label>
+                                @Html.TextBoxFor(q => q.TotalEgresos, new { @class = "form-control", @id = "TotalEgresos", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(m => m.TotalEgresos, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="IdEmpresa">Saldo*</label>
+                                @Html.TextBoxFor(q => q.Saldo, new { @class = "form-control", @id = "Saldo", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(m => m.Saldo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">¿Qué le impulsa a ingresar al Liceo Cristiano de Guayaquil?*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaMotivo_Aspirante, new SelectList(ViewBag.lst_ing_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaMotivo_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaMotivo_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-8" id="otro_motivo_ingreso" hidden>
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otro motivo de Ingreso</label>
+                                @Html.TextBoxFor(q => q.OtroMotivoIngreso_Aspirante, new { @class = "form-control", @id = "OtroMotivoIngreso_Aspirante" })
+                                @Html.ValidationMessageFor(m => m.OtroMotivoIngreso_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">¿Cómo se informó de nuestra institución?*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaInst_Aspirante, new SelectList(ViewBag.lst_institucion, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaInst_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaInst_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-8" id="otro_informacion_inst" hidden>
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otra información</label>
+                                @Html.TextBoxFor(q => q.OtroInformacionInst_Aspirante, new { @class = "form-control", @id = "OtroInformacionInst_Aspirante" })
+                                @Html.ValidationMessageFor(m => m.OtroInformacionInst_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="IdEmpresa">¿Cómo financiara los estudios?*</label>
+                                @Html.DropDownListFor(q => q.IdCatalogoFichaFinanc_Aspirante, new SelectList(ViewBag.lst_financiamiento, "IdCatalogoFicha", "NomCatalogoFicha"), new { @class = "form-control", @id = "IdCatalogoFichaFinanc_Aspirante" })
+                                @Html.ValidationMessageFor(q => q.IdCatalogoFichaFinanc_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-8" id="otro_forma_financ" hidden>
+                            <div class="form-group">
+                                <label for="IdEmpresa">Otra forma de financiamiento</label>
+                                @Html.TextBoxFor(q => q.OtroFinanciamiento_Aspirante, new { @class = "form-control", @id = "OtroFinanciamiento_Aspirante" })
+                                @Html.ValidationMessageFor(m => m.OtroFinanciamiento_Aspirante, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_admisiondocumentos">
                 <table class="table table-striped" id="DetalleDocumentos">
                     <thead>
@@ -2105,6 +2359,62 @@
             mostrar_cliente_madre();
             mostrar_cliente_representante();
             mostrar_ArchivosAspirante();
+
+            mostrar_otro_motivo();
+            mostrar_otro_informacion_inst();
+            mostrar_otro_financiamiento();
+            mostrar_div();
+
+            sumar_ingresos();
+            sumar_egresos();
+
+            $("#IdCatalogoFichaMotivo_Aspirante").change(function () {
+                mostrar_otro_motivo();
+            });
+
+            $("#IdCatalogoFichaInst_Aspirante").change(function () {
+                mostrar_otro_informacion_inst();
+            });
+
+            $("#IdCatalogoFichaFinanc_Aspirante").change(function () {
+                mostrar_otro_financiamiento();
+            });
+
+            $("#SueldoPadre").change(function () {
+                sumar_ingresos();
+            });
+            $("#SueldoMadre").change(function () {
+                sumar_ingresos();
+            });
+            $("#OtroIngresoPadre").change(function () {
+                sumar_ingresos();
+            });
+
+            $("#OtroIngresoMadre").change(function () {
+                sumar_ingresos();
+            });
+
+            $("#GastoAlimentacion").change(function () {
+                sumar_egresos();
+            });
+            $("#GastoEducacion").change(function () {
+                sumar_egresos();
+            });
+            $("#GastoServicioBasico").change(function () {
+                sumar_egresos();
+            });
+            $("#GastoSalud").change(function () {
+                sumar_egresos();
+            });
+            $("#GastoArriendo").change(function () {
+                sumar_egresos();
+            });
+            $("#GastoPrestamo").change(function () {
+                sumar_egresos();
+            });
+            $("#OtroGasto").change(function () {
+                sumar_egresos();
+            });
         })
         //$("#Celular_Aspirante").blur(function () {
         //    Validar_cedula_ruc();
@@ -3023,4 +3333,60 @@
             }
         });
     }
+
+    function mostrar_otro_motivo() {
+        var MotivoIngreso = $("#IdCatalogoFichaMotivo_Aspirante").val();
+        if (MotivoIngreso == 15) {
+            $("#otro_motivo_ingreso").show();
+        }
+        else {
+            $("#otro_motivo_ingreso").hide();
+        }
+    };
+
+    function mostrar_otro_informacion_inst() {
+        var MotivoIngreso = $("#IdCatalogoFichaInst_Aspirante").val();
+        if (MotivoIngreso == 19) {
+            $("#otro_informacion_inst").show();
+        }
+        else {
+            $("#otro_informacion_inst").hide();
+        }
+    };
+
+    function mostrar_otro_financiamiento() {
+        var Informacion = $("#IdCatalogoFichaFinanc_Aspirante").val();
+        if (Informacion == 22) {
+            $("#otro_forma_financ").show();
+        }
+        else {
+            $("#otro_forma_financ").hide();
+        }
+    };
+
+    function mostrar_div() {
+        if (TieneHermanos_Aspirante.GetValue() == true) {
+            $("#cant_hermanos").show();
+        }
+        else {
+            $("#cant_hermanos").hide();
+        }
+    }
+
+    function sumar_ingresos() {
+        var TotalIng = parseFloat($("#SueldoPadre").val()) + parseFloat($("#SueldoMadre").val()) + parseFloat($("#OtroIngresoPadre").val()) + parseFloat($("#OtroIngresoMadre").val());
+        $("#TotalIngresos").val(TotalIng);
+        saldo();
+    };
+
+    function sumar_egresos() {
+        var TotalEgresos = parseFloat($("#GastoAlimentacion").val()) + parseFloat($("#GastoEducacion").val()) + parseFloat($("#GastoServicioBasico").val()) + parseFloat($("#GastoSalud").val()) + parseFloat($("#GastoArriendo").val()) + parseFloat($("#GastoPrestamo").val()) + parseFloat($("#OtroGasto").val());
+        $("#TotalEgresos").val(TotalEgresos);
+        saldo();
+    };
+
+    function saldo() {
+        var Total = parseFloat($("#TotalIngresos").val()) - parseFloat($("#TotalEgresos").val());
+        $("#Saldo").val(Total);
+    };
     </script>

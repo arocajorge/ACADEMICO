@@ -428,6 +428,8 @@ namespace Core.Info.Academico
         public double ValorPlantillaProntoPago { get; set; }
         public List<aca_AnioLectivo_Curso_Documento_Info> lst_documentos { get; set; }
         public int IdCatalogoPAREN_OtroFamiliar { get; set; }
+
+        public string IdUsuarioSesion { get; set; }
         #endregion
     }
 }
