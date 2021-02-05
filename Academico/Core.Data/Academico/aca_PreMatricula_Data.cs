@@ -85,7 +85,7 @@ namespace Core.Data.Academico
                                 ValorIVA = item.ValorIVA,
                                 Total = item.Total,
                                 FechaFacturacion = null,
-                                EnMatricula = item.EnMatricula,
+                                EnMatricula = item.seleccionado,
                                 IdPlantilla = item.IdPlantilla,
                                 IdAnio = item.IdAnio,
                                 IdSede = item.IdSede,
@@ -161,7 +161,7 @@ namespace Core.Data.Academico
                     }
                     #endregion
 
-                    aca_Admision Entity_Admision = Context.aca_Admision.FirstOrDefault(q => q.IdEmpresa == info.IdAdmision);
+                    aca_Admision Entity_Admision = Context.aca_Admision.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAdmision == info.IdAdmision);
                     if (Entity_Admision == null)
                         return false;
 
@@ -169,6 +169,7 @@ namespace Core.Data.Academico
                     Entity_Admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.PREMATRICULADO);
                     Entity_Admision.IdUsuarioModificacion = info.IdUsuarioCreacion;
                     Entity_Admision.FechaModificacion = info.FechaModificacion = DateTime.Now;
+
                     Context.SaveChanges();
                 }
                 return true;

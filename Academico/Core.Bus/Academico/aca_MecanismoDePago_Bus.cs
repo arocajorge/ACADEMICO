@@ -37,6 +37,19 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_MecanismoDePago_Info GetInfo_ByTermino(int IdEmpresa, string IdTerminoPago)
+        {
+            try
+            {
+                return odata.getInfo_ByTermino(IdEmpresa, IdTerminoPago);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool GuardarDB(aca_MecanismoDePago_Info info)
         {
             try

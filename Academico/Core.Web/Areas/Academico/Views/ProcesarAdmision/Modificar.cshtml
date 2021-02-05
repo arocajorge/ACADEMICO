@@ -532,7 +532,7 @@
                                 {
                                     settings.Name = "SeFactura_Padre";
                                     settings.Text = "Se factura";
-                                    settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){SeFactura_Madre.SetChecked(false); SeFactura_Representante.SetChecked(false); mostrar_cliente_padre();mostrar_cliente_madre();mostrar_cliente_representante(); }";
+                                    settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){ SeFacturaPadre(); }";
                                 }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.SeFactura_Padre, "", new { @class = "text-danger" })
                             </div>
@@ -1002,7 +1002,7 @@
                         {
                             settings.Name = "SeFactura_Madre";
                             settings.Text = "Se factura";
-                            settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){SeFactura_Padre.SetChecked(false);SeFactura_Representante.SetChecked(false); mostrar_cliente_madre(); mostrar_cliente_padre();mostrar_cliente_representante();}";
+                            settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){ SeFacturaMadre(); }";
                         }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.SeFactura_Madre, "", new { @class = "text-danger" })
                             </div>
@@ -1461,7 +1461,7 @@
                         {
                             settings.Name = "SeFactura_Representante";
                             settings.Text = "Se factura";
-                            settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){SeFactura_Padre.SetChecked(false); SeFactura_Madre.SetChecked(false); mostrar_cliente_representante(); mostrar_cliente_padre(); mostrar_cliente_madre();}";
+                            settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){ SeFacturaRepresentante(); }";
                         }).GetHtml()
                                 @Html.ValidationMessageFor(q => q.SeFactura_Representante, "", new { @class = "text-danger" })
                             </div>
@@ -2267,13 +2267,6 @@
                 </div>*@
                 <div class="row" id="Empleado" hidden>
                     <div class="col-md-12">
-                        @*<div class="col-md-4">
-                    <div class="form-group">
-                        <label for="IdEmpresa">Empresa</label>
-                        @Html.DropDownListFor(q => q.IdEmpresa_rol, new SelectList(ViewBag.lst_empresa, "IdEmpresa", "em_nombre"), new { @class = "form-control", @id = "IdEmpresa_rol", @readonly= "readonly" })
-                        @Html.ValidationMessageFor(q => q.IdEmpresa_rol, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
                         <div class="col-md-6">
                             <label for="IdEmpresa">Empleado</label>
                             @Html.Partial("_CmbEmpleado", Model)
@@ -2355,9 +2348,11 @@
             mostrar_vehiculo_padre();
             mostrar_vehiculo_madre();
             mostrar_vehiculo_representante();
+
             mostrar_cliente_padre();
             mostrar_cliente_madre();
             mostrar_cliente_representante();
+
             mostrar_ArchivosAspirante();
 
             mostrar_otro_motivo();
@@ -2414,6 +2409,14 @@
             });
             $("#OtroGasto").change(function () {
                 sumar_egresos();
+            });
+
+            $("#IdMecanismoDet").change(function () {
+                VerDatosEmpleado();
+            });
+
+            $("#IdMecanismo").change(function () {
+                VerDatosEmpleado();
             });
         })
         //$("#Celular_Aspirante").blur(function () {
@@ -3389,4 +3392,67 @@
         var Total = parseFloat($("#TotalIngresos").val()) - parseFloat($("#TotalEgresos").val());
         $("#Saldo").val(Total);
     };
+
+
+    function SeFacturaPadre() {
+        if (SeFactura_Padre.GetChecked()==true) {
+            SeFactura_Madre.SetChecked(false);
+            SeFactura_Representante.SetChecked(false);
+        }
+        mostrar_cliente_representante();
+        mostrar_cliente_padre();
+        mostrar_cliente_madre();
+    };
+
+    function SeFacturaMadre() {
+        if (SeFactura_Madre.GetChecked() == true) {
+            SeFactura_Padre.SetChecked(false);
+            SeFactura_Representante.SetChecked(false);
+        }
+        mostrar_cliente_representante();
+        mostrar_cliente_padre();
+        mostrar_cliente_madre();
+    };
+
+    function SeFacturaRepresentante() {
+        if (SeFactura_Representante.GetChecked() == true) {
+            SeFactura_Madre.SetChecked(false);
+            SeFactura_Padre.SetChecked(false);
+        }
+        mostrar_cliente_representante();
+        mostrar_cliente_padre();
+        mostrar_cliente_madre();
+    };
+
+    function VerDatosEmpleado() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMecanismo: $("#IdMecanismo").val(),
+            IdMecanismoOtros: $("#IdMecanismoDet").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetDatosMecanismo", "ProcesarAdmision", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.MostrarEmpleado == true) {
+                    $("#Empleado").show();
+                    $("#IdEmpresa_rol").val(data.IdEmpresa_rol)
+
+                    IdEmpleado.PerformCallback();
+                }
+                else {
+                    $("#Empleado").hide();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
     </script>

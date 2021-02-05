@@ -291,10 +291,11 @@
 
     function AddFacturas() {
         var datos = {
+            Fecha: no_fecha.GetValue(),
             IDs: selectedIDs,
             IdTransaccionSession: $("#IdTransaccionSession").val(),
             IdTipoNota: IdTipoNota.GetValue(),
-            IdEmpresa: $("#IdEmpresa").val()
+            IdEmpresa: $("#IdEmpresa").val(),
         }
         $.ajax({
             type: 'POST',
