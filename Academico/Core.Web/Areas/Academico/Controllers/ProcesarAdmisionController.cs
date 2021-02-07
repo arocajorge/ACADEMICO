@@ -534,7 +534,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_prematricula = new aca_PreMatricula_Info();
             info_prematricula = armar_info_prematricula(model);
             var lst_DetallePlantilla = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
-            var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(model.IdTransaccionSession)).Where(q=>q.seleccionado==true);
+            var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(model.IdTransaccionSession)).Where(q => q.seleccionado == true).ToList();
 
             var lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>();
             foreach (var item in lst_DetalleDocumentos)
@@ -552,6 +552,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
                     lst_alumno_documentos.Add(info_doc);
                 }
+                else
+                {
+                    existe_documento.EnArchivo = true;
+                    lst_alumno_documentos.Add(existe_documento);
+                }
+
             }
 
             info_prematricula.lst_PreMatriculaRubro = lst_DetallePlantilla;

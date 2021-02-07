@@ -508,10 +508,9 @@
             this.xrPivotGrid1.Name = "xrPivotGrid1";
             this.xrPivotGrid1.OLAPConnectionString = "";
             this.xrPivotGrid1.OptionsPrint.FilterSeparatorBarPadding = 3;
-            this.xrPivotGrid1.OptionsPrint.PrintColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
-            this.xrPivotGrid1.OptionsPrint.PrintDataHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid1.OptionsPrint.PrintColumnAreaOnEveryPage = true;
             this.xrPivotGrid1.OptionsPrint.PrintFilterHeaders = DevExpress.Utils.DefaultBoolean.True;
-            this.xrPivotGrid1.OptionsPrint.PrintRowHeaders = DevExpress.Utils.DefaultBoolean.False;
+            this.xrPivotGrid1.OptionsPrint.PrintRowAreaOnEveryPage = true;
             this.xrPivotGrid1.OptionsPrint.PrintUnusedFilterFields = false;
             this.xrPivotGrid1.OptionsView.ShowColumnHeaders = false;
             this.xrPivotGrid1.OptionsView.ShowCustomTotalsForSingleValues = true;
@@ -804,7 +803,7 @@
             this.xrTable7,
             this.xrTable3,
             this.lbl_imagen});
-            this.PageHeader.HeightF = 125.5F;
+            this.PageHeader.HeightF = 140F;
             this.PageHeader.Name = "PageHeader";
             // 
             // ACA_007_Rpt

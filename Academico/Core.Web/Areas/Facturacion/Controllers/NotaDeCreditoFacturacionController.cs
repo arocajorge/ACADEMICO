@@ -445,6 +445,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             i_validar.lst_cruce = List_cruce.get_list(i_validar.IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
 
+
+            if (i_validar.lst_cruce.Count() > 0)
+            {
+                if (i_validar.lst_cruce.Where(q => q.fecha_cruce!= i_validar.no_fecha).Count() > 0)
+                {
+                    msg = "La fecha de los documentos relacionados debe ser la misma de la nota de crédito";
+                    return false;
+                }
+
+            }
+
             if (i_validar.lst_cruce.Count()>0)
             {
                 if (i_validar.lst_cruce.Where(q=> q.TieneSaldo0==false).Count()>0)
