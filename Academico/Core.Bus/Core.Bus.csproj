@@ -91,6 +91,7 @@
     <Compile Include="Academico\aca_MatriculaCondicional_Det_Bus.cs" />
     <Compile Include="Academico\aca_MatriculaConducta_Bus.cs" />
     <Compile Include="Academico\aca_Matricula_Bus.cs" />
+    <Compile Include="Academico\aca_PreMatricula_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_Matricula_Rubro_Bus.cs" />
     <Compile Include="Academico\aca_MecanismoDePago_Bus.cs" />
     <Compile Include="Academico\aca_Menu_Bus.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Academico\aca_PlantillaTipo_Bus.cs" />
     <Compile Include="Academico\aca_Plantilla_Bus.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Bus.cs" />
+    <Compile Include="Academico\aca_PreMatricula_Bus.cs" />
     <Compile Include="Academico\aca_Profesor_Bus.cs" />
     <Compile Include="Academico\aca_Reporte_Bus.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Bus.cs" />
@@ -282,6 +284,7 @@
     <Compile Include="Reportes\Academico\ACA_049_General_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_049_General_Detalle_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_049_General_Promedio_Bus.cs" />
+    <Compile Include="Reportes\Academico\ACA_073_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_071_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_049_Promedio_Bus.cs" />
     <Compile Include="Reportes\Academico\ACA_049_Detalle_Bus.cs" />

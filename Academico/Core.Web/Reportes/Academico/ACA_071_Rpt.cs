@@ -35,6 +35,8 @@ namespace Core.Web.Reportes.Academico
             ACA_071_Bus bus_rpt = new ACA_071_Bus();
             List<ACA_071_Info> lst_rpt = new List<ACA_071_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            lbl_usuario.Text = usuario;
 
             this.DataSource = lst_rpt;
 

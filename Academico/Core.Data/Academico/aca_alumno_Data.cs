@@ -625,7 +625,7 @@ namespace Core.Data.Academico
                             IdParroquia = reader["IdParroquia"].ToString(),
                             Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(),
                             LugarNacimiento = string.IsNullOrEmpty(reader["LugarNacimiento"].ToString()) ? null : reader["LugarNacimiento"].ToString(),
-                            IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
+                            IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
                             AsisteCentroCristiano = string.IsNullOrEmpty(reader["AsisteCentroCristiano"].ToString()) ? false : Convert.ToBoolean(reader["AsisteCentroCristiano"]),
                             IdGrupoEtnico = string.IsNullOrEmpty(reader["IdGrupoEtnico"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdGrupoEtnico"]),
                             Dificultad_Escritura = string.IsNullOrEmpty(reader["Dificultad_Escritura"].ToString()) ? false : Convert.ToBoolean(reader["Dificultad_Escritura"]),
@@ -823,6 +823,7 @@ namespace Core.Data.Academico
                     IdParroquia = Entity_aca.IdParroquia,
                     Sector = Entity_aca.Sector,
                     pe_fechaNacimiento = Entity_aca.pe_fechaNacimiento,
+                    pe_sexo = Entity_aca.pe_sexo,
                     IdReligion = Entity_aca.IdReligion,
                     IdGrupoEtnico = Entity_aca.IdGrupoEtnico,
                     AsisteCentroCristiano = Entity_aca.AsisteCentroCristiano

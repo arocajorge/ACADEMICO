@@ -572,7 +572,9 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
         public JsonResult get_info_termino_pago(string IdTerminoPago = "")
         {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var resultado = bus_termino_pago.get_info(IdTerminoPago);
+            var info_mecanismo = bus_mecanismo.GetInfo_ByTermino(IdEmpresa, IdTerminoPago);
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
@@ -630,14 +632,19 @@ namespace Core.Web.Areas.Facturacion.Controllers
         public JsonResult GetDatosMecanismo(int IdEmpresa = 0, string IdTerminoPago = "")
         {
             bool resultado = false;
+            var IdEmpresa_rol = (int?)null;
             var info_termino_pago = bus_termino_pago.get_info(IdTerminoPago);
-
+            var info_mecanismo = bus_mecanismo.GetInfo_ByTermino(IdEmpresa, IdTerminoPago);
             if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
             {
                 resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
             }
+            if (info_mecanismo != null)
+            {
+                IdEmpresa_rol = info_mecanismo.IdEmpresa_rol;
+            }
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            return Json(new { AplicaDescuentoNomina = resultado, IdEmpresa_rol = IdEmpresa_rol } , JsonRequestBehavior.AllowGet);
         }
         #endregion
         #region Acciones

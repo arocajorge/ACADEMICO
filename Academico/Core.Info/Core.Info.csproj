@@ -103,6 +103,8 @@
     <Compile Include="Academico\aca_PlantillaTipo_Info.cs" />
     <Compile Include="Academico\aca_Plantilla_Info.cs" />
     <Compile Include="Academico\aca_Plantilla_Rubro_Info.cs" />
+    <Compile Include="Academico\aca_PreMatricula_Info.cs" />
+    <Compile Include="Academico\aca_PreMatricula_Rubro_Info.cs" />
     <Compile Include="Academico\aca_Profesor_Info.cs" />
     <Compile Include="Academico\aca_Reporte_Info.cs" />
     <Compile Include="Academico\aca_Reporte_x_seg_usuario_Info.cs" />
@@ -290,6 +292,7 @@
     <Compile Include="Reportes\Academico\ACA_049_General_Promedio_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_049_Promedio_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_049_Detalle_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_073_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_071_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_070_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_069_Info.cs" />

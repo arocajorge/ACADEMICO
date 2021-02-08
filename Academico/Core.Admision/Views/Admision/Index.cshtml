@@ -108,7 +108,7 @@
                         <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Archivos</div>
                     </div>
                     <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                        <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnTerminos">6</button>
+                        <button class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnTerminos">7</button>
                         <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Términos y Condiciones</div>
                     </div>
                     <div class="wizard__line hidden lg:block w-2/3 bg-gray-200 dark:bg-dark-1 absolute mt-5"></div>
@@ -1319,21 +1319,6 @@
                                     </td>
                                     <td class="border-b dark:border-dark-5">Si padre y madre trabajan, deberá subir ambos documentos en un solo archivo pdf donde se detalle los ingresos y el tiempo que labora en la empresa</td>
                                 </tr>
-                                @*<tr>
-                                    <td class="border-b dark:border-dark-5"> Cédula Padre</td>
-                                    <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivoCedulaPadre"></td>
-                                    <td class="border-b dark:border-dark-5"></td>
-                                </tr>
-                                <tr>
-                                    <td class="border-b dark:border-dark-5"> Cédula Madre</td>
-                                    <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivosCedulaMadre"></td>
-                                    <td class="border-b dark:border-dark-5"></td>
-                                </tr>
-                                <tr>
-                                    <td class="border-b dark:border-dark-5"> Cédula Representante</td>
-                                    <td class="border-b dark:border-dark-5"> <input type="file" name="ArchivosAspirante" id="ArchivosCedulaRepresentante"></td>
-                                    <td class="border-b dark:border-dark-5"></td>
-                                </tr>*@
                             </tbody>
                         </table>
                     </div>
@@ -1401,13 +1386,17 @@
     mostrar_VehiculoMadre();
     mostrar_VehiculoRepresentante();
 
-    mostrar_Vehiculo_Padre();
-    mostrar_Vehiculo_Madre();
-    mostrar_Vehiculo_Representante();
+    //mostrar_Vehiculo_Padre();
+    //mostrar_Vehiculo_Madre();
+    //mostrar_Vehiculo_Representante();
 
     CargarParroquia_Facturacion_Padre();
     CargarParroquia_Facturacion_Madre();
     CargarParroquia_Facturacion_Representante();
+
+    MostrarFacturacion_Padre();
+    MostrarFacturacion_Madre();
+    MostrarFacturacion_Representante();
 })
 
     $("#IdSede").change(function () {

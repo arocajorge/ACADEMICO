@@ -1577,7 +1577,7 @@ namespace Core.Data.Academico
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToInt32(reader["IdMatricula"]),
-                            IdProfesor = Convert.ToInt32(reader["IdProfesor"]),
+                            IdProfesor = string.IsNullOrEmpty(reader["IdProfesor"].ToString()) ? (decimal?)null :  Convert.ToDecimal(reader["IdProfesor"]),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
                             IdSede = Convert.ToInt32(reader["IdSede"]),
                             IdNivel = Convert.ToInt32(reader["IdNivel"]),

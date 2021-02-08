@@ -325,7 +325,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult EditingAddNewFacturas(string IDs = "", decimal IdTransaccionSession = 0, int IdTipoNota = 0)
+        public ActionResult EditingAddNewFacturas(DateTime Fecha, string IDs = "", decimal IdTransaccionSession = 0, int IdTipoNota = 0, int IdEmpresa=0)
         {
             if (IDs != "")
             {
@@ -339,10 +339,12 @@ namespace Core.Web.Areas.Facturacion.Controllers
             var lst_det = new List<fa_notaCreDeb_det_Info>();
             foreach (var item in list)
             {
+                item.fecha_cruce = Fecha;
                 var lst = bus_det.get_list(item.IdEmpresa_fac_nd_doc_mod, item.IdSucursal_fac_nd_doc_mod, item.IdBodega_fac_nd_doc_mod, item.IdCbteVta_fac_nd_doc_mod, item.vt_tipoDoc);
                 lst.ForEach(q=>q.TieneSaldo0 = Convert.ToBoolean(item.TieneSaldo0));
                 lst_det.AddRange(lst);
             }
+
             List_det.set_list(lst_det, IdTransaccionSession);
             var model = list;
             return PartialView("_GridViewPartial_CruceNC", model);
@@ -442,6 +444,17 @@ namespace Core.Web.Areas.Facturacion.Controllers
         {
             i_validar.lst_det = List_det.get_list(i_validar.IdTransaccionSession);
             i_validar.lst_cruce = List_cruce.get_list(i_validar.IdTransaccionSession).Where(q => q.seleccionado == true).ToList();
+
+
+            if (i_validar.lst_cruce.Count() > 0)
+            {
+                if (i_validar.lst_cruce.Where(q => q.fecha_cruce!= i_validar.no_fecha).Count() > 0)
+                {
+                    msg = "La fecha de los documentos relacionados debe ser la misma de la nota de crédito";
+                    return false;
+                }
+
+            }
 
             if (i_validar.lst_cruce.Count()>0)
             {

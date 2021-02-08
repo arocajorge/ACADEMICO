@@ -5,10 +5,12 @@ using Core.Info.Academico;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
+using DevExpress.Web;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,6 +19,11 @@ namespace Core.Web.Areas.Academico.Controllers
     public class ProcesarAdmisionController : Controller
     {
         #region Variables
+        aca_SocioEconomico_Bus bus_socio_economico = new aca_SocioEconomico_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+        aca_Matricula_List Lista_Matricula = new aca_Matricula_List();
+        aca_CatalogoFicha_Bus bus_catalogo_socioeconomico = new aca_CatalogoFicha_Bus();
+
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         tb_GrupoEtnico_Bus bus_grupoetnico = new tb_GrupoEtnico_Bus();
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
@@ -41,7 +48,20 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_ProcesarAdmision_List Lista_ProcesarAdmision = new aca_ProcesarAdmision_List();
         fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
         fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
-
+        aca_PreMatricula_Bus bus_prematricula = new aca_PreMatricula_Bus();
+        aca_MecanismoDePago_Bus bus_mecanismo = new aca_MecanismoDePago_Bus();
+        aca_AnioLectivo_Curso_Documento_List Lista_DocumentosMatricula = new aca_AnioLectivo_Curso_Documento_List();
+        aca_PreMatricula_Rubro_List ListaPreMatriculaRubro = new aca_PreMatricula_Rubro_List();
+        aca_AnioLectivo_Curso_Documento_Bus bus_curso_documento = new aca_AnioLectivo_Curso_Documento_Bus();
+        aca_PrePreMatricula_Rubro_Bus bus_prematricula_rubro = new aca_PrePreMatricula_Rubro_Bus();
+        aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
+        fa_PuntoVta_Bus bus_punto_venta = new fa_PuntoVta_Bus();
+        fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
+        fa_formaPago_Bus bus_forma_pago = new fa_formaPago_Bus();
+        fa_cliente_Bus bus_cliente = new fa_cliente_Bus();
+        aca_AlumnoDocumento_Bus bus_alumno_documento = new aca_AlumnoDocumento_Bus();
+        aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
+        aca_Plantilla_Rubro_Bus bus_plantilla_rubro = new aca_Plantilla_Rubro_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -58,7 +78,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
-
+      
             var model = new aca_Admision_Info
             {
                 IdEmpresa = IdEmpresa,
@@ -67,7 +87,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
-            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList(model.IdEmpresa, model.IdAnio, model.IdSede);
+            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_Academico(model.IdEmpresa, model.IdAnio, model.IdSede);
+            lst_admisiones.ForEach(q => q.IdUsuarioSesion = SessionFixed.IdUsuario);
             Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model);
             return View(model);
@@ -76,7 +97,8 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_Admision_Info model)
         {
-            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList(model.IdEmpresa, model.IdAnio, model.IdSede);
+            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_Academico(model.IdEmpresa, model.IdAnio, model.IdSede);
+            lst_admisiones.ForEach(q=> q.IdUsuarioSesion = SessionFixed.IdUsuario);
             Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model);
             return View(model);
@@ -237,8 +259,193 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         #endregion
 
+        #region Combos bajo demanada
+        public ActionResult Cmb_MatriculaAlumno()
+        {
+            decimal model = new decimal();
+            return PartialView("_CmbAlumno", model);
+        }
+        public List<tb_persona_Info> get_list_bajo_demanda_alumno(ListEditItemsRequestedByFilterConditionEventArgs args)
+        {
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO_MATRICULA.ToString());
+        }
+        public tb_persona_Info get_info_bajo_demanda_alumno(ListEditItemRequestedByValueEventArgs args)
+        {
+            return bus_persona.get_info_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO_MATRICULA.ToString());
+        }
+
+        public ActionResult ComboBoxPartial_Anio()
+        {
+            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+        }
+        public ActionResult ComboBoxPartial_Sede()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            return PartialView("_ComboBoxPartial_Sede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
+        }
+
+        public ActionResult ComboBoxPartial_Curso()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            decimal IdAlumno = (Request.Params["IdAlumno"] != null) ? decimal.Parse(Request.Params["IdAlumno"]) : -1;
+            string Validar = (Request.Params["Validar"] != null) ? Convert.ToString(Request.Params["Validar"]) : "N";
+            return PartialView("_ComboBoxPartial_Curso", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdAlumno = IdAlumno, Validar = Validar });
+        }
+
+        public ActionResult ComboBoxPartial_Plantilla()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            string IdComboCurso = (Request.Params["IdCurso"] != null) ? (Request.Params["IdCurso"]).ToString() : null;
+            int IdSede = -1;
+            int IdNivel = -1;
+            int IdJornada = -1;
+            int IdCurso = -1;
+
+            if (!string.IsNullOrEmpty(IdComboCurso))
+            {
+                var regex = new Regex(@".{4}");
+                string result = regex.Replace(IdComboCurso, "$&" + Environment.NewLine);
+                string[] array = result.Split('\n');
+                if (array.Count() >= 5)
+                {
+                    IdAnio = Convert.ToInt32(array[1]);
+                    IdSede = Convert.ToInt32(array[2]);
+                    IdNivel = Convert.ToInt32(array[3]);
+                    IdJornada = Convert.ToInt32(array[4]);
+                    IdCurso = Convert.ToInt32(array[5]);
+                }
+            }
+            return PartialView("_ComboBoxPartial_Plantilla", new aca_AnioLectivo_Curso_Plantilla_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
+        }
+
+        public ActionResult ComboBoxPartial_Paralelo()
+        {
+            string IdComboCurso = (Request.Params["IdCurso"] != null) ? (Request.Params["IdCurso"]).ToString() : null;
+            int IdAnio = -1;
+            int IdSede = -1;
+            int IdNivel = -1;
+            int IdJornada = -1;
+            int IdCurso = -1;
+
+            if (!string.IsNullOrEmpty(IdComboCurso))
+            {
+                var regex = new Regex(@".{4}");
+                string result = regex.Replace(IdComboCurso, "$&" + Environment.NewLine);
+                string[] array = result.Split('\n');
+                if (array.Count() >= 5)
+                {
+                    IdAnio = Convert.ToInt32(array[1]);
+                    IdSede = Convert.ToInt32(array[2]);
+                    IdNivel = Convert.ToInt32(array[3]);
+                    IdJornada = Convert.ToInt32(array[4]);
+                    IdCurso = Convert.ToInt32(array[5]);
+                }
+            }
+
+            return PartialView("_ComboBoxPartial_Paralelo", new aca_AnioLectivo_Curso_Paralelo_Info { IdAnio = IdAnio, IdSede = IdSede, IdNivel = IdNivel, IdJornada = IdJornada, IdCurso = IdCurso });
+        }
+        #endregion
+
+        #region Combos bajo demanada Empleado
+        public ActionResult Cmb_PreMatriculaEmpleado()
+        {
+            int IdEmpresa_rol = (Request.Params["IdEmpresa_rol"] != null) ? int.Parse(Request.Params["IdEmpresa_rol"]) : 0;
+            return PartialView("_CmbEmpleado", new aca_Matricula_Info { IdEmpresa_rol = IdEmpresa_rol });
+        }
+        #endregion
+        #region Grid documentos
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_Documentos()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
+            List<aca_AnioLectivo_Curso_Documento_Info> model = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            ViewData["documentoIDs"] = Request.Params["documentoIDs"];
+            if (ViewData["documentoIDs"] == null)
+            {
+                int x = 0;
+                string documentoIDs = "";
+                foreach (var item in model.Where(q => q.seleccionado == true).ToList())
+                {
+                    if (x == 0)
+                        documentoIDs = Convert.ToString(item.IdStringDoc);
+                    else
+                        documentoIDs += "," + item.IdStringDoc;
+                    x++;
+                }
+                ViewData["documentoIDs"] = documentoIDs;
+            }
+
+            return PartialView("_GridViewPartial_Documentos", model);
+        }
+        #endregion
+        #region DetallePlantilla (nuevo)
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_DetallePlantilla()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
+            List<aca_PreMatricula_Rubro_Info> model = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            int x = 0;
+            string selectedIDs = "";
+            ViewData["selectedIDs"] = Request.Params["selectedIDs"];
+            if (ViewData["selectedIDs"] == null)
+            {
+                foreach (var item in model.Where(q => q.seleccionado == true).ToList())
+                {
+                    if (x == 0)
+                        selectedIDs = item.IdString;
+                    else
+                        selectedIDs += "," + item.IdString;
+                    x++;
+                }
+                ViewData["selectedIDs"] = selectedIDs;
+            }
+            else
+            {
+                foreach (var item in model.Where(q => q.seleccionado == true).ToList())
+                {
+                    if (x == 0)
+                        selectedIDs = item.IdString;
+                    else
+                        selectedIDs += "," + item.IdString;
+                    x++;
+                }
+                ViewData["selectedIDs"] = selectedIDs;
+            }
+
+            return PartialView("_GridViewPartial_DetallePlantilla", model);
+        }
+        #endregion
+
         #region Acciones
         public ActionResult Consultar(int IdEmpresa = 0, decimal IdAdmision = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_Admision_Info model = bus_admision.GetInfo(IdEmpresa, IdAdmision);
+            model.CodCatalogoCONADIS_Aspirante = model.CodCatalogoCONADIS_Aspirante == null ? "" : model.CodCatalogoCONADIS_Aspirante;
+            model.CodCatalogoCONADIS_Madre = model.CodCatalogoCONADIS_Madre == null ? "" : model.CodCatalogoCONADIS_Madre;
+            model.CodCatalogoCONADIS_Padre = model.CodCatalogoCONADIS_Padre == null ? "" : model.CodCatalogoCONADIS_Padre;
+            model.CodCatalogoCONADIS_Representante = model.CodCatalogoCONADIS_Representante == null ? "" : model.CodCatalogoCONADIS_Representante;
+
+            if (model == null)
+                return RedirectToAction("Index");
+
+            //if (Exito)
+            //    ViewBag.MensajeSuccess = MensajeSuccess;
+
+            cargar_combos(model);
+            return View(model);
+        }
+
+        public ActionResult Modificar(int IdEmpresa = 0, decimal IdAdmision = 0, bool Exito=false)
         {
             #region Validar Session
             if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
@@ -252,17 +459,148 @@ namespace Core.Web.Areas.Academico.Controllers
             if (model == null)
                 return RedirectToAction("Index");
 
-            //if (Exito)
-            //    ViewBag.MensajeSuccess = MensajeSuccess;
+            var info_ExistePersonaAspirante = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Aspirante);
+            var info_ExistePersonaPadre = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Padre);
+            var info_ExistePersonaMadre = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Madre);
+            var info_ExistePersonaRepresentante = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Representante);
+            var info_ExisteAlumno = bus_alumno.get_info_x_num_cedula(model.IdEmpresa, model.CedulaRuc_Aspirante);
+
+            model.IdAlumno = (info_ExisteAlumno == null ? 0 : info_ExisteAlumno.IdAlumno);
+            model.IdPersona_Aspirante = (info_ExistePersonaAspirante == null ? 0 : info_ExistePersonaAspirante.IdPersona);
+            model.IdPersona_Madre = (info_ExistePersonaMadre == null ? 0 : info_ExistePersonaMadre.IdPersona);
+            model.IdPersona_Padre = (info_ExistePersonaPadre == null ? 0 : info_ExistePersonaPadre.IdPersona);
+            model.IdPersona_Representante = (info_ExistePersonaRepresentante == null ? 0 : info_ExistePersonaRepresentante.IdPersona);
+
+            model.CodCatalogoCONADIS_Aspirante = (model.CodCatalogoCONADIS_Aspirante == null ? "" : model.CodCatalogoCONADIS_Aspirante);
+            model.CodCatalogoCONADIS_Padre = (model.CodCatalogoCONADIS_Padre == null ? "" : model.CodCatalogoCONADIS_Padre);
+            model.CodCatalogoCONADIS_Madre = (model.CodCatalogoCONADIS_Madre == null ? "" : model.CodCatalogoCONADIS_Madre);
+            model.CodCatalogoCONADIS_Representante = (model.CodCatalogoCONADIS_Representante == null ? "" : model.CodCatalogoCONADIS_Representante);
+
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.Fecha = DateTime.Now.Date;
+            model.IdSucursal = bus_sede.GetInfo(model.IdEmpresa, model.IdSede).IdSucursal;
+            model.IdCatalogo_FormaPago = "CRE";
+            model.IdEmpresa_rol = 0;
+            model.info_valido_aspirante = true;
+            model.info_valido_madre = true;
+            model.info_valido_padre = true;
+            model.IdComboCurso = model.IdEmpresa.ToString("0000") + model.IdAnio.ToString("0000") + model.IdSede.ToString("0000") + model.IdNivel.ToString("0000") + model.IdJornada.ToString("0000") + model.IdCurso.ToString("0000");
+
+            model.IdMecanismo = 1;
+            model.IdMecanismoDet = 1;
+            //IdEmpresa = Convert.ToInt32(model.IdComboCurso.Substring(0, 4));
+            //IdAnio = Convert.ToInt32(model.IdComboCurso.Substring(4, 4));
+            //int IdSede = Convert.ToInt32(IdComboCurso.Substring(8, 4));
+            //int IdNivel = Convert.ToInt32(IdComboCurso.Substring(12, 4));
+            //int IdJornada = Convert.ToInt32(IdComboCurso.Substring(16, 4));
+            //int IdCurso = Convert.ToInt32(IdComboCurso.Substring(20, 4));
+
+            model.IdCatalogoESTPREMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REGISTRADO);
+            model.lst_documentos = new List<aca_AnioLectivo_Curso_Documento_Info>();
+            var lst_doc_curso = bus_curso_documento.GetList_Matricula(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso);
+            var lst_doc_alumno = bus_alumno_documento.GetList(IdEmpresa, model.IdAlumno, true);
+
+            if (lst_doc_curso != null && lst_doc_curso.Count > 0)
+            {
+                foreach (var item in lst_doc_curso)
+                {
+                    item.seleccionado = false;
+                    item.IdStringDoc = Convert.ToString(item.IdDocumento);
+
+                    foreach (var item1 in lst_doc_alumno)
+                    {
+                        if (item.IdDocumento == item1.IdDocumento)
+                        {
+                            item.seleccionado = true;
+                            break;
+                        }
+                    }
+                    model.lst_documentos.Add(item);
+                }
+            }
+
+            Lista_DocumentosMatricula.set_list(model.lst_documentos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            if (Exito)
+                ViewBag.MensajeSuccess = MensajeSuccess;
 
             cargar_combos(model);
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Modificar(aca_Admision_Info model)
+        {
+            model.IdUsuarioModificacion = SessionFixed.IdUsuario;
+            var info_prematricula = new aca_PreMatricula_Info();
+            info_prematricula = armar_info_prematricula(model);
+            var lst_DetallePlantilla = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
+            var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(model.IdTransaccionSession)).Where(q => q.seleccionado == true).ToList();
+
+            var lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>();
+            foreach (var item in lst_DetalleDocumentos)
+            {
+                var existe_documento = bus_alumno_documento.GetInfo(info_prematricula.IdEmpresa, info_prematricula.IdAlumno, Convert.ToInt32(item.IdStringDoc));
+                if (existe_documento == null)
+                {
+                    var info_doc = new aca_AlumnoDocumento_Info
+                    {
+                        IdEmpresa = info_prematricula.IdEmpresa,
+                        IdAlumno = info_prematricula.IdAlumno,
+                        IdDocumento = Convert.ToInt32(item.IdDocumento),
+                        EnArchivo = true
+                    };
+
+                    lst_alumno_documentos.Add(info_doc);
+                }
+                else
+                {
+                    existe_documento.EnArchivo = true;
+                    lst_alumno_documentos.Add(existe_documento);
+                }
+
+            }
+
+            info_prematricula.lst_PreMatriculaRubro = lst_DetallePlantilla;
+            info_prematricula.lst_Documentos = lst_alumno_documentos;
+
+            if (!validar_PreMatricula(info_prematricula, ref mensaje))
+            {
+                ViewBag.mensaje = mensaje;
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos(model);
+                return View(model);
+            }
+
+            if (!bus_prematricula.GuardarDB(info_prematricula))
+            {
+                ViewBag.mensaje = "No se ha podido guardar el registro";
+                SessionFixed.IdTransaccionSessionActual = model.IdTransaccionSession.ToString();
+                cargar_combos(model);
+                return View(model);
+            }
+
+            return RedirectToAction("Index");
         }
         #endregion
 
         #region Metodos
         private void cargar_combos(aca_Admision_Info model)
         {
+            var lst_vivienda = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVIENDA), false);
+            ViewBag.lst_vivienda = lst_vivienda;
+            var lst_tipo_vivienda = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.TIPOVIVIENDA), false);
+            ViewBag.lst_tipo_vivienda = lst_tipo_vivienda;
+            var lst_agua = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.AGUA), false);
+            ViewBag.lst_agua = lst_agua;
+            var lst_ing_institucion = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.MOTIVOING), false);
+            ViewBag.lst_ing_institucion = lst_ing_institucion;
+            var lst_institucion = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTITUCION), false);
+            ViewBag.lst_institucion = lst_institucion;
+            var lst_financiamiento = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.ESTUDIOS), false);
+            ViewBag.lst_financiamiento = lst_financiamiento;
+            var lst_vivecon = bus_catalogo_socioeconomico.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVECON), false);
+            ViewBag.lst_vivecon = lst_vivecon;
+
             var lst_anio = bus_anio.GetList_Matricula(model.IdEmpresa, false);
 
             var lst_sede = bus_sede.GetList(model.IdEmpresa, false);
@@ -287,14 +625,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
             var lst_instruccion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTRUCCION), false);
             lst_instruccion.Add(new aca_CatalogoFicha_Info { IdCatalogoFicha = 0, NomCatalogoFicha = "--- Seleccione ---" });
-
-            var lst_vive = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVECON), false);
-            var lst_tipo_vivienda = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.TIPOVIVIENDA), false);
-            var lst_vivienda = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.VIVIENDA), false);
-            var lst_agua = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.AGUA), false);
-            var lst_ing_institucion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.MOTIVOING), false);
-            var lst_institucion = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.INSTITUCION), false);
-            var lst_financiamiento = bus_catalogo_ficha.GetList_x_Tipo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoSocioEconomico.ESTUDIOS), false);
 
             var lst_profesion = bus_profesion.GetList(false);
             lst_profesion.Add(new tb_profesion_Info { IdProfesion = 0, Descripcion = "--- Seleccione ---" });
@@ -339,19 +669,27 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_ciudad = lst_ciudad;
             ViewBag.lst_parroquia = lst_parroquia;
             ViewBag.lst_parentesco = lst_parentesco;
-            ViewBag.lst_vive = lst_vive;
-            ViewBag.lst_tipo_vivienda = lst_tipo_vivienda;
-            ViewBag.lst_vivienda = lst_vivienda;
-            ViewBag.lst_agua = lst_agua;
-            ViewBag.lst_ing_institucion = lst_ing_institucion;
-            ViewBag.lst_institucion = lst_institucion;
-            ViewBag.lst_financiamiento = lst_financiamiento;
             ViewBag.lst_termino_pago = lst_termino_pago;
             ViewBag.lst_clientetipo = lst_clientetipo;
             ViewBag.lst_ciudad_factura = lst_ciudad_factura;
             ViewBag.lst_parroquia_factura = lst_parroquia_factura;
-        }
 
+            bool EsContador = Convert.ToBoolean(SessionFixed.EsContador);
+            var lst_mecanismo = bus_mecanismo.GetList(model.IdEmpresa, false);
+            ViewBag.lst_mecanismo = lst_mecanismo;
+
+            var lst_ptoventa = bus_punto_venta.GetListUsuario(model.IdEmpresa, model.IdSucursal, false, SessionFixed.IdUsuario, EsContador, "FACT");
+            ViewBag.lst_ptoventa = lst_ptoventa;
+
+            var lst_vendedor = bus_vendedor.get_list(model.IdEmpresa, false);
+            ViewBag.lst_vendedor = lst_vendedor;
+
+            var lst_pago = bus_termino_pago.get_list(false);
+            ViewBag.lst_pago = lst_pago;
+
+            var lst_formapago = bus_catalogo.get_list((int)cl_enumeradores.eTipoCatalogoFact.FormaDePago, false);
+            ViewBag.lst_formapago = lst_formapago;
+        }
         private bool validar(aca_Admision_Info info, ref string msg)
         {
             string return_naturaleza = "";
@@ -694,6 +1032,525 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return true;
         }
+        private bool validar_PreMatricula(aca_PreMatricula_Info info, ref string msg)
+        {
+            string return_naturaleza = "";
+            string return_naturaleza_padre = "";
+            string return_naturaleza_madre = "";
+            string return_naturaleza_representante = "";
+
+            if (cl_funciones.ValidaIdentificacion(info.info_alumno.info_persona_alumno.IdTipoDocumento, info.info_alumno.info_persona_alumno.pe_Naturaleza, info.info_alumno.info_persona_alumno.pe_cedulaRuc, ref return_naturaleza))
+            {
+                info.info_alumno.info_persona_alumno.pe_Naturaleza = return_naturaleza;
+            }
+            else
+            {
+                msg = "Número de identificación del alumno inválida";
+                return false;
+            }
+
+            if (info.info_alumno.info_persona_padre.IdTipoDocumento != "" && info.info_alumno.info_persona_padre.pe_Naturaleza != "" && info.info_alumno.info_persona_padre.pe_cedulaRuc != null)
+            {
+                if (cl_funciones.ValidaIdentificacion(info.info_alumno.info_persona_padre.IdTipoDocumento, info.info_alumno.info_persona_padre.pe_Naturaleza, info.info_alumno.info_persona_padre.pe_cedulaRuc, ref return_naturaleza_padre))
+                {
+                    info.info_alumno.info_persona_padre.pe_Naturaleza = return_naturaleza_padre;
+                    info.info_alumno.info_valido_padre = true;
+                }
+                else
+                {
+                    msg = "Número de identificación del padre inválida";
+                    info.info_alumno.info_valido_padre = false;
+                    return false;
+                }
+            }
+            else
+            {
+                info.info_valido_padre = false;
+            }
+
+            if (info.info_alumno.info_persona_madre.IdTipoDocumento != "" && info.info_alumno.info_persona_madre.pe_Naturaleza != "" && info.info_alumno.info_persona_madre.pe_cedulaRuc != null)
+            {
+                if (cl_funciones.ValidaIdentificacion(info.info_alumno.info_persona_madre.IdTipoDocumento, info.info_alumno.info_persona_madre.pe_Naturaleza, info.info_alumno.info_persona_madre.pe_cedulaRuc, ref return_naturaleza_madre))
+                {
+                    info.info_alumno.info_persona_madre.pe_Naturaleza = return_naturaleza_madre;
+                    info.info_alumno.info_valido_madre = true;
+                }
+                else
+                {
+                    msg = "Número de identificación de la madre inválida";
+                    info.info_alumno.info_valido_madre = false;
+                    return false;
+                }
+            }
+            else
+            {
+                info.info_alumno.info_valido_madre = false;
+            }
+
+            if (info.info_alumno.info_persona_representante.IdTipoDocumento != "" && info.info_alumno.info_persona_representante.pe_Naturaleza != "" && info.info_alumno.info_persona_representante.pe_cedulaRuc != null)
+            {
+                if (cl_funciones.ValidaIdentificacion(info.info_alumno.info_persona_representante.IdTipoDocumento, info.info_alumno.info_persona_representante.pe_Naturaleza, info.info_alumno.info_persona_representante.pe_cedulaRuc, ref return_naturaleza_representante))
+                {
+                    info.info_alumno.info_persona_representante.pe_Naturaleza = return_naturaleza_representante;
+                    info.info_alumno.info_valido_representante = true;
+                }
+                else
+                {
+                    msg = "Número de identificación del representante inválida";
+                    info.info_alumno.info_valido_representante = false;
+                    return false;
+                }
+            }
+            else
+            {
+                info.info_alumno.info_valido_representante = false;
+            }
+
+            if (info.info_alumno.pe_cedulaRuc_madre == info.info_alumno.pe_cedulaRuc_padre)
+            {
+                msg = "No se puede registrar a la misma persona como padre y madre";
+                return false;
+            }
+
+            if (info.info_alumno.SeFactura_madre ==false && info.info_alumno.SeFactura_padre== false && info.info_alumno.SeFactura_representante==false)
+            {
+                msg = "Debe seleccionar a una persona para facturar";
+                return false;
+            }
+            else
+            {
+                if (info.info_alumno.SeFactura_madre == true && info.info_alumno.SeFactura_padre == true)
+                {
+                    msg = "Debe seleccionar a una sola persona para facturar";
+                    return false;
+                }
+                if (info.info_alumno.SeFactura_madre == true && info.info_alumno.SeFactura_representante == true)
+                {
+                    msg = "Debe seleccionar a una sola persona para facturar";
+                    return false;
+                }
+                if (info.info_alumno.SeFactura_padre == true && info.info_alumno.SeFactura_representante == true)
+                {
+                    msg = "Debe seleccionar a una sola persona para facturar";
+                    return false;
+                }
+            }
+
+            if (info.IdCurso==0)
+            {
+                msg = "Seleccione curso";
+                return false;
+            }
+
+            if (info.IdParalelo == 0)
+            {
+                msg = "Seleccione paralelo";
+                return false;
+            }
+
+            if (info.lst_PreMatriculaRubro.Count == 0)
+            {
+                msg = "Seleccione plantilla, el estudiante no tiene rubros";
+                return false;
+            }
+
+            return true;
+        }
+        private aca_PreMatricula_Info armar_info_prematricula(aca_Admision_Info model)
+        {
+            var info_ExistePersonaAspirante = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Aspirante);
+            var info_ExistePersonaPadre = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Padre);
+            var info_ExistePersonaMadre = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Madre);
+            var info_ExistePersonaRepresentante = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Representante);
+            var info_ExisteAlumno = bus_alumno.get_info_x_num_cedula(model.IdEmpresa, model.CedulaRuc_Aspirante);
+
+            var info_Alumno = new aca_Alumno_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdAlumno = (info_ExisteAlumno == null ? 0 : info_ExisteAlumno.IdAlumno),
+                IdPersona = (info_ExisteAlumno == null ? 0 : info_ExisteAlumno.IdPersona),
+                Codigo = (info_ExisteAlumno == null ? "" : info_ExisteAlumno.Codigo),
+                Estado = true,
+                Correo = model.Correo_Aspirante,
+                Direccion = model.Direccion_Aspirante,
+                Celular = model.Celular_Aspirante,
+                FechaIngreso = DateTime.Now,
+                IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO),
+                IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REGISTRADO),
+                IdPais = model.IdPais_Aspirante,
+                Cod_Region = model.Cod_Region_Aspirante,
+                IdProvincia = model.IdProvincia_Aspirante,
+                IdCiudad = model.IdCiudad_Aspirante,
+                IdParroquia = model.IdParroquia_Aspirante,
+                Sector = model.Sector_Aspirante,
+                LugarNacimiento = model.LugarNacimiento_Aspirante,
+                Dificultad_Lectura = model.Dificultad_Lectura,
+                Dificultad_Escritura = model.Dificultad_Escritura,
+                Dificultad_Matematicas = model.Dificultad_Matematicas,
+                pe_apellido = model.Apellidos_Aspirante,
+                pe_nombre = model.Nombres_Aspirante,
+                pe_nombreCompleto = model.NombreCompleto_Aspirante,
+                pe_Naturaleza = model.Naturaleza_Aspirante,
+                NumeroCarnetConadis = model.NumeroCarnetConadis_Aspirante,
+                CodCatalogoCONADIS = (model.CodCatalogoCONADIS_Aspirante == "" ? null : model.CodCatalogoCONADIS_Aspirante),
+                AsisteCentroCristiano = model.AsisteCentroCristiano_Aspirante,
+                pe_cedulaRuc = model.CedulaRuc_Aspirante,
+                pe_sexo = model.Sexo_Aspirante,
+                IdGrupoEtnico = model.IdGrupoEtnico_Aspirante,
+                IdUsuario = SessionFixed.IdUsuario,
+                FechaCreacion = DateTime.Now,
+                IdAnio = model.IdAnio,
+                IdSede = model.IdSede,
+                IdJornada = model.IdJornada,
+                IdNivel = model.IdNivel,
+                IdCurso = model.IdCurso,
+                IdParalelo = model.IdParalelo,
+                IdSucursal = model.IdSucursal,
+                IdReligion = model.IdReligion_Aspirante,
+                IdTipoDocumento = model.IdTipoDocumento_Aspirante,
+
+                AniosServicio_madre = model.AniosServicio_Madre,
+                AnioVehiculo_madre = model.AnioVehiculo_Madre,
+                AsisteCentroCristiano_madre = model.AsisteCentroCristiano_Madre,
+                CargoTrabajo_madre = model.CargoTrabajo_Madre,
+                CasaPropia_madre = model.CasaPropia_Madre,
+                Celular_madre = model.Celular_Madre,
+                CodCatalogoSangre_madre = null,
+                IdCatalogoFichaInst_madre = model.IdCatalogoFichaInst_Madre,
+                CodCatalogoSangre = model.CodCatalogoSangre_Aspirante,
+                Cod_Region_madre = model.Cod_Region_Madre,
+                Correo_madre = model.Correo_Madre,
+                DireccionTrabajo_madre = model.DireccionTrabajo_Madre,
+                Direccion_madre = model.Direccion_Madre,
+                EmpresaTrabajo_madre = model.EmpresaTrabajo_Madre,
+                EsRepresentante_madre = false,
+                EstaFallecido_madre = model.EstaFallecido_Madre,
+                IdCiudad_madre_fact = model.IdCiudad_Madre_Fact,
+                IdEstadoCivil_madre = model.IdEstadoCivil_Madre,
+                IdPais_madre = model.IdPais_Madre,
+                CodCatalogoCONADIS_madre = (model.CodCatalogoCONADIS_Madre == "" ? null : model.CodCatalogoCONADIS_Madre),
+                IdCiudad_madre = model.IdCiudad_Madre,
+                IdParroquia_madre = model.IdParroquia_Madre,
+                IdParroquia_madre_fact = model.IdParroquia_Madre_Fact,
+                IdPersona_madre = model.IdPersona_Madre,
+                IdTipoCredito_madre = model.IdTipoCredito_Padre,
+                IdReligion_madre = model.IdReligion_Madre,
+                IdProvincia_madre = model.IdProvincia_Madre,
+                IdTipoDocumento_madre = model.IdTipoCredito_Madre,
+                Idtipo_cliente_madre = model.Idtipo_cliente_Madre ?? 0,
+                IngresoMensual_madre = model.IngresoMensual_Madre,
+                IdProfesion_madre = model.IdProfesion_Madre,
+                Marca_madre = model.Marca_Madre,
+                pe_apellido_madre = model.Apellidos_Madre,
+                NumeroCarnetConadis_madre=model.NumeroCarnetConadis_Madre,
+                pe_cedulaRuc_madre = model.CedulaRuc_Madre,
+                pe_fechaNacimiento_madre = model.FechaNacimiento_Madre,
+                pe_Naturaleza_madre=model.Naturaleza_Madre,
+                pe_nombreCompleto_madre = model.NombreCompleto_Madre,
+                pe_nombre_madre = model.Nombres_Madre,
+                Modelo_madre = model.Modelo_Madre,
+                pe_razonSocial_madre = model.RazonSocial_Madre,
+                pe_sexo_madre=model.Sexo_Madre,
+                pe_telfono_Contacto_madre = model.Telefono_Madre,
+                PorcentajeDiscapacidad_madre = model.PorcentajeDiscapacidad_Madre,
+                Sector_madre = model.Sector_Madre,
+                SeFactura_madre = model.SeFactura_Madre,
+                TelefonoTrabajo_madre = model.TelefonoTrabajo_Madre,
+                VehiculoPropio_madre = model.VehiculoPropio_Madre,
+                IdCatalogo_madre = model.IdCatalogoPAREN_Madre,
+
+                AniosServicio_padre = model.AniosServicio_Padre,
+                pe_cedulaRuc_padre = model.CedulaRuc_Aspirante,
+                AnioVehiculo_padre = model.AnioVehiculo_Padre,
+                AsisteCentroCristiano_padre = model.AsisteCentroCristiano_Padre, 
+                CargoTrabajo_padre = model.CargoTrabajo_Padre,               
+                CasaPropia_padre = model.CasaPropia_Padre,
+                Celular_padre = model.Celular_Padre,
+                CodCatalogoSangre_padre = null,
+                Cod_Region_padre = model.Cod_Region_Padre,
+                DireccionTrabajo_padre = model.DireccionTrabajo_Padre,
+                CodCatalogoCONADIS_padre = (model.CodCatalogoCONADIS_Padre == "" ? null : model.CodCatalogoCONADIS_Padre),
+                Correo_padre = model.Correo_Padre,
+                IdCiudad_padre_fact = model.IdCiudad_Madre_Fact,
+                Direccion_padre = model.Direccion_Padre,                
+                EmpresaTrabajo_padre = model.EmpresaTrabajo_Padre,                 
+                EsRepresentante_padre = false,               
+                EstaFallecido_padre = model.EstaFallecido_Padre,
+                IdCatalogoFichaInst_padre = model.IdCatalogoFichaInst_Padre,
+                IdCiudad_padre = model.IdCiudad_Padre,
+                IdEstadoCivil_padre = model.IdEstadoCivil_Padre,
+                IdPais_padre = model.IdPais_Padre,
+                IdParroquia_padre = model.IdParroquia_Padre,
+                IdPersona_padre = model.IdPersona_Padre,
+                IdParroquia_padre_fact = model.IdParroquia_Padre_Fact,
+                IdProfesion_padre = model.IdProfesion_Padre,
+                IdReligion_padre = model.IdReligion_Padre,
+                IdProvincia_padre = model.IdProvincia_Padre,
+                IdTipoCredito_padre = model.IdTipoCredito_Padre,
+                IdTipoDocumento_padre = model.IdTipoCredito_Padre,
+                Idtipo_cliente_padre = model.Idtipo_cliente_Padre ?? 0,
+                IngresoMensual_padre = model.IngresoMensual_Padre,
+                Marca_padre = model.Marca_Padre,
+                NumeroCarnetConadis_padre=model.NumeroCarnetConadis_Padre,
+                pe_apellido_padre=model.Apellidos_Padre,
+                pe_fechaNacimiento_padre=model.FechaNacimiento_Padre,
+                pe_Naturaleza_padre=model.Naturaleza_Padre,
+                pe_nombreCompleto_padre=model.NombreCompleto_Padre,
+                pe_nombre_padre=model.Nombres_Padre,
+                pe_razonSocial_padre = model.RazonSocial_Padre,
+                pe_sexo_padre=model.Sexo_Padre,
+                pe_telfono_Contacto_padre=model.Telefono_Padre,
+                PorcentajeDiscapacidad_padre=model.PorcentajeDiscapacidad_Padre,
+                Sector_padre=model.Sector_Padre,
+                SeFactura_padre=model.SeFactura_Padre,
+                TelefonoTrabajo_padre=model.TelefonoTrabajo_Padre,
+                VehiculoPropio_padre = model.VehiculoPropio_Padre,
+                IdCatalogo_padre = model.IdCatalogoPAREN_Padre,
+                Modelo_padre=model.Modelo_Padre,
+
+                AniosServicio_representante = model.AniosServicio_Representante,
+                pe_cedulaRuc_representante = model.CedulaRuc_Aspirante,
+                AnioVehiculo_representante = model.AnioVehiculo_Representante,
+                AsisteCentroCristiano_representante = model.AsisteCentroCristiano_Representante,
+                CargoTrabajo_representante = model.CargoTrabajo_Representante,
+                CasaPropia_representante = model.CasaPropia_Representante,
+                Celular_representante = model.Celular_Representante,
+                CodCatalogoSangre_representante = null,
+                Cod_Region_representante = model.Cod_Region_Representante,
+                DireccionTrabajo_representante = model.DireccionTrabajo_Representante,
+                CodCatalogoCONADIS_representante = (model.CodCatalogoCONADIS_Representante == "" ? null : model.CodCatalogoCONADIS_Representante),
+                Correo_representante = model.Correo_Representante,
+                IdCiudad_representante_fact = model.IdCiudad_Madre_Fact,
+                Direccion_representante = model.Direccion_Representante,
+                EmpresaTrabajo_representante = model.EmpresaTrabajo_Representante,
+                EsRepresentante_representante = false,
+                EstaFallecido_representante = model.EstaFallecido_Representante,
+                IdCatalogoFichaInst_representante = model.IdCatalogoFichaInst_Representante,
+                IdCiudad_representante = model.IdCiudad_Representante,
+                IdEstadoCivil_representante = model.IdEstadoCivil_Representante,
+                IdPais_representante = model.IdPais_Representante,
+                IdParroquia_representante = model.IdParroquia_Representante,
+                IdPersona_representante = model.IdPersona_Representante,
+                IdParroquia_representante_fact = model.IdParroquia_Representante_Fact,
+                IdProfesion_representante = model.IdProfesion_Representante,
+                IdReligion_representante = model.IdReligion_Representante,
+                IdProvincia_representante = model.IdProvincia_Representante,
+                IdTipoCredito_representante = model.IdTipoCredito_Representante,
+                IdTipoDocumento_representante = model.IdTipoCredito_Representante,
+                Idtipo_cliente_representante = model.Idtipo_cliente_Representante ?? 0,
+                IngresoMensual_representante = model.IngresoMensual_Representante,
+                Marca_representante = model.Marca_Representante,
+                NumeroCarnetConadis_representante = model.NumeroCarnetConadis_Representante,
+                pe_apellido_representante = model.Apellidos_Representante,
+                pe_fechaNacimiento_representante = model.FechaNacimiento_Representante,
+                pe_Naturaleza_representante = model.Naturaleza_Representante,
+                pe_nombreCompleto_representante = model.NombreCompleto_Representante,
+                pe_nombre_representante = model.Nombres_Representante,
+                pe_razonSocial_representante = model.RazonSocial_Representante,
+                pe_sexo_representante = model.Sexo_Representante,
+                pe_telfono_Contacto_representante = model.Telefono_Representante,
+                PorcentajeDiscapacidad_representante = model.PorcentajeDiscapacidad_Representante,
+                Sector_representante = model.Sector_Representante,
+                SeFactura_representante = model.SeFactura_Representante,
+                TelefonoTrabajo_representante = model.TelefonoTrabajo_Representante,
+                VehiculoPropio_representante = model.VehiculoPropio_Representante,
+                IdCatalogo_representante = model.IdCatalogoPAREN_Representante,
+                Modelo_representante = model.Modelo_Representante,
+                
+            };
+
+            info_Alumno.info_persona_alumno = new tb_persona_Info();
+            info_Alumno.info_persona_padre = new tb_persona_Info();
+            info_Alumno.info_persona_madre = new tb_persona_Info();
+
+            var info_persona_aspirante = new tb_persona_Info
+            {
+                IdPersona = (info_ExistePersonaAspirante == null ? 0 : info_ExistePersonaAspirante.IdPersona),
+                pe_Naturaleza = model.Naturaleza_Aspirante,
+                IdTipoDocumento = model.IdTipoDocumento_Aspirante,
+                pe_cedulaRuc = (model.CedulaRuc_Aspirante == "" ? null : model.CedulaRuc_Aspirante),
+                pe_nombre = model.Nombres_Aspirante,
+                pe_apellido = model.Apellidos_Aspirante,
+                pe_nombreCompleto = model.NombreCompleto_Aspirante,
+                pe_razonSocial = "",
+                pe_sexo = model.Sexo_Aspirante,
+                CodCatalogoCONADIS = model.CodCatalogoCONADIS_Aspirante,
+                NumeroCarnetConadis = model.NumeroCarnetConadis_Aspirante,
+                PorcentajeDiscapacidad = model.PorcentajeDiscapacidad_Aspirante,
+                pe_fechaNacimiento = model.FechaNacimiento_Aspirante,
+                pe_telfono_Contacto = model.Telefono_Aspirante,
+                pe_correo = model.Correo_Aspirante,
+                pe_celular = model.Celular_Aspirante,
+                pe_direccion = model.Direccion_Aspirante,
+                IdEstadoCivil = null,
+                IdProfesion = null,
+                IdReligion = model.IdReligion_Aspirante,
+                AsisteCentroCristiano = model.AsisteCentroCristiano_Aspirante,
+            };
+            var info_persona_padre = new tb_persona_Info
+            {
+                IdPersona = (info_ExistePersonaPadre == null ? 0 : info_ExistePersonaPadre.IdPersona),
+                pe_Naturaleza = model.Naturaleza_Padre,
+                IdTipoDocumento = model.IdTipoDocumento_Padre,
+                pe_cedulaRuc = (model.CedulaRuc_Padre == "" ? null : model.CedulaRuc_Padre),
+                pe_nombre = model.Nombres_Padre,
+                pe_apellido = model.Apellidos_Padre,
+                pe_nombreCompleto = model.NombreCompleto_Padre,
+                pe_razonSocial = model.RazonSocial_Padre,
+                pe_sexo = model.Sexo_Padre,
+                CodCatalogoCONADIS = model.CodCatalogoCONADIS_Padre,
+                NumeroCarnetConadis = model.NumeroCarnetConadis_Padre,
+                PorcentajeDiscapacidad = model.PorcentajeDiscapacidad_Padre,
+                pe_fechaNacimiento = model.FechaNacimiento_Padre,
+                pe_telfono_Contacto = model.Telefono_Padre,
+                pe_correo = model.Correo_Padre,
+                pe_celular = model.Celular_Padre,
+                pe_direccion = model.Direccion_Padre,
+                IdEstadoCivil = null,
+                IdProfesion = null,
+                IdReligion = model.IdReligion_Padre,
+                AsisteCentroCristiano = model.AsisteCentroCristiano_Padre,
+            };
+            var info_persona_madre = new tb_persona_Info
+            {
+                IdPersona = (info_ExistePersonaMadre == null ? 0 : info_ExistePersonaMadre.IdPersona),
+                pe_Naturaleza = model.Naturaleza_Madre,
+                IdTipoDocumento = model.IdTipoDocumento_Madre,
+                pe_cedulaRuc = (model.CedulaRuc_Madre == "" ? null : model.CedulaRuc_Madre),
+                pe_nombre = model.Nombres_Madre,
+                pe_apellido = model.Apellidos_Madre,
+                pe_nombreCompleto = model.NombreCompleto_Madre,
+                pe_razonSocial = model.RazonSocial_Madre,
+                pe_sexo = model.Sexo_Madre,
+                CodCatalogoCONADIS = model.CodCatalogoCONADIS_Madre,
+                NumeroCarnetConadis = model.NumeroCarnetConadis_Madre,
+                PorcentajeDiscapacidad = model.PorcentajeDiscapacidad_Madre,
+                pe_fechaNacimiento = model.FechaNacimiento_Madre,
+                pe_telfono_Contacto = model.Telefono_Madre,
+                pe_correo = model.Correo_Madre,
+                pe_celular = model.Celular_Madre,
+                pe_direccion = model.Direccion_Madre,
+                IdEstadoCivil = null,
+                IdProfesion = null,
+                IdReligion = model.IdReligion_Madre,
+                AsisteCentroCristiano = model.AsisteCentroCristiano_Madre,
+            };
+
+            var info_persona_representante = new tb_persona_Info
+            {
+                IdPersona = (info_ExistePersonaRepresentante == null ? 0 : info_ExistePersonaRepresentante.IdPersona),
+                pe_Naturaleza = model.Naturaleza_Representante,
+                IdTipoDocumento = model.IdTipoDocumento_Representante,
+                pe_cedulaRuc = (model.CedulaRuc_Representante == "" ? null : model.CedulaRuc_Representante),
+                pe_nombre = model.Nombres_Representante,
+                pe_apellido = model.Apellidos_Representante,
+                pe_nombreCompleto = model.NombreCompleto_Representante,
+                pe_razonSocial = model.RazonSocial_Representante,
+                pe_sexo = model.Sexo_Representante,
+                CodCatalogoCONADIS = model.CodCatalogoCONADIS_Representante,
+                NumeroCarnetConadis = model.NumeroCarnetConadis_Representante,
+                PorcentajeDiscapacidad = model.PorcentajeDiscapacidad_Representante,
+                pe_fechaNacimiento = model.FechaNacimiento_Representante,
+                pe_telfono_Contacto = model.Telefono_Representante,
+                pe_correo = model.Correo_Representante,
+                pe_celular = model.Celular_Representante,
+                pe_direccion = model.Direccion_Representante,
+                IdEstadoCivil = null,
+                IdProfesion = null,
+                IdReligion = model.IdReligion_Representante,
+                AsisteCentroCristiano = model.AsisteCentroCristiano_Representante,
+            };
+
+            info_Alumno.info_persona_alumno = info_persona_aspirante;
+            info_Alumno.info_persona_padre = info_persona_padre;
+            info_Alumno.info_persona_madre = info_persona_madre;
+            info_Alumno.info_persona_representante = info_persona_representante;
+
+            model.IdMecanismo = 1;
+            model.IdMecanismoDet = 1;
+
+            var info_mecanismo = bus_mecanismo.GetInfo(model.IdEmpresa, model.IdMecanismo);
+            var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+            if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == false)
+            {
+                info_mecanismo = bus_mecanismo.GetInfo(model.IdEmpresa, model.IdMecanismoDet);
+                info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+            }
+
+            var info_SocioEconomico = new aca_SocioEconomico_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdAlumno = info_Alumno == null ? 0 : info_Alumno.IdAlumno,
+                IdCatalogoFichaVi = model.IdCatalogoFichaViv_Aspirante,
+                IdCatalogoFichaTVi = model.IdCatalogoFichaTipoViv_Aspirante,
+                IdCatalogoFichaAg = model.IdCatalogoFichaAgua_Aspirante,
+                TieneElectricidad = model.TieneElectricidad_Aspirante,
+                TieneHermanos = model.TieneHermanos_Aspirante,
+                CantidadHermanos = model.CantidadHermanos,
+                SueldoPadre = model.SueldoPadre,
+                SueldoMadre = model.SueldoMadre,
+                OtroIngresoMadre = model.OtroIngresoMadre,
+                OtroIngresoPadre = model.OtroIngresoPadre,
+                GastoAlimentacion = model.GastoAlimentacion,
+                GastoEducacion = model.GastoEducacion,
+                GastoServicioBasico = model.GastoServicioBasico,
+                GastoSalud = model.GastoSalud,
+                GastoArriendo = model.GastoArriendo,
+                GastoPrestamo = model.GastoPrestamo,
+                OtroGasto = model.OtroGasto,
+                IdCatalogoFichaMot = model.IdCatalogoFichaMotivo_Aspirante,
+                IdCatalogoFichaIns = model.IdCatalogoFichaInst_Aspirante,
+                IdCatalogoFichaFin = model.IdCatalogoFichaFinanc_Aspirante,
+                IdCatalogoFichaVive = model.IdCatalogoFichaVive_Aspirante,
+                OtroFinanciamiento = model.OtroFinanciamiento_Aspirante,
+                OtroInformacionInst = model.OtroInformacionInst_Aspirante,
+                OtroMotivoIngreso = model.OtroMotivoIngreso_Aspirante,
+                IdUsuarioModificacion = model.IdUsuarioModificacion,
+        };
+
+            var info_PreMatricula = new aca_PreMatricula_Info
+            {
+                IdEmpresa = model.IdEmpresa,
+                IdAdmision = model.IdAdmision,
+                IdAlumno = info_Alumno==null ? 0 : info_Alumno.IdAlumno,
+                IdAnio = model.IdAnio,
+                IdSede = model.IdSede,
+                IdNivel = model.IdNivel,
+                IdJornada = model.IdJornada,
+                IdCurso = model.IdCurso,
+                IdParalelo = model.IdParalelo,
+                IdPlantilla = model.IdPlantilla,
+                IdMecanismo = model.IdMecanismo,
+                Fecha = model.Fecha.Date,
+                Observacion = model.Observacion,
+                IdCatalogoESTPREMAT = model.IdCatalogoESTPREMAT,
+                IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpresa_rol : (int?)null),
+                IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpleado : (decimal?)null),
+                EsPatrocinado = model.EsPatrocinado,
+                IdUsuarioCreacion = SessionFixed.IdUsuario,
+                info_alumno = new aca_Alumno_Info(),
+                lst_PreMatriculaRubro = new List<aca_PreMatricula_Rubro_Info>(),
+                ExisteAlumno = (info_ExisteAlumno.IdAlumno>0 ? true : false)
+            };
+
+            info_PreMatricula.info_alumno = info_Alumno;
+            info_PreMatricula.info_socioeconomico = info_SocioEconomico;
+
+            if (model.CedulaRuc_Representante == model.CedulaRuc_Padre || model.CedulaRuc_Representante == model.CedulaRuc_Madre)
+            {
+                info_PreMatricula.OtraPersonaFamiliar = false;
+                
+            }
+            else
+            {
+                info_PreMatricula.OtraPersonaFamiliar = true;
+                info_PreMatricula.IdCatalogoPAREN_OtroFamiliar = model.IdCatalogoPAREN_Representante;
+            }
+            info_PreMatricula.lst_PreMatriculaRubro = ListaPreMatriculaRubro.get_list(model.IdTransaccionSession);
+            info_PreMatricula.lst_PreMatriculaRubro.Where(q=>q.EnMatricula=true).ToList().ForEach(q=> q.IdMecanismo = model.IdMecanismo);
+            info_PreMatricula.lst_PreMatriculaRubro.Where(q => q.EnMatricula = false).ToList().ForEach(q => q.IdMecanismo = model.IdMecanismoDet);
+            return info_PreMatricula;
+        }
         #endregion
 
         #region JSON
@@ -728,7 +1585,6 @@ namespace Core.Web.Areas.Academico.Controllers
             resultado.IdAdmision = (info_admision == null ? 0 : info_admision.IdAdmision);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-
         public JsonResult get_info_x_num_cedula_persona(string pe_cedulaRuc = "")
         {
             var resultado = new tb_persona_Info();
@@ -743,39 +1599,310 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ProcesarAdmision(int IdEmpresa = 0, decimal IdAdmision=0)
+        public JsonResult ActualizarDocumentosSeleccionados(string IdComboCurso = "", string Seleccionados = "")
         {
-            var resultado = "";
-            var info_admision = bus_admision.GetInfo(IdEmpresa, IdAdmision);
-            if (info_admision!=null)
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var lst_detalle = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            lst_detalle.ForEach(q=>q.seleccionado=false);
+            if (Seleccionados != null && Seleccionados != "")
             {
-                if (info_admision.IdCatalogoESTADM == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO))
+                string[] array = Seleccionados.Split(',');
+                foreach (var item in array)
                 {
-                    info_admision.IdUsuarioModificacion = SessionFixed.IdUsuario;
-                    info_admision.IdUsuarioRevision = SessionFixed.IdUsuario;
-                    info_admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.ENPROCESO);
-
-                    if (bus_admision.ModificarEstadoEnProceso(info_admision))
+                    var info = lst_detalle.Where(q => q.IdStringDoc == item).FirstOrDefault();
+                    if (info != null)
                     {
-                        resultado = "La admisión esta en proceso de revisión";
+                        lst_detalle.Where(q => q.IdStringDoc == item).FirstOrDefault().seleccionado = true;
+                    }
+                }
+                Lista_DocumentosMatricula.set_list(lst_detalle, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+            return Json(lst_detalle, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SumarValores(int IdAnio = 0, int IdPlantilla = 0, string Seleccionados = "")
+        {
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            decimal Total = 0;
+            decimal TotalProntoPago = 0;
+            decimal ValorRubro = 0;
+            decimal ValorDescuento = 0;
+            var lst_detalle = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            if (Seleccionados != null && Seleccionados != "")
+            {
+                string[] array = Seleccionados.Split(',');
+                var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
+
+                foreach (var item in array)
+                {
+                    var info = lst_detalle.Where(q => q.IdString == item).FirstOrDefault();
+                    if (info!=null)
+                    {
+                        lst_detalle.Where(q => q.IdString == item).FirstOrDefault().seleccionado = true;
+                    }
+
+                    var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, info.IdPeriodo);
+                    if (info.AplicaProntoPago == true)
+                    {
+                        if (DateTime.Now.Date <= info_anio_periodo.FechaProntoPago)
+                        {
+                            ValorRubro = info.ValorProntoPago;
+                            TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                        }
+                        else
+                        {
+                            ValorRubro = info.Total;
+                            TotalProntoPago = TotalProntoPago + Math.Round((ValorRubro), 2, MidpointRounding.AwayFromZero);
+                        }
+
+                        Total = Total + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
                     }
                     else
                     {
-                        resultado = "El registro no se ha actualizado";
+                        ValorRubro = info.Total;
+                        Total = Total + Math.Round((info.Total), 2, MidpointRounding.AwayFromZero);
+                        TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
                     }
+
                 }
-                else
-                {
-                    resultado = "La admisión ya esta siendo procesada por otro usuario: " + info_admision.IdUsuarioRevision;
-                }   
+                ListaPreMatriculaRubro.set_list(lst_detalle ,Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             }
-            else
+            return Json(new { ValorPlantilla = Total, ValorPlantillaProntoPago = TotalProntoPago }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult EnlistarDocumentos(int IdEmpresa = 0, decimal IdAdmision=0)
+        {
+            var lst_documentos = new List<aca_AlumnoDocumento_Info>();
+            var info_admision = bus_admision.GetInfo(IdEmpresa, IdAdmision);
+            var FilePath = Server.UrlPathEncode("http://sistema.liceocristiano.edu.ec/lcgPrueba/Content/aspirantes/" + IdAdmision);
+            //DirectoryInfo dir = new DirectoryInfo(@""+FilePath);
+            var listaDocumentos = new List<FileInfo>();
+            var Secuencia = 1;
+            if (Directory.Exists(FilePath))
             {
-                resultado = "No existe el registro";
+                var lst = Directory.GetDirectories(FilePath);
+                //foreach (FileInfo file in lst)
+                //{
+                //    listaDocumentos.Add(file);
+
+                //    var Documentos = new aca_AlumnoDocumento_Info
+                //    {
+                //        NomDocumento = file.Name,
+                //        Ruta = file.FullName,
+                //        Secuencia = Secuencia++,
+                //    };
+                //    lst_documentos.Add(Documentos);
+                //}
             }
             
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
+            return Json(lst_documentos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult SetDocumentos(int IdEmpresa = 0, int IdAnio = 0, string IdCurso = "", decimal IdAlumno = 0)
+        {
+            var IdSede = Convert.ToInt32(IdCurso.Substring(8, 4));
+            var IdNivel = Convert.ToInt32(IdCurso.Substring(12, 4));
+            var IdJornada = Convert.ToInt32(IdCurso.Substring(16, 4));
+            var IdCursoMat = Convert.ToInt32(IdCurso.Substring(20, 4));
+            List<aca_AnioLectivo_Curso_Documento_Info> lst_Documentos = new List<aca_AnioLectivo_Curso_Documento_Info>();
+
+            var lst_doc_curso = bus_curso_documento.GetList_Matricula(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCursoMat);
+            var lst_doc_alumno = bus_alumno_documento.GetList(IdEmpresa, IdAlumno, true);
+
+            if (lst_doc_curso != null && lst_doc_curso.Count > 0)
+            {
+                foreach (var item in lst_doc_curso)
+                {
+                    item.seleccionado = false;
+                    item.IdStringDoc = Convert.ToString(item.IdDocumento);
+
+                    foreach (var item1 in lst_doc_alumno)
+                    {
+                        if (item.IdDocumento == item1.IdDocumento)
+                        {
+                            item.seleccionado = true;
+                            break;
+                        }
+                    }
+                    lst_Documentos.Add(item);
+                }
+            }
+
+            Lista_DocumentosMatricula.set_list(lst_Documentos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(lst_Documentos, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetDatosMecanismo(int IdEmpresa = 0, int IdMecanismo = 0, int IdMecanismoOtros = 0)
+        {
+            bool resultado = false;
+            var Empresa = 0;
+            var info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismo);
+            var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+
+            if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+            {
+                resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+                Empresa = (info_mecanismo == null ? 0 : info_mecanismo.IdEmpresa_rol ?? 0);
+            }
+            else
+            {
+                if (IdMecanismoOtros != 0)
+                {
+                    info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismoOtros);
+                    info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+                    if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+                    {
+                        resultado = info_termino_pago.AplicaDescuentoNomina ?? false;
+                        Empresa = (info_mecanismo == null ? 0 : info_mecanismo.IdEmpresa_rol ?? 0);
+                    }
+                }
+            }
+
+            return Json(new { MostrarEmpleado = resultado, IdEmpresa_rol = Empresa }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LimpiarListaDetalle(int IdEmpresa = 0)
+        {
+            decimal Total = 0;
+            decimal TotalProntoPago = 0;
+            decimal ValorTotal = 0;
+            decimal ValorTotalPP = 0;
+
+            ValorTotal = Total;
+            ValorTotalPP = TotalProntoPago;
+            ListaPreMatriculaRubro.set_list(new List<aca_PreMatricula_Rubro_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SetMatriculaRubro(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, int IdMatricula = 0)
+        {
+            decimal Total = 0;
+            decimal TotalProntoPago = 0;
+            decimal ValorDescuento = 0;
+            decimal ValorRubro = 0;
+            decimal ValorTotal = 0;
+            decimal ValorTotalPP = 0;
+            List<aca_PreMatricula_Rubro_Info> lst_MatriculaRubro = new List<aca_PreMatricula_Rubro_Info>();
+            if (IdMatricula == 0)
+            {
+                var info_plantilla = bus_plantilla.GetInfo(IdEmpresa, IdAnio, IdPlantilla);
+                lst_MatriculaRubro = bus_prematricula_rubro.GetList_PreMatricula(IdEmpresa, IdAnio, IdPlantilla);
+                if (lst_MatriculaRubro.Count() > 0)
+                {
+                    var IdPrimerPeriodo = lst_MatriculaRubro.Min(q => q.IdPeriodo);
+
+                    foreach (var item in lst_MatriculaRubro)
+                    {
+                        var info_anio_periodo = bus_anio_periodo.GetInfo(IdEmpresa, IdAnio, item.IdPeriodo);
+
+                        if (item.IdPeriodo == IdPrimerPeriodo)
+                        {
+                            item.seleccionado = true;
+                        }
+
+                        if (item.AplicaProntoPago == true)
+                        {
+                            if (DateTime.Now.Date <= item.FechaProntoPago)
+                            {
+                                ValorRubro = Math.Round(item.ValorProntoPago, 2, MidpointRounding.AwayFromZero);
+                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                            }
+                            else
+                            {
+                                ValorRubro = (item.Total);
+                                TotalProntoPago = TotalProntoPago + Math.Round(ValorRubro, 2, MidpointRounding.AwayFromZero);
+                            }
+                            if (item.seleccionado)
+                            {
+                                Total = Total + Math.Round((item.ValorProntoPago), 2, MidpointRounding.AwayFromZero);
+                            }
+
+                        }
+                        else
+                        {
+                            ValorRubro = (item.Total);
+                            Total = Total + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                            TotalProntoPago = TotalProntoPago + Math.Round((item.Total), 2, MidpointRounding.AwayFromZero);
+                        }
+
+                        item.ValorProntoPago = ValorRubro;
+                        item.FechaProntoPago = Convert.ToDateTime(info_anio_periodo.FechaProntoPago);
+                    }
+                    ValorTotal = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.Total);
+                    ValorTotalPP = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.ValorProntoPago);
+                    ListaPreMatriculaRubro.set_list(lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                }
+                else
+                {
+                    ValorTotal = Total;
+                    ValorTotalPP = TotalProntoPago;
+                    ListaPreMatriculaRubro.set_list(new List<aca_PreMatricula_Rubro_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                }
+
+            }
+            else
+            {
+                lst_MatriculaRubro = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                var lst_nueva_plantilla = bus_prematricula_rubro.GetList_PreMatricula(IdEmpresa, IdAnio, IdPlantilla);
+                var lista_no_cobrado = lst_MatriculaRubro.Where(q => q.EnMatricula == false).ToList();
+
+                List<aca_PreMatricula_Rubro_Info> lista_nueva = new List<aca_PreMatricula_Rubro_Info>();
+
+                foreach (var item in lst_MatriculaRubro)
+                {
+                    if (item.EnMatricula == true)
+                    {
+                        lista_nueva.Add(item);
+                    }
+                }
+
+
+                foreach (var item1 in lista_no_cobrado)
+                {
+                    foreach (var item2 in lst_nueva_plantilla)
+                    {
+                        if (item1.IdPeriodo == item2.IdPeriodo)
+                        {
+                            item2.IdMecanismo = item1.IdMecanismo;
+                            lista_nueva.Add(item2);
+                        }
+                    }
+                }
+
+                ListaPreMatriculaRubro.set_list(lista_nueva, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            }
+
+
+            return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ProcesarAdmision(int IdEmpresa = 0, decimal IdAdmision = 0)
+        {
+            var info_admision = bus_admision.GetInfo(IdEmpresa, IdAdmision);
+            var mensaje = "";
+            if (info_admision.IdUsuarioRevision == null)
+            {
+                info_admision.IdUsuarioRevision = SessionFixed.IdUsuario;
+                info_admision.IdUsuarioModificacion = SessionFixed.IdUsuario;
+                info_admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.ENPROCESO);
+
+                
+                if (bus_admision.ModificarEstadoEnProceso(info_admision))
+                {
+                    mensaje = "El estado de la admisión cambió a proceso de revisión";
+                }
+                else
+                {
+                    mensaje = "El estado de la admisión no se ha actualizado";
+                }
+            }
+            else
+            {
+                mensaje = "La admisión ya esta siendo revisando por: " + info_admision.IdUsuarioRevision + " desde: " + info_admision.FechaRevision.ToString();
+            }
+            
+            
+            return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }
@@ -798,5 +1925,34 @@ public class aca_ProcesarAdmision_List
     public void set_list(List<aca_Admision_Info> list, decimal IdTransaccionSession)
     {
         HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+    }
+}
+public class aca_PreMatricula_Rubro_List
+{
+    string Variable = "aca_PreMatricula_Rubro_Info";
+    public List<aca_PreMatricula_Rubro_Info> get_list(decimal IdTransaccionSession)
+    {
+        if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+        {
+            List<aca_PreMatricula_Rubro_Info> list = new List<aca_PreMatricula_Rubro_Info>();
+
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+        return (List<aca_PreMatricula_Rubro_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+    }
+
+    public void set_list(List<aca_PreMatricula_Rubro_Info> list, decimal IdTransaccionSession)
+    {
+        HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+    }
+
+    public void UpdateRow(aca_PreMatricula_Rubro_Info info_det, decimal IdTransaccion)
+    {
+        int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+        aca_PreMatricula_Rubro_Info edited_info = get_list(IdTransaccion).Where(q => q.IdString == info_det.IdString).FirstOrDefault();
+        if (edited_info.FechaFacturacion == null)
+        {
+            edited_info.IdMecanismo = info_det.IdMecanismo;
+        }
     }
 }

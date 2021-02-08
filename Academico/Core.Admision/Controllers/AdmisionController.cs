@@ -48,15 +48,15 @@ namespace Core.Admision.Controllers
         public ActionResult Index()
         {
             int IdEmpresa = 1;
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0); 
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0);
             var model = new aca_Admision_Info
             {
-                IdEmpresa= IdEmpresa,
-                IdAnio = (info_anio==null ? 0 : info_anio.IdAnio),
-                IdSede=0,
-                IdJornada=0,
-                IdNivel=0,
-                IdCurso=0,
+                IdEmpresa = IdEmpresa,
+                IdAnio = (info_anio == null ? 0 : info_anio.IdAnio),
+                IdSede = 0,
+                IdJornada = 0,
+                IdNivel = 0,
+                IdCurso = 0,
                 Naturaleza_Aspirante = "NATU",
                 Naturaleza_Padre = "NATU",
                 Naturaleza_Madre = "NATU",
@@ -71,7 +71,7 @@ namespace Core.Admision.Controllers
                 IdReligion_Representante = 0,
                 CodCatalogoCONADIS_Aspirante = "",
                 CodCatalogoCONADIS_Padre = "",
-                CodCatalogoCONADIS_Madre= "",
+                CodCatalogoCONADIS_Madre = "",
                 CodCatalogoCONADIS_Representante = "",
                 IdGrupoEtnico_Aspirante = (int?)null,
                 IdGrupoEtnico_Padre = (int?)null,
@@ -94,7 +94,7 @@ namespace Core.Admision.Controllers
                 Sector_Madre = "",
                 IdPais_Aspirante = "1",
                 IdPais_Padre = "1",
-                IdPais_Madre= "1",
+                IdPais_Madre = "1",
                 Cod_Region_Aspirante = "00001",
                 Cod_Region_Padre = "00001",
                 Cod_Region_Madre = "00001",
@@ -103,17 +103,17 @@ namespace Core.Admision.Controllers
                 IdProvincia_Padre = "09",
                 IdProvincia_Madre = "09",
                 IdProvincia_Representante = "09",
-                IdProfesion_Madre=0,
-                IdProfesion_Padre=0,
-                IdProfesion_Representante=0,
+                IdProfesion_Madre = 0,
+                IdProfesion_Padre = 0,
+                IdProfesion_Representante = 0,
                 IdCatalogoFichaInst_Madre = 0,
-                IdCatalogoFichaInst_Padre=0,
-                IdCatalogoFichaInst_Representante=0,
+                IdCatalogoFichaInst_Padre = 0,
+                IdCatalogoFichaInst_Representante = 0,
                 IdCatalogoPAREN_Madre = Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA),
                 IdCatalogoPAREN_Padre = Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA),
                 IdCatalogoPAREN_Representante = Convert.ToInt32(cl_enumeradores.eTipoParentezco.OTROS),
                 SueldoPadre = 0,
-                SueldoMadre= 0,
+                SueldoMadre = 0,
                 OtroIngresoMadre = 0,
                 OtroIngresoPadre = 0,
                 GastoAlimentacion = 0,
@@ -140,7 +140,7 @@ namespace Core.Admision.Controllers
                 FechaNacimiento_Madre = DateTime.Now,
                 FechaNacimiento_Representante = DateTime.Now,
                 IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO),
-                Representante="O",
+                Representante = "O",
                 Idtipo_cliente_Padre = 1,
                 Idtipo_cliente_Madre = 1,
                 Idtipo_cliente_Representante = 1,
@@ -156,6 +156,7 @@ namespace Core.Admision.Controllers
                 SeFactura_Padre = false,
                 SeFactura_Madre = false,
                 SeFactura_Representante = false,
+                AceptaTerminos = true
             };
 
             cargar_combos(model);
@@ -201,7 +202,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.CedulaAspirante.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.CedulaAspirante.SaveAs(path);
             }
             if (model.CedulaRepresentante != null)
             {
@@ -210,7 +211,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.CedulaRepresentante.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.CedulaRepresentante.SaveAs(path);
             }
             if (model.RecordAcademicoAspirante != null)
             {
@@ -219,7 +220,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.RecordAcademicoAspirante.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.RecordAcademicoAspirante.SaveAs(path);
             }
             if (model.PagoAlDiaAspirante != null)
             {
@@ -228,7 +229,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.PagoAlDiaAspirante.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.PagoAlDiaAspirante.SaveAs(path);
             }
             if (model.CertificadoLaboral != null)
             {
@@ -237,7 +238,7 @@ namespace Core.Admision.Controllers
                 var extension = Path.GetExtension(model.CertificadoLaboral.FileName);
                 var NombreArchivoGuardar = NombreArchivo + extension;
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
-                model.FotoAspirante.SaveAs(path);
+                model.CertificadoLaboral.SaveAs(path);
             }
             return RedirectToAction("Index");
         }
@@ -486,11 +487,11 @@ namespace Core.Admision.Controllers
                 info.AnioVehiculo_Representante = info.AnioVehiculo_Padre;
                 info.CasaPropia_Representante = info.CasaPropia_Padre;
                 info.EstaFallecido_Representante = info.EstaFallecido_Padre;
-                //info.SeFactura_Representante = info.SeFactura_Padre;
-                //info.Idtipo_cliente_Representante = info.Idtipo_cliente_Padre;
-                //info.IdTipoCredito_Representante = info.IdTipoCredito_Padre;
-                //info.IdCiudad_Representante_Fact = info.IdCiudad_Padre_Fact;
-                //info.IdParroquia_Representante_Fact = info.IdParroquia_Padre_Fact;
+                info.SeFactura_Representante = false;
+                info.Idtipo_cliente_Representante = info.Idtipo_cliente_Padre;
+                info.IdTipoCredito_Representante = info.IdTipoCredito_Padre;
+                info.IdCiudad_Representante_Fact = info.IdCiudad_Padre_Fact;
+                info.IdParroquia_Representante_Fact = info.IdParroquia_Padre_Fact;
             }
             else if (info.Representante == "M")
             {
@@ -535,11 +536,11 @@ namespace Core.Admision.Controllers
                 info.AnioVehiculo_Representante = info.AnioVehiculo_Madre;
                 info.CasaPropia_Representante = info.CasaPropia_Madre;
                 info.EstaFallecido_Representante = info.EstaFallecido_Madre;
-                //info.SeFactura_Representante = info.SeFactura_Madre;
-                //info.Idtipo_cliente_Representante = info.Idtipo_cliente_Madre;
-                //info.IdTipoCredito_Representante = info.IdTipoDocumento_Madre;
-                //info.IdCiudad_Representante_Fact = info.IdCiudad_Madre_Fact;
-                //info.IdParroquia_Representante_Fact = info.IdParroquia_Madre_Fact;
+                info.SeFactura_Representante = false;
+                info.Idtipo_cliente_Representante = info.Idtipo_cliente_Madre;
+                info.IdTipoCredito_Representante = info.IdTipoCredito_Madre;
+                info.IdCiudad_Representante_Fact = info.IdCiudad_Madre_Fact;
+                info.IdParroquia_Representante_Fact = info.IdParroquia_Madre_Fact;
             }
             else
             {
@@ -586,7 +587,7 @@ namespace Core.Admision.Controllers
                 info.EstaFallecido_Representante = info.EstaFallecido_Representante;
                 info.SeFactura_Representante = info.SeFactura_Representante;
                 info.Idtipo_cliente_Representante = info.Idtipo_cliente_Representante;
-                info.IdTipoCredito_Representante = info.IdTipoDocumento_Representante;
+                info.IdTipoCredito_Representante = info.IdTipoCredito_Representante;
                 info.IdCiudad_Representante_Fact = info.IdCiudad_Representante_Fact;
                 info.IdParroquia_Representante_Fact = info.IdParroquia_Representante_Fact;
             }
@@ -782,24 +783,24 @@ namespace Core.Admision.Controllers
 
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ValidarArchivos(HttpPostedFileBase FotoAspirante)
-        {
-            var resultado = "";
+        //public JsonResult ValidarArchivos(HttpPostedFileBase FotoAspirante)
+        //{
+        //    var resultado = "";
 
-            if (FotoAspirante==null)
-            {
-                resultado = "foto del aspirante, ";
-            }
-            else
-            {
-                if (FotoAspirante.ContentLength > 0 && FotoAspirante.ContentLength <= 100000)
-                {
-                    resultado = "peso no permitido para foto del aspirante, ";
-                }
-            }
+        //    if (FotoAspirante==null)
+        //    {
+        //        resultado = "foto del aspirante, ";
+        //    }
+        //    else
+        //    {
+        //        if (FotoAspirante.ContentLength > 0 && FotoAspirante.ContentLength <= 100000)
+        //        {
+        //            resultado = "peso no permitido para foto del aspirante, ";
+        //        }
+        //    }
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
+        //    return Json(resultado, JsonRequestBehavior.AllowGet);
+        //}
         #endregion
     }
 }

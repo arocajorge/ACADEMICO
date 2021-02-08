@@ -37,7 +37,8 @@ namespace Core.Web.Reportes.Academico
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
 
             this.DataSource = lst_rpt;
-
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            lbl_usuario.Text = usuario;
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
             var emp = bus_empresa.get_info(IdEmpresa);
             if (emp != null)

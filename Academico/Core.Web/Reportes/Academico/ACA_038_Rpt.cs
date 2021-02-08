@@ -37,6 +37,8 @@ namespace Core.Web.Reportes.Academico
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno);
 
             this.DataSource = lst_rpt;
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            lbl_usuario.Text = usuario;
             aca_Sede_Bus bus_sede = new aca_Sede_Bus();
             var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
             if (sede != null)

@@ -123,9 +123,9 @@
   <metadata name="toolTipController1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 60</value>
   </metadata>
-  <metadata name="objectDataSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="xrTableCell202.Text" xml:space="preserve">
+    <value>La presente declaración corresponde a la realidad de mis bienes, ingresos, obligaciones, compremetiendome a notificar previamente a la Unidad Educativa Liceo Cristiano de Guayaquil, cualquier variación que pueda alterar el significadode la misma hasta la cancelación de los valores por concepto de educación. Autorizo(amos) expresa e irrevocablemente a la Unidad Educativa Liceo Cristiano de Guayaquil, para que obtenga cuantas veces sea necesario y de cualquier fuente esta información.</value>
+  </data>
   <data name="xrTableCell195.Text" xml:space="preserve">
     <value>* 2 fotos tamaño carnet a colores del postulante.
 * Copia de cédula del postulante y representante.
@@ -133,4 +133,7 @@
 * Certificado de estar al día en los pagos de las pensiones (si el postulante procede de Institución Particular).
 * Certificado laboral de los padres indicando los ingresos y el tiempo en la empresa.</value>
   </data>
+  <metadata name="objectDataSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

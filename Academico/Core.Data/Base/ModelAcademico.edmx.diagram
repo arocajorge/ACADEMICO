@@ -242,7 +242,13 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_MatriculaCondicional_aca_Alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PermisoMatricula_aca_Alumno" />
         <AssociationConnector Association="ModelAcademico.FK_aca_SocioEconomico_aca_Alumno" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_Admision" Width="1.5" PointX="44.875" PointY="5.5" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_PreMatricula_Rubro" Width="1.5" PointX="47.875" PointY="9.625" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_Rubro_aca_AnioLectivo_Curso_Paralelo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_Rubro_aca_MecanismoDePago" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_Rubro_aca_Plantilla" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_Rubro_aca_Rubro" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_Admision" Width="1.5" PointX="44.875" PointY="5.25" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_PreMatricula" Width="1.5" PointX="42.625" PointY="10.75" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Catalogo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Catalogo1" />
@@ -263,6 +269,11 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Jornada" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Sede" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Admision" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_MecanismoDePago" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Plantilla" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
