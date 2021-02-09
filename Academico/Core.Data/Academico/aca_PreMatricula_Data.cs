@@ -3,6 +3,7 @@ using Core.Info.Academico;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,7 +64,11 @@ namespace Core.Data.Academico
                         Fecha = info.Fecha,
                         IdEmpresa_rol = info.IdEmpresa_rol,
                         IdEmpleado = info.IdEmpleado,
-                        EsPatrocinado = info.EsPatrocinado
+                        EsPatrocinado = info.EsPatrocinado,
+                        IdSucursal = info.IdSucursal,
+                        IdPuntoVta =info.IdPuntoVta,
+                        Valor=info.Valor,
+                        ValorProntoPago=info.ValorProntoPago
                     };
                     Context.aca_PreMatricula.Add(Entity);
 
@@ -175,6 +180,69 @@ namespace Core.Data.Academico
                 return true;
             }
             catch (Exception EX)
+            {
+
+                throw;
+            }
+        }
+        public aca_PreMatricula_Info getInfo(int IdEmpresa, decimal IdAdmision)
+        {
+            try
+            {
+                aca_PreMatricula_Info info = new aca_PreMatricula_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT pm.IdEmpresa, pm.IdPreMatricula, pm.IdAdmision, pm.Codigo, pm.IdAlumno, pm.IdAnio, pm.IdSede, pm.IdNivel, pm.IdJornada, "
+                    + " pm.IdCurso, pm.IdParalelo, pm.IdPersonaF, pm.IdPersonaR, pm.IdPlantilla, pm.IdMecanismo, pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, "
+                    + "pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago"
+                    + " FROM     dbo.aca_PreMatricula AS pm LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno AS a ON pm.IdEmpresa = a.IdEmpresa AND pm.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
+                    + " WHERE pm.IdEmpresa = " + IdEmpresa.ToString() + " and pm.IdAdmision = '" + IdAdmision.ToString() + "'";
+                    var ResultValue = command.ExecuteScalar();
+
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_PreMatricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdPreMatricula = Convert.ToDecimal(reader["IdPreMatricula"]),
+                            IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            CodigoAlumno = string.IsNullOrEmpty(reader["CodigoAlumno"].ToString()) ? null : reader["CodigoAlumno"].ToString(),
+                            pe_cedulaRuc = string.IsNullOrEmpty(reader["pe_cedulaRuc"].ToString()) ? null : reader["pe_cedulaRuc"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            IdPersonaF = Convert.ToInt32(reader["IdPersonaF"]),
+                            IdPersonaR = Convert.ToInt32(reader["IdPersonaR"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            IdMecanismo = Convert.ToInt32(reader["IdMecanismo"]),
+                            IdCatalogoESTPREMAT = Convert.ToInt32(reader["IdCatalogoESTPREMAT"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            IdPuntoVta = Convert.ToInt32(reader["IdPuntoVta"]),
+                            Valor = Convert.ToDecimal(reader["Valor"]),
+                            ValorProntoPago = Convert.ToDecimal(reader["ValorProntoPago"]),
+                        };
+                    }
+                }
+                return info;
+            }
+            catch (Exception)
             {
 
                 throw;

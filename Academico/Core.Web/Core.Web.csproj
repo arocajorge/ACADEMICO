@@ -235,6 +235,7 @@
     <Compile Include="Areas\Academico\Controllers\DocumentoController.cs" />
     <Compile Include="Areas\Academico\Controllers\DocumentoPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\EquivalenciaPromedioController.cs" />
+    <Compile Include="Areas\Academico\Controllers\ImportarPreMatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\JornadaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaCompartidaController.cs" />
     <Compile Include="Areas\Academico\Controllers\MateriaController.cs" />
@@ -9757,6 +9758,8 @@
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_PreMatriculaRubro.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_073.cshtml" />
+    <Content Include="Areas\Academico\Views\ImportarPreMatricula\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\ImportarPreMatricula\_GridViewPartial_Importacion.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

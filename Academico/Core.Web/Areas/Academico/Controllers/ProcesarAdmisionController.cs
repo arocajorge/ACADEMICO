@@ -53,7 +53,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Curso_Documento_List Lista_DocumentosMatricula = new aca_AnioLectivo_Curso_Documento_List();
         aca_PreMatricula_Rubro_List ListaPreMatriculaRubro = new aca_PreMatricula_Rubro_List();
         aca_AnioLectivo_Curso_Documento_Bus bus_curso_documento = new aca_AnioLectivo_Curso_Documento_Bus();
-        aca_PrePreMatricula_Rubro_Bus bus_prematricula_rubro = new aca_PrePreMatricula_Rubro_Bus();
+        aca_PreMatricula_Rubro_Bus bus_prematricula_rubro = new aca_PreMatricula_Rubro_Bus();
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
         fa_PuntoVta_Bus bus_punto_venta = new fa_PuntoVta_Bus();
         fa_Vendedor_Bus bus_vendedor = new fa_Vendedor_Bus();
@@ -533,6 +533,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             var info_prematricula = new aca_PreMatricula_Info();
             info_prematricula = armar_info_prematricula(model);
+
             var lst_DetallePlantilla = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(model.IdTransaccionSession)).Where(q => q.seleccionado == true).ToList();
 
@@ -1530,7 +1531,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdUsuarioCreacion = SessionFixed.IdUsuario,
                 info_alumno = new aca_Alumno_Info(),
                 lst_PreMatriculaRubro = new List<aca_PreMatricula_Rubro_Info>(),
-                ExisteAlumno = (info_ExisteAlumno.IdAlumno>0 ? true : false)
+                ExisteAlumno = (info_ExisteAlumno.IdAlumno>0 ? true : false),
+                IdSucursal = model.IdSucursal,
+                IdPuntoVta = model.IdPuntoVta,
+                Valor = Convert.ToDecimal(model.ValorPlantilla),
+                ValorProntoPago = Convert.ToDecimal(model.ValorPlantillaProntoPago),
             };
 
             info_PreMatricula.info_alumno = info_Alumno;
@@ -1538,8 +1543,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (model.CedulaRuc_Representante == model.CedulaRuc_Padre || model.CedulaRuc_Representante == model.CedulaRuc_Madre)
             {
-                info_PreMatricula.OtraPersonaFamiliar = false;
-                
+                info_PreMatricula.OtraPersonaFamiliar = false;              
             }
             else
             {
@@ -1547,6 +1551,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 info_PreMatricula.IdCatalogoPAREN_OtroFamiliar = model.IdCatalogoPAREN_Representante;
             }
             info_PreMatricula.lst_PreMatriculaRubro = ListaPreMatriculaRubro.get_list(model.IdTransaccionSession);
+
             info_PreMatricula.lst_PreMatriculaRubro.Where(q=>q.EnMatricula=true).ToList().ForEach(q=> q.IdMecanismo = model.IdMecanismo);
             info_PreMatricula.lst_PreMatriculaRubro.Where(q => q.EnMatricula = false).ToList().ForEach(q => q.IdMecanismo = model.IdMecanismoDet);
             return info_PreMatricula;

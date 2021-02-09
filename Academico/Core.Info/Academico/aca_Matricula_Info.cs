@@ -104,6 +104,13 @@ namespace Core.Info.Academico
         public string ObservacionCambioCurso { get; set; }
 
         public bool AplicaDescuentoNomina { get; set; }
+
+
+        public decimal IdAdmision { get; set; }
+        public DateTime FechaPago { get; set; }
+        public decimal ValorPago { get; set; }
+        public string CodigoAlumno { get; set; }
+        public bool ValidaImportacionPreMatricula { get; set; }
         #endregion
     }
 }

@@ -2217,13 +2217,13 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        @*<div class="col-md-3">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="IdPuntoVta">Punto de venta*</label>
                                 @Html.DropDownListFor(q => q.IdPuntoVta, new SelectList(ViewBag.lst_ptoventa, "IdPuntoVta", "nom_PuntoVta"), new { @class = "form-control", @id = "IdPuntoVta" })
                                 @Html.ValidationMessageFor(q => q.IdPuntoVta, "", new { @class = "text-danger" })
                             </div>
-                        </div>*@
+                        </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label for="IdEmpresa">Mecanismo de pago*</label>

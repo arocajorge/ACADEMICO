@@ -58,5 +58,16 @@ namespace Core.Bus.Facturacion
                 throw;
             }
         }
+        public fa_notaCreDeb_x_fa_factura_NotaDeb_Info Get_info_SaldoDocumento(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCliente, decimal IdAlumno, decimal IdCbteVta, string vt_tipoDoc)
+        {
+            try
+            {
+                return odata.get_info_SaldoDocumento(IdEmpresa, IdSucursal, IdBodega, IdCliente, IdAlumno, IdCbteVta, vt_tipoDoc);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

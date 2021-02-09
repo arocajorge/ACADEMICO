@@ -86,7 +86,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT a.IdEmpresa, a.IdAdmision, a.IdSede, a.IdAnio, a.IdJornada, a.IdNivel, a.IdCurso, a.CedulaRuc_Aspirante, a.NombreCompleto_Aspirante, a.IdCatalogoESTADM, an.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, "
-                    + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, a.IdCatalogoESTADM, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado, a.IdUsuarioRevision "
+                    + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, a.IdCatalogoESTADM, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado, a.IdUsuarioRevision, a.FechaIngreso_Aspirante "
                     + " FROM     dbo.aca_Admision AS a LEFT OUTER JOIN "
                     + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
@@ -127,6 +127,7 @@ namespace Core.Data.Academico
                             EstadoAdmision = string.IsNullOrEmpty(reader["EstadoAdmision"].ToString()) ? null : reader["EstadoAdmision"].ToString(),
                             IdCatalogoESTADM = Convert.ToInt32(reader["IdCatalogoESTADM"]),
                             IdUsuarioRevision = string.IsNullOrEmpty(reader["IdUsuarioRevision"].ToString()) ? null : reader["IdUsuarioRevision"].ToString(),
+                            FechaIngreso_Aspirante = Convert.ToDateTime(reader["FechaIngreso_Aspirante"].ToString()),
                         });
                     }
                     reader.Close();

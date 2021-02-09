@@ -49,6 +49,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
+        cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         cxc_ConciliacionNotaCredito_Bus bus_conciliacion = new cxc_ConciliacionNotaCredito_Bus();
@@ -454,6 +455,23 @@ namespace Core.Web.Areas.Facturacion.Controllers
                     return false;
                 }
 
+            }
+
+            if (i_validar.lst_cruce.Count() > 0)
+            {
+                foreach (var item in i_validar.lst_cruce)
+                {
+                    var info_documento = bus_cruce.Get_info_SaldoDocumento(i_validar.IdEmpresa, i_validar.IdSucursal, item.IdBodega_fac_nd_doc_mod, i_validar.IdCliente, Convert.ToDecimal(i_validar.IdAlumno), item.IdCbteVta_fac_nd_doc_mod, item.vt_tipoDoc);
+                    if (item.Valor_Aplicado<=info_documento.Saldo)
+                    {
+
+                    }
+                    else
+                    {
+                        msg = "El valor aplicado de los documentos debe ser menor o igual al saldo";
+                        return false;
+                    }
+                }
             }
 
             if (i_validar.lst_cruce.Count()>0)

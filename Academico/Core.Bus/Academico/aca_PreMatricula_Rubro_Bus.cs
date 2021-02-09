@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Bus.Academico
 {
-    public class aca_PrePreMatricula_Rubro_Bus
+    public class aca_PreMatricula_Rubro_Bus
     {
         aca_PreMatricula_Rubro_Data odata = new aca_PreMatricula_Rubro_Data();
 
@@ -55,19 +55,6 @@ namespace Core.Bus.Academico
             try
             {
                 return odata.modificarDB(info);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public List<aca_PreMatricula_Rubro_Info> getList_FactMasiva(int IdEmpresa, int IdAnio, int IdPeriodo, int IdSede, int IdJornada, int IdNivel, int IdCurso, int IdParalelo)
-        {
-            try
-            {
-                return odata.getList_FactMasiva(IdEmpresa, IdAnio, IdPeriodo, IdSede, IdJornada, IdNivel, IdCurso, IdParalelo);
             }
             catch (Exception)
             {

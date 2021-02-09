@@ -32,6 +32,10 @@ namespace Core.Data.Base
         public Nullable<int> IdCatalogoESTPREMAT { get; set; }
         public System.DateTime Fecha { get; set; }
         public string Observacion { get; set; }
+        public int IdPuntoVta { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal Valor { get; set; }
+        public decimal ValorProntoPago { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string IdUsuarioModificacion { get; set; }

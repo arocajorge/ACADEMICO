@@ -8,6 +8,7 @@ namespace Core.Info.Academico
 {
     public class aca_PreMatricula_Info
     {
+        public decimal IdTransaccionSession { get; set; }
         public int IdEmpresa { get; set; }
         public decimal IdPreMatricula { get; set; }
         public decimal IdAdmision { get; set; }
@@ -25,6 +26,10 @@ namespace Core.Info.Academico
         public decimal IdMecanismo { get; set; }
         public Nullable<int> IdCatalogoESTPREMAT { get; set; }
         public System.DateTime Fecha { get; set; }
+        public int IdPuntoVta { get; set; }
+        public int IdSucursal { get; set; }
+        public decimal Valor { get; set; }
+        public decimal ValorProntoPago { get; set; }
         public string Observacion { get; set; }
         public string IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
@@ -48,6 +53,12 @@ namespace Core.Info.Academico
         public bool info_valido_representante { get; set; }
         public bool OtraPersonaFamiliar { get; set; }
         public int IdCatalogoPAREN_OtroFamiliar { get; set; }
+        public DateTime FechaPago { get; set; }
+        public decimal ValorPago { get; set; }
+        public string CodigoAlumno { get; set; }
+        public string pe_cedulaRuc { get; set; }
+        public string pe_nombreCompleto { get; set; }
+        public bool ValidaImportacionPreMatricula { get; set; }
         #endregion
     }
 }

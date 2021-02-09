@@ -268,5 +268,44 @@ namespace Core.Data.Facturacion
                 throw;
             }
         }
+
+        public fa_notaCreDeb_x_fa_factura_NotaDeb_Info get_info_SaldoDocumento(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCliente, decimal IdAlumno, decimal IdCbteVta, string vt_tipoDoc)
+        {
+            try
+            {
+                fa_notaCreDeb_x_fa_factura_NotaDeb_Info info = new fa_notaCreDeb_x_fa_factura_NotaDeb_Info(); ;
+
+                using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
+                {
+                    vwcxc_cartera_x_cobrar Entity = Context.vwcxc_cartera_x_cobrar.FirstOrDefault(q => q.IdEmpresa == IdEmpresa && q.IdSucursal == IdSucursal && q.IdBodega == IdBodega
+                    && q.IdCliente == IdCliente && q.IdAlumno == IdAlumno && q.IdComprobante == IdCbteVta && q.vt_tipoDoc == vt_tipoDoc);
+                    if (Entity == null) return null;
+
+                    info = new fa_notaCreDeb_x_fa_factura_NotaDeb_Info
+                    {
+                        IdEmpresa_fac_nd_doc_mod = Entity.IdEmpresa,
+                        IdSucursal_fac_nd_doc_mod = Entity.IdSucursal,
+                        IdBodega_fac_nd_doc_mod = Entity.IdBodega,
+                        vt_tipoDoc = Entity.vt_tipoDoc,
+                        IdCbteVta_fac_nd_doc_mod = Entity.IdComprobante,
+                        vt_NumDocumento = Entity.vt_NunDocumento,
+                        Observacion = Entity.Referencia,
+                        vt_fecha = Entity.vt_fecha,
+                        vt_total = Entity.vt_total,
+                        Saldo = Entity.Saldo,
+                        vt_Subtotal = Entity.vt_Subtotal,
+                        vt_iva = Entity.vt_iva,
+                        NumDocumento = Entity.vt_NunDocumento
+                    };
+
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

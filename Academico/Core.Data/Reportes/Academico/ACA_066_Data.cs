@@ -20,7 +20,7 @@ namespace Core.Data.Reportes.Academico
 
                     #region Query
                     string query = "declare @IdEmpresa int = " + IdEmpresa.ToString() + ", @IdAnio int = " + IdAnio.ToString()
-                    + " select a.IdEmpresa, a.IdAlumno, b.IdPersona, a.Codigo, b.pe_nombreCompleto, nj.OrdenJornada, nj.NomJornada, jc.OrdenCurso, jc.NomCurso,cp.NomParalelo, cp.OrdenParalelo, pt.NomPlantillaTipo, al.Descripcion "
+                    + " select a.IdEmpresa, a.IdAlumno, a.Codigo, b.IdPersona, a.Codigo, b.pe_nombreCompleto, nj.OrdenJornada, nj.NomJornada, jc.OrdenCurso, jc.NomCurso,cp.NomParalelo, cp.OrdenParalelo, pt.NomPlantillaTipo, al.Descripcion "
                     + " from aca_Alumno as a join "
                     + " tb_persona as b on a.IdPersona = b.IdPersona join "
                     + " aca_Familia as c on a.IdEmpresa = c.IdEmpresa and a.IdAlumno = c.IdAlumno join "
@@ -62,6 +62,7 @@ namespace Core.Data.Reportes.Academico
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             IdPersona = Convert.ToInt32(reader["IdPersona"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
                             Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
                             //NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
                             //NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
