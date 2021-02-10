@@ -1,0 +1,55 @@
+@using System.Web.UI.WebControls;
+@{
+    var grid = Html.DevExpress().GridView(settings =>
+    {
+        settings.Name = "GridViewPartial_PreMatricula";
+        settings.CallbackRouteValues = new { Controller = "ProcesarPreMatricula", Action = "GridViewPartial_PreMatricula", Area = "Academico" };
+        settings.KeyFieldName = "IdString";
+        settings.Width = Unit.Percentage(100);
+
+        settings.SettingsPager.Visible = true;
+        settings.Settings.ShowGroupPanel = false;
+        settings.Settings.ShowFilterRow = true;
+        settings.SettingsBehavior.AllowSelectByRowClick = false;
+
+        //Configuración para que la grilla no muestre texto completo
+        settings.SettingsBehavior.AllowEllipsisInText = true;
+        settings.SettingsResizing.ColumnResizeMode = ColumnResizeMode.NextColumn;
+
+        //Configuración click derecho
+        settings.SettingsContextMenu.Enabled = true;
+        settings.SettingsBehavior.EnableCustomizationWindow = true;
+        settings.SettingsContextMenu.EnableRowMenu = DefaultBoolean.False;
+
+
+        //Configuracion responsive
+        settings.SettingsAdaptivity.AdaptivityMode = GridViewAdaptivityMode.HideDataCellsWindowLimit;
+        settings.SettingsAdaptivity.AdaptiveColumnPosition = GridViewAdaptiveColumnPosition.Right;
+        settings.SettingsAdaptivity.AdaptiveDetailColumnCount = 1;
+        settings.SettingsAdaptivity.AllowOnlyOneAdaptiveDetailExpanded = false;
+        settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
+
+        settings.Columns.Add("IdAdmision", "Admisión").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(20);
+        settings.Columns.Add("pe_nombreCompleto", "Nombres del estudiante").Width = Unit.Percentage(50);
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "";
+            column.FieldName = "";
+            column.Width = System.Web.UI.WebControls.Unit.Percentage(10);
+            column.UnboundType = DevExpress.Data.UnboundColumnType.String;
+            column.SetDataItemTemplateContent(p =>
+            {
+                Html.DevExpress().Button(settingsBtn =>
+                {
+                    settingsBtn.Name = "btn" + p.KeyValue;
+                    settingsBtn.Text = "Procesar";
+                    settingsBtn.ClientSideEvents.Click = "function(s, e) {ProcesarPreMatricula('" + p.KeyValue + "');}";
+                }).Render();
+            });
+        });
+        settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";
+
+    });
+}
+@grid.Bind(Model).GetHtml()

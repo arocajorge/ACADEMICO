@@ -49,6 +49,7 @@ namespace Core.Bus.Academico
                     {
                         if (odata.modificarDB(info.info_alumno))
                         {
+                            info.IdAlumno = info.info_alumno.IdAlumno;
                             grabar_padre = true;
                         }
                     }
@@ -82,7 +83,7 @@ namespace Core.Bus.Academico
                         if (odata.guardarDB(info.info_alumno))
                         {
                             grabar_padre = true;
-
+                            info.IdAlumno = info.info_alumno.IdAlumno;
                         }
                     }
                 }
@@ -655,15 +656,40 @@ namespace Core.Bus.Academico
             }
         }
 
-        public aca_PreMatricula_Info GetInfo(int IdEmpresa, decimal IdAdmision)
+        public aca_PreMatricula_Info GetInfo_PorIdAdmision(int IdEmpresa, decimal IdAdmision)
         {
             try
             {
-                return odata_prematricula.getInfo(IdEmpresa, IdAdmision);
+                return odata_prematricula.getInfo_PorIdAdmision(IdEmpresa, IdAdmision);
             }
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public List<aca_PreMatricula_Info> GetList_Procesar(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                return odata_prematricula.getList_Procesar(IdEmpresa, IdSede, IdAnio);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool ModificarEstado(aca_PreMatricula_Info info)
+        {
+            try
+            {
+                return odata_prematricula.modificarEstado(info);
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }

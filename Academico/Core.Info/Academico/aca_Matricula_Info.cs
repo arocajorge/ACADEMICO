@@ -106,6 +106,7 @@ namespace Core.Info.Academico
         public bool AplicaDescuentoNomina { get; set; }
 
 
+        public decimal IdPreMatricula { get; set; }
         public decimal IdAdmision { get; set; }
         public DateTime FechaPago { get; set; }
         public decimal ValorPago { get; set; }

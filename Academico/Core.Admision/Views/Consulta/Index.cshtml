@@ -6,7 +6,6 @@
 <script src="~/Scripts/Consulta.js"></script>
 <script src="~/Scripts/ScriptsGenerales.js"></script>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script type="text/javascript" src="~/Scripts/tabulator.min.js"></script>
 <!-- BEGIN: Mobile Menu -->
 <div class="mobile-menu md:hidden">
     <div class="mobile-menu-bar">
@@ -130,6 +129,7 @@
                 <input type="text" name="CedulaRuc_Aspirante" id="CedulaRuc_Aspirante" class="input w-full border flex-1">
             </div>
             <div class="intro-y col-span-12 sm:col-span-3">
+                <div class="mb-2">&nbsp;</div>
                 <button type="button" class="button w-full sm:w-16 bg-theme-1 text-white" id="tabulator-html-filter-go" onclick="Buscar();">Buscar</button>
             </div>
         </div>
@@ -141,7 +141,7 @@
                         <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Nombres del aspirante</th>
                         <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Fecha de registro</th>
                         <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Estado</th>
-                        <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Siguiente paso</th>
+                        <th class="border-b-2 dark:border-dark-5 whitespace-nowrap">Observación</th>
                     </tr>
                 </thead>
                 <tbody id="Detalle">

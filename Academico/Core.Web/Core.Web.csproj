@@ -272,6 +272,7 @@
     <Compile Include="Areas\Academico\Controllers\PlantillaPorCursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\PlantillaTipoController.cs" />
     <Compile Include="Areas\Academico\Controllers\ProcesarAdmisionController.cs" />
+    <Compile Include="Areas\Academico\Controllers\ProcesarPreMatriculaController.cs" />
     <Compile Include="Areas\Academico\Controllers\ProfesorController.cs" />
     <Compile Include="Areas\Academico\Controllers\ReporteController.cs" />
     <Compile Include="Areas\Academico\Controllers\ReportePorUsuarioController.cs" />
@@ -9760,6 +9761,10 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_073.cshtml" />
     <Content Include="Areas\Academico\Views\ImportarPreMatricula\Index.cshtml" />
     <Content Include="Areas\Academico\Views\ImportarPreMatricula\_GridViewPartial_Importacion.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarPreMatricula\Index.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_GridViewPartial_PreMatricula.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Sede.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

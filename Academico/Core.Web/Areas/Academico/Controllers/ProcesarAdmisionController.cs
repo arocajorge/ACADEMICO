@@ -1567,7 +1567,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
 
             var lst_admisiones = bus_admision.GetList_Academico(IdEmpresa,IdSede, IdAnio);
-            var cantidad = lst_admisiones.Count();
+            var cantidad = lst_admisiones.Where(q=>q.IdCatalogoESTADM==Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO)).Count();
             return Json(cantidad, JsonRequestBehavior.AllowGet);
     }
         public JsonResult Validar_cedula_ruc(string naturaleza = "", string tipo_documento = "", string cedula_ruc = "")
@@ -1678,13 +1678,15 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             var lst_documentos = new List<aca_AlumnoDocumento_Info>();
             var info_admision = bus_admision.GetInfo(IdEmpresa, IdAdmision);
-            var FilePath = Server.UrlPathEncode("http://sistema.liceocristiano.edu.ec/lcgPrueba/Content/aspirantes/" + IdAdmision);
+            //var FilePath = Server.UrlPathEncode("http://sistema.liceocristiano.edu.ec/lcgPrueba/Content/aspirantes/" + IdAdmision);
+            var FilePath = Server.UrlPathEncode("http://sistema.liceocristiano.edu.ec/lcgPrueba/Content/aspirantes/1");
             //DirectoryInfo dir = new DirectoryInfo(@""+FilePath);
             var listaDocumentos = new List<FileInfo>();
+            //var lst = System.IO.Directory.g(FilePath);
             var Secuencia = 1;
             if (Directory.Exists(FilePath))
             {
-                var lst = Directory.GetDirectories(FilePath);
+                //var lst = Directory.GetDirectories(FilePath);
                 //foreach (FileInfo file in lst)
                 //{
                 //    listaDocumentos.Add(file);

@@ -70,17 +70,13 @@
                 {
                     if (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioRevision")) == Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioSesion")))
                     {
-                        ViewContext.Writer.Write(
-                            Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAdmision = DataBinder.Eval(tc.DataItem, "IdAdmision") }) + "&nbsp;"
-                        );
+                        if (Convert.ToInt32(DataBinder.Eval(tc.DataItem, "IdCatalogoESTADM")) ==48)
+                        {
+                            ViewContext.Writer.Write(
+                                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAdmision = DataBinder.Eval(tc.DataItem, "IdAdmision") }) + "&nbsp;"
+                            );
+                        }
                     }
-                    else
-                    {
-                        ViewContext.Writer.Write(
-                            Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAdmision = DataBinder.Eval(tc.DataItem, "IdAdmision") }) + "&nbsp;"
-                        );
-                    }
-
                 }
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;

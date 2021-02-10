@@ -94,7 +94,8 @@ namespace Core.Bus.Academico
             cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
             tb_mes_Bus bus_mes = new tb_mes_Bus();
             tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
-
+            aca_Admision_Bus bus_admision = new aca_Admision_Bus();
+            aca_PreMatricula_Bus bus_prematricula = new aca_PreMatricula_Bus();
             try
             {
                 if (odata.guardarDB(info_matricula))
@@ -199,10 +200,25 @@ namespace Core.Bus.Academico
 
                         if (!bus_factura.guardarDB(info_factura))
                         {
+                            return false;
                             //mensaje = "No se ha podido guardar la factura";
                         }
                     }
                     #endregion
+
+                    var info_admision = bus_admision.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAdmision);
+                    if (info_admision!=null)
+                    {
+                        info_admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.MATRICULADO);
+                        bus_admision.ModificarEstadoEnProceso(info_admision);
+                    }           
+
+                    var info_prematricula = bus_prematricula.GetInfo_PorIdAdmision(info_matricula.IdEmpresa, info_matricula.IdAdmision);
+                    if (info_prematricula != null)
+                    {
+                        info_prematricula.IdCatalogoESTPREMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO);
+                        bus_prematricula.ModificarEstado(info_prematricula);
+                    }
                 }
 
                 return true;

@@ -59,6 +59,8 @@ namespace Core.Info.Academico
         public string pe_cedulaRuc { get; set; }
         public string pe_nombreCompleto { get; set; }
         public bool ValidaImportacionPreMatricula { get; set; }
+        public string IdString { get; set; }
+        public decimal IdMatricula { get; set; }
         #endregion
     }
 }

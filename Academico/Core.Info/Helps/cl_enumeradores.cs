@@ -260,6 +260,7 @@ namespace Core.Info.Helps
             REGISTRADO = 47,
             ENPROCESO = 48,
             PREMATRICULADO = 49,
+            MATRICULADO = 50,
         }
         public enum eTipoCatalogoSocioEconomico
         {

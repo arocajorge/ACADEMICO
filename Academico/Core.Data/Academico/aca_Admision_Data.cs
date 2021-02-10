@@ -95,8 +95,8 @@ namespace Core.Data.Academico
                     + " dbo.aca_AnioLectivo AS an ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
                     + " and a.IdSede = " + IdSede.ToString()
-                    + " and a.IdAnio = " + IdAnio.ToString()
-                    + " and a.IdCatalogoESTADM != "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.PREMATRICULADO);
+                    + " and a.IdAnio = " + IdAnio.ToString();
+                    //+ " and a.IdCatalogoESTADM = "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.PREMATRICULADO);
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);

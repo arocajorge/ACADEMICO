@@ -51,10 +51,10 @@ namespace Core.Web.Areas.Academico.Controllers
             try
             {
                 var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-                var Lista_Matricula_Guardar = Lista_Matricula.get_list(model.IdTransaccionSession).Where(q=>q.ValidaImportacionPreMatricula==true);
+                var Lista_Matricula_Guardar = Lista_Matricula.get_list(model.IdTransaccionSession).Where(q=>q.ValidaImportacionPreMatricula==true).ToList();
                 foreach (var item in Lista_Matricula_Guardar)
                 {
-                    if (!bus_matricula.GuardarDB(item))
+                    if (!bus_matricula.GuardarPreMatriculaDB(item))
                     {
                         ViewBag.mensaje = "Error al importar el archivo";
                         return View(model);
@@ -155,7 +155,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         var Fecha = Convert.ToDateTime(reader.GetValue(1));
                         var Valor = Convert.ToDouble(reader.GetValue(2));
 
-                        var info_PreMatricula = bus_prematricula.GetInfo(IdEmpresa, IdAdmision);
+                        var info_PreMatricula = bus_prematricula.GetInfo_PorIdAdmision(IdEmpresa, IdAdmision);
                         var IdPreMatricula = (info_PreMatricula == null ? 0 : info_PreMatricula.IdPreMatricula);
                         var lst_PreMatricula_Detalle = bus_prematricula_rubro.GetList(IdEmpresa, IdPreMatricula);
 
@@ -224,13 +224,16 @@ namespace Core.Web.Areas.Academico.Controllers
                                 EsPatrocinado = info_PreMatricula.EsPatrocinado,
                                 IdUsuarioCreacion = SessionFixed.IdUsuario,
                                 lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>(),
+                                lst_documentos = new List<aca_AlumnoDocumento_Info>(),
                                 pe_cedulaRuc = info_PreMatricula.pe_cedulaRuc,
                                 pe_nombreCompleto = info_PreMatricula.pe_nombreCompleto,
                                 IdSucursal = info_PreMatricula.IdSucursal,
                                 IdPuntoVta = info_PreMatricula.IdPuntoVta,
                                 ValidaImportacionPreMatricula = (Valor == Convert.ToDouble(Total) ? true : false),
                                 ValorPago = Convert.ToDecimal(Valor),
-                                IdAdmision = IdAdmision
+                                IdAdmision = IdAdmision,
+                                IdPreMatricula = IdPreMatricula,
+                                FechaPago = Fecha
                             };
 
                             #region Calificacion y conducta

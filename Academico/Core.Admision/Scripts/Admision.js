@@ -21,6 +21,7 @@ function IrAlInicio() {
     });
 }
 
+
 function SiguienteAspirante() {
     if ($("#AspiranteValido").val() == "1") {
         ValidarDatosRegistro_Aspirante();
