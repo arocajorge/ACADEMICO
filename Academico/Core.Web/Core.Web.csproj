@@ -9765,6 +9765,7 @@
     <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_GridViewPartial_PreMatricula.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_DocumentosAdmision.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

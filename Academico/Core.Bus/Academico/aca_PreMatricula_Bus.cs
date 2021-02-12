@@ -112,7 +112,6 @@ namespace Core.Bus.Academico
                             odata_per.modificarDB(info.info_alumno.info_persona_padre);
                         }
 
-
                         var info_fam_padre = new aca_Familia_Info
                         {
                             IdEmpresa = info.IdEmpresa,
@@ -469,18 +468,18 @@ namespace Core.Bus.Academico
                         var info_otro_familia = odata_fam.getInfo_ExistePersonaParentezco(info_fam_otro_familiar.IdEmpresa, info_fam_otro_familiar.IdAlumno, info_fam_otro_familiar.IdPersona, info.IdCatalogoPAREN_OtroFamiliar);
                         if (info_otro_familia == null)
                         {
-                            odata_fam.guardarDB(info_otro_familia);
+                            odata_fam.guardarDB(info_fam_otro_familiar);
                         }
                         else
                         {
-                            info_otro_familia.Secuencia = info_otro_familia.Secuencia;
-                            info_otro_familia.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                            info_fam_otro_familiar.Secuencia = info_otro_familia.Secuencia;
+                            info_fam_otro_familiar.IdUsuarioModificacion = info.IdUsuarioModificacion;
 
-                            odata_fam.modificarDB(info_otro_familia);
+                            odata_fam.modificarDB(info_fam_otro_familiar);
                         }
 
                         /*CLIENTE*/
-                        if (info_otro_familia.SeFactura == true)
+                        if (info_fam_otro_familiar.SeFactura == true)
                         {
                             var info_credito = odata_terminopago.get_info(info.info_alumno.IdTipoCredito_representante);
                             var existe_cliente = odata_cliente.get_info_x_num_cedula(info.IdEmpresa, info.info_alumno.pe_cedulaRuc_representante);
@@ -596,6 +595,7 @@ namespace Core.Bus.Academico
 
                     if (info_socio_economico == null)
                     {
+                        info.info_socioeconomico.IdAlumno = info.IdAlumno;
                         if (odata_socioeconomico.guardarDB(info.info_socioeconomico))
                         {
                             grabar_prematricula = true;

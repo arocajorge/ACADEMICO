@@ -156,7 +156,8 @@ namespace Core.Admision.Controllers
                 SeFactura_Padre = false,
                 SeFactura_Madre = false,
                 SeFactura_Representante = false,
-                AceptaTerminos = true
+                AceptaTerminos = true,
+                TieneElectricidad_Aspirante = true
             };
 
             cargar_combos(model);

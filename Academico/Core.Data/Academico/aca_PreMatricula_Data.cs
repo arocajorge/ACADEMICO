@@ -197,7 +197,7 @@ namespace Core.Data.Academico
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT pm.IdEmpresa, pm.IdPreMatricula, pm.IdAdmision, pm.Codigo, pm.IdAlumno, pm.IdAnio, pm.IdSede, pm.IdNivel, pm.IdJornada, "
                     + " pm.IdCurso, pm.IdParalelo, pm.IdPersonaF, pm.IdPersonaR, pm.IdPlantilla, pm.IdMecanismo, pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, "
-                    + "pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago"
+                    + "pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago, pm.IdEmpresa_rol, pm.IdEmpleado, pm.EsPatrocinado"
                     + " FROM     dbo.aca_PreMatricula AS pm LEFT OUTER JOIN "
                     + " dbo.aca_Alumno AS a ON pm.IdEmpresa = a.IdEmpresa AND pm.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
                     + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
@@ -238,6 +238,9 @@ namespace Core.Data.Academico
                             IdPuntoVta = Convert.ToInt32(reader["IdPuntoVta"]),
                             Valor = Convert.ToDecimal(reader["Valor"]),
                             ValorProntoPago = Convert.ToDecimal(reader["ValorProntoPago"]),
+                            IdEmpresa_rol = string.IsNullOrEmpty(reader["IdEmpresa_rol"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpresa_rol"]),
+                            IdEmpleado = string.IsNullOrEmpty(reader["IdEmpleado"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpleado"]),
+                            EsPatrocinado = string.IsNullOrEmpty(reader["EsPatrocinado"].ToString()) ? false : Convert.ToBoolean(reader["EsPatrocinado"]),
                         };
                     }
                 }

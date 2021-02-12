@@ -19,7 +19,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_PreMatricula_List Lista_PreMatricula = new aca_PreMatricula_List();
         aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
-
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         tb_persona_Bus bus_persona = new tb_persona_Bus();
         aca_PreMatricula_Rubro_Bus bus_prematricula_rubro = new aca_PreMatricula_Rubro_Bus();
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
@@ -57,6 +57,7 @@ namespace Core.Web.Areas.Academico.Controllers
             };
             var lst_PreMatricula = bus_prematricula.GetList_Procesar(model.IdEmpresa, model.IdSede, model.IdAnio);
             Lista_PreMatricula.set_list(lst_PreMatricula, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+
             return View(model);
         }
 
@@ -162,7 +163,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     IdPuntoVta = info_PreMatricula.IdPuntoVta,
                     ValidaImportacionPreMatricula = true,
                     IdAdmision = IdAdmision,
-                    IdPreMatricula = IdPreMatricula,
+                    IdPreMatricula = IdPreMatricula
                 };
 
                 #region Calificacion y conducta

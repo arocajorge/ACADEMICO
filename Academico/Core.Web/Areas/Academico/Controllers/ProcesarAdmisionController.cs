@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -23,7 +24,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_Matricula_List Lista_Matricula = new aca_Matricula_List();
         aca_CatalogoFicha_Bus bus_catalogo_socioeconomico = new aca_CatalogoFicha_Bus();
-
+        aca_Menu_x_seg_usuario_Bus bus_permisos = new aca_Menu_x_seg_usuario_Bus();
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         tb_GrupoEtnico_Bus bus_grupoetnico = new tb_GrupoEtnico_Bus();
         tb_Catalogo_Bus bus_catalogo = new tb_Catalogo_Bus();
@@ -62,6 +63,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AlumnoDocumento_Bus bus_alumno_documento = new aca_AlumnoDocumento_Bus();
         aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
         aca_Plantilla_Rubro_Bus bus_plantilla_rubro = new aca_Plantilla_Rubro_Bus();
+        aca_AlumnoDocumentoAdmision_List Lista_DocAdmision = new aca_AlumnoDocumentoAdmision_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -91,6 +93,7 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_admisiones.ForEach(q => q.IdUsuarioSesion = SessionFixed.IdUsuario);
             Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model);
+
             return View(model);
         }
 
@@ -380,6 +383,17 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_Documentos", model);
         }
         #endregion
+
+        #region Grid documentos
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_DocumentosAdmision()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List<aca_AlumnoDocumento_Info> model = Lista_DocAdmision.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_DocumentosAdmision", model);
+        }
+        #endregion
         #region DetallePlantilla (nuevo)
         [ValidateInput(false)]
         public ActionResult GridViewPartial_DetallePlantilla()
@@ -534,7 +548,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_prematricula = new aca_PreMatricula_Info();
             info_prematricula = armar_info_prematricula(model);
 
-            var lst_DetallePlantilla = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
+            //var lst_DetallePlantilla = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(model.IdTransaccionSession)).Where(q => q.seleccionado == true).ToList();
 
             var lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>();
@@ -561,7 +575,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
             }
 
-            info_prematricula.lst_PreMatriculaRubro = lst_DetallePlantilla;
+            //info_prematricula.lst_PreMatriculaRubro = lst_DetallePlantilla;
             info_prematricula.lst_Documentos = lst_alumno_documentos;
 
             if (!validar_PreMatricula(info_prematricula, ref mensaje))
@@ -1256,6 +1270,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 PorcentajeDiscapacidad_madre = model.PorcentajeDiscapacidad_Madre,
                 Sector_madre = model.Sector_Madre,
                 SeFactura_madre = model.SeFactura_Madre,
+                
                 TelefonoTrabajo_madre = model.TelefonoTrabajo_Madre,
                 VehiculoPropio_madre = model.VehiculoPropio_Madre,
                 IdCatalogo_madre = model.IdCatalogoPAREN_Madre,
@@ -1310,7 +1325,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 Modelo_padre=model.Modelo_Padre,
 
                 AniosServicio_representante = model.AniosServicio_Representante,
-                pe_cedulaRuc_representante = model.CedulaRuc_Aspirante,
+                pe_cedulaRuc_representante = model.CedulaRuc_Representante,
                 AnioVehiculo_representante = model.AnioVehiculo_Representante,
                 AsisteCentroCristiano_representante = model.AsisteCentroCristiano_Representante,
                 CargoTrabajo_representante = model.CargoTrabajo_Representante,
@@ -1359,6 +1374,19 @@ namespace Core.Web.Areas.Academico.Controllers
                 Modelo_representante = model.Modelo_Representante,
                 
             };
+
+            if (model.CedulaRuc_Representante == model.CedulaRuc_Madre)
+            {
+                info_Alumno.EsRepresentante_madre = true;
+            }
+            else if (model.CedulaRuc_Representante == model.CedulaRuc_Padre)
+            {
+                info_Alumno.EsRepresentante_padre = true;
+            }
+            else
+            {
+                info_Alumno.EsRepresentante_representante = true;
+            }
 
             info_Alumno.info_persona_alumno = new tb_persona_Info();
             info_Alumno.info_persona_padre = new tb_persona_Info();
@@ -1467,17 +1495,6 @@ namespace Core.Web.Areas.Academico.Controllers
             info_Alumno.info_persona_madre = info_persona_madre;
             info_Alumno.info_persona_representante = info_persona_representante;
 
-            model.IdMecanismo = 1;
-            model.IdMecanismoDet = 1;
-
-            var info_mecanismo = bus_mecanismo.GetInfo(model.IdEmpresa, model.IdMecanismo);
-            var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
-            if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == false)
-            {
-                info_mecanismo = bus_mecanismo.GetInfo(model.IdEmpresa, model.IdMecanismoDet);
-                info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
-            }
-
             var info_SocioEconomico = new aca_SocioEconomico_Info
             {
                 IdEmpresa = model.IdEmpresa,
@@ -1506,56 +1523,65 @@ namespace Core.Web.Areas.Academico.Controllers
                 OtroFinanciamiento = model.OtroFinanciamiento_Aspirante,
                 OtroInformacionInst = model.OtroInformacionInst_Aspirante,
                 OtroMotivoIngreso = model.OtroMotivoIngreso_Aspirante,
-                IdUsuarioModificacion = model.IdUsuarioModificacion,
+                IdUsuarioCreacion = SessionFixed.IdUsuario,
+                IdUsuarioModificacion = SessionFixed.IdUsuario,
         };
 
-            var info_PreMatricula = new aca_PreMatricula_Info
-            {
-                IdEmpresa = model.IdEmpresa,
-                IdAdmision = model.IdAdmision,
-                IdAlumno = info_Alumno==null ? 0 : info_Alumno.IdAlumno,
-                IdAnio = model.IdAnio,
-                IdSede = model.IdSede,
-                IdNivel = model.IdNivel,
-                IdJornada = model.IdJornada,
-                IdCurso = model.IdCurso,
-                IdParalelo = model.IdParalelo,
-                IdPlantilla = model.IdPlantilla,
-                IdMecanismo = model.IdMecanismo,
-                Fecha = model.Fecha.Date,
-                Observacion = model.Observacion,
-                IdCatalogoESTPREMAT = model.IdCatalogoESTPREMAT,
-                IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpresa_rol : (int?)null),
-                IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpleado : (decimal?)null),
-                EsPatrocinado = model.EsPatrocinado,
-                IdUsuarioCreacion = SessionFixed.IdUsuario,
-                info_alumno = new aca_Alumno_Info(),
-                lst_PreMatriculaRubro = new List<aca_PreMatricula_Rubro_Info>(),
-                ExisteAlumno = (info_ExisteAlumno.IdAlumno>0 ? true : false),
-                IdSucursal = model.IdSucursal,
-                IdPuntoVta = model.IdPuntoVta,
-                Valor = Convert.ToDecimal(model.ValorPlantilla),
-                ValorProntoPago = Convert.ToDecimal(model.ValorPlantillaProntoPago),
-            };
-
-            info_PreMatricula.info_alumno = info_Alumno;
-            info_PreMatricula.info_socioeconomico = info_SocioEconomico;
-
-            if (model.CedulaRuc_Representante == model.CedulaRuc_Padre || model.CedulaRuc_Representante == model.CedulaRuc_Madre)
-            {
-                info_PreMatricula.OtraPersonaFamiliar = false;              
-            }
-            else
-            {
-                info_PreMatricula.OtraPersonaFamiliar = true;
-                info_PreMatricula.IdCatalogoPAREN_OtroFamiliar = model.IdCatalogoPAREN_Representante;
-            }
-            info_PreMatricula.lst_PreMatriculaRubro = ListaPreMatriculaRubro.get_list(model.IdTransaccionSession);
-
-            info_PreMatricula.lst_PreMatriculaRubro.Where(q=>q.EnMatricula=true).ToList().ForEach(q=> q.IdMecanismo = model.IdMecanismo);
-            info_PreMatricula.lst_PreMatriculaRubro.Where(q => q.EnMatricula = false).ToList().ForEach(q => q.IdMecanismo = model.IdMecanismoDet);
-            return info_PreMatricula;
+        var info_mecanismo = bus_mecanismo.GetInfo(model.IdEmpresa, model.IdMecanismo);
+        var info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
+        if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == false)
+        {
+            info_mecanismo = bus_mecanismo.GetInfo(model.IdEmpresa, model.IdMecanismoDet);
+            info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
         }
+
+        var info_PreMatricula = new aca_PreMatricula_Info
+        {
+            IdEmpresa = model.IdEmpresa,
+            IdAdmision = model.IdAdmision,
+            IdAlumno = info_Alumno==null ? 0 : info_Alumno.IdAlumno,
+            IdAnio = model.IdAnio,
+            IdSede = model.IdSede,
+            IdNivel = model.IdNivel,
+            IdJornada = model.IdJornada,
+            IdCurso = model.IdCurso,
+            IdParalelo = model.IdParalelo,
+            IdPlantilla = model.IdPlantilla,
+            IdMecanismo = model.IdMecanismo,
+            Fecha = model.Fecha.Date,
+            Observacion = model.Observacion,
+            IdCatalogoESTPREMAT = model.IdCatalogoESTPREMAT,
+            IdEmpresa_rol = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpresa_rol : (int?)null),
+            IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? model.IdEmpleado : (decimal?)null),
+            EsPatrocinado = model.EsPatrocinado,
+            IdUsuarioCreacion = SessionFixed.IdUsuario,
+            info_alumno = new aca_Alumno_Info(),
+            lst_PreMatriculaRubro = new List<aca_PreMatricula_Rubro_Info>(),
+            ExisteAlumno = (info_ExisteAlumno.IdAlumno>0 ? true : false),
+            IdSucursal = model.IdSucursal,
+            IdPuntoVta = model.IdPuntoVta,
+            Valor = Convert.ToDecimal(model.ValorPlantilla),
+            ValorProntoPago = Convert.ToDecimal(model.ValorPlantillaProntoPago),
+        };
+
+        info_PreMatricula.info_alumno = info_Alumno;
+        info_PreMatricula.info_socioeconomico = info_SocioEconomico;
+
+        if (model.CedulaRuc_Representante == model.CedulaRuc_Padre || model.CedulaRuc_Representante == model.CedulaRuc_Madre)
+        {
+            info_PreMatricula.OtraPersonaFamiliar = false;              
+        }
+        else
+        {
+            info_PreMatricula.OtraPersonaFamiliar = true;
+            info_PreMatricula.IdCatalogoPAREN_OtroFamiliar = model.IdCatalogoPAREN_Representante;
+        }
+        info_PreMatricula.lst_PreMatriculaRubro = ListaPreMatriculaRubro.get_list(model.IdTransaccionSession);
+
+        info_PreMatricula.lst_PreMatriculaRubro.Where(q=>q.seleccionado==true).ToList().ForEach(q=> q.IdMecanismo = model.IdMecanismo);
+        info_PreMatricula.lst_PreMatriculaRubro.Where(q => q.seleccionado== false).ToList().ForEach(q => q.IdMecanismo = model.IdMecanismoDet);
+        return info_PreMatricula;
+    }
         #endregion
 
         #region JSON
@@ -1674,33 +1700,44 @@ namespace Core.Web.Areas.Academico.Controllers
             }
             return Json(new { ValorPlantilla = Total, ValorPlantillaProntoPago = TotalProntoPago }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult EnlistarDocumentos(int IdEmpresa = 0, decimal IdAdmision=0)
+        public JsonResult EnlistarDocumentos(int IdEmpresa = 0, decimal IdAdmision=0, decimal IdTransaccionSession=0)
         {
-            var lst_documentos = new List<aca_AlumnoDocumento_Info>();
-            var info_admision = bus_admision.GetInfo(IdEmpresa, IdAdmision);
-            //var FilePath = Server.UrlPathEncode("http://sistema.liceocristiano.edu.ec/lcgPrueba/Content/aspirantes/" + IdAdmision);
-            var FilePath = Server.UrlPathEncode("http://sistema.liceocristiano.edu.ec/lcgPrueba/Content/aspirantes/1");
-            //DirectoryInfo dir = new DirectoryInfo(@""+FilePath);
-            var listaDocumentos = new List<FileInfo>();
-            //var lst = System.IO.Directory.g(FilePath);
-            var Secuencia = 1;
-            if (Directory.Exists(FilePath))
-            {
-                //var lst = Directory.GetDirectories(FilePath);
-                //foreach (FileInfo file in lst)
-                //{
-                //    listaDocumentos.Add(file);
 
-                //    var Documentos = new aca_AlumnoDocumento_Info
-                //    {
-                //        NomDocumento = file.Name,
-                //        Ruta = file.FullName,
-                //        Secuencia = Secuencia++,
-                //    };
-                //    lst_documentos.Add(Documentos);
-                //}
+            List<aca_AlumnoDocumento_Info> lst_documentos = new List<aca_AlumnoDocumento_Info>();
+            string ftpURLPrefix = "ftp://";
+            List<string> Lista = new List<string>();
+            string url = ftpURLPrefix + "sistema.liceocristiano.edu.ec/Content/aspirantes/" + IdAdmision.ToString();
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
+
+            request.Method = WebRequestMethods.Ftp.ListDirectory;
+            request.EnableSsl = true;
+            request.Credentials = new NetworkCredential("fixedftp", "admin*2016");
+
+            ServicePointManager.ServerCertificateValidationCallback =
+                 (s, certificate, chain, sslPolicyErrors) => true;
+
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+
+            Stream responseStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(responseStream);
+
+            string Directorio = reader.ReadToEnd();
+            reader.Close();
+            response.Close();
+            string[] stringSeparators = new string[] { "\r\n" };
+            string[] lines = Directorio.Split(stringSeparators, StringSplitOptions.None);
+            Lista = lines.Where(q => !string.IsNullOrEmpty(q) && q != "Processed").ToList();
+            var secuencia = 1;
+            foreach (var item in Lista)
+            {
+                var aluDocumento = new aca_AlumnoDocumento_Info
+                {
+                    Secuencia = secuencia++,
+                    NomDocumento = item
+                };
+                lst_documentos.Add(aluDocumento);
             }
-            
+            Lista_DocAdmision.set_list(lst_documentos, IdTransaccionSession);
 
             return Json(lst_documentos, JsonRequestBehavior.AllowGet);
         }
@@ -1930,6 +1967,26 @@ public class aca_ProcesarAdmision_List
     }
 
     public void set_list(List<aca_Admision_Info> list, decimal IdTransaccionSession)
+    {
+        HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+    }
+}
+
+public class aca_AlumnoDocumentoAdmision_List
+{
+    string Variable = "aca_AlumnoDocumentoAdmision_Info";
+    public List<aca_AlumnoDocumento_Info> get_list(decimal IdTransaccionSession)
+    {
+        if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+        {
+            List<aca_AlumnoDocumento_Info> list = new List<aca_AlumnoDocumento_Info>();
+
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+        return (List<aca_AlumnoDocumento_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+    }
+
+    public void set_list(List<aca_AlumnoDocumento_Info> list, decimal IdTransaccionSession)
     {
         HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
     }

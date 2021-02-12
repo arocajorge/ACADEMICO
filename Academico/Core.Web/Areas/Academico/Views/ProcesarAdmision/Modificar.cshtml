@@ -2122,17 +2122,13 @@
                 </div>
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_admisiondocumentos">
-                <table class="table table-striped" id="DetalleDocumentos">
-                    <thead>
-                        <tr>
-                            <th style="width: 10px">#</th>
-                            <th>Nombre del Documento</th>
-                            <th style="width: 40px"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_DocumentosAdmision")
+                        </div>
+                    </div>
+                </div>
             </div>
             <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_prematricula">
                 <div class="row">
@@ -2299,18 +2295,6 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content" style="padding-top: 20px">
-                        @*<div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_matricula_paralelo">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            @Html.Action("GridViewPartial_AlumnosPorParalelo")
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>*@
-
                         <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_plantilla_detalle">
                             <div class="row">
                                 <div class="col-md-12">
@@ -3226,7 +3210,8 @@
             var location = GetPathServer();
                 var datos = {
                     IdEmpresa: $("#IdEmpresa").val(),
-                    IdAdmision: $("#IdAdmision").val()
+                    IdAdmision: $("#IdAdmision").val(),
+                    IdTransaccionSession: $("#IdTransaccionSession").val()
                 }
                 $.ajax({
                     type: 'POST',
@@ -3238,21 +3223,7 @@
                     dataType: 'json',
                     contentType: 'application/json; charset=utf-8',
                     success: function (data) {
-                        
-                        var filas = "";
-                        if (data != "") {
-                            $.each(data, function (i, row) {
-                                filas = "";
-                                filas = '<tr>' +
-                                '<td>' + row.Secuencia + '</td>' +
-                                '<td>' + row.NomDocumento + '</td>'+
-                                '<td><a href=' + '"' + row.Ruta + '"' + '>Descargar</a></td>' +
-                                '</tr>';
-                                $("#DetalleDocumentos>tbody").append(filas);
-                            });
-                            console.log(filas);
-                            
-                        }
+                        GridViewPartial_DocumentosAdmision.PerformCallback();
                     },
                     error: function (error) {
                     }
