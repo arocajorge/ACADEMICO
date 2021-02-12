@@ -1414,6 +1414,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdEstadoCivil = null,
                 IdProfesion = null,
                 IdReligion = model.IdReligion_Aspirante,
+                IdGrupoEtnico = model.IdGrupoEtnico_Aspirante,
                 AsisteCentroCristiano = model.AsisteCentroCristiano_Aspirante,
             };
             var info_persona_padre = new tb_persona_Info
@@ -1435,9 +1436,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_correo = model.Correo_Padre,
                 pe_celular = model.Celular_Padre,
                 pe_direccion = model.Direccion_Padre,
-                IdEstadoCivil = null,
-                IdProfesion = null,
+                IdEstadoCivil = model.IdEstadoCivil_Padre,
+                IdProfesion = model.IdReligion_Padre,
                 IdReligion = model.IdReligion_Padre,
+                IdGrupoEtnico = model.IdGrupoEtnico_Padre,
                 AsisteCentroCristiano = model.AsisteCentroCristiano_Padre,
             };
             var info_persona_madre = new tb_persona_Info
@@ -1459,9 +1461,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_correo = model.Correo_Madre,
                 pe_celular = model.Celular_Madre,
                 pe_direccion = model.Direccion_Madre,
-                IdEstadoCivil = null,
-                IdProfesion = null,
+                IdEstadoCivil = model.IdEstadoCivil_Madre,
+                IdProfesion = model.IdReligion_Madre,
                 IdReligion = model.IdReligion_Madre,
+                IdGrupoEtnico = model.IdGrupoEtnico_Madre,
                 AsisteCentroCristiano = model.AsisteCentroCristiano_Madre,
             };
 
@@ -1484,9 +1487,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_correo = model.Correo_Representante,
                 pe_celular = model.Celular_Representante,
                 pe_direccion = model.Direccion_Representante,
-                IdEstadoCivil = null,
-                IdProfesion = null,
+                IdEstadoCivil = model.IdEstadoCivil_Representante,
+                IdProfesion = model.IdReligion_Representante,
                 IdReligion = model.IdReligion_Representante,
+                IdGrupoEtnico = model.IdGrupoEtnico_Representante,
                 AsisteCentroCristiano = model.AsisteCentroCristiano_Representante,
             };
 

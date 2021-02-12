@@ -142,6 +142,7 @@ namespace Core.Bus.Academico
                             IdProvincia = info.info_alumno.IdProvincia_padre,
                             IdCiudad = info.info_alumno.IdCiudad_padre,
                             IdParroquia = info.info_alumno.IdParroquia_padre,
+                            Sector = info.info_alumno.Sector_padre,
                             IdUsuarioCreacion = info.info_alumno.IdUsuario,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -303,6 +304,7 @@ namespace Core.Bus.Academico
                             IdProvincia = info.info_alumno.IdProvincia_madre,
                             IdCiudad = info.info_alumno.IdCiudad_madre,
                             IdParroquia = info.info_alumno.IdParroquia_madre,
+                            Sector = info.info_alumno.Sector_madre,
                             IdUsuarioCreacion = info.IdUsuarioCreacion,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
@@ -461,6 +463,7 @@ namespace Core.Bus.Academico
                             IdProvincia = info.info_alumno.IdProvincia_representante,
                             IdCiudad = info.info_alumno.IdCiudad_representante,
                             IdParroquia = info.info_alumno.IdParroquia_representante,
+                            Sector = info.info_alumno.Sector_representante,
                             IdUsuarioCreacion = info.IdUsuarioCreacion,
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };

@@ -147,8 +147,8 @@ namespace Core.Data.Academico
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT f.IdEmpresa, f.IdAlumno, f.IdCatalogoPAREN, c.NomCatalogo, f.IdPersona, p.pe_Naturaleza, p.IdTipoDocumento, p.pe_cedulaRuc, p.pe_apellido, p.pe_nombre, p.pe_nombreCompleto, f.Direccion, f.Celular, f.Correo, f.SeFactura, p.pe_sexo, "
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
-                    + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
-                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
+                    + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo,f.AnioVehiculo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
+                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono, p.IdReligion "
                     + " FROM dbo.tb_persona AS p INNER JOIN "
                     + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
                     + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
@@ -197,7 +197,16 @@ namespace Core.Data.Academico
                             IdEstadoCivil = string.IsNullOrEmpty(reader["IdEstadoCivil"].ToString()) ? null : reader["IdEstadoCivil"].ToString(),
                             pe_fechaNacimiento = string.IsNullOrEmpty(reader["pe_fechaNacimiento"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["pe_fechaNacimiento"]),
                             EstaFallecido = Convert.ToBoolean(reader["EstaFallecido"]),
-                            Estado = Convert.ToBoolean(reader["Estado"])
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdPais = string.IsNullOrEmpty(reader["IdPais"].ToString()) ? null : reader["IdPais"].ToString(),
+                            IdProvincia = string.IsNullOrEmpty(reader["IdProvincia"].ToString()) ? null : reader["IdProvincia"].ToString(),
+                            IdCiudad = string.IsNullOrEmpty(reader["IdCiudad"].ToString()) ? null : reader["IdCiudad"].ToString(),
+                            IdParroquia = string.IsNullOrEmpty(reader["IdParroquia"].ToString()) ? null : reader["IdParroquia"].ToString(),
+                            Cod_Region = string.IsNullOrEmpty(reader["Cod_Region"].ToString()) ? null : reader["Cod_Region"].ToString(),
+                            Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(),
+                            IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
+                            IdProfesion = string.IsNullOrEmpty(reader["IdProfesion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion"]),
+                            AnioVehiculo = string.IsNullOrEmpty(reader["AnioVehiculo"].ToString()) ? (int?)null : Convert.ToInt32(reader["AnioVehiculo"]),
                         };
                     }
                 }
@@ -281,7 +290,7 @@ namespace Core.Data.Academico
                     command.CommandText = "SELECT f.IdEmpresa, f.IdAlumno, f.IdCatalogoPAREN, c.NomCatalogo, f.IdPersona, p.pe_Naturaleza, p.IdTipoDocumento, p.pe_cedulaRuc, p.pe_apellido, p.pe_nombre, p.pe_nombreCompleto, f.Direccion, f.Celular, f.Correo, f.SeFactura, p.pe_sexo, "
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
                     + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
-                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
+                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono, p.IdReligion "
                     + " FROM dbo.tb_persona AS p INNER JOIN "
                     + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
                     + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
@@ -344,7 +353,14 @@ namespace Core.Data.Academico
                             PorcentajeDiscapacidad = string.IsNullOrEmpty(reader["PorcentajeDiscapacidad"].ToString()) ? (double?)null : Convert.ToDouble(reader["CodCatalogoCONADIS"]),
                             pe_telfono_Contacto = string.IsNullOrEmpty(reader["pe_telfono_Contacto"].ToString()) ? null : reader["pe_telfono_Contacto"].ToString(),
                             IdProfesion = string.IsNullOrEmpty(reader["IdProfesion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion"]),
-                            Estado = Convert.ToBoolean(reader["Estado"])
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdPais = string.IsNullOrEmpty(reader["IdPais"].ToString()) ? null : reader["IdPais"].ToString(),
+                            IdProvincia = string.IsNullOrEmpty(reader["IdProvincia"].ToString()) ? null : reader["IdProvincia"].ToString(),
+                            IdCiudad = string.IsNullOrEmpty(reader["IdCiudad"].ToString()) ? null : reader["IdCiudad"].ToString(),
+                            IdParroquia = string.IsNullOrEmpty(reader["IdParroquia"].ToString()) ? null : reader["IdParroquia"].ToString(),
+                            Cod_Region = string.IsNullOrEmpty(reader["Cod_Region"].ToString()) ? null : reader["Cod_Region"].ToString(),
+                            Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(),
+                            IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
                         };
                     }
                 }
