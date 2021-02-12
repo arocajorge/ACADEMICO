@@ -2053,6 +2053,11 @@
             mostrar_vehiculo_madre();
             mostrar_cliente_padre();
             mostrar_cliente_madre();
+
+            mostrar_otro_motivo();
+            mostrar_otro_informacion_inst();
+            mostrar_otro_financiamiento();
+            mostrar_div();
         })
         //$("#Celular_Aspirante").blur(function () {
         //    Validar_cedula_ruc();
@@ -2763,4 +2768,43 @@
                     }
                 });
         }
+
+    function mostrar_otro_motivo() {
+        var MotivoIngreso = $("#IdCatalogoFichaMotivo_Aspirante").val();
+        if (MotivoIngreso == 15) {
+            $("#otro_motivo_ingreso").show();
+        }
+        else {
+            $("#otro_motivo_ingreso").hide();
+        }
+    };
+
+    function mostrar_otro_informacion_inst() {
+        var MotivoIngreso = $("#IdCatalogoFichaInst_Aspirante").val();
+        if (MotivoIngreso == 19) {
+            $("#otro_informacion_inst").show();
+        }
+        else {
+            $("#otro_informacion_inst").hide();
+        }
+    };
+
+    function mostrar_otro_financiamiento() {
+        var Informacion = $("#IdCatalogoFichaFinanc_Aspirante").val();
+        if (Informacion == 22) {
+            $("#otro_forma_financ").show();
+        }
+        else {
+            $("#otro_forma_financ").hide();
+        }
+    };
+
+    function mostrar_div() {
+        if (TieneHermanos_Aspirante.GetValue() == true) {
+            $("#cant_hermanos").show();
+        }
+        else {
+            $("#cant_hermanos").hide();
+        }
+    }
     </script>

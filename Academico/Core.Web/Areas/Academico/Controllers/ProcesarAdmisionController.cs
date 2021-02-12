@@ -64,6 +64,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Plantilla_Bus bus_plantilla = new aca_Plantilla_Bus();
         aca_Plantilla_Rubro_Bus bus_plantilla_rubro = new aca_Plantilla_Rubro_Bus();
         aca_AlumnoDocumentoAdmision_List Lista_DocAdmision = new aca_AlumnoDocumentoAdmision_List();
+        aca_parametro_Bus bus_parametro = new aca_parametro_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -1270,6 +1271,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 PorcentajeDiscapacidad_madre = model.PorcentajeDiscapacidad_Madre,
                 Sector_madre = model.Sector_Madre,
                 SeFactura_madre = model.SeFactura_Madre,
+                IdGrupoEtnico_madre = model.IdGrupoEtnico_Madre,
                 
                 TelefonoTrabajo_madre = model.TelefonoTrabajo_Madre,
                 VehiculoPropio_madre = model.VehiculoPropio_Madre,
@@ -1323,6 +1325,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 VehiculoPropio_padre = model.VehiculoPropio_Padre,
                 IdCatalogo_padre = model.IdCatalogoPAREN_Padre,
                 Modelo_padre=model.Modelo_Padre,
+                IdGrupoEtnico_padre = model.IdGrupoEtnico_Padre,
 
                 AniosServicio_representante = model.AniosServicio_Representante,
                 pe_cedulaRuc_representante = model.CedulaRuc_Representante,
@@ -1372,7 +1375,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 VehiculoPropio_representante = model.VehiculoPropio_Representante,
                 IdCatalogo_representante = model.IdCatalogoPAREN_Representante,
                 Modelo_representante = model.Modelo_Representante,
-                
+                IdGrupoEtnico_representante = model.IdGrupoEtnico_Representante,
+
             };
 
             if (model.CedulaRuc_Representante == model.CedulaRuc_Madre)
@@ -1437,7 +1441,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_celular = model.Celular_Padre,
                 pe_direccion = model.Direccion_Padre,
                 IdEstadoCivil = model.IdEstadoCivil_Padre,
-                IdProfesion = model.IdReligion_Padre,
+                IdProfesion = model.IdProfesion_Padre,
                 IdReligion = model.IdReligion_Padre,
                 IdGrupoEtnico = model.IdGrupoEtnico_Padre,
                 AsisteCentroCristiano = model.AsisteCentroCristiano_Padre,
@@ -1462,7 +1466,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_celular = model.Celular_Madre,
                 pe_direccion = model.Direccion_Madre,
                 IdEstadoCivil = model.IdEstadoCivil_Madre,
-                IdProfesion = model.IdReligion_Madre,
+                IdProfesion = model.IdProfesion_Madre,
                 IdReligion = model.IdReligion_Madre,
                 IdGrupoEtnico = model.IdGrupoEtnico_Madre,
                 AsisteCentroCristiano = model.AsisteCentroCristiano_Madre,
@@ -1488,7 +1492,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_celular = model.Celular_Representante,
                 pe_direccion = model.Direccion_Representante,
                 IdEstadoCivil = model.IdEstadoCivil_Representante,
-                IdProfesion = model.IdReligion_Representante,
+                IdProfesion = model.IdProfesion_Representante,
                 IdReligion = model.IdReligion_Representante,
                 IdGrupoEtnico = model.IdGrupoEtnico_Representante,
                 AsisteCentroCristiano = model.AsisteCentroCristiano_Representante,
@@ -1706,16 +1710,16 @@ namespace Core.Web.Areas.Academico.Controllers
         }
         public JsonResult EnlistarDocumentos(int IdEmpresa = 0, decimal IdAdmision=0, decimal IdTransaccionSession=0)
         {
-
+            var info_parametros = bus_parametro.get_info(IdEmpresa);
             List<aca_AlumnoDocumento_Info> lst_documentos = new List<aca_AlumnoDocumento_Info>();
             string ftpURLPrefix = "ftp://";
             List<string> Lista = new List<string>();
-            string url = ftpURLPrefix + "sistema.liceocristiano.edu.ec/Content/aspirantes/" + IdAdmision.ToString();
+            string url = ftpURLPrefix + info_parametros.FtpUrl + IdAdmision.ToString();
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
 
             request.Method = WebRequestMethods.Ftp.ListDirectory;
             request.EnableSsl = true;
-            request.Credentials = new NetworkCredential("fixedftp", "admin*2016");
+            request.Credentials = new NetworkCredential(info_parametros.FtpUser, info_parametros.FtpPassword);
 
             ServicePointManager.ServerCertificateValidationCallback =
                  (s, certificate, chain, sslPolicyErrors) => true;

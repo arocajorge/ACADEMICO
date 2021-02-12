@@ -476,7 +476,7 @@ namespace Core.Admision.Controllers
                 info.IdCatalogoPAREN_Representante = info.IdCatalogoPAREN_Padre;
                 info.IdCatalogoFichaInst_Representante = (info.IdCatalogoFichaInst_Padre == 0 ? (int?)null : info.IdCatalogoFichaInst_Padre);
                 info.EmpresaTrabajo_Representante = info.EmpresaTrabajo_Padre;
-                info.IdProfesion_Representante = (info.IdProfesion_Padre == 0 ? (int?)null : info.IdCatalogoFichaInst_Padre);
+                info.IdProfesion_Representante = (info.IdProfesion_Padre == 0 ? (int?)null : info.IdProfesion_Padre);
                 info.DireccionTrabajo_Representante = info.DireccionTrabajo_Padre;
                 info.TelefonoTrabajo_Representante = info.TelefonoTrabajo_Padre;
                 info.CargoTrabajo_Representante = info.CargoTrabajo_Padre;
@@ -525,7 +525,7 @@ namespace Core.Admision.Controllers
                 info.IdCatalogoPAREN_Representante = info.IdCatalogoPAREN_Madre;
                 info.IdCatalogoFichaInst_Representante = (info.IdCatalogoFichaInst_Madre == 0 ? (int?)null : info.IdCatalogoFichaInst_Madre);
                 info.EmpresaTrabajo_Representante = info.EmpresaTrabajo_Madre;
-                info.IdProfesion_Representante = (info.IdProfesion_Madre == 0 ? (int?)null : info.IdCatalogoFichaInst_Madre);
+                info.IdProfesion_Representante = (info.IdProfesion_Madre == 0 ? (int?)null : info.IdProfesion_Madre);
                 info.DireccionTrabajo_Representante = info.DireccionTrabajo_Madre;
                 info.TelefonoTrabajo_Representante = info.TelefonoTrabajo_Madre;
                 info.CargoTrabajo_Representante = info.CargoTrabajo_Madre;
@@ -574,7 +574,7 @@ namespace Core.Admision.Controllers
                 info.IdCatalogoPAREN_Representante = info.IdCatalogoPAREN_Representante;
                 info.IdCatalogoFichaInst_Representante = (info.IdCatalogoFichaInst_Representante == 0 ? (int?)null : info.IdCatalogoFichaInst_Representante);
                 info.EmpresaTrabajo_Representante = info.EmpresaTrabajo_Representante;
-                info.IdProfesion_Representante = (info.IdProfesion_Representante == 0 ? (int?)null : info.IdCatalogoFichaInst_Representante);
+                info.IdProfesion_Representante = (info.IdProfesion_Representante == 0 ? (int?)null : info.IdProfesion_Representante);
                 info.DireccionTrabajo_Representante = info.DireccionTrabajo_Representante;
                 info.TelefonoTrabajo_Representante = info.TelefonoTrabajo_Representante;
                 info.CargoTrabajo_Representante = info.CargoTrabajo_Representante;

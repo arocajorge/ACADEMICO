@@ -25,6 +25,9 @@ namespace Core.Data.Academico
                         RutaImagen_Alumno = Entity.RutaImagen_Alumno,
                         RutaImagen_Profesor = Entity.RutaImagen_Profesor,
                         RutaImagen_Seguimiento = Entity.RutaImagen_Seguimiento,
+                        FtpPassword = Entity.FtpPassword,
+                        FtpUrl = Entity.FtpUrl,
+                        FtpUser = Entity.FtpUser
                     };
                 }
                 return info;
@@ -50,7 +53,10 @@ namespace Core.Data.Academico
                             IdEmpresa = info.IdEmpresa,
                             RutaImagen_Seguimiento = info.RutaImagen_Seguimiento,
                             RutaImagen_Profesor = info.RutaImagen_Profesor,
-                            RutaImagen_Alumno = info.RutaImagen_Alumno
+                            RutaImagen_Alumno = info.RutaImagen_Alumno,
+                            FtpPassword = info.FtpPassword,
+                            FtpUrl = info.FtpUrl,
+                            FtpUser = info.FtpUser
 
                         };
                         Context.aca_parametro.Add(Entity);
@@ -60,6 +66,9 @@ namespace Core.Data.Academico
                         Entity.RutaImagen_Seguimiento = info.RutaImagen_Seguimiento;
                         Entity.RutaImagen_Profesor = info.RutaImagen_Profesor;
                         Entity.RutaImagen_Alumno = info.RutaImagen_Alumno;
+                        Entity.FtpPassword = info.FtpPassword;
+                        Entity.FtpUrl = info.FtpUrl;
+                        Entity.FtpUser = info.FtpUser;
                     }
                     Context.SaveChanges();
                 }

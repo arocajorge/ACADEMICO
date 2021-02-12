@@ -148,6 +148,7 @@ namespace Core.Info.Academico
         public string IdParroquia_padre { get; set; }
         [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 500 caracteres")]
         public string Sector_padre { get; set; }
+        public Nullable<int> IdGrupoEtnico_padre { get; set; }
         #endregion
 
         #region Datos madre
@@ -217,6 +218,7 @@ namespace Core.Info.Academico
         public string IdParroquia_madre { get; set; }
         [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 500 caracteres")]
         public string Sector_madre { get; set; }
+        public Nullable<int> IdGrupoEtnico_madre { get; set; }
         #endregion
 
         #region Datos representante
@@ -286,6 +288,7 @@ namespace Core.Info.Academico
         public string IdParroquia_representante { get; set; }
         [StringLength(500, MinimumLength = 0, ErrorMessage = "el campo numero de carnet de conadis debe tener máximo 500 caracteres")]
         public string Sector_representante { get; set; }
+        public Nullable<int> IdGrupoEtnico_representante { get; set; }
         #endregion
 
         public tb_persona_Info info_persona_alumno { get; set; }

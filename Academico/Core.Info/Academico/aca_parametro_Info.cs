@@ -12,5 +12,8 @@ namespace Core.Info.Academico
         public string RutaImagen_Alumno { get; set; }
         public string RutaImagen_Profesor { get; set; }
         public string RutaImagen_Seguimiento { get; set; }
+        public string FtpUser { get; set; }
+        public string FtpPassword { get; set; }
+        public string FtpUrl { get; set; }
     }
 }

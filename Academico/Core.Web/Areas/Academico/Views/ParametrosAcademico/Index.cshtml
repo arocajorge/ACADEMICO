@@ -14,7 +14,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="DiasTransaccionesAFuturo">Imágenes Alumno</label>
                     @Html.TextBoxFor(q => q.RutaImagen_Alumno, new { @class = "form-control", @id = "RutaImagen_Alumno" })
@@ -25,7 +25,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="DiasTransaccionesAFuturo">Imágenes Profesor</label>
                     @Html.TextBoxFor(q => q.RutaImagen_Profesor, new { @class = "form-control", @id = "RutaImagen_Profesor" })
@@ -36,11 +36,36 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="DiasTransaccionesAFuturo">Imágenes Seguimiento</label>
                     @Html.TextBoxFor(q => q.RutaImagen_Seguimiento, new { @class = "form-control", @id = "RutaImagen_Alumno" })
                     @Html.ValidationMessageFor(q => q.RutaImagen_Seguimiento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="FtpUrl">URL FTP</label>
+                    @Html.TextBoxFor(q => q.FtpUrl, new { @class = "form-control", @id = "RutaImagen_Alumno" })
+                    @Html.ValidationMessageFor(q => q.FtpUrl, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FtpUser">Usuario FTP</label>
+                    @Html.TextBoxFor(q => q.FtpUser, new { @class = "form-control", @id = "RutaImagen_Alumno" })
+                    @Html.ValidationMessageFor(q => q.FtpUser, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="FtpPassword">Clave FTP</label>
+                    @Html.TextBoxFor(q => q.FtpPassword, new { @class = "form-control", @id = "RutaImagen_Alumno" })
+                    @Html.ValidationMessageFor(q => q.FtpPassword, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
