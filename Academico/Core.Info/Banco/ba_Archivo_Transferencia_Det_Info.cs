@@ -8,10 +8,10 @@ namespace Core.Info.Banco
 {
     public class ba_Archivo_Transferencia_Det_Info
     {
-        public string pe_cedulaRuc;
-        public string pr_correo;
-        public string pr_direccion;
-        public string num_cta_acreditacion;
+        public string pe_cedulaRuc { get; set; }
+        public string pr_correo { get; set; }
+        public string pr_direccion { get; set; }
+        public string num_cta_acreditacion { get; set; }
 
         public int IdEmpresa { get; set; }
         public decimal IdArchivo { get; set; }

@@ -8,43 +8,163 @@ using System.Web.Mvc;
 using Core.Bus.Banco;
 using Core.Bus.General;
 using Core.Info.General;
+using ExcelDataReader;
+using System.IO;
+using DevExpress.Web.Mvc;
 
 namespace Core.Web.Areas.Banco.Controllers
 {
     public class ActualizarArchivoController : Controller
     {
-        tb_sucursal_Bus bus_sucursal = new tb_sucursal_Bus();
-        public ActualizarArchivoController()
+        ba_ArchivoRecaudacionDet_List Lista = new ba_ArchivoRecaudacionDet_List();
+        public ActionResult Importar()
         {
-            bus_sucursal = new tb_sucursal_Bus();
-        }
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
 
-        public ActionResult Index()
-        {
             ba_Archivo_Transferencia_Info model = new ba_Archivo_Transferencia_Info
             {
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
-                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa)
+                IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
             return View(model);
         }
-
-        [HttpPost]
-        public ActionResult Index(ba_Archivo_Transferencia_Info model)
+        public ActionResult UploadControlUpload()
         {
-            return View(model);
+            UploadControlExtension.GetUploadedFiles("UploadControlFile", UploadControlSettings.UploadValidationSettings, UploadControlSettings.FileUploadComplete);
+            return null;
+        }
+        public ActionResult GridViewPartial_Importacion()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = Lista.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_Importacion", model);
+        }
+        public ActionResult DescargarArchivo(decimal IdTransaccion = 0)
+        {
+            string fileName = Guid.NewGuid() + ".txt";
+            string filePath = "/Content/UploadedFiles/Reports/"+ fileName;
+            StreamWriter sw = new StreamWriter(Server.MapPath(filePath));
+            sw.WriteLine("9990940           "+new DateTime(DateTime.Now.Date.Year,DateTime.Now.Month,1).ToString("MM/dd/yyyy"));
+            var lst = Lista.get_list(IdTransaccion);
+            foreach (var item in lst)
+            {
+                decimal valorEntero = Math.Floor(item.Saldo);
+                decimal valorDecimal = Convert.ToDecimal((item.Saldo - valorEntero).ToString("N2")) * 100;
+                string ValorS = valorEntero.ToString("n0").Replace(",","").PadLeft(8, '0') + "." + valorDecimal.ToString("n0").Replace(",", "").PadRight(2, '0');
+                sw.WriteLine("094"
+                    + item.CodigoAlumno.PadRight(15, ' ')
+                    + Convert.ToDateTime(item.FechaProceso).ToString("MM/dd/yyyy")
+                    + "2  "
+                    + ValorS
+                    + new DateTime(DateTime.Now.Year,DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Date.Year, DateTime.Now.Month)).ToString("MM/dd/yyyy")
+                    + "01/01/1900"
+                    + "N"
+                    + (item.pe_nombreCompleto.Trim().Length > 30 ? item.pe_nombreCompleto.Trim().Substring(0, 30) : item.pe_nombreCompleto.Trim().PadRight(30, ' '))
+                    + ("").PadRight(15, ' ')
+                    + ("").PadRight(3, ' ')
+                    + ("").PadRight(15, ' ')
+                    + ValorS
+                    + ("").PadRight(10, ' ')
+                    +"1"
+                    + ValorS
+                    + ValorS
+                    + ("").PadRight(6, ' ')
+                    + ("").PadRight(2, ' ')
+                    + ("").PadRight(30, ' ')
+                    + ("").PadRight(15, ' ')
+                    + ("").PadRight(14, ' ')
+                    + ("").PadRight(30, ' ')
+                    +"E"
+                    );
+
+            }
+            sw.Flush();
+            sw.Dispose();
+            sw.Close();
+            return File(filePath,"text/txt","ACTALUMNOS094.TXT");
         }
 
-        private void CargarCombos(ba_Archivo_Transferencia_Info model)
+    }
+
+    public class UploadControlSettings
+    {
+        
+        
+        public static DevExpress.Web.UploadControlValidationSettings UploadValidationSettings = new DevExpress.Web.UploadControlValidationSettings()
         {
-            //var lst_cuenta_bancarias = bus_cuentas_bancarias.get_list(model.IdEmpresa, model.IdSucursal, false);
-            //ViewBag.lst_cuenta_bancarias = lst_cuenta_bancarias;
+            AllowedFileExtensions = new string[] { ".xlsx" },
+            MaxFileSize = 40000000
+        };
+        public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
+        {
+            #region Variables
+            int cont = 0;
+            decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            ba_ArchivoRecaudacionDet_List ListaDet = new ba_ArchivoRecaudacionDet_List();
+            ba_ArchivoRecaudacionDet_Bus busRecaudacion = new ba_ArchivoRecaudacionDet_Bus();
+            List<ba_ArchivoRecaudacionDet_Info> ListDet = new List<ba_ArchivoRecaudacionDet_Info>();
+            #endregion
 
-            //var lst_proceso = bus_procesos_bancarios.get_list(model.IdEmpresa, false);
-            //ViewBag.lst_proceso = lst_proceso;
+            Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
+            if (stream.Length > 0)
+            {
+                IExcelDataReader reader = null;
+                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
 
-            var lst_sucursal = bus_sucursal.GetList(model.IdEmpresa, SessionFixed.IdUsuario, false);
-            ViewBag.lst_sucursal = lst_sucursal;
+                #region Alumno
+                var no_validas = "";
+                var repetidos = "";
+                string Codigos = "";
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0) && cont > 0)
+                    {
+                        ListDet.Add(new ba_ArchivoRecaudacionDet_Info
+                        {
+                            CodigoAlumno = reader[1].ToString(),
+                            pe_nombreCompleto = reader[2].ToString(),
+                            FechaProceso = new DateTime(DateTime.Now.Date.Year, DateTime.Now.Month, 1),
+
+                        });
+                        Codigos += (string.IsNullOrEmpty(Codigos)) ? ("'"+reader[1].ToString()+"'") : ("," + ("'"+reader[1].ToString()+"'"));
+                        
+                        
+                                  
+                    }
+                    else
+                        cont++;
+                }
+
+                var Alumno = busRecaudacion.GetList(IdEmpresa, Codigos);
+                ListDet = (from a in ListDet
+                           join b in Alumno
+                           on a.CodigoAlumno equals b.CodigoAlumno into gj
+                           from c in gj.DefaultIfEmpty()
+                           select new ba_ArchivoRecaudacionDet_Info
+                           {
+                               CodigoAlumno = a.CodigoAlumno,
+                               pe_nombreCompleto = a.pe_nombreCompleto,
+                               FechaProceso = a.FechaProceso,
+                               IdAlumno = c?.IdAlumno ?? 0,
+                               FechaProntoPago = c?.FechaProntoPago,
+                               Saldo = c?.Saldo ?? 0,
+                               SaldoProntoPago = c?.SaldoProntoPago ?? 0
+                           }).ToList();
+
+                
+
+                no_validas = " " + no_validas;
+                repetidos = " " + repetidos;
+                ListaDet.set_list(ListDet, IdTransaccionSession);
+                #endregion
+            }
         }
     }
 }

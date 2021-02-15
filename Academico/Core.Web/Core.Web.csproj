@@ -9766,6 +9766,8 @@
     <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_DocumentosAdmision.cshtml" />
+    <Content Include="Areas\Banco\Views\ActualizarArchivo\Importar.cshtml" />
+    <Content Include="Areas\Banco\Views\ActualizarArchivo\_GridViewPartial_Importacion.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9811,7 +9813,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Academico\Models\" />
     <Folder Include="Areas\Banco\Models\" />
-    <Folder Include="Areas\Banco\Views\ActualizarArchivo\" />
     <Folder Include="Areas\Banco\Views\ArchivoBancario\" />
     <Folder Include="Areas\Caja\Models\" />
     <Folder Include="Areas\Contabilidad\Models\" />

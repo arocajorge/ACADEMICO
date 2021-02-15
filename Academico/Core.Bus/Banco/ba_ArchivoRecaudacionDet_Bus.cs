@@ -49,5 +49,18 @@ namespace Core.Bus.Banco
                 throw;
             }
         }
+
+        public List<ba_ArchivoRecaudacionDet_Info> GetList(int IdEmpresa, string Codigo)
+        {
+            try
+            {
+                return odata.GetList(IdEmpresa, Codigo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
