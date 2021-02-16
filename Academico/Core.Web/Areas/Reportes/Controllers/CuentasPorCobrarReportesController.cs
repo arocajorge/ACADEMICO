@@ -263,6 +263,14 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
 
+            CXC_004_Resumen_Rpt report2 = new CXC_004_Resumen_Rpt();
+
+            report2.p_IdEmpresa.Value = model.IdEmpresa;
+            report2.p_IdUsuario.Value = SessionFixed.IdUsuario;
+            report2.usuario = SessionFixed.IdUsuario;
+            report2.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = report2;
+
             return View(model);
         }
         [HttpPost]
@@ -276,6 +284,14 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
+
+            CXC_004_Resumen_Rpt report2 = new CXC_004_Resumen_Rpt();
+
+            report2.p_IdEmpresa.Value = model.IdEmpresa;
+            report2.p_IdUsuario.Value = SessionFixed.IdUsuario;
+            report2.usuario = SessionFixed.IdUsuario;
+            report2.empresa = SessionFixed.NomEmpresa;
+            ViewBag.ReportResumen = report2;
 
             return View(model);
         }
