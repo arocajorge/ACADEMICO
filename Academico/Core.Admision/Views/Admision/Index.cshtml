@@ -1498,6 +1498,16 @@
         mostrar_otro_financiamiento();
     });
 
+    $("#IngresoMensual_Padre").change(function () {
+        var Ingreso = $("#IngresoMensual_Padre").val();
+        $("#SueldoPadre").val(Ingreso);
+    });
+
+    $("#IngresoMensual_Madre").change(function () {
+        var Ingreso = $("#IngresoMensual_Madre").val();
+        $("#SueldoMadre").val(Ingreso);
+    });
+
     $("#SueldoPadre").change(function () {
         sumar_ingresos();
     });

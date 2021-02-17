@@ -25,6 +25,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
         aca_AnioLectivo_Paralelo_Profesor_Bus bus_materias_x_paralelo = new aca_AnioLectivo_Paralelo_Profesor_Bus();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
+        aca_AlumnoDocumento_Bus bus_aludocumentos = new aca_AlumnoDocumento_Bus();
         #endregion
 
         #region Combos
@@ -273,6 +274,9 @@ namespace Core.Web.Areas.Academico.Controllers
                         info_matricula.lst_MatriculaRubro.Add(info_detalle);
                     }
                 }
+
+                var lstDocumentos = bus_aludocumentos.GetList(info_matricula.IdEmpresa, info_matricula.IdAlumno, true);
+                info_matricula.lst_documentos = lstDocumentos;
 
                 if (bus_matricula.GuardarPreMatriculaDB(info_matricula))
                 {
