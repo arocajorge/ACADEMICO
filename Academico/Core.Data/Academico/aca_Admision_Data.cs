@@ -381,11 +381,12 @@ namespace Core.Data.Academico
                     Context.aca_Admision.Add(Entity);
 
                     var info_catalogo = odata_catalogo.getInfo(Convert.ToInt32(info.IdCatalogoESTADM));
+                    var Destinatarios = (info == null ? "" : (info.SeFactura_Padre == true ? info.Correo_Padre : (info.SeFactura_Madre ? info.Correo_Madre : info.Correo_Representante)) + ";" + info.Correo_Padre + ";" + info.Correo_Madre + ";" + info.Correo_Representante);
                     var info_correo = new tb_ColaCorreo_Info
                     {
                         IdEmpresa = info.IdEmpresa,
-                        Destinatarios = info.Correo_Padre + ";" + info.Correo_Madre + ";" + info.Correo_Representante,
-                        Asunto = "REGISTRO DE PROCESO DE ADMISION",
+                        Destinatarios = Destinatarios,
+                        Asunto = "REGISTRO DE ADMISION",
                         Parametros = "",
                         Codigo="",
                         IdUsuarioCreacion = "",

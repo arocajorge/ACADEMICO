@@ -92,7 +92,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
 
-            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_Academico(model.IdEmpresa, model.IdAnio, model.IdSede);
+            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_Academico(model.IdEmpresa, model.IdSede, model.IdAnio);
             lst_admisiones.ForEach(q => q.IdUsuarioSesion = SessionFixed.IdUsuario);
             Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model);
@@ -103,7 +103,7 @@ namespace Core.Web.Areas.Academico.Controllers
         [HttpPost]
         public ActionResult Index(aca_Admision_Info model)
         {
-            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_Academico(model.IdEmpresa, model.IdAnio, model.IdSede);
+            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_Academico(model.IdEmpresa, model.IdSede, model.IdAnio);
             lst_admisiones.ForEach(q=> q.IdUsuarioSesion = SessionFixed.IdUsuario);
             Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
             cargar_combos(model);
@@ -1934,6 +1934,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public JsonResult ProcesarAdmision(int IdEmpresa = 0, decimal IdAdmision = 0)
         {
             var info_admision = bus_admision.GetInfo(IdEmpresa, IdAdmision);
+            var Destinatarios = (info_admision == null ? "" : (info_admision.SeFactura_Padre==true ? info_admision.Correo_Padre: (info_admision.SeFactura_Madre ? info_admision.Correo_Madre : info_admision.Correo_Representante)) + ";" + info_admision.Correo_Padre + ";" + info_admision.Correo_Madre + ";" + info_admision.Correo_Representante);
             var mensaje = "";
             if (info_admision.IdUsuarioRevision == null)
             {
@@ -1950,8 +1951,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     var info_correo = new tb_ColaCorreo_Info
                     {
                         IdEmpresa = info_admision.IdEmpresa,
-                        Destinatarios = info_admision.Correo_Padre + ";" + info_admision.Correo_Madre + ";" + info_admision.Correo_Representante,
-                        Asunto = "PROCESO DE ADMISION EN REVISION",
+                        Destinatarios = Destinatarios,
+                        Asunto = "ADMISION EN PROCESO DE REVISION",
                         Parametros = "",
                         Codigo = "",
                         IdUsuarioCreacion = SessionFixed.IdUsuario,

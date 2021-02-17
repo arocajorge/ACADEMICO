@@ -181,10 +181,11 @@ namespace Core.Data.Academico
                     Entity_Admision.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
                     var info_catalogo = odata_catalogo.getInfo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.PREMATRICULADO));
+                    var Destinatarios = (info.info_alumno == null ? "" : (info.info_alumno.SeFactura_padre == true ? info.info_alumno.info_persona_padre.pe_correo : (info.info_alumno.SeFactura_madre==true ? info.info_alumno.info_persona_madre.pe_correo : info.info_alumno.info_persona_representante.pe_correo)) + ";" + info.info_alumno.info_persona_padre.pe_correo + ";" + info.info_alumno.info_persona_madre.pe_correo + ";" + info.info_alumno.info_persona_representante.pe_correo);
                     var info_correo = new tb_ColaCorreo_Info
                     {
                         IdEmpresa = info.IdEmpresa,
-                        Destinatarios = info.info_alumno.info_persona_padre.pe_correo + ";" + info.info_alumno.info_persona_madre.pe_correo + ";" + info.info_alumno.info_persona_representante.pe_correo,
+                        Destinatarios = Destinatarios,
                         Asunto = "ASPIRANTE PREMATRICULADO",
                         Parametros = "",
                         Codigo = "",

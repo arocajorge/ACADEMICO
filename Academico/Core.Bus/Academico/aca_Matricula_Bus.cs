@@ -22,6 +22,7 @@ namespace Core.Bus.Academico
         aca_Matricula_Data odata = new aca_Matricula_Data();
         aca_Alumno_Data odata_alumno = new aca_Alumno_Data();
         aca_Familia_Data odata_familia = new aca_Familia_Data();
+        tb_persona_Data odata_persona = new tb_persona_Data();
         public List<aca_Matricula_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
         {
             try
@@ -223,13 +224,13 @@ namespace Core.Bus.Academico
                         var info_alumno = odata_alumno.getInfo(info_matricula.IdEmpresa, info_matricula.IdAlumno);
                         var info_familia_papa = odata_familia.getListTipo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
                         var info_familia_mama = odata_familia.getListTipo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
-                        //var info_familia_rep_legal = odata_familia.getListTipo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoRepresentante.LEGAL));
-                        //var info_familia_rep_eco = odata_familia.getListTipo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoRepresentante.ECON));
-                        var correos = (info_familia_papa == null ? "" : info_familia_papa.Correo) + ";" + (info_familia_mama == null ? "" : info_familia_mama.Correo) + ";";
+                        var info_familia_rep_eco = odata_familia.getInfo_Representante(info_matricula.IdEmpresa, info_matricula.IdAlumno, cl_enumeradores.eTipoRepresentante.ECON.ToString());
+                        var info_familia_rep_legal = odata_familia.getInfo_Representante(info_matricula.IdEmpresa, info_matricula.IdAlumno, cl_enumeradores.eTipoRepresentante.LEGAL.ToString());
+                        var Destinatarios = (info_familia_papa == null ? "" : info_familia_papa.Correo) + ";" + (info_familia_mama == null ? "" : info_familia_mama.Correo) + ";" + (info_familia_rep_eco==null?"": info_familia_rep_eco.Correo)+";"+(info_familia_rep_legal==null ? "" : info_familia_rep_legal.Correo);
                         var info_correo = new tb_ColaCorreo_Info
                         {
                             IdEmpresa = info_matricula.IdEmpresa,
-                            Destinatarios = correos,
+                            Destinatarios = Destinatarios,
                             Asunto = "ASPIRANTE MATRICULADO",
                             Parametros = "",
                             Codigo = "",
