@@ -2,8 +2,10 @@
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Data.Academico;
+using Core.Data.General;
 using Core.Info.Academico;
 using Core.Info.Facturacion;
+using Core.Info.General;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
@@ -15,7 +17,11 @@ namespace Core.Bus.Academico
 {
     public class aca_Matricula_Bus
     {
+        tb_ColaCorreo_Data odata_correo = new tb_ColaCorreo_Data();
+        aca_Catalogo_Data odata_catalogo = new aca_Catalogo_Data();
         aca_Matricula_Data odata = new aca_Matricula_Data();
+        aca_Alumno_Data odata_alumno = new aca_Alumno_Data();
+        aca_Familia_Data odata_familia = new aca_Familia_Data();
         public List<aca_Matricula_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, bool MostrarAnulados)
         {
             try
@@ -209,8 +215,29 @@ namespace Core.Bus.Academico
                     var info_admision = bus_admision.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAdmision);
                     if (info_admision!=null)
                     {
+                        info_admision.IdUsuarioModificacion = info_matricula.IdUsuarioCreacion;
                         info_admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.MATRICULADO);
                         bus_admision.ModificarEstadoEnProceso(info_admision);
+
+                        var info_catalogo = odata_catalogo.getInfo(Convert.ToInt32(info_admision.IdCatalogoESTADM));
+                        var info_alumno = odata_alumno.getInfo(info_matricula.IdEmpresa, info_matricula.IdAlumno);
+                        var info_familia_papa = odata_familia.getListTipo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA));
+                        var info_familia_mama = odata_familia.getListTipo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA));
+                        //var info_familia_rep_legal = odata_familia.getListTipo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoRepresentante.LEGAL));
+                        //var info_familia_rep_eco = odata_familia.getListTipo(info_matricula.IdEmpresa, info_matricula.IdAlumno, Convert.ToInt32(cl_enumeradores.eTipoRepresentante.ECON));
+                        var correos = (info_familia_papa == null ? "" : info_familia_papa.Correo) + ";" + (info_familia_mama == null ? "" : info_familia_mama.Correo) + ";";
+                        var info_correo = new tb_ColaCorreo_Info
+                        {
+                            IdEmpresa = info_matricula.IdEmpresa,
+                            Destinatarios = correos,
+                            Asunto = "ASPIRANTE MATRICULADO",
+                            Parametros = "",
+                            Codigo = "",
+                            IdUsuarioCreacion = info_matricula.IdUsuarioCreacion,
+                            Cuerpo = (info_catalogo == null ? "" : info_catalogo.NomCatalogo),
+                            FechaCreacion = DateTime.Now
+                        };
+                        odata_correo.GuardarDB(info_correo);
                     }           
 
                     var info_prematricula = bus_prematricula.GetInfo_PorIdAdmision(info_matricula.IdEmpresa, info_matricula.IdAdmision);

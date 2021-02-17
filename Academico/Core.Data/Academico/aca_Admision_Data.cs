@@ -1,5 +1,7 @@
 ﻿using Core.Data.Base;
+using Core.Data.General;
 using Core.Info.Academico;
+using Core.Info.General;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,8 @@ namespace Core.Data.Academico
 {
     public class aca_Admision_Data
     {
+        tb_ColaCorreo_Data odata_correo = new tb_ColaCorreo_Data();
+        aca_Catalogo_Data odata_catalogo = new aca_Catalogo_Data();
         public List<aca_Admision_Info> getList(int IdEmpresa, int IdSede, int IdAnio)
         {
             try
@@ -375,6 +379,20 @@ namespace Core.Data.Academico
                         FechaCreacion = info.FechaCreacion = DateTime.Now
                     };
                     Context.aca_Admision.Add(Entity);
+
+                    var info_catalogo = odata_catalogo.getInfo(Convert.ToInt32(info.IdCatalogoESTADM));
+                    var info_correo = new tb_ColaCorreo_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        Destinatarios = info.Correo_Padre + ";" + info.Correo_Madre + ";" + info.Correo_Representante,
+                        Asunto = "REGISTRO DE PROCESO DE ADMISION",
+                        Parametros = "",
+                        Codigo="",
+                        IdUsuarioCreacion = "",
+                        Cuerpo = (info_catalogo==null ? "" : info_catalogo.NomCatalogo),
+                        FechaCreacion = DateTime.Now
+                    };
+                    odata_correo.GuardarDB(info_correo);
 
                     Context.SaveChanges();
                 }

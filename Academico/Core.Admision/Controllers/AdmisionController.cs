@@ -41,6 +41,7 @@ namespace Core.Admision.Controllers
         aca_Familia_Bus bus_familia = new aca_Familia_Bus();
         fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
         fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
+        tb_ColaCorreo_Bus bus_correo = new tb_ColaCorreo_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -95,6 +96,7 @@ namespace Core.Admision.Controllers
                 IdPais_Aspirante = "1",
                 IdPais_Padre = "1",
                 IdPais_Madre = "1",
+                IdPais_Representante="1",
                 Cod_Region_Aspirante = "00001",
                 Cod_Region_Padre = "00001",
                 Cod_Region_Madre = "00001",

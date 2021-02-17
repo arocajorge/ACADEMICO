@@ -7883,6 +7883,24 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Rubro" EntitySet="aca_Rubro" />
             <End Role="aca_PreMatricula_Rubro" EntitySet="aca_PreMatricula_Rubro" />
           </AssociationSet>
+          <EntitySet Name="aca_PreMatricula" EntityType="ModelAcademico.aca_PreMatricula" />
+          <AssociationSet Name="FK_aca_PreMatricula_aca_Alumno" Association="ModelAcademico.FK_aca_PreMatricula_aca_Alumno">
+            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
+            <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo" Association="ModelAcademico.FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo">
+            <End Role="aca_AnioLectivo_Curso_Paralelo" EntitySet="aca_AnioLectivo_Curso_Paralelo" />
+            <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_PreMatricula_aca_MecanismoDePago" Association="ModelAcademico.FK_aca_PreMatricula_aca_MecanismoDePago">
+            <End Role="aca_MecanismoDePago" EntitySet="aca_MecanismoDePago" />
+            <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_aca_PreMatricula_aca_Plantilla" Association="ModelAcademico.FK_aca_PreMatricula_aca_Plantilla">
+            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
+            <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
+          </AssociationSet>
+          <EntitySet Name="aca_parametro" EntityType="ModelAcademico.aca_parametro" />
           <EntitySet Name="aca_Admision" EntityType="ModelAcademico.aca_Admision" />
           <AssociationSet Name="FK_aca_Admision_aca_AnioLectivo" Association="ModelAcademico.FK_aca_Admision_aca_AnioLectivo">
             <End Role="aca_AnioLectivo" EntitySet="aca_AnioLectivo" />
@@ -7964,28 +7982,10 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Sede" EntitySet="aca_Sede" />
             <End Role="aca_Admision" EntitySet="aca_Admision" />
           </AssociationSet>
-          <EntitySet Name="aca_PreMatricula" EntityType="ModelAcademico.aca_PreMatricula" />
           <AssociationSet Name="FK_aca_PreMatricula_aca_Admision" Association="ModelAcademico.FK_aca_PreMatricula_aca_Admision">
             <End Role="aca_Admision" EntitySet="aca_Admision" />
             <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
           </AssociationSet>
-          <AssociationSet Name="FK_aca_PreMatricula_aca_Alumno" Association="ModelAcademico.FK_aca_PreMatricula_aca_Alumno">
-            <End Role="aca_Alumno" EntitySet="aca_Alumno" />
-            <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo" Association="ModelAcademico.FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo">
-            <End Role="aca_AnioLectivo_Curso_Paralelo" EntitySet="aca_AnioLectivo_Curso_Paralelo" />
-            <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_PreMatricula_aca_MecanismoDePago" Association="ModelAcademico.FK_aca_PreMatricula_aca_MecanismoDePago">
-            <End Role="aca_MecanismoDePago" EntitySet="aca_MecanismoDePago" />
-            <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_aca_PreMatricula_aca_Plantilla" Association="ModelAcademico.FK_aca_PreMatricula_aca_Plantilla">
-            <End Role="aca_Plantilla" EntitySet="aca_Plantilla" />
-            <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
-          </AssociationSet>
-          <EntitySet Name="aca_parametro" EntityType="ModelAcademico.aca_parametro" />
           </EntityContainer>
         <EntityType Name="aca_AnioLectivo_Curso_Plantilla">
           <Key>
@@ -13093,6 +13093,130 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="aca_PreMatricula">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdPreMatricula" />
+            <PropertyRef Name="IdAdmision" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdPreMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAdmision" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdAnio" Type="Int32" Nullable="false" />
+          <Property Name="IdSede" Type="Int32" Nullable="false" />
+          <Property Name="IdNivel" Type="Int32" Nullable="false" />
+          <Property Name="IdJornada" Type="Int32" Nullable="false" />
+          <Property Name="IdCurso" Type="Int32" Nullable="false" />
+          <Property Name="IdParalelo" Type="Int32" Nullable="false" />
+          <Property Name="IdPersonaF" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPersonaR" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
+          <Property Name="IdMecanismo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdCatalogoESTPREMAT" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdPuntoVta" Type="Int32" Nullable="false" />
+          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ValorProntoPago" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
+          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_rol" Type="Int32" />
+          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="EsPatrocinado" Type="Boolean" />
+          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_Alumno" FromRole="aca_PreMatricula" ToRole="aca_Alumno" />
+          <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_PreMatricula" ToRole="aca_AnioLectivo_Curso_Paralelo" />
+          <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_MecanismoDePago" FromRole="aca_PreMatricula" ToRole="aca_MecanismoDePago" />
+          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_Plantilla" FromRole="aca_PreMatricula" ToRole="aca_Plantilla" />
+          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_Admision" FromRole="aca_PreMatricula" ToRole="aca_Admision" />
+        </EntityType>
+        <Association Name="FK_aca_PreMatricula_aca_Alumno">
+          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Alumno">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="aca_PreMatricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo">
+          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Paralelo" Role="aca_AnioLectivo_Curso_Paralelo" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_AnioLectivo_Curso_Paralelo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdSede" />
+              <PropertyRef Name="IdNivel" />
+              <PropertyRef Name="IdJornada" />
+              <PropertyRef Name="IdCurso" />
+              <PropertyRef Name="IdParalelo" />
+            </Principal>
+            <Dependent Role="aca_PreMatricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdSede" />
+              <PropertyRef Name="IdNivel" />
+              <PropertyRef Name="IdJornada" />
+              <PropertyRef Name="IdCurso" />
+              <PropertyRef Name="IdParalelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_PreMatricula_aca_MecanismoDePago">
+          <End Type="ModelAcademico.aca_MecanismoDePago" Role="aca_MecanismoDePago" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_MecanismoDePago">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMecanismo" />
+            </Principal>
+            <Dependent Role="aca_PreMatricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdMecanismo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_aca_PreMatricula_aca_Plantilla">
+          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
+          <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aca_Plantilla">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Principal>
+            <Dependent Role="aca_PreMatricula">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdAnio" />
+              <PropertyRef Name="IdPlantilla" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="aca_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="RutaImagen_Alumno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RutaImagen_Profesor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RutaImagen_Seguimiento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FtpUser" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FtpPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FtpUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="aca_Admision">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -13582,50 +13706,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="aca_PreMatricula">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdPreMatricula" />
-            <PropertyRef Name="IdAdmision" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdPreMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdAdmision" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdAnio" Type="Int32" Nullable="false" />
-          <Property Name="IdSede" Type="Int32" Nullable="false" />
-          <Property Name="IdNivel" Type="Int32" Nullable="false" />
-          <Property Name="IdJornada" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" Nullable="false" />
-          <Property Name="IdParalelo" Type="Int32" Nullable="false" />
-          <Property Name="IdPersonaF" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdPersonaR" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdPlantilla" Type="Int32" Nullable="false" />
-          <Property Name="IdMecanismo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdCatalogoESTPREMAT" Type="Int32" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdPuntoVta" Type="Int32" Nullable="false" />
-          <Property Name="IdSucursal" Type="Int32" Nullable="false" />
-          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ValorProntoPago" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdUsuarioCreacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioAnulacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="FechaAnulacion" Type="DateTime" Precision="3" />
-          <Property Name="MotivoAnulacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpresa_rol" Type="Int32" />
-          <Property Name="IdEmpleado" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="EsPatrocinado" Type="Boolean" />
-          <NavigationProperty Name="aca_Admision" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_Admision" FromRole="aca_PreMatricula" ToRole="aca_Admision" />
-          <NavigationProperty Name="aca_Alumno" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_Alumno" FromRole="aca_PreMatricula" ToRole="aca_Alumno" />
-          <NavigationProperty Name="aca_AnioLectivo_Curso_Paralelo" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo" FromRole="aca_PreMatricula" ToRole="aca_AnioLectivo_Curso_Paralelo" />
-          <NavigationProperty Name="aca_MecanismoDePago" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_MecanismoDePago" FromRole="aca_PreMatricula" ToRole="aca_MecanismoDePago" />
-          <NavigationProperty Name="aca_Plantilla" Relationship="ModelAcademico.FK_aca_PreMatricula_aca_Plantilla" FromRole="aca_PreMatricula" ToRole="aca_Plantilla" />
-        </EntityType>
         <Association Name="FK_aca_PreMatricula_aca_Admision">
           <End Type="ModelAcademico.aca_Admision" Role="aca_Admision" Multiplicity="1" />
           <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
@@ -13640,86 +13720,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_aca_PreMatricula_aca_Alumno">
-          <End Type="ModelAcademico.aca_Alumno" Role="aca_Alumno" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Alumno">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Principal>
-            <Dependent Role="aca_PreMatricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAlumno" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo">
-          <End Type="ModelAcademico.aca_AnioLectivo_Curso_Paralelo" Role="aca_AnioLectivo_Curso_Paralelo" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_AnioLectivo_Curso_Paralelo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdSede" />
-              <PropertyRef Name="IdNivel" />
-              <PropertyRef Name="IdJornada" />
-              <PropertyRef Name="IdCurso" />
-              <PropertyRef Name="IdParalelo" />
-            </Principal>
-            <Dependent Role="aca_PreMatricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdSede" />
-              <PropertyRef Name="IdNivel" />
-              <PropertyRef Name="IdJornada" />
-              <PropertyRef Name="IdCurso" />
-              <PropertyRef Name="IdParalelo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_PreMatricula_aca_MecanismoDePago">
-          <End Type="ModelAcademico.aca_MecanismoDePago" Role="aca_MecanismoDePago" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_MecanismoDePago">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMecanismo" />
-            </Principal>
-            <Dependent Role="aca_PreMatricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdMecanismo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_aca_PreMatricula_aca_Plantilla">
-          <End Type="ModelAcademico.aca_Plantilla" Role="aca_Plantilla" Multiplicity="1" />
-          <End Type="ModelAcademico.aca_PreMatricula" Role="aca_PreMatricula" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aca_Plantilla">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Principal>
-            <Dependent Role="aca_PreMatricula">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdAnio" />
-              <PropertyRef Name="IdPlantilla" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="aca_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="RutaImagen_Alumno" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="RutaImagen_Profesor" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="RutaImagen_Seguimiento" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="FtpUser" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="FtpPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="FtpUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -16253,6 +16253,57 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="aca_PreMatricula">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_PreMatricula">
+              <MappingFragment StoreEntitySet="aca_PreMatricula">
+                <ScalarProperty Name="EsPatrocinado" ColumnName="EsPatrocinado" />
+                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
+                <ScalarProperty Name="IdEmpresa_rol" ColumnName="IdEmpresa_rol" />
+                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
+                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
+                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="ValorProntoPago" ColumnName="ValorProntoPago" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
+                <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdCatalogoESTPREMAT" ColumnName="IdCatalogoESTPREMAT" />
+                <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
+                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
+                <ScalarProperty Name="IdPersonaR" ColumnName="IdPersonaR" />
+                <ScalarProperty Name="IdPersonaF" ColumnName="IdPersonaF" />
+                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
+                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
+                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
+                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
+                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
+                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdAdmision" ColumnName="IdAdmision" />
+                <ScalarProperty Name="IdPreMatricula" ColumnName="IdPreMatricula" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aca_parametro">
+            <EntityTypeMapping TypeName="ModelAcademico.aca_parametro">
+              <MappingFragment StoreEntitySet="aca_parametro">
+                <ScalarProperty Name="FtpUrl" ColumnName="FtpUrl" />
+                <ScalarProperty Name="FtpPassword" ColumnName="FtpPassword" />
+                <ScalarProperty Name="FtpUser" ColumnName="FtpUser" />
+                <ScalarProperty Name="RutaImagen_Seguimiento" ColumnName="RutaImagen_Seguimiento" />
+                <ScalarProperty Name="RutaImagen_Profesor" ColumnName="RutaImagen_Profesor" />
+                <ScalarProperty Name="RutaImagen_Alumno" ColumnName="RutaImagen_Alumno" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="aca_Admision">
             <EntityTypeMapping TypeName="ModelAcademico.aca_Admision">
               <MappingFragment StoreEntitySet="aca_Admision">
@@ -16467,57 +16518,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdSede" ColumnName="IdSede" />
                 <ScalarProperty Name="IdAdmision" ColumnName="IdAdmision" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aca_PreMatricula">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_PreMatricula">
-              <MappingFragment StoreEntitySet="aca_PreMatricula">
-                <ScalarProperty Name="EsPatrocinado" ColumnName="EsPatrocinado" />
-                <ScalarProperty Name="IdEmpleado" ColumnName="IdEmpleado" />
-                <ScalarProperty Name="IdEmpresa_rol" ColumnName="IdEmpresa_rol" />
-                <ScalarProperty Name="MotivoAnulacion" ColumnName="MotivoAnulacion" />
-                <ScalarProperty Name="FechaAnulacion" ColumnName="FechaAnulacion" />
-                <ScalarProperty Name="IdUsuarioAnulacion" ColumnName="IdUsuarioAnulacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="ValorProntoPago" ColumnName="ValorProntoPago" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="IdSucursal" ColumnName="IdSucursal" />
-                <ScalarProperty Name="IdPuntoVta" ColumnName="IdPuntoVta" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdCatalogoESTPREMAT" ColumnName="IdCatalogoESTPREMAT" />
-                <ScalarProperty Name="IdMecanismo" ColumnName="IdMecanismo" />
-                <ScalarProperty Name="IdPlantilla" ColumnName="IdPlantilla" />
-                <ScalarProperty Name="IdPersonaR" ColumnName="IdPersonaR" />
-                <ScalarProperty Name="IdPersonaF" ColumnName="IdPersonaF" />
-                <ScalarProperty Name="IdParalelo" ColumnName="IdParalelo" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdJornada" ColumnName="IdJornada" />
-                <ScalarProperty Name="IdNivel" ColumnName="IdNivel" />
-                <ScalarProperty Name="IdSede" ColumnName="IdSede" />
-                <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdAdmision" ColumnName="IdAdmision" />
-                <ScalarProperty Name="IdPreMatricula" ColumnName="IdPreMatricula" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="aca_parametro">
-            <EntityTypeMapping TypeName="ModelAcademico.aca_parametro">
-              <MappingFragment StoreEntitySet="aca_parametro">
-                <ScalarProperty Name="FtpUrl" ColumnName="FtpUrl" />
-                <ScalarProperty Name="FtpPassword" ColumnName="FtpPassword" />
-                <ScalarProperty Name="FtpUser" ColumnName="FtpUser" />
-                <ScalarProperty Name="RutaImagen_Seguimiento" ColumnName="RutaImagen_Seguimiento" />
-                <ScalarProperty Name="RutaImagen_Profesor" ColumnName="RutaImagen_Profesor" />
-                <ScalarProperty Name="RutaImagen_Alumno" ColumnName="RutaImagen_Alumno" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

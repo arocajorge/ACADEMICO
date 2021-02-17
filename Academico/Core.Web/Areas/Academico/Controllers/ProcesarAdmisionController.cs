@@ -65,6 +65,8 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Plantilla_Rubro_Bus bus_plantilla_rubro = new aca_Plantilla_Rubro_Bus();
         aca_AlumnoDocumentoAdmision_List Lista_DocAdmision = new aca_AlumnoDocumentoAdmision_List();
         aca_parametro_Bus bus_parametro = new aca_parametro_Bus();
+        tb_ColaCorreo_Bus bus_cola_correo = new tb_ColaCorreo_Bus();
+    
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         #endregion
@@ -1376,7 +1378,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdCatalogo_representante = model.IdCatalogoPAREN_Representante,
                 Modelo_representante = model.Modelo_Representante,
                 IdGrupoEtnico_representante = model.IdGrupoEtnico_Representante,
-
+                TelefonoRepresentante = model.Telefono_Representante,
             };
 
             if (model.CedulaRuc_Representante == model.CedulaRuc_Madre)
@@ -1714,7 +1716,8 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_AlumnoDocumento_Info> lst_documentos = new List<aca_AlumnoDocumento_Info>();
             string ftpURLPrefix = "ftp://";
             List<string> Lista = new List<string>();
-            string url = ftpURLPrefix + info_parametros.FtpUrl + IdAdmision.ToString();
+            //string url = ftpURLPrefix + info_parametros.FtpUrl + IdAdmision.ToString();
+            string url = ftpURLPrefix + info_parametros.FtpUrl + "1";
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
 
             request.Method = WebRequestMethods.Ftp.ListDirectory;
@@ -1942,6 +1945,20 @@ namespace Core.Web.Areas.Academico.Controllers
                 if (bus_admision.ModificarEstadoEnProceso(info_admision))
                 {
                     mensaje = "El estado de la admisión cambió a proceso de revisión";
+
+                    var info_catalogo = bus_aca_catalogo.GetInfo(Convert.ToInt32(info_admision.IdCatalogoESTADM));
+                    var info_correo = new tb_ColaCorreo_Info
+                    {
+                        IdEmpresa = info_admision.IdEmpresa,
+                        Destinatarios = info_admision.Correo_Padre + ";" + info_admision.Correo_Madre + ";" + info_admision.Correo_Representante;
+                        Asunto = "PROCESO DE ADMISION EN REVISION",
+                        Parametros = "",
+                        Codigo = "",
+                        IdUsuarioCreacion = SessionFixed.IdUsuario,
+                        Cuerpo = (info_catalogo == null ? "" : info_catalogo.NomCatalogo),
+                        FechaCreacion = DateTime.Now
+                    };
+                    bus_cola_correo.GuardarDB(info_correo);
                 }
                 else
                 {

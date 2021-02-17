@@ -148,7 +148,7 @@ namespace Core.Data.Academico
                     command.CommandText = "SELECT f.IdEmpresa, f.IdAlumno, f.IdCatalogoPAREN, c.NomCatalogo, f.IdPersona, p.pe_Naturaleza, p.IdTipoDocumento, p.pe_cedulaRuc, p.pe_apellido, p.pe_nombre, p.pe_nombreCompleto, f.Direccion, f.Celular, f.Correo, f.SeFactura, p.pe_sexo, "
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
                     + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo,f.AnioVehiculo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
-                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono, p.IdReligion "
+                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
                     + " FROM dbo.tb_persona AS p INNER JOIN "
                     + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
                     + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
@@ -290,7 +290,7 @@ namespace Core.Data.Academico
                     command.CommandText = "SELECT f.IdEmpresa, f.IdAlumno, f.IdCatalogoPAREN, c.NomCatalogo, f.IdPersona, p.pe_Naturaleza, p.IdTipoDocumento, p.pe_cedulaRuc, p.pe_apellido, p.pe_nombre, p.pe_nombreCompleto, f.Direccion, f.Celular, f.Correo, f.SeFactura, p.pe_sexo, "
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
                     + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
-                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono, p.IdReligion "
+                    + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
                     + " FROM dbo.tb_persona AS p INNER JOIN "
                     + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
                     + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
@@ -500,8 +500,9 @@ namespace Core.Data.Academico
                             IdProvincia = string.IsNullOrEmpty(reader["IdProvincia"].ToString()) ? null : reader["IdProvincia"].ToString(),
                             Cod_Region = string.IsNullOrEmpty(reader["Cod_Region"].ToString()) ? null : reader["Cod_Region"].ToString(),
                             IdParroquia = string.IsNullOrEmpty(reader["IdParroquia"].ToString()) ? null : reader["IdParroquia"].ToString(),
-                            Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(), 
-                             
+                            Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(),
+                            IdProfesion = string.IsNullOrEmpty(reader["IdProfesion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion"]),
+                            IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
                             Estado = Convert.ToBoolean(reader["Estado"])
                         };
                     }

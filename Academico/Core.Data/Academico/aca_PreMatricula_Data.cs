@@ -1,5 +1,7 @@
 ﻿using Core.Data.Base;
+using Core.Data.General;
 using Core.Info.Academico;
+using Core.Info.General;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,9 @@ namespace Core.Data.Academico
     public class aca_PreMatricula_Data
     {
         aca_AlumnoDocumento_Data odata_AlumnoDocumento = new aca_AlumnoDocumento_Data();
-        
+        tb_ColaCorreo_Data odata_correo = new tb_ColaCorreo_Data();
+        aca_Catalogo_Data odata_catalogo = new aca_Catalogo_Data();
+
         public decimal getId(int IdEmpresa)
         {
             try
@@ -176,6 +180,20 @@ namespace Core.Data.Academico
                     Entity_Admision.IdUsuarioModificacion = info.IdUsuarioCreacion;
                     Entity_Admision.FechaModificacion = info.FechaModificacion = DateTime.Now;
 
+                    var info_catalogo = odata_catalogo.getInfo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.PREMATRICULADO));
+                    var info_correo = new tb_ColaCorreo_Info
+                    {
+                        IdEmpresa = info.IdEmpresa,
+                        Destinatarios = info.info_alumno.info_persona_padre.pe_correo + ";" + info.info_alumno.info_persona_madre.pe_correo + ";" + info.info_alumno.info_persona_representante.pe_correo,
+                        Asunto = "ASPIRANTE PREMATRICULADO",
+                        Parametros = "",
+                        Codigo = "",
+                        IdUsuarioCreacion = info.IdUsuarioCreacion,
+                        Cuerpo = (info_catalogo == null ? "" : info_catalogo.NomCatalogo),
+                        FechaCreacion = DateTime.Now
+                    };
+                    odata_correo.GuardarDB(info_correo);
+
                     Context.SaveChanges();
                 }
                 return true;
@@ -333,6 +351,20 @@ namespace Core.Data.Academico
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
                     Entity.IdCatalogoESTPREMAT = info.IdCatalogoESTPREMAT;
+
+                    //var info_catalogo = odata_catalogo.getInfo(Convert.ToInt32(info.IdCatalogoESTPREMAT));
+                    //var info_correo = new tb_ColaCorreo_Info
+                    //{
+                    //    IdEmpresa = info.IdEmpresa,
+                    //    Destinatarios = info.info_alumno.info_persona_padre.pe_correo + ";" + info.info_alumno.info_persona_madre.pe_correo + ";" + info.info_alumno.info_persona_representante.pe_correo,
+                    //    Asunto = "ASPIRANTE MATRICULADO",
+                    //    Parametros = "",
+                    //    Codigo = "",
+                    //    IdUsuarioCreacion = info.IdUsuarioCreacion,
+                    //    Cuerpo = (info_catalogo == null ? "" : info_catalogo.NomCatalogo),
+                    //    FechaCreacion = DateTime.Now
+                    //};
+                    //odata_correo.GuardarDB(info_correo);
 
                     Context.SaveChanges();
                 }

@@ -27,6 +27,8 @@ namespace Core.Bus.Academico
         fa_Vendedor_Data odata_vendedor = new fa_Vendedor_Data();
         aca_SocioEconomico_Data odata_socioeconomico = new aca_SocioEconomico_Data();
         fa_cliente_x_fa_Vendedor_x_sucursal_Data odata_vendedor_sucursal = new fa_cliente_x_fa_Vendedor_x_sucursal_Data();
+        tb_ColaCorreo_Data odata_correo = new tb_ColaCorreo_Data();
+        aca_Catalogo_Data odata_catalogo = new aca_Catalogo_Data();
 
         public bool GuardarDB(aca_PreMatricula_Info info)
         {
@@ -465,7 +467,7 @@ namespace Core.Bus.Academico
                             IdParroquia = info.info_alumno.IdParroquia_representante,
                             Sector = info.info_alumno.Sector_representante,
                             IdUsuarioCreacion = info.IdUsuarioCreacion,
-                            FechaCreacion = info.FechaCreacion = DateTime.Now
+                            FechaCreacion = info.FechaCreacion = DateTime.Now,
                         };
 
                         var info_otro_familia = odata_fam.getInfo_ExistePersonaParentezco(info_fam_otro_familiar.IdEmpresa, info_fam_otro_familiar.IdAlumno, info_fam_otro_familiar.IdPersona, info.IdCatalogoPAREN_OtroFamiliar);

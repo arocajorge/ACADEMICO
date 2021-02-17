@@ -246,6 +246,12 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_Rubro_aca_MecanismoDePago" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_Rubro_aca_Plantilla" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_Rubro_aca_Rubro" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_PreMatricula" Width="1.5" PointX="47.125" PointY="22" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Alumno" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_MecanismoDePago" />
+        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Plantilla" />
+        <EntityTypeShape EntityType="ModelAcademico.aca_parametro" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="ModelAcademico.aca_Admision" Width="1.5" PointX="44.875" PointY="5.25" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_AnioLectivo" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Catalogo" />
@@ -267,13 +273,7 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Jornada" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Sede" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_PreMatricula" Width="1.5" PointX="47.125" PointY="22" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Admision" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Alumno" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_AnioLectivo_Curso_Paralelo" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_MecanismoDePago" />
-        <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Plantilla" />
-        <EntityTypeShape EntityType="ModelAcademico.aca_parametro" Width="1.5" PointX="0.75" PointY="7.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

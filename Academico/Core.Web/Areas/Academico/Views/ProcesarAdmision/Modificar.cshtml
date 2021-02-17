@@ -119,6 +119,10 @@
     @Html.HiddenFor(q => q.IdCatalogoPAREN_Madre, new { @id = "IdCatalogoPAREN_Madre" })
     @Html.HiddenFor(q => q.IdCatalogoPAREN_Representante, new { @id = "IdCatalogoPAREN_Representante" })
 
+    @Html.HiddenFor(q => q.IdGrupoEtnico_Madre, new { @id = "IdGrupoEtnico_Madre" })
+    @Html.HiddenFor(q => q.IdGrupoEtnico_Padre, new { @id = "IdGrupoEtnico_Padre" })
+    @Html.HiddenFor(q => q.IdGrupoEtnico_Representante, new { @id = "IdGrupoEtnico_Representante" })
+
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -312,7 +316,7 @@
                                 <label for="IdEmpresa">Religión</label>
                                 @Html.DevExpress().ComboBoxFor(q => q.IdReligion_Aspirante, settings =>
                                {
-                                   settings.Name = "IdReligion";
+                                   settings.Name = "IdReligion_Aspirante";
                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
                                    settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
@@ -2888,7 +2892,7 @@
             $("#Celular_Padre").val("");
             $("#Direccion_Padre").val("");
             $("#Telefono_Padre").val("");
-            $("#CodCatalogoSangre_Aspirante_Padre").val("");
+            //$("#CodCatalogoSangre_Aspirante_Padre").val("");
             $("#CodCatalogoCONADIS_Padre").val("");
             $("#NumeroCarnetConadis_Padre").val("");
             $("#PorcentajeDiscapacidad_Padre").val("");
@@ -2930,7 +2934,7 @@
             $("#Celular_Madre").val("");
             $("#Direccion_Madre").val("");
             $("#Telefono_Madre").val("");
-            $("#CodCatalogoSangre_Aspirante_Madre").val("");
+            //$("#CodCatalogoSangre_Aspirante_Madre").val("");
             $("#CodCatalogoCONADIS_Madre").val("");
             $("#NumeroCarnetConadis_Madre").val("");
             $("#PorcentajeDiscapacidad_Madre").val("");
@@ -2972,7 +2976,7 @@
             $("#Celular_Representante").val("");
             $("#Direccion_Representante").val("");
             $("#Telefono_Representante").val("");
-            $("#CodCatalogoSangre_Aspirante_Representante").val("");
+            //$("#CodCatalogoSangre_Aspirante_Representante").val("");
             $("#CodCatalogoCONADIS_Representante").val("");
             $("#NumeroCarnetConadis_Representante").val("");
             $("#PorcentajeDiscapacidad_Representante").val("");
