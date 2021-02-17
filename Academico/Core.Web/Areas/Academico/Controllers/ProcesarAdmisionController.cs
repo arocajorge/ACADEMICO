@@ -1950,7 +1950,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     var info_correo = new tb_ColaCorreo_Info
                     {
                         IdEmpresa = info_admision.IdEmpresa,
-                        Destinatarios = info_admision.Correo_Padre + ";" + info_admision.Correo_Madre + ";" + info_admision.Correo_Representante;
+                        Destinatarios = info_admision.Correo_Padre + ";" + info_admision.Correo_Madre + ";" + info_admision.Correo_Representante,
                         Asunto = "PROCESO DE ADMISION EN REVISION",
                         Parametros = "",
                         Codigo = "",
