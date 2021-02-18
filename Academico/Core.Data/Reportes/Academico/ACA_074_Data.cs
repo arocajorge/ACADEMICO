@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_073_Data
+    public class ACA_074_Data
     {
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
-        public List<ACA_073_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostrarRetirados)
+        public List<ACA_074_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostrarRetirados)
         {
             try
             {
@@ -30,10 +30,9 @@ namespace Core.Data.Reportes.Academico
                 int IdParaleloIni = IdParalelo;
                 int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
 
-                List<ACA_073_Info> Lista = new List<ACA_073_Info>();
-                List<ACA_073_Info> ListaParticipacionAprobacion = new List<ACA_073_Info>();
-                List<ACA_073_Info> ListaParticipacion = new List<ACA_073_Info>();
-                List<ACA_073_Info> ListaFinal = new List<ACA_073_Info>();
+                List<ACA_074_Info> Lista = new List<ACA_074_Info>();
+                List<ACA_074_Info> ListaPromedioPorNivel = new List<ACA_074_Info>();
+                List<ACA_074_Info> ListaFinal = new List<ACA_074_Info>();
 
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
@@ -64,7 +63,7 @@ namespace Core.Data.Reportes.Academico
                     + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
                     + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
                     + " and m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
-                    + " and h.IdCurso in (10,11,12,13,14,15) "
+                    + " and h.IdCurso in (4,5,6,7,8,9,10,11,12,13,14) "
                     + " and isnull(r.IdMatricula,0) = case when @MostrarRetirados = 1 then isnull(r.IdMatricula,0) else 0 end ";
                     #endregion
 
@@ -73,7 +72,7 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_073_Info
+                        Lista.Add(new ACA_074_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
@@ -107,8 +106,8 @@ namespace Core.Data.Reportes.Academico
                     }
                     reader.Close();
                 }
-
-                Lista.ForEach(q=> { q.CalificacionNull = (q.Promedio == null ? 1 : 0); q.PromedioString = Convert.ToString(q.Promedio); });
+                Lista.OrderBy(q=>q.pe_nombreCompleto);
+                Lista.ForEach(q=>q.CalificacionNull = (q.Promedio==null ? 1 : 0));
 
                 var ListaPromedioNivel = Lista.GroupBy(q => new
                 {
@@ -135,8 +134,10 @@ namespace Core.Data.Reportes.Academico
                     q.OrdenCurso,
                     q.OrdenParalelo,
                     q.NivelCal,
-                    q.OrdenNivelCal
-                }).Select(q => new ACA_073_Info
+                    q.OrdenNivelCal,
+                    q.CursoCal,
+                    q.OrdenCursoCal
+                }).Select(q => new ACA_074_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdAlumno = q.Key.IdAlumno,
@@ -161,18 +162,21 @@ namespace Core.Data.Reportes.Academico
                     OrdenParalelo = q.Key.OrdenParalelo,
                     NivelCal = q.Key.NivelCal,
                     OrdenNivelCal = q.Key.OrdenNivelCal,
+                    CursoCal = q.Key.CursoCal,
+                    OrdenCursoCal = q.Key.OrdenCursoCal,
                     CalificacionNull = q.Sum(g => g.CalificacionNull),
                     SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Promedio)),
                     PromedioCalculado = q.Max(g => g.Promedio) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Promedio)) / q.Count(g => !string.IsNullOrEmpty(g.Promedio.ToString()))
                 }).ToList();
 
                 ListaPromedioNivel.ForEach(q => { q.PromedioCalculado = (q.CalificacionNull == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.CalificacionNull == 0 ? q.SumaGeneral : (decimal?)null); });
-                ListaPromedioNivel.ForEach(q=>q.PromedioString = Convert.ToString(q.PromedioString));
 
-                var lst_Promedio= new List<ACA_073_Info>();
+                var lst_Promedio= new List<ACA_074_Info>();
+                var lst_Observacion = new List<ACA_074_Info>();
+
                 foreach (var item in ListaPromedioNivel)
                 {
-                    lst_Promedio.Add(new ACA_073_Info
+                    lst_Promedio.Add(new ACA_074_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
@@ -197,217 +201,50 @@ namespace Core.Data.Reportes.Academico
                         OrdenCurso = item.OrdenCurso,
                         OrdenParalelo = item.OrdenParalelo,
                         Promedio = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
-                        PromedioString = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
                         AnioCal = "",
-                        NivelCal = item.NivelCal,
-                        OrdenNivelCal = item.OrdenNivelCal,
-                        CursoCal = "PROMEDIO",
-                        OrdenCursoCal = 999,
+                        //NivelCal = item.NivelCal,
+                        //OrdenNivelCal = item.OrdenNivelCal,
+                        NivelCal = "PROMEDIO",
+                        OrdenNivelCal = 9999,
+                    });
+
+                    lst_Observacion.Add(new ACA_074_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        IdAlumno = item.IdAlumno,
+                        pe_nombreCompleto = item.pe_nombreCompleto,
+                        pe_cedulaRuc = item.pe_cedulaRuc,
+                        Codigo = item.Codigo,
+                        IdAnio = item.IdAnio,
+                        IdSede = item.IdSede,
+                        IdJornada = item.IdJornada,
+                        IdCurso = item.IdCurso,
+                        IdParalelo = item.IdParalelo,
+                        IdNivel = item.IdNivel,
+                        Descripcion = item.Descripcion,
+                        NomSede = item.NomSede,
+                        NomNivel = item.NomNivel,
+                        NomJornada = item.NomJornada,
+                        NomCurso = item.NomCurso,
+                        NomParalelo = item.NomParalelo,
+                        OrdenNivel = item.OrdenNivel,
+                        OrdenJornada = item.OrdenJornada,
+                        OrdenCurso = item.OrdenCurso,
+                        OrdenParalelo = item.OrdenParalelo,
+                        Promedio = null,
+                        AnioCal = null,
+                        NivelCal = "OBSERVACION",
+                        OrdenNivelCal = 999999,
                     });
                 }
 
                 Lista.AddRange(lst_Promedio);
-
-                #region Participacion Estudiantil
-                var ListaAlumos = Lista.GroupBy(q => new
-                {
-                    q.IdEmpresa,
-                    q.IdAlumno,
-                    q.pe_cedulaRuc,
-                    q.pe_nombreCompleto,
-                    q.Codigo,
-                    q.IdAnio,
-                    q.IdSede,
-                    q.IdJornada,
-                    q.IdCurso,
-                    q.IdParalelo,
-                    q.IdNivel,
-                    q.Descripcion,
-                    q.NomSede,
-                    q.NomNivel,
-                    q.NomJornada,
-                    q.NomCurso,
-                    q.NomParalelo,
-                    q.OrdenNivel,
-                    q.OrdenJornada,
-                    q.OrdenCurso,
-                    q.OrdenParalelo
-                }).Select(q => new ACA_073_Info
-                {
-                    IdEmpresa = q.Key.IdEmpresa,
-                    IdAlumno = q.Key.IdAlumno,
-                    pe_cedulaRuc = q.Key.pe_cedulaRuc,
-                    pe_nombreCompleto = q.Key.pe_nombreCompleto,
-                    Codigo = q.Key.Codigo,
-                    IdAnio = q.Key.IdAnio,
-                    IdSede = q.Key.IdSede,
-                    IdJornada = q.Key.IdJornada,
-                    IdCurso = q.Key.IdCurso,
-                    IdParalelo = q.Key.IdParalelo,
-                    IdNivel = q.Key.IdNivel,
-                    Descripcion = q.Key.Descripcion,
-                    NomSede = q.Key.NomSede,
-                    NomNivel = q.Key.NomNivel,
-                    NomJornada = q.Key.NomJornada,
-                    NomCurso = q.Key.NomCurso,
-                    NomParalelo = q.Key.NomParalelo,
-                    OrdenNivel = q.Key.OrdenNivel,
-                    OrdenJornada = q.Key.OrdenJornada,
-                    OrdenCurso = q.Key.OrdenCurso,
-                    OrdenParalelo = q.Key.OrdenParalelo,
-                }).ToList();
-
-                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
-                {
-                    connection.Open();
-                    var info_participacion = new ACA_073_Info();
-                    var info_participacion_aprobacion = new ACA_073_Info();
-
-                    foreach (var item in ListaAlumos)
-                    {
-                        #region Query
-                        string query = "select a.IdEmpresa, a.IdAlumno, t.NombreTematica, count(*) NumCalificaciones, count(*) *100 NumHoras "
-                        + " from aca_MatriculaCalificacionParticipacion as a "
-                        + " left join aca_Tematica t on t.IdEmpresa = a.IdEmpresa and t.IdTematica = a.IdTematica and t.IdCampoAccion = a.IdCampoAccion "
-                        + " where a.IdEmpresa = " + item.IdEmpresa.ToString() + " and a.IdAlumno = " + item.IdAlumno.ToString() + " and PromedioFinal is not null "
-                        + " group by a.IdEmpresa, a.IdAlumno, t.NombreTematica ";
-                        #endregion
-
-                        SqlCommand command = new SqlCommand(query, connection);
-                        SqlDataReader reader = command.ExecuteReader();
-
-                        if (reader.HasRows==false)
-                        {
-                            info_participacion_aprobacion = new ACA_073_Info
-                            {
-                                IdEmpresa = item.IdEmpresa,
-                                IdAlumno = item.IdAlumno,
-                                pe_cedulaRuc = item.pe_cedulaRuc,
-                                pe_nombreCompleto = item.pe_nombreCompleto,
-                                IdAnio = item.IdAnio,
-                                IdSede = item.IdSede,
-                                IdNivel = item.IdNivel,
-                                IdJornada = item.IdJornada,
-                                IdCurso = item.IdCurso,
-                                IdParalelo = item.IdParalelo,
-                                Descripcion = item.Descripcion,
-                                NomSede = item.NomSede,
-                                NomNivel = item.NomNivel,
-                                NomJornada = item.NomJornada,
-                                NomCurso = item.NomCurso,
-                                NomParalelo = item.NomParalelo,
-                                OrdenNivel = item.OrdenNivel,
-                                OrdenJornada = item.OrdenJornada,
-                                OrdenCurso = item.OrdenCurso,
-                                OrdenParalelo = item.OrdenParalelo,
-                                Promedio = (decimal?)null,
-                                PromedioString = null,
-                                NivelCal = "APROBACION DE PPE",
-                                OrdenNivelCal = 99999
-                            };
-
-                            info_participacion = new ACA_073_Info
-                            {
-                                IdEmpresa = item.IdEmpresa,
-                                IdAlumno = item.IdAlumno,
-                                pe_cedulaRuc = item.pe_cedulaRuc,
-                                pe_nombreCompleto = item.pe_nombreCompleto,
-                                IdAnio = item.IdAnio,
-                                IdSede = item.IdSede,
-                                IdNivel = item.IdNivel,
-                                IdJornada = item.IdJornada,
-                                IdCurso = item.IdCurso,
-                                IdParalelo = item.IdParalelo,
-                                Descripcion = item.Descripcion,
-                                NomSede = item.NomSede,
-                                NomNivel = item.NomNivel,
-                                NomJornada = item.NomJornada,
-                                NomCurso = item.NomCurso,
-                                NomParalelo = item.NomParalelo,
-                                OrdenNivel = item.OrdenNivel,
-                                OrdenJornada = item.OrdenJornada,
-                                OrdenCurso = item.OrdenCurso,
-                                OrdenParalelo = item.OrdenParalelo,
-                                Promedio = (decimal?)null,
-                                PromedioString = null,
-                                NivelCal = "PARTICIPACION ESTUDIANTIL",
-                                OrdenNivelCal = 999999
-                            };
-
-                            ListaParticipacion.Add(info_participacion_aprobacion);
-                            ListaParticipacion.Add(info_participacion);
-                        }
-
-                        while (reader.Read())
-                        {
-                            info_participacion_aprobacion = new ACA_073_Info
-                            {
-                                IdEmpresa = item.IdEmpresa,
-                                IdAlumno = item.IdAlumno,
-                                pe_cedulaRuc = item.pe_cedulaRuc,
-                                pe_nombreCompleto = item.pe_nombreCompleto,
-                                IdAnio = item.IdAnio,
-                                IdSede = item.IdSede,
-                                IdNivel = item.IdNivel,
-                                IdJornada = item.IdJornada,
-                                IdCurso = item.IdCurso,
-                                IdParalelo = item.IdParalelo,
-                                Descripcion = item.Descripcion,
-                                NomSede = item.NomSede,
-                                NomNivel = item.NomNivel,
-                                NomJornada = item.NomJornada,
-                                NomCurso = item.NomCurso,
-                                NomParalelo = item.NomParalelo,
-                                OrdenNivel = item.OrdenNivel,
-                                OrdenJornada = item.OrdenJornada,
-                                OrdenCurso = item.OrdenCurso,
-                                OrdenParalelo = item.OrdenParalelo,
-                                Promedio = Convert.ToDecimal(reader["NumHoras"]),
-                                PromedioString = (Convert.ToDecimal(reader["NumHoras"])==200 ? "APROBADO" : "REPROBADO"),
-                                NivelCal = "APROBACION DE PPE",
-                                OrdenNivelCal = 99999
-                            };
-
-                            info_participacion = new ACA_073_Info
-                            {
-                                IdEmpresa = item.IdEmpresa,
-                                IdAlumno = item.IdAlumno,
-                                pe_cedulaRuc = item.pe_cedulaRuc,
-                                pe_nombreCompleto = item.pe_nombreCompleto,
-                                IdAnio = item.IdAnio,
-                                IdSede = item.IdSede,
-                                IdNivel = item.IdNivel,
-                                IdJornada = item.IdJornada,
-                                IdCurso = item.IdCurso,
-                                IdParalelo = item.IdParalelo,
-                                Descripcion = item.Descripcion,
-                                NomSede = item.NomSede,
-                                NomNivel = item.NomNivel,
-                                NomJornada = item.NomJornada,
-                                NomCurso = item.NomCurso,
-                                NomParalelo = item.NomParalelo,
-                                OrdenNivel = item.OrdenNivel,
-                                OrdenJornada = item.OrdenJornada,
-                                OrdenCurso = item.OrdenCurso,
-                                OrdenParalelo = item.OrdenParalelo,
-                                Promedio = (decimal?)null,
-                                PromedioString = reader["NombreTematica"].ToString(),
-                                NivelCal = "PARTICIPACION ESTUDIANTIL",
-                                OrdenNivelCal = 999999
-                            };
-
-                            ListaParticipacion.Add(info_participacion_aprobacion);
-                            ListaParticipacion.Add(info_participacion);
-                        }
-
-                        reader.Close();
-                    }
-                    Lista.AddRange(ListaParticipacion);
-                }
-                #endregion
+                Lista.AddRange(lst_Observacion);
+                Lista.ForEach(q => q.CalificacionNull = (q.Promedio == null ? 1 : 0));
 
                 #region Secuencial
-                var lstAlumnos = Lista.GroupBy(q => new { q.IdAlumno, q.pe_nombreCompleto }).Select(q => new ACA_073_Info
+                var lstAlumnos = Lista.GroupBy(q => new { q.IdAlumno, q.pe_nombreCompleto }).Select(q => new ACA_074_Info
                 {
                     IdAlumno = q.Key.IdAlumno,
                     pe_nombreCompleto = q.Key.pe_nombreCompleto,
@@ -422,7 +259,7 @@ namespace Core.Data.Reportes.Academico
                 ListaFinal = (from a in Lista
                               join b in lstAlumnos
                               on a.IdAlumno equals b.IdAlumno
-                              select new ACA_073_Info
+                              select new ACA_074_Info
                               {
                                   IdEmpresa = a.IdEmpresa,
                                   IdAnio = a.IdAnio,
@@ -451,8 +288,7 @@ namespace Core.Data.Reportes.Academico
                                   NomParalelo = a.NomParalelo,
                                   OrdenParalelo = a.OrdenParalelo,
                                   Promedio = a.Promedio,
-                                  PromedioString = a.PromedioString,
-                                  Codigo = a.Codigo,
+                                  Codigo = a.Codigo, 
                                   PromedioCalculado = a.PromedioCalculado,
                                   PromedioFinalCalculado = a.PromedioFinalCalculado,
                                   SumaGeneral = a.SumaGeneral,

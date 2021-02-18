@@ -402,6 +402,12 @@
     <Compile Include="Reportes\Academico\ACA_034_General_Rpt.Designer.cs">
       <DependentUpon>ACA_034_General_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_074_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_074_Rpt.Designer.cs">
+      <DependentUpon>ACA_074_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_073_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9774,6 +9780,7 @@
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_DocumentosAdmision.cshtml" />
     <Content Include="Areas\Banco\Views\ActualizarArchivo\Importar.cshtml" />
     <Content Include="Areas\Banco\Views\ActualizarArchivo\_GridViewPartial_Importacion.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_074.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9879,6 +9886,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_034_General_Rpt.resx">
       <DependentUpon>ACA_034_General_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_074_Rpt.resx">
+      <DependentUpon>ACA_074_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_073_Rpt.resx">
       <DependentUpon>ACA_073_Rpt.cs</DependentUpon>
