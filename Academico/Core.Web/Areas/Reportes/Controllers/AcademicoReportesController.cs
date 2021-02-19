@@ -472,7 +472,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdNivel = 0;
             model.IdCurso = 0;
             model.IdParalelo = 0;
-            model.mostrarAnulados = true;
+            model.mostrarAnulados = false;
             ACA_006_Rpt report = new ACA_006_Rpt();
 
             report.p_IdEmpresa.Value = model.IdEmpresa;
