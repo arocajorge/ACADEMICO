@@ -3898,7 +3898,7 @@
             this.xrTableCell202.StylePriority.UsePadding = false;
             this.xrTableCell202.StylePriority.UseTextAlignment = false;
             this.xrTableCell202.Text = resources.GetString("xrTableCell202.Text");
-            this.xrTableCell202.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            this.xrTableCell202.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleJustify;
             this.xrTableCell202.Weight = 7.9948736781336D;
             // 
             // xrTableRow68
@@ -3951,7 +3951,7 @@
             this.lbl_representante.StylePriority.UsePadding = false;
             this.lbl_representante.StylePriority.UseTextAlignment = false;
             this.lbl_representante.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_representante.Weight = 3.997436477466D;
+            this.lbl_representante.Weight = 5.6888755215531717D;
             // 
             // xrTableCell213
             // 
@@ -3963,7 +3963,7 @@
             this.xrTableCell213.StylePriority.UsePadding = false;
             this.xrTableCell213.StylePriority.UseTextAlignment = false;
             this.xrTableCell213.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell213.Weight = 1.86050918461567D;
+            this.xrTableCell213.Weight = 0.16907014052849867D;
             // 
             // xrTableCell214
             // 
@@ -4003,7 +4003,7 @@
             this.lbl_ci_representante.StylePriority.UsePadding = false;
             this.lbl_ci_representante.StylePriority.UseTextAlignment = false;
             this.lbl_ci_representante.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lbl_ci_representante.Weight = 3.9974368390668D;
+            this.lbl_ci_representante.Weight = 5.6888755390295369D;
             // 
             // xrTableCell217
             // 
@@ -4015,7 +4015,7 @@
             this.xrTableCell217.StylePriority.UsePadding = false;
             this.xrTableCell217.StylePriority.UseTextAlignment = false;
             this.xrTableCell217.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell217.Weight = 1.86050916711886D;
+            this.xrTableCell217.Weight = 0.16907046715612339D;
             // 
             // xrTableCell218
             // 
@@ -4053,7 +4053,7 @@
             this.xrTableCell219.StylePriority.UseTextAlignment = false;
             this.xrTableCell219.Text = "REPRESENTANTE";
             this.xrTableCell219.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell219.Weight = 3.9974368390668D;
+            this.xrTableCell219.Weight = 5.6888755390295369D;
             // 
             // xrTableCell221
             // 
@@ -4065,7 +4065,7 @@
             this.xrTableCell221.StylePriority.UsePadding = false;
             this.xrTableCell221.StylePriority.UseTextAlignment = false;
             this.xrTableCell221.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell221.Weight = 1.86050916711886D;
+            this.xrTableCell221.Weight = 0.16907046715612339D;
             // 
             // xrTableCell222
             // 
@@ -4102,7 +4102,7 @@
             this.xrTableCell189.StylePriority.UsePadding = false;
             this.xrTableCell189.StylePriority.UseTextAlignment = false;
             this.xrTableCell189.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell189.Weight = 3.9974368390668D;
+            this.xrTableCell189.Weight = 5.6888755390295369D;
             // 
             // xrTableCell190
             // 
@@ -4114,7 +4114,7 @@
             this.xrTableCell190.StylePriority.UsePadding = false;
             this.xrTableCell190.StylePriority.UseTextAlignment = false;
             this.xrTableCell190.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell190.Weight = 1.86050916711886D;
+            this.xrTableCell190.Weight = 0.16907046715612339D;
             // 
             // xrTableCell191
             // 
@@ -4152,7 +4152,7 @@
             this.xrTableCell192.StylePriority.UseTextAlignment = false;
             this.xrTableCell192.Text = "Adjuntar:";
             this.xrTableCell192.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell192.Weight = 3.9974368390668D;
+            this.xrTableCell192.Weight = 5.6888755390295369D;
             // 
             // xrTableCell193
             // 
@@ -4165,7 +4165,7 @@
             this.xrTableCell193.StylePriority.UseTextAlignment = false;
             this.xrTableCell193.Text = "\r\n";
             this.xrTableCell193.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell193.Weight = 1.86050916711886D;
+            this.xrTableCell193.Weight = 0.16907046715612339D;
             // 
             // xrTableCell194
             // 

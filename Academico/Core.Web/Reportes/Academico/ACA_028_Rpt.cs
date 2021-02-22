@@ -14,6 +14,7 @@ namespace Core.Web.Reportes.Academico
     public partial class ACA_028_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
+        aca_Sede_Bus bus_sede = new aca_Sede_Bus();
         public string usuario { get; set; }
         public string empresa { get; set; }
         public ACA_028_Rpt()
@@ -40,6 +41,12 @@ namespace Core.Web.Reportes.Academico
             if (quimestre != null)
             {
                 lbl_Quimestre.Text = quimestre.NomCatalogoTipo;
+            }
+
+            var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
+            if (sede != null)
+            {
+                Secretaria.Text = sede.NombreSecretaria;
             }
 
             var emp = bus_empresa.get_info(IdEmpresa);
