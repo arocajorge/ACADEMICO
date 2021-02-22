@@ -9781,6 +9781,7 @@
     <Content Include="Areas\Banco\Views\ActualizarArchivo\Importar.cshtml" />
     <Content Include="Areas\Banco\Views\ActualizarArchivo\_GridViewPartial_Importacion.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_074.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_075.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

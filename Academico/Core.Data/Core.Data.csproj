@@ -2042,6 +2042,7 @@
     <Compile Include="Reportes\Academico\ACA_049_General_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_049_General_Detalle_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_049_General_Promedio_Data.cs" />
+    <Compile Include="Reportes\Academico\ACA_075_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_074_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_073_Data.cs" />
     <Compile Include="Reportes\Academico\ACA_071_Data.cs" />

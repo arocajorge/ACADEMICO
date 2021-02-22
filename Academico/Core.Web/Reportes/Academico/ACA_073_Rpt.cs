@@ -65,7 +65,7 @@ namespace Core.Web.Reportes.Academico
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, MostrarRetirados);
             Fecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             this.DataSource = lst_rpt;
-            xrCrossTab1.DataSource = lst_rpt;
+            xrCrossTab2.DataSource = lst_rpt;
         }
 
         private void xrTable2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)

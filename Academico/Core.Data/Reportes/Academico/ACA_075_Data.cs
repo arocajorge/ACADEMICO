@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Core.Data.Reportes.Academico
 {
-    public class ACA_073_Data
+    public class ACA_075_Data
     {
         aca_AnioLectivo_Data odata_anio = new aca_AnioLectivo_Data();
-        public List<ACA_073_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostrarRetirados)
+        public List<ACA_075_Info> get_list(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, bool MostrarRetirados)
         {
             try
             {
@@ -30,10 +30,10 @@ namespace Core.Data.Reportes.Academico
                 int IdParaleloIni = IdParalelo;
                 int IdParaleloFin = IdParalelo == 0 ? 9999999 : IdParalelo;
 
-                List<ACA_073_Info> Lista = new List<ACA_073_Info>();
-                List<ACA_073_Info> ListaParticipacionAprobacion = new List<ACA_073_Info>();
-                List<ACA_073_Info> ListaParticipacion = new List<ACA_073_Info>();
-                List<ACA_073_Info> ListaFinal = new List<ACA_073_Info>();
+                List<ACA_075_Info> Lista = new List<ACA_075_Info>();
+                List<ACA_075_Info> ListaParticipacionAprobacion = new List<ACA_075_Info>();
+                List<ACA_075_Info> ListaParticipacion = new List<ACA_075_Info>();
+                List<ACA_075_Info> ListaFinal = new List<ACA_075_Info>();
 
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
@@ -73,7 +73,7 @@ namespace Core.Data.Reportes.Academico
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        Lista.Add(new ACA_073_Info
+                        Lista.Add(new ACA_075_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
@@ -136,7 +136,7 @@ namespace Core.Data.Reportes.Academico
                     q.OrdenParalelo,
                     q.NivelCal,
                     q.OrdenNivelCal
-                }).Select(q => new ACA_073_Info
+                }).Select(q => new ACA_075_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdAlumno = q.Key.IdAlumno,
@@ -169,10 +169,10 @@ namespace Core.Data.Reportes.Academico
                 ListaPromedioNivel.ForEach(q => { q.PromedioCalculado = (q.CalificacionNull == 0 ? q.PromedioCalculado : (decimal?)null); q.SumaGeneral = (q.CalificacionNull == 0 ? q.SumaGeneral : (decimal?)null); });
                 ListaPromedioNivel.ForEach(q=>q.PromedioString = Convert.ToString(q.PromedioString));
 
-                var lst_Promedio= new List<ACA_073_Info>();
+                var lst_Promedio= new List<ACA_075_Info>();
                 foreach (var item in ListaPromedioNivel)
                 {
-                    lst_Promedio.Add(new ACA_073_Info
+                    lst_Promedio.Add(new ACA_075_Info
                     {
                         IdEmpresa = item.IdEmpresa,
                         IdMatricula = item.IdMatricula,
@@ -232,7 +232,7 @@ namespace Core.Data.Reportes.Academico
                     q.OrdenJornada,
                     q.OrdenCurso,
                     q.OrdenParalelo
-                }).Select(q => new ACA_073_Info
+                }).Select(q => new ACA_075_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
                     IdAlumno = q.Key.IdAlumno,
@@ -260,8 +260,8 @@ namespace Core.Data.Reportes.Academico
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
-                    var info_participacion = new ACA_073_Info();
-                    var info_participacion_aprobacion = new ACA_073_Info();
+                    var info_participacion = new ACA_075_Info();
+                    var info_participacion_aprobacion = new ACA_075_Info();
 
                     foreach (var item in ListaAlumos)
                     {
@@ -278,7 +278,7 @@ namespace Core.Data.Reportes.Academico
 
                         if (reader.HasRows==false)
                         {
-                            info_participacion_aprobacion = new ACA_073_Info
+                            info_participacion_aprobacion = new ACA_075_Info
                             {
                                 IdEmpresa = item.IdEmpresa,
                                 IdAlumno = item.IdAlumno,
@@ -306,7 +306,7 @@ namespace Core.Data.Reportes.Academico
                                 OrdenNivelCal = 99999
                             };
 
-                            info_participacion = new ACA_073_Info
+                            info_participacion = new ACA_075_Info
                             {
                                 IdEmpresa = item.IdEmpresa,
                                 IdAlumno = item.IdAlumno,
@@ -340,7 +340,7 @@ namespace Core.Data.Reportes.Academico
 
                         while (reader.Read())
                         {
-                            info_participacion_aprobacion = new ACA_073_Info
+                            info_participacion_aprobacion = new ACA_075_Info
                             {
                                 IdEmpresa = item.IdEmpresa,
                                 IdAlumno = item.IdAlumno,
@@ -368,7 +368,7 @@ namespace Core.Data.Reportes.Academico
                                 OrdenNivelCal = 99999
                             };
 
-                            info_participacion = new ACA_073_Info
+                            info_participacion = new ACA_075_Info
                             {
                                 IdEmpresa = item.IdEmpresa,
                                 IdAlumno = item.IdAlumno,
@@ -407,16 +407,12 @@ namespace Core.Data.Reportes.Academico
                 #endregion
 
                 #region Secuencial
-                var lstAlumnos = Lista.GroupBy(q => new { q.OrdenJornada, q.OrdenNivel, q.OrdenCurso, q.OrdenParalelo, q.IdAlumno, q.pe_nombreCompleto }).Select(q => new ACA_073_Info
+                var lstAlumnos = Lista.GroupBy(q => new { q.IdAlumno, q.pe_nombreCompleto }).Select(q => new ACA_075_Info
                 {
                     IdAlumno = q.Key.IdAlumno,
-                    OrdenJornada = q.Key.OrdenJornada,
-                    OrdenNivel = q.Key.OrdenNivel,
-                    OrdenCurso = q.Key.OrdenCurso,
-                    OrdenParalelo = q.Key.OrdenParalelo,
                     pe_nombreCompleto = q.Key.pe_nombreCompleto,
                     Secuencial = 0
-                }).ToList();
+                }).OrderBy(q => q.pe_nombreCompleto).ToList();
 
                 int Secuencial = 1;
                 foreach (var item in lstAlumnos)
@@ -426,7 +422,7 @@ namespace Core.Data.Reportes.Academico
                 ListaFinal = (from a in Lista
                               join b in lstAlumnos
                               on a.IdAlumno equals b.IdAlumno
-                              select new ACA_073_Info
+                              select new ACA_075_Info
                               {
                                   IdEmpresa = a.IdEmpresa,
                                   IdAnio = a.IdAnio,
@@ -464,8 +460,8 @@ namespace Core.Data.Reportes.Academico
                                   Secuencial = b.Secuencial
                               }).ToList();
                 #endregion
-                //ListaFinal.ForEach(q=>q.NomParalelo=q.IdJornada+"-"+q.IdNivel + "-" +q.IdCurso + "-" +q.IdParalelo);
-                return ListaFinal;
+
+                return ListaFinal.OrderBy(q => q.pe_nombreCompleto).ToList();
             }
             catch (Exception ex)
             {
