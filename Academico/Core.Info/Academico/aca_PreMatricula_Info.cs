@@ -61,6 +61,19 @@ namespace Core.Info.Academico
         public bool ValidaImportacionPreMatricula { get; set; }
         public string IdString { get; set; }
         public decimal IdMatricula { get; set; }
+
+        public string NomSede { get; set; }
+        public string NomNivel { get; set; }
+        public string NomJornada { get; set; }
+        public string NomParalelo { get; set; }
+        public string Descripcion { get; set; }
+        public string NomCurso { get; set; }
+        public int OrdenJornada { get; set; }
+        public int OrdenNivel { get; set; }
+        public int OrdenCurso { get; set; }
+        public int OrdenParalelo { get; set; }
+        public string NomPlantilla { get; set; }
+        public string NomPlantillaTipo { get; set; }
         #endregion
     }
 }

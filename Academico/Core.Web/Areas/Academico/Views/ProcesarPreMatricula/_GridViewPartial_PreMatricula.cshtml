@@ -30,8 +30,13 @@
         settings.SettingsAdaptivity.HideDataCellsAtWindowInnerWidth = 500;
 
         settings.Columns.Add("IdAdmision", "Admisión").Width = System.Web.UI.WebControls.Unit.Percentage(10);
-        settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(20);
-        settings.Columns.Add("pe_nombreCompleto", "Nombres del estudiante").Width = Unit.Percentage(50);
+        settings.Columns.Add("CodigoAlumno", "Código Alumno").Width = System.Web.UI.WebControls.Unit.Percentage(10);
+        //settings.Columns.Add("pe_cedulaRuc", "Cédula/Ruc").Width = Unit.Percentage(20);
+        settings.Columns.Add("pe_nombreCompleto", "Nombres del estudiante").Width = Unit.Percentage(20);
+        settings.Columns.Add("NomJornada", "Jornada").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(10);
+        settings.Columns.Add("NomPlantillaTipo", "Tipo Plantilla").Width = Unit.Percentage(10);
         settings.Columns.Add(column =>
         {
             column.Caption = "";

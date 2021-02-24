@@ -191,6 +191,51 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public List<aca_AnioLectivo_Info> getList_Admision(int IdEmpresa)
+        {
+            try
+            {
+                List<aca_AnioLectivo_Info> Lista = new List<aca_AnioLectivo_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    #region Query
+                    string query = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.BloquearMatricula=0 "
+                    + " and FechaHasta=(select MAX(FechaHasta) FechaMaxima from aca_AnioLectivo)";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"]),
+                        });
+                    }
+                    reader.Close();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Info> getList_update(int IdEmpresa)
         {
             try

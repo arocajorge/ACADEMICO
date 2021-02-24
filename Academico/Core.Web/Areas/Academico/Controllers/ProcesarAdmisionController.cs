@@ -472,9 +472,21 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             aca_Admision_Info model = bus_admision.GetInfo(IdEmpresa, IdAdmision);
-
             if (model == null)
                 return RedirectToAction("Index");
+
+            if (model.CedulaRuc_Representante == model.CedulaRuc_Padre)
+            {
+                model.EsRepresentante_padre = 1;
+            }
+            else if (model.CedulaRuc_Representante == model.CedulaRuc_Madre)
+            {
+                model.EsRepresentante_madre = 1;
+            }
+            else
+            {
+                model.EsRepresentante_otro = 1;
+            }
 
             var info_ExistePersonaAspirante = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Aspirante);
             var info_ExistePersonaPadre = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Padre);
@@ -1602,7 +1614,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0);
             var IdAnio = info_anio == null ? 0 : info_anio.IdAnio;
 
-            var lst_admisiones = bus_admision.GetList_Academico(IdEmpresa,IdSede, IdAnio);
+            var lst_admisiones = bus_admision.GetList_Admisiones(IdEmpresa,IdSede);
             var cantidad = lst_admisiones.Where(q=>q.IdCatalogoESTADM==Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO)).Count();
             return Json(cantidad, JsonRequestBehavior.AllowGet);
     }

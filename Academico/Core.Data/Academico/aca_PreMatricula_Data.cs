@@ -282,16 +282,27 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT pm.IdEmpresa, pm.IdPreMatricula, pm.IdAdmision, pm.Codigo, pm.IdAlumno, pm.IdAnio, pm.IdSede, pm.IdNivel, pm.IdJornada, pm.IdCurso, pm.IdParalelo, pm.IdPersonaF, pm.IdPersonaR, pm.IdPlantilla, pm.IdMecanismo, "
-                    + " pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago, m.IdMatricula "
+                    + " pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago, cp.OrdenParalelo, cp.NomParalelo, "
+                    + " jc.NomCurso, jc.OrdenCurso, nj.NomJornada, nj.OrdenJornada, sn.NomSede, sn.NomNivel, sn.OrdenNivel, al.Descripcion, pla.NomPlantilla, tpla.NomPlantillaTipo "
                     + " FROM     dbo.aca_PreMatricula AS pm LEFT OUTER JOIN "
-                    + " dbo.aca_Matricula AS m ON pm.IdAlumno = m.IdAlumno AND pm.IdParalelo = m.IdParalelo AND pm.IdCurso = m.IdCurso AND pm.IdJornada = m.IdJornada AND pm.IdNivel = m.IdNivel AND pm.IdSede = m.IdSede AND "
-                    + " pm.IdAnio = m.IdAnio AND m.IdEmpresa = pm.IdEmpresa LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON pm.IdEmpresa = sn.IdEmpresa AND pm.IdAnio = sn.IdAnio AND pm.IdSede = sn.IdSede AND pm.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON pm.IdEmpresa = nj.IdEmpresa AND pm.IdAnio = nj.IdAnio AND pm.IdSede = nj.IdSede AND pm.IdNivel = nj.IdNivel AND pm.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON pm.IdEmpresa = jc.IdEmpresa AND pm.IdAnio = jc.IdAnio AND pm.IdSede = jc.IdSede AND pm.IdNivel = jc.IdNivel AND pm.IdJornada = jc.IdJornada AND "
+                    + " pm.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON pm.IdEmpresa = cp.IdEmpresa AND pm.IdAnio = cp.IdAnio AND pm.IdSede = cp.IdSede AND pm.IdNivel = cp.IdNivel AND pm.IdJornada = cp.IdJornada AND pm.IdCurso = cp.IdCurso AND "
+                    + " pm.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
                     + " dbo.aca_Alumno AS a ON pm.IdEmpresa = a.IdEmpresa AND pm.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS al ON al.IdEmpresa = pm.IdEmpresa AND al.IdAnio = pm.IdAnio LEFT OUTER JOIN "
+                    + " dbo.aca_Plantilla AS pla ON pla.IdEmpresa = pm.IdEmpresa AND pla.IdPlantilla = pm.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.aca_PlantillaTipo AS tpla ON tpla.IdEmpresa = pm.IdEmpresa AND tpla.IdTipoPlantilla = pla.IdTipoPlantilla "
                     + " WHERE pm.IdEmpresa = " + IdEmpresa.ToString()
                     + " and pm.IdSede = " + IdSede.ToString()
                     + " and pm.IdAnio = " + IdAnio.ToString()
-                    + " and m.IdMatricula is null";
+                    + " and not exists ( "
+                    + " SELECT IdEmpresa, IdMatricula, IdPreMatricula FROM aca_Matricula m "
+                    + " WHERE m.IdEmpresa = pm.IdEmpresa and m.IdPreMatricula = pm.IdPreMatricula "
+                    + " ) ";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -326,11 +337,23 @@ namespace Core.Data.Academico
                             IdPuntoVta = Convert.ToInt32(reader["IdPuntoVta"]),
                             Valor = Convert.ToDecimal(reader["Valor"]),
                             ValorProntoPago = Convert.ToDecimal(reader["ValorProntoPago"]),
+                            NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
+                            NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
+                            NomJornada = string.IsNullOrEmpty(reader["NomJornada"].ToString()) ? null : reader["NomJornada"].ToString(),
+                            NomParalelo = string.IsNullOrEmpty(reader["NomParalelo"].ToString()) ? null : reader["NomParalelo"].ToString(),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            NomCurso = string.IsNullOrEmpty(reader["NomCurso"].ToString()) ? null : reader["NomCurso"].ToString(),
+                            NomPlantilla = string.IsNullOrEmpty(reader["NomPlantilla"].ToString()) ? null : reader["NomPlantilla"].ToString(),
+                            NomPlantillaTipo = string.IsNullOrEmpty(reader["NomPlantillaTipo"].ToString()) ? null : reader["NomPlantillaTipo"].ToString(),
+                            OrdenJornada = string.IsNullOrEmpty(reader["OrdenJornada"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenJornada"]),
+                            OrdenNivel = string.IsNullOrEmpty(reader["OrdenNivel"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenNivel"]),
+                            OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenCurso"]),
+                            OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenParalelo"]),
                         });
                     }
                     reader.Close();
                 }
-                Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000")+q.IdAdmision.ToString("000000"));
+                Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000")+q.IdAdmision.ToString("000000")+q.CodigoAlumno);
                 return Lista;
             }
             catch (Exception)

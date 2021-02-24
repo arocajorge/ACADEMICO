@@ -394,6 +394,9 @@ namespace Core.Info.Academico
         public HttpPostedFileBase RecordAcademicoAspirante { get; set; }
         public HttpPostedFileBase PagoAlDiaAspirante { get; set; }
         public HttpPostedFileBase CertificadoLaboral { get; set; }
+        public int EsRepresentante_padre { get; set; }
+        public int EsRepresentante_madre { get; set; }
+        public int EsRepresentante_otro { get; set; }
         #endregion
 
         #region PreMatricula

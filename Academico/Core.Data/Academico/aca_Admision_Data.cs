@@ -80,6 +80,70 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public List<aca_Admision_Info> getList_Admisiones(int IdEmpresa, int IdSede)
+        {
+            try
+            {
+                List<aca_Admision_Info> Lista = new List<aca_Admision_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    #region Query
+                    string query = "SELECT a.IdEmpresa, a.IdAdmision, a.IdSede, a.IdAnio, a.IdJornada, a.IdNivel, a.IdCurso, a.CedulaRuc_Aspirante, a.NombreCompleto_Aspirante, a.IdCatalogoESTADM, an.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, "
+                    + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, a.IdCatalogoESTADM, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado, a.IdUsuarioRevision, a.FechaIngreso_Aspirante "
+                    + " FROM     dbo.aca_Admision AS a LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON a.IdEmpresa = nj.IdEmpresa AND a.IdAnio = nj.IdAnio AND a.IdSede = nj.IdSede AND a.IdNivel = nj.IdNivel AND a.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON a.IdEmpresa = sn.IdEmpresa AND a.IdAnio = sn.IdAnio AND a.IdSede = sn.IdSede AND a.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS an ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
+                    + " and a.IdSede = " + IdSede.ToString()
+                    + " and a.IdCatalogoESTADM = "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO);
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Admision_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            CedulaRuc_Aspirante = reader["CedulaRuc_Aspirante"].ToString(),
+                            NombreCompleto_Aspirante = string.IsNullOrEmpty(reader["NombreCompleto_Aspirante"].ToString()) ? null : reader["NombreCompleto_Aspirante"].ToString(),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
+                            NomJornada = string.IsNullOrEmpty(reader["NomJornada"].ToString()) ? null : reader["NomJornada"].ToString(),
+                            NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
+                            NomCurso = string.IsNullOrEmpty(reader["NomCurso"].ToString()) ? null : reader["NomCurso"].ToString(),
+                            OrdenJornada = string.IsNullOrEmpty(reader["OrdenJornada"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenJornada"]),
+                            OrdenNivel = string.IsNullOrEmpty(reader["OrdenNivel"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenNivel"]),
+                            OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenCurso"]),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            EstadoAdmision = string.IsNullOrEmpty(reader["EstadoAdmision"].ToString()) ? null : reader["EstadoAdmision"].ToString(),
+                            IdCatalogoESTADM = Convert.ToInt32(reader["IdCatalogoESTADM"]),
+                            IdUsuarioRevision = string.IsNullOrEmpty(reader["IdUsuarioRevision"].ToString()) ? null : reader["IdUsuarioRevision"].ToString(),
+                            FechaIngreso_Aspirante = Convert.ToDateTime(reader["FechaIngreso_Aspirante"].ToString()),
+                        });
+                    }
+                    reader.Close();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_Admision_Info> getList_Academico(int IdEmpresa, int IdSede, int IdAnio)
         {
             try

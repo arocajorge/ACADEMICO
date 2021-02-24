@@ -33,11 +33,11 @@ namespace Core.Data.Base
         public Nullable<System.DateTime> FechaModificacion { get; set; }
     
         public virtual aca_CampoAccion aca_CampoAccion { get; set; }
-        public virtual aca_Matricula aca_Matricula { get; set; }
-        public virtual aca_Matricula aca_Matricula1 { get; set; }
         public virtual aca_Profesor aca_Profesor { get; set; }
         public virtual aca_Tematica aca_Tematica { get; set; }
         public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_Alumno aca_Alumno1 { get; set; }
+        public virtual aca_Matricula aca_Matricula { get; set; }
+        public virtual aca_Matricula aca_Matricula1 { get; set; }
     }
 }

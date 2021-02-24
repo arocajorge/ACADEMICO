@@ -1445,14 +1445,18 @@ function CargarParroquia_Representante() {
 };
 
 function PadreRepresentante() {
-    $("#RepresentanteParensco").html("Padre");
+    var Nombre = $("#Nombres_Padre").val();
+    var Apellido = $("#Apellidos_Padre").val();
+    $("#RepresentanteParensco").html("Padre: " + Nombre+" "+Apellido);
     $("#DivDatosRepresentante").hide();
     $("#Representante").val("P");
     $("#RepresentanteValido").val("1");
 }
 
 function MadreRepresentante() {
-    $("#RepresentanteParensco").html("Madre");
+    var Nombre = $("#Nombres_Madre").val();
+    var Apellido = $("#Apellidos_Madre").val();
+    $("#RepresentanteParensco").html("Madre: " + Nombre + " " + Apellido);
     $("#DivDatosRepresentante").hide();
     $("#Representante").val("M");
     $("#RepresentanteValido").val("1");

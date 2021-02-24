@@ -25,6 +25,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_Admision_Info> GetList_Admisiones(int IdEmpresa, int IdSede)
+        {
+            try
+            {
+                return odata.getList_Admisiones(IdEmpresa, IdSede);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_Admision_Info> GetList_Academico(int IdEmpresa, int IdSede, int IdAnio)
         {
             try

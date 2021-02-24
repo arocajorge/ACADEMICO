@@ -558,7 +558,8 @@ namespace Core.Data.Academico
                         Fecha = info.Fecha,
                         IdEmpresa_rol=info.IdEmpresa_rol,
                         IdEmpleado = info.IdEmpleado,
-                        EsPatrocinado = info.EsPatrocinado
+                        EsPatrocinado = info.EsPatrocinado,
+                        IdPreMatricula = info.IdPreMatricula
                     };
                     Context.aca_Matricula.Add(Entity);
                     

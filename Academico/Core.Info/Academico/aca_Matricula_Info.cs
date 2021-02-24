@@ -45,6 +45,7 @@ namespace Core.Info.Academico
         public Nullable<decimal> IdEmpleado { get; set; }
         public Nullable<int> IdCatalogoESTMAT { get; set; }
         public Nullable<bool> EsPatrocinado { get; set; }
+        public Nullable<decimal> IdPreMatricula { get; set; }
 
 
 
@@ -106,7 +107,6 @@ namespace Core.Info.Academico
         public bool AplicaDescuentoNomina { get; set; }
 
 
-        public decimal IdPreMatricula { get; set; }
         public decimal IdAdmision { get; set; }
         public DateTime FechaPago { get; set; }
         public decimal ValorPago { get; set; }

@@ -249,7 +249,7 @@ namespace Core.Admision.Controllers
         #region Metodos
         private void cargar_combos(aca_Admision_Info model)
         {
-            var lst_anio = bus_anio.GetList_Matricula(model.IdEmpresa, false);
+            var lst_anio = bus_anio.GetList_Admision(model.IdEmpresa);
 
             var lst_sede = bus_sede.GetList(model.IdEmpresa, false);
             var lst_jornada = new List<aca_Jornada_Info>();
