@@ -23,6 +23,18 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_Matricula_PreMatricula_List Lista_Matricula = new aca_Matricula_PreMatricula_List();
         #endregion
 
+        #region Combos
+        public ActionResult ComboBoxPartial_Anio()
+        {
+            return PartialView("_ComboBoxPartial_Anio", new aca_PreMatricula_Info());
+        }
+        public ActionResult ComboBoxPartial_Sede()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            return PartialView("_ComboBoxPartial_Sede", new aca_PreMatricula_Info { IdAnio = IdAnio });
+        }
+        #endregion
+
         #region Importacion
         public ActionResult UploadControlUpload()
         {
@@ -131,10 +143,12 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_AnioLectivo_Periodo_Bus bus_anio_periodo = new aca_AnioLectivo_Periodo_Bus();
             aca_AnioLectivo_Paralelo_Profesor_Bus bus_materias_x_paralelo = new aca_AnioLectivo_Paralelo_Profesor_Bus();
             aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
+            aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
 
             int cont = 0;
             decimal IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual);
             int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            int IdSede = Convert.ToInt32(SessionFixed.IdSede);
             #endregion
 
             Stream stream = new MemoryStream(e.UploadedFile.FileBytes);
@@ -142,21 +156,27 @@ namespace Core.Web.Areas.Academico.Controllers
             {
                 IExcelDataReader reader = null;
                 reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                decimal Total = 0;
-                decimal TotalProntoPago = 0;
-                decimal ValorRubro = 0;
-                decimal ValorDescuento = 0;
 
                 while (reader.Read())
                 {
                     if (!reader.IsDBNull(0) && cont > 0)
-                    {       
-                        var IdAdmision = Convert.ToDecimal(reader.GetValue(0));
+                    {
+                        decimal Total = 0;
+                        decimal TotalProntoPago = 0;
+                        decimal ValorRubro = 0;
+
+                        var Codigoalumno = Convert.ToString(reader.GetValue(0));
                         var Fecha = Convert.ToDateTime(reader.GetValue(1));
                         var Valor = Convert.ToDouble(reader.GetValue(2));
+                        var AnioAdmision = bus_anio.GetInfo_AnioAdmision(IdEmpresa);
+                        var IdAnio = (AnioAdmision == null ? 0 : AnioAdmision.IdAnio);
+                        var info_alumno = bus_alumno.GetInfo_Codigo(IdEmpresa,Codigoalumno);
+                        var IdAlumno = (info_alumno == null ? 0: info_alumno.IdAlumno);
+                        var CodigoAlumno = (info_alumno == null ? null : info_alumno.Codigo);
+                        var info_PreMatricula = bus_prematricula.GetInfo_ProcesarPorAlumno(IdEmpresa, IdSede, IdAnio, IdAlumno);
 
-                        var info_PreMatricula = bus_prematricula.GetInfo_PorIdAdmision(IdEmpresa, IdAdmision);
                         var IdPreMatricula = (info_PreMatricula == null ? 0 : info_PreMatricula.IdPreMatricula);
+                        var IdAdmision = (info_PreMatricula == null ? 0 : info_PreMatricula.IdAdmision);
                         var lst_PreMatricula_Detalle = bus_prematricula_rubro.GetList(IdEmpresa, IdPreMatricula);
 
                         if (lst_PreMatricula_Detalle.Count>0)
@@ -164,10 +184,7 @@ namespace Core.Web.Areas.Academico.Controllers
                             foreach (var item in lst_PreMatricula_Detalle)
                             {
                                 var info = lst_PreMatricula_Detalle.Where(q => q.IdString == item.IdString).FirstOrDefault();
-                                //if (info != null)
-                                //{
-                                //    lst_PreMatricula_Detalle.Where(q => q.IdString == item.IdString).FirstOrDefault().seleccionado = true;
-                                //}
+
                                 if (info.EnMatricula==true)
                                 {
                                     var info_anio_periodo = bus_anio_periodo.GetInfo(info.IdEmpresa, info.IdAnio, info.IdPeriodo);
@@ -199,11 +216,31 @@ namespace Core.Web.Areas.Academico.Controllers
 
                         var info_matricula = new aca_Matricula_Info();
 
-                        if (info_PreMatricula != null)
+                        if (info_PreMatricula == null)
+                        {
+                            info_matricula = new aca_Matricula_Info
+                            {
+                                CodigoAlumno = CodigoAlumno,
+                                IdAlumno = IdAlumno,
+                                FechaPago = Fecha,
+                                pe_nombreCompleto = (info_alumno ==null ? "" : info_alumno.pe_nombreCompleto),
+                                ValidaImportacionPreMatricula = (CodigoAlumno == null ? false : (IdPreMatricula == 0 ? false : (Valor == Convert.ToDouble(Total) ? true : false))),
+                                ValorPago = Convert.ToDecimal(Valor),
+                            };
+                            info_matricula.lst_MatriculaCalificacionCualitativa = new List<aca_MatriculaCalificacionCualitativa_Info>();
+                            info_matricula.lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
+                            info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
+                            info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
+                            info_matricula.lst_MatriculaCalificacionCualitativaPromedio = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
+                            info_matricula.lst_alumno_documentos = new List<aca_AnioLectivo_Curso_Documento_Info>();
+                            info_matricula.lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>();
+                        }
+                        else
                         {
                             info_matricula = new aca_Matricula_Info
                             {
                                 IdEmpresa = info_PreMatricula.IdEmpresa,
+                                CodigoAlumno = CodigoAlumno,
                                 IdAlumno = info_PreMatricula.IdAlumno,
                                 IdAnio = info_PreMatricula.IdAnio,
                                 IdSede = info_PreMatricula.IdSede,
@@ -225,15 +262,22 @@ namespace Core.Web.Areas.Academico.Controllers
                                 IdUsuarioCreacion = SessionFixed.IdUsuario,
                                 lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>(),
                                 lst_documentos = new List<aca_AlumnoDocumento_Info>(),
-                                pe_cedulaRuc = info_PreMatricula.pe_cedulaRuc,
                                 pe_nombreCompleto = info_PreMatricula.pe_nombreCompleto,
                                 IdSucursal = info_PreMatricula.IdSucursal,
                                 IdPuntoVta = info_PreMatricula.IdPuntoVta,
-                                ValidaImportacionPreMatricula = (Valor == Convert.ToDouble(Total) ? true : false),
+                                ValidaImportacionPreMatricula = (CodigoAlumno == null ? false : (IdPreMatricula == 0 ? false : (Valor == Convert.ToDouble(Total) ? true : false))),
                                 ValorPago = Convert.ToDecimal(Valor),
                                 IdAdmision = IdAdmision,
                                 IdPreMatricula = IdPreMatricula,
-                                FechaPago = Fecha
+                                FechaPago = Fecha,
+                                Descripcion = info_PreMatricula.Descripcion,
+                                NomSede = info_PreMatricula.NomSede,
+                                NomJornada = info_PreMatricula.NomJornada,
+                                NomNivel = info_PreMatricula.NomNivel,
+                                NomCurso = info_PreMatricula.NomCurso,
+                                NomParalelo = info_PreMatricula.NomParalelo,
+                                NomPlantilla = info_PreMatricula.NomPlantilla,
+                                NomPlantillaTipo = info_PreMatricula.NomPlantillaTipo,
                             };
 
                             #region Calificacion y conducta
@@ -343,8 +387,8 @@ namespace Core.Web.Areas.Academico.Controllers
                                     info_matricula.lst_MatriculaRubro.Add(info_detalle);
                                 }
                             }
-                            Lista_PreMatriculaImportar.Add(info_matricula);
                         }
+                        Lista_PreMatriculaImportar.Add(info_matricula);
                     }
                     else
                         cont++;

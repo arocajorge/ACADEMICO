@@ -271,7 +271,98 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public aca_PreMatricula_Info getInfo_ProcesarPorAlumno(int IdEmpresa, int IdSede, int IdAnio, decimal IdAlumno)
+        {
+            try
+            {
+                aca_PreMatricula_Info info = new aca_PreMatricula_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT pm.IdEmpresa, pm.IdPreMatricula, pm.IdAdmision, pm.Codigo, pm.IdAlumno, pm.IdAnio, pm.IdSede, pm.IdNivel, pm.IdJornada, "
+                    + " pm.IdCurso, pm.IdParalelo, pm.IdPersonaF, pm.IdPersonaR, pm.IdPlantilla, pm.IdMecanismo, pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, "
+                    + "pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago, pm.IdEmpresa_rol, pm.IdEmpleado, pm.EsPatrocinado, cp.OrdenParalelo, cp.NomParalelo, "
+                    + " jc.NomCurso, jc.OrdenCurso, nj.NomJornada, nj.OrdenJornada, sn.NomSede, sn.NomNivel, sn.OrdenNivel, al.Descripcion, pla.NomPlantilla, tpla.NomPlantillaTipo "
+                    + " FROM     dbo.aca_PreMatricula AS pm LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON pm.IdEmpresa = sn.IdEmpresa AND pm.IdAnio = sn.IdAnio AND pm.IdSede = sn.IdSede AND pm.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON pm.IdEmpresa = nj.IdEmpresa AND pm.IdAnio = nj.IdAnio AND pm.IdSede = nj.IdSede AND pm.IdNivel = nj.IdNivel AND pm.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON pm.IdEmpresa = jc.IdEmpresa AND pm.IdAnio = jc.IdAnio AND pm.IdSede = jc.IdSede AND pm.IdNivel = jc.IdNivel AND pm.IdJornada = jc.IdJornada AND "
+                    + " pm.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON pm.IdEmpresa = cp.IdEmpresa AND pm.IdAnio = cp.IdAnio AND pm.IdSede = cp.IdSede AND pm.IdNivel = cp.IdNivel AND pm.IdJornada = cp.IdJornada AND pm.IdCurso = cp.IdCurso AND "
+                    + " pm.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno AS a ON pm.IdEmpresa = a.IdEmpresa AND pm.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS al ON al.IdEmpresa = pm.IdEmpresa AND al.IdAnio = pm.IdAnio LEFT OUTER JOIN "
+                    + " dbo.aca_Plantilla AS pla ON pla.IdEmpresa = pm.IdEmpresa AND pla.IdPlantilla = pm.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.aca_PlantillaTipo AS tpla ON tpla.IdEmpresa = pm.IdEmpresa AND tpla.IdTipoPlantilla = pla.IdTipoPlantilla "
+                    + " WHERE pm.IdEmpresa = " + IdEmpresa.ToString() + " and pm.IdSede = " + IdSede.ToString() + " and pm.IdAnio = " + IdAnio.ToString() + " and pm.IdAlumno = " + IdAlumno.ToString()
+                    + " and not exists ( "
+                    + " SELECT IdEmpresa, IdMatricula, IdPreMatricula FROM aca_Matricula m "
+                    + " WHERE m.IdEmpresa = pm.IdEmpresa and m.IdPreMatricula = pm.IdPreMatricula "
+                    + " ) ";
+                    var ResultValue = command.ExecuteScalar();
 
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_PreMatricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdPreMatricula = Convert.ToDecimal(reader["IdPreMatricula"]),
+                            IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            CodigoAlumno = string.IsNullOrEmpty(reader["CodigoAlumno"].ToString()) ? null : reader["CodigoAlumno"].ToString(),
+                            pe_cedulaRuc = string.IsNullOrEmpty(reader["pe_cedulaRuc"].ToString()) ? null : reader["pe_cedulaRuc"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            IdPersonaF = Convert.ToInt32(reader["IdPersonaF"]),
+                            IdPersonaR = Convert.ToInt32(reader["IdPersonaR"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            IdMecanismo = Convert.ToInt32(reader["IdMecanismo"]),
+                            IdCatalogoESTPREMAT = Convert.ToInt32(reader["IdCatalogoESTPREMAT"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            IdPuntoVta = Convert.ToInt32(reader["IdPuntoVta"]),
+                            Valor = Convert.ToDecimal(reader["Valor"]),
+                            ValorProntoPago = Convert.ToDecimal(reader["ValorProntoPago"]),
+                            IdEmpresa_rol = string.IsNullOrEmpty(reader["IdEmpresa_rol"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpresa_rol"]),
+                            IdEmpleado = string.IsNullOrEmpty(reader["IdEmpleado"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpleado"]),
+                            EsPatrocinado = string.IsNullOrEmpty(reader["EsPatrocinado"].ToString()) ? false : Convert.ToBoolean(reader["EsPatrocinado"]),
+                            NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
+                            NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
+                            NomJornada = string.IsNullOrEmpty(reader["NomJornada"].ToString()) ? null : reader["NomJornada"].ToString(),
+                            NomParalelo = string.IsNullOrEmpty(reader["NomParalelo"].ToString()) ? null : reader["NomParalelo"].ToString(),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            NomCurso = string.IsNullOrEmpty(reader["NomCurso"].ToString()) ? null : reader["NomCurso"].ToString(),
+                            NomPlantilla = string.IsNullOrEmpty(reader["NomPlantilla"].ToString()) ? null : reader["NomPlantilla"].ToString(),
+                            NomPlantillaTipo = string.IsNullOrEmpty(reader["NomPlantillaTipo"].ToString()) ? null : reader["NomPlantillaTipo"].ToString(),
+                            OrdenJornada = string.IsNullOrEmpty(reader["OrdenJornada"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenJornada"]),
+                            OrdenNivel = string.IsNullOrEmpty(reader["OrdenNivel"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenNivel"]),
+                            OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenCurso"]),
+                            OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenParalelo"]),
+                        };
+                    }
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_PreMatricula_Info> getList_Procesar(int IdEmpresa, int IdSede, int IdAnio)
         {
             try
@@ -282,7 +373,7 @@ namespace Core.Data.Academico
                     connection.Open();
                     #region Query
                     string query = "SELECT pm.IdEmpresa, pm.IdPreMatricula, pm.IdAdmision, pm.Codigo, pm.IdAlumno, pm.IdAnio, pm.IdSede, pm.IdNivel, pm.IdJornada, pm.IdCurso, pm.IdParalelo, pm.IdPersonaF, pm.IdPersonaR, pm.IdPlantilla, pm.IdMecanismo, "
-                    + " pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago, cp.OrdenParalelo, cp.NomParalelo, "
+                    + " pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, pm.EsPatrocinado, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago, cp.OrdenParalelo, cp.NomParalelo, "
                     + " jc.NomCurso, jc.OrdenCurso, nj.NomJornada, nj.OrdenJornada, sn.NomSede, sn.NomNivel, sn.OrdenNivel, al.Descripcion, pla.NomPlantilla, tpla.NomPlantillaTipo "
                     + " FROM     dbo.aca_PreMatricula AS pm LEFT OUTER JOIN "
                     + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON pm.IdEmpresa = sn.IdEmpresa AND pm.IdAnio = sn.IdAnio AND pm.IdSede = sn.IdSede AND pm.IdNivel = sn.IdNivel LEFT OUTER JOIN "
@@ -396,6 +487,73 @@ namespace Core.Data.Academico
             }
             catch (Exception ex)
             {
+                throw;
+            }
+        }
+
+        public aca_PreMatricula_Info getInfo_PorIdAlumno(int IdEmpresa, int IdSede, int IdAnio, decimal IdAdlumno)
+        {
+            try
+            {
+                aca_PreMatricula_Info info = new aca_PreMatricula_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT pm.IdEmpresa, pm.IdPreMatricula, pm.IdAdmision, pm.Codigo, pm.IdAlumno, pm.IdAnio, pm.IdSede, pm.IdNivel, pm.IdJornada, "
+                    + " pm.IdCurso, pm.IdParalelo, pm.IdPersonaF, pm.IdPersonaR, pm.IdPlantilla, pm.IdMecanismo, pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, "
+                    + "pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago, pm.IdEmpresa_rol, pm.IdEmpleado, pm.EsPatrocinado"
+                    + " FROM     dbo.aca_PreMatricula AS pm LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno AS a ON pm.IdEmpresa = a.IdEmpresa AND pm.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
+                    + " WHERE pm.IdEmpresa = " + IdEmpresa.ToString() + " and pm.IdSede = " + IdSede.ToString() + " and pm.IdAnio = " + IdAnio.ToString() + " and pm.IdAlumno = " + IdAdlumno.ToString();
+                    var ResultValue = command.ExecuteScalar();
+
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_PreMatricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdPreMatricula = Convert.ToDecimal(reader["IdPreMatricula"]),
+                            IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            CodigoAlumno = string.IsNullOrEmpty(reader["CodigoAlumno"].ToString()) ? null : reader["CodigoAlumno"].ToString(),
+                            pe_cedulaRuc = string.IsNullOrEmpty(reader["pe_cedulaRuc"].ToString()) ? null : reader["pe_cedulaRuc"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            IdPersonaF = Convert.ToInt32(reader["IdPersonaF"]),
+                            IdPersonaR = Convert.ToInt32(reader["IdPersonaR"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            IdMecanismo = Convert.ToInt32(reader["IdMecanismo"]),
+                            IdCatalogoESTPREMAT = Convert.ToInt32(reader["IdCatalogoESTPREMAT"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            IdPuntoVta = Convert.ToInt32(reader["IdPuntoVta"]),
+                            Valor = Convert.ToDecimal(reader["Valor"]),
+                            ValorProntoPago = Convert.ToDecimal(reader["ValorProntoPago"]),
+                            IdEmpresa_rol = string.IsNullOrEmpty(reader["IdEmpresa_rol"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpresa_rol"]),
+                            IdEmpleado = string.IsNullOrEmpty(reader["IdEmpleado"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpleado"]),
+                            EsPatrocinado = string.IsNullOrEmpty(reader["EsPatrocinado"].ToString()) ? false : Convert.ToBoolean(reader["EsPatrocinado"]),
+                        };
+                    }
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

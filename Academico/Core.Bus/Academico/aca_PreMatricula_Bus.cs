@@ -674,6 +674,32 @@ namespace Core.Bus.Academico
             }
         }
 
+        public aca_PreMatricula_Info GetInfo_ProcesarPorAlumno(int IdEmpresa, int IdSede, int IdAnio, decimal IdAdmision)
+        {
+            try
+            {
+                return odata_prematricula.getInfo_ProcesarPorAlumno(IdEmpresa, IdSede, IdAnio, IdAdmision);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public aca_PreMatricula_Info GetInfo_PorIdAlumno(int IdEmpresa, int IdSede, int IdAnio, decimal IdAlumno)
+        {
+            try
+            {
+                return odata_prematricula.getInfo_PorIdAlumno(IdEmpresa, IdSede, IdAnio, IdAlumno);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<aca_PreMatricula_Info> GetList_Procesar(int IdEmpresa, int IdSede, int IdAnio)
         {
             try

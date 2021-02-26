@@ -82,7 +82,7 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
+            var info_anio = bus_anio.GetInfo_AnioAdmision(IdEmpresa);
       
             var model = new aca_Admision_Info
             {
@@ -1069,6 +1069,14 @@ namespace Core.Web.Areas.Academico.Controllers
             string return_naturaleza_madre = "";
             string return_naturaleza_representante = "";
 
+            var info_prematricula = bus_prematricula.GetInfo_PorIdAlumno(info.IdEmpresa, info.IdSede, info.IdAnio, info.IdAlumno);
+            var IdPrematricula = (info_prematricula==null ? 0 : info_prematricula.IdPreMatricula);
+            if (IdPrematricula!=0)
+            {
+                msg = "El aspirante ya tiene una prematricula para el año lectivo seleccionado";
+                return false;
+            }
+
             if (cl_funciones.ValidaIdentificacion(info.info_alumno.info_persona_alumno.IdTipoDocumento, info.info_alumno.info_persona_alumno.pe_Naturaleza, info.info_alumno.info_persona_alumno.pe_cedulaRuc, ref return_naturaleza))
             {
                 info.info_alumno.info_persona_alumno.pe_Naturaleza = return_naturaleza;
@@ -1636,6 +1644,22 @@ namespace Core.Web.Areas.Academico.Controllers
 
             var info_admision = bus_admision.GetInfo_CedulaAspirante(IdEmpresa, pe_cedulaRuc);
             resultado.IdAdmision = (info_admision == null ? 0 : info_admision.IdAdmision);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult get_info_x_num_cedula_Prematricula(int IdEmpresa = 0, int IdAnio = 0, string pe_cedulaRuc = "")
+        {
+            var IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var resultado = bus_alumno.get_info_x_num_cedula(IdEmpresa, pe_cedulaRuc);
+
+            resultado.anio = Convert.ToDateTime(resultado.pe_fechaNacimiento).Year.ToString();
+            var mes = Convert.ToDateTime(resultado.pe_fechaNacimiento).Month;
+            mes = mes - 1;
+            resultado.mes = mes.ToString();
+            resultado.dia = Convert.ToDateTime(resultado.pe_fechaNacimiento).Day.ToString();
+
+            var info_prematricula = bus_prematricula.GetInfo_PorIdAlumno(IdEmpresa, IdSede, IdAnio, resultado.IdAlumno);
+            resultado.IdAdmision = (info_prematricula == null ? 0 : info_prematricula.IdAdmision);
+            resultado.IdPreMatricula = (info_prematricula == null ? 0 : info_prematricula.IdPreMatricula);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
         public JsonResult get_info_x_num_cedula_persona(string pe_cedulaRuc = "")

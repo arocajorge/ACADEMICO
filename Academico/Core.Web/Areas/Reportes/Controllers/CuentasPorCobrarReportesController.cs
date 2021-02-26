@@ -1025,5 +1025,59 @@ namespace Core.Web.Areas.Reportes.Controllers
             return View(model);
         }
         #endregion
+
+        #region CXC_021
+        public ActionResult ComboBoxPartial_Anio()
+        {
+            return PartialView("_ComboBoxPartial_Anio", new aca_AnioLectivo_NivelAcademico_Jornada_Info());
+        }
+        public ActionResult ComboBoxPartial_Sede()
+        {
+            int IdAnio = (Request.Params["IdAnio"] != null) ? int.Parse(Request.Params["IdAnio"]) : -1;
+            return PartialView("_ComboBoxPartial_Sede", new aca_AnioLectivo_NivelAcademico_Jornada_Info { IdAnio = IdAnio });
+        }
+
+        public ActionResult CXC_021()
+        {
+            cl_filtros_Info model = new cl_filtros_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_AnioAdmision = bus_anio.GetInfo_AnioAdmision(model.IdEmpresa);
+            model.IdAnio = (info_AnioAdmision == null ? 0 : info_AnioAdmision.IdAnio);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdAlumno = 0;
+            model.fecha_ini = DateTime.Now.AddMonths(-1);
+            model.fecha_fin = DateTime.Now;
+            model.mostrarAnulados = false;
+
+            CXC_021_Rpt report = new CXC_021_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult CXC_021(cl_filtros_Info model)
+        {
+            CXC_021_Rpt report = new CXC_021_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_fecha_ini.Value = model.fecha_ini;
+            report.p_fecha_fin.Value = model.fecha_fin;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+
+            ViewBag.Report = report;
+            return View(model);
+        }
+        #endregion
     }
 }

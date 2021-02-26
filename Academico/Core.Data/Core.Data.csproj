@@ -2153,6 +2153,7 @@
     <Compile Include="Reportes\Caja\CAJ_002_ValesNoConciliados_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_001_Data.cs" />
     <Compile Include="Reportes\Contabilidad\CONTA_002_Data.cs" />
+    <Compile Include="Reportes\CuentasPorCobrar\CXC_021_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_020_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_019_Data.cs" />
     <Compile Include="Reportes\CuentasPorCobrar\CXC_018_Data.cs" />

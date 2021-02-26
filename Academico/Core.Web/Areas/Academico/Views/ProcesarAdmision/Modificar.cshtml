@@ -2568,7 +2568,7 @@
         }
 
         function get_info_x_num_cedula() {
-            var cedula = $("#Celular_Aspirante").val();
+            var cedula = $("#CedulaRuc_Aspirante").val();
             var tipo_doc = $("#IdTipoDocumento_Aspirante").val();
 
             if (cedula == null) {
@@ -2595,12 +2595,13 @@
 
             var datos = {
                 IdEmpresa: $("#IdEmpresa").val(),
-                Celular_Aspirante: cedula
+                IdAnio: IdAnio.GetValue(),
+                pe_cedulaRuc: cedula
             }
             $.ajax({
                 type: 'POST',
                 data: JSON.stringify(datos),
-                url: '@Url.Action("get_info_x_num_cedula", "ProcesarAdmision",new { Area = "Academico"})',
+                url: '@Url.Action("get_info_x_num_cedula_Prematricula", "ProcesarAdmision",new { Area = "Academico"})',
                 async: false,
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
@@ -2609,10 +2610,14 @@
                         return;
                     }
 
-                    if (data.IdAlumno != 0) {
-                        $("#IdAlumno").val(data.IdAlumno);
+                    if (data.IdPreMatricula != 0) {
+                        alert("El aspirante ya esta prematriculado.");
                     }
                     else {
+                        if (data.IdAlumno != 0) {
+                            $("#IdAlumno").val(data.IdAlumno);
+                        }
+
                         if (data.IdPersona != 0) {
                             $("#IdPersona_Aspirante").val(data.IdPersona);
                             $("#Naturaleza_Aspirante").val(data.pe_Naturaleza);

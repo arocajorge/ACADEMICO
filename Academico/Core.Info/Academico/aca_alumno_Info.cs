@@ -331,6 +331,7 @@ namespace Core.Info.Academico
 
         #region Admision
         public decimal IdAdmision { get; set; }
+        public decimal IdPreMatricula { get; set; }
         #endregion
 
         #endregion

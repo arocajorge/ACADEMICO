@@ -112,6 +112,7 @@ namespace Core.Info.Academico
         public decimal ValorPago { get; set; }
         public string CodigoAlumno { get; set; }
         public bool ValidaImportacionPreMatricula { get; set; }
+        public string NomPlantillaTipo { get; set; }
         #endregion
     }
 }

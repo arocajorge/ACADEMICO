@@ -236,6 +236,53 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public aca_AnioLectivo_Info getInfo(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                aca_AnioLectivo_Info info = new aca_AnioLectivo_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.IdAnio = " + IdAnio.ToString();
+                    var ResultValue = command.ExecuteScalar();
+
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_AnioLectivo_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            FechaDesde = Convert.ToDateTime(reader["FechaDesde"]),
+                            FechaHasta = Convert.ToDateTime(reader["FechaHasta"]),
+                            EnCurso = Convert.ToBoolean(reader["EnCurso"]),
+                            BloquearMatricula = Convert.ToBoolean(reader["BloquearMatricula"]),
+                            Estado = Convert.ToBoolean(reader["Estado"]),
+                            IdAnioLectivoAnterior = string.IsNullOrEmpty(reader["IdAnioLectivoAnterior"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdAnioLectivoAnterior"]),
+                            PromedioMinimoParcial = string.IsNullOrEmpty(reader["PromedioMinimoParcial"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoParcial"]),
+                            PromedioMinimoPromocion = string.IsNullOrEmpty(reader["PromedioMinimoPromocion"].ToString()) ? (double?)null : Convert.ToInt32(reader["PromedioMinimoPromocion"]),
+                            CalificacionMaxima = string.IsNullOrEmpty(reader["CalificacionMaxima"].ToString()) ? (double?)null : Convert.ToInt32(reader["CalificacionMaxima"]),
+                            IdCursoBachiller = string.IsNullOrEmpty(reader["IdCursoBachiller"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCursoBachiller"])
+                        };
+                    }
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_AnioLectivo_Info> getList_update(int IdEmpresa)
         {
             try
@@ -300,7 +347,7 @@ namespace Core.Data.Academico
             }
         }
 
-        public aca_AnioLectivo_Info getInfo(int IdEmpresa, int IdAnio)
+        public aca_AnioLectivo_Info getInfo_AnioAdmision(int IdEmpresa)
         {
             try
             {
@@ -310,7 +357,8 @@ namespace Core.Data.Academico
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT * FROM aca_AnioLectivo a "
-                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.IdAnio = "+ IdAnio.ToString();
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.BloquearMatricula=0 "
+                    + " and FechaHasta=(select MAX(FechaHasta) FechaMaxima from aca_AnioLectivo)";
                     var ResultValue = command.ExecuteScalar();
 
                     if (ResultValue == null)
