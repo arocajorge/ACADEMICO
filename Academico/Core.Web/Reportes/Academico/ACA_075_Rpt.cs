@@ -11,12 +11,12 @@ using Core.Bus.Academico;
 
 namespace Core.Web.Reportes.Academico
 {
-    public partial class ACA_073_Rpt : DevExpress.XtraReports.UI.XtraReport
+    public partial class ACA_075_Rpt : DevExpress.XtraReports.UI.XtraReport
     {
         public string usuario { get; set; }
         public string empresa { get; set; }
 
-        public ACA_073_Rpt()
+        public ACA_075_Rpt()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace Core.Web.Reportes.Academico
 
         }
 
-        private void ACA_073_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void ACA_075_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
             lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
             lbl_usuario.Text = usuario;
@@ -53,19 +53,16 @@ namespace Core.Web.Reportes.Academico
                 }
             }
 
-            var sede = bus_sede.GetInfo(IdEmpresa, IdSede);
-            if (sede != null)
-            {
-                rector.Text = sede.NombreRector;
-                secretaria.Text = sede.NombreSecretaria;
-            }
-
-            ACA_073_Bus bus_rpt = new ACA_073_Bus();
-            List<ACA_073_Info> lst_rpt = new List<ACA_073_Info>();
+            ACA_075_Bus bus_rpt = new ACA_075_Bus();
+            List<ACA_075_Info> lst_rpt = new List<ACA_075_Info>();
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, MostrarRetirados);
-            Fecha.Text = DateTime.Now.ToString("dd/MM/yyyy");
             this.DataSource = lst_rpt;
             xrCrossTab1.DataSource = lst_rpt;
+        }
+
+        private void xrTable2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        {
+
         }
     }
 }
