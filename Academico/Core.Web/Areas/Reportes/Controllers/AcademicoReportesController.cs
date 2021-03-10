@@ -1263,16 +1263,18 @@ namespace Core.Web.Areas.Reportes.Controllers
             ViewBag.lst_parcial = lst_parcial;
 
         }
-        public ActionResult ACA_013(int IdEmpresa = 0, decimal IdAlumno = 0)
+        public ActionResult ACA_013(int IdEmpresa = 0, decimal IdAlumno = 0, int IdCatalogoTipo = 0, int IdCatalogoParcial = 0, bool MostrarRetirados = false, bool MostrarPromedios = true)
         {
             aca_MatriculaCalificacionParcial_Info model = new aca_MatriculaCalificacionParcial_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
-            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
+            model.IdAlumno = IdAlumno;
+            model.IdCatalogoTipo = IdCatalogoTipo;
+            model.IdCatalogoParcial = IdCatalogoParcial;
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-            model.MostrarRetirados = false;
-            model.MostrarPromedios = true;
+            model.MostrarRetirados = MostrarRetirados;
+            model.MostrarPromedios = MostrarPromedios;
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -1337,16 +1339,17 @@ namespace Core.Web.Areas.Reportes.Controllers
             lst_quimestre.Add(quim2);
             ViewBag.lst_quimestre = lst_quimestre;
         }
-        public ActionResult ACA_014()
+        public ActionResult ACA_014(int IdEmpresa = 0, decimal IdAlumno = 0, int IdCatalogoTipo = 0, bool MostrarRetirados = false, bool MostrarPromedios = true)
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.IdAlumno = IdAlumno;
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
-            model.IdCatalogoParcial = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
-            model.mostrarAnulados = false;
-            model.MostrarPromedios = true;
+            model.IdCatalogoParcial = IdCatalogoTipo;
+            model.mostrarAnulados = MostrarRetirados;
+            model.MostrarPromedios = MostrarPromedios;
             string IdUsuario = SessionFixed.IdUsuario;
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
@@ -3565,7 +3568,7 @@ namespace Core.Web.Areas.Reportes.Controllers
         #endregion
 
         #region ACA_052
-        public ActionResult ACA_052()
+        public ActionResult ACA_052(int IdEmpresa=0, decimal IdAlumno=0)
         {
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
@@ -3576,6 +3579,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdJornada = 0;
             model.IdCurso = 0;
             model.IdParalelo = 0;
+            model.IdAlumno = IdAlumno;
             model.mostrar_observacion_completa = false;
             model.mostrarAnulados = false;
 
@@ -3588,6 +3592,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 
@@ -3607,6 +3612,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdJornada.Value = model.IdJornada;
             report.p_IdCurso.Value = model.IdCurso;
             report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdAlumno.Value = model.IdAlumno;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
 

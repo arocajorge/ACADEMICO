@@ -35,6 +35,17 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<TreeList_Info> GetList_CorreoMasivoAcademico(int IdEmpresa, int IdAnio)
+        {
+            try
+            {
+                return odata.get_list_CorreoMasivoAcademico(IdEmpresa, IdAnio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<TreeList_Info> GetList_CorreoMasivoDeudores(int IdEmpresa, int IdAnio, int CantidadIni, int CantidadFin)
         {
             try

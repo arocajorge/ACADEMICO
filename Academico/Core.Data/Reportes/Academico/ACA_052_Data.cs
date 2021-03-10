@@ -9,7 +9,7 @@ namespace Core.Data.Reportes.Academico
 {
     public class ACA_052_Data
     {
-        public List<ACA_052_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo)
+        public List<ACA_052_Info> GetList(int IdEmpresa, int IdAnio, int IdSede, int IdNivel, int IdJornada, int IdCurso,int IdParalelo, decimal IdAlumno)
         {
             try
             {
@@ -47,12 +47,20 @@ namespace Core.Data.Reportes.Academico
                     + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString()
                     + " and m.IdAnio = " + IdAnio.ToString()
-                    + " and m.IdSede = " + IdSede.ToString()
-                    + " and m.IdJornada = " + IdJornada.ToString()
-                    + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
-                    + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
-                    + " and m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString()
-                    + " and ad.EnArchivo = 0"
+                    + " and m.IdSede = " + IdSede.ToString();
+                    if (IdAlumno!=0)
+                    {
+                        query += " and m.IdAlumno = " + IdAlumno.ToString();
+                    }
+                    else
+                    {
+                        query += " and m.IdJornada = " + IdJornada.ToString()
+                        + " and m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
+                        + " and m.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString()
+                        + " and m.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString();
+                    }
+
+                    query += " and ad.EnArchivo = 0"
                     + " and isnull(r.IdMatricula,0) = 0";
 
                     #endregion

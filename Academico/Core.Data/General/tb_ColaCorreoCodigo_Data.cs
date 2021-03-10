@@ -43,6 +43,38 @@ namespace Core.Data.General
             }
         }
 
+        public List<tb_ColaCorreoCodigo_Info> GetList_Academico(int IdEmpresa)
+        {
+            try
+            {
+                List<tb_ColaCorreoCodigo_Info> Lista = new List<tb_ColaCorreoCodigo_Info>();
+
+                using (EntitiesGeneral db = new EntitiesGeneral())
+                {
+                    var lst = db.tb_ColaCorreoCodigo.Where(q => q.IdEmpresa == IdEmpresa && q.ApareceSeguimientoCobranza == false).ToList();
+                    foreach (var item in lst)
+                    {
+                        Lista.Add(new tb_ColaCorreoCodigo_Info
+                        {
+                            IdEmpresa = item.IdEmpresa,
+                            Codigo = item.Codigo,
+                            ApareceSeguimientoCobranza = item.ApareceSeguimientoCobranza,
+                            Asunto = item.Asunto,
+                            Cuerpo = item.Cuerpo,
+                            CantidadFin = item.CantidadFin,
+                            CantidadIni = item.CantidadIni
+                        });
+                    }
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<tb_ColaCorreoCodigo_Info> GetList_Seguimiento(int IdEmpresa)
         {
             try

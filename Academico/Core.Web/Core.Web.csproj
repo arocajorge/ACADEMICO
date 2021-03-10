@@ -229,6 +229,7 @@
     <Compile Include="Areas\Academico\Controllers\CatalogoFichaController.cs" />
     <Compile Include="Areas\Academico\Controllers\CatalogoTipoFichaController.cs" />
     <Compile Include="Areas\Academico\Controllers\ConductaEquivalenciaController.cs" />
+    <Compile Include="Areas\Academico\Controllers\CorreoMasivoAcademicoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoController.cs" />
     <Compile Include="Areas\Academico\Controllers\CursoPorJornadaController.cs" />
     <Compile Include="Areas\Academico\Controllers\DECEObservacionController.cs" />
@@ -9797,6 +9798,10 @@
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\CXC_021.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_ComboBoxPartial_Sede.cshtml" />
     <Content Include="Areas\Reportes\Views\CuentasPorCobrarReportes\_ComboBoxPartial_Anio_Consulta.cshtml" />
+    <Content Include="Areas\Academico\Views\CorreoMasivoAcademico\_aca_AnioLectivo_ParaleloTreeList.cshtml" />
+    <Content Include="Areas\Academico\Views\CorreoMasivoAcademico\_CmbAlumno.cshtml" />
+    <Content Include="Areas\Academico\Views\CorreoMasivoAcademico\_HtmlEditorPartial.cshtml" />
+    <Content Include="Areas\Academico\Views\CorreoMasivoAcademico\Index.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

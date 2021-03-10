@@ -33,6 +33,11 @@ namespace Core.Info.General
         public List<TreeList_Info> lst_correo_masivo { get; set; }
         public int CantidadIni { get; set; }
         public int CantidadFin { get; set; }
+        public int IdSede { get; set; }
+        public int IdCatalogoTipo { get; set; }
+        public int IdCatalogoParcial { get; set; }
+        public bool MostrarRetirados { get; set; }
+        public bool MostrarPromedios { get; set; }
         #endregion
     }
 }
