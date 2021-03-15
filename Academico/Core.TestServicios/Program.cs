@@ -1,5 +1,6 @@
 ﻿using Core.Bus.General;
 using Core.Info.General;
+using Core.Web.Reportes.Academico;
 using Core.Web.Reportes.CuentasPorCobrar;
 using Core.Web.Reportes.Facturacion;
 using System;
@@ -250,6 +251,112 @@ namespace Core.TestServicios
 
                             AlternateView htmlView_CXC_015 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
                             mail.AlternateViews.Add(htmlView_CXC_015);
+                            #endregion
+
+                            break;
+                        case "ACA_013":
+
+                            #region ACA_013
+                            ACA_013_Rpt rpt_ACA_013 = new ACA_013_Rpt();
+
+                            #region Parametros
+                            if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
+                            {
+                                string[] Parametros = CorreoInfo.Parametros.Split(';');
+                                rpt_ACA_013.p_IdEmpresa.Value = Parametros[0];
+                                rpt_ACA_013.p_IdAnio.Value = Parametros[1];
+                                rpt_ACA_013.p_IdSede.Value = Parametros[2];
+                                rpt_ACA_013.p_IdAlumno.Value = Parametros[3];
+                                rpt_ACA_013.p_IdCatalogoTipo.Value = Parametros[4];
+                                rpt_ACA_013.p_IdCatalogoParcial.Value = Parametros[5];
+                                rpt_ACA_013.p_MostrarRetirados.Value = (Parametros[6] == "0" ? false : true);
+                                rpt_ACA_013.p_MostrarComportamiento.Value = (Parametros[7] == "0" ? false : true);
+                            }
+                            #endregion
+
+
+                            rpt_ACA_013.usuario = "SRVFIX";
+                            rpt_ACA_013.empresa = Empresa.em_nombre;
+                            rpt_ACA_013.RequestParameters = false;
+
+                            rpt_ACA_013.ExportToPdf(mem);
+
+                            // Create a new attachment and put the PDF report into it.
+                            mem.Seek(0, System.IO.SeekOrigin.Begin);
+                            Attachment att_ACA_013 = new Attachment(mem, "REPORTE PARCIAL CALIFICACIONES.pdf", "application/pdf");
+                            mail.Attachments.Add(att_ACA_013);
+
+                            AlternateView htmlView_ACA_013 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
+                            mail.AlternateViews.Add(htmlView_ACA_013);
+                            #endregion
+
+                            break;
+                        case "ACA_014":
+
+                            #region ACA_014
+                            ACA_014_Rpt rpt_ACA_014 = new ACA_014_Rpt();
+
+                            #region Parametros
+                            if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
+                            {
+                                string[] Parametros = CorreoInfo.Parametros.Split(';');
+                                rpt_ACA_014.p_IdEmpresa.Value = Parametros[0];
+                                rpt_ACA_014.p_IdAnio.Value = Parametros[1];
+                                rpt_ACA_014.p_IdSede.Value = Parametros[2];
+                                rpt_ACA_014.p_IdAlumno.Value = Parametros[3];
+                                rpt_ACA_014.p_IdCatalogoParcial.Value = Parametros[4];
+                                rpt_ACA_014.p_MostrarRetirados.Value = (Parametros[5] == "0" ? false : true);
+                                rpt_ACA_014.p_MostrarPromedios.Value = (Parametros[6] == "0" ? false : true);
+                            }
+                            #endregion
+
+
+                            rpt_ACA_014.usuario = "SRVFIX";
+                            rpt_ACA_014.empresa = Empresa.em_nombre;
+                            rpt_ACA_014.RequestParameters = false;
+
+                            rpt_ACA_014.ExportToPdf(mem);
+
+                            // Create a new attachment and put the PDF report into it.
+                            mem.Seek(0, System.IO.SeekOrigin.Begin);
+                            Attachment att_ACA_014 = new Attachment(mem, "REPORTE QUIMESTRAL CALIFICACIONES.pdf", "application/pdf");
+                            mail.Attachments.Add(att_ACA_014);
+
+                            AlternateView htmlView_ACA_014 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
+                            mail.AlternateViews.Add(htmlView_ACA_014);
+                            #endregion
+
+                            break;
+                        case "ACA_052":
+
+                            #region ACA_052
+                            ACA_052_Rpt rpt_ACA_052 = new ACA_052_Rpt();
+
+                            #region Parametros
+                            if (!string.IsNullOrEmpty(CorreoInfo.Parametros))
+                            {
+                                string[] Parametros = CorreoInfo.Parametros.Split(';');
+                                rpt_ACA_052.p_IdEmpresa.Value = Parametros[0];
+                                rpt_ACA_052.p_IdAnio.Value = Parametros[1];
+                                rpt_ACA_052.p_IdSede.Value = Parametros[2];
+                                rpt_ACA_052.p_IdAlumno.Value = Parametros[3];
+                            }
+                            #endregion
+
+
+                            rpt_ACA_052.usuario = "SRVFIX";
+                            rpt_ACA_052.empresa = Empresa.em_nombre;
+                            rpt_ACA_052.RequestParameters = false;
+
+                            rpt_ACA_052.ExportToPdf(mem);
+
+                            // Create a new attachment and put the PDF report into it.
+                            mem.Seek(0, System.IO.SeekOrigin.Begin);
+                            Attachment att_ACA_052 = new Attachment(mem, "CIRCULAR DOCUMENTOS PENDIENTES.pdf", "application/pdf");
+                            mail.Attachments.Add(att_ACA_052);
+
+                            AlternateView htmlView_ACA_052 = AlternateView.CreateAlternateViewFromString(CorreoInfo.Cuerpo, null, "text/html");
+                            mail.AlternateViews.Add(htmlView_ACA_052);
                             #endregion
 
                             break;

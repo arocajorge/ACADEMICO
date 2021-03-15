@@ -155,7 +155,7 @@ namespace Core.Web.Areas.Academico.Controllers
         #endregion
 
         #region Json
-        public JsonResult guardar(int IdEmpresa = 0, int Modificado = 0, string Ids = "", decimal IdAlumno = 0, string Copia = "", string Codigo = "", string Asunto = "", string Cuerpo = "", bool RepLegal = false, bool RepEconomico = false, int IdCatalogoTipo = 0, int IdCatalogoParcial = 0, bool MostrarRetirados=false, bool MostrarPromedios=false, decimal IdTransaccionSession = 0)
+        public JsonResult guardar(int IdEmpresa = 0, int IdAnio=0, int IdSedeSession=0, int Modificado = 0, string Ids = "", decimal IdAlumno = 0, string Copia = "", string Codigo = "", string Asunto = "", string Cuerpo = "", bool RepLegal = false, bool RepEconomico = false, int IdCatalogoTipo = 0, int IdCatalogoParcial = 0, bool MostrarRetirados=false, bool MostrarPromedios=false, decimal IdTransaccionSession = 0)
         {
             string[] array = Ids.Split(',');
             List<TreeList_Info> lista = new List<TreeList_Info>();
@@ -179,11 +179,11 @@ namespace Core.Web.Areas.Academico.Controllers
             List_AlumnosPeriodoActual.set_list(AlumnosPorPeriodoActual, IdTransaccionSession);
             var lstAlumnos = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).ToList();
 
-            var lstParalelos = lista.Where(q => q.IdString.Count() == 15).ToList();
+            var lstParalelos = lista.Where(q => q.IdStringPadre.Count() == 15).ToList();
             var ListaAlumnosCorreo = new List<aca_Alumno_Info>();
             foreach (var item in lstParalelos)
             {
-                var lst_x_paralelo = lista.Where(q => q.IdStringPadre == item.IdString).ToList();
+                var lst_x_paralelo = lista.Where(q => q.IdString == item.IdString).ToList();
 
                 foreach (var itemAlu in lst_x_paralelo)
                 {
@@ -254,13 +254,14 @@ namespace Core.Web.Areas.Academico.Controllers
                         var Destinatarios = (RepLegal == true ? (CorreoXAlumno == null ? "" : (string.IsNullOrEmpty(CorreoXAlumno.CorreoRepLegal) ? "" : CorreoXAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreoXAlumno == null ? "" : (string.IsNullOrEmpty(CorreoXAlumno.correoRepEconomico) ? "" : CorreoXAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
 
                         if (CodigoCorreo == "ACA_013")
-                            ParametrosCorreo = IdEmpresa.ToString() + ";" + CorreoXAlumno.IdAlumno.ToString() + ";" + IdCatalogoTipo.ToString() + ";" + IdCatalogoParcial.ToString() + ";" + (MostrarRetirados == true ? "1" : "0") + ";" + (MostrarPromedios == true ? "1" : "0");
+                            ParametrosCorreo = IdEmpresa.ToString() + ";" + IdAnio.ToString() + ";" + IdSedeSession.ToString() + ";" + CorreoXAlumno.IdAlumno.ToString() + ";" + IdCatalogoTipo.ToString() + ";" + IdCatalogoParcial.ToString() + ";" + (MostrarRetirados == true ? "1" : "0") + ";" + (MostrarPromedios == true ? "1" : "0");
 
                         if (CodigoCorreo == "ACA_014")
-                            ParametrosCorreo = IdEmpresa.ToString() + ";" + CorreoXAlumno.IdAlumno.ToString() + ";" + IdCatalogoTipo.ToString() + ";" + (MostrarRetirados == true ? "1" : "0") + ";" + (MostrarPromedios == true ? "1" : "0");
+                            ParametrosCorreo = IdEmpresa.ToString() + ";" + IdAnio.ToString() + ";" + IdSedeSession.ToString() + ";" + CorreoXAlumno.IdAlumno.ToString() + ";" + IdCatalogoTipo.ToString() + ";" + (MostrarRetirados == true ? "1" : "0") + ";" + (MostrarPromedios == true ? "1" : "0");
 
                         if (CodigoCorreo == "ACA_052")
-                            ParametrosCorreo = IdEmpresa.ToString() + ";" + CorreoXAlumno.IdAlumno.ToString();
+                            ParametrosCorreo = IdEmpresa.ToString() + ";" + IdAnio.ToString() + ";" + IdSedeSession.ToString() + ";" + CorreoXAlumno.IdAlumno.ToString();
+
 
                         var info = new tb_ColaCorreo_Info
                         {
@@ -284,13 +285,13 @@ namespace Core.Web.Areas.Academico.Controllers
                     var CorreosAlumno = List_AlumnosPeriodoActual.get_list(IdTransaccionSession).Where(q => q.IdAlumno == IdAlumno).FirstOrDefault();
                     var DestinatarioAlumno = (RepLegal == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.CorreoRepLegal) ? "" : CorreosAlumno.CorreoRepLegal + ";")) : "") + (RepEconomico == true ? (CorreosAlumno == null ? "" : (string.IsNullOrEmpty(CorreosAlumno.correoRepEconomico) ? "" : CorreosAlumno.correoRepEconomico + ";")) : "") + (!string.IsNullOrEmpty(Copia) ? Copia + ";" : "");
                     if (CodigoCorreo == "ACA_013")
-                        ParametrosCorreo = IdEmpresa.ToString() + ";" + CorreosAlumno.IdAlumno.ToString() + ";" + IdCatalogoTipo.ToString() + ";" + IdCatalogoParcial.ToString() + ";" + (MostrarRetirados == true ? "1" : "0") + ";" + (MostrarPromedios == true ? "1" : "0");
+                        ParametrosCorreo = IdEmpresa.ToString() + ";" + IdAnio.ToString() + ";" + IdSedeSession.ToString() + ";" + CorreosAlumno.IdAlumno.ToString() + ";" + IdCatalogoTipo.ToString() + ";" + IdCatalogoParcial.ToString() + ";" + (MostrarRetirados == true ? "1" : "0") + ";" + (MostrarPromedios == true ? "1" : "0");
 
                     if (CodigoCorreo == "ACA_014")
-                        ParametrosCorreo = IdEmpresa.ToString() + ";" + CorreosAlumno.IdAlumno.ToString() + ";" + IdCatalogoTipo.ToString() + ";" + (MostrarRetirados == true ? "1" : "0") + ";" + (MostrarPromedios == true ? "1" : "0");
+                        ParametrosCorreo = IdEmpresa.ToString() + ";" + IdAnio.ToString() + ";" + IdSedeSession.ToString() + ";" + CorreosAlumno.IdAlumno.ToString() + ";" + IdCatalogoTipo.ToString() + ";" + (MostrarRetirados == true ? "1" : "0") + ";" + (MostrarPromedios == true ? "1" : "0");
 
                     if (CodigoCorreo == "ACA_052")
-                        ParametrosCorreo = IdEmpresa.ToString() + ";" + CorreosAlumno.IdAlumno.ToString();
+                        ParametrosCorreo = IdEmpresa.ToString() + ";" + IdAnio.ToString() + ";" + IdSedeSession.ToString() + ";" + CorreosAlumno.IdAlumno.ToString();
 
                     var info = new tb_ColaCorreo_Info
                     {
@@ -313,7 +314,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult actualizarTreeList(int IdEmpresa = 0, int IdAnio = 0, int CantidadIni = 0, int CantidadFin = 0, decimal IdTransaccionSession = 0)
+        public JsonResult actualizarTreeList(int IdEmpresa = 0, int IdAnio = 0, decimal IdTransaccionSession = 0)
         {
             var lst_correo_masivo = bus_treelist.GetList_CorreoMasivoAcademico(IdEmpresa, IdAnio);
             Lista_TreeList.set_list(lst_correo_masivo, IdTransaccionSession);

@@ -97,6 +97,8 @@
     function guardar() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: $("#IdAnio").val(),
+            IdSedeSession: $("#IdSede").val(),
             Modificado: $("#modificado").val(),
             IDs: selectedIDs,
             IdAlumno : IdAlumno.GetValue(),
@@ -371,8 +373,6 @@ function actualizarTreeList() {
     var datos = {
         IdEmpresa: $("#IdEmpresa").val(),
         IdAnio: $("#IdAnio").val(),
-        CantidadIni: $("#CantidadIni").val(),
-        CantidadFin: $("#CantidadFin").val(),
         IdTransaccionSession: $("#IdTransaccionSession").val(),
     }
     $.ajax({

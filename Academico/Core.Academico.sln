@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.TestServicios", "Core.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Admision", "Core.Admision\Core.Admision.csproj", "{D5FCAE82-8DC1-42B1-A059-B9F4CCDC7010}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FixedAcademicoServicioCorreoSetup", "FixedAcademicoServicioCorreoSetup\FixedAcademicoServicioCorreoSetup.vdproj", "{78F7BB59-FCD1-44C9-8DC5-1729F5B4BCC5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,8 @@ Global
 		{D5FCAE82-8DC1-42B1-A059-B9F4CCDC7010}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5FCAE82-8DC1-42B1-A059-B9F4CCDC7010}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5FCAE82-8DC1-42B1-A059-B9F4CCDC7010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78F7BB59-FCD1-44C9-8DC5-1729F5B4BCC5}.Debug|Any CPU.ActiveCfg = Debug
+		{78F7BB59-FCD1-44C9-8DC5-1729F5B4BCC5}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
