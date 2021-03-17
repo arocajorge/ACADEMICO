@@ -48,7 +48,7 @@ namespace Core.Web.Areas.Banco.Controllers
         public ActionResult DescargarArchivo(decimal IdTransaccion = 0)
         {
             string fileName = Guid.NewGuid() + ".txt";
-            string filePath = "/Content/UploadedFiles/Reports/"+ fileName;
+            string filePath = "~/Content/UploadedFiles/Reports/" + fileName;
             StreamWriter sw = new StreamWriter(Server.MapPath(filePath));
             sw.WriteLine("9990940           "+new DateTime(DateTime.Now.Date.Year,DateTime.Now.Month,1).ToString("MM/dd/yyyy"));
             var lst = Lista.get_list(IdTransaccion);

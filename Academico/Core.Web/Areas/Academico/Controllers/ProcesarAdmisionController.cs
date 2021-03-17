@@ -1752,8 +1752,8 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_AlumnoDocumento_Info> lst_documentos = new List<aca_AlumnoDocumento_Info>();
             string ftpURLPrefix = "ftp://";
             List<string> Lista = new List<string>();
-            //string url = ftpURLPrefix + info_parametros.FtpUrl + IdAdmision.ToString();
-            string url = ftpURLPrefix + info_parametros.FtpUrl + "1";
+            string url = ftpURLPrefix + info_parametros.FtpUrl + IdAdmision.ToString();
+            //string url = ftpURLPrefix + info_parametros.FtpUrl + "1";
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(url);
 
             request.Method = WebRequestMethods.Ftp.ListDirectory;

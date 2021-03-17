@@ -403,6 +403,12 @@
     <Compile Include="Reportes\Academico\ACA_034_General_Rpt.Designer.cs">
       <DependentUpon>ACA_034_General_Rpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\Academico\ACA_076_Rpt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\Academico\ACA_076_Rpt.Designer.cs">
+      <DependentUpon>ACA_076_Rpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\Academico\ACA_075_Rpt.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -9802,6 +9808,9 @@
     <Content Include="Areas\Academico\Views\CorreoMasivoAcademico\_CmbAlumno.cshtml" />
     <Content Include="Areas\Academico\Views\CorreoMasivoAcademico\_HtmlEditorPartial.cshtml" />
     <Content Include="Areas\Academico\Views\CorreoMasivoAcademico\Index.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_076.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Anio.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Sede.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -9907,6 +9916,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_034_General_Rpt.resx">
       <DependentUpon>ACA_034_General_Rpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\Academico\ACA_076_Rpt.resx">
+      <DependentUpon>ACA_076_Rpt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Academico\ACA_075_Rpt.resx">
       <DependentUpon>ACA_075_Rpt.cs</DependentUpon>

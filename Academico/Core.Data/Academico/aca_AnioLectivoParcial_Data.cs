@@ -73,6 +73,7 @@ namespace Core.Data.Academico
                     });
                 }
                 */
+                Lista.ForEach(q=>q.IdString= q.IdEmpresa.ToString("0000") + q.IdAnio.ToString("0000") + q.IdCatalogoParcial.ToString("0000"));
                 return Lista;
             }
             catch (Exception)
@@ -406,7 +407,7 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_AnioLectivoParcial Entity = Context.aca_AnioLectivoParcial.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdSede == info.IdSede && q.IdCatalogoParcial== info.IdCatalogoParcial);
+                    aca_AnioLectivoParcial Entity = Context.aca_AnioLectivoParcial.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio== info.IdAnio && q.IdSede == info.IdSede && q.IdCatalogoParcial== info.IdCatalogoParcial);
                     if (Entity == null)
                         return false;
 

@@ -28,6 +28,7 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la tabla
         public string NomCatalogo { get; set; }
+        public string IdString { get; set; }
         #endregion
     }
 }

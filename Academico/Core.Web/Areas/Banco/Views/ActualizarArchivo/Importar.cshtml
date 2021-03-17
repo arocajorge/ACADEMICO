@@ -34,7 +34,8 @@
 
     function DescargarArchivo() {
         var Transaccion = $("#IdTransaccionSession").val();
-        window.open("/Banco/ActualizarArchivo/DescargarArchivo?IdTransaccion=" + Transaccion, "", "");
+        var location = GetPathServer();
+        window.open(location +"/Banco/ActualizarArchivo/DescargarArchivo?IdTransaccion=" + Transaccion, "", "");
     }
 
 </script>

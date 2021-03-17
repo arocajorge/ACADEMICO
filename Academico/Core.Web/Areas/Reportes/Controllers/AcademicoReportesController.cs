@@ -4735,6 +4735,67 @@ namespace Core.Web.Areas.Reportes.Controllers
         }
 
         #endregion
+
+        #region ACA_076
+        private void cargar_combos_ACA_046(aca_MatriculaCalificacionParcial_Info model)
+        {
+            aca_CatalogoTipo_Bus bus_catalogo = new aca_CatalogoTipo_Bus();
+            var lst_quimestre = new List<aca_CatalogoTipo_Info>();
+            var quim1 = bus_catalogo.GetInfo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+            lst_quimestre.Add(quim1);
+            var quim2 = bus_catalogo.GetInfo(Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2));
+            lst_quimestre.Add(quim2);
+            ViewBag.lst_quimestre = lst_quimestre;
+        }
+        public ActionResult ACA_076()
+        {
+            aca_MatriculaCalificacionParcial_Info model = new aca_MatriculaCalificacionParcial_Info();
+            model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
+            model.MostrarRetirados = false;
+            ACA_076_Rpt report = new ACA_076_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
+            report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            cargar_combos_ACA_046(model);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ACA_076(aca_MatriculaCalificacionParcial_Info model)
+        {
+            ACA_076_Rpt report = new ACA_076_Rpt();
+
+            report.p_IdEmpresa.Value = model.IdEmpresa;
+            report.p_IdSede.Value = model.IdSede;
+            report.p_IdAnio.Value = model.IdAnio;
+            report.p_IdNivel.Value = model.IdNivel;
+            report.p_IdJornada.Value = model.IdJornada;
+            report.p_IdCurso.Value = model.IdCurso;
+            report.p_IdParalelo.Value = model.IdParalelo;
+            report.p_IdCatalogoTipo.Value = model.IdCatalogoTipo;
+            report.p_MostrarRetirados.Value = model.MostrarRetirados;
+            report.usuario = SessionFixed.IdUsuario;
+            report.empresa = SessionFixed.NomEmpresa;
+            ViewBag.Report = report;
+
+            cargar_combos_ACA_046(model);
+            return View(model);
+        }
+        #endregion
     }
 
     public class aca_ReporteCalificacion_Combos_List

@@ -160,6 +160,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacionParticipacion_Info> Lista = new List<aca_MatriculaCalificacionParticipacion_Info>();
+                List<aca_MatriculaCalificacionParticipacion_Info> ListaFinal = new List<aca_MatriculaCalificacionParticipacion_Info>();
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -232,6 +233,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacionParticipacion_Info> Lista = new List<aca_MatriculaCalificacionParticipacion_Info>();
+                List<aca_MatriculaCalificacionParticipacion_Info> ListaFinal = new List<aca_MatriculaCalificacionParticipacion_Info>();
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -280,9 +282,9 @@ namespace Core.Data.Academico
                                                     string.IsNullOrEmpty(reader["CalificacionP3"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP3"])
                                                     : (decimal?)null)),
                             Calificacion2 = (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?
-                                                string.IsNullOrEmpty(reader["CalificacionP2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP1"])
+                                                string.IsNullOrEmpty(reader["CalificacionP2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP2"])
                                                 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ?
-                                                    string.IsNullOrEmpty(reader["CalificacionP4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP3"])
+                                                    string.IsNullOrEmpty(reader["CalificacionP4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP4"])
                                                     : (decimal?)null)),
                             Promedio = (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?
                                                 string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ1"])
@@ -293,8 +295,8 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-
-                return Lista;
+                ListaFinal = Lista.OrderBy(q => q.NombreAlumno).ToList();
+                return ListaFinal;
             }
             catch (Exception)
             {
@@ -307,6 +309,8 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacionParticipacion_Info> Lista = new List<aca_MatriculaCalificacionParticipacion_Info>();
+                List<aca_MatriculaCalificacionParticipacion_Info> ListaFinal = new List<aca_MatriculaCalificacionParticipacion_Info>();
+
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -355,9 +359,9 @@ namespace Core.Data.Academico
                                                     string.IsNullOrEmpty(reader["CalificacionP3"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP3"])
                                                     : (decimal?)null)),
                             Calificacion2 = (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?
-                                                string.IsNullOrEmpty(reader["CalificacionP2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP1"])
+                                                string.IsNullOrEmpty(reader["CalificacionP2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP2"])
                                                 : (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2) ?
-                                                    string.IsNullOrEmpty(reader["CalificacionP4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP3"])
+                                                    string.IsNullOrEmpty(reader["CalificacionP4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP4"])
                                                     : (decimal?)null)),
                             Promedio = (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1) ?
                                                 string.IsNullOrEmpty(reader["PromedioQ1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["PromedioQ1"])
@@ -368,8 +372,8 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-
-                return Lista;
+                ListaFinal = Lista.OrderBy(q=>q.NombreAlumno).ToList();
+                return ListaFinal;
             }
             catch (Exception)
             {

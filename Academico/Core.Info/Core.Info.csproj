@@ -287,6 +287,7 @@
     <Compile Include="Reportes\Academico\ACA_001_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_034_General_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_037_Info.cs" />
+    <Compile Include="Reportes\Academico\ACA_076_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_049_General_Detalle_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_049_General_Info.cs" />
     <Compile Include="Reportes\Academico\ACA_049_General_Promedio_Info.cs" />

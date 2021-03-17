@@ -181,7 +181,7 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            aca_AnioLectivoParcial_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdCatalogoParcial == info_det.IdCatalogoParcial).FirstOrDefault();
+            aca_AnioLectivoParcial_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdString == info_det.IdString).FirstOrDefault();
             edited_info.FechaInicio = info_det.FechaInicio;
             edited_info.FechaFin = info_det.FechaFin;
             edited_info.EsExamen = info_det.EsExamen;

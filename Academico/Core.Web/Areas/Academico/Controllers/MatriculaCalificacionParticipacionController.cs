@@ -511,6 +511,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 ListaCalificaciones = bus_calificacion_participacion.GetList_Calificaciones(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCampoAccion, IdTematica, IdCatalogoParcialTipo, IdProfesor);
             }
 
+            ListaCalificaciones.OrderBy(q=>q.NombreAlumno);
             foreach (var item in ListaCalificaciones)
             {
                 item.IdCatalogoParcialTipo = IdCatalogoParcialTipo;
