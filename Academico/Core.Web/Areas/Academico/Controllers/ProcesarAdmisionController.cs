@@ -1780,7 +1780,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 var aluDocumento = new aca_AlumnoDocumento_Info
                 {
                     Secuencia = secuencia++,
-                    NomDocumento = item
+                    NomDocumento = item,
+                    urlDoc = url+"/"+item
                 };
                 lst_documentos.Add(aluDocumento);
             }

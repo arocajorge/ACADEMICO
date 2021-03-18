@@ -41,11 +41,11 @@ namespace Core.Admision.Controllers
         fa_cliente_tipo_Bus bus_clientetipo = new fa_cliente_tipo_Bus();
         fa_TerminoPago_Bus bus_termino_pago = new fa_TerminoPago_Bus();
         tb_ColaCorreo_Bus bus_correo = new tb_ColaCorreo_Bus();
-        string MensajeSuccess = "La transacción se ha realizado con éxito";
+        string MensajeSuccess = "Su requerimiento ha sido enviado con éxito al departamento de secretaria.";
         string mensaje = string.Empty;
         #endregion
 
-        public ActionResult Index()
+        public ActionResult Index(bool Guardado=false)
         {
             int IdEmpresa = 1;
             var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0);
@@ -162,12 +162,22 @@ namespace Core.Admision.Controllers
             };
 
             cargar_combos(model);
+            if (Guardado == true)
+            {
+                ViewBag.MensajeSuccess = MensajeSuccess;
+            }
+            else
+            {
+                ViewBag.MensajeSuccess = null;
+            }
+
             return View(model);
         }
 
         [HttpPost]
         public ActionResult Index(aca_Admision_Info model)
         {
+            ViewBag.MensajeSuccess = null;
             if (!validar(model, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -242,7 +252,8 @@ namespace Core.Admision.Controllers
                 var path = Path.Combine(FilePath, NombreArchivoGuardar);
                 model.CertificadoLaboral.SaveAs(path);
             }
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", new { Guardado = true });
         }
 
         #region Metodos
@@ -343,84 +354,87 @@ namespace Core.Admision.Controllers
             string return_naturaleza_padre = "";
             string return_naturaleza_madre = "";
             string return_naturaleza_representante = "";
-            if (info.FotoAspirante != null)
+            if (info.IdAlumno == (decimal?)null || info.IdAlumno == 0)
             {
-                if (info.FotoAspirante.ContentLength > 0 && info.FotoAspirante.ContentLength >= 4000000)
+                if (info.FotoAspirante != null)
                 {
-                    msg = "Peso de archivo (foto del aspirante) no permitido";
+                    if (info.FotoAspirante.ContentLength > 0 && info.FotoAspirante.ContentLength >= 4000000)
+                    {
+                        msg = "Peso de archivo (foto del aspirante) no permitido";
+                        return false;
+                    }
+                }
+                else
+                {
+                    msg = "Cargue el archivo (foto del aspirante)";
                     return false;
                 }
-            }
-            else
-            {
-                msg = "Cargue el archivo (foto del aspirante)";
-                return false;
-            }
 
-            if (info.CedulaAspirante != null)
-            {
-                if (info.CedulaAspirante.ContentLength > 0 && info.CedulaAspirante.ContentLength >= 4000000)
+                if (info.CedulaAspirante != null)
                 {
-                    msg = "Peso de archivo (cédula del aspirante) no permitido";
+                    if (info.CedulaAspirante.ContentLength > 0 && info.CedulaAspirante.ContentLength >= 4000000)
+                    {
+                        msg = "Peso de archivo (cédula del aspirante) no permitido";
+                        return false;
+                    }
+                }
+                else
+                {
+                    msg = "Cargue el archivo (cédula del aspirante)";
                     return false;
                 }
-            }
-            else
-            {
-                msg = "Cargue el archivo (cédula del aspirante)";
-                return false;
-            }
-            if (info.CedulaRepresentante != null)
-            {
-                if (info.CedulaRepresentante.ContentLength > 0 && info.CedulaRepresentante.ContentLength >= 4000000)
+                if (info.CedulaRepresentante != null)
                 {
-                    msg = "Peso de archivo (cédula del representante) no permitido";
+                    if (info.CedulaRepresentante.ContentLength > 0 && info.CedulaRepresentante.ContentLength >= 4000000)
+                    {
+                        msg = "Peso de archivo (cédula del representante) no permitido";
+                        return false;
+                    }
+                }
+                else
+                {
+                    msg = "Cargue el archivo (cédula del representante)";
                     return false;
                 }
-            }
-            else
-            {
-                msg = "Cargue el archivo (cédula del representante)";
-                return false;
-            }
-            if (info.RecordAcademicoAspirante != null)
-            {
-                if (info.RecordAcademicoAspirante.ContentLength > 0 && info.RecordAcademicoAspirante.ContentLength >= 4000000)
+                if (info.RecordAcademicoAspirante != null)
                 {
-                    msg = "Peso de archivo (record académico del aspirante) no permitido";
+                    if (info.RecordAcademicoAspirante.ContentLength > 0 && info.RecordAcademicoAspirante.ContentLength >= 4000000)
+                    {
+                        msg = "Peso de archivo (record académico del aspirante) no permitido";
+                        return false;
+                    }
+                }
+                else
+                {
+                    msg = "Cargue el archivo (record académico del aspirante)";
                     return false;
                 }
-            }
-            else
-            {
-                msg = "Cargue el archivo (record académico del aspirante)";
-                return false;
-            }
-            if (info.PagoAlDiaAspirante != null)
-            {
-                if (info.PagoAlDiaAspirante.ContentLength > 0 && info.PagoAlDiaAspirante.ContentLength >= 4000000)
+                if (info.PagoAlDiaAspirante != null)
                 {
-                    msg = "Peso de archivo (pago al día) no permitido";
+                    if (info.PagoAlDiaAspirante.ContentLength > 0 && info.PagoAlDiaAspirante.ContentLength >= 4000000)
+                    {
+                        msg = "Peso de archivo (pago al día) no permitido";
+                        return false;
+                    }
+                }
+                else
+                {
+                    msg = "Cargue el archivo (pago al día)";
                     return false;
                 }
-            }
-            else
-            {
-                msg = "Cargue el archivo (pago al día)";
-                return false;
-            }
-            if (info.CertificadoLaboral != null)
-            {
-                if (info.CertificadoLaboral.ContentLength > 0 && info.CertificadoLaboral.ContentLength >= 4000000)
+                if (info.CertificadoLaboral != null)
                 {
-                    msg = "Peso de archivo (certificado laboral) no permitido";
+                    if (info.CertificadoLaboral.ContentLength > 0 && info.CertificadoLaboral.ContentLength >= 4000000)
+                    {
+                        msg = "Peso de archivo (certificado laboral) no permitido";
+                        return false;
+                    }
+                }
+                else
+                {
+                    msg = "Cargue el archivo (certificado laboral)";
                     return false;
                 }
-            }
-            else
-            {
-                msg = "Cargue el archivo (certificado laboral)";
-                return false;
             }
 
             info.NombreCompleto_Aspirante = info.Apellidos_Aspirante + ' ' + info.Nombres_Aspirante;
@@ -613,6 +627,14 @@ namespace Core.Admision.Controllers
                 msg = "Complete la información del aspirante";
                 info.info_valido_aspirante = false;
                 return false;
+            }
+
+
+            if (info.SeFactura_Madre ==false && info.SeFactura_Padre == false && info.SeFactura_Representante == false)
+            {
+                    msg = "Debe seleccionar al representante económico (persona que se factura)";
+                    info.info_valido_padre = false;
+                    return false;
             }
 
             if (!string.IsNullOrEmpty(info.IdTipoDocumento_Padre) && !string.IsNullOrEmpty(info.Naturaleza_Padre) && !string.IsNullOrEmpty(info.CedulaRuc_Padre))

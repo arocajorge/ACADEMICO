@@ -689,6 +689,12 @@ function ValidarDatosRegistro_Representante() {
         }
     }
 
+    if ($("#SeFactura_Padre").prop('checked') == false && $("#SeFactura_Madre").prop('checked') == false && $("#SeFactura_Representante").prop('checked') == false)
+    {
+        mensaje += "representante económico (persona que se factura), ";
+    }
+
+
     IrAlInicio();
     if (mensaje == "") {
         $("#MensajeError").html("");
@@ -1650,13 +1656,9 @@ function get_info_x_num_cedula_aspirante() {
             if (data == "") {
                 return;
             }
-            //if (data.IdAlumno != 0) {
-            //    //alert("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
-            //    $("#MensajeError").html("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
-            //    $("#DivError").show();
-            //    $("#AspiranteValido").val("0");
-            //    //window.location.href = '/Admision/Index'
-            //}
+            if (data.IdAlumno != 0) {
+                $("#IdAlumno").val(data.IdAlumno);
+            }
             if (data.IdAdmision != 0) {
                 $("#MensajeError").html("El aspirante ya fue registrado");
                 $("#DivError").show();
@@ -2144,62 +2146,78 @@ function ValidarTerminos() {
 function ValidarArchivos() {
     var mensaje = "";
 
-    if($('#FotoAspirante').val()==""){
-        mensaje += "seleccione archivo para foto del aspirante, ";
-    }
-    else {
-        if ($("#FotoAspirante")[0].files[0].size > 0 && $("#FotoAspirante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo foto del aspirante ha superado el peso máximo, ";
+    if ($("#IdAlumno").val() == null || $("#IdAlumno").val() == 0) {
+        if ($('#FotoAspirante').val() == "") {
+            mensaje += "seleccione archivo para foto del aspirante, ";
+        }
+        else {
+            if ($("#FotoAspirante")[0].files[0].size > 0 && $("#FotoAspirante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo foto del aspirante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#CedulaAspirante').val() == "") {
+            mensaje += "seleccione archivo para cédula del aspirante, ";
+        }
+        else {
+            if ($("#CedulaAspirante")[0].files[0].size > 0 && $("#CedulaAspirante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo cédula del aspirante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#CedulaRepresentante').val() == "") {
+            mensaje += "seleccione archivo para cédula del representante, ";
+        }
+        else {
+            if ($("#CedulaRepresentante")[0].files[0].size > 0 && $("#CedulaRepresentante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo cédula del representante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#RecordAcademicoAspirante').val() == "") {
+            mensaje += "seleccione archivo para record académico del aspirante, ";
+        }
+        else {
+            if ($("#RecordAcademicoAspirante")[0].files[0].size > 0 && $("#RecordAcademicoAspirante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo record académico del aspirante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#PagoAlDiaAspirante').val() == "") {
+            mensaje += "seleccione archivo para pago al día del aspirante, ";
+        }
+        else {
+            if ($("#PagoAlDiaAspirante")[0].files[0].size > 0 && $("#PagoAlDiaAspirante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo pago al día del aspirante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#CertificadoLaboral').val() == "") {
+            mensaje += "seleccione archivo para certificado laboral, ";
+        }
+        else {
+            if ($("#CertificadoLaboral")[0].files[0].size > 0 && $("#CertificadoLaboral")[0].files[0].size > 4000000) {
+                mensaje += "el archivo certificado laboral ha superado el peso máximo, ";
+            }
+        }
+
+        IrAlInicio();
+        if (mensaje == "") {
+            $("#MensajeError").html("");
+            $("#DivError").hide();
+
+            $("#DatosArchivos").hide();
+            $("#BtnArchivos").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+            $("#DatosTerminos").show();
+            $("#BtnTerminos").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        }
+        else {
+            $("#MensajeError").html(mensaje);
+            $("#DivError").show();
         }
     }
-
-    if ($('#CedulaAspirante').val() == "") {
-        mensaje += "seleccione archivo para cédula del aspirante, ";
-    }
     else {
-        if ($("#CedulaAspirante")[0].files[0].size > 0 && $("#CedulaAspirante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo cédula del aspirante ha superado el peso máximo, ";
-        }
-    }
-
-    if ($('#CedulaRepresentante').val() == "") {
-        mensaje += "seleccione archivo para cédula del representante, ";
-    }
-    else {
-        if ($("#CedulaRepresentante")[0].files[0].size > 0 && $("#CedulaRepresentante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo cédula del representante ha superado el peso máximo, ";
-        }
-    }
-
-    if ($('#RecordAcademicoAspirante').val() == "") {
-        mensaje += "seleccione archivo para record académico del aspirante, ";
-    }
-    else {
-        if ($("#RecordAcademicoAspirante")[0].files[0].size > 0 && $("#RecordAcademicoAspirante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo record académico del aspirante ha superado el peso máximo, ";
-        }
-    }
-
-    if ($('#PagoAlDiaAspirante').val() == "") {
-        mensaje += "seleccione archivo para pago al día del aspirante, ";
-    }
-    else {
-        if ($("#PagoAlDiaAspirante")[0].files[0].size > 0 && $("#PagoAlDiaAspirante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo pago al día del aspirante ha superado el peso máximo, ";
-        }
-    }
-
-    if ($('#CertificadoLaboral').val() == "") {
-        mensaje += "seleccione archivo para certificado laboral, ";
-    }
-    else {
-        if ($("#CertificadoLaboral")[0].files[0].size > 0 && $("#CertificadoLaboral")[0].files[0].size > 4000000) {
-            mensaje += "el archivo certificado laboral ha superado el peso máximo, ";
-        }
-    }
-
-    IrAlInicio();
-    if (mensaje == "") {
+        IrAlInicio();
         $("#MensajeError").html("");
         $("#DivError").hide();
 
@@ -2208,10 +2226,7 @@ function ValidarArchivos() {
         $("#DatosTerminos").show();
         $("#BtnTerminos").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
     }
-    else {
-        $("#MensajeError").html(mensaje);
-        $("#DivError").show();
-    }
+    
 };
 
 function CargarParroquia_Facturacion_Padre() {

@@ -10,7 +10,7 @@
 <div class="mobile-menu md:hidden">
     <div class="mobile-menu-bar">
         <a href="" class="flex mr-auto">
-            <img title="Sistema de admisión" class="w-6" src="~dist/images/logo.svg">
+            <img alt="Sistema de admisión" class="w-6" src="~/dist/images/liceo.png">
         </a>
         <a href="javascript:;" id="mobile-menu-toggler"> <i data-feather="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
     </div>
@@ -36,7 +36,7 @@
     <!-- BEGIN: Simple Menu -->
     <nav class="side-nav side-nav--simple">
         <a href="" class="intro-x flex items-center pl-5 pt-4">
-            <img alt="Sistema de admisión" class="w-6" src="~/dist/images/logo.svg">
+            <img alt="Sistema de admisión" class="w-6" src="~/dist/images/liceo.png">
         </a>
         <div class="side-nav__devider my-6"></div>
         <ul>
@@ -69,8 +69,15 @@
                     Registro de admisión
                 </h2>
             </div>
+            @if (ViewBag.MensajeSuccess != null)
+            {
+                <div class="rounded-md flex items-center px-5 py-4 mb-2 border border-theme-1 text-theme-1 dark:text-theme-10 dark:border-theme-10"> 
+                    <i data-feather="alert-circle" class="w-6 h-6 mr-2"></i> @ViewBag.mensajeSuccess <i data-feather="x" class="w-4 h-4 ml-auto"></i> 
+                </div>
+            }
+
             @if (ViewBag.mensaje != null)
-        {
+            {
             <div class="rounded-md flex items-center px-5 py-4 mb-2 border border-theme-6 text-theme-6 dark:border-theme-6">
                 <i data-feather="alert-octagon" class="w-6 h-6 mr-2"></i> @ViewBag.mensaje <i data-feather="x" class="w-4 h-4 ml-auto"></i>
             </div>
@@ -84,32 +91,32 @@
             <div class="intro-y box py-10 sm:py-20 mt-5">
                 <div class="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
                     <div class="intro-x lg:text-center flex items-center lg:block flex-1 z-10">
-                        <button type="button" class="w-10 h-10 rounded-full button text-white bg-theme-1" id="BtnAspirante">1</button>
-                        <div class="lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto">Datos del aspirante</div>
+                        <button type="button" class="w-10 h-10 rounded-full button text-white bg-theme-1" id="BtnAspirante"><b>1</b></button>
+                        <div class="lg:w-32 font-medium text-base lg:mt-3 ml-3 lg:mx-auto"><b>Datos del aspirante</b></div>
                     </div>
                     <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnPadre">2</button>
-                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos del padre</div>
+                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnPadre"><b>2</b></button>
+                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600"><b>Datos del padre</b></div>
                     </div>
                     <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnMadre">3</button>
-                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos de la madre</div>
+                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnMadre"><b>3</b></button>
+                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600"><b>Datos de la madre</b></div>
                     </div>
                     <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnRepresentante">4</button>
-                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos del representante</div>
+                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnRepresentante"><b>4</b></button>
+                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600"><b>Datos del representante</b></div>
                     </div>
                     <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnSocioEconomico">5</button>
-                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Datos socioeconómicos</div>
+                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnSocioEconomico"><b>5</b></button>
+                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600"><b>Datos socioeconómicos</b></div>
                     </div>
                     <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnArchivos">6</button>
-                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Archivos</div>
+                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnArchivos"><b>6</b></button>
+                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600"><b>Archivos</b></div>
                     </div>
                     <div class="intro-x lg:text-center flex items-center mt-5 lg:mt-0 lg:block flex-1 z-10">
-                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnTerminos">7</button>
-                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600">Términos y Condiciones</div>
+                        <button type="button" class="w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1" id="BtnTerminos"><b>7</b></button>
+                        <div class="lg:w-32 text-base lg:mt-3 ml-3 lg:mx-auto text-gray-700 dark:text-gray-600"><b>Términos y Condiciones</b></div>
                     </div>
                     <div class="wizard__line hidden lg:block w-2/3 bg-gray-200 dark:bg-dark-1 absolute mt-5"></div>
                 </div>
@@ -127,6 +134,7 @@
                     @Html.HiddenFor(q => q.IdTipoCredito_Padre, new { @id = "IdTipoCredito_Padre" })
                     @Html.HiddenFor(q => q.IdTipoCredito_Madre, new { @id = "IdTipoCredito_Madre" })
                     @Html.HiddenFor(q => q.IdTipoCredito_Representante, new { @id = "IdTipoCredito_Representante" })
+                    @Html.HiddenFor(q => q.IdAlumno, new { @id = "IdAlumno" })
                     <div class="font-medium text-base">Datos de la admisión</div>
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 sm:col-span-3">

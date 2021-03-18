@@ -19,6 +19,7 @@ namespace Core.Info.Academico
         public string NomDocumento { get; set; }
         public string Ruta { get; set; }
         public bool seleccionado { get; set; }
+        public string urlDoc { get; set; }
         #endregion
     }
 }
