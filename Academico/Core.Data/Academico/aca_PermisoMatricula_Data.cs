@@ -233,7 +233,9 @@ namespace Core.Data.Academico
                             IdCatalogoPERNEG = Convert.ToInt32(reader["IdCatalogoPERNEG"]),
                             Fecha = Convert.ToDateTime(reader["Fecha"]),
                             Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
-                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"])
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            IdUsuarioCreacion = string.IsNullOrEmpty(reader["IdUsuarioCreacion"].ToString()) ? null : reader["IdUsuarioCreacion"].ToString(),
+                            IdUsuarioModificacion = string.IsNullOrEmpty(reader["IdUsuarioModificacion"].ToString()) ? null : reader["IdUsuarioModificacion"].ToString(),
                         };
                     }
                 }

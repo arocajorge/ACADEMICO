@@ -52,7 +52,7 @@ namespace Core.Web.Reportes.Academico
                 Curso = info.NomCurso;
                 Aprovechamiento =  ((info.Promedio==0 || info.Promedio == null) ? "" : Convert.ToDecimal(info.Promedio).ToString("N2"));
                 var info_conducta = bus_conducta.GetInfoXPromedioConducta(IdEmpresa, IdAnio, Convert.ToDecimal(info.Conducta));
-                Comportamiento = (info_conducta==null ? "": info_conducta.Letra);
+                Comportamiento = (info.Conducta==null ? null : (info_conducta==null ? "": info_conducta.Letra));
 
                 lst_rpt.Add(info);
             }

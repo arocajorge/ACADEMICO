@@ -150,7 +150,16 @@
             </div>
         </div>
     }
-
+    if (ViewBag.mensajeInfo != null)
+    {
+        <div class="col-md-12">
+            <div class="callout callout-info">
+                <h4>
+                    <i class="icon fa fa-exclamation"></i> <label id="MensajeInfo">@ViewBag.mensajeInfo</label>
+                </h4>
+            </div>
+        </div>
+    }
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-2">

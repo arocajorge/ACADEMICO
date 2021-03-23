@@ -1,7 +1,10 @@
 ﻿using Core.Bus.Academico;
+using Core.Bus.CuentasPorCobrar;
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Info.Academico;
+using Core.Info.CuentasPorCobrar;
+using Core.Info.Facturacion;
 using Core.Info.General;
 using Core.Info.Helps;
 using Core.Web.Helps;
@@ -66,9 +69,13 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AlumnoDocumentoAdmision_List Lista_DocAdmision = new aca_AlumnoDocumentoAdmision_List();
         aca_parametro_Bus bus_parametro = new aca_parametro_Bus();
         tb_ColaCorreo_Bus bus_cola_correo = new tb_ColaCorreo_Bus();
-    
+        aca_PermisoMatricula_Bus bus_permiso = new aca_PermisoMatricula_Bus();
+        fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
+        cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
+        aca_MatriculaCondicional_Bus bus_matricula_condicional = new aca_MatriculaCondicional_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
+        string mensajeInfo = string.Empty;
         #endregion
 
         #region Index
@@ -474,6 +481,75 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Admision_Info model = bus_admision.GetInfo(IdEmpresa, IdAdmision);
             if (model == null)
                 return RedirectToAction("Index");
+
+            #region Validar Deuda y Matricula
+            var IdCatalogoPERNEG_Negar = Convert.ToInt32(cl_enumeradores.eCatalogoPermisoMatricula.NEGAR);
+            var IdCatalogoPERNEG_Permitir = Convert.ToInt32(cl_enumeradores.eCatalogoPermisoMatricula.PERMITIR);
+            var msgInfo = "";
+            var mensaje = "";
+            var info_alumno = bus_alumno.get_info_x_num_cedula(IdEmpresa, model.CedulaRuc_Aspirante);
+            var IdAlumno = info_alumno == null ? 0 : info_alumno.IdAlumno;
+            List<fa_notaCreDeb_Info> lst_CreditoAlumno = bus_notaDebCre.get_list_credito_favor(model.IdEmpresa, IdAlumno);
+
+
+            if (lst_CreditoAlumno.Sum(q => q.sc_saldo) > 0)
+            {
+                var Saldo = Math.Round(lst_CreditoAlumno.Sum(q => Convert.ToDouble(q.sc_saldo)), 2, MidpointRounding.AwayFromZero).ToString("C2");
+                msgInfo += "El estudiante tiene un saldo a favor: " + Saldo + " - ";
+            }
+
+            var ObsMatriculaCondicional = "";
+            List<aca_MatriculaCondicional_Info> lst_MatriculaCondicional = bus_matricula_condicional.GetList_Matricula(model.IdEmpresa, model.IdAnio, IdAlumno);
+
+            if (lst_MatriculaCondicional.Count() > 0)
+            {
+                var cant = lst_MatriculaCondicional.Count();
+                var cont = 0;
+                foreach (var item in lst_MatriculaCondicional)
+                {
+                    ObsMatriculaCondicional += item.Observacion;
+                    if (cont < (cant - 1))
+                    {
+                        ObsMatriculaCondicional = ObsMatriculaCondicional + " - ";
+                    }
+                    cont++;
+                }
+                msgInfo += "El estudiante tiene matrícula condicional. Observación: " + ObsMatriculaCondicional;
+            }
+            ViewBag.mensajeInfo = msgInfo == "" ? null : msgInfo;
+
+            if (IdAlumno != 0)
+            {
+                var PermitirMatricula = bus_permiso.GetInfo_ByMatricula(model.IdEmpresa, model.IdAnio, IdAlumno, IdCatalogoPERNEG_Permitir);
+
+                if (PermitirMatricula != null && PermitirMatricula.IdPermiso != 0)
+                {
+
+                }
+                else
+                {
+                    var NegarMatricula = bus_permiso.GetInfo_ByMatricula(model.IdEmpresa, model.IdAnio, IdAlumno, IdCatalogoPERNEG_Negar);
+                    if (NegarMatricula != null)
+                    {
+                        var IdUsuario = (string.IsNullOrEmpty(NegarMatricula.IdUsuarioModificacion) ? NegarMatricula.IdUsuarioCreacion : NegarMatricula.IdUsuarioCreacion);
+                        mensaje += "El estudiante tiene negación de matrícula. Observación: " + NegarMatricula.Observacion + " , usuario: " + IdUsuario + " - ";
+                    }
+
+                    List<cxc_cobro_Info> lst_DeudaAlumno = bus_cobro.get_list_deuda(model.IdEmpresa, IdAlumno);
+
+                    if (lst_DeudaAlumno.Sum(q => q.cr_saldo) > 0)
+                    {
+                        var Saldo = Math.Round(lst_DeudaAlumno.Sum(q => q.cr_saldo), 2, MidpointRounding.AwayFromZero).ToString("C2");
+                        mensaje += "El estudiante tiene saldo pendiente: " + Saldo + " - ";
+                    }
+                }
+                ViewBag.mensaje = mensaje == "" ? null : mensaje;
+            }
+            else
+            {
+                ViewBag.mensaje = mensaje == "" ? null : mensaje;
+            }
+            #endregion
 
             if (model.CedulaRuc_Representante == model.CedulaRuc_Padre)
             {
@@ -1160,17 +1236,7 @@ namespace Core.Web.Areas.Academico.Controllers
             }
             else
             {
-                if (info.info_alumno.SeFactura_madre == true && info.info_alumno.SeFactura_padre == true)
-                {
-                    msg = "Debe seleccionar a una sola persona para facturar";
-                    return false;
-                }
-                if (info.info_alumno.SeFactura_madre == true && info.info_alumno.SeFactura_representante == true)
-                {
-                    msg = "Debe seleccionar a una sola persona para facturar";
-                    return false;
-                }
-                if (info.info_alumno.SeFactura_padre == true && info.info_alumno.SeFactura_representante == true)
+                if (info.info_alumno.SeFactura_madre == true && info.info_alumno.SeFactura_padre == true && info.info_alumno.SeFactura_representante == true)
                 {
                     msg = "Debe seleccionar a una sola persona para facturar";
                     return false;
@@ -1195,6 +1261,38 @@ namespace Core.Web.Areas.Academico.Controllers
                 return false;
             }
 
+            var IdCatalogoPERNEG_Negar = Convert.ToInt32(cl_enumeradores.eCatalogoPermisoMatricula.NEGAR);
+            var IdCatalogoPERNEG_Permitir = Convert.ToInt32(cl_enumeradores.eCatalogoPermisoMatricula.PERMITIR);
+            if (info.IdAlumno!=0 )
+            {
+                var PermitirMatricula = bus_permiso.GetInfo_ByMatricula(info.IdEmpresa, info.IdAnio, info.IdAlumno, IdCatalogoPERNEG_Permitir);
+
+                if (PermitirMatricula != null && PermitirMatricula.IdPermiso != 0)
+                {
+
+                }
+                else
+                {
+                    var NegarMatricula = bus_permiso.GetInfo_ByMatricula(info.IdEmpresa, info.IdAnio, info.IdAlumno, IdCatalogoPERNEG_Negar);
+                    if (NegarMatricula != null)
+                    {
+                        var IdUsuario = (string.IsNullOrEmpty(NegarMatricula.IdUsuarioModificacion) ? NegarMatricula.IdUsuarioCreacion : NegarMatricula.IdUsuarioCreacion);
+                        msg += "El estudiante tiene negación de matrícula. Observación: " + NegarMatricula.Observacion + " , usuario: " + IdUsuario + " ";
+                        return false;
+                    }
+
+                    List<cxc_cobro_Info> lst_DeudaAlumno = bus_cobro.get_list_deuda(info.IdEmpresa, info.IdAlumno);
+
+                    if (lst_DeudaAlumno.Sum(q => q.cr_saldo) > 0)
+                    {
+                        var Saldo = Math.Round(lst_DeudaAlumno.Sum(q => q.cr_saldo), 2, MidpointRounding.AwayFromZero).ToString("C2");
+                        msg += "El estudiante tiene saldo pendiente: " + Saldo + " ";
+                        return false;
+                    }
+                }
+            }
+
+
             return true;
         }
         private aca_PreMatricula_Info armar_info_prematricula(aca_Admision_Info model)
@@ -1204,6 +1302,13 @@ namespace Core.Web.Areas.Academico.Controllers
             var info_ExistePersonaMadre = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Madre);
             var info_ExistePersonaRepresentante = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Representante);
             var info_ExisteAlumno = bus_alumno.get_info_x_num_cedula(model.IdEmpresa, model.CedulaRuc_Aspirante);
+
+            int IdEmpresa = Convert.ToInt32(model.IdComboCurso.Substring(0, 4));
+            int IdAnio = Convert.ToInt32(model.IdComboCurso.Substring(4, 4));
+            int IdSede = Convert.ToInt32(model.IdComboCurso.Substring(8, 4));
+            int IdNivel = Convert.ToInt32(model.IdComboCurso.Substring(12, 4));
+            int IdJornada = Convert.ToInt32(model.IdComboCurso.Substring(16, 4));
+            int IdCurso = Convert.ToInt32(model.IdComboCurso.Substring(20, 4));
 
             var info_Alumno = new aca_Alumno_Info
             {
@@ -1240,11 +1345,11 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdGrupoEtnico = model.IdGrupoEtnico_Aspirante,
                 IdUsuario = SessionFixed.IdUsuario,
                 FechaCreacion = DateTime.Now,
-                IdAnio = model.IdAnio,
-                IdSede = model.IdSede,
-                IdJornada = model.IdJornada,
-                IdNivel = model.IdNivel,
-                IdCurso = model.IdCurso,
+                IdAnio = IdAnio,
+                IdSede = IdSede,
+                IdJornada = IdJornada,
+                IdNivel = IdNivel,
+                IdCurso = IdCurso,
                 IdParalelo = model.IdParalelo,
                 IdSucursal = model.IdSucursal,
                 IdReligion = model.IdReligion_Aspirante,
@@ -1573,11 +1678,11 @@ namespace Core.Web.Areas.Academico.Controllers
             IdEmpresa = model.IdEmpresa,
             IdAdmision = model.IdAdmision,
             IdAlumno = info_Alumno==null ? 0 : info_Alumno.IdAlumno,
-            IdAnio = model.IdAnio,
-            IdSede = model.IdSede,
-            IdNivel = model.IdNivel,
-            IdJornada = model.IdJornada,
-            IdCurso = model.IdCurso,
+            IdAnio = IdAnio,
+            IdSede = IdSede,
+            IdNivel = IdNivel,
+            IdJornada = IdJornada,
+            IdCurso = IdCurso,
             IdParalelo = model.IdParalelo,
             IdPlantilla = model.IdPlantilla,
             IdMecanismo = model.IdMecanismo,

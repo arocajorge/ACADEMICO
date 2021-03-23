@@ -30,8 +30,13 @@
     </ul>
 </div>
 <!-- END: Mobile Menu -->
-@using (Html.BeginForm("Index", "Admision", FormMethod.Post, new { @id="FormAdmision", @class = "form", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Index", "Admision", FormMethod.Post, new { @id = "FormAdmision", @class = "form", enctype = "multipart/form-data" }))
 {
+    @*<div class="modal" id="ModalBloqueo">
+        <div class="modal__content p-10 text-center">
+            <img src="~/dist/images/loading.gif" style="align-content:center" width="100%" height="100%" />
+        </div>
+    </div>*@
 <div class="flex">
     <!-- BEGIN: Simple Menu -->
     <nav class="side-nav side-nav--simple">
@@ -87,6 +92,7 @@
                     <i data-feather="alert-octagon" class="w-6 h-6 mr-2"></i> <label id="MensajeError"></label>
                 </div>
             </div>
+            
             <!-- BEGIN: Wizard Layout -->
             <div class="intro-y box py-10 sm:py-20 mt-5">
                 <div class="wizard flex flex-col lg:flex-row justify-center px-5 sm:px-20">
@@ -1359,7 +1365,7 @@
                     <div class="grid grid-cols-12 gap-4 gap-y-5 mt-5">
                         <div class="intro-y col-span-12 flex items-center justify-center sm:justify-end mt-5">
                             <button type="button" class="button w-24 justify-center block bg-gray-200 text-gray-600 dark:bg-dark-1 dark:text-gray-300" onclick="AnteriorTerminos();">Anterior</button>
-                            <button type="button" class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteTerminos();">Guardar</button>
+                            <button type="button" id="Guardar" class="button w-24 justify-center block bg-theme-1 text-white ml-2" onclick="SiguienteTerminos();">Guardar</button>
                         </div>
                     </div>
                 </div>

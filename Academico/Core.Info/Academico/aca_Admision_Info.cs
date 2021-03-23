@@ -212,7 +212,7 @@ namespace Core.Info.Academico
         public string Apellidos_Madre { get; set; }
         public string NombreCompleto_Madre { get; set; }
         public string RazonSocial_Madre { get; set; }
-        [Required(ErrorMessage = "El campo direccion es obligatorio")]
+        //[Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Madre { get; set; }
         //[Required(ErrorMessage = "El campo teléfono es obligatorio")]
         public string Telefono_Madre { get; set; }

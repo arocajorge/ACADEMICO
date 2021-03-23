@@ -29,7 +29,21 @@ function SiguienteAspirante() {
 }
 function SiguientePadre() {
     if ($("#PadreValido").val() == "1") {
+        $("#TienePadre").val("1");
         ValidarDatosRegistro_Padre();
+    }
+    else {
+        if ($("#CedulaRuc_Padre").val() == "") {
+            $("#TienePadre").val("0");
+
+            $("#MensajeError").html("");
+            $("#DivError").hide();
+
+            $("#DatosPadre").hide();
+            $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+            $("#DatosMadre").show();
+            $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        }
     }
 }
 function AnteriorPadre() {
@@ -39,9 +53,36 @@ function AnteriorPadre() {
     $("#BtnAspirante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
 }
 function SiguienteMadre() {
-    if ($("#MadreValido").val() == "1")
-    {
+    if ($("#MadreValido").val() == "1") {
+        $("#TieneMadre").val("1");
         ValidarDatosRegistro_Madre();
+    }
+    else {
+        if ($("#CedulaRuc_Madre").val() == "") {
+            $("#TieneMadre").val("0");
+
+            $("#MensajeError").html("");
+            $("#DivError").hide();
+
+            $("#DatosMadre").hide();
+            $("#BtnMadre").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+            $("#DatosRepresentante").show();
+            $("#BtnRepresentante").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        }
+    }
+
+    if ($("#TieneMadre").val() == "1") {
+        $("#BtnMadreRep").show();
+    }
+    else {
+        $("#BtnMadreRep").hide();
+    }
+
+    if ($("#TienePadre").val() == "1") {
+        $("#BtnPadreRep").show();
+    }
+    else {
+        $("#BtnPadreRep").hide();
     }
 }
 function AnteriorMadre() {
@@ -51,8 +92,7 @@ function AnteriorMadre() {
     $("#BtnPadre").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
 }
 function SiguienteRepresentante() {
-    if ($("#RepresentanteValido").val() == "1")
-    {
+    if ($("#RepresentanteValido").val() == "1") {
         ValidarDatosRegistro_Representante();
     }
 }
@@ -277,6 +317,7 @@ function ValidarDatosRegistro_Padre() {
     if ($("#CedulaRuc_Padre").val() == "") {
         mensaje += "número de cédula, ";
     }
+    /*
     if ($("#FechaNacimiento_Padre").val() == "" || $("#FechaNacimiento_Padre").val() == null) {
         mensaje += "fecha de nacimiento, ";
     }
@@ -385,7 +426,7 @@ function ValidarDatosRegistro_Padre() {
             mensaje += "parroquia para facturacion, ";
         }
     }
-
+    */
     IrAlInicio();
     if (mensaje == "") {
         $("#MensajeError").html("");
@@ -427,6 +468,7 @@ function ValidarDatosRegistro_Madre() {
     if ($("#CedulaRuc_Madre").val() == "") {
         mensaje += "número de cédula, ";
     }
+    /*
     if ($("#FechaNacimiento_Madre").val() == "" || $("#FechaNacimiento_Madre").val() == null) {
         mensaje += "fecha de nacimiento, ";
     }
@@ -535,7 +577,7 @@ function ValidarDatosRegistro_Madre() {
             mensaje += "parroquia para facturacion, ";
         }
     }
-
+    */
     IrAlInicio();
     if (mensaje == "") {
         $("#MensajeError").html("");
@@ -675,19 +717,296 @@ function ValidarDatosRegistro_Representante() {
                 mensaje += "número de carnet de Conadis, ";
             }
         }
+
+        if ($("#SeFactura_Representante").prop('checked') == true) {
+            if ($("#Idtipo_cliente_Representante").val() == "0") {
+                mensaje += "tipo de cliente, ";
+            }
+            if ($("#IdCiudad_Representante_Fact").val() == "") {
+                mensaje += "ciudad para facturacion, ";
+            }
+            if ($("#IdParroquia_Representante_Fact").val() == "") {
+                mensaje += "parroquia para facturacion, ";
+            }
+        }
     }
 
-    if ($("#SeFactura_Representante").prop('checked') == true) {
-        if ($("#Idtipo_cliente_Representante").val() == "0") {
-            mensaje += "tipo de cliente, ";
+    if ($("#Representante").val() == "P") {
+        if ($("#Naturaleza_Padre").val() == "") {
+            mensaje += "naturaleza, ";
         }
-        if ($("#IdCiudad_Representante_Fact").val() == "") {
-            mensaje += "ciudad para facturacion, ";
+        if ($("#IdTipoDocumento_Padre").val() == "") {
+            mensaje += "tipo de documento, ";
         }
-        if ($("#IdParroquia_Representante_Fact").val() == "") {
-            mensaje += "parroquia para facturacion, ";
+        else {
+            if ($("#IdTipoDocumento_Padre").val() == "RUC") {
+                if ($("#RazonSocial_Padre").val() == "") {
+                    mensaje += "razón social, ";
+                }
+            }
+            else {
+                if ($("#Nombres_Padre").val() == "") {
+                    mensaje += "nombres, ";
+                }
+                if ($("#Apellidos_Padre").val() == "") {
+                    mensaje += "apellidos, ";
+                }
+            }
+        }
+        if ($("#CedulaRuc_Padre").val() == "") {
+            mensaje += "número de cédula, ";
+        }
+
+        if ($("#FechaNacimiento_Padre").val() == "" || $("#FechaNacimiento_Padre").val() == null) {
+            mensaje += "fecha de nacimiento, ";
+        }
+        if ($("#IdPais_Padre").val() == "") {
+            mensaje += "país, ";
+        }
+        if ($("#Cod_Region_Padre").val() == "") {
+            mensaje += "región, ";
+        }
+        if ($("#IdProvincia_Padre").val() == "") {
+            mensaje += "provincia, ";
+        }
+        if ($("#IdCiudad_Padre").val() == "") {
+            mensaje += "ciudad, ";
+        }
+        if ($("#IdParroquia_Padre").val() == "") {
+            mensaje += "parroquia, ";
+        }
+        if ($("#Sexo_Padre").val() == "") {
+            mensaje += "sexo, ";
+        }
+        if ($("#IdEstadoCivil_Padre").val() == "") {
+            mensaje += "estado civil, ";
+        }
+        if ($("#IdGrupoEtnico_Padre").val() == "0") {
+            mensaje += "grupo étnico, ";
+        }
+        if ($("#Telefono_Padre").val() == "") {
+            mensaje += "número de teléfono, ";
+        }
+        if ($("#Celular_Padre").val() == "") {
+            mensaje += "número de celular, ";
+        }
+        if ($("#Correo_Padre").val() == "") {
+            mensaje += "correo electrónico, ";
+        }
+        if ($("#IdReligion_Padre").val() == "") {
+            mensaje += "religión, ";
+        }
+        if ($("#AsisteCentroCristiano_Padre").prop('checked') == null) {
+            mensaje += "asiste o no a Centro Cristiano, ";
+        }
+        if ($("#CasaPropia_Padre").prop('checked') == null) {
+            mensaje += "tiene casa propia, ";
+        }
+        if ($("#VehiculoPropio_Padre").prop('checked') == null) {
+            mensaje += "tiene casa propia, ";
+        }
+        else {
+            if ($("#VehiculoPropio_Padre").prop('checked') == true) {
+                if ($("#Marca_Padre").val() == "") {
+                    mensaje += "marca de vehículo, ";
+                }
+                if ($("#Modelo_Padre").val() == "") {
+                    mensaje += "modelo de vehículo, ";
+                }
+            }
+        }
+        if ($("#Direccion_Padre").val() == "") {
+            mensaje += "dirección, ";
+        }
+        if ($("#Sector_Padre").val() == "") {
+            mensaje += "sector, ";
+        }
+        if ($("#EmpresaTrabajo_Padre").val() == "") {
+            mensaje += "empresa donde trabaja, ";
+        }
+        if ($("#IdCatalogoFichaInst_Padre").val() == "0") {
+            mensaje += "intrucción, ";
+        }
+        if ($("#IdProfesion_Padre").val() == "0") {
+            mensaje += "profesión, ";
+        }
+        if ($("#CargoTrabajo_Padre").val() == "") {
+            mensaje += "cargo, ";
+        }
+        if ($("#TelefonoTrabajo_Padre").val() == "") {
+            mensaje += "teléfono trabajo, ";
+        }
+        if ($("#AniosServicio_Padre").val() == "") {
+            mensaje += "años de servicio, ";
+        }
+        if ($("#IngresoMensual_Padre").val() == "") {
+            mensaje += "ingreso mensual, ";
+        }
+        if ($("#DireccionTrabajo_Padre").val() == "") {
+            mensaje += "dirección de trabajo, ";
+        }
+        if ($("#CodCatalogoCONADIS_Padre").val() != "") {
+            if ($("#PorcentajeDiscapacidad_Padre").val() == "") {
+                mensaje += "porcentaje de discapacidad, ";
+            }
+            if ($("#NumeroCarnetConadis_Padre").val() == "") {
+                mensaje += "número de carnet de Conadis, ";
+            }
+        }
+
+        if ($("#SeFactura_Padre").prop('checked') == true) {
+            if ($("#Idtipo_cliente_Padre").val() == "0") {
+                mensaje += "tipo de cliente, ";
+            }
+            if ($("#IdCiudad_Padre_Fact").val() == "") {
+                mensaje += "ciudad para facturacion, ";
+            }
+            if ($("#IdParroquia_Padre_Fact").val() == "") {
+                mensaje += "parroquia para facturacion, ";
+            }
         }
     }
+
+    if ($("#Representante").val() == "M") {
+        if ($("#Naturaleza_Madre").val() == "") {
+            mensaje += "naturaleza, ";
+        }
+        if ($("#IdTipoDocumento_Madre").val() == "") {
+            mensaje += "tipo de documento, ";
+        }
+        else {
+            if ($("#IdTipoDocumento_Madre").val() == "RUC") {
+                if ($("#RazonSocial_Madre").val() == "") {
+                    mensaje += "razón social, ";
+                }
+            }
+            else {
+                if ($("#Nombres_Madre").val() == "") {
+                    mensaje += "nombres, ";
+                }
+                if ($("#Apellidos_Madre").val() == "") {
+                    mensaje += "apellidos, ";
+                }
+            }
+        }
+        if ($("#CedulaRuc_Madre").val() == "") {
+            mensaje += "número de cédula, ";
+        }
+
+        if ($("#FechaNacimiento_Madre").val() == "" || $("#FechaNacimiento_Madre").val() == null) {
+            mensaje += "fecha de nacimiento, ";
+        }
+        if ($("#IdPais_Madre").val() == "") {
+            mensaje += "país, ";
+        }
+        if ($("#Cod_Region_Madre").val() == "") {
+            mensaje += "región, ";
+        }
+        if ($("#IdProvincia_Madre").val() == "") {
+            mensaje += "provincia, ";
+        }
+        if ($("#IdCiudad_Madre").val() == "") {
+            mensaje += "ciudad, ";
+        }
+        if ($("#IdParroquia_Madre").val() == "") {
+            mensaje += "parroquia, ";
+        }
+        if ($("#Sexo_Madre").val() == "") {
+            mensaje += "sexo, ";
+        }
+        if ($("#IdEstadoCivil_Madre").val() == "") {
+            mensaje += "estado civil, ";
+        }
+        if ($("#IdGrupoEtnico_Madre").val() == "0") {
+            mensaje += "grupo étnico, ";
+        }
+        if ($("#Telefono_Madre").val() == "") {
+            mensaje += "número de teléfono, ";
+        }
+        if ($("#Celular_Madre").val() == "") {
+            mensaje += "número de celular, ";
+        }
+        if ($("#Correo_Madre").val() == "") {
+            mensaje += "correo electrónico, ";
+        }
+        if ($("#IdReligion_Madre").val() == "") {
+            mensaje += "religión, ";
+        }
+        if ($("#AsisteCentroCristiano_Madre").prop('checked') == null) {
+            mensaje += "asiste o no a Centro Cristiano, ";
+        }
+        if ($("#CasaPropia_Madre").prop('checked') == null) {
+            mensaje += "tiene casa propia, ";
+        }
+        if ($("#VehiculoPropio_Madre").prop('checked') == null) {
+            mensaje += "tiene casa propia, ";
+        }
+        else {
+            if ($("#VehiculoPropio_Madre").prop('checked') == true) {
+                if ($("#Marca_Madre").val() == "") {
+                    mensaje += "marca de vehículo, ";
+                }
+                if ($("#Modelo_Madre").val() == "") {
+                    mensaje += "modelo de vehículo, ";
+                }
+            }
+        }
+        if ($("#Direccion_Madre").val() == "") {
+            mensaje += "dirección, ";
+        }
+        if ($("#Sector_Madre").val() == "") {
+            mensaje += "sector, ";
+        }
+        if ($("#EmpresaTrabajo_Madre").val() == "") {
+            mensaje += "empresa donde trabaja, ";
+        }
+        if ($("#IdCatalogoFichaInst_Madre").val() == "0") {
+            mensaje += "intrucción, ";
+        }
+        if ($("#IdProfesion_Madre").val() == "0") {
+            mensaje += "profesión, ";
+        }
+        if ($("#CargoTrabajo_Madre").val() == "") {
+            mensaje += "cargo, ";
+        }
+        if ($("#TelefonoTrabajo_Madre").val() == "") {
+            mensaje += "teléfono trabajo, ";
+        }
+        if ($("#AniosServicio_Madre").val() == "") {
+            mensaje += "años de servicio, ";
+        }
+        if ($("#IngresoMensual_Madre").val() == "") {
+            mensaje += "ingreso mensual, ";
+        }
+        if ($("#DireccionTrabajo_Madre").val() == "") {
+            mensaje += "dirección de trabajo, ";
+        }
+        if ($("#CodCatalogoCONADIS_Madre").val() != "") {
+            if ($("#PorcentajeDiscapacidad_Madre").val() == "") {
+                mensaje += "porcentaje de discapacidad, ";
+            }
+            if ($("#NumeroCarnetConadis_Madre").val() == "") {
+                mensaje += "número de carnet de Conadis, ";
+            }
+        }
+
+        if ($("#SeFactura_Madre").prop('checked') == true) {
+            if ($("#Idtipo_cliente_Madre").val() == "0") {
+                mensaje += "tipo de cliente, ";
+            }
+            if ($("#IdCiudad_Madre_Fact").val() == "") {
+                mensaje += "ciudad para facturacion, ";
+            }
+            if ($("#IdParroquia_Madre_Fact").val() == "") {
+                mensaje += "parroquia para facturacion, ";
+            }
+        }
+    }
+
+    if ($("#SeFactura_Padre").prop('checked') == false && $("#SeFactura_Madre").prop('checked') == false && $("#SeFactura_Representante").prop('checked') == false) {
+        mensaje += "representante económico (persona que se factura), ";
+    }
+
 
     IrAlInicio();
     if (mensaje == "") {
@@ -805,7 +1124,15 @@ function ValidarDatosSocioEconomico() {
         $("#BtnArchivos").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
     }
     else {
-        $("#MensajeError").html("Ingresar o seleccionar: " + mensaje);
+        if ($("#Representante").val() == "P") {
+            $("#MensajeError").html("Ingresar o seleccionar los datos del padre: " + mensaje);
+        }
+        else if ($("#Representante").val() == "M") {
+            ("#MensajeError").html("Ingresar o seleccionar los datos de la madre: " + mensaje);
+        }
+        else {
+            $("#MensajeError").html("Ingresar o seleccionar: " + mensaje);
+        }
         $("#DivError").show();
     }
 }
@@ -820,7 +1147,7 @@ function Validar_cedula_ruc_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+'/Admision/Validar_cedula_ruc',
+        url: url_sistema + '/Admision/Validar_cedula_ruc',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -830,7 +1157,7 @@ function Validar_cedula_ruc_Padre() {
             if (data.isValid == true) {
                 $("#error_documento_padre").hide();
                 $("#Naturaleza_Padre").val(data.return_naturaleza);
-                
+
                 $("#PadreValido").val("1");
             }
             else {
@@ -854,7 +1181,7 @@ function Validar_cedula_ruc_Madre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+'/Admision/Validar_cedula_ruc',
+        url: url_sistema + '/Admision/Validar_cedula_ruc',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -887,7 +1214,7 @@ function Validar_cedula_ruc_Representante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+'/Admision/Validar_cedula_ruc',
+        url: url_sistema + '/Admision/Validar_cedula_ruc',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -920,7 +1247,7 @@ function CargarJornada() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+'/Admision/CargarJornada',
+        url: url_sistema + '/Admision/CargarJornada',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -952,7 +1279,7 @@ function CargarNivel() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarNivel',
+        url: url_sistema + '/Admision/CargarNivel',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -985,7 +1312,7 @@ function CargarCurso() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarCurso',
+        url: url_sistema + '/Admision/CargarCurso',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1013,7 +1340,7 @@ function CargarRegion_Aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarRegion',
+        url: url_sistema + '/Admision/CargarRegion',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1040,7 +1367,7 @@ function CargarProvincia_Aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url:url_sistema+ '/Admision/CargarProvincia',
+        url: url_sistema + '/Admision/CargarProvincia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1096,7 +1423,7 @@ function CargarParroquia_Aspirante() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarParroquia',
+        url: url_sistema + '/Admision/CargarParroquia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1123,7 +1450,7 @@ function CargarRegion_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarRegion',
+        url: url_sistema + '/Admision/CargarRegion',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1150,7 +1477,7 @@ function CargarProvincia_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarProvincia',
+        url: url_sistema + '/Admision/CargarProvincia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1178,7 +1505,7 @@ function CargaCiudad_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarCiudad',
+        url: url_sistema + '/Admision/CargarCiudad',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1206,7 +1533,7 @@ function CargarParroquia_Padre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarParroquia',
+        url: url_sistema + '/Admision/CargarParroquia',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1233,7 +1560,7 @@ function CargarRegion_Madre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarRegion',
+        url: url_sistema + '/Admision/CargarRegion',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1288,7 +1615,7 @@ function CargaCiudad_Madre() {
     $.ajax({
         type: 'POST',
         data: JSON.stringify(datos),
-        url: url_sistema+ '/Admision/CargarCiudad',
+        url: url_sistema + '/Admision/CargarCiudad',
         async: false,
         bDeferRender: true,
         bProcessing: true,
@@ -1447,7 +1774,7 @@ function CargarParroquia_Representante() {
 function PadreRepresentante() {
     var Nombre = $("#Nombres_Padre").val();
     var Apellido = $("#Apellidos_Padre").val();
-    $("#RepresentanteParensco").html("Padre: " + Nombre+" "+Apellido);
+    $("#RepresentanteParensco").html("Padre: " + Nombre + " " + Apellido);
     $("#DivDatosRepresentante").hide();
     $("#Representante").val("P");
     $("#RepresentanteValido").val("1");
@@ -1463,7 +1790,7 @@ function MadreRepresentante() {
 }
 
 function OtroRepresentante() {
-    $("#RepresentanteParensco").html("Otro");
+    $("#RepresentanteParensco").html("Otra Persona");
     $("#DivDatosRepresentante").show();
     $("#Representante").val("O");
 }
@@ -1560,7 +1887,7 @@ function MostrarFacturacion_Padre() {
     }
 }
 
-function MostrarFacturacion_Madre () {
+function MostrarFacturacion_Madre() {
     if ($("#SeFactura_Madre").prop('checked') == true) {
         $("#SeFactura_Padre").prop('checked', false);
         $("#SeFactura_Representante").prop('checked', false);
@@ -1650,13 +1977,9 @@ function get_info_x_num_cedula_aspirante() {
             if (data == "") {
                 return;
             }
-            //if (data.IdAlumno != 0) {
-            //    //alert("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
-            //    $("#MensajeError").html("El aspirante ya es alumno de nuestra Institución ID: " + data.Codigo);
-            //    $("#DivError").show();
-            //    $("#AspiranteValido").val("0");
-            //    //window.location.href = '/Admision/Index'
-            //}
+            if (data.IdAlumno != 0) {
+                $("#IdAlumno").val(data.IdAlumno);
+            }
             if (data.IdAdmision != 0) {
                 $("#MensajeError").html("El aspirante ya fue registrado");
                 $("#DivError").show();
@@ -1725,7 +2048,7 @@ function get_info_x_num_cedula_padre() {
     var cedula = $("#CedulaRuc_Padre").val();
     var tipo_doc = $("#IdTipoDocumento_Padre").val();
 
-    if (cedula == null || cedula=="") {
+    if (cedula == null || cedula == "") {
         vaciar_campos_padre();
         return;
     }
@@ -1762,12 +2085,12 @@ function get_info_x_num_cedula_padre() {
             if (data.IdPersona == 0) {
                 return;
             }
-            else{
+            else {
                 $("#Naturaleza_Padre").val(data.pe_Naturaleza);
                 $("#IdTipoDocumento_Padre").val(data.IdTipoDocumento);
                 $("#Nombres_Padre").val(data.pe_nombre);
                 $("#Apellidos_Padre").val(data.pe_apellido);
-                $("#RazonSocial_Padre").val(data.pe_razonSocial); 
+                $("#RazonSocial_Padre").val(data.pe_razonSocial);
                 $("#Sexo_Padre").val(data.pe_sexo);
                 //pe_fechaNacimiento.SetDate(new Date(data.anio, data.mes, data.dia));
                 $("#Direccion_Padre").val(data.pe_direccion);
@@ -1979,7 +2302,7 @@ function vaciar_campos_aspirante() {
     $("#Telefono_Aspirante").val("");
     $("#Celular_Aspirante").val("");
     $("#Correo_Aspirante").val("");
-    $("#FechaNacimiento_Aspirante").val(new Date().getDate() + "/" + (new Date().getMonth() +1) + "/" + new Date().getFullYear());
+    $("#FechaNacimiento_Aspirante").val(new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear());
     $("#CodCatalogoSangre_Aspirante").val("");
     $("#CodCatalogoCONADIS_Aspirante").val("");
     $("#PorcentajeDiscapacidad_Aspirante").val("");
@@ -2100,7 +2423,7 @@ function vaciar_campos_representante() {
     $("#Telefono_Representante").val("");
     $("#Celular_Representante").val("");
     $("#Correo_Representante").val("");
-    $("#AsisteCentroCristiano_Representante").prop('checked',false);
+    $("#AsisteCentroCristiano_Representante").prop('checked', false);
     $("#CasaPropia_Representante").prop('checked', false);
     $("#VehiculoPropio_Representante").prop('checked', false);
     $("#Marca_Representante").val("");
@@ -2123,7 +2446,7 @@ function vaciar_campos_representante() {
 
 function ValidarTerminos() {
     var mensaje = "";
-
+    $('#Guardar').attr("disabled", true);
     if ($("#AceptaTerminos").prop('checked') == null || $("#AceptaTerminos").prop('checked') == false) {
         mensaje += "Aceptar terminos y condiciones, ";
     }
@@ -2138,68 +2461,86 @@ function ValidarTerminos() {
     else {
         $("#MensajeError").html(mensaje);
         $("#DivError").show();
+
+        $('#Guardar').attr("disabled", false);
     }
 }
 
 function ValidarArchivos() {
     var mensaje = "";
 
-    if($('#FotoAspirante').val()==""){
-        mensaje += "seleccione archivo para foto del aspirante, ";
-    }
-    else {
-        if ($("#FotoAspirante")[0].files[0].size > 0 && $("#FotoAspirante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo foto del aspirante ha superado el peso máximo, ";
+    if ($("#IdAlumno").val() == null || $("#IdAlumno").val() == 0) {
+        if ($('#FotoAspirante').val() == "") {
+            mensaje += "seleccione archivo para foto del aspirante, ";
+        }
+        else {
+            if ($("#FotoAspirante")[0].files[0].size > 0 && $("#FotoAspirante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo foto del aspirante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#CedulaAspirante').val() == "") {
+            mensaje += "seleccione archivo para cédula del aspirante, ";
+        }
+        else {
+            if ($("#CedulaAspirante")[0].files[0].size > 0 && $("#CedulaAspirante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo cédula del aspirante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#CedulaRepresentante').val() == "") {
+            mensaje += "seleccione archivo para cédula del representante, ";
+        }
+        else {
+            if ($("#CedulaRepresentante")[0].files[0].size > 0 && $("#CedulaRepresentante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo cédula del representante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#RecordAcademicoAspirante').val() == "") {
+            mensaje += "seleccione archivo para record académico del aspirante, ";
+        }
+        else {
+            if ($("#RecordAcademicoAspirante")[0].files[0].size > 0 && $("#RecordAcademicoAspirante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo record académico del aspirante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#PagoAlDiaAspirante').val() == "") {
+            mensaje += "seleccione archivo para pago al día del aspirante, ";
+        }
+        else {
+            if ($("#PagoAlDiaAspirante")[0].files[0].size > 0 && $("#PagoAlDiaAspirante")[0].files[0].size > 4000000) {
+                mensaje += "el archivo pago al día del aspirante ha superado el peso máximo, ";
+            }
+        }
+
+        if ($('#CertificadoLaboral').val() == "") {
+            mensaje += "seleccione archivo para certificado laboral, ";
+        }
+        else {
+            if ($("#CertificadoLaboral")[0].files[0].size > 0 && $("#CertificadoLaboral")[0].files[0].size > 4000000) {
+                mensaje += "el archivo certificado laboral ha superado el peso máximo, ";
+            }
+        }
+
+        IrAlInicio();
+        if (mensaje == "") {
+            $("#MensajeError").html("");
+            $("#DivError").hide();
+
+            $("#DatosArchivos").hide();
+            $("#BtnArchivos").attr("class", "w-10 h-10 rounded-full button text-gray-600 bg-gray-200 dark:bg-dark-1");
+            $("#DatosTerminos").show();
+            $("#BtnTerminos").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
+        }
+        else {
+            $("#MensajeError").html(mensaje);
+            $("#DivError").show();
         }
     }
-
-    if ($('#CedulaAspirante').val() == "") {
-        mensaje += "seleccione archivo para cédula del aspirante, ";
-    }
     else {
-        if ($("#CedulaAspirante")[0].files[0].size > 0 && $("#CedulaAspirante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo cédula del aspirante ha superado el peso máximo, ";
-        }
-    }
-
-    if ($('#CedulaRepresentante').val() == "") {
-        mensaje += "seleccione archivo para cédula del representante, ";
-    }
-    else {
-        if ($("#CedulaRepresentante")[0].files[0].size > 0 && $("#CedulaRepresentante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo cédula del representante ha superado el peso máximo, ";
-        }
-    }
-
-    if ($('#RecordAcademicoAspirante').val() == "") {
-        mensaje += "seleccione archivo para record académico del aspirante, ";
-    }
-    else {
-        if ($("#RecordAcademicoAspirante")[0].files[0].size > 0 && $("#RecordAcademicoAspirante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo record académico del aspirante ha superado el peso máximo, ";
-        }
-    }
-
-    if ($('#PagoAlDiaAspirante').val() == "") {
-        mensaje += "seleccione archivo para pago al día del aspirante, ";
-    }
-    else {
-        if ($("#PagoAlDiaAspirante")[0].files[0].size > 0 && $("#PagoAlDiaAspirante")[0].files[0].size > 4000000) {
-            mensaje += "el archivo pago al día del aspirante ha superado el peso máximo, ";
-        }
-    }
-
-    if ($('#CertificadoLaboral').val() == "") {
-        mensaje += "seleccione archivo para certificado laboral, ";
-    }
-    else {
-        if ($("#CertificadoLaboral")[0].files[0].size > 0 && $("#CertificadoLaboral")[0].files[0].size > 4000000) {
-            mensaje += "el archivo certificado laboral ha superado el peso máximo, ";
-        }
-    }
-
-    IrAlInicio();
-    if (mensaje == "") {
+        IrAlInicio();
         $("#MensajeError").html("");
         $("#DivError").hide();
 
@@ -2208,10 +2549,7 @@ function ValidarArchivos() {
         $("#DatosTerminos").show();
         $("#BtnTerminos").attr("class", "w-10 h-10 rounded-full button text-white bg-theme-1");
     }
-    else {
-        $("#MensajeError").html(mensaje);
-        $("#DivError").show();
-    }
+
 };
 
 function CargarParroquia_Facturacion_Padre() {
