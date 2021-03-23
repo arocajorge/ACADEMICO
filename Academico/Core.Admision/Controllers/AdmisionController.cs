@@ -651,12 +651,12 @@ namespace Core.Admision.Controllers
                     return false;
                 }
             }
-            else
-            {
-                msg = "Complete la información del padre";
-                info.info_valido_padre = false;
-                return false;
-            }
+            //else
+            //{
+            //    msg = "Complete la información del padre";
+            //    info.info_valido_padre = false;
+            //    return false;
+            //}
 
             if (!string.IsNullOrEmpty(info.IdTipoDocumento_Madre) && !string.IsNullOrEmpty(info.Naturaleza_Madre) && !string.IsNullOrEmpty(info.CedulaRuc_Madre))
             {
@@ -672,12 +672,12 @@ namespace Core.Admision.Controllers
                     return false;
                 }
             }
-            else
-            {
-                msg = "Complete la información de la madre";
-                info.info_valido_madre = false;
-                return false;
-            }
+            //else
+            //{
+            //    msg = "Complete la información de la madre";
+            //    info.info_valido_madre = false;
+            //    return false;
+            //}
 
             if (!string.IsNullOrEmpty(info.IdTipoDocumento_Representante) && !string.IsNullOrEmpty(info.Naturaleza_Representante) && !string.IsNullOrEmpty(info.CedulaRuc_Representante))
             {
@@ -700,19 +700,25 @@ namespace Core.Admision.Controllers
                 return false;
             }
 
-            if (info.info_valido_aspirante == true && info.info_valido_padre==true && info.info_valido_madre == true && info.info_valido_representante==true)
+            if (info.CedulaRuc_Padre != null && info.CedulaRuc_Madre != null && (info.CedulaRuc_Padre == info.CedulaRuc_Madre))
             {
-                if (info.CedulaRuc_Padre != null && info.CedulaRuc_Madre != null && (info.CedulaRuc_Padre == info.CedulaRuc_Madre))
-                {
-                    msg = "No se puede registrar a la misma persona como padre y madre";
-                    return false;
-                }
-            }
-            else
-            {
-                msg = "Complete la información solicitada";
+                msg = "No se puede registrar a la misma persona como padre y madre";
                 return false;
             }
+
+            //if (info.info_valido_aspirante == true && info.info_valido_padre==true && info.info_valido_madre == true && info.info_valido_representante==true)
+            //{
+            //    if (info.CedulaRuc_Padre != null && info.CedulaRuc_Madre != null && (info.CedulaRuc_Padre == info.CedulaRuc_Madre))
+            //    {
+            //        msg = "No se puede registrar a la misma persona como padre y madre";
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    msg = "Complete la información solicitada";
+            //    return false;
+            //}
   
             return true;
         }

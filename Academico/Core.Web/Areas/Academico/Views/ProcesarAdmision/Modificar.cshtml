@@ -127,6 +127,8 @@
     @Html.HiddenFor(q => q.EsRepresentante_madre, new { @id = "EsRepresentante_madre" })
     @Html.HiddenFor(q => q.EsRepresentante_otro, new { @id = "EsRepresentante_otro" })
 
+    @Html.HiddenFor(q => q.TienePadre, new { @id = "TienePadre" })
+    @Html.HiddenFor(q => q.TieneMadre, new { @id = "TieneMadre" })
     if (ViewBag.mensaje != null)
     {
         <div class="alert alert-warning alert-dismissible">
@@ -1448,9 +1450,9 @@
                         </div>
                         <div class="col-md-10">
                             <div class="form-group">
-                                <button type="button" class="btn btn-success" onclick="PadreRepresentante();">Padre</button>
-                                <button type="button" class="btn btn-info" onclick="MadreRepresentante();">Madre</button>
-                                <button type="button" class="btn btn-default" onclick="OtroRepresentante();">Otro</button>
+                                <button type="button" class="btn btn-success" id="BtnPadreRep" onclick="PadreRepresentante();" hidden>Padre</button>
+                                <button type="button" class="btn btn-info" id="BtnMadreRep" onclick="MadreRepresentante();" hidden>Madre</button>
+                                <button type="button" class="btn btn-default" id="BtnOtroRep" onclick="OtroRepresentante();">Otro</button>
                             </div>
                         </div>
                     </div>
@@ -1552,15 +1554,15 @@
                                                 <i class="fa fa-calendar"></i>
                                             </div>
                                             @Html.DevExpress().DateEditFor(q => q.FechaNacimiento_Representante, settings =>
-                        {
-                            settings.Name = "FechaNacimiento_Representante";
-                            settings.Properties.UseMaskBehavior = true;
-                            settings.Properties.EditFormat = EditFormat.Date;
-                            settings.Properties.EditFormatString = "dd/MM/yyyy";
-                            settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
-                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            settings.Properties.AllowMouseWheel = false;
-                        }).GetHtml()
+                                            {
+                                                settings.Name = "FechaNacimiento_Representante";
+                                                settings.Properties.UseMaskBehavior = true;
+                                                settings.Properties.EditFormat = EditFormat.Date;
+                                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                                settings.Properties.AllowMouseWheel = false;
+                                            }).GetHtml()
                                             @Html.ValidationMessageFor(q => q.FechaNacimiento_Representante, "", new { @class = "text-danger" })
                                         </div>
                                     </div>
@@ -1651,19 +1653,19 @@
                                     <div class="form-group">
                                         <label for="IdEmpresa">Religión</label>
                                         @Html.DevExpress().ComboBoxFor(q => q.IdReligion_Representante, settings =>
-                            {
-                                settings.Name = "IdReligion_Representante";
-                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                                settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                                settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                                settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                                //Campo ID
-                                settings.Properties.ValueField = "IdReligion";
-                                settings.Properties.ValueType = typeof(int);
-                                settings.Properties.TextField = "NomReligion";
-                                settings.Properties.NullText = "== Seleccione ==";
-                                settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                            }).BindList(ViewBag.lst_religion).GetHtml()
+                                        {
+                                            settings.Name = "IdReligion_Representante";
+                                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                            settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                            settings.Properties.Columns.Add("IdReligion", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                            settings.Properties.Columns.Add("NomReligion", "Religion").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                            //Campo ID
+                                            settings.Properties.ValueField = "IdReligion";
+                                            settings.Properties.ValueType = typeof(int);
+                                            settings.Properties.TextField = "NomReligion";
+                                            settings.Properties.NullText = "== Seleccione ==";
+                                            settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                        }).BindList(ViewBag.lst_religion).GetHtml()
                                         @Html.ValidationMessageFor(q => q.IdReligion_Representante, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -1693,10 +1695,10 @@
                                     <div class="form-group">
                                         <label for="bo_EsBodega"></label>
                                         @Html.DevExpress().CheckBoxFor(q => q.CasaPropia_Representante, settings =>
-                        {
-                            settings.Name = "CasaPropia_Representante";
-                            settings.Text = "Tiene casa propia";
-                        }).GetHtml()
+                                        {
+                                            settings.Name = "CasaPropia_Representante";
+                                            settings.Text = "Tiene casa propia";
+                                        }).GetHtml()
                                         @Html.ValidationMessageFor(q => q.CasaPropia_Representante, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -1704,11 +1706,11 @@
                                     <div class="form-group">
                                         <label for="bo_EsBodega"></label>
                                         @Html.DevExpress().CheckBoxFor(q => q.VehiculoPropio_Representante, settings =>
-                        {
-                            settings.Name = "VehiculoPropio_Representante";
-                            settings.Text = "Tiene vehiculo propio";
-                            settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_vehiculo_representante();}";
-                        }).GetHtml()
+                                        {
+                                            settings.Name = "VehiculoPropio_Representante";
+                                            settings.Text = "Tiene vehiculo propio";
+                                            settings.Properties.ClientSideEvents.CheckedChanged = "function(s,e){mostrar_vehiculo_representante();}";
+                                        }).GetHtml()
                                         @Html.ValidationMessageFor(q => q.VehiculoPropio_Representante, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
@@ -1759,24 +1761,24 @@
                                             <div class="form-group">
                                                 <label for="Idtipo_cliente">Tipo cliente</label>
                                                 @Html.DevExpress().ComboBoxFor(q => q.Idtipo_cliente_Representante, settings =>
-                        {
-                            settings.Name = "Idtipo_cliente_Representante";
-                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                            settings.Properties.Columns.Add("Idtipo_cliente", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                            settings.Properties.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
-                            //Campo ID
-                            settings.Properties.ValueField = "Idtipo_cliente";
-                            settings.Properties.ValueType = typeof(int);
-                            settings.Properties.TextField = "Descripcion_tip_cliente";
-                            //Boton para seleccionar ningun registro
-                            settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
-                            settings.Properties.NullText = "== Seleccione ==";
-                            settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                            //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info_tipo_cliente()}";
-                            settings.Properties.AllowNull = true;
+                                                {
+                                                    settings.Name = "Idtipo_cliente_Representante";
+                                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                                    settings.Properties.Columns.Add("Idtipo_cliente", "Código").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                                    settings.Properties.Columns.Add("Descripcion_tip_cliente", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(50);
+                                                    //Campo ID
+                                                    settings.Properties.ValueField = "Idtipo_cliente";
+                                                    settings.Properties.ValueType = typeof(int);
+                                                    settings.Properties.TextField = "Descripcion_tip_cliente";
+                                                    //Boton para seleccionar ningun registro
+                                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Never;
+                                                    settings.Properties.NullText = "== Seleccione ==";
+                                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                                    //settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s,e,){get_info_tipo_cliente()}";
+                                                    settings.Properties.AllowNull = true;
 
-                        }).BindList(ViewBag.lst_clientetipo).GetHtml()
+                                                }).BindList(ViewBag.lst_clientetipo).GetHtml()
                                                 @Html.ValidationMessageFor(q => q.Idtipo_cliente_Representante, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -1784,21 +1786,21 @@
                                             <div class="form-group">
                                                 <label for="IdCiudad">Ciudad*</label>
                                                 @Html.DevExpress().ComboBoxFor(q => q.IdCiudad_Representante_Fact, settings =>
-                        {
-                            settings.Name = "IdCiudad_Representante_Fact";
-                            settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
-                            settings.Properties.DisplayFormatString = "[{0}] - {1}";
-                            settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
-                            settings.Properties.Columns.Add("Descripcion_Ciudad", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
-                            //Campo ID
-                            settings.Properties.ValueField = "IdCiudad";
-                            settings.Properties.ValueType = typeof(string);
-                            settings.Properties.TextField = "Descripcion_Ciudad";
-                            //Boton para seleccionar ningun registro
-                            settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-                            settings.Properties.DropDownStyle = DropDownStyle.DropDown;
-                            settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_Representante_Fact.PerformCallback(); }";
-                        }).BindList(ViewBag.lst_ciudad_factura).GetHtml()
+                                                {
+                                                    settings.Name = "IdCiudad_Representante_Fact";
+                                                    settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                                    settings.Properties.DisplayFormatString = "[{0}] - {1}";
+                                                    settings.Properties.Columns.Add("IdCiudad", "ID").Width = System.Web.UI.WebControls.Unit.Percentage(20);
+                                                    settings.Properties.Columns.Add("Descripcion_Ciudad", "Descripción").Width = System.Web.UI.WebControls.Unit.Percentage(80);
+                                                    //Campo ID
+                                                    settings.Properties.ValueField = "IdCiudad";
+                                                    settings.Properties.ValueType = typeof(string);
+                                                    settings.Properties.TextField = "Descripcion_Ciudad";
+                                                    //Boton para seleccionar ningun registro
+                                                    settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
+                                                    settings.Properties.DropDownStyle = DropDownStyle.DropDown;
+                                                    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_Representante_Fact.PerformCallback(); }";
+                                                }).BindList(ViewBag.lst_ciudad_factura).GetHtml()
                                                 @Html.ValidationMessageFor(q => q.IdCiudad_Representante_Fact, "", new { @class = "text-danger" })
                                             </div>
                                         </div>
@@ -2438,6 +2440,8 @@
             $("#IdMecanismo").change(function () {
                 VerDatosEmpleado();
             });
+
+            MostrarBotonesRepresentante();
         })
         //$("#Celular_Aspirante").blur(function () {
         //    Validar_cedula_ruc();
@@ -2484,10 +2488,24 @@
 
         $("#CedulaRuc_Padre").change(function () {
             get_info_x_num_cedula_padre();
+            if ($("#CedulaRuc_Padre").val() == "") {
+                $("#TienePadre").val("0");
+            }
+            else {
+                $("#TienePadre").val("1");
+            }
+            MostrarBotonesRepresentante();
         });
 
         $("#CedulaRuc_Madre").change(function () {
             get_info_x_num_cedula_madre();
+            if ($("#CedulaRuc_Madre").val() == "") {
+                $("#TieneMadre").val("0");
+            }
+            else {
+                $("#TieneMadre").val("1");
+            }
+            MostrarBotonesRepresentante();
         });
         
         $("#CedulaRuc_Representante").change(function () {
@@ -2728,7 +2746,6 @@
                     }
                 },
                 error: function (error) {
-                    console.log(error)
                     alert(error);
                 }
             });
@@ -2921,8 +2938,8 @@
         function vaciar_campos_padre() {
             $("#IdPersona_Padre").val(0);
             $("#Nombres_Padre").val("");
-            $("#Apellidos_Aspirante_Padre").val("");
-            $("#NombreCompleto_Aspirante_Padre").val("");
+            $("#Apellidos_Padre").val("");
+            $("#NombreCompleto_Padre").val("");
             $("#RazonSocial_Padre").val("");
             FechaNacimiento_Padre.SetDate(null);
             $("#Correo_Padre").val("");
@@ -3469,7 +3486,7 @@
 
     function mostrar_representante() {
         if ($("#EsRepresentante_otro").val() == 1) {
-            $("#RepresentanteLabel").html("Representante: Otro");
+            $("#RepresentanteLabel").html("Representante: Otra Persona");
             $("#DatosRepresentante").show();
         }
         else {
@@ -3510,5 +3527,21 @@
         $("#RepresentanteLabel").html("Representante: Otro");
 
         mostrar_representante();
+    }
+
+    function MostrarBotonesRepresentante() {
+        if ($("#TieneMadre").val() == "1") {
+            $("#BtnMadreRep").show();
+        }
+        else {
+            $("#BtnMadreRep").hide();
+        }
+
+        if ($("#TienePadre").val() == "1") {
+            $("#BtnPadreRep").show();
+        }
+        else {
+            $("#BtnPadreRep").hide();
+        }
     }
     </script>

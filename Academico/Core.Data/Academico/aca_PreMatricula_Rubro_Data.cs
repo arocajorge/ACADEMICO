@@ -117,13 +117,24 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT mr.IdEmpresa, mr.IdPreMatricula, mr.IdPeriodo, ap.FechaDesde, mr.IdRubro, ar.NomRubro, mr.IdProducto, mr.Subtotal, mr.IdCod_Impuesto_Iva, mr.Porcentaje, mr.ValorIVA, mr.Total, p.pr_descripcion, mr.IdSucursal, mr.IdBodega, "
-                    + " mr.IdCbteVta, mr.FechaFacturacion, mr.IdMecanismo, mr.EnMatricula, mr.IdAnio, mr.IdPlantilla, mr.IdSede, mr.IdNivel, mr.IdJornada, mr.IdCurso, mr.IdParalelo "
-                    + " FROM     dbo.aca_AnioLectivo_Rubro AS ar INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Rubro_Periodo AS arp ON ar.IdEmpresa = arp.IdEmpresa AND ar.IdAnio = arp.IdAnio AND ar.IdRubro = arp.IdRubro INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Periodo AS ap ON arp.IdEmpresa = ap.IdEmpresa AND arp.IdPeriodo = ap.IdPeriodo INNER JOIN "
-                    + " dbo.aca_PreMatricula_Rubro AS mr ON arp.IdEmpresa = mr.IdEmpresa AND arp.IdPeriodo = mr.IdPeriodo AND arp.IdRubro = mr.IdRubro INNER JOIN "
-                    + " dbo.in_Producto AS p ON mr.IdEmpresa = p.IdEmpresa AND mr.IdProducto = p.IdProducto "
+                    string query = "SELECT mr.IdEmpresa, mr.IdPreMatricula, mr.IdPeriodo, ap.FechaDesde, mr.IdRubro, ar.NomRubro, mr.IdProducto, mr.Subtotal, "
+                    + " mr.IdCod_Impuesto_Iva, mr.Porcentaje, mr.ValorIVA, mr.Total, p.pr_descripcion, mr.IdSucursal, mr.IdBodega,  mr.IdCbteVta, "
+                    + " mr.FechaFacturacion, mr.IdMecanismo, mr.EnMatricula, mr.IdAnio, mr.IdPlantilla, mr.IdSede, mr.IdNivel, mr.IdJornada, "
+                    + " mr.IdCurso,  mr.IdParalelo, ar.AplicaProntoPago, ap.FechaProntoPago, "
+                    + " CASE WHEN ar.AplicaProntoPago = 1 AND ap.FechaProntoPago > CAST(getdate() AS date) "
+                    + " THEN CAST(mr.Subtotal AS float)  -(CASE WHEN pl.AplicaParaTodo = 1 "
+                    + " THEN(CASE WHEN pl.TipoDescuento = '$' THEN CAST(pl.Valor AS FLOAT) ELSE "
+                    + " ROUND(CAST(mr.Subtotal AS float) * (pl.Valor / 100), 2) END) "
+                    + " ELSE(CASE WHEN pr.TipoDescuento_descuentoDet = '$' THEN CAST(pr.Valor_descuentoDet AS FLOAT) "
+                    + " ELSE ROUND(CAST(pr.Subtotal AS float) * (pr.Valor_descuentoDet / 100), 2) END) END) ELSE "
+                    + " CAST(pr.Subtotal AS float) + CAST(pr.ValorIVA AS FLOAT) END + pr.ValorIVA AS ValorProntoPago "
+                    + " FROM dbo.aca_AnioLectivo_Rubro AS ar "
+                    + " INNER JOIN dbo.aca_AnioLectivo_Rubro_Periodo AS arp ON ar.IdEmpresa = arp.IdEmpresa AND ar.IdAnio = arp.IdAnio AND ar.IdRubro = arp.IdRubro "
+                    + " INNER JOIN  dbo.aca_AnioLectivo_Periodo AS ap ON arp.IdEmpresa = ap.IdEmpresa and arp.IdAnio = ar.IdAnio AND arp.IdPeriodo = ap.IdPeriodo "
+                    + " INNER JOIN  dbo.aca_PreMatricula_Rubro AS mr ON arp.IdEmpresa = mr.IdEmpresa AND arp.IdPeriodo = mr.IdPeriodo AND arp.IdRubro = mr.IdRubro "
+                    + " inner join aca_Plantilla pl on pl.IdEmpresa = mr.IdEmpresa and pl.IdAnio = ar.IdAnio and pl.IdPlantilla = mr.IdPlantilla "
+                    + " INNER JOIN aca_Plantilla_Rubro pr on pr.IdEmpresa = pl.IdEmpresa AND pr.IdAnio = pl.IdAnio AND pr.IdPlantilla = pl.IdPlantilla and pr.IdRubro = ar.IdRubro "
+                    + " INNER JOIN  dbo.in_Producto AS p ON mr.IdEmpresa = p.IdEmpresa AND mr.IdProducto = p.IdProducto  "
                     + " WHERE mr.IdEmpresa = " + IdEmpresa.ToString() + " and mr.IdPreMatricula = " + IdPreMatricula.ToString()
                     + " ORDER BY mr.IdPeriodo ";
                     #endregion
@@ -161,6 +172,9 @@ namespace Core.Data.Academico
                             IdNivel = string.IsNullOrEmpty(reader["IdNivel"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdNivel"]),
                             IdCurso = string.IsNullOrEmpty(reader["IdCurso"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdCurso"]),
                             IdParalelo = string.IsNullOrEmpty(reader["IdParalelo"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdParalelo"]),
+                            AplicaProntoPago = string.IsNullOrEmpty(reader["AplicaProntoPago"].ToString()) ? false : Convert.ToBoolean(reader["AplicaProntoPago"]),
+                            ValorProntoPago = string.IsNullOrEmpty(reader["ValorProntoPago"].ToString()) ? 0 : Convert.ToDecimal(reader["ValorProntoPago"]),
+                            FechaProntoPago = string.IsNullOrEmpty(reader["FechaProntoPago"].ToString()) ? DateTime.Now.Date : Convert.ToDateTime(reader["FechaProntoPago"])
                         });
                         Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000000") + q.IdPlantilla.ToString("0000000") + q.IdPeriodo.ToString("0000000") + q.IdRubro.ToString("0000000"));
                     }

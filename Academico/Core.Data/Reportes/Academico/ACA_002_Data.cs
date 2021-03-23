@@ -83,7 +83,7 @@ namespace Core.Data.Reportes.Academico
                     + " LEFT OUTER JOIN aca_AnioLectivo_Rubro ar on pr.IdEmpresa = ar.IdEmpresa and pr.IdRubro = ar.IdRubro and ar.IdAnio = pr.IdAnio "
                     + " ) val "
                     + " on pl.IdEmpresa = val.IdEmpresa and pl.IdPlantilla = val.IdPlantilla and val.IdAnio = m.IdAnio and val.NumeroCuotas > 1 "
-                    + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + "and m.IdAlumno = " + IdAlumno.ToString();
+                    + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + "and m.IdAlumno = " + IdAlumno.ToString() + "and m.IdAnio = " + IdAnio.ToString();
                     var ResultValue = command.ExecuteScalar();
 
                     if (ResultValue == null)

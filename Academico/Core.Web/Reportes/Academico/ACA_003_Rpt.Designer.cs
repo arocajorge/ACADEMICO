@@ -77,6 +77,7 @@
             this.xrTableRow23 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell19 = new DevExpress.XtraReports.UI.XRTableCell();
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
+            this.p_IdAnio = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.txtContrato)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
@@ -579,6 +580,11 @@
             this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Academico.ACA_003_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
+            // p_IdAnio
+            // 
+            this.p_IdAnio.Name = "p_IdAnio";
+            this.p_IdAnio.Visible = false;
+            // 
             // ACA_003_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -599,7 +605,8 @@
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this.p_IdEmpresa,
             this.p_IdAlumno,
-            this.p_IdSede});
+            this.p_IdSede,
+            this.p_IdAnio});
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.xrControlStyle1});
             this.Version = "20.1";
@@ -664,5 +671,6 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow23;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell19;
         private DevExpress.XtraReports.UI.XRRichText txtContrato;
+        public DevExpress.XtraReports.Parameters.Parameter p_IdAnio;
     }
 }

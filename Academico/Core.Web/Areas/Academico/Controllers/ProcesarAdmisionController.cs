@@ -488,6 +488,9 @@ namespace Core.Web.Areas.Academico.Controllers
                 model.EsRepresentante_otro = 1;
             }
 
+            model.TienePadre = string.IsNullOrEmpty(model.CedulaRuc_Padre) ? 0 : 1;
+            model.TieneMadre = string.IsNullOrEmpty(model.CedulaRuc_Madre) ? 0 : 1;
+
             var info_ExistePersonaAspirante = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Aspirante);
             var info_ExistePersonaPadre = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Padre);
             var info_ExistePersonaMadre = bus_persona.get_info_x_num_cedula(model.CedulaRuc_Madre);

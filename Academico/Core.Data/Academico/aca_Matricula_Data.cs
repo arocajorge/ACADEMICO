@@ -317,6 +317,83 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+
+        public aca_Matricula_Info getInfo_X_PreMatricula(int IdEmpresa, decimal IdPreMatricula)
+        {
+            try
+            {
+                aca_Matricula_Info info = new aca_Matricula_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT m.IdEmpresa, m.IdMatricula, al.Codigo, m.IdAlumno, pa.IdPersona, pa.pe_nombreCompleto, pa.pe_cedulaRuc, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, sn.NomSede, a.Descripcion, sn.NomNivel, sn.OrdenNivel, "
+                    + " nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, a.BloquearMatricula, m.IdPersonaF, m.IdPersonaR, m.IdPlantilla, m.Fecha, m.Observacion, m.IdMecanismo, m.IdEmpresa_rol, "
+                    + " m.IdEmpleado, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, dbo.aca_Plantilla.NomPlantilla, m.EsPatrocinado "
+                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
+                    + " dbo.aca_Plantilla ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pa INNER JOIN "
+                    + " dbo.aca_Alumno AS al ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
+                    + " m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
+                    + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
+                    + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdPreMatricula = " + IdPreMatricula.ToString() + " and al.Estado = 1 ";
+                    var ResultValue = command.ExecuteScalar();
+
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_Matricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
+                            NomJornada = string.IsNullOrEmpty(reader["NomJornada"].ToString()) ? null : reader["NomJornada"].ToString(),
+                            NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
+                            NomCurso = string.IsNullOrEmpty(reader["NomCurso"].ToString()) ? null : reader["NomCurso"].ToString(),
+                            NomParalelo = string.IsNullOrEmpty(reader["NomParalelo"].ToString()) ? null : reader["NomParalelo"].ToString(),
+                            NomPlantilla = reader["NomPlantilla"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            pe_cedulaRuc = string.IsNullOrEmpty(reader["pe_cedulaRuc"].ToString()) ? null : reader["pe_cedulaRuc"].ToString(),
+                            EsRetirado = string.IsNullOrEmpty(reader["EsRetirado"].ToString()) ? false : Convert.ToBoolean(reader["EsRetirado"]),
+                            IdPersonaF = Convert.ToDecimal(reader["IdPersonaF"]),
+                            IdPersonaR = Convert.ToDecimal(reader["IdPersonaR"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            IdMecanismo = Convert.ToDecimal(reader["IdMecanismo"]),
+                            IdEmpresa_rol = string.IsNullOrEmpty(reader["IdEmpresa_rol"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpresa_rol"]),
+                            IdEmpleado = string.IsNullOrEmpty(reader["IdEmpleado"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdEmpleado"]),
+                            EsPatrocinado = string.IsNullOrEmpty(reader["EsPatrocinado"].ToString()) ? false : Convert.ToBoolean(reader["EsPatrocinado"]),
+                        };
+                    }
+                }
+
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_Matricula_Info getInfo_UltimaMatricula(int IdEmpresa, decimal IdAlumno)
         {
             try
@@ -435,7 +512,7 @@ namespace Core.Data.Academico
                         info = new aca_Matricula_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
-                            IdMatricula = Convert.ToDecimal(reader["IdAnio"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
                             Codigo = string.IsNullOrEmpty(reader["IdEmpresa"].ToString()) ? null : reader["IdEmpresa"].ToString(),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             IdAnio = Convert.ToInt32(reader["IdAnio"]),
@@ -1070,6 +1147,11 @@ namespace Core.Data.Academico
                     Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacion WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
                     Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaConducta WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
                     Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacionParcial WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaAsistencia WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacionParticipacion WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacionCualitativa WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+                    Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCalificacionCualitativaPromedio WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
+
 
                     Context.Database.ExecuteSqlCommand("DELETE aca_MatriculaCambios WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);
                     Context.Database.ExecuteSqlCommand("DELETE aca_Matricula_Rubro WHERE IdEmpresa = " + info.IdEmpresa + " AND IdMatricula = " + info.IdMatricula);

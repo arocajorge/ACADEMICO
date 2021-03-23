@@ -20,7 +20,7 @@ namespace Core.Data.Reportes.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "DECLARE @IdEmpresa int = 1, @IdAlumno numeric = 1205, @IdAnioActual numeric, @IdAnioAnterior numeric "
+                    command.CommandText = "DECLARE @IdEmpresa int = "+ IdEmpresa.ToString() + ", @IdAlumno numeric = " + IdAlumno.ToString() + ", @IdAnioActual numeric, @IdAnioAnterior numeric "
                     + " select @IdAnioActual = IdAnio, @IdAnioAnterior = IdAnioLectivoAnterior from aca_AnioLectivo "
                     + " where IdEmpresa = @IdEmpresa and EnCurso = 1 "
                     + " set @IdAnioAnterior = isnull(@IdAnioAnterior, 0) "

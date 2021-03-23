@@ -29,13 +29,14 @@ namespace Core.Web.Reportes.Academico
             int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
             decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
             int IdSede = string.IsNullOrEmpty(p_IdSede.Value.ToString()) ? 0 : Convert.ToInt32(p_IdSede.Value);
+            int IdAnio = string.IsNullOrEmpty(p_IdAnio.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAnio.Value);
 
             aca_Sede_Bus bus_sede = new aca_Sede_Bus();
             aca_Familia_Bus bus_familia = new aca_Familia_Bus();
             ACA_003_Bus bus_rpt = new ACA_003_Bus();
 
             List<ACA_003_Info> lst_rpt = new List<ACA_003_Info>();
-            ACA_003_Info info = bus_rpt.GetInfo(IdEmpresa, IdAlumno);
+            ACA_003_Info info = bus_rpt.GetInfo(IdEmpresa, IdAnio, IdAlumno);
 
             var CedulaRepLegal = "";
             var NombreRepLegal = "";

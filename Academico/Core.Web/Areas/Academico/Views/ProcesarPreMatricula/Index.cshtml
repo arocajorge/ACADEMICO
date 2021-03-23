@@ -83,7 +83,8 @@
     function ProcesarPreMatricula(IdString)
     {
         var datos = {
-            IdString: IdString
+            IdString: IdString,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',

@@ -30,10 +30,10 @@ namespace Core.Info.Academico
         public string IdTipoDocumento_Aspirante { get; set; }
         [Required(ErrorMessage = "El campo cédula es obligatorio")]
         public string CedulaRuc_Aspirante { get; set; }
-        //[Required(ErrorMessage = "El campo nombres es obligatorio")]
+        [Required(ErrorMessage = "El campo nombres es obligatorio")]
         //[StringLength(0, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
         public string Nombres_Aspirante { get; set; }
-        //[Required(ErrorMessage = "El campo apellidos es obligatorio")]
+        [Required(ErrorMessage = "El campo apellidos es obligatorio")]
         //[StringLength(0, MinimumLength = 0, ErrorMessage = "el campo apellidos debe tener máximo 100 caracteres")]
         public string Apellidos_Aspirante { get; set; }
         //[Required(ErrorMessage = "El campo nombre completo del aspirante es obligatorio")]
@@ -113,8 +113,9 @@ namespace Core.Info.Academico
         public string OtroFinanciamiento_Aspirante { get; set; }
         [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string Naturaleza_Padre { get; set; }
+        [Required(ErrorMessage = "El campo tipo de documento es obligatorio")]
         public string IdTipoDocumento_Padre { get; set; }
-        [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
+        //[Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Padre { get; set; }
         //[Required(ErrorMessage = "El campo nombres es obligatorio")]
         //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
@@ -124,84 +125,84 @@ namespace Core.Info.Academico
         public string Apellidos_Padre { get; set; }
         public string NombreCompleto_Padre { get; set; }
         public string RazonSocial_Padre { get; set; }
-        [Required(ErrorMessage = "El campo direccion es obligatorio")]
+        //[Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Padre { get; set; }
-        [Required(ErrorMessage = "El campo teléfono es obligatorio")]
+        //[Required(ErrorMessage = "El campo teléfono es obligatorio")]
         public string Telefono_Padre { get; set; }
-        [Required(ErrorMessage = "El campo celular es obligatorio")]
+        //[Required(ErrorMessage = "El campo celular es obligatorio")]
         public string Celular_Padre { get; set; }
-        [Required(ErrorMessage = "El campo correo es obligatorio")]
+        //[Required(ErrorMessage = "El campo correo es obligatorio")]
         public string Correo_Padre { get; set; }
-        [Required(ErrorMessage = "El campo sexo es obligatorio")]
+        //[Required(ErrorMessage = "El campo sexo es obligatorio")]
         public string Sexo_Padre { get; set; }
-        [Required(ErrorMessage = "El campo fecha de nacimiento es obligatorio")]
+        //[Required(ErrorMessage = "El campo fecha de nacimiento es obligatorio")]
         public Nullable<System.DateTime> FechaNacimiento_Padre { get; set; }
         public string CodCatalogoCONADIS_Padre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Padre { get; set; }
         public string NumeroCarnetConadis_Padre { get; set; }
-        [Required(ErrorMessage = "El campo grupo étnico es obligatorio")]
+        //[Required(ErrorMessage = "El campo grupo étnico es obligatorio")]
         public Nullable<int> IdGrupoEtnico_Padre { get; set; }
-        [Required(ErrorMessage = "El campo religión es obligatorio")]
+        //[Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion_Padre { get; set; }
-        [Required(ErrorMessage = "El campo estado civil es obligatorio")]
+        //[Required(ErrorMessage = "El campo estado civil es obligatorio")]
         public string IdEstadoCivil_Padre { get; set; }
-        [Required(ErrorMessage = "El campo asiste a Centro Cristiano es obligatorio")]
+        //[Required(ErrorMessage = "El campo asiste a Centro Cristiano es obligatorio")]
         public bool AsisteCentroCristiano_Padre { get; set; }
-        [Required(ErrorMessage = "El campo país es obligatorio")]
+        //[Required(ErrorMessage = "El campo país es obligatorio")]
         public string IdPais_Padre { get; set; }
-        [Required(ErrorMessage = "El campo región es obligatorio")]
+        //[Required(ErrorMessage = "El campo región es obligatorio")]
         public string Cod_Region_Padre { get; set; }
-        [Required(ErrorMessage = "El campo provincia es obligatorio")]
+        //[Required(ErrorMessage = "El campo provincia es obligatorio")]
         public string IdProvincia_Padre { get; set; }
-        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        //[Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad_Padre { get; set; }
-        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        //[Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_Padre { get; set; }
-        [Required(ErrorMessage = "El campo sector es obligatorio")]
+        //[Required(ErrorMessage = "El campo sector es obligatorio")]
         public string Sector_Padre { get; set; }
-        [Required(ErrorMessage = "El campo parentezco es obligatorio")]
+        //[Required(ErrorMessage = "El campo parentezco es obligatorio")]
         public int IdCatalogoPAREN_Padre { get; set; }
-        [Required(ErrorMessage = "El campo instrucción es obligatorio")]
+        //[Required(ErrorMessage = "El campo instrucción es obligatorio")]
         public Nullable<int> IdCatalogoFichaInst_Padre { get; set; }
-        [Required(ErrorMessage = "El campo empresa donde trabaja es obligatorio")]
+        //[Required(ErrorMessage = "El campo empresa donde trabaja es obligatorio")]
         public string EmpresaTrabajo_Padre { get; set; }
-        [Required(ErrorMessage = "El campo dirección de trabajo es obligatorio")]
+        //[Required(ErrorMessage = "El campo dirección de trabajo es obligatorio")]
         public string DireccionTrabajo_Padre { get; set; }
-        [Required(ErrorMessage = "El campo teléfono de trabajo es obligatorio")]
+        //[Required(ErrorMessage = "El campo teléfono de trabajo es obligatorio")]
         public string TelefonoTrabajo_Padre { get; set; }
-        [Required(ErrorMessage = "El campo cargo es obligatorio")]
+        //[Required(ErrorMessage = "El campo cargo es obligatorio")]
         public string CargoTrabajo_Padre { get; set; }
-        [Required(ErrorMessage = "El campo años de servicio es obligatorio")]
+        //[Required(ErrorMessage = "El campo años de servicio es obligatorio")]
         public Nullable<int> AniosServicio_Padre { get; set; }
-        [Required(ErrorMessage = "El campo ingreso mensual es obligatorio")]
+        //[Required(ErrorMessage = "El campo ingreso mensual es obligatorio")]
         public Nullable<double> IngresoMensual_Padre { get; set; }
-        [Required(ErrorMessage = "El campo vehículo propio es obligatorio")]
+        //[Required(ErrorMessage = "El campo vehículo propio es obligatorio")]
         public bool VehiculoPropio_Padre { get; set; }
-        [Required(ErrorMessage = "El campo marca de vehículo es obligatorio")]
+        //[Required(ErrorMessage = "El campo marca de vehículo es obligatorio")]
         public string Marca_Padre { get; set; }
-        [Required(ErrorMessage = "El campo modelo de vehículo es obligatorio")]
+        //[Required(ErrorMessage = "El campo modelo de vehículo es obligatorio")]
         public string Modelo_Padre { get; set; }
-        [Required(ErrorMessage = "El campo año de vehículo es obligatorio")]
+        //[Required(ErrorMessage = "El campo año de vehículo es obligatorio")]
         public Nullable<int> AnioVehiculo_Padre { get; set; }
-        [Required(ErrorMessage = "El campo casa propia es obligatorio")]
+        //[Required(ErrorMessage = "El campo casa propia es obligatorio")]
         public bool CasaPropia_Padre { get; set; }
         public bool EstaFallecido_Padre { get; set; }
-        [Required(ErrorMessage = "El campo profesión es obligatorio")]
+        //[Required(ErrorMessage = "El campo profesión es obligatorio")]
         public Nullable<int> IdProfesion_Padre { get; set; }
-        [Required(ErrorMessage = "El campo se factura es obligatorio")]
+        //[Required(ErrorMessage = "El campo se factura es obligatorio")]
         public bool SeFactura_Padre { get; set; }
-        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        //[Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
         public Nullable<int> Idtipo_cliente_Padre { get; set; }
         public string IdTipoCredito_Padre { get; set; }
-        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        //[Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad_Padre_Fact { get; set; }
-        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        //[Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_Padre_Fact { get; set; }
         [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string Naturaleza_Madre { get; set; }
         [Required(ErrorMessage = "El campo tipo documento es obligatorio")]
         public string IdTipoDocumento_Madre { get; set; }
-        [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
+        //[Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Madre { get; set; }
         //[Required(ErrorMessage = "El campo nombres es obligatorio")]
         //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
@@ -213,51 +214,51 @@ namespace Core.Info.Academico
         public string RazonSocial_Madre { get; set; }
         [Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Madre { get; set; }
-        [Required(ErrorMessage = "El campo teléfono es obligatorio")]
+        //[Required(ErrorMessage = "El campo teléfono es obligatorio")]
         public string Telefono_Madre { get; set; }
-        [Required(ErrorMessage = "El campo celular es obligatorio")]
+        //[Required(ErrorMessage = "El campo celular es obligatorio")]
         public string Celular_Madre { get; set; }
-        [Required(ErrorMessage = "El campo correo es obligatorio")]
+        //[Required(ErrorMessage = "El campo correo es obligatorio")]
         public string Correo_Madre { get; set; }
-        [Required(ErrorMessage = "El campo sexo es obligatorio")]
+        //[Required(ErrorMessage = "El campo sexo es obligatorio")]
         public string Sexo_Madre { get; set; }
-        [Required(ErrorMessage = "El campo fecha de nacimiento es obligatorio")]
+        //[Required(ErrorMessage = "El campo fecha de nacimiento es obligatorio")]
         public Nullable<System.DateTime> FechaNacimiento_Madre { get; set; }
         public string CodCatalogoCONADIS_Madre { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Madre { get; set; }
         public string NumeroCarnetConadis_Madre { get; set; }
-        [Required(ErrorMessage = "El campo grupo étnico es obligatorio")]
+        //[Required(ErrorMessage = "El campo grupo étnico es obligatorio")]
         public Nullable<int> IdGrupoEtnico_Madre { get; set; }
-        [Required(ErrorMessage = "El campo religión es obligatorio")]
+        //[Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion_Madre { get; set; }
-        [Required(ErrorMessage = "El campo estado civil es obligatorio")]
+        //[Required(ErrorMessage = "El campo estado civil es obligatorio")]
         public string IdEstadoCivil_Madre { get; set; }
         public bool AsisteCentroCristiano_Madre { get; set; }
-        [Required(ErrorMessage = "El campo país es obligatorio")]
+        //[Required(ErrorMessage = "El campo país es obligatorio")]
         public string IdPais_Madre { get; set; }
-        [Required(ErrorMessage = "El campo región es obligatorio")]
+        //[Required(ErrorMessage = "El campo región es obligatorio")]
         public string Cod_Region_Madre { get; set; }
-        [Required(ErrorMessage = "El campo provincia es obligatorio")]
+        //[Required(ErrorMessage = "El campo provincia es obligatorio")]
         public string IdProvincia_Madre { get; set; }
-        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        //[Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad_Madre { get; set; }
-        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        //[Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_Madre { get; set; }
-        [Required(ErrorMessage = "El campo sector es obligatorio")]
+        //[Required(ErrorMessage = "El campo sector es obligatorio")]
         public string Sector_Madre { get; set; }
-        [Required(ErrorMessage = "El campo parentezco es obligatorio")]
+        //[Required(ErrorMessage = "El campo parentezco es obligatorio")]
         public int IdCatalogoPAREN_Madre { get; set; }
-        [Required(ErrorMessage = "El campo instrucción es obligatorio")]
+        //[Required(ErrorMessage = "El campo instrucción es obligatorio")]
         public Nullable<int> IdCatalogoFichaInst_Madre { get; set; }
-        [Required(ErrorMessage = "El campo empresa donde trabaja es obligatorio")]
+        //[Required(ErrorMessage = "El campo empresa donde trabaja es obligatorio")]
         public string EmpresaTrabajo_Madre { get; set; }
-        [Required(ErrorMessage = "El campo dirección del trabajo es obligatorio")]
+        //[Required(ErrorMessage = "El campo dirección del trabajo es obligatorio")]
         public string DireccionTrabajo_Madre { get; set; }
-        [Required(ErrorMessage = "El campo teléfono del trabajo es obligatorio")]
+        //[Required(ErrorMessage = "El campo teléfono del trabajo es obligatorio")]
         public string TelefonoTrabajo_Madre { get; set; }
-        [Required(ErrorMessage = "El campo cargo es obligatorio")]
+        //[Required(ErrorMessage = "El campo cargo es obligatorio")]
         public string CargoTrabajo_Madre { get; set; }
-        [Required(ErrorMessage = "El campo años de servicio es obligatorio")]
+        //[Required(ErrorMessage = "El campo años de servicio es obligatorio")]
         public Nullable<int> AniosServicio_Madre { get; set; }
         public Nullable<double> IngresoMensual_Madre { get; set; }
         public bool VehiculoPropio_Madre { get; set; }
@@ -267,18 +268,20 @@ namespace Core.Info.Academico
         public bool CasaPropia_Madre { get; set; }
         public bool EstaFallecido_Madre { get; set; }
         public Nullable<int> IdProfesion_Madre { get; set; }
-        [Required(ErrorMessage = "El campo se factura es obligatorio")]
+        //[Required(ErrorMessage = "El campo se factura es obligatorio")]
         public bool SeFactura_Madre { get; set; }
-        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        //[Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
         public Nullable<int> Idtipo_cliente_Madre { get; set; }
         public string IdTipoCredito_Madre { get; set; }
-        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        //[Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad_Madre_Fact { get; set; }
-        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        //[Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_Madre_Fact { get; set; }
+        [Required(ErrorMessage = "El campo naturaleza es obligatorio")]
         public string Naturaleza_Representante { get; set; }
+        [Required(ErrorMessage = "El campo tipo de documento es obligatorio")]
         public string IdTipoDocumento_Representante { get; set; }
-        [Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
+        //[Required(ErrorMessage = "El campo cédula o Ruc es obligatorio")]
         public string CedulaRuc_Representante { get; set; }
         //[Required(ErrorMessage = "El campo nombres es obligatorio")]
         //[StringLength(1, MinimumLength = 0, ErrorMessage = "el campo nombres debe tener máximo 100 caracteres")]
@@ -288,21 +291,21 @@ namespace Core.Info.Academico
         public string Apellidos_Representante { get; set; }
         public string NombreCompleto_Representante { get; set; }
         public string RazonSocial_Representante { get; set; }
-        [Required(ErrorMessage = "El campo direccion es obligatorio")]
+        //[Required(ErrorMessage = "El campo direccion es obligatorio")]
         public string Direccion_Representante { get; set; }
         public string Telefono_Representante { get; set; }
-        [Required(ErrorMessage = "El campo celular es obligatorio")]
+        //[Required(ErrorMessage = "El campo celular es obligatorio")]
         public string Celular_Representante { get; set; }
-        [Required(ErrorMessage = "El campo correo es obligatorio")]
+        //[Required(ErrorMessage = "El campo correo es obligatorio")]
         public string Correo_Representante { get; set; }
-        [Required(ErrorMessage = "El campo sexo es obligatorio")]
+        //[Required(ErrorMessage = "El campo sexo es obligatorio")]
         public string Sexo_Representante { get; set; }
         public Nullable<System.DateTime> FechaNacimiento_Representante { get; set; }
         public string CodCatalogoCONADIS_Representante { get; set; }
         public Nullable<double> PorcentajeDiscapacidad_Representante { get; set; }
         public string NumeroCarnetConadis_Representante { get; set; }
         public Nullable<int> IdGrupoEtnico_Representante { get; set; }
-        [Required(ErrorMessage = "El campo religión es obligatorio")]
+        //[Required(ErrorMessage = "El campo religión es obligatorio")]
         public Nullable<int> IdReligion_Representante { get; set; }
         public string IdEstadoCivil_Representante { get; set; }
         public bool AsisteCentroCristiano_Representante { get; set; }
@@ -327,14 +330,14 @@ namespace Core.Info.Academico
         public bool CasaPropia_Representante { get; set; }
         public bool EstaFallecido_Representante { get; set; }
         public Nullable<int> IdProfesion_Representante { get; set; }
-        [Required(ErrorMessage = "El campo se factura es obligatorio")]
+        //[Required(ErrorMessage = "El campo se factura es obligatorio")]
         public bool SeFactura_Representante { get; set; }
-        [Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
+        //[Required(ErrorMessage = "El campo tipo de cliente es obligatorio")]
         public Nullable<int> Idtipo_cliente_Representante { get; set; }
         public string IdTipoCredito_Representante { get; set; }
-        [Required(ErrorMessage = "El campo ciudad es obligatorio")]
+        //[Required(ErrorMessage = "El campo ciudad es obligatorio")]
         public string IdCiudad_Representante_Fact { get; set; }
-        [Required(ErrorMessage = "El campo parroquia es obligatorio")]
+        //[Required(ErrorMessage = "El campo parroquia es obligatorio")]
         public string IdParroquia_Representante_Fact { get; set; }
         public double SueldoPadre { get; set; }
         public double SueldoMadre { get; set; }
@@ -362,6 +365,8 @@ namespace Core.Info.Academico
 
 
         #region Campos que no exiten en la tabla
+        public int TienePadre { get; set; }
+        public int TieneMadre { get; set; }
         public double TotalIngresos { get; set; }
         public int AspiranteValido { get; set; }
         public int PadreValido { get; set; }

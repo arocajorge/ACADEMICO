@@ -201,6 +201,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ACA_003_Rpt ReportContrato = new ACA_003_Rpt();
 
             ReportContrato.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportContrato.p_IdAnio.Value = model.IdAnio;
             ReportContrato.p_IdAlumno.Value = model.IdAlumno;
             ReportContrato.p_IdSede.Value = model.IdSede;
             ReportContrato.usuario = SessionFixed.IdUsuario;
@@ -259,6 +260,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             ACA_003_Rpt ReportContrato = new ACA_003_Rpt();
 
             ReportContrato.p_IdEmpresa.Value = model.IdEmpresa;
+            ReportContrato.p_IdAnio.Value = model.IdAnio;
             ReportContrato.p_IdAlumno.Value = model.IdAlumno;
             ReportContrato.p_IdSede.Value = model.IdSede;
             ReportContrato.usuario = SessionFixed.IdUsuario;

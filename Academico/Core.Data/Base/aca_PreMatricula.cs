@@ -53,12 +53,12 @@ namespace Core.Data.Base
         public Nullable<decimal> IdEmpleado { get; set; }
         public Nullable<bool> EsPatrocinado { get; set; }
     
-        public virtual aca_Admision aca_Admision { get; set; }
         public virtual aca_Alumno aca_Alumno { get; set; }
         public virtual aca_AnioLectivo_Curso_Paralelo aca_AnioLectivo_Curso_Paralelo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aca_Matricula> aca_Matricula { get; set; }
         public virtual aca_MecanismoDePago aca_MecanismoDePago { get; set; }
         public virtual aca_Plantilla aca_Plantilla { get; set; }
+        public virtual aca_Admision aca_Admision { get; set; }
     }
 }
