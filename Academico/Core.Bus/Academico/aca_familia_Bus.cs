@@ -207,6 +207,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public bool modificarCheck(aca_Familia_Info info)
+        {
+            try
+            {
+                return odata.modificarCheck(info);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool modificarDB(aca_Familia_Info info)
         {
             try
@@ -305,7 +317,7 @@ namespace Core.Bus.Academico
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }

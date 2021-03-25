@@ -225,6 +225,36 @@ namespace Core.Bus.Academico
                     }
                     #endregion
 
+                    #region Familia
+                    var lst_familia = bus_familia.GetList(info_matricula.IdEmpresa, Convert.ToInt32(info_matricula.IdAlumno));
+                    if (lst_familia.Count > 0)
+                    {
+                        foreach (var item in lst_familia)
+                        {
+                            var info_familia_factura = bus_familia.GetInfo(item.IdEmpresa, Convert.ToInt32(item.IdAlumno), item.Secuencia);
+                            if (info_familia_factura.IdPersona == info_matricula.IdPersonaF)
+                            {
+                                info_familia_factura.SeFactura = true; 
+                            }
+                            else
+                            {
+                                info_familia_factura.SeFactura = false;
+                            }
+
+                            if (info_familia_factura.IdPersona == info_matricula.IdPersonaR)
+                            {
+                                info_familia_factura.EsRepresentante = true;
+                            }
+                            else
+                            {
+                                info_familia_factura.EsRepresentante = false;
+                            }
+                            bus_familia.modificarCheck(info_familia_factura);
+                        }
+
+                    }
+                    #endregion
+
                     var info_admision = bus_admision.GetInfo(info_matricula.IdEmpresa, info_matricula.IdAdmision);
                     if (info_admision!=null)
                     {

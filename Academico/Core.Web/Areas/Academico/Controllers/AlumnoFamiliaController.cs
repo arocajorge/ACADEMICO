@@ -404,6 +404,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 pe_celular = model.Celular,
                 pe_direccion = model.Direccion,
                 IdReligion=model.IdReligion,
+                IdGrupoEtnico = model.IdGrupoEtnico,
                 AsisteCentroCristiano = model.AsisteCentroCristiano,
                 IdProfesion = model.IdProfesion
             };

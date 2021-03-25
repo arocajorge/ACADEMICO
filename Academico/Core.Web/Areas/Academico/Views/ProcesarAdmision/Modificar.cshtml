@@ -66,7 +66,8 @@
         var datos = {
             IdAnio: IdAnio.GetValue(),
             IdPlantilla: IdPlantilla.GetValue(),
-            Seleccionados: ItemsSeleccionados
+            Seleccionados: ItemsSeleccionados,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -126,6 +127,7 @@
     @Html.HiddenFor(q => q.EsRepresentante_padre, new { @id = "EsRepresentante_padre" })
     @Html.HiddenFor(q => q.EsRepresentante_madre, new { @id = "EsRepresentante_madre" })
     @Html.HiddenFor(q => q.EsRepresentante_otro, new { @id = "EsRepresentante_otro" })
+    @Html.HiddenFor(q => q.Representante, new { @id = "Representante" })
 
     @Html.HiddenFor(q => q.TienePadre, new { @id = "TienePadre" })
     @Html.HiddenFor(q => q.TieneMadre, new { @id = "TieneMadre" })
@@ -2491,6 +2493,16 @@
             actualizar_nombre_completo_madre("R");
         });
 
+        $("#Apellidos_Representante").change(function () {
+            actualizar_nombre_completo_representante("N");
+        });
+        $("#Nombres_Representante").change(function () {
+            actualizar_nombre_completo_representante("N");
+        });
+        $("#RazonSocial_Representante").change(function () {
+            actualizar_nombre_completo_representante("R");
+        });
+
         $("#CedulaRuc_Aspirante").change(function () {
             get_info_x_num_cedula();
         });
@@ -2833,7 +2845,7 @@
                             Cod_Region_Madre.SetValue(data.Cod_Region);
                             IdProvincia_Madre.SetValue(data.IdProvincia);
                             IdCiudad_Madre.SetValue(data.IdCiudad);
-                            IdParroquia_madre.SetValue(data.IdParroquia);
+                            IdParroquia_Madre.SetValue(data.IdParroquia);
                         }
                     }
                 },
@@ -2856,7 +2868,7 @@
             if (cedula.length != 13) {
                 alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
                 $("#Celular_Representante").val("");
-                vaciar_campos_padre();
+                vaciar_campos_representante();
                 return;
             }
         } else
@@ -2864,7 +2876,7 @@
                 if (cedula.length != 10) {
                     alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
                     $("#Celular_Representante").val("");
-                    vaciar_campos_madre();
+                    vaciar_campos_representante();
                     return;
                 }
             }
@@ -2910,12 +2922,12 @@
                         mostrar_vehiculo_madre();
                     }
                     else {
-                        vaciar_campos_madre();
+                        vaciar_campos_representante();
                         IdPais_Representante.SetValue(data.IdPais);
                         Cod_Region_Representante.SetValue(data.Cod_Region);
                         IdProvincia_Representante.SetValue(data.IdProvincia);
                         IdCiudad_Representante.SetValue(data.IdCiudad);
-                        IdParroquia_madre.SetValue(data.IdParroquia);
+                        IdParroquia_Madre.SetValue(data.IdParroquia);
                     }
                 }
             },
@@ -3220,6 +3232,20 @@
             }
         }
 
+        function actualizar_nombre_completo_representante(Tipo) {
+            if (Tipo == "N") {
+                var apellido = $("#Apellidos_Representante").val();
+                var nombre = $("#Nombres_Representante").val();
+
+                var nombre_completo = apellido + ' ' + nombre;
+                $("#NombreCompleto_Representante").val(nombre_completo)
+            }
+            else {
+                var razon_social = $("#RazonSocial_Representantee").val();
+                $("#NombreCompleto_Representante").val(razon_social)
+            }
+        }
+
         function mostrar_vehiculo_padre() {
             if (VehiculoPropio_Padre.GetValue() == true) {
                 $("#vehiculo_padre").show();
@@ -3368,7 +3394,7 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                GridViewPartial_AlumnoDocumentos.PerformCallback();
+                GridViewPartial_Documentos.PerformCallback();
             },
             error: function (error) {
             }
@@ -3515,6 +3541,8 @@
         $("#EsRepresentante_padre").val("1");
         $("#EsRepresentante_madre").val("0");
         $("#EsRepresentante_otro").val("0");
+        $("#Representante").val("P");
+        
         $("#RepresentanteLabel").html("Representante: Padre");
         
         mostrar_representante();
@@ -3524,6 +3552,8 @@
         $("#EsRepresentante_padre").val("0");
         $("#EsRepresentante_madre").val("1");
         $("#EsRepresentante_otro").val("0");
+        $("#Representante").val("M");
+
         $("#RepresentanteLabel").html("Representante: Madre");
 
         mostrar_representante();
@@ -3533,6 +3563,8 @@
         $("#EsRepresentante_padre").val("0");
         $("#EsRepresentante_madre").val("0");
         $("#EsRepresentante_otro").val("1");
+        $("#Representante").val("O");
+
         $("#RepresentanteLabel").html("Representante: Otro");
 
         mostrar_representante();

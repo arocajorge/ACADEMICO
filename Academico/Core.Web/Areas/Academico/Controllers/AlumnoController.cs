@@ -760,6 +760,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdCiudad_padre = info_fam_padre.IdCiudad;
             model.IdParroquia_padre = info_fam_padre.IdParroquia;
             model.Sector_padre = info_fam_padre.Sector;
+            model.IdGrupoEtnico_padre = info_fam_padre.IdGrupoEtnico;
 
             model.IdPersona_madre = info_fam_madre.IdPersona;
             model.SeFactura_madre = info_fam_madre.SeFactura;
@@ -807,6 +808,7 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdCiudad_madre = info_fam_madre.IdCiudad;
             model.IdParroquia_madre = info_fam_madre.IdParroquia;
             model.Sector_madre = info_fam_madre.Sector;
+            model.IdGrupoEtnico_madre = info_fam_madre.IdGrupoEtnico;
 
             if (model == null)
                 return RedirectToAction("Index");

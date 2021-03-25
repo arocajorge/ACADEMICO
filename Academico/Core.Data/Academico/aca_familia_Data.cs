@@ -207,6 +207,7 @@ namespace Core.Data.Academico
                             IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
                             IdProfesion = string.IsNullOrEmpty(reader["IdProfesion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion"]),
                             AnioVehiculo = string.IsNullOrEmpty(reader["AnioVehiculo"].ToString()) ? (int?)null : Convert.ToInt32(reader["AnioVehiculo"]),
+                            IdGrupoEtnico = string.IsNullOrEmpty(reader["IdGrupoEtnico"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdGrupoEtnico"]),
                         };
                     }
                 }
@@ -503,6 +504,7 @@ namespace Core.Data.Academico
                             Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(),
                             IdProfesion = string.IsNullOrEmpty(reader["IdProfesion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion"]),
                             IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
+                            IdGrupoEtnico = string.IsNullOrEmpty(reader["IdGrupoEtnico"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdGrupoEtnico"]),
                             Estado = Convert.ToBoolean(reader["Estado"])
                         };
                     }
@@ -1015,6 +1017,45 @@ namespace Core.Data.Academico
                     Entity.Sector = info.Sector;
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = info.FechaModificacion = DateTime.Now;
+
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public bool modificarCheck(aca_Familia_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Familia Entity = Context.aca_Familia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno && q.Secuencia == info.Secuencia);
+
+                    if (Entity == null)
+                        return false;
+
+                    if (info.SeFactura==true)
+                    {
+                        Entity.SeFactura = true;
+                    }
+                    else
+                    {
+                        Entity.SeFactura = false;
+                    }
+
+                    if (info.EsRepresentante == true)
+                    {
+                        Entity.EsRepresentante = true;
+                    }
+                    else
+                    {
+                        Entity.EsRepresentante = false;
+                    }
 
                     Context.SaveChanges();
                 }

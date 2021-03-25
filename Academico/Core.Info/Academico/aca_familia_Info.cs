@@ -110,6 +110,7 @@ namespace Core.Info.Academico
         public int IdSucursal { get; set; }
         public tb_persona_Info info_persona { get; set; }
         public string pe_cedulaRuc_Alumno { get; set; }
+        public Nullable<int> IdGrupoEtnico { get; set; }
         #endregion
     }
 }
