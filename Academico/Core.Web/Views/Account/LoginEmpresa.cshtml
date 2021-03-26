@@ -78,11 +78,12 @@
 
     $(function () {
         cargar_sede_x_empresa();
-        $("#IdSede").change(function () {
-            cargar_sede_x_empresa();
-        });
+        
     });
 
+    $("#IdEmpresa").change(function () {
+        cargar_sede_x_empresa();
+    });
 
     function cargar_sede_x_empresa() {
         $("#IdSede").empty();        

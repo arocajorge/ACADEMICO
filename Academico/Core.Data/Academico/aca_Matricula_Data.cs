@@ -822,6 +822,11 @@ namespace Core.Data.Academico
                     Entity_Alumno.IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO);
                     Entity_Alumno.IdCurso = info.IdCurso;
 
+                    if (Entity_Alumno.IdCatalogoESTALU == Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO))
+                    {
+                        Entity_Alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
+                    }
+
                     Context.SaveChanges();
                 }
                 return true;
@@ -1121,6 +1126,30 @@ namespace Core.Data.Academico
                         Context.aca_MatriculaCalificacionCualitativa.Add(Entity_ParcialCualitativa);
                     }
 
+                    var lst_MatriculaCalificacionesCualitativasPromedio = Context.aca_MatriculaCalificacionCualitativaPromedio.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula).ToList();
+                    Context.aca_MatriculaCalificacionCualitativaPromedio.RemoveRange(lst_MatriculaCalificacionesCualitativasPromedio);
+                    foreach (var cal_cualit_prom in info.lst_MatriculaCalificacionCualitativaPromedio)
+                    {
+                        aca_MatriculaCalificacionCualitativaPromedio Entity_ParcialCualitativaPromedio = new aca_MatriculaCalificacionCualitativaPromedio
+                        {
+                            IdEmpresa = cal_cualit_prom.IdEmpresa,
+                            IdMatricula = cal_cualit_prom.IdMatricula,
+                            IdMateria = cal_cualit_prom.IdMateria,
+                            IdProfesor = cal_cualit_prom.IdProfesor,
+                            IdCalificacionCualitativaQ1 = cal_cualit_prom.IdCalificacionCualitativaQ1,
+                            PromedioQ1 = cal_cualit_prom.PromedioQ1,
+                            IdCalificacionCualitativaQ2 = cal_cualit_prom.IdCalificacionCualitativaQ2,
+                            PromedioQ2 = cal_cualit_prom.PromedioQ2,
+                            IdCalificacionCualitativaFinal = cal_cualit_prom.IdCalificacionCualitativaFinal,
+                            PromedioFinal = cal_cualit_prom.PromedioFinal,
+                            IdUsuarioCreacion = cal_cualit_prom.IdUsuarioCreacion,
+                            FechaCreacion = cal_cualit_prom.FechaCreacion,
+                            IdUsuarioModificacion = cal_cualit_prom.IdUsuarioModificacion,
+                            FechaModificacion = cal_cualit_prom.FechaModificacion,
+                        };
+
+                        Context.aca_MatriculaCalificacionCualitativaPromedio.Add(Entity_ParcialCualitativaPromedio);
+                    }
                     #endregion
 
                     Context.SaveChanges();

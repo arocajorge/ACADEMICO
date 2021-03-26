@@ -87,7 +87,8 @@ namespace Core.Info.Academico
         public List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial { get; set; }
         public List<aca_MatriculaCalificacion_Info> lst_calificacion { get; set; }
         public List<aca_MatriculaConducta_Info> lst_conducta { get; set; }
-        
+
+        public List<aca_MatriculaCalificacionParticipacion_Info> lst_participacion { get; set; }
         public aca_MatriculaCambios_Info info_MatriculaCambios { get; set; }
         public Nullable<decimal> PromedioFinal { get; set; }
         public int OrdenJornada { get; set; }
@@ -100,7 +101,7 @@ namespace Core.Info.Academico
         public List<aca_MatriculaCalificacion_Info> lst_MatriculaCalificacion { get; set; }
         public List<aca_MatriculaCalificacionCualitativa_Info> lst_MatriculaCalificacionCualitativa { get; set; }
         public List<aca_MatriculaCalificacionCualitativaPromedio_Info> lst_MatriculaCalificacionCualitativaPromedio { get; set; }
-
+        public List<aca_MatriculaAsistencia_Info> lst_asistencia { get; set; }
         public string ObservacionCambioPlantilla { get; set; }
         public string ObservacionCambioCurso { get; set; }
 

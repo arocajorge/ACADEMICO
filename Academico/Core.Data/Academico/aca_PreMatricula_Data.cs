@@ -97,12 +97,12 @@ namespace Core.Data.Academico
                                 FechaFacturacion = null,
                                 EnMatricula = item.seleccionado,
                                 IdPlantilla = item.IdPlantilla,
-                                IdAnio = item.IdAnio,
-                                IdSede = item.IdSede,
-                                IdNivel = item.IdNivel,
-                                IdJornada = item.IdJornada,
-                                IdCurso = item.IdCurso,
-                                IdParalelo = item.IdParalelo
+                                IdAnio = info.IdAnio,
+                                IdSede = info.IdSede,
+                                IdNivel = info.IdNivel,
+                                IdJornada = info.IdJornada,
+                                IdCurso = info.IdCurso,
+                                IdParalelo = info.IdParalelo
                             };
                             Context.aca_PreMatricula_Rubro.Add(Entity_Det);
                         }

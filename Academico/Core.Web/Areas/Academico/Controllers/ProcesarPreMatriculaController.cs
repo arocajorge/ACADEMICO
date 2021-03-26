@@ -177,12 +177,14 @@ namespace Core.Web.Areas.Academico.Controllers
 
                     var lst_parcial = bus_parcial.GetList_x_Tipo(info_PreMatricula.IdEmpresa, info_PreMatricula.IdSede, info_PreMatricula.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
                     lst_parcial.AddRange(bus_parcial.GetList_x_Tipo(info_PreMatricula.IdEmpresa, info_PreMatricula.IdSede, info_PreMatricula.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)));
-
+                    
                     info_matricula.lst_MatriculaCalificacionCualitativa = new List<aca_MatriculaCalificacionCualitativa_Info>();
                     info_matricula.lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
                     info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
                     info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
+                    info_matricula.lst_asistencia = new List<aca_MatriculaAsistencia_Info>();
                     info_matricula.lst_MatriculaCalificacionCualitativaPromedio = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
+
                     if (lst_materias_cuantitativas != null && lst_materias_cuantitativas.Count > 0)
                     {
                         foreach (var item in lst_materias_cuantitativas)

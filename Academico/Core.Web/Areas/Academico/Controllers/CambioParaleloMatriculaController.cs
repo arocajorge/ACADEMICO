@@ -44,8 +44,10 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_MatriculaCalificacionParcial_Bus bus_calificacion_parcial = new aca_MatriculaCalificacionParcial_Bus();
         aca_MatriculaCalificacion_Bus bus_calificacion = new aca_MatriculaCalificacion_Bus();
         aca_MatriculaCalificacionCualitativa_Bus bus_calificacion_cualitativa = new aca_MatriculaCalificacionCualitativa_Bus();
+        aca_MatriculaCalificacionCualitativaPromedio_Bus bus_calificacion_cualitativa_promedio = new aca_MatriculaCalificacionCualitativaPromedio_Bus();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_MatriculaConducta_Bus bus_conducta = new aca_MatriculaConducta_Bus();
+        aca_MatriculaAsistencia_Bus bus_asistencia = new aca_MatriculaAsistencia_Bus();
         #endregion
 
         #region Combos bajo demanada
@@ -308,23 +310,35 @@ namespace Core.Web.Areas.Academico.Controllers
             }
 
             List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial_existente = new List<aca_MatriculaCalificacionParcial_Info>();
-            List<aca_MatriculaCalificacionCualitativa_Info> lst_calificacion_cualitativa_parcial_existente = new List<aca_MatriculaCalificacionCualitativa_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion_existente = new List<aca_MatriculaCalificacion_Info>();
 
+            List<aca_MatriculaCalificacionCualitativa_Info> lst_calificacion_cualitativa_parcial_existente = new List<aca_MatriculaCalificacionCualitativa_Info>();
+            List<aca_MatriculaCalificacionCualitativaPromedio_Info> lst_calificacion_cualitativa_promedio_existente = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
+
+            List<aca_MatriculaCalificacionParticipacion_Info> lst_participacion_existente = new List<aca_MatriculaCalificacionParticipacion_Info>();
+
             List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
-            List<aca_MatriculaCalificacionCualitativa_Info> lst_calificacion_cualitativa = new List<aca_MatriculaCalificacionCualitativa_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
 
+            List<aca_MatriculaCalificacionCualitativa_Info> lst_calificacion_cualitativa = new List<aca_MatriculaCalificacionCualitativa_Info>();
+            List<aca_MatriculaCalificacionCualitativaPromedio_Info> lst_calificacion_cualitativa_promedio = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
+
+            aca_MatriculaConducta_Info info_conducta = new aca_MatriculaConducta_Info();
+            aca_MatriculaAsistencia_Info info_asistencia = new aca_MatriculaAsistencia_Info();
+            List<aca_MatriculaCalificacionParticipacion_Info> lst_participacion = new List<aca_MatriculaCalificacionParticipacion_Info>();
+
+            var lst_parcial = bus_parcial.GetList_x_Tipo(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
+            lst_parcial.AddRange(bus_parcial.GetList_x_Tipo(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)));
             var lst_materias_x_curso = bus_materias_x_paralelo.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
+
             var lst_materias_cualitativas = lst_materias_x_curso.Where(q => q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUALI)).ToList();
             var lst_materias_cuantitativas = lst_materias_x_curso.Where(q => q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
 
             lst_calificacion_parcial_existente = bus_calificacion_parcial.GetList(model.IdEmpresa, model.IdMatricula);
-            lst_calificacion_cualitativa_parcial_existente = bus_calificacion_cualitativa.getList(model.IdEmpresa, model.IdMatricula);
             lst_calificacion_existente = bus_calificacion.GetList(model.IdEmpresa, model.IdMatricula);
 
-            var lst_parcial = bus_parcial.GetList_x_Tipo(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1));
-            lst_parcial.AddRange(bus_parcial.GetList_x_Tipo(model.IdEmpresa, model.IdSede, model.IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM2)));
+            lst_calificacion_cualitativa_parcial_existente = bus_calificacion_cualitativa.getList(model.IdEmpresa, model.IdMatricula);
+            lst_calificacion_cualitativa_promedio_existente = bus_calificacion_cualitativa_promedio.GetList(model.IdEmpresa, model.IdMatricula);
 
             #region Cualitativas
             if (lst_materias_cualitativas != null && lst_materias_cualitativas.Count > 0)
@@ -336,29 +350,100 @@ namespace Core.Web.Areas.Academico.Controllers
                         foreach (var item_p in lst_parcial)
                         {
                             var calificacion_cualitativa_parcial = lst_calificacion_cualitativa_parcial_existente.Where(q => q.IdCatalogoParcial == item_p.IdCatalogoParcial && q.IdMateria == item_materias_cualit.IdMateria).FirstOrDefault();
-
-                            var info_cualitativa = new aca_MatriculaCalificacionCualitativa_Info()
+                            var info_cualitativa = new aca_MatriculaCalificacionCualitativa_Info();
+                            if (calificacion_cualitativa_parcial!=null)
                             {
-                                IdEmpresa = model.IdEmpresa,
-                                IdMatricula = model.IdMatricula,
-                                IdMateria = item_materias_cualit.IdMateria,
-                                IdCatalogoParcial = calificacion_cualitativa_parcial.IdCatalogoParcial,
-                                IdProfesor = item_materias_cualit.IdProfesor,
-                                IdCalificacionCualitativa = (calificacion_cualitativa_parcial.IdCalificacionCualitativa==null ? (int?)null : calificacion_cualitativa_parcial.IdCalificacionCualitativa),
-                                Conducta = (calificacion_cualitativa_parcial.Conducta==null ? null : calificacion_cualitativa_parcial.Conducta),
-                                MotivoConducta = (calificacion_cualitativa_parcial.MotivoConducta==null ? null : calificacion_cualitativa_parcial.MotivoConducta),
-                                IdUsuarioCreacion = (calificacion_cualitativa_parcial.IdUsuarioCreacion == null ? SessionFixed.IdUsuario : calificacion_cualitativa_parcial.IdUsuarioCreacion),
-                                FechaCreacion = (calificacion_cualitativa_parcial.FechaCreacion == null ? DateTime.Now : calificacion_cualitativa_parcial.FechaCreacion),
-                                IdUsuarioModificacion = (calificacion_cualitativa_parcial.IdUsuarioModificacion == null ? null : SessionFixed.IdUsuario),
-                                FechaModificacion = (calificacion_cualitativa_parcial.FechaModificacion == null ? (DateTime?)null : DateTime.Now)
-                            };
+                                info_cualitativa = new aca_MatriculaCalificacionCualitativa_Info()
+                                {
+                                    IdEmpresa = model.IdEmpresa,
+                                    IdMatricula = model.IdMatricula,
+                                    IdMateria = item_materias_cualit.IdMateria,
+                                    IdCatalogoParcial = calificacion_cualitativa_parcial.IdCatalogoParcial,
+                                    IdProfesor = item_materias_cualit.IdProfesor,
+                                    IdCalificacionCualitativa = (calificacion_cualitativa_parcial.IdCalificacionCualitativa == null ? (int?)null : calificacion_cualitativa_parcial.IdCalificacionCualitativa),
+                                    Conducta = (calificacion_cualitativa_parcial.Conducta == null ? null : calificacion_cualitativa_parcial.Conducta),
+                                    MotivoConducta = (calificacion_cualitativa_parcial.MotivoConducta == null ? null : calificacion_cualitativa_parcial.MotivoConducta),
+                                    IdUsuarioCreacion = (calificacion_cualitativa_parcial.IdUsuarioCreacion == null ? SessionFixed.IdUsuario : calificacion_cualitativa_parcial.IdUsuarioCreacion),
+                                    FechaCreacion = (calificacion_cualitativa_parcial.FechaCreacion == null ? DateTime.Now : calificacion_cualitativa_parcial.FechaCreacion),
+                                    IdUsuarioModificacion = (calificacion_cualitativa_parcial.IdUsuarioModificacion == null ? null : SessionFixed.IdUsuario),
+                                    FechaModificacion = (calificacion_cualitativa_parcial.FechaModificacion == null ? (DateTime?)null : DateTime.Now)
+                                };
+                            }
+                            else
+                            {
+                                info_cualitativa = new aca_MatriculaCalificacionCualitativa_Info()
+                                {
+                                    IdEmpresa = model.IdEmpresa,
+                                    IdMatricula = model.IdMatricula,
+                                    IdMateria = item_materias_cualit.IdMateria,
+                                    IdCatalogoParcial = item_p.IdCatalogoParcial,
+                                    IdProfesor = item_materias_cualit.IdProfesor,
+                                    IdCalificacionCualitativa = (int?)null,
+                                    Conducta = null,
+                                    MotivoConducta = null ,
+                                    IdUsuarioCreacion = SessionFixed.IdUsuario,
+                                    FechaCreacion =  DateTime.Now,
+                                    IdUsuarioModificacion = null,
+                                    FechaModificacion = null
+                                };
+                            }
+                            
                             lst_calificacion_cualitativa.Add(info_cualitativa);
                         }
                     }
+
+                    var calificacion_cualitativa_promedio = lst_calificacion_cualitativa_promedio_existente.Where(q => q.IdMateria == item_materias_cualit.IdMateria).FirstOrDefault();
+                    var info_cualitativa_promedio = new aca_MatriculaCalificacionCualitativaPromedio_Info();
+                    if (calificacion_cualitativa_promedio!=null)
+                    {
+                        info_cualitativa_promedio = new aca_MatriculaCalificacionCualitativaPromedio_Info()
+                        {
+                            IdEmpresa = model.IdEmpresa,
+                            IdMatricula = model.IdMatricula,
+                            IdMateria = item_materias_cualit.IdMateria,
+                            IdProfesor = item_materias_cualit.IdProfesor,
+                            IdCalificacionCualitativaQ1 = calificacion_cualitativa_promedio.IdCalificacionCualitativaQ1 == null ? (int?)null : calificacion_cualitativa_promedio.IdCalificacionCualitativaQ1,
+                            PromedioQ1 = calificacion_cualitativa_promedio.PromedioQ1 == null ? (decimal?)null : calificacion_cualitativa_promedio.PromedioQ1,
+                            IdCalificacionCualitativaQ2 = calificacion_cualitativa_promedio.IdCalificacionCualitativaQ2 == null ? (int?)null : calificacion_cualitativa_promedio.IdCalificacionCualitativaQ2,
+                            PromedioQ2 = calificacion_cualitativa_promedio.PromedioQ2 == null ? (decimal?)null : calificacion_cualitativa_promedio.PromedioQ2,
+                            IdCalificacionCualitativaFinal = calificacion_cualitativa_promedio.IdCalificacionCualitativaFinal == null ? (int?)null : calificacion_cualitativa_promedio.IdCalificacionCualitativaFinal,
+                            PromedioFinal = calificacion_cualitativa_promedio.PromedioFinal == null ? (decimal?)null : calificacion_cualitativa_promedio.PromedioFinal,
+                            IdUsuarioCreacion = (calificacion_cualitativa_promedio.IdUsuarioCreacion == null ? SessionFixed.IdUsuario : calificacion_cualitativa_promedio.IdUsuarioCreacion),
+                            FechaCreacion = (calificacion_cualitativa_promedio.FechaCreacion == null ? DateTime.Now : calificacion_cualitativa_promedio.FechaCreacion),
+                            IdUsuarioModificacion = (calificacion_cualitativa_promedio.IdUsuarioModificacion == null ? null : SessionFixed.IdUsuario),
+                            FechaModificacion = (calificacion_cualitativa_promedio.FechaModificacion == null ? (DateTime?)null : DateTime.Now)
+
+                        };
+                    }
+                    else
+                    {
+                        info_cualitativa_promedio = new aca_MatriculaCalificacionCualitativaPromedio_Info()
+                        {
+                            IdEmpresa = model.IdEmpresa,
+                            IdMatricula = model.IdMatricula,
+                            IdMateria = item_materias_cualit.IdMateria,
+                            IdProfesor = item_materias_cualit.IdProfesor,
+                            IdCalificacionCualitativaQ1 =  (int?)null,
+                            PromedioQ1 = (decimal?)null,
+                            IdCalificacionCualitativaQ2 = (int?)null,
+                            PromedioQ2 = (decimal?)null,
+                            IdCalificacionCualitativaFinal = (int?)null,
+                            PromedioFinal = (decimal?)null,
+                            IdUsuarioCreacion = SessionFixed.IdUsuario,
+                            FechaCreacion = DateTime.Now,
+                            IdUsuarioModificacion = null,
+                            FechaModificacion=null
+
+                        };
+                    }
+                    lst_calificacion_cualitativa_promedio.Add(info_cualitativa_promedio);
                 }
             }
             model.lst_MatriculaCalificacionCualitativa = new List<aca_MatriculaCalificacionCualitativa_Info>();
             model.lst_MatriculaCalificacionCualitativa = lst_calificacion_cualitativa;
+
+            model.lst_MatriculaCalificacionCualitativaPromedio = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
+            model.lst_MatriculaCalificacionCualitativaPromedio = lst_calificacion_cualitativa_promedio;
             #endregion
 
             #region Cuantitativa

@@ -82,7 +82,7 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_Matricula_Info model = new aca_Matricula_Info
             {
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
-                IdAnio = info_anio.IdAnio,
+                IdAnio = info_anio==null ? 0: info_anio.IdAnio,
                 IdSede = Convert.ToInt32(SessionFixed.IdSede),
                 IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
             };
@@ -789,7 +789,10 @@ namespace Core.Web.Areas.Academico.Controllers
                 info_matricula.lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
                 info_matricula.lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
                 info_matricula.lst_conducta = new List<aca_MatriculaConducta_Info>();
+                info_matricula.lst_asistencia = new List<aca_MatriculaAsistencia_Info>();
                 info_matricula.lst_MatriculaCalificacionCualitativaPromedio = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
+
+                #region Cuantitativas
                 if (lst_materias_cuantitativas != null && lst_materias_cuantitativas.Count > 0)
                 {
                     foreach (var item in lst_materias_cuantitativas)
@@ -819,6 +822,9 @@ namespace Core.Web.Areas.Academico.Controllers
                         info_matricula.lst_calificacion.Add(info_calificacion);
                     }
                 }
+                #endregion
+
+                #region Cualitativas
                 if (lst_materias_cualitativas != null && lst_materias_cualitativas.Count > 0)
                 {
                     foreach (var item in lst_materias_cualitativas)
@@ -847,6 +853,8 @@ namespace Core.Web.Areas.Academico.Controllers
                         info_matricula.lst_MatriculaCalificacionCualitativaPromedio.Add(info_calificacion_cualitativa_promedio);
                     }
                 }
+                #endregion
+
                 #endregion
 
                 var personaRep = bus_persona.get_info(info_matricula.IdPersonaF);

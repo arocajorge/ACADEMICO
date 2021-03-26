@@ -83,3 +83,42 @@
     @Html.Action("TreeListPartial_menu_x_usuario", new { IdEmpresa = Model.IdEmpresa, IdSede = Model.IdSede, IdUsuario = Model.IdUsuario })
 
 }
+
+<script type="text/javascript">
+
+    $(function () {
+        cargar_sede_x_empresa();
+
+    });
+
+    $("#IdEmpresa").change(function () {
+        cargar_sede_x_empresa();
+    });
+
+    function cargar_sede_x_empresa() {
+        $("#IdSede").empty();
+
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdUsuario: $("#IdUsuario").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("cargar_sede_x_empresa", "Account", new { Area = "" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdSede").append("<option value=" + row.IdSede + ">" + row.NomSede + "</option>");
+                });
+            },
+            error: function (error) {
+            }
+        });
+    };
+</script>
