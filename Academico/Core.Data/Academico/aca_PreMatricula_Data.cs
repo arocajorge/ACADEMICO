@@ -444,7 +444,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000")+q.IdAdmision.ToString("000000")+q.CodigoAlumno);
+                Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000")+q.IdSede.ToString("0000") + q.IdAnio.ToString("0000") + q.IdAlumno.ToString("000000"));
                 return Lista;
             }
             catch (Exception)

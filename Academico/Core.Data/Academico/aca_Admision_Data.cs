@@ -163,8 +163,9 @@ namespace Core.Data.Academico
                     + " dbo.aca_AnioLectivo AS an ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
                     + " and a.IdSede = " + IdSede.ToString()
-                    + " and a.IdAnio = " + IdAnio.ToString();
-                    //+ " and a.IdCatalogoESTADM = "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.PREMATRICULADO);
+                    + " and a.IdAnio = " + IdAnio.ToString()
+                    + " and (a.IdCatalogoESTADM = "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO)
+                    + " or a.IdCatalogoESTADM = " + Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.ENPROCESO) + ")";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -799,6 +800,29 @@ namespace Core.Data.Academico
 
                     Entity.IdUsuarioRevision = info.IdUsuarioRevision;
                     Entity.FechaRevision = DateTime.Now;
+                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                    Entity.FechaModificacion = DateTime.Now;
+                    Entity.IdCatalogoESTADM = info.IdCatalogoESTADM;
+
+                    Context.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public bool modificarEstado(aca_Admision_Info info)
+        {
+            try
+            {
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    aca_Admision Entity = Context.aca_Admision.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAdmision == info.IdAdmision);
+                    if (Entity == null) return false;
+
                     Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
                     Entity.FechaModificacion = DateTime.Now;
                     Entity.IdCatalogoESTADM = info.IdCatalogoESTADM;

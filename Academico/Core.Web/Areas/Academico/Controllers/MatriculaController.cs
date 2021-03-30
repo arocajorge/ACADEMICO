@@ -63,6 +63,7 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_MatriculaCambios_Bus bus_cambios = new aca_MatriculaCambios_Bus();
+        aca_Alumno_Bus bus_alumno = new aca_Alumno_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
@@ -573,7 +574,7 @@ namespace Core.Web.Areas.Academico.Controllers
             var IdCatalogoPERNEG_Permitir = Convert.ToInt32(cl_enumeradores.eCatalogoPermisoMatricula.PERMITIR);
             var mensaje = "";
             var Validacion = 0;
-
+            var pe_cedulaRuc = "";
             if (Nuevo == "S")
             {
                 var existe_matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, IdAnio, IdAlumno);
@@ -586,6 +587,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (Validacion == 0)
             {
+                var existe_matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, IdAnio, IdAlumno);
+                if (existe_matricula != null)
+                {
+                    mensaje += "El estudiante ya se encuentra matriculado en el año lectivo seleccionado.</ br > ";
+                }
+
                 var PermitirMatricula = bus_permiso.GetInfo_ByMatricula(IdEmpresa, IdAnio, IdAlumno, IdCatalogoPERNEG_Permitir);
 
                 if (PermitirMatricula!=null && PermitirMatricula.IdPermiso!=0)
@@ -672,6 +679,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     info_mecanismo = bus_mecanismo.GetInfo(IdEmpresa, IdMecanismoDet);
                     info_termino_pago = bus_termino_pago.get_info(info_mecanismo.IdTerminoPago);
                 }
+                var info_alumno = bus_alumno.GetInfo(IdEmpresa, IdAlumno);
+                var pe_cedulaRuc = (info_alumno == null ? "" : info_alumno.pe_cedulaRuc);
 
                 aca_Matricula_Info info_matricula = new aca_Matricula_Info
                 {
@@ -694,7 +703,8 @@ namespace Core.Web.Areas.Academico.Controllers
                     IdEmpleado = ((info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true) ? IdEmpleado : (decimal?)null ),
                     EsPatrocinado = EsPatrocinado,
                     IdUsuarioCreacion = SessionFixed.IdUsuario,
-                    lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>()
+                    lst_MatriculaRubro = new List<aca_Matricula_Rubro_Info>(),
+                    pe_cedulaRuc= pe_cedulaRuc
                 };
 
                 string[] array = Ids.Split(',');

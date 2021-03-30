@@ -351,7 +351,7 @@ namespace Core.Data.Academico
                             EstaFallecido = Convert.ToBoolean(reader["EstaFallecido"]),
                             CodCatalogoCONADIS = string.IsNullOrEmpty(reader["CodCatalogoCONADIS"].ToString()) ? null : reader["CodCatalogoCONADIS"].ToString(),
                             NumeroCarnetConadis = string.IsNullOrEmpty(reader["NumeroCarnetConadis"].ToString()) ? null : reader["NumeroCarnetConadis"].ToString(),
-                            PorcentajeDiscapacidad = string.IsNullOrEmpty(reader["PorcentajeDiscapacidad"].ToString()) ? (double?)null : Convert.ToDouble(reader["CodCatalogoCONADIS"]),
+                            PorcentajeDiscapacidad = string.IsNullOrEmpty(reader["PorcentajeDiscapacidad"].ToString()) ? (double?)null : Convert.ToDouble(reader["PorcentajeDiscapacidad"]),
                             pe_telfono_Contacto = string.IsNullOrEmpty(reader["pe_telfono_Contacto"].ToString()) ? null : reader["pe_telfono_Contacto"].ToString(),
                             IdProfesion = string.IsNullOrEmpty(reader["IdProfesion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdProfesion"]),
                             Estado = Convert.ToBoolean(reader["Estado"]),
@@ -362,6 +362,8 @@ namespace Core.Data.Academico
                             Cod_Region = string.IsNullOrEmpty(reader["Cod_Region"].ToString()) ? null : reader["Cod_Region"].ToString(),
                             Sector = string.IsNullOrEmpty(reader["Sector"].ToString()) ? null : reader["Sector"].ToString(),
                             IdReligion = string.IsNullOrEmpty(reader["IdReligion"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdReligion"]),
+                            CodCatalogoSangre = string.IsNullOrEmpty(reader["CodCatalogoSangre"].ToString()) ? null : reader["CodCatalogoSangre"].ToString(),
+                            
                         };
                     }
                 }
@@ -427,7 +429,7 @@ namespace Core.Data.Academico
                 */
                 return info_familia;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

@@ -26,6 +26,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_AnioLectivo_Paralelo_Profesor_Bus bus_materias_x_paralelo = new aca_AnioLectivo_Paralelo_Profesor_Bus();
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
         aca_AlumnoDocumento_Bus bus_aludocumentos = new aca_AlumnoDocumento_Bus();
+        aca_Admision_Bus bus_admision = new aca_Admision_Bus();
         #endregion
 
         #region Combos
@@ -83,9 +84,13 @@ namespace Core.Web.Areas.Academico.Controllers
         public JsonResult ProcesarPreMatricula(string IdString = "", decimal IdTransaccionSession=0)
         {
             var IdEmpresa = Convert.ToInt32(IdString.Substring(0,4));
-            var IdAdmision = Convert.ToInt32(IdString.Substring(4, 6));
-            var info_PreMatricula = bus_prematricula.GetInfo_PorIdAdmision(IdEmpresa, IdAdmision);
-            var matricula = bus_matricula.GetInfo_X_PreMatricula(IdEmpresa,info_PreMatricula.IdPreMatricula);
+            var IdSede = Convert.ToInt32(IdString.Substring(4, 4));
+            var IdAnio = Convert.ToInt32(IdString.Substring(8, 4));
+            var IdAlumno = Convert.ToInt32(IdString.Substring(12, 6));
+
+            var matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, IdAnio, IdAlumno);
+            var info_PreMatricula = bus_prematricula.GetInfo_PorIdAlumno(IdEmpresa, IdSede, IdAnio, IdAlumno);
+            var IdAdmision = (info_PreMatricula == null ? 0 : info_PreMatricula.IdAdmision);
             var IdPreMatricula = (info_PreMatricula == null ? 0 : info_PreMatricula.IdPreMatricula);
             var lst_PreMatricula_Detalle = bus_prematricula_rubro.GetList(IdEmpresa, IdPreMatricula);
             decimal Total = 0;

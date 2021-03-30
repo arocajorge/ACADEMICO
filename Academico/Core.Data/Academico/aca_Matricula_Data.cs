@@ -633,13 +633,13 @@ namespace Core.Data.Academico
                         IdUsuarioCreacion = info.IdUsuarioCreacion,
                         FechaCreacion = DateTime.Now,
                         Fecha = info.Fecha,
-                        IdEmpresa_rol=info.IdEmpresa_rol,
+                        IdEmpresa_rol = info.IdEmpresa_rol,
                         IdEmpleado = info.IdEmpleado,
                         EsPatrocinado = info.EsPatrocinado,
                         IdPreMatricula = info.IdPreMatricula
                     };
                     Context.aca_Matricula.Add(Entity);
-                    
+
                     if (info.lst_calificacion_parcial.Count > 0)
                     {
                         foreach (var item in info.lst_calificacion_parcial)
@@ -826,6 +826,36 @@ namespace Core.Data.Academico
                     {
                         Entity_Alumno.IdCatalogoESTALU = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.PROMOVIDO);
                     }
+
+                    #region Admision y Prematricula
+                    aca_PreMatricula Entity_Prematricula = Context.aca_PreMatricula.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio== info.IdAnio && q.IdAlumno == info.IdAlumno);
+                    var IdAdmision = (decimal?)null;
+                    var IdPreMatricula = (decimal?)null;
+                    if (Entity_Prematricula!=null)
+                    {
+                        IdAdmision = Entity_Prematricula.IdAdmision;
+                        IdPreMatricula = Entity_Prematricula.IdPreMatricula;
+                        Entity_Prematricula.IdCatalogoESTPREMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO);
+                    }
+
+                    if (IdAdmision!=null)
+                    {
+                        aca_Admision Entity_Admision = Context.aca_Admision.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdAdmision == info.IdAdmision);
+                        if (Entity_Admision != null)
+                        {
+                            Entity_Admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.MATRICULADO);
+                        }
+                    }
+                    else
+                    {
+                        aca_Admision Entity_Admision = Context.aca_Admision.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.CedulaRuc_Aspirante == info.pe_cedulaRuc);
+                        if (Entity_Admision != null)
+                        {
+                            Entity_Admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.MATRICULADO);
+                        }
+                    }
+                    Entity.IdPreMatricula = IdPreMatricula;
+                    #endregion
 
                     Context.SaveChanges();
                 }

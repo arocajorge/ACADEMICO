@@ -520,6 +520,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             if (IdAlumno != 0)
             {
+                var info_matricula = bus_matricula.GetInfo_ExisteMatricula(model.IdEmpresa, model.IdAnio, model.IdAlumno);
+                if (info_matricula!=null)
+                {
+                    mensaje += "El estudiante ya se encuentra matriculado - ";
+                }
                 var PermitirMatricula = bus_permiso.GetInfo_ByMatricula(model.IdEmpresa, model.IdAnio, IdAlumno, IdCatalogoPERNEG_Permitir);
 
                 if (PermitirMatricula != null && PermitirMatricula.IdPermiso != 0)

@@ -260,7 +260,7 @@ namespace Core.Bus.Academico
                     {
                         info_admision.IdUsuarioModificacion = info_matricula.IdUsuarioCreacion;
                         info_admision.IdCatalogoESTADM = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.MATRICULADO);
-                        bus_admision.ModificarEstadoEnProceso(info_admision);
+                        bus_admision.ModificarEstado(info_admision);
 
                         var info_catalogo = odata_catalogo.getInfo(Convert.ToInt32(info_admision.IdCatalogoESTADM));
                         var info_alumno = odata_alumno.getInfo(info_matricula.IdEmpresa, info_matricula.IdAlumno);

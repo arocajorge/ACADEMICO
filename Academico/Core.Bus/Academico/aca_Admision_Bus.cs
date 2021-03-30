@@ -126,5 +126,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+
+        public bool ModificarEstado(aca_Admision_Info info)
+        {
+            try
+            {
+                return odata.modificarEstado(info);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
     }
 }
