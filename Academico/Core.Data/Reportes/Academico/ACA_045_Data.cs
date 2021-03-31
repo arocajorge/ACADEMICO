@@ -91,7 +91,7 @@ namespace Core.Data.Reportes.Academico
 
                 var IdCatalogoEstado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.APROBADO);
                 var info_anio = odata_anio.getInfo(IdEmpresa,IdAnio);
-                ListaFinal = Lista.Where(q=>q.IdAnio==info_anio.IdCursoBachiller && q.IdCatalogoESTMAT == Convert.ToInt32(IdCatalogoEstado)).ToList();
+                ListaFinal = Lista.Where(q=>q.IdCurso==info_anio.IdCursoBachiller && q.IdCatalogoESTMAT == Convert.ToInt32(IdCatalogoEstado)).ToList();
 
                 return ListaFinal;
             }

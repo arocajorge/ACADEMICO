@@ -228,6 +228,79 @@ namespace Core.Data.Academico
             }
         }
 
+        
+        public List<aca_MatriculaCalificacionParticipacion_Info> getList_CombosParticipacion(int IdEmpresa, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
+        {
+            try
+            {
+                List<aca_MatriculaCalificacionParticipacion_Info> Lista = new List<aca_MatriculaCalificacionParticipacion_Info>();
+                List<aca_MatriculaCalificacionParticipacion_Info> ListaFinal = new List<aca_MatriculaCalificacionParticipacion_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    #region Query
+                    string query = "SELECT mc.IdEmpresa, mc.IdCampoAccion, mc.IdTematica, mc.IdProfesor, c.IdAnio, c.IdSede, c.IdNivel, c.IdJornada, c.IdCurso, c.IdParalelo, a.Descripcion, "
+                    + " sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, t.NombreCampoAccion,t.NombreTematica, t.OrdenCampoAccion, t.OrdenTematica "
+                    + " FROM     dbo.aca_MatriculaCalificacionParticipacion AS mc INNER JOIN "
+                    + " dbo.aca_Matricula AS c ON mc.IdEmpresa = c.IdEmpresa AND mc.IdMatricula = c.IdMatricula INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a ON c.IdAnio = a.IdAnio AND c.IdEmpresa = a.IdEmpresa "
+                    + " left join aca_AnioLectivo_Curso_Paralelo cp on c.IdEmpresa = cp.IdEmpresa AND c.IdAnio = cp.IdAnio AND c.IdSede = cp.IdSede "
+                    + " AND c.IdNivel = cp.IdNivel AND c.IdJornada = cp.IdJornada AND c.IdCurso = cp.IdCurso and c.IdParalelo = cp.IdParalelo "
+                    + " left join aca_AnioLectivo_Jornada_Curso jc on c.IdEmpresa = jc.IdEmpresa AND c.IdAnio = jc.IdAnio AND c.IdSede = jc.IdSede "
+                    + " AND c.IdNivel = jc.IdNivel AND c.IdJornada = jc.IdJornada AND c.IdCurso = jc.IdCurso "
+                    + " left join aca_AnioLectivo_NivelAcademico_Jornada nj on c.IdEmpresa = nj.IdEmpresa AND c.IdAnio = nj.IdAnio AND c.IdSede = nj.IdSede "
+                    + " AND c.IdNivel = nj.IdNivel AND c.IdJornada = nj.IdJornada "
+                    + " left join aca_AnioLectivo_Sede_NivelAcademico sn on c.IdEmpresa = sn.IdEmpresa AND c.IdAnio = sn.IdAnio AND c.IdSede = sn.IdSede "
+                    + " AND c.IdNivel = sn.IdNivel "
+                    + " left join aca_AnioLectivo_Tematica t on t.IdEmpresa = c.IdEmpresa and t.IdAnio = c.IdAnio and t.IdCampoAccion = mc.IdCampoAccion and t.IdTematica = mc.IdTematica "
+                    + " WHERE mc.IdEmpresa= " + IdEmpresa + " and c.IdSede= " + IdSede + (EsSuperAdmin == true ? "" : " and mc.IdProfesor = " + IdProfesor)
+                    + " GROUP BY mc.IdEmpresa, mc.IdCampoAccion, mc.IdTematica, mc.IdProfesor, c.IdAnio, c.IdSede, c.IdNivel, c.IdJornada, c.IdCurso, c.IdParalelo, a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, "
+                    + " jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, t.NombreCampoAccion,t.NombreTematica, t.OrdenCampoAccion, t.OrdenTematica ";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaCalificacionParticipacion_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            IdProfesor = string.IsNullOrEmpty(reader["IdProfesor"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdProfesor"]),
+                            IdTematica = Convert.ToInt32(reader["IdTematica"]),
+                            IdCampoAccion = Convert.ToInt32(reader["IdCampoAccion"]),
+                            NombreCampoAccion = reader["NombreCampoAccion"].ToString(),
+                            NombreTematica = reader["NombreTematica"].ToString(),
+                            OrdenCampoAccion = Convert.ToInt32(reader["OrdenCampoAccion"]),
+                            OrdenTematica = Convert.ToInt32(reader["OrdenTematica"]),
+                            Descripcion = reader["Descripcion"].ToString(),
+                            NomSede = reader["NomSede"].ToString(),
+                            NomJornada = reader["NomJornada"].ToString(),
+                            NomNivel = reader["NomNivel"].ToString(),
+                            NomCurso = reader["NomCurso"].ToString(),
+                            NomParalelo = reader["NomParalelo"].ToString(),
+                            OrdenJornada = Convert.ToInt32(reader["OrdenJornada"]),
+                            OrdenNivel = Convert.ToInt32(reader["OrdenNivel"]),
+                            OrdenCurso = Convert.ToInt32(reader["OrdenCurso"]),
+                            OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"])
+
+                        });
+                    }
+                    reader.Close();
+                }
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_MatriculaCalificacionParticipacion_Info> getList_Calificaciones(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCampoAccion, int IdTematica, int IdCatalogoParcialTipo, decimal IdProfesor)
         {
             try

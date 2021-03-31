@@ -66,7 +66,7 @@ namespace Core.Web.Areas.Academico.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosCalificaciones(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ViewBag.EsSuperAdmin = EsSuperAdmin;
             cargar_combos(model);
@@ -726,6 +726,12 @@ namespace Core.Web.Areas.Academico.Controllers
 
             return Json(EsSuperAdmin, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult CargarExamenes(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdCatalogoTipo = 0)
+        {
+            var resultado = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio, Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.EXSUP), DateTime.Now.Date);
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Importacion
@@ -762,7 +768,7 @@ namespace Core.Web.Areas.Academico.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosCalificaciones(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             List<aca_MatriculaCalificacion_Info> ListaCalificacionExamen = new List<aca_MatriculaCalificacion_Info>();
             ListaCalificacionExamen = bus_calificacion.GetList_x_Profesor(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdProfesor);

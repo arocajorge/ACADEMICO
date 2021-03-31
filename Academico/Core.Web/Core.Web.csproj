@@ -9811,6 +9811,9 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_076.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarPreMatricula\_ComboBoxPartial_Sede.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_AnioParcial.cshtml" />
+    <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbSedeParcial.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

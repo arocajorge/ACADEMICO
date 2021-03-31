@@ -37,7 +37,7 @@
                             @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="IdEmpresa">Sede</label>
                             @Html.Partial("_ComboBoxPartial_Sede_Cal", Model)
@@ -51,7 +51,7 @@
                             @Html.ValidationMessageFor(q => q.IdJornada, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Nivel Académico</label>
                             @Html.Partial("_ComboBoxPartial_Nivel_Cal", Model)
@@ -123,3 +123,31 @@
         <!-- /.box-footer-->
     </div>
 }
+
+<script type="text/javascript">
+    function CargarParciales() {
+        $("#IdCatalogoParcial").empty();
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdSede: IdSede.GetValue(),
+            IdAnio: IdAnio.GetValue(),
+            IdCatalogoTipo: $("#IdCatalogoTipo").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("CargarParciales_X_Quimestre", "AcademicoReportes",new { Area = "Reportes"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $.each(data, function (i, row) {
+                    $("#IdCatalogoParcial").append("<option value=" + row.IdCatalogoParcial + ">" + row.NomCatalogo + "</option>");
+                    $("#IdCatalogoParcial").val($("#IdCatalogoParcial option:first").val());
+                });
+            },
+            error: function (error) {
+            }
+        });
+    }
+</script>

@@ -23,7 +23,17 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
-
+        public List<aca_MatriculaAsistencia_Info> getList(int IdEmpresa, decimal IdMatricula)
+        {
+            try
+            {
+                return odata.getList(IdEmpresa, IdMatricula);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public aca_MatriculaAsistencia_Info getInfo(int IdEmpresa, decimal IdMatricula)
         {
             try
@@ -44,6 +54,18 @@ namespace Core.Bus.Academico
                 return odata.modificar(info);
             }
             catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public bool GenerarCalificacion(List<aca_MatriculaAsistencia_Info> lst_asistencia)
+        {
+            try
+            {
+                return odata.generarCalificacion(lst_asistencia);
+            }
+            catch (Exception)
             {
                 throw;
             }

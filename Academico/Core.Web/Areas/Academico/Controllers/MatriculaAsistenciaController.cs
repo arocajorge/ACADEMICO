@@ -88,7 +88,7 @@ namespace Core.Web.Areas.Academico.Controllers
             lst_quimestres.Add("7", "QUIMESTRE 2");
             ViewBag.lst_quimestres = lst_quimestres;
 
-            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            var lst_parcial = bus_parcial.GetList(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo, DateTime.Now.Date);
             ViewBag.lst_parcial = lst_parcial;
             //aca_CatalogoTipo_Bus bus_catalogo = new aca_CatalogoTipo_Bus();
             //var lst_parcial = new List<aca_AnioLectivoParcial_Info>();
@@ -443,8 +443,18 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public JsonResult CargarParciales_X_Quimestre(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdCatalogoTipo = 0)
         {
-            var resultado = bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            var resultado = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo, DateTime.Now.Date);
             return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult LimpiarLista(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            List<aca_MatriculaAsistencia_Info> Lista_CalificacionAsistencia = new List<aca_MatriculaAsistencia_Info>();
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+
+            ListaAsistencia.set_list(Lista_CalificacionAsistencia, IdTransaccionSession);
+
+            return Json(EsSuperAdmin, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

@@ -56,14 +56,12 @@
                         <div class="form-group">
                             <label for="IdCliente">Nivel</label>
                             @Html.Partial("_CmbNivel", Model)
-                            @Html.ValidationMessageFor(q => q.IdNivel, "", new { @class = "text-danger", @id = "IdNivel" })
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="IdCliente">Curso</label>
                             @Html.Partial("_CmbCurso", Model)
-                            @Html.ValidationMessageFor(q => q.IdCurso, "", new { @class = "text-danger", @id = "IdCurso" })
                         </div>
                     </div>
                     <div class="col-md-2" hidden>

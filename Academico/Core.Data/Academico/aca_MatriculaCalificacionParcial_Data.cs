@@ -3,6 +3,7 @@ using Core.Info.Academico;
 using Core.Info.Helps;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -65,6 +66,7 @@ namespace Core.Data.Academico
             {
                 List<aca_MatriculaCalificacionParcial_Info> Lista = new List<aca_MatriculaCalificacionParcial_Info>();
 
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
@@ -76,6 +78,7 @@ namespace Core.Data.Academico
                         Lista.Add(new aca_MatriculaCalificacionParcial_Info
                         {
                             IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
                             IdMatricula = q.IdMatricula,
                             IdMateria = q.IdMateria,
                             IdProfesor = q.IdProfesor,
@@ -104,6 +107,75 @@ namespace Core.Data.Academico
                             RegistroconPromedioBajo = false
                         });
                     });
+                }*/
+
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT mcp.IdEmpresa, mcp.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, p.pe_nombreCompleto, mcp.IdCatalogoParcial, mcp.IdProfesor, mcp.IdMateria, mcp.Calificacion1, mcp.Calificacion2, "
+                    + " mcp.Calificacion3, mcp.Calificacion4, mcp.Evaluacion, mcp.Remedial1, mcp.Remedial2, mcp.Conducta, mcp.MotivoCalificacion, mcp.MotivoConducta, mcp.AccionRemedial, a.Codigo, mc.CalificacionP1, mc.CalificacionP2, mc.CalificacionP3, "
+                    + " mc.CalificacionP4, mc.CalificacionP5, mc.CalificacionP6, c.Letra "
+                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp INNER JOIN "
+                    + " dbo.aca_Matricula AS m ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
+                    + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_MatriculaCalificacion AS mc ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
+                    + " WHERE(NOT EXISTS "
+                    + " (SELECT IdEmpresa "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " WHERE(IdEmpresa = mcp.IdEmpresa) AND(IdMatricula = mcp.IdMatricula) AND(Estado = 1))) "
+                    + " AND mcp.IdEmpresa = " + IdEmpresa.ToString() + " AND m.IdAnio =" + IdAnio.ToString() + " AND m.IdSede = " + IdSede.ToString()
+                    + " AND m.IdNivel = " + IdNivel.ToString() + " AND m.IdJornada = " + IdJornada.ToString() + " AND m.IdCurso = " + IdCurso.ToString()
+                    + " AND m.IdParalelo = " + IdParalelo.ToString() + " AND mcp.IdMateria = " + IdMateria.ToString() + " AND mcp.IdCatalogoParcial = " + IdCatalogoParcial.ToString() + "AND mcp.IdProfesor = " + IdProfesor.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaCalificacionParcial_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdMateria = Convert.ToInt32(reader["IdMateria"]),
+                            IdProfesor = Convert.ToDecimal(reader["IdProfesor"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            IdCatalogoParcial = Convert.ToInt32(reader["IdCatalogoParcial"]),
+                            Calificacion1 = string.IsNullOrEmpty(reader["Calificacion1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion1"]),
+                            Calificacion2 = string.IsNullOrEmpty(reader["Calificacion2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion2"]),
+                            Calificacion3 = string.IsNullOrEmpty(reader["Calificacion3"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion3"]),
+                            Calificacion4 = string.IsNullOrEmpty(reader["Calificacion4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion4"]),
+                            Evaluacion = string.IsNullOrEmpty(reader["Evaluacion"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Evaluacion"]),
+                            Remedial1 = string.IsNullOrEmpty(reader["Remedial1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Remedial1"]),
+                            Remedial2 = string.IsNullOrEmpty(reader["Remedial2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Remedial2"]),
+                            Conducta = string.IsNullOrEmpty(reader["Conducta"].ToString()) ? (int?)null : Convert.ToInt32(reader["Conducta"]),
+                            MotivoCalificacion = string.IsNullOrEmpty(reader["MotivoCalificacion"].ToString()) ? null : reader["MotivoCalificacion"].ToString(),
+                            MotivoConducta = string.IsNullOrEmpty(reader["MotivoConducta"].ToString()) ? null : reader["MotivoConducta"].ToString(),
+                            AccionRemedial = string.IsNullOrEmpty(reader["AccionRemedial"].ToString()) ? null : reader["AccionRemedial"].ToString(),
+                            CalificacionP1 = string.IsNullOrEmpty(reader["CalificacionP1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP1"]),
+                            CalificacionP2 = string.IsNullOrEmpty(reader["CalificacionP2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP2"]),
+                            CalificacionP3 = string.IsNullOrEmpty(reader["CalificacionP3"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP3"]),
+                            CalificacionP4 = string.IsNullOrEmpty(reader["CalificacionP4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP4"]),
+                            CalificacionP5 = string.IsNullOrEmpty(reader["CalificacionP5"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP5"]),
+                            CalificacionP6 = string.IsNullOrEmpty(reader["CalificacionP6"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP6"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            RegistroValido = true,
+                            RegistroconPromedioBajo = false
+                        });
+                    }
+                    reader.Close();
                 }
 
                 return Lista;
@@ -120,6 +192,75 @@ namespace Core.Data.Academico
             {
                 List<aca_MatriculaCalificacionParcial_Info> Lista = new List<aca_MatriculaCalificacionParcial_Info>();
 
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT mcp.IdEmpresa, mcp.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, p.pe_nombreCompleto, mcp.IdCatalogoParcial, mcp.IdProfesor, mcp.IdMateria, mcp.Calificacion1, mcp.Calificacion2, "
+                    + " mcp.Calificacion3, mcp.Calificacion4, mcp.Evaluacion, mcp.Remedial1, mcp.Remedial2, mcp.Conducta, mcp.MotivoCalificacion, mcp.MotivoConducta, mcp.AccionRemedial, a.Codigo, mc.CalificacionP1, mc.CalificacionP2, mc.CalificacionP3, "
+                    + " mc.CalificacionP4, mc.CalificacionP5, mc.CalificacionP6, c.Letra "
+                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp INNER JOIN "
+                    + " dbo.aca_Matricula AS m ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
+                    + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_MatriculaCalificacion AS mc ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
+                    + " WHERE(NOT EXISTS "
+                    + " (SELECT IdEmpresa "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " WHERE(IdEmpresa = mcp.IdEmpresa) AND(IdMatricula = mcp.IdMatricula) AND(Estado = 1))) "
+                    + " AND mcp.IdEmpresa = " + IdEmpresa.ToString() + " AND m.IdAnio =" + IdAnio.ToString() + " AND m.IdSede = " + IdSede.ToString()
+                    + " AND m.IdNivel = " + IdNivel.ToString() + " AND m.IdJornada = " + IdJornada.ToString() + " AND m.IdCurso = " + IdCurso.ToString()
+                    +" AND m.IdParalelo = " + IdParalelo.ToString() + " AND mcp.IdMateria = " + IdMateria.ToString() + " AND mcp.IdCatalogoParcial = " + IdCatalogoParcial.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaCalificacionParcial_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdMateria = Convert.ToInt32(reader["IdMateria"]),
+                            IdProfesor = Convert.ToDecimal(reader["IdProfesor"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            IdCatalogoParcial = Convert.ToInt32(reader["IdCatalogoParcial"]),
+                            Calificacion1 = string.IsNullOrEmpty(reader["Calificacion1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion1"]),
+                            Calificacion2 = string.IsNullOrEmpty(reader["Calificacion2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion2"]),
+                            Calificacion3 = string.IsNullOrEmpty(reader["Calificacion3"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion3"]),
+                            Calificacion4 = string.IsNullOrEmpty(reader["Calificacion4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion4"]),
+                            Evaluacion = string.IsNullOrEmpty(reader["Evaluacion"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Evaluacion"]),
+                            Remedial1 = string.IsNullOrEmpty(reader["Remedial1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Remedial1"]),
+                            Remedial2 = string.IsNullOrEmpty(reader["Remedial2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Remedial2"]),
+                            Conducta = string.IsNullOrEmpty(reader["Conducta"].ToString()) ? (int?)null : Convert.ToInt32(reader["Conducta"]),
+                            MotivoCalificacion = string.IsNullOrEmpty(reader["MotivoCalificacion"].ToString()) ? null : reader["MotivoCalificacion"].ToString(),
+                            MotivoConducta = string.IsNullOrEmpty(reader["MotivoConducta"].ToString()) ? null : reader["MotivoConducta"].ToString(),
+                            AccionRemedial = string.IsNullOrEmpty(reader["AccionRemedial"].ToString()) ? null : reader["AccionRemedial"].ToString(),
+                            CalificacionP1 = string.IsNullOrEmpty(reader["CalificacionP1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP1"]),
+                            CalificacionP2 = string.IsNullOrEmpty(reader["CalificacionP2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP2"]),
+                            CalificacionP3 = string.IsNullOrEmpty(reader["CalificacionP3"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP3"]),
+                            CalificacionP4 = string.IsNullOrEmpty(reader["CalificacionP4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP4"]),
+                            CalificacionP5 = string.IsNullOrEmpty(reader["CalificacionP5"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP5"]),
+                            CalificacionP6 = string.IsNullOrEmpty(reader["CalificacionP6"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP6"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            RegistroValido = true,
+                            RegistroconPromedioBajo = false
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
@@ -131,6 +272,7 @@ namespace Core.Data.Academico
                         Lista.Add(new aca_MatriculaCalificacionParcial_Info
                         {
                             IdEmpresa = q.IdEmpresa,
+                            IdAnio = q.IdAnio,
                             IdMatricula = q.IdMatricula,
                             IdMateria = q.IdMateria,
                             IdProfesor = q.IdProfesor,
@@ -160,7 +302,7 @@ namespace Core.Data.Academico
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)
@@ -174,7 +316,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacionParcial_Info> Lista = new List<aca_MatriculaCalificacionParcial_Info>();
-
+                /*
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula
@@ -206,7 +348,73 @@ namespace Core.Data.Academico
                         });
                     });
                 }
+                */
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT mcp.IdEmpresa, mcp.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, p.pe_nombreCompleto, mcp.IdCatalogoParcial, mcp.IdProfesor, mcp.IdMateria, mcp.Calificacion1, mcp.Calificacion2, "
+                    + " mcp.Calificacion3, mcp.Calificacion4, mcp.Evaluacion, mcp.Remedial1, mcp.Remedial2, mcp.Conducta, mcp.MotivoCalificacion, mcp.MotivoConducta, mcp.AccionRemedial, a.Codigo, mc.CalificacionP1, mc.CalificacionP2, mc.CalificacionP3, "
+                    + " mc.CalificacionP4, mc.CalificacionP5, mc.CalificacionP6, c.Letra "
+                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp INNER JOIN "
+                    + " dbo.aca_Matricula AS m ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
+                    + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_MatriculaCalificacion AS mc ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
+                    + " WHERE(NOT EXISTS "
+                    + " (SELECT IdEmpresa "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " WHERE(IdEmpresa = mcp.IdEmpresa) AND(IdMatricula = mcp.IdMatricula) AND(Estado = 1))) "
+                    + " AND mcp.IdEmpresa = " + IdEmpresa.ToString() + " AND m.IdMatricula =" + IdMatricula.ToString() + " AND mcp.IdCatalogoParcial = " + IdCatalogoParcial.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaCalificacionParcial_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            IdMateria = Convert.ToInt32(reader["IdMateria"]),
+                            IdProfesor = Convert.ToDecimal(reader["IdProfesor"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            IdCatalogoParcial = Convert.ToInt32(reader["IdCatalogoParcial"]),
+                            Calificacion1 = string.IsNullOrEmpty(reader["Calificacion1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion1"]),
+                            Calificacion2 = string.IsNullOrEmpty(reader["Calificacion2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion2"]),
+                            Calificacion3 = string.IsNullOrEmpty(reader["Calificacion3"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion3"]),
+                            Calificacion4 = string.IsNullOrEmpty(reader["Calificacion4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Calificacion4"]),
+                            Evaluacion = string.IsNullOrEmpty(reader["Evaluacion"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Evaluacion"]),
+                            Remedial1 = string.IsNullOrEmpty(reader["Remedial1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Remedial1"]),
+                            Remedial2 = string.IsNullOrEmpty(reader["Remedial2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["Remedial2"]),
+                            Conducta = string.IsNullOrEmpty(reader["Conducta"].ToString()) ? (int?)null : Convert.ToInt32(reader["Conducta"]),
+                            MotivoCalificacion = string.IsNullOrEmpty(reader["MotivoCalificacion"].ToString()) ? null : reader["MotivoCalificacion"].ToString(),
+                            MotivoConducta = string.IsNullOrEmpty(reader["MotivoConducta"].ToString()) ? null : reader["MotivoConducta"].ToString(),
+                            AccionRemedial = string.IsNullOrEmpty(reader["AccionRemedial"].ToString()) ? null : reader["AccionRemedial"].ToString(),
+                            CalificacionP1 = string.IsNullOrEmpty(reader["CalificacionP1"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP1"]),
+                            CalificacionP2 = string.IsNullOrEmpty(reader["CalificacionP2"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP2"]),
+                            CalificacionP3 = string.IsNullOrEmpty(reader["CalificacionP3"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP3"]),
+                            CalificacionP4 = string.IsNullOrEmpty(reader["CalificacionP4"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP4"]),
+                            CalificacionP5 = string.IsNullOrEmpty(reader["CalificacionP5"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP5"]),
+                            CalificacionP6 = string.IsNullOrEmpty(reader["CalificacionP6"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["CalificacionP6"]),
+                            Letra = string.IsNullOrEmpty(reader["Letra"].ToString()) ? null : reader["Letra"].ToString(),
+                            RegistroValido = true,
+                            RegistroconPromedioBajo = false
+                        });
+                    }
+                    reader.Close();
+                }
                 return Lista;
             }
             catch (Exception)

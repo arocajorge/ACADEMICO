@@ -159,7 +159,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         Fecha = info_PreMatricula.Fecha,
                         Observacion = info_PreMatricula.Observacion,
                         IdCatalogo_FormaPago = "CRE",
-                        IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.REGISTRADO),
+                        IdCatalogoESTMAT = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoMatricula.MATRICULADO),
                         IdEmpresa_rol = info_PreMatricula.IdEmpresa_rol,
                         IdEmpleado = info_PreMatricula.IdEmpleado,
                         EsPatrocinado = info_PreMatricula.EsPatrocinado,

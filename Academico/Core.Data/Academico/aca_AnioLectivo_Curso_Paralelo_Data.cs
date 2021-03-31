@@ -1144,7 +1144,7 @@ namespace Core.Data.Academico
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

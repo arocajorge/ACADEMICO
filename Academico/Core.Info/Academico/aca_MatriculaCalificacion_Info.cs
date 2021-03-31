@@ -70,8 +70,8 @@ namespace Core.Info.Academico
         public int OrdenCurso { get; set; }
         public int OrdenParalelo { get; set; }
         public int OrdenMateria { get; set; }
-        public decimal IdProfesorTutor { get; set; }
-        public decimal IdProfesorInspector { get; set; }
+        public Nullable<decimal> IdProfesorTutor { get; set; }
+        public Nullable<decimal> IdProfesorInspector { get; set; }
         public bool EsObligatorio { get; set; }
         public string pe_nombreCompletoAlumno { get; set; }
         public string pe_nombreCompleto { get; set; }

@@ -114,6 +114,67 @@ namespace Core.Data.Academico
             }
         }
 
+        public List<aca_MatriculaAsistencia_Info> getList(int IdEmpresa, decimal IdMatricula)
+        {
+            try
+            {
+                List<aca_MatriculaAsistencia_Info> Lista = new List<aca_MatriculaAsistencia_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT ma.IdEmpresa, ma.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, a.Codigo, p.pe_nombreCompleto, ma.FInjustificadaP1, ma.FJustificadaP1, ma.AtrasosP1, ma.FInjustificadaP2,  "
+                    + " ma.FJustificadaP2, ma.AtrasosP2, ma.FInjustificadaP3, ma.FJustificadaP3, ma.AtrasosP3, ma.FInjustificadaP4, ma.FJustificadaP4, ma.AtrasosP4, ma.FInjustificadaP5, ma.FJustificadaP5, ma.AtrasosP5, ma.FInjustificadaP6, "
+                    + " ma.FJustificadaP6, ma.AtrasosP6, cp.IdProfesorTutor, cp.IdProfesorInspector "
+                    + " FROM dbo.aca_MatriculaAsistencia AS ma INNER JOIN "
+                    + " dbo.aca_Matricula AS m ON ma.IdEmpresa = m.IdEmpresa AND ma.IdMatricula = m.IdMatricula INNER JOIN "
+                    + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
+                    + " m.IdParalelo = cp.IdParalelo "
+                    + " WHERE ma.IdEmpresa = " + IdEmpresa.ToString() + " and ma.IdMatricula = " + IdMatricula.ToString(); ;
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_MatriculaAsistencia_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatricula = Convert.ToDecimal(reader["IdMatricula"]),
+                            FJustificadaP1 = string.IsNullOrEmpty(reader["FJustificadaP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["FJustificadaP1"]),
+                            FInjustificadaP1 = string.IsNullOrEmpty(reader["FInjustificadaP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["FInjustificadaP1"]),
+                            AtrasosP1 = string.IsNullOrEmpty(reader["AtrasosP1"].ToString()) ? (int?)null : Convert.ToInt32(reader["AtrasosP1"]),
+                            FJustificadaP2 = string.IsNullOrEmpty(reader["FJustificadaP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["FJustificadaP2"]),
+                            FInjustificadaP2 = string.IsNullOrEmpty(reader["FInjustificadaP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["FInjustificadaP2"]),
+                            AtrasosP2 = string.IsNullOrEmpty(reader["AtrasosP2"].ToString()) ? (int?)null : Convert.ToInt32(reader["AtrasosP2"]),
+                            FInjustificadaP3 = string.IsNullOrEmpty(reader["FInjustificadaP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["FInjustificadaP3"]),
+                            FJustificadaP3 = string.IsNullOrEmpty(reader["FJustificadaP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["FJustificadaP3"]),
+                            AtrasosP3 = string.IsNullOrEmpty(reader["AtrasosP3"].ToString()) ? (int?)null : Convert.ToInt32(reader["AtrasosP3"]),
+                            FJustificadaP4 = string.IsNullOrEmpty(reader["FJustificadaP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["FJustificadaP4"]),
+                            FInjustificadaP4 = string.IsNullOrEmpty(reader["FInjustificadaP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["FInjustificadaP4"]),
+                            AtrasosP4 = string.IsNullOrEmpty(reader["AtrasosP4"].ToString()) ? (int?)null : Convert.ToInt32(reader["AtrasosP4"]),
+                            FJustificadaP5 = string.IsNullOrEmpty(reader["FJustificadaP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["FJustificadaP5"]),
+                            FInjustificadaP5 = string.IsNullOrEmpty(reader["FInjustificadaP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["FInjustificadaP5"]),
+                            AtrasosP5 = string.IsNullOrEmpty(reader["AtrasosP5"].ToString()) ? (int?)null : Convert.ToInt32(reader["AtrasosP5"]),
+                            FJustificadaP6 = string.IsNullOrEmpty(reader["FJustificadaP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["FJustificadaP6"]),
+                            FInjustificadaP6 = string.IsNullOrEmpty(reader["FInjustificadaP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["FInjustificadaP6"]),
+                            AtrasosP6 = string.IsNullOrEmpty(reader["AtrasosP6"].ToString()) ? (int?)null : Convert.ToInt32(reader["AtrasosP6"]),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString()
+                        });
+                    }
+                    reader.Close();
+                }
+                return Lista;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
         public aca_MatriculaAsistencia_Info getInfo(int IdEmpresa, decimal IdMatricula)
         {
             try
@@ -271,6 +332,60 @@ namespace Core.Data.Academico
                     EntityAsistencia.FechaModificacion = DateTime.Now;
 
                     Context.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public bool generarCalificacion(List<aca_MatriculaAsistencia_Info> lst_asistencia)
+        {
+            try
+            {
+                List<aca_MatriculaAsistencia> Lista = new List<aca_MatriculaAsistencia>();
+
+                using (EntitiesAcademico Context = new EntitiesAcademico())
+                {
+                    foreach (var info in lst_asistencia)
+                    {
+                        var lista_calificacion_asistencia = Context.aca_MatriculaAsistencia.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdMatricula == info.IdMatricula).ToList();
+                        Context.aca_MatriculaAsistencia.RemoveRange(lista_calificacion_asistencia);
+
+                        aca_MatriculaAsistencia Entity = new aca_MatriculaAsistencia
+                        {
+                            IdEmpresa = info.IdEmpresa,
+                            IdMatricula = info.IdMatricula,
+                            FInjustificadaP1 = info.FInjustificadaP1,
+                            FJustificadaP1 = info.FJustificadaP1,
+                            AtrasosP1 = info.AtrasosP1,
+                            FInjustificadaP2 = info.FInjustificadaP2,
+                            FJustificadaP2 = info.FJustificadaP2,
+                            AtrasosP2 = info.AtrasosP2,
+                            FInjustificadaP3 = info.FInjustificadaP3,
+                            FJustificadaP3 = info.FJustificadaP3,
+                            AtrasosP3 = info.AtrasosP3,
+                            FInjustificadaP4 = info.FInjustificadaP4,
+                            FJustificadaP4 = info.FJustificadaP4,
+                            AtrasosP4 = info.AtrasosP4,
+                            FInjustificadaP5 = info.FInjustificadaP5,
+                            FJustificadaP5 = info.FJustificadaP5,
+                            AtrasosP5 = info.AtrasosP5,
+                            FInjustificadaP6 = info.FInjustificadaP6,
+                            FJustificadaP6 = info.FJustificadaP6,
+                            AtrasosP6 = info.AtrasosP6,
+                            IdUsuarioCreacion = info.IdUsuarioCreacion,
+                            FechaCreacion = info.FechaCreacion,
+                            IdUsuarioModificacion = info.IdUsuarioModificacion,
+                            FechaModificacion = info.FechaModificacion
+                        };
+
+                        Context.aca_MatriculaAsistencia.Add(Entity);
+                        Context.SaveChanges();
+                    }
                 }
 
                 return true;

@@ -1075,7 +1075,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosCalificaciones(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_010_Rpt report = new ACA_010_Rpt();
@@ -1145,7 +1145,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_Tutor(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_TutorCalificacion(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_011_Rpt report = new ACA_011_Rpt();
@@ -1473,7 +1473,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_CombosCualitativa(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_016_Rpt report = new ACA_016_Rpt();
@@ -1784,7 +1784,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_Inspector(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.getList_Combos_InspectorCalificacion(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_022_Rpt report = new ACA_022_Rpt();
@@ -1852,7 +1852,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_Inspector(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.getList_Combos_InspectorCalificacion(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_023_Rpt report = new ACA_023_Rpt();
@@ -1987,7 +1987,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             model.MostrarRetirados = false;
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdAnio);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosCalificaciones(model.IdEmpresa, model.IdSede);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_025_Rpt report = new ACA_025_Rpt();
@@ -2056,7 +2056,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             model.MostrarRetirados = false;
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.GetList_CombosCualitativa(model.IdEmpresa, model.IdSede);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_026_Rpt report = new ACA_026_Rpt();
@@ -2125,7 +2125,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.IdCatalogoTipo = Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1);
             model.MostrarRetirados = false;
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdAnio);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosCalificaciones(model.IdEmpresa, model.IdSede);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_027_Rpt report = new ACA_027_Rpt();
@@ -2194,7 +2194,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_Tutor(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_TutorCalificacion(model.IdEmpresa,  model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_028_Rpt report = new ACA_028_Rpt();
@@ -2244,6 +2244,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             lst_quimestres.Add("6", "QUIMESTRE 1");
             lst_quimestres.Add("7", "QUIMESTRE 2");
             ViewBag.lst_quimestres = lst_quimestres;
+
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            ViewBag.lst_parcial = lst_parcial;
         }
         public ActionResult ACA_029()
         {
@@ -2257,7 +2260,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosCalificaciones(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_029_Rpt report = new ACA_029_Rpt();
@@ -2392,7 +2395,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_Inspector(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.getList_Combos_InspectorCalificacion(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_031_Rpt report = new ACA_031_Rpt();
@@ -2443,6 +2446,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             lst_quimestres.Add(cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.QUIMESTRE_2.ToString(), "QUIMESTRE 2");
             lst_quimestres.Add(cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.PROMEDIOFINAL.ToString(), "PROMEDIO FINAL");
             ViewBag.lst_quimestres = lst_quimestres;
+
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            ViewBag.lst_parcial = lst_parcial;
         }
         public ActionResult ACA_032()
         {
@@ -2453,7 +2459,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.IdPromedioFinal = cl_enumeradores.eTipoCatalogoAcademicoConductaFinal.QUIMESTRE_1.ToString();
             model.MostrarRetirados = false;
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdAnio);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosCalificaciones(model.IdEmpresa, model.IdSede);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_032_Rpt report = new ACA_032_Rpt();
@@ -2505,6 +2511,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             lst_quimestres.Add("6", "QUIMESTRE 1");
             lst_quimestres.Add("7", "QUIMESTRE 2");
             ViewBag.lst_quimestres = lst_quimestres;
+
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            ViewBag.lst_parcial = lst_parcial;
         }
         public ActionResult ACA_033(int IdEmpresa = 0, decimal IdAlumno = 0)
         {
@@ -2518,7 +2527,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_CombosCalificaciones(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_033_Rpt report = new ACA_033_Rpt();
@@ -3272,6 +3281,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             lst_quimestres.Add("6", "QUIMESTRE 1");
             lst_quimestres.Add("7", "QUIMESTRE 2");
             ViewBag.lst_quimestres = lst_quimestres;
+
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            ViewBag.lst_parcial = lst_parcial;
         }
         public ActionResult ACA_047()
         {
@@ -3285,7 +3297,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_CombosCualitativa(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_047_Rpt report = new ACA_047_Rpt();
@@ -3337,6 +3349,9 @@ namespace Core.Web.Areas.Reportes.Controllers
             lst_quimestres.Add("6", "QUIMESTRE 1");
             lst_quimestres.Add("7", "QUIMESTRE 2");
             ViewBag.lst_quimestres = lst_quimestres;
+
+            var lst_parcial = bus_parcial.GetList_Reportes(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdCatalogoTipo);
+            ViewBag.lst_parcial = lst_parcial;
         }
         public ActionResult ACA_048()
         {
@@ -3350,7 +3365,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_cualitativa.getList_CombosCualitativa(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_048_Rpt report = new ACA_048_Rpt();
@@ -4561,7 +4576,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_Tutor(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, true);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion.GetList_Combos_TutorCalificacion(model.IdEmpresa, model.IdSede, IdProfesor, true);
             Lista_CombosCalificaciones.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             ACA_028_Rpt report = new ACA_028_Rpt();

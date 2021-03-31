@@ -13,5 +13,5 @@
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.Properties.ClearButton.DisplayMode = ClearButtonDisplayMode.Always;
-    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdSede.PerformCallback(); IdJornada.PerformCallback(); IdNivel.PerformCallback(); IdCurso.PerformCallback(); IdParalelo.PerformCallback(); IdMateria.PerformCallback();LimpiarLista();}";
+    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdSede.PerformCallback(); IdJornada.PerformCallback(); IdNivel.PerformCallback(); IdCurso.PerformCallback(); IdParalelo.PerformCallback(); IdMateria.PerformCallback();LimpiarLista();CargarParciales();}";
 }).BindList(new Core.Web.Areas.Academico.Controllers.MatriculaCalificacionParcialController().CargarAnio(Convert.ToInt32(Core.Web.Helps.SessionFixed.IdEmpresa))).Bind(Model.IdAnio).GetHtml()

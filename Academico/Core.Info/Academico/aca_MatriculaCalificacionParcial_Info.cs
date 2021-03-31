@@ -56,6 +56,7 @@ namespace Core.Info.Academico
         public int IdCatalogoTipo { get; set; }
         public bool MostrarRetirados { get; set; }
         public bool MostrarPromedios{ get; set; }
+        public string Letra { get; set; }
         #endregion
     }
 }

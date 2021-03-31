@@ -32,6 +32,7 @@ namespace Core.Web.Areas.Academico.Controllers
         aca_MatriculaGeneracionCalificaciones_List Lista_MatriculaCalificaciones = new aca_MatriculaGeneracionCalificaciones_List();
         aca_MatriculaCalificacionCualitativa_Bus bus_calificacion_cualitativa = new aca_MatriculaCalificacionCualitativa_Bus();
         aca_MatriculaCalificacionCualitativaPromedio_Bus bus_calificacion_cualitativa_promedio = new aca_MatriculaCalificacionCualitativaPromedio_Bus();
+        aca_MatriculaAsistencia_Bus bus_asistencia = new aca_MatriculaAsistencia_Bus();
         string mensaje = string.Empty;
         string MensajeSuccess = string.Empty;
         #endregion
@@ -76,12 +77,14 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_MatriculaCalificacionCualitativaPromedio_Info> lst_calificacion_cualitativa_existente = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion_existente = new List<aca_MatriculaCalificacion_Info>();
             List<aca_MatriculaConducta_Info> lst_conducta_existente = new List<aca_MatriculaConducta_Info>();
+            List<aca_MatriculaAsistencia_Info> lst_asistencia_existente = new List<aca_MatriculaAsistencia_Info>();
 
             List<aca_MatriculaCalificacionParcial_Info> lst_calificacion_parcial = new List<aca_MatriculaCalificacionParcial_Info>();
             List<aca_MatriculaCalificacionCualitativa_Info> lst_calificacion_cualitativa = new List<aca_MatriculaCalificacionCualitativa_Info>();
             List<aca_MatriculaCalificacionCualitativaPromedio_Info> lst_calificacion_cualitativa_promedio = new List<aca_MatriculaCalificacionCualitativaPromedio_Info>();
             List<aca_MatriculaCalificacion_Info> lst_calificacion = new List<aca_MatriculaCalificacion_Info>();
             List<aca_MatriculaConducta_Info> lst_conducta = new List<aca_MatriculaConducta_Info>();
+            List<aca_MatriculaAsistencia_Info> lst_asistencia = new List<aca_MatriculaAsistencia_Info>();
 
             if (lista.Count()>0)
             {
@@ -92,6 +95,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     lst_calificacion_cualitativa_existente = bus_calificacion_cualitativa_promedio.GetList(model.IdEmpresa, item.IdMatricula);
                     lst_calificacion_existente = bus_calificacion.GetList(model.IdEmpresa, item.IdMatricula);
                     lst_conducta_existente = bus_conducta.GetList(model.IdEmpresa, item.IdMatricula);
+                    lst_asistencia_existente = bus_asistencia.getList(model.IdEmpresa, item.IdMatricula);
 
                     var lst_materias_x_curso = bus_materias_x_paralelo.GetList(item.IdEmpresa, item.IdSede, item.IdAnio, item.IdNivel, item.IdJornada, item.IdCurso, item.IdParalelo);
                     var lst_materias_cualitativas = lst_materias_x_curso.Where(q => q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUALI)).ToList();
@@ -285,6 +289,38 @@ namespace Core.Web.Areas.Academico.Controllers
                         }
                     }
                     #endregion
+
+                    #region Asistencia
+                    var asistencia = lst_asistencia_existente.Where(q => q.IdMatricula == item.IdMatricula).FirstOrDefault();
+                    var info_asistencia = new aca_MatriculaAsistencia_Info
+                    {
+                        IdEmpresa = item.IdEmpresa,
+                        IdMatricula = item.IdMatricula,
+                        FInjustificadaP1 = (asistencia == null ? null : asistencia.FInjustificadaP1),
+                        FJustificadaP1 = (asistencia == null ? null : asistencia.FJustificadaP1),
+                        AtrasosP1 = (asistencia == null ? null : asistencia.AtrasosP1),
+                        FInjustificadaP2 = (asistencia == null ? null : asistencia.FInjustificadaP2),
+                        FJustificadaP2 = (asistencia == null ? null : asistencia.FJustificadaP2),
+                        AtrasosP2 = (asistencia == null ? null : asistencia.AtrasosP2),
+                        FInjustificadaP3 = (asistencia == null ? null : asistencia.FInjustificadaP3),
+                        FJustificadaP3 = (asistencia == null ? null : asistencia.FJustificadaP3),
+                        AtrasosP3 = (asistencia == null ? null : asistencia.AtrasosP3),
+                        FInjustificadaP4 = (asistencia == null ? null : asistencia.FInjustificadaP4),
+                        FJustificadaP4 = (asistencia == null ? null : asistencia.FJustificadaP4),
+                        AtrasosP4 = (asistencia == null ? null : asistencia.AtrasosP4),
+                        FInjustificadaP5 = (asistencia == null ? null : asistencia.FInjustificadaP5),
+                        FJustificadaP5 = (asistencia == null ? null : asistencia.FJustificadaP5),
+                        AtrasosP5 = (asistencia == null ? null : asistencia.AtrasosP5),
+                        FInjustificadaP6 = (asistencia == null ? null : asistencia.FInjustificadaP6),
+                        FJustificadaP6 = (asistencia == null ? null : asistencia.FJustificadaP6),
+                        AtrasosP6 = (asistencia == null ? null : asistencia.AtrasosP6),
+                        IdUsuarioCreacion = (asistencia == null ? SessionFixed.IdUsuario : asistencia.IdUsuarioCreacion),
+                        FechaCreacion = (asistencia == null ? DateTime.Now : asistencia.FechaCreacion),
+                        IdUsuarioModificacion = (asistencia == null ? SessionFixed.IdUsuario : asistencia.IdUsuarioModificacion),
+                        FechaModificacion = (asistencia == null ? DateTime.Now : asistencia.FechaModificacion),
+                    };
+                    lst_asistencia.Add(info_asistencia);
+                    #endregion
                 }
 
                 if (bus_calificacion_parcial.GenerarCalificacion(lst_calificacion_parcial))
@@ -297,32 +333,35 @@ namespace Core.Web.Areas.Academico.Controllers
                             {
                                 if (bus_conducta.GenerarCalificacion(lst_conducta))
                                 {
-                                    MensajeSuccess = "Registros generados exitosamente";
-                                    ViewBag.MensajeSuccess = MensajeSuccess;
-                                    var ListaGenerada = new List<aca_Matricula_Info>();
-                                    //var ListaGenerada = bus_calificacion.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
-
-                                    var lst_matricula = (from q in lst_conducta
-                                                         group q by new
-                                                         {
-                                                             q.IdEmpresa,
-                                                             q.IdMatricula
-                                                         } into mat
-                                                         select new aca_Matricula_Info
-                                                         {
-                                                             IdEmpresa = mat.Key.IdEmpresa,
-                                                             IdMatricula = mat.Key.IdMatricula
-                                                         }).ToList();
-
-                                    foreach (var item in lst_matricula)
+                                    if (bus_asistencia.GenerarCalificacion(lst_asistencia))
                                     {
-                                        var matricula = lista.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).FirstOrDefault();
-                                        if (matricula != null)
+                                        MensajeSuccess = "Registros generados exitosamente";
+                                        ViewBag.MensajeSuccess = MensajeSuccess;
+                                        var ListaGenerada = new List<aca_Matricula_Info>();
+                                        //var ListaGenerada = bus_calificacion.GetList(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo, model.IdAlumno);
+
+                                        var lst_matricula = (from q in lst_asistencia
+                                                             group q by new
+                                                             {
+                                                                 q.IdEmpresa,
+                                                                 q.IdMatricula
+                                                             } into mat
+                                                             select new aca_Matricula_Info
+                                                             {
+                                                                 IdEmpresa = mat.Key.IdEmpresa,
+                                                                 IdMatricula = mat.Key.IdMatricula
+                                                             }).ToList();
+
+                                        foreach (var item in lst_matricula)
                                         {
-                                            ListaGenerada.Add(matricula);
+                                            var matricula = lista.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdMatricula == item.IdMatricula).FirstOrDefault();
+                                            if (matricula != null)
+                                            {
+                                                ListaGenerada.Add(matricula);
+                                            }
                                         }
+                                        Lista_MatriculaCalificaciones.set_list(ListaGenerada, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                                     }
-                                    Lista_MatriculaCalificaciones.set_list(ListaGenerada, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
                                 }
                                 else
                                 {

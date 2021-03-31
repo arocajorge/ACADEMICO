@@ -60,6 +60,18 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_MatriculaCalificacionParticipacion_Info> GetList_CombosParticipacion(int IdEmpresa, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
+        {
+            try
+            {
+                return odata.getList_CombosParticipacion(IdEmpresa, IdSede, IdProfesor, EsSuperAdmin);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<aca_MatriculaCalificacionParticipacion_Info> GetList_Calificaciones(int IdEmpresa, int IdSede, int IdAnio, int IdNivel, int IdJornada, int IdCurso, int IdParalelo, int IdCampoAccion, int IdTematica, int IdCatalogoParcialTipo, decimal IdProfesor)
         {
             try

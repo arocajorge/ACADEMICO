@@ -68,39 +68,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Alumno_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAlumno = q.IdAlumno,
-                            IdPersona = q.IdPersona,
-                            Codigo = q.Codigo,
-                            IdTipoDocumento = q.IdTipoDocumento,
-                            pe_Naturaleza = q.pe_Naturaleza,
-                            pe_cedulaRuc = q.pe_cedulaRuc,
-                            pe_nombre = q.pe_nombre,
-                            pe_apellido = q.pe_apellido,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            pe_sexo = q.pe_sexo,
-                            FechaIngreso = q.FechaIngreso,
-                            pe_fechaNacimiento = q.pe_fechaNacimiento,
-                            CodCatalogoSangre = q.CodCatalogoSangre,
-                            CodCatalogoCONADIS = q.CodCatalogoCONADIS,
-                            NumeroCarnetConadis = q.NumeroCarnetConadis,
-                            PorcentajeDiscapacidad =q.PorcentajeDiscapacidad,
-                            NomCatalogoESTALU = q.NomCatalogoESTALU,
-                            NomCatalogoESTMAT = q.NomCatalogoESTMAT,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)

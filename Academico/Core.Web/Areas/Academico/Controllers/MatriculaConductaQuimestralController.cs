@@ -76,7 +76,9 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             List<aca_MatriculaConducta_Info> model = ListaEditarConducta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
+            var info = model.FirstOrDefault();
+
+            cargar_combos_detalle(info);
 
             return PartialView("_GridViewPartial_MatriculaConducta", model);
         }
@@ -92,11 +94,13 @@ namespace Core.Web.Areas.Academico.Controllers
             ViewBag.lst_parcial = lst_parcial;
         }
 
-        private void cargar_combos_detalle()
+        private void cargar_combos_detalle(aca_MatriculaConducta_Info info)
         {
-            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
-            int IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            //var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            //var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
+            //int IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            var IdEmpresa = info == null ? 0 : info.IdEmpresa;
+            var IdAnio = info == null ? 0 : info.IdAnio;
 
             var lst_conducta = bus_conducta.GetList_Inspector(IdEmpresa, IdAnio);
             ViewBag.lst_conducta = lst_conducta;
@@ -373,9 +377,11 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpress.Web.Mvc.DevExpressEditorsBinder))] aca_MatriculaConducta_Info info_det)
         {
             ViewBag.MostrarError = "";
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            //aca_MatriculaConducta_Info registro_editar = ListaEditarConducta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(m => m.IdEmpresa == IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
+
             if (ModelState.IsValid)
             {
-                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
                 var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
                 var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info_det.SecuenciaConductaPromedioParcialFinal));
 
@@ -396,7 +402,9 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_MatriculaConducta_Info> model = new List<aca_MatriculaConducta_Info>();
             model = ListaEditarConducta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            cargar_combos_detalle();
+            var info = model.FirstOrDefault();
+
+            cargar_combos_detalle(info);
             return PartialView("_GridViewPartial_MatriculaConducta", model);
         }
         #endregion
@@ -445,7 +453,7 @@ namespace Core.Web.Areas.Academico.Controllers
 
         public JsonResult CargarParciales_X_Quimestre(int IdEmpresa = 0, int IdSede = 0, int IdAnio = 0, int IdCatalogoTipo = 0)
         {
-            var resultado = bus_parcial.GetList_Reportes(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo);
+            var resultado = bus_parcial.GetList(IdEmpresa, IdSede, IdAnio, IdCatalogoTipo, DateTime.Now.Date);
             return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
@@ -457,6 +465,17 @@ namespace Core.Web.Areas.Academico.Controllers
             SessionFixed.IdTransaccionSessionActual = IdTransaccionSession.ToString();
             return Json(retorno, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult LimpiarLista(int IdEmpresa = 0, decimal IdTransaccionSession = 0)
+        {
+            List<aca_MatriculaConducta_Info> Lista_CalificacionConducta = new List<aca_MatriculaConducta_Info>();
+            string IdUsuario = SessionFixed.IdUsuario;
+            bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
+
+            ListaEditarConducta.set_list(Lista_CalificacionConducta, IdTransaccionSession);
+
+            return Json(EsSuperAdmin, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region Importacion
@@ -576,7 +595,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         if (!bus_conducta_cal.ModicarPromedioFinalQuimestre(item))
                         {
                             ViewBag.mensaje = "Error al importar el archivo";
-                            cargar_combos_detalle();
+                            cargar_combos_detalle(model);
                             return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdPromedioFinal = model.IdPromedioFinal });
                         }
                     }
@@ -590,7 +609,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 //SisLogError.set_list((ex.InnerException) == null ? ex.Message.ToString() : ex.InnerException.ToString());
 
                 ViewBag.error = ex.Message.ToString();
-                cargar_combos_detalle();
+                cargar_combos_detalle(model);
                 return RedirectToAction("Importar", new { IdEmpresa = model.IdEmpresa, IdSede = model.IdSede, IdAnio = model.IdAnio, IdNivel = model.IdNivel, IdJornada = model.IdJornada, IdCurso = model.IdCurso, IdParalelo = model.IdParalelo, IdPromedioFinal = model.IdPromedioFinal });
             }
         }
@@ -599,7 +618,9 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = ListaEditarConducta.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
+            var info = model.FirstOrDefault();
+
+            cargar_combos_detalle(info);
             return PartialView("_GridViewPartial_MatriculaConductaImportacion", model);
         }
         #endregion
@@ -678,6 +699,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public static void FileUploadComplete(object sender, DevExpress.Web.FileUploadCompleteEventArgs e)
         {
             #region Variables
+            aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
             aca_MatriculaConductaFinal_List ListaConductaQuimestral = new aca_MatriculaConductaFinal_List();
             List<aca_MatriculaConducta_Info> Lista_Conducta = new List<aca_MatriculaConducta_Info>();
             aca_AnioLectivoConductaEquivalencia_Bus bus_conducta = new aca_AnioLectivoConductaEquivalencia_Bus();
@@ -699,6 +721,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     if (!reader.IsDBNull(1) && cont > 0)
                     {
                         var IdMatricula = (Convert.ToInt32(reader.GetValue(1)));
+                        var info_matricula = bus_matricula.GetInfo(IdEmpresa, IdMatricula);
                         var pe_nombreCompleto = (Convert.ToString(reader.GetValue(2)).Trim());
                         var Conducta = (Convert.ToString(reader.GetValue(3)).Trim());
                         var MotivoConducta = (Convert.ToString(reader.GetValue(4)).Trim());
@@ -707,6 +730,7 @@ namespace Core.Web.Areas.Academico.Controllers
                         aca_MatriculaConducta_Info info = new aca_MatriculaConducta_Info
                         {
                             IdEmpresa = IdEmpresa,
+                            IdAnio = info_matricula == null ? 0 : info_matricula.IdAnio,
                             IdMatricula = IdMatricula,
                             pe_nombreCompleto = pe_nombreCompleto,
                             SecuenciaConductaPromedioParcialFinal = (info_conducta == null ? (int?)null : info_conducta.Secuencia),

@@ -12,8 +12,32 @@
     $(function () {
         $("#IdCatalogoTipo").change(function () {
             CargarParciales();
+            LimpiarLista();
+        });
+        $("#IdCatalogoParcial").change(function () {
+            LimpiarLista();
         });
     });
+
+    function LimpiarLista() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("LimpiarLista", "MatriculaConductaQuimestral", new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_MatriculaConducta.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
 
     function CargarParciales() {
         $("#IdCatalogoParcial").empty();

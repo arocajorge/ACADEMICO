@@ -1228,6 +1228,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 model.AnioVehiculo_Representante = model.AnioVehiculo_Padre;
                 model.CasaPropia_Representante = model.CasaPropia_Padre;
                 model.EstaFallecido_Representante = model.EstaFallecido_Padre;
+                model.SeFactura_Representante = model.SeFactura_Padre;
             }
             else if (model.Representante == "M")
             {
@@ -1272,6 +1273,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 model.AnioVehiculo_Representante = model.AnioVehiculo_Madre;
                 model.CasaPropia_Representante = model.CasaPropia_Madre;
                 model.EstaFallecido_Representante = model.EstaFallecido_Madre;
+                model.SeFactura_Representante = model.SeFactura_Madre;
             }
             else
             {
@@ -1316,6 +1318,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 model.AnioVehiculo_Representante = model.AnioVehiculo_Representante;
                 model.CasaPropia_Representante = model.CasaPropia_Representante;
                 model.EstaFallecido_Representante = model.EstaFallecido_Representante;
+                model.SeFactura_Representante = model.SeFactura_Representante;
             }
 
             var info_Alumno = new aca_Alumno_Info

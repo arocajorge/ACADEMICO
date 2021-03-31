@@ -72,11 +72,36 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        
+        public List<aca_MatriculaCalificacion_Info> GetList_CombosCualitativa(int IdEmpresa, int IdSede)
+        {
+            try
+            {
+                return odata.getList_CombosCualitativa(IdEmpresa, IdSede);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public List<aca_MatriculaCalificacion_Info> getList_Combos(int IdEmpresa, int IdAnio, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
         {
             try
             {
                 return odata.getList_Combos(IdEmpresa, IdAnio, IdSede, IdProfesor,EsSuperAdmin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public List<aca_MatriculaCalificacion_Info> getList_CombosCualitativa(int IdEmpresa, int IdSede, decimal IdProfesor, bool EsSuperAdmin)
+        {
+            try
+            {
+                return odata.getList_CombosCualitativa(IdEmpresa, IdSede, IdProfesor, EsSuperAdmin);
             }
             catch (Exception)
             {

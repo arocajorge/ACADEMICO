@@ -67,7 +67,7 @@ namespace Core.Web.Areas.Academico.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacionParticipacion_Info> lst_combos = bus_calificacion_participacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacionParticipacion_Info> lst_combos = bus_calificacion_participacion.GetList_CombosParticipacion(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ViewBag.EsSuperAdmin = EsSuperAdmin;
             cargar_combos(model);
@@ -598,7 +598,7 @@ namespace Core.Web.Areas.Academico.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacionParticipacion_Info> lst_combos = bus_calificacion_participacion.GetList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacionParticipacion_Info> lst_combos = bus_calificacion_participacion.GetList_CombosParticipacion(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             List<aca_MatriculaCalificacionParticipacion_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParticipacion_Info>();
             ListaCalificaciones = bus_calificacion_participacion.GetList_Calificaciones(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCampoAccion, IdTematica, IdCatalogoParcialTipo, IdProfesor);

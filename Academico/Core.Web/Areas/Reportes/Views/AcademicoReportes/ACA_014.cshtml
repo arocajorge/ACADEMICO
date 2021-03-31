@@ -33,14 +33,14 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="IdEmpresa">Año Lectivo</label>
-                            @Html.Partial("_ComboBoxPartial_Anio", Model)
+                            @Html.Partial("_ComboBoxPartial_AnioParcial", Model)
                             @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="IdEmpresa">Sede</label>
-                            @Html.Partial("_CmbSede", Model)
+                            @Html.Partial("_CmbSedeParcial", Model)
                             @Html.ValidationMessageFor(q => q.IdSede, "", new { @class = "text-danger" })
                         </div>
                     </div>

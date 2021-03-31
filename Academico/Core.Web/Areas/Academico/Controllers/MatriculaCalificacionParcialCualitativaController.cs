@@ -69,7 +69,7 @@ namespace Core.Web.Areas.Academico.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_parcial.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_parcial.getList_CombosCualitativa(model.IdEmpresa, model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             ViewBag.EsSuperAdmin = EsSuperAdmin;
             cargar_combos(model);
@@ -81,7 +81,8 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             List<aca_MatriculaCalificacionCualitativa_Info> model = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
+            var info = model.FirstOrDefault();
+            cargar_combos_detalle(info);
 
             return PartialView("_GridViewPartial_MatriculaCalificacionParcialCualitativa", model);
         }
@@ -91,7 +92,9 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             List<aca_MatriculaCalificacionCualitativa_Info> model = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
+            var info = model.FirstOrDefault();
+
+            cargar_combos_detalle(info);
 
             return PartialView("_GridViewPartial_MatriculaCalificacionParcialCualitativa_SuperAdmin", model);
         }
@@ -115,11 +118,13 @@ namespace Core.Web.Areas.Academico.Controllers
             //ViewBag.lst_parcial = lst_parcial;
         }
 
-        private void cargar_combos_detalle()
+        private void cargar_combos_detalle(aca_MatriculaCalificacionCualitativa_Info info)
         {
-            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
-            var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
-            int IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            //var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            //var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa, 0);
+            //int IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
+            var IdEmpresa = info == null ? 0 : info.IdEmpresa;
+            var IdAnio = info == null ? 0 : info.IdAnio;
 
             var lst_calificacion_cualitativa = bus_CalificacionCualitativa.getList(IdEmpresa, IdAnio, false);
             ViewBag.lst_calificacion_cualitativa = lst_calificacion_cualitativa;
@@ -449,13 +454,15 @@ namespace Core.Web.Areas.Academico.Controllers
         #region Funciones del Grid
         public ActionResult EditingUpdate([ModelBinder(typeof(DevExpress.Web.Mvc.DevExpressEditorsBinder))] aca_MatriculaCalificacionCualitativa_Info info_det)
         {
+            int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            aca_MatriculaCalificacionCualitativa_Info registro_editar = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(m => m.IdEmpresa == IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
 
             if (ModelState.IsValid)
             {
-                int IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+                
                 var info_matricula = bus_matricula.GetInfo(IdEmpresa, info_det.IdMatricula);
                 var info_conducta = bus_conducta.GetInfo(IdEmpresa, info_matricula.IdAnio, Convert.ToInt32(info_det.Conducta));
-                aca_MatriculaCalificacionCualitativa_Info registro_editar = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual)).Where(m => m.IdEmpresa == IdEmpresa && m.IdMatricula == info_det.IdMatricula).FirstOrDefault();
+                
                 info_det.RegistroValido = true;
                 ViewBag.MostrarError = "";
                 var RegistroValidoConducta = true;
@@ -514,7 +521,7 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_MatriculaCalificacionCualitativa_Info> model = new List<aca_MatriculaCalificacionCualitativa_Info>();
             model = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
-            cargar_combos_detalle();
+            cargar_combos_detalle(registro_editar);
             #region Permisos
             aca_Menu_x_seg_usuario_Info info = bus_permisos.get_list_menu_accion(Convert.ToInt32(SessionFixed.IdEmpresa), Convert.ToInt32(SessionFixed.IdSede), SessionFixed.IdUsuario, "Academico", "MatriculaCalificacionParcialCualitativa", "Index");
             ViewBag.Nuevo = info.Nuevo;
@@ -624,7 +631,7 @@ namespace Core.Web.Areas.Academico.Controllers
             bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
             var info_profesor = bus_profesor.GetInfo_x_Usuario(model.IdEmpresa, IdUsuario);
             var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_parcial.getList_Combos(model.IdEmpresa, model.IdAnio, model.IdSede, IdProfesor, EsSuperAdmin);
+            List<aca_MatriculaCalificacion_Info> lst_combos = bus_calificacion_parcial.getList_CombosCualitativa(model.IdEmpresa,model.IdSede, IdProfesor, EsSuperAdmin);
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             List<aca_MatriculaCalificacionCualitativa_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionCualitativa_Info>();
             ListaCalificaciones = bus_calificacion_parcial.getList(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdMateria, IdCatalogoParcial, IdProfesor);
@@ -722,7 +729,8 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = Lista_CalificacionParcial.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
-            cargar_combos_detalle();
+            var info = model.FirstOrDefault();
+            cargar_combos_detalle(info);
             return PartialView("_GridViewPartial_MatriculaCalificacionParcialCualitativaImportacion", model);
         }
         #endregion

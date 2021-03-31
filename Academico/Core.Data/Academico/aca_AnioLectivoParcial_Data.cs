@@ -264,7 +264,7 @@ namespace Core.Data.Academico
                 using (EntitiesAcademico odata = new EntitiesAcademico())
                 {
                     var lst = odata.vwaca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio
-                    && q.IdCatalogoTipo == IdCatalogoTipo && FechaActual >= q.FechaInicio && FechaActual <= q.FechaFin).OrderBy(q => q.Orden).ToList();
+                    && q.IdCatalogoTipo == IdCatalogoTipo && FechaActual.Date >= q.FechaInicio && FechaActual.Date <= q.FechaFin).OrderBy(q => q.Orden).ToList();
 
                     lst.ForEach(q =>
                     {

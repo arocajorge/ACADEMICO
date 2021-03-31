@@ -620,8 +620,8 @@ namespace Core.Data.Academico
                             NomParalelo = string.IsNullOrEmpty(reader["NomParalelo"].ToString()) ? null : reader["NomParalelo"].ToString(),
                             OrdenParalelo = Convert.ToInt32(reader["OrdenParalelo"]),
                             CodigoParalelo = string.IsNullOrEmpty(reader["CodigoParalelo"].ToString()) ? null : reader["CodigoParalelo"].ToString(),
-                            IdProfesorTutor = Convert.ToInt32(reader["IdProfesorTutor"]),
-                            IdProfesorInspector = Convert.ToInt32(reader["IdProfesorInspector"])
+                            IdProfesorTutor = string.IsNullOrEmpty(reader["IdProfesorTutor"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdProfesorTutor"]),
+                            IdProfesorInspector = string.IsNullOrEmpty(reader["IdProfesorInspector"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdProfesorInspector"])
                         });
                     }
                     reader.Close();

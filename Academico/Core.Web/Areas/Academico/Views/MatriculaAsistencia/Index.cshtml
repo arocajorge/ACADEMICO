@@ -12,6 +12,10 @@
     $(function () {
         $("#IdCatalogoTipo").change(function () {
             CargarParciales();
+            LimpiarLista();
+        });
+        $("#IdCatalogoParcial").change(function () {
+            LimpiarLista();
         });
     });
 
@@ -35,6 +39,31 @@
                     $("#IdCatalogoParcial").append("<option value=" + row.IdCatalogoParcial + ">" + row.NomCatalogo + "</option>");
                     $("#IdCatalogoParcial").val($("#IdCatalogoParcial option:first").val());
                 });
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function LimpiarLista() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("LimpiarLista", "MatriculaAsistencia", new { Area = "Academico"})',
+            async: false,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data == 1) {
+                    GridViewPartial_MatriculaAsistencia.PerformCallback();
+                }
+                else {
+                    GridViewPartial_MatriculaAsistencia.PerformCallback();
+                }
             },
             error: function (error) {
             }
