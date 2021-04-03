@@ -2602,7 +2602,7 @@
             var apellido = $("#Apellidos_Aspirante").val();
             var nombre = $("#Nombres_Aspirante").val();
 
-            var nombre_completo = apellido + ' ' + nombre;
+            var nombre_completo = (apellido == "" && nombre == "" ? "" : apellido + ' ' + nombre);
             $("#NombreCompleto_Aspirante").val(nombre_completo)
         }
 
@@ -2618,7 +2618,7 @@
             if (tipo_doc == "RUC") {
                 if (cedula.length != 13) {
                     alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
-                    $("#Celular_Aspirante").val("");
+                    $("#CedulaRuc_Aspirante").val("");
                     vaciar_campos_persona();
                     return;
                 }
@@ -2626,7 +2626,7 @@
                 if (tipo_doc == "CED") {
                     if (cedula.length != 10) {
                         alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
-                        $("#Celular_Aspirante").val("");
+                        $("#CedulaRuc_Aspirante").val("");
                         vaciar_campos_persona();
                         return;
                     }
@@ -2784,7 +2784,7 @@
             if (tipo_doc == "RUC") {
                 if (cedula.length != 13) {
                     alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
-                    $("#Celular_Madre").val("");
+                    $("#CedulaRuc_Madre").val("");
                     vaciar_campos_padre();
                     return;
                 }
@@ -2792,7 +2792,7 @@
                 if (tipo_doc == "CED") {
                     if (cedula.length != 10) {
                         alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
-                        $("#Celular_Madre").val("");
+                        $("#CedulaRuc_Madre").val("");
                         vaciar_campos_madre();
                         return;
                     }
@@ -2867,7 +2867,7 @@
         if (tipo_doc == "RUC") {
             if (cedula.length != 13) {
                 alert("El documento de tipo RUC, debe tener una longitud de 13 caracteres");
-                $("#Celular_Representante").val("");
+                $("#CedulaRuc_Representante").val("");
                 vaciar_campos_representante();
                 return;
             }
@@ -2875,7 +2875,7 @@
             if (tipo_doc == "CED") {
                 if (cedula.length != 10) {
                     alert("El documento de tipo cédula, debe tener una longitud de 10 caracteres");
-                    $("#Celular_Representante").val("");
+                    $("#CedulaRuc_Representante").val("");
                     vaciar_campos_representante();
                     return;
                 }
@@ -3209,7 +3209,7 @@
                 var apellido = $("#Apellidos_Padre").val();
                 var nombre = $("#Nombres_Padre").val();
 
-                var nombre_completo = apellido + ' ' + nombre;
+                var nombre_completo = (apellido == "" && nombre == "" ? "" : apellido + ' ' + nombre);
                 $("#NombreCompleto_Padre").val(nombre_completo)
             }
             else {
@@ -3223,7 +3223,7 @@
                 var apellido = $("#Apellidos_Madre").val();
                 var nombre = $("#Nombres_Madre").val();
 
-                var nombre_completo = apellido + ' ' + nombre;
+                var nombre_completo = (apellido == "" && nombre == "" ? "" : apellido + ' ' + nombre);
                 $("#NombreCompleto_Madre").val(nombre_completo)
             }
             else {
@@ -3237,11 +3237,11 @@
                 var apellido = $("#Apellidos_Representante").val();
                 var nombre = $("#Nombres_Representante").val();
 
-                var nombre_completo = apellido + ' ' + nombre;
+                var nombre_completo = (apellido=="" && nombre=="" ? "" : apellido + ' ' + nombre);
                 $("#NombreCompleto_Representante").val(nombre_completo)
             }
             else {
-                var razon_social = $("#RazonSocial_Representantee").val();
+                var razon_social = $("#RazonSocial_Representante").val();
                 $("#NombreCompleto_Representante").val(razon_social)
             }
         }

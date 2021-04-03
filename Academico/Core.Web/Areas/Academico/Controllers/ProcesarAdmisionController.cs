@@ -1034,6 +1034,12 @@ namespace Core.Web.Areas.Academico.Controllers
             if (cl_funciones.ValidaIdentificacion(info.info_alumno.info_persona_alumno.IdTipoDocumento, info.info_alumno.info_persona_alumno.pe_Naturaleza, info.info_alumno.info_persona_alumno.pe_cedulaRuc, ref return_naturaleza))
             {
                 info.info_alumno.info_persona_alumno.pe_Naturaleza = return_naturaleza;
+
+                if (info.pe_nombreCompleto=="")
+                {
+                    msg = "Nombre Completo no válido";
+                    return false;
+                }
             }
             else
             {
@@ -1047,6 +1053,20 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     info.info_alumno.info_persona_padre.pe_Naturaleza = return_naturaleza_padre;
                     info.info_alumno.info_valido_padre = true;
+
+                    if (info.info_alumno.info_persona_padre.pe_nombreCompleto == "")
+                    {
+                        if (info.info_alumno.info_persona_padre.IdTipoDocumento == "RUC")
+                        {
+                            msg = "Razón social del padre no válida";
+                            return false;
+                        }
+                        else
+                        {
+                            msg = "Nombre completo del padre no válido";
+                            return false;
+                        }
+                    }
                 }
                 else
                 {
@@ -1066,6 +1086,20 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     info.info_alumno.info_persona_madre.pe_Naturaleza = return_naturaleza_madre;
                     info.info_alumno.info_valido_madre = true;
+
+                    if (info.info_alumno.info_persona_madre.pe_nombreCompleto == "")
+                    {
+                        if (info.info_alumno.info_persona_madre.IdTipoDocumento == "RUC")
+                        {
+                            msg = "Razón social de la madre no válida";
+                            return false;
+                        }
+                        else
+                        {
+                            msg = "Nombre completo de la madre no válido";
+                            return false;
+                        }
+                    }
                 }
                 else
                 {
@@ -1085,6 +1119,20 @@ namespace Core.Web.Areas.Academico.Controllers
                 {
                     info.info_alumno.info_persona_representante.pe_Naturaleza = return_naturaleza_representante;
                     info.info_alumno.info_valido_representante = true;
+
+                    if (info.info_alumno.info_persona_representante.pe_nombreCompleto == "")
+                    {
+                        if (info.info_alumno.info_persona_representante.IdTipoDocumento == "RUC")
+                        {
+                            msg = "Razón social del representante no válida";
+                            return false;
+                        }
+                        else
+                        {
+                            msg = "Nombre completo del representante no válido";
+                            return false;
+                        }
+                    }
                 }
                 else
                 {
@@ -1192,7 +1240,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 model.CedulaRuc_Representante = model.CedulaRuc_Padre;
                 model.Nombres_Representante = model.Nombres_Padre;
                 model.Apellidos_Representante = model.Apellidos_Padre;
-                model.NombreCompleto_Representante = model.Apellidos_Padre + ' ' + model.Nombres_Padre;
+                model.NombreCompleto_Representante = (model.IdTipoDocumento_Padre == "RUC" ? model.RazonSocial_Padre : ((string.IsNullOrEmpty(model.Apellidos_Padre) && string.IsNullOrEmpty(model.Nombres_Padre) ? "" : model.Apellidos_Padre + ' ' + model.Nombres_Padre)));
                 model.RazonSocial_Representante = model.RazonSocial_Padre;
                 model.Direccion_Representante = model.Direccion_Padre;
                 model.Telefono_Representante = model.Telefono_Padre;
@@ -1237,7 +1285,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 model.CedulaRuc_Representante = model.CedulaRuc_Madre;
                 model.Nombres_Representante = model.Nombres_Madre;
                 model.Apellidos_Representante = model.Apellidos_Madre;
-                model.NombreCompleto_Representante = model.Apellidos_Madre + ' ' + model.Nombres_Madre;
+                model.NombreCompleto_Representante = (model.IdTipoDocumento_Madre == "RUC" ? model.RazonSocial_Madre : ((string.IsNullOrEmpty(model.Apellidos_Madre) && string.IsNullOrEmpty(model.Nombres_Madre) ? "" : model.Apellidos_Madre + ' ' + model.Nombres_Madre)));
                 model.RazonSocial_Representante = model.RazonSocial_Madre;
                 model.Direccion_Representante = model.Direccion_Madre;
                 model.Telefono_Representante = model.Telefono_Madre;
@@ -1282,7 +1330,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 model.CedulaRuc_Representante = model.CedulaRuc_Representante;
                 model.Nombres_Representante = model.Nombres_Representante;
                 model.Apellidos_Representante = model.Apellidos_Representante;
-                model.NombreCompleto_Representante = model.Apellidos_Representante + ' ' + model.Nombres_Representante;
+                model.NombreCompleto_Representante = (model.IdTipoDocumento_Representante == "RUC" ? model.RazonSocial_Representante : ((string.IsNullOrEmpty(model.Apellidos_Representante) && string.IsNullOrEmpty(model.Nombres_Representante) ? "" :  model.Apellidos_Representante + ' ' + model.Nombres_Representante)));
                 model.RazonSocial_Representante = model.RazonSocial_Representante;
                 model.Direccion_Representante = model.Direccion_Representante;
                 model.Telefono_Representante = model.Telefono_Representante;
@@ -1393,7 +1441,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdTipoCredito_madre = model.IdTipoCredito_Padre,
                 IdReligion_madre = model.IdReligion_Madre,
                 IdProvincia_madre = model.IdProvincia_Madre,
-                IdTipoDocumento_madre = model.IdTipoCredito_Madre,
+                IdTipoDocumento_madre = model.IdTipoDocumento_Madre,
                 Idtipo_cliente_madre = model.Idtipo_cliente_Madre ?? 0,
                 IngresoMensual_madre = model.IngresoMensual_Madre,
                 IdProfesion_madre = model.IdProfesion_Madre,
@@ -1446,7 +1494,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdReligion_padre = model.IdReligion_Padre,
                 IdProvincia_padre = model.IdProvincia_Padre,
                 IdTipoCredito_padre = model.IdTipoCredito_Padre,
-                IdTipoDocumento_padre = model.IdTipoCredito_Padre,
+                IdTipoDocumento_padre = model.IdTipoDocumento_Padre,
                 Idtipo_cliente_padre = model.Idtipo_cliente_Padre ?? 0,
                 IngresoMensual_padre = model.IngresoMensual_Padre,
                 Marca_padre = model.Marca_Padre,
@@ -1496,7 +1544,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdReligion_representante = model.IdReligion_Representante,
                 IdProvincia_representante = model.IdProvincia_Representante,
                 IdTipoCredito_representante = model.IdTipoCredito_Representante,
-                IdTipoDocumento_representante = model.IdTipoCredito_Representante,
+                IdTipoDocumento_representante = model.IdTipoDocumento_Representante,
                 Idtipo_cliente_representante = model.Idtipo_cliente_Representante ?? 0,
                 IngresoMensual_representante = model.IngresoMensual_Representante,
                 Marca_representante = model.Marca_Representante,
