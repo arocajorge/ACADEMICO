@@ -21,6 +21,7 @@ namespace Core.Info.Banco
         public string CodigoAlumno { get; set; }
         public string pe_nombreCompleto { get; set; }
         public System.DateTime Fecha { get; set; }
+        public System.DateTime FechaFin { get; set; }
         public decimal Saldo { get; set; }
         public decimal SaldoProntoPago { get; set; }
         public Nullable<System.DateTime> FechaProntoPago { get; set; }

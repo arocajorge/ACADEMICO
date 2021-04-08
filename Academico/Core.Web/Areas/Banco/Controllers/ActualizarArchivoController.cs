@@ -59,10 +59,11 @@ namespace Core.Web.Areas.Banco.Controllers
                 string ValorS = valorEntero.ToString("n0").Replace(",","").PadLeft(8, '0') + "." + valorDecimal.ToString("n0").Replace(",", "").PadRight(2, '0');
                 sw.WriteLine("094"
                     + item.CodigoAlumno.PadRight(15, ' ')
-                    + Convert.ToDateTime(item.FechaProceso).ToString("MM/dd/yyyy")
-                    + "2  "
+                    + Convert.ToDateTime(item.Fecha).ToString("MM/dd/yyyy")
+                    + "0  "
                     + ValorS
-                    + new DateTime(DateTime.Now.Year,DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Date.Year, DateTime.Now.Month)).ToString("MM/dd/yyyy")
+                    //+ new DateTime(DateTime.Now.Year,DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Date.Year, DateTime.Now.Month)).ToString("MM/dd/yyyy")
+                    + Convert.ToDateTime(item.FechaFin).ToString("MM/dd/yyyy")
                     + "01/01/1900"
                     + "N"
                     + (item.pe_nombreCompleto.Trim().Length > 30 ? item.pe_nombreCompleto.Trim().Substring(0, 30) : item.pe_nombreCompleto.Trim().PadRight(30, ' '))
@@ -131,6 +132,11 @@ namespace Core.Web.Areas.Banco.Controllers
                             CodigoAlumno = reader[1].ToString(),
                             pe_nombreCompleto = reader[2].ToString(),
                             FechaProceso = new DateTime(DateTime.Now.Date.Year, DateTime.Now.Month, 1),
+                            Fecha = Convert.ToDateTime(reader[3]),
+                            FechaFin = Convert.ToDateTime(reader[4]),
+                            FechaProntoPago = Convert.ToDateTime(reader[11]),
+                            Saldo = Convert.ToDecimal(reader[6]),
+                            SaldoProntoPago = Convert.ToDecimal(reader[10])
 
                         });
                         Codigos += (string.IsNullOrEmpty(Codigos)) ? ("'"+reader[1].ToString()+"'") : ("," + ("'"+reader[1].ToString()+"'"));
@@ -153,9 +159,11 @@ namespace Core.Web.Areas.Banco.Controllers
                                pe_nombreCompleto = a.pe_nombreCompleto,
                                FechaProceso = a.FechaProceso,
                                IdAlumno = c?.IdAlumno ?? 0,
-                               FechaProntoPago = c?.FechaProntoPago,
-                               Saldo = c?.Saldo ?? 0,
-                               SaldoProntoPago = c?.SaldoProntoPago ?? 0
+                               FechaProntoPago = a?.FechaProntoPago,
+                               Fecha = a.Fecha,
+                               FechaFin = a.FechaFin,
+                               Saldo = a?.Saldo ?? 0,
+                               SaldoProntoPago = a?.SaldoProntoPago ?? 0
                            }).ToList();
 
                 

@@ -88,7 +88,9 @@ namespace Core.Bus.Facturacion
                                 if (SaldoRealNC > 0)
                                 {
                                     ValorProntoPagoCxC = Math.Round((item_cxc.vt_total - item_cxc.dc_ValorProntoPago ?? 0), 2, MidpointRounding.AwayFromZero);
-                                    ValorProntoPago = SaldoRealNC >= (item_cxc.Saldo - ValorProntoPagoCxC) ? ValorProntoPagoCxC : 0;
+                                    //ValorProntoPago = SaldoRealNC >= (item_cxc.Saldo - ValorProntoPagoCxC) ? ValorProntoPagoCxC : 0;
+                                    ValorProntoPago = Math.Round(SaldoRealNC, 2, MidpointRounding.AwayFromZero) >= Math.Round((Convert.ToDouble(item_cxc.Saldo) - ValorProntoPagoCxC), 2, MidpointRounding.AwayFromZero) ? Math.Round(ValorProntoPagoCxC, 2, MidpointRounding.AwayFromZero) : 0;
+
                                     Valor = SaldoRealNC >= Convert.ToDouble(item_cxc.Saldo - ValorProntoPagoCxC) ? Convert.ToDouble(item_cxc.Saldo) - ValorProntoPago : SaldoRealNC;
                                     Saldo_final = Convert.ToDouble(item_cxc.Saldo - ValorProntoPago) - Valor;
                                     SaldoRealNC = SaldoRealNC - Valor;
