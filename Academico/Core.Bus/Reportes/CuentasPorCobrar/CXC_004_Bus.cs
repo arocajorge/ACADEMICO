@@ -21,12 +21,12 @@ namespace Core.Bus.Reportes.CuentasPorCobrar
             }
         }
 
-        public List<CXC_004_Info> Getlist(int IdEmpresa, string IdUsuario)
+        public List<CXC_004_Info> Getlist_Resumen(int IdEmpresa, string IdUsuario)
         {
             try
             {
 
-                return odata.Getlist(IdEmpresa, IdUsuario);
+                return odata.Getlist_Resumen(IdEmpresa, IdUsuario);
             }
             catch (Exception)
             {

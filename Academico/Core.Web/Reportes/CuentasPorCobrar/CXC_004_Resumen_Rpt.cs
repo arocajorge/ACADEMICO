@@ -29,7 +29,8 @@ namespace Core.Web.Reportes.CuentasPorCobrar
 
                 int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
                 string IdUsuario = string.IsNullOrEmpty(p_IdUsuario.Value.ToString()) ? null : Convert.ToString(p_IdUsuario.Value);
-                List<CXC_004_Info> Lista = bus_rpt.Getlist(IdEmpresa, IdUsuario);
+                List<CXC_004_Info> Lista = new List<CXC_004_Info>();
+                Lista = bus_rpt.Getlist_Resumen(IdEmpresa, IdUsuario);
                 xrCrossTab1.DataSource = Lista;
             }
             catch (Exception)

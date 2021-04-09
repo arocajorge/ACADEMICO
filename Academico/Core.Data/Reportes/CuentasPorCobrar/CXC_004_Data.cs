@@ -43,7 +43,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                 }
 
 
-                    return Lista;
+                return Lista;
             }
             catch (Exception)
             {
@@ -51,24 +51,28 @@ namespace Core.Data.Reportes.CuentasPorCobrar
             }
         }
 
-        public List<CXC_004_Info> Getlist(int IdEmpresa, string IdUsuario)
+        public List<CXC_004_Info> Getlist_Resumen(int IdEmpresa, string IdUsuario)
         {
             try
             {
-                List<CXC_004_Info> Lista = new List<CXC_004_Info>();
+                List<CXC_004_Info> ListaResumen = new List<CXC_004_Info>();
 
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
-                    SqlCommand command = new SqlCommand();
-                    command.Connection = connection;
-                    command.CommandText = "select IdEmpresa,  IdAlumno, IdAnio, IdUsuario, NomAnio, CodigoAlumno, NombreAlumno, IdJornada, NombreJornada, SaldoDeudor, SaldoAcreedor, SaldoFinal"
-                                        +" from[Academico].[cxc_SPCXC_004]"
-                                        +" where IdEmpresa = "+IdEmpresa.ToString()+" and IdUsuario = '"+IdUsuario+"'";
+                    #region Query
+                    string query = "select IdEmpresa,  IdAlumno, IdAnio, IdUsuario, NomAnio, CodigoAlumno, NombreAlumno, IdJornada, NombreJornada, SaldoDeudor, SaldoAcreedor, SaldoFinal"
+                    + " from[Academico].[cxc_SPCXC_004] with (nolock)"
+                    + " where IdEmpresa = " + IdEmpresa.ToString() + " and IdUsuario = '" + IdUsuario + "'"; ;
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 5000;
                     SqlDataReader reader = command.ExecuteReader();
+
                     while (reader.Read())
                     {
-                        Lista.Add(new CXC_004_Info
+                        ListaResumen.Add(new CXC_004_Info
                         {
                             IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
@@ -86,7 +90,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                 }
 
 
-                return Lista;
+                return ListaResumen;
             }
             catch (Exception)
             {
