@@ -251,7 +251,7 @@ namespace Core.Web.Areas.Reportes.Controllers
                 IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa),
                 IdSucursal = Convert.ToInt32(SessionFixed.IdSucursal),
                 IdCliente = 0,
-                
+                fecha_corte = DateTime.Now
             };
            
             CXC_004_Rpt report = new CXC_004_Rpt();

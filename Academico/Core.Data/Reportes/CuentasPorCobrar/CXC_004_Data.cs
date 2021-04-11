@@ -9,7 +9,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 {
     public class CXC_004_Data
     {
-        public List<CXC_004_Info> Getlist(int IdEmpresa, string IdUsuario, DateTime FechaCorte)
+        public List<CXC_004_Info> Getlist_Reporte(int IdEmpresa, string IdUsuario, DateTime FechaCorte)
         {
             try
             {
@@ -19,8 +19,9 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
+                    db.Database.CommandTimeout = 5000;
                     var lst = db.SPCXC_004(IdEmpresa, IdUsuario, FechaCorte).ToList();
-
+                    
                     foreach (var item in lst)
                     {
                         Lista.Add(new CXC_004_Info
@@ -62,8 +63,8 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                     connection.Open();
                     #region Query
                     string query = "select IdEmpresa,  IdAlumno, IdAnio, IdUsuario, NomAnio, CodigoAlumno, NombreAlumno, IdJornada, NombreJornada, SaldoDeudor, SaldoAcreedor, SaldoFinal"
-                    + " from[Academico].[cxc_SPCXC_004] with (nolock)"
-                    + " where IdEmpresa = " + IdEmpresa.ToString() + " and IdUsuario = '" + IdUsuario + "'"; ;
+                    + " from[Academico].[cxc_SPCXC_004]"
+                    + " where IdEmpresa = " + IdEmpresa.ToString() + " and IdUsuario = " + "'" +IdUsuario.ToString() + "'";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
