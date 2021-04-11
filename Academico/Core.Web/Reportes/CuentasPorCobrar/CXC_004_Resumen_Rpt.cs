@@ -25,17 +25,12 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             lbl_empresa.Text = empresa;
             lbl_usuario.Text = usuario;
 
-                int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
-                string IdUsuario = string.IsNullOrEmpty(p_IdUsuario.Value.ToString()) ? null : Convert.ToString(p_IdUsuario.Value);
-                DateTime FechaCorte = string.IsNullOrEmpty(p_FechaCorte.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_FechaCorte.Value);
-                List<CXC_004_Info> Lista = new List<CXC_004_Info>();
-                Lista = bus_rpt.Getlist_Resumen(IdEmpresa, IdUsuario,FechaCorte);
-                xrCrossTab1.DataSource = Lista;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
+            string IdUsuario = string.IsNullOrEmpty(p_IdUsuario.Value.ToString()) ? null : Convert.ToString(p_IdUsuario.Value);
+            DateTime FechaCorte = string.IsNullOrEmpty(p_FechaCorte.Value.ToString()) ? DateTime.Now.Date : Convert.ToDateTime(p_FechaCorte.Value);
+            List<CXC_004_Info> Lista = new List<CXC_004_Info>();
+            Lista = bus_rpt.Getlist_Resumen(IdEmpresa, IdUsuario,FechaCorte);
+            xrCrossTab1.DataSource = Lista;
         }
     }
 }
