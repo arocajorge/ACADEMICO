@@ -51,7 +51,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
             }
         }
 
-        public List<CXC_004_Info> Getlist_Resumen(int IdEmpresa, string IdUsuario)
+        public List<CXC_004_Info> Getlist_Resumen(int IdEmpresa, string IdUsuario, DateTime FechaCorte)
         {
             try
             {
@@ -60,13 +60,11 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
-                    #region Query
-                    string query = "select IdEmpresa,  IdAlumno, IdAnio, IdUsuario, NomAnio, CodigoAlumno, NombreAlumno, IdJornada, NombreJornada, SaldoDeudor, SaldoAcreedor, SaldoFinal"
-                    + " from[Academico].[cxc_SPCXC_004] with (nolock)"
-                    + " where IdEmpresa = " + IdEmpresa.ToString() + " and IdUsuario = '" + IdUsuario + "'"; ;
-                    #endregion
 
-                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "DECLARE @Fecha date = DATEFROMPARTS("+FechaCorte.Year.ToString()+","+FechaCorte.Month.ToString()+","+FechaCorte.Day.ToString()+")"
+                        + " exec Academico.SPCXC_004 " + IdEmpresa.ToString() + ", '" + IdUsuario + "',@fecha";
                     command.CommandTimeout = 5000;
                     SqlDataReader reader = command.ExecuteReader();
 

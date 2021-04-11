@@ -269,6 +269,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report2.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report2.usuario = SessionFixed.IdUsuario;
             report2.empresa = SessionFixed.NomEmpresa;
+            report.p_FechaCorte.Value = model.fecha_corte;
             ViewBag.ReportResumen = report2;
 
             return View(model);
@@ -290,6 +291,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report2.p_IdEmpresa.Value = model.IdEmpresa;
             report2.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report2.usuario = SessionFixed.IdUsuario;
+            report.p_FechaCorte.Value = model.fecha_corte;
             report2.empresa = SessionFixed.NomEmpresa;
             ViewBag.ReportResumen = report2;
 
