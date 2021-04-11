@@ -9,7 +9,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 {
     public class CXC_004_Data
     {
-        public List<CXC_004_Info> Getlist(int IdEmpresa, string IdUsuario, DateTime FechaCorte)
+        public List<CXC_004_Info> Getlist_Reporte(int IdEmpresa, string IdUsuario, DateTime FechaCorte)
         {
             try
             {
@@ -19,8 +19,9 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 
                 using (EntitiesReportes db = new EntitiesReportes())
                 {
+                    db.Database.CommandTimeout = 5000;
                     var lst = db.SPCXC_004(IdEmpresa, IdUsuario, FechaCorte).ToList();
-
+                    
                     foreach (var item in lst)
                     {
                         Lista.Add(new CXC_004_Info
@@ -60,7 +61,6 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
-
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
                     command.CommandText = "DECLARE @Fecha date = DATEFROMPARTS("+FechaCorte.Year.ToString()+","+FechaCorte.Month.ToString()+","+FechaCorte.Day.ToString()+")"

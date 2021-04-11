@@ -19,13 +19,11 @@ namespace Core.Web.Reportes.CuentasPorCobrar
             InitializeComponent();
         }
 
-        private void CXC_004_Resumen_Rpt_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void CXC_004_Resumen_Rpt_BeforePrint_1(object sender, System.Drawing.Printing.PrintEventArgs e)
         {
-            try
-            {
-                lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
-                lbl_empresa.Text = empresa;
-                lbl_usuario.Text = usuario;
+            lbl_fecha.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+            lbl_empresa.Text = empresa;
+            lbl_usuario.Text = usuario;
 
                 int IdEmpresa = string.IsNullOrEmpty(p_IdEmpresa.Value.ToString()) ? 0 : Convert.ToInt32(p_IdEmpresa.Value);
                 string IdUsuario = string.IsNullOrEmpty(p_IdUsuario.Value.ToString()) ? null : Convert.ToString(p_IdUsuario.Value);
