@@ -971,6 +971,15 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_periodo' no tiene definida ni
             <End Role="ct_periodo" EntitySet="ct_periodo" />
             <End Role="ct_periodo_x_tb_modulo" EntitySet="ct_periodo_x_tb_modulo" />
           </AssociationSet>
+          <EntitySet Name="ct_parametro" EntityType="ModelContabilidad.ct_parametro" />
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo" Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1">
+            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
+            <End Role="ct_parametro" EntitySet="ct_parametro" />
+          </AssociationSet>
           <FunctionImport Name="SPACA_ContabilizacionCobros" ReturnType="Collection(ModelContabilidad.SPACA_ContabilizacionCobros_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
@@ -986,15 +995,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_periodo' no tiene definida ni
             <Parameter Name="FechaIni" Mode="In" Type="DateTime" />
             <Parameter Name="FechaFin" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="ct_parametro" EntityType="ModelContabilidad.ct_parametro" />
-          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo" Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo">
-            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
-            <End Role="ct_parametro" EntitySet="ct_parametro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ct_parametro_ct_cbtecble_tipo1" Association="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1">
-            <End Role="ct_cbtecble_tipo" EntitySet="ct_cbtecble_tipo" />
-            <End Role="ct_parametro" EntitySet="ct_parametro" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ct_periodo">
           <Key>
@@ -1550,6 +1550,47 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_periodo' no tiene definida ni
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ct_parametro">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_SaldoInicial" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="Int32" Nullable="false" />
+          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="Boolean" Nullable="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="DiasTransaccionesAPasado" Type="Int32" />
+          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
+          <NavigationProperty Name="ct_cbtecble_tipo1" Relationship="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
+        </EntityType>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
+          <End Type="ModelContabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_SaldoInicial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
+          <End Type="ModelContabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
+          <End Type="ModelContabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_cbtecble_tipo">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte" />
+            </Principal>
+            <Dependent Role="ct_parametro">
+              <PropertyRef Name="IdEmpresa" />
+              <PropertyRef Name="IdTipoCbte_AsientoCierre_Anual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <ComplexType Name="SPACA_ContabilizacionCobros_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdSucursal" Nullable="false" />
@@ -1600,47 +1641,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_periodo' no tiene definida ni
           <Property Type="Double" Name="TotalContabilidad" Nullable="true" />
           <Property Type="Double" Name="Saldo" Nullable="true" />
         </ComplexType>
-        <EntityType Name="ct_parametro">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_SaldoInicial" Type="Int32" Nullable="false" />
-          <Property Name="IdTipoCbte_AsientoCierre_Anual" Type="Int32" Nullable="false" />
-          <Property Name="P_Se_Muestra_Todas_las_ctas_en_combos" Type="Boolean" Nullable="false" />
-          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
-          <Property Name="DiasTransaccionesAPasado" Type="Int32" />
-          <NavigationProperty Name="ct_cbtecble_tipo" Relationship="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
-          <NavigationProperty Name="ct_cbtecble_tipo1" Relationship="ModelContabilidad.FK_ct_parametro_ct_cbtecble_tipo1" FromRole="ct_parametro" ToRole="ct_cbtecble_tipo" />
-        </EntityType>
-        <Association Name="FK_ct_parametro_ct_cbtecble_tipo">
-          <End Type="ModelContabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
-          <End Type="ModelContabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Principal>
-            <Dependent Role="ct_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte_SaldoInicial" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ct_parametro_ct_cbtecble_tipo1">
-          <End Type="ModelContabilidad.ct_cbtecble_tipo" Role="ct_cbtecble_tipo" Multiplicity="1" />
-          <End Type="ModelContabilidad.ct_parametro" Role="ct_parametro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ct_cbtecble_tipo">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte" />
-            </Principal>
-            <Dependent Role="ct_parametro">
-              <PropertyRef Name="IdEmpresa" />
-              <PropertyRef Name="IdTipoCbte_AsientoCierre_Anual" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1963,6 +1963,18 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_periodo' no tiene definida ni
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ct_parametro">
+            <EntityTypeMapping TypeName="ModelContabilidad.ct_parametro">
+              <MappingFragment StoreEntitySet="ct_parametro">
+                <ScalarProperty Name="DiasTransaccionesAPasado" ColumnName="DiasTransaccionesAPasado" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
+                <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
+                <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SPACA_ContabilizacionCobros" FunctionName="ModelContabilidad.Store.SPACA_ContabilizacionCobros">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ModelContabilidad.SPACA_ContabilizacionCobros_Result">
@@ -2025,18 +2037,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwct_periodo' no tiene definida ni
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="ct_parametro">
-            <EntityTypeMapping TypeName="ModelContabilidad.ct_parametro">
-              <MappingFragment StoreEntitySet="ct_parametro">
-                <ScalarProperty Name="DiasTransaccionesAPasado" ColumnName="DiasTransaccionesAPasado" />
-                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
-                <ScalarProperty Name="P_Se_Muestra_Todas_las_ctas_en_combos" ColumnName="P_Se_Muestra_Todas_las_ctas_en_combos" />
-                <ScalarProperty Name="IdTipoCbte_AsientoCierre_Anual" ColumnName="IdTipoCbte_AsientoCierre_Anual" />
-                <ScalarProperty Name="IdTipoCbte_SaldoInicial" ColumnName="IdTipoCbte_SaldoInicial" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
