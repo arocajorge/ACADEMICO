@@ -3326,6 +3326,7 @@
     function LimpiarListaDetalle() {
         var datos = {
             IdEmpresa: $("#IdEmpresa").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
         }
         $.ajax({
             type: 'POST',
@@ -3357,6 +3358,7 @@
             IdAnio: IdAnio.GetValue(),
             IdPlantilla: IdPlantilla.GetValue(),
             IdMatricula: $("#IdMatricula").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val(),
         }
         $.ajax({
             type: 'POST',

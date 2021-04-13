@@ -648,11 +648,12 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             model.IdUsuarioModificacion = SessionFixed.IdUsuario;
             var info_prematricula = new aca_PreMatricula_Info();
+            var lst_rubro = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             info_prematricula = armar_info_prematricula(model);
 
             //var lst_DetallePlantilla = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(model.IdTransaccionSession));
             var lst_DetalleDocumentos = Lista_DocumentosMatricula.get_list(Convert.ToDecimal(model.IdTransaccionSession)).Where(q => q.seleccionado == true).ToList();
-
+            
             var lst_alumno_documentos = new List<aca_AlumnoDocumento_Info>();
             foreach (var item in lst_DetalleDocumentos)
             {
@@ -2021,7 +2022,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return Json(new { MostrarEmpleado = resultado, IdEmpresa_rol = Empresa }, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult LimpiarListaDetalle(int IdEmpresa = 0)
+        public JsonResult LimpiarListaDetalle(int IdEmpresa = 0, decimal IdTransaccionSession=0)
         {
             decimal Total = 0;
             decimal TotalProntoPago = 0;
@@ -2030,11 +2031,11 @@ namespace Core.Web.Areas.Academico.Controllers
 
             ValorTotal = Total;
             ValorTotalPP = TotalProntoPago;
-            ListaPreMatriculaRubro.set_list(new List<aca_PreMatricula_Rubro_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            ListaPreMatriculaRubro.set_list(new List<aca_PreMatricula_Rubro_Info>(), IdTransaccionSession);
 
             return Json(new { Valor = ValorTotal, ProntoPago = ValorTotalPP }, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult SetMatriculaRubro(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, int IdMatricula = 0)
+        public JsonResult SetMatriculaRubro(int IdEmpresa = 0, int IdAnio = 0, int IdPlantilla = 0, int IdMatricula = 0, decimal IdTransaccionSession=0)
         {
             decimal Total = 0;
             decimal TotalProntoPago = 0;
@@ -2090,13 +2091,13 @@ namespace Core.Web.Areas.Academico.Controllers
                     }
                     ValorTotal = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.Total);
                     ValorTotalPP = lst_MatriculaRubro.Where(q => q.seleccionado == true).Sum(q => q.ValorProntoPago);
-                    ListaPreMatriculaRubro.set_list(lst_MatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                    ListaPreMatriculaRubro.set_list(lst_MatriculaRubro, IdTransaccionSession);
                 }
                 else
                 {
                     ValorTotal = Total;
                     ValorTotalPP = TotalProntoPago;
-                    ListaPreMatriculaRubro.set_list(new List<aca_PreMatricula_Rubro_Info>(), Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                    ListaPreMatriculaRubro.set_list(new List<aca_PreMatricula_Rubro_Info>(), IdTransaccionSession);
                 }
 
             }
@@ -2129,7 +2130,7 @@ namespace Core.Web.Areas.Academico.Controllers
                     }
                 }
 
-                ListaPreMatriculaRubro.set_list(lista_nueva, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+                ListaPreMatriculaRubro.set_list(lista_nueva, IdTransaccionSession);
             }
 
 

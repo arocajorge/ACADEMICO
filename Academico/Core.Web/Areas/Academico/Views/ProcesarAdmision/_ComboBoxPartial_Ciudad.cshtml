@@ -13,5 +13,5 @@
     settings.Properties.NullText = "== Seleccione ==";
     settings.Properties.DropDownStyle = DropDownStyle.DropDown;
     settings.Properties.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['IdPais'] = IdPais_Aspirante.GetValue(); e.customArgs['Cod_Region'] = Cod_Region_Aspirante.GetValue();e.customArgs['IdProvincia'] = IdProvincia_Aspirante.GetValue(); }";
-    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia.PerformCallback();}";
+    settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) { IdParroquia_Aspirante.PerformCallback();}";
 }).BindList(new Core.Bus.General.tb_ciudad_Bus().get_list(Model.IdProvincia_Aspirante, false)).Bind(Model.IdCiudad_Aspirante).GetHtml()
