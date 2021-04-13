@@ -191,23 +191,23 @@ namespace Core.Info.Helps
             value = Math.Truncate(value);
             if (value == 0) Num2Text = "CERO";
 
-            else if (value == 1) Num2Text = "UNO";
+            else if (value == 1) Num2Text = "CERO UNO";
 
-            else if (value == 2) Num2Text = "DOS";
+            else if (value == 2) Num2Text = "CERO DOS";
 
-            else if (value == 3) Num2Text = "TRES";
+            else if (value == 3) Num2Text = "CERO TRES";
 
-            else if (value == 4) Num2Text = "CUATRO";
+            else if (value == 4) Num2Text = "CERO CUATRO";
 
-            else if (value == 5) Num2Text = "CINCO";
+            else if (value == 5) Num2Text = "CERO CINCO";
 
-            else if (value == 6) Num2Text = "SEIS";
+            else if (value == 6) Num2Text = "CERO SEIS";
 
-            else if (value == 7) Num2Text = "SIETE";
+            else if (value == 7) Num2Text = "CERO SIETE";
 
-            else if (value == 8) Num2Text = "OCHO";
+            else if (value == 8) Num2Text = "CERO OCHO";
 
-            else if (value == 9) Num2Text = "NUEVE";
+            else if (value == 9) Num2Text = "CERO NUEVE";
 
             else if (value == 10) Num2Text = "DIEZ";
 
