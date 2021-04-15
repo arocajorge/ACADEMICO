@@ -1495,15 +1495,15 @@
             this.xrTableCell1.StylePriority.UseFont = false;
             this.xrTableCell1.StylePriority.UsePadding = false;
             this.xrTableCell1.StylePriority.UseTextAlignment = false;
-            this.xrTableCell1.Text = "Nombres:";
+            this.xrTableCell1.Text = "Apellidos:";
             this.xrTableCell1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell1.Weight = 1.75419435756921D;
             // 
             // xrTableCell2
             // 
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_nombre]")});
-            this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 8.5F);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_apellido]")});
+            this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 8.5F, System.Drawing.FontStyle.Bold);
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
@@ -1523,15 +1523,15 @@
             this.xrTableCell4.StylePriority.UseFont = false;
             this.xrTableCell4.StylePriority.UsePadding = false;
             this.xrTableCell4.StylePriority.UseTextAlignment = false;
-            this.xrTableCell4.Text = "Apellidos:";
+            this.xrTableCell4.Text = "Nombres:";
             this.xrTableCell4.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell4.Weight = 1.86050916711886D;
             // 
             // xrTableCell9
             // 
             this.xrTableCell9.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_apellido]")});
-            this.xrTableCell9.Font = new System.Drawing.Font("Verdana", 8.5F);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pe_nombre]")});
+            this.xrTableCell9.Font = new System.Drawing.Font("Verdana", 8.5F, System.Drawing.FontStyle.Bold);
             this.xrTableCell9.Multiline = true;
             this.xrTableCell9.Name = "xrTableCell9";
             this.xrTableCell9.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 100F);
