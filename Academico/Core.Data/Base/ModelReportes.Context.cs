@@ -32,12 +32,9 @@ namespace Core.Data.Base
         public virtual DbSet<VWFAC_003> VWFAC_003 { get; set; }
         public virtual DbSet<VWFAC_003_aplicaciones> VWFAC_003_aplicaciones { get; set; }
         public virtual DbSet<VWFAC_004> VWFAC_004 { get; set; }
-        public virtual DbSet<VWACA_003> VWACA_003 { get; set; }
         public virtual DbSet<VWCXC_002> VWCXC_002 { get; set; }
-        public virtual DbSet<VWACA_004> VWACA_004 { get; set; }
         public virtual DbSet<VWCXC_002_Aplicaciones> VWCXC_002_Aplicaciones { get; set; }
         public virtual DbSet<VWFAC_001> VWFAC_001 { get; set; }
-        public virtual DbSet<VWACA_002> VWACA_002 { get; set; }
         public virtual DbSet<VWCAJ_001> VWCAJ_001 { get; set; }
         public virtual DbSet<VWCAJ_002> VWCAJ_002 { get; set; }
         public virtual DbSet<VWCAJ_002_ingresos> VWCAJ_002_ingresos { get; set; }
@@ -47,18 +44,12 @@ namespace Core.Data.Base
         public virtual DbSet<VWBAN_002> VWBAN_002 { get; set; }
         public virtual DbSet<VWBAN_002_cancelaciones> VWBAN_002_cancelaciones { get; set; }
         public virtual DbSet<VWBAN_003> VWBAN_003 { get; set; }
-        public virtual DbSet<VWACA_009> VWACA_009 { get; set; }
         public virtual DbSet<VWCXC_005> VWCXC_005 { get; set; }
         public virtual DbSet<VWCXC_005_Cobros> VWCXC_005_Cobros { get; set; }
         public virtual DbSet<VWCXC_005_Diario> VWCXC_005_Diario { get; set; }
         public virtual DbSet<VWFAC_0031> VWFAC_0031 { get; set; }
         public virtual DbSet<VWFAC_007> VWFAC_007 { get; set; }
-        public virtual DbSet<VWACA_012> VWACA_012 { get; set; }
-        public virtual DbSet<VWACA_011> VWACA_011 { get; set; }
         public virtual DbSet<VWFAC_008> VWFAC_008 { get; set; }
-        public virtual DbSet<VWACA_006> VWACA_006 { get; set; }
-        public virtual DbSet<VWACA_008> VWACA_008 { get; set; }
-        public virtual DbSet<VWACA_013_EquivalenciaPromedio> VWACA_013_EquivalenciaPromedio { get; set; }
         public virtual DbSet<VWBAN_004> VWBAN_004 { get; set; }
         public virtual DbSet<VWFAC_002> VWFAC_002 { get; set; }
         public virtual DbSet<VWCXC_012> VWCXC_012 { get; set; }
@@ -67,6 +58,16 @@ namespace Core.Data.Base
         public virtual DbSet<VWACA_019> VWACA_019 { get; set; }
         public virtual DbSet<VWACA_021> VWACA_021 { get; set; }
         public virtual DbSet<VWFAC_009> VWFAC_009 { get; set; }
+        public virtual DbSet<VWACA_002> VWACA_002 { get; set; }
+        public virtual DbSet<VWACA_003> VWACA_003 { get; set; }
+        public virtual DbSet<VWACA_004> VWACA_004 { get; set; }
+        public virtual DbSet<VWACA_006> VWACA_006 { get; set; }
+        public virtual DbSet<VWACA_008> VWACA_008 { get; set; }
+        public virtual DbSet<VWACA_009> VWACA_009 { get; set; }
+        public virtual DbSet<VWACA_010> VWACA_010 { get; set; }
+        public virtual DbSet<VWACA_011> VWACA_011 { get; set; }
+        public virtual DbSet<VWACA_012> VWACA_012 { get; set; }
+        public virtual DbSet<VWACA_013_EquivalenciaPromedio> VWACA_013_EquivalenciaPromedio { get; set; }
     
         public virtual ObjectResult<SPCXC_001_Result> SPCXC_001(Nullable<int> idEmpresa, Nullable<int> idSucursalIni, Nullable<int> idSucursalFin, Nullable<decimal> idAlumnoIni, Nullable<decimal> idAlumnoFin, Nullable<System.DateTime> fechaCorte, Nullable<bool> mostrarSaldo0)
         {
@@ -458,39 +459,6 @@ namespace Core.Data.Base
                 new ObjectParameter("IdMateria", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_010_Result>("SPACA_010", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, idParcialParameter, idMateriaParameter);
-        }
-    
-        public virtual ObjectResult<SPACA_011_Result> SPACA_011(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var idAnioParameter = idAnio.HasValue ?
-                new ObjectParameter("IdAnio", idAnio) :
-                new ObjectParameter("IdAnio", typeof(int));
-    
-            var idSedeParameter = idSede.HasValue ?
-                new ObjectParameter("IdSede", idSede) :
-                new ObjectParameter("IdSede", typeof(int));
-    
-            var idNivelParameter = idNivel.HasValue ?
-                new ObjectParameter("IdNivel", idNivel) :
-                new ObjectParameter("IdNivel", typeof(int));
-    
-            var idJornadaParameter = idJornada.HasValue ?
-                new ObjectParameter("IdJornada", idJornada) :
-                new ObjectParameter("IdJornada", typeof(int));
-    
-            var idCursoParameter = idCurso.HasValue ?
-                new ObjectParameter("IdCurso", idCurso) :
-                new ObjectParameter("IdCurso", typeof(int));
-    
-            var idParaleloParameter = idParalelo.HasValue ?
-                new ObjectParameter("IdParalelo", idParalelo) :
-                new ObjectParameter("IdParalelo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_011_Result>("SPACA_011", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter);
         }
     
         public virtual ObjectResult<SPACA_013_Result> SPACA_013(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo, Nullable<int> idParcial, Nullable<decimal> idAlumno, Nullable<bool> mostrarRetirados)
@@ -1639,6 +1607,39 @@ namespace Core.Data.Base
                 new ObjectParameter("MostrarRetirados", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_034_Result>("SPACA_034", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter, idAlumnoParameter, mostrarRetiradosParameter);
+        }
+    
+        public virtual ObjectResult<SPACA_011_Result> SPACA_011(Nullable<int> idEmpresa, Nullable<int> idAnio, Nullable<int> idSede, Nullable<int> idNivel, Nullable<int> idJornada, Nullable<int> idCurso, Nullable<int> idParalelo)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idAnioParameter = idAnio.HasValue ?
+                new ObjectParameter("IdAnio", idAnio) :
+                new ObjectParameter("IdAnio", typeof(int));
+    
+            var idSedeParameter = idSede.HasValue ?
+                new ObjectParameter("IdSede", idSede) :
+                new ObjectParameter("IdSede", typeof(int));
+    
+            var idNivelParameter = idNivel.HasValue ?
+                new ObjectParameter("IdNivel", idNivel) :
+                new ObjectParameter("IdNivel", typeof(int));
+    
+            var idJornadaParameter = idJornada.HasValue ?
+                new ObjectParameter("IdJornada", idJornada) :
+                new ObjectParameter("IdJornada", typeof(int));
+    
+            var idCursoParameter = idCurso.HasValue ?
+                new ObjectParameter("IdCurso", idCurso) :
+                new ObjectParameter("IdCurso", typeof(int));
+    
+            var idParaleloParameter = idParalelo.HasValue ?
+                new ObjectParameter("IdParalelo", idParalelo) :
+                new ObjectParameter("IdParalelo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_011_Result>("SPACA_011", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter);
         }
     }
 }

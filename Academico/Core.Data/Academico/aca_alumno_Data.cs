@@ -25,10 +25,10 @@ namespace Core.Data.Academico
                     string query = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
                     + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, cm.NomCatalogo AS NomCatalogoESTMAT, "
                     + " c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, p.AsisteCentroCristiano, p.IdGrupoEtnico "
-                    + " FROM dbo.aca_Alumno AS a INNER JOIN "
-                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS cm ON a.IdCatalogoESTMAT = cm.IdCatalogo "
+                    + " FROM dbo.aca_Alumno AS a WITH (nolock) INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS cm WITH (nolock) ON a.IdCatalogoESTMAT = cm.IdCatalogo "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -92,35 +92,35 @@ namespace Core.Data.Academico
                     + " pfc.pe_nombreCompleto NombreFactura, fc.Correo as CorreoEmiteFactura, fr.Celular as CelularRepresentante, fc.Celular as CelularEmiteFactura, fr.Telefono as TelefonoRepresentante, fc.Telefono as TelefonoEmiteFactura,"
                     + " b.IdAnio, b.IdSede, b.IdNivel, b.IdJornada, b.IdCurso, b.IdParalelo,  sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo,"
                     + " isnull(e.Saldo, 0) Saldo, isnull(e.SaldoProntoPago, 0)SaldoProntoPago, isnull(e.CantidadDeudas, 0) CantidadDeudas, pt.NomPlantillaTipo"
-                    + " from aca_Alumno as a inner join"
-                    + " aca_Matricula as b on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno left join"
-                    + " tb_persona as c on a.IdPersona = c.IdPersona inner join"
-                    + " aca_AnioLectivo as d on b.IdEmpresa = d.IdEmpresa and b.IdAnio = d.IdAnio left join"
+                    + " from aca_Alumno as a WITH (nolock) inner join"
+                    + " aca_Matricula as b WITH (nolock) on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno left join"
+                    + " tb_persona as c WITH (nolock) on a.IdPersona = c.IdPersona inner join"
+                    + " aca_AnioLectivo as d WITH (nolock) on b.IdEmpresa = d.IdEmpresa and b.IdAnio = d.IdAnio left join"
                     + " ("
                     + " select az.IdEmpresa, az.IdAlumno, dbo.bankersrounding(sum(az.Saldo), 2) Saldo, sum(az.SaldoProntoPago) SaldoProntoPago, sum(CantidadFacturas) as CantidadDeudas from("
                     + " SELECT ay.IdEmpresa, ay.IdAlumno, sum(ay.Saldo) Saldo, sum(ay.SaldoProntoPago) SaldoProntoPago, count(*) as CantidadFacturas"
                     + " FROM("
                     + " select a1.IdEmpresa, a2.IdAlumno, dbo.bankersrounding(a1.Total - ISNULL(A3.dc_ValorPago, 0), 2) as Saldo,"
                     + " case when a5.FechaProntoPago >= CAST(GETDATE() AS DATE) THEN dbo.bankersrounding(a1.ValorProntoPago - ISNULL(A3.dc_ValorPago, 0), 2) ELSE dbo.bankersrounding(a1.Total - ISNULL(A3.dc_ValorPago, 0), 2) end as SaldoProntoPago"
-                    + " from fa_factura_resumen as a1 inner join"
-                    + " fa_factura as a2 on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdCbteVta = a2.IdCbteVta left join"
+                    + " from fa_factura_resumen as a1 WITH (nolock) inner join"
+                    + " fa_factura as a2 WITH (nolock) on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdCbteVta = a2.IdCbteVta left join"
                     + " ("
                     + " select x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento, sum(x1.dc_ValorPago) dc_ValorPago"
-                    + " from cxc_cobro_det as x1"
+                    + " from cxc_cobro_det as x1 WITH (nolock) "
                     + " where x1.IdEmpresa = " + IdEmpresa.ToString() + " and x1.estado = 'A'"
                     + " group by x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento"
                     + " ) as a3 on a2.IdEmpresa = a3.IdEmpresa and a2.IdSucursal = a3.IdSucursal and a2.IdBodega = a3.IdBodega_Cbte and a2.IdCbteVta = a3.IdCbte_vta_nota and a2.vt_tipoDoc = a3.dc_TipoDocumento left join"
-                    + " aca_Matricula_Rubro as a4 on a2.IdEmpresa = a4.IdEmpresa and a2.IdSucursal = a4.IdSucursal and a2.IdBodega = a4.IdBodega and a2.IdCbteVta = a4.IdCbteVta left join"
-                    + " aca_AnioLectivo_Periodo as a5 on a5.IdEmpresa = a4.IdEmpresa and a5.IdAnio = a4.IdAnio and a5.IdPeriodo = a4.IdPeriodo"
+                    + " aca_Matricula_Rubro as a4 WITH (nolock) on a2.IdEmpresa = a4.IdEmpresa and a2.IdSucursal = a4.IdSucursal and a2.IdBodega = a4.IdBodega and a2.IdCbteVta = a4.IdCbteVta left join"
+                    + " aca_AnioLectivo_Periodo as a5 WITH (nolock) on a5.IdEmpresa = a4.IdEmpresa and a5.IdAnio = a4.IdAnio and a5.IdPeriodo = a4.IdPeriodo"
                     + " where a2.IdEmpresa = " + IdEmpresa.ToString() + " and a2.Estado = 'A' and dbo.BankersRounding(a1.Total - isnull(a3.dc_ValorPago, 0), 2) > 0"
                     + " ) ay group by ay.IdEmpresa, ay.IdAlumno"
                     + " UNION ALL"
                     + " select a1.IdEmpresa, a2.IdAlumno, dbo.bankersrounding(sum(a1.Total) - ISNULL(SUM(A3.dc_ValorPago), 0), 2) as Saldo, dbo.bankersrounding(sum(a1.Total) - ISNULL(SUM(A3.dc_ValorPago), 0), 2), count(*) CantidadFacturas"
-                    + " from fa_notaCreDeb_resumen as a1 inner join"
-                    + " fa_notaCreDeb as a2 on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdNota = a2.IdNota left join"
+                    + " from fa_notaCreDeb_resumen as a1 WITH (nolock) inner join"
+                    + " fa_notaCreDeb as a2 WITH (nolock) on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdNota = a2.IdNota left join"
                     + " ("
                     + " select x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento, sum(x1.dc_ValorPago) dc_ValorPago"
-                    + " from cxc_cobro_det as x1"
+                    + " from cxc_cobro_det as x1 WITH (nolock) "
                     + " where x1.IdEmpresa = " + IdEmpresa.ToString() + " and x1.estado = 'A'"
                     + " group by x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento"
                     + " ) as a3 on a2.IdEmpresa = a3.IdEmpresa and a2.IdSucursal = a3.IdSucursal and a2.IdBodega = a3.IdBodega_Cbte and a2.IdNota = a3.IdCbte_vta_nota and a2.CodDocumentoTipo = a3.dc_TipoDocumento"
@@ -128,18 +128,18 @@ namespace Core.Data.Academico
                     + " group by a1.IdEmpresa, a2.IdAlumno"
                     + " ) az group by az.IdEmpresa, az.IdAlumno"
                     + " ) as e on a.IdEmpresa = e.IdEmpresa and a.IdAlumno = e.IdAlumno left join"
-                    + " aca_AnioLectivo_Curso_Paralelo as cp on b.IdEmpresa = cp.IdEmpresa and b.IdAnio = cp.IdAnio and b.IdSede = cp.IdSede and b.IdNivel = cp.IdNivel and b.IdJornada = cp.IdJornada and b.IdCurso = cp.IdCurso and b.IdParalelo = cp.IdParalelo left join"
+                    + " aca_AnioLectivo_Curso_Paralelo as cp WITH (nolock) on b.IdEmpresa = cp.IdEmpresa and b.IdAnio = cp.IdAnio and b.IdSede = cp.IdSede and b.IdNivel = cp.IdNivel and b.IdJornada = cp.IdJornada and b.IdCurso = cp.IdCurso and b.IdParalelo = cp.IdParalelo left join"
                     + " aca_AnioLectivo_Jornada_Curso as jc on b.IdEmpresa = jc.IdEmpresa and b.IdAnio = jc.IdAnio and b.IdSede = jc.IdSede and b.IdNivel = jc.IdNivel and b.IdJornada = jc.IdJornada and b.IdCurso = jc.IdCurso left join"
-                    + " aca_AnioLectivo_NivelAcademico_Jornada as nj on nj.IdEmpresa = b.IdEmpresa and nj.IdAnio = b.IdAnio and nj.IdSede = b.IdSede and nj.IdNivel = b.IdNivel and nj.IdJornada = b.IdJornada left join"
-                    + " aca_AnioLectivo_Sede_NivelAcademico as sn on sn.IdEmpresa = b.IdEmpresa and sn.IdAnio = b.IdAnio and sn.IdSede = b.IdSede and sn.IdNivel = b.IdNivel left join"
-                    + " aca_Familia as fr on fr.IdEmpresa = a.IdEmpresa and fr.IdAlumno = a.IdAlumno and fr.EsRepresentante = 1 left join"
-                    + " tb_persona as pfr on pfr.IdPersona = fr.IdPersona left join"
-                    + " aca_Familia as fc on fc.IdEmpresa = a.IdEmpresa and fc.IdAlumno = a.IdAlumno and fc.SeFactura = 1 left join"
-                    + " tb_persona as pfc on pfc.IdPersona = fc.IdPersona LEFT JOIN"
-                    + " aca_Plantilla as p on b.IdEmpresa = p.IdEmpresa and b.IdPlantilla = p.IdPlantilla left join"
-                    + " aca_PlantillaTipo as pt on pt.IdEmpresa = p.IdEmpresa and pt.IdTipoPlantilla = p.IdTipoPlantilla"
+                    + " aca_AnioLectivo_NivelAcademico_Jornada as nj WITH (nolock) on nj.IdEmpresa = b.IdEmpresa and nj.IdAnio = b.IdAnio and nj.IdSede = b.IdSede and nj.IdNivel = b.IdNivel and nj.IdJornada = b.IdJornada left join"
+                    + " aca_AnioLectivo_Sede_NivelAcademico as sn WITH (nolock) on sn.IdEmpresa = b.IdEmpresa and sn.IdAnio = b.IdAnio and sn.IdSede = b.IdSede and sn.IdNivel = b.IdNivel left join"
+                    + " aca_Familia as fr WITH (nolock) on fr.IdEmpresa = a.IdEmpresa and fr.IdAlumno = a.IdAlumno and fr.EsRepresentante = 1 left join"
+                    + " tb_persona as pfr WITH (nolock) on pfr.IdPersona = fr.IdPersona left join"
+                    + " aca_Familia as fc WITH (nolock) on fc.IdEmpresa = a.IdEmpresa and fc.IdAlumno = a.IdAlumno and fc.SeFactura = 1 left join"
+                    + " tb_persona as pfc WITH (nolock) on pfc.IdPersona = fc.IdPersona LEFT JOIN"
+                    + " aca_Plantilla as p WITH (nolock) on b.IdEmpresa = p.IdEmpresa and b.IdPlantilla = p.IdPlantilla left join"
+                    + " aca_PlantillaTipo as pt WITH (nolock) on pt.IdEmpresa = p.IdEmpresa and pt.IdTipoPlantilla = p.IdTipoPlantilla"
                     + " where a.IdEmpresa = " + IdEmpresa.ToString() + " and d.EnCurso = 1 and not exists("
-                    + " select x1.IdEmpresa from aca_AlumnoRetiro as x1"
+                    + " select x1.IdEmpresa from aca_AlumnoRetiro as x1 WITH (nolock) "
                     + " where x1.IdEmpresa = b.IdEmpresa and x1.IdMatricula = b.IdMatricula and x1.Estado = 1)";
                     #endregion
 
@@ -180,44 +180,6 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    odata.Database.CommandTimeout = 5000;
-                    var lst = odata.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Alumno_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAlumno = q.IdAlumno,
-                            Codigo = q.Codigo,
-                            pe_nombreCompleto = q.NombreAlumno,
-                            pe_cedulaRuc = q.pe_cedulaRuc,
-                            NomRepEconomico = q.NombreEmiteFactura,
-                            correoRepEconomico = q.CorreoEmiteFactura,
-                            CelularEmiteFactura = q.CelularEmiteFactura,
-                            NomRepLegal = q.NombreRepresentante,
-                            CorreoRepLegal =q.CorreoRepresentante,
-                            CelularRepresentante = q.CelularRepresentante,
-                            IdSede= q.IdSede,
-                            IdJornada=q.IdJornada,
-                            IdNivel=q.IdNivel,
-                            IdCurso = q.IdCurso,
-                            IdParalelo = q.IdParalelo,
-                            NomSede = q.NomSede,
-                            NomJornada = q.NomJornada,
-                            NomNivel = q.NomNivel,
-                            NomCurso = q.NomCurso,
-                            NomParalelo = q.NomParalelo,
-                            NomPlantillaTipo = q.NomPlantillaTipo,
-                            TelefonoRepresentante = q.TelefonoRepresentante,
-                            TelefonoEmiteFactura = q.TelefonoEmiteFactura
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -299,50 +261,6 @@ namespace Core.Data.Academico
 
                 List<aca_Alumno_Info> Lista = new List<aca_Alumno_Info>();
 
-                #region Anterior
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    odata.Database.CommandTimeout = 5000;
-                    var lst = odata.vwaca_Alumno_PeriodoActual.Where(q => q.IdEmpresa == IdEmpresa & q.IdAnio == IdAnio && q.IdSede >= IdSedeIni && q.IdSede <= IdSedeFin
-                    && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin
-                    && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin).OrderBy(q=>q.NombreAlumno).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Alumno_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAlumno = q.IdAlumno,
-                            Codigo = q.Codigo,
-                            pe_nombreCompleto = q.NombreAlumno,
-                            pe_cedulaRuc = q.pe_cedulaRuc,
-                            NomRepEconomico = q.NombreEmiteFactura,
-                            correoRepEconomico = q.CorreoEmiteFactura,
-                            CelularEmiteFactura = q.CelularEmiteFactura,
-                            NomRepLegal = q.NombreRepresentante,
-                            CorreoRepLegal = q.CorreoRepresentante,
-                            CelularRepresentante = q.CelularRepresentante,
-                            IdSede = q.IdSede,
-                            IdJornada = q.IdJornada,
-                            IdNivel = q.IdNivel,
-                            IdCurso = q.IdCurso,
-                            IdParalelo = q.IdParalelo,
-                            NomSede = q.NomSede,
-                            NomJornada = q.NomJornada,
-                            NomNivel = q.NomNivel,
-                            NomCurso = q.NomCurso,
-                            NomParalelo = q.NomParalelo,
-                            Saldo = q.Saldo,
-                            SaldoProntoPago = q.SaldoProntoPago,
-                            NomPlantillaTipo = q.NomPlantillaTipo,
-                            TelefonoRepresentante = q.TelefonoRepresentante,
-                            TelefonoEmiteFactura = q.TelefonoEmiteFactura
-                        });
-                    });
-                }*/
-                #endregion
-
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -352,35 +270,35 @@ namespace Core.Data.Academico
                     + " pfc.pe_nombreCompleto NombreFactura, fc.Correo as CorreoEmiteFactura, fr.Celular as CelularRepresentante, fc.Celular as CelularEmiteFactura, fr.Telefono as TelefonoRepresentante, fc.Telefono as TelefonoEmiteFactura,"
                     + " b.IdAnio, b.IdSede, b.IdNivel, b.IdJornada, b.IdCurso, b.IdParalelo,  sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo,"
                     + " isnull(e.Saldo, 0) Saldo, isnull(e.SaldoProntoPago, 0)SaldoProntoPago, isnull(e.CantidadDeudas, 0) CantidadDeudas, pt.NomPlantillaTipo"
-                    + " from aca_Alumno as a inner join"
-                    + " aca_Matricula as b on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno left join"
-                    + " tb_persona as c on a.IdPersona = c.IdPersona inner join"
-                    + " aca_AnioLectivo as d on b.IdEmpresa = d.IdEmpresa and b.IdAnio = d.IdAnio left join"
+                    + " from aca_Alumno as a WITH (nolock) inner join"
+                    + " aca_Matricula as b WITH (nolock) on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno left join"
+                    + " tb_persona as c WITH (nolock) on a.IdPersona = c.IdPersona inner join"
+                    + " aca_AnioLectivo as d WITH (nolock) on b.IdEmpresa = d.IdEmpresa and b.IdAnio = d.IdAnio left join"
                     + " ("
                     + " select az.IdEmpresa, az.IdAlumno, dbo.bankersrounding(sum(az.Saldo), 2) Saldo, sum(az.SaldoProntoPago) SaldoProntoPago, sum(CantidadFacturas) as CantidadDeudas from("
                     + " SELECT ay.IdEmpresa, ay.IdAlumno, sum(ay.Saldo) Saldo, sum(ay.SaldoProntoPago) SaldoProntoPago, count(*) as CantidadFacturas"
                     + " FROM("
                     + " select a1.IdEmpresa, a2.IdAlumno, dbo.bankersrounding(a1.Total - ISNULL(A3.dc_ValorPago, 0), 2) as Saldo,"
                     + " case when a5.FechaProntoPago >= CAST(GETDATE() AS DATE) THEN dbo.bankersrounding(a1.ValorProntoPago - ISNULL(A3.dc_ValorPago, 0), 2) ELSE dbo.bankersrounding(a1.Total - ISNULL(A3.dc_ValorPago, 0), 2) end as SaldoProntoPago"
-                    + " from fa_factura_resumen as a1 inner join"
-                    + " fa_factura as a2 on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdCbteVta = a2.IdCbteVta left join"
+                    + " from fa_factura_resumen as a1 WITH (nolock) inner join"
+                    + " fa_factura as a2 WITH (nolock) on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdCbteVta = a2.IdCbteVta left join"
                     + " ("
                     + " select x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento, sum(x1.dc_ValorPago) dc_ValorPago"
-                    + " from cxc_cobro_det as x1"
+                    + " from cxc_cobro_det as x1 WITH (nolock) "
                     + " where x1.IdEmpresa = "+IdEmpresa.ToString()+" and x1.estado = 'A'"
                     + " group by x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento"
                     + " ) as a3 on a2.IdEmpresa = a3.IdEmpresa and a2.IdSucursal = a3.IdSucursal and a2.IdBodega = a3.IdBodega_Cbte and a2.IdCbteVta = a3.IdCbte_vta_nota and a2.vt_tipoDoc = a3.dc_TipoDocumento left join"
-                    + " aca_Matricula_Rubro as a4 on a2.IdEmpresa = a4.IdEmpresa and a2.IdSucursal = a4.IdSucursal and a2.IdBodega = a4.IdBodega and a2.IdCbteVta = a4.IdCbteVta left join"
-                    + " aca_AnioLectivo_Periodo as a5 on a5.IdEmpresa = a4.IdEmpresa and a5.IdAnio = a4.IdAnio and a5.IdPeriodo = a4.IdPeriodo"
+                    + " aca_Matricula_Rubro as a4 WITH (nolock) on a2.IdEmpresa = a4.IdEmpresa and a2.IdSucursal = a4.IdSucursal and a2.IdBodega = a4.IdBodega and a2.IdCbteVta = a4.IdCbteVta left join"
+                    + " aca_AnioLectivo_Periodo as a5 WITH (nolock) on a5.IdEmpresa = a4.IdEmpresa and a5.IdAnio = a4.IdAnio and a5.IdPeriodo = a4.IdPeriodo"
                     + " where a2.IdEmpresa = " + IdEmpresa.ToString() + " and a2.Estado = 'A' and dbo.BankersRounding(a1.Total - isnull(a3.dc_ValorPago, 0), 2) > 0"
                     + " ) ay group by ay.IdEmpresa, ay.IdAlumno"
                     + " UNION ALL"
                     + " select a1.IdEmpresa, a2.IdAlumno, dbo.bankersrounding(sum(a1.Total) - ISNULL(SUM(A3.dc_ValorPago), 0), 2) as Saldo, dbo.bankersrounding(sum(a1.Total) - ISNULL(SUM(A3.dc_ValorPago), 0), 2), count(*) CantidadFacturas"
                     + " from fa_notaCreDeb_resumen as a1 inner join"
-                    + " fa_notaCreDeb as a2 on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdNota = a2.IdNota left join"
+                    + " fa_notaCreDeb as a2 WITH (nolock) on a1.IdEmpresa = a2.IdEmpresa and a1.IdSucursal = a2.IdSucursal and a1.IdBodega = a2.IdBodega and a1.IdNota = a2.IdNota left join"
                     + " ("
                     + " select x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento, sum(x1.dc_ValorPago) dc_ValorPago"
-                    + " from cxc_cobro_det as x1"
+                    + " from cxc_cobro_det as x1 WITH (nolock) "
                     + " where x1.IdEmpresa = " + IdEmpresa.ToString() + " and x1.estado = 'A'"
                     + " group by x1.IdEmpresa, x1.IdSucursal, x1.IdBodega_Cbte, x1.IdCbte_vta_nota, x1.dc_TipoDocumento"
                     + " ) as a3 on a2.IdEmpresa = a3.IdEmpresa and a2.IdSucursal = a3.IdSucursal and a2.IdBodega = a3.IdBodega_Cbte and a2.IdNota = a3.IdCbte_vta_nota and a2.CodDocumentoTipo = a3.dc_TipoDocumento"
@@ -388,18 +306,18 @@ namespace Core.Data.Academico
                     + " group by a1.IdEmpresa, a2.IdAlumno"
                     + " ) az group by az.IdEmpresa, az.IdAlumno"
                     + " ) as e on a.IdEmpresa = e.IdEmpresa and a.IdAlumno = e.IdAlumno left join"
-                    + " aca_AnioLectivo_Curso_Paralelo as cp on b.IdEmpresa = cp.IdEmpresa and b.IdAnio = cp.IdAnio and b.IdSede = cp.IdSede and b.IdNivel = cp.IdNivel and b.IdJornada = cp.IdJornada and b.IdCurso = cp.IdCurso and b.IdParalelo = cp.IdParalelo left join"
-                    + " aca_AnioLectivo_Jornada_Curso as jc on b.IdEmpresa = jc.IdEmpresa and b.IdAnio = jc.IdAnio and b.IdSede = jc.IdSede and b.IdNivel = jc.IdNivel and b.IdJornada = jc.IdJornada and b.IdCurso = jc.IdCurso left join"
-                    + " aca_AnioLectivo_NivelAcademico_Jornada as nj on nj.IdEmpresa = b.IdEmpresa and nj.IdAnio = b.IdAnio and nj.IdSede = b.IdSede and nj.IdNivel = b.IdNivel and nj.IdJornada = b.IdJornada left join"
-                    + " aca_AnioLectivo_Sede_NivelAcademico as sn on sn.IdEmpresa = b.IdEmpresa and sn.IdAnio = b.IdAnio and sn.IdSede = b.IdSede and sn.IdNivel = b.IdNivel left join"
-                    + " aca_Familia as fr on fr.IdEmpresa = a.IdEmpresa and fr.IdAlumno = a.IdAlumno and fr.EsRepresentante = 1 left join"
-                    + " tb_persona as pfr on pfr.IdPersona = fr.IdPersona left join"
-                    + " aca_Familia as fc on fc.IdEmpresa = a.IdEmpresa and fc.IdAlumno = a.IdAlumno and fc.SeFactura = 1 left join"
-                    + " tb_persona as pfc on pfc.IdPersona = fc.IdPersona LEFT JOIN"
-                    +" aca_Plantilla as p on b.IdEmpresa = p.IdEmpresa and b.IdPlantilla = p.IdPlantilla left join"
-                    +" aca_PlantillaTipo as pt on pt.IdEmpresa = p.IdEmpresa and pt.IdTipoPlantilla = p.IdTipoPlantilla"
+                    + " aca_AnioLectivo_Curso_Paralelo as cp WITH (nolock) on b.IdEmpresa = cp.IdEmpresa and b.IdAnio = cp.IdAnio and b.IdSede = cp.IdSede and b.IdNivel = cp.IdNivel and b.IdJornada = cp.IdJornada and b.IdCurso = cp.IdCurso and b.IdParalelo = cp.IdParalelo left join"
+                    + " aca_AnioLectivo_Jornada_Curso as jc WITH (nolock) on b.IdEmpresa = jc.IdEmpresa and b.IdAnio = jc.IdAnio and b.IdSede = jc.IdSede and b.IdNivel = jc.IdNivel and b.IdJornada = jc.IdJornada and b.IdCurso = jc.IdCurso left join"
+                    + " aca_AnioLectivo_NivelAcademico_Jornada as nj WITH (nolock) on nj.IdEmpresa = b.IdEmpresa and nj.IdAnio = b.IdAnio and nj.IdSede = b.IdSede and nj.IdNivel = b.IdNivel and nj.IdJornada = b.IdJornada left join"
+                    + " aca_AnioLectivo_Sede_NivelAcademico as sn WITH (nolock) on sn.IdEmpresa = b.IdEmpresa and sn.IdAnio = b.IdAnio and sn.IdSede = b.IdSede and sn.IdNivel = b.IdNivel left join"
+                    + " aca_Familia as fr WITH (nolock) on fr.IdEmpresa = a.IdEmpresa and fr.IdAlumno = a.IdAlumno and fr.EsRepresentante = 1 left join"
+                    + " tb_persona as pfr WITH (nolock) on pfr.IdPersona = fr.IdPersona left join"
+                    + " aca_Familia as fc WITH (nolock) on fc.IdEmpresa = a.IdEmpresa and fc.IdAlumno = a.IdAlumno and fc.SeFactura = 1 left join"
+                    + " tb_persona as pfc WITH (nolock) on pfc.IdPersona = fc.IdPersona LEFT JOIN"
+                    + " aca_Plantilla as p WITH (nolock) on b.IdEmpresa = p.IdEmpresa and b.IdPlantilla = p.IdPlantilla left join"
+                    + " aca_PlantillaTipo as pt WITH (nolock) on pt.IdEmpresa = p.IdEmpresa and pt.IdTipoPlantilla = p.IdTipoPlantilla"
                     + " where a.IdEmpresa = "+IdEmpresa.ToString()+" and d.EnCurso = 1 and not exists("
-                    + " select x1.IdEmpresa from aca_AlumnoRetiro as x1"
+                    + " select x1.IdEmpresa from aca_AlumnoRetiro as x1 WITH (nolock) "
                     + " where x1.IdEmpresa = b.IdEmpresa and x1.IdMatricula = b.IdMatricula and x1.Estado = 1)"
                     + " and b.IdSede between " + IdSedeIni.ToString() + " and " + IdSedeFin.ToString() + " and b.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString() + " and b.IdJornada between " + IdJornadaIni.ToString() + " and " + IdJornadaFin.ToString() + " and b.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString() + " and b.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString();
                     #endregion
@@ -468,20 +386,20 @@ namespace Core.Data.Academico
                     + " fc.Celular as CelularEmiteFactura, fr.Telefono as TelefonoRepresentante, fc.Telefono as TelefonoEmiteFactura, b.IdAnio, b.IdSede, b.IdNivel, "
                     + " b.IdJornada, b.IdCurso, b.IdParalelo,  sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, "
                     + " cp.NomParalelo, cp.OrdenParalelo, pt.NomPlantillaTipo, d.Descripcion "
-                    + " from aca_Alumno as a inner join aca_Matricula as b on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno "
-                    + " left join tb_persona as c on a.IdPersona = c.IdPersona inner join aca_AnioLectivo as d on b.IdEmpresa = d.IdEmpresa and b.IdAnio = d.IdAnio "
-                    + " left join aca_AnioLectivo_Curso_Paralelo as cp on b.IdEmpresa = cp.IdEmpresa and b.IdAnio = cp.IdAnio and b.IdSede = cp.IdSede and b.IdNivel = cp.IdNivel "
+                    + " from aca_Alumno as a WITH (nolock) inner join aca_Matricula as b WITH (nolock) on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno "
+                    + " left join tb_persona as c WITH (nolock) on a.IdPersona = c.IdPersona inner join aca_AnioLectivo as d on b.IdEmpresa = d.IdEmpresa and b.IdAnio = d.IdAnio "
+                    + " left join aca_AnioLectivo_Curso_Paralelo as cp WITH (nolock) on b.IdEmpresa = cp.IdEmpresa and b.IdAnio = cp.IdAnio and b.IdSede = cp.IdSede and b.IdNivel = cp.IdNivel "
                     + " and b.IdJornada = cp.IdJornada and b.IdCurso = cp.IdCurso and b.IdParalelo = cp.IdParalelo "
-                    + " left join aca_AnioLectivo_Jornada_Curso as jc on b.IdEmpresa = jc.IdEmpresa and b.IdAnio = jc.IdAnio and b.IdSede = jc.IdSede and b.IdNivel = jc.IdNivel "
+                    + " left join aca_AnioLectivo_Jornada_Curso as jc WITH (nolock) on b.IdEmpresa = jc.IdEmpresa and b.IdAnio = jc.IdAnio and b.IdSede = jc.IdSede and b.IdNivel = jc.IdNivel "
                     + " and b.IdJornada = jc.IdJornada and b.IdCurso = jc.IdCurso "
-                    + " left join aca_AnioLectivo_NivelAcademico_Jornada as nj on nj.IdEmpresa = b.IdEmpresa and nj.IdAnio = b.IdAnio and nj.IdSede = b.IdSede "
+                    + " left join aca_AnioLectivo_NivelAcademico_Jornada as nj WITH (nolock) on nj.IdEmpresa = b.IdEmpresa and nj.IdAnio = b.IdAnio and nj.IdSede = b.IdSede "
                     + " and nj.IdNivel = b.IdNivel and nj.IdJornada = b.IdJornada "
-                    + " left join aca_AnioLectivo_Sede_NivelAcademico as sn on sn.IdEmpresa = b.IdEmpresa and sn.IdAnio = b.IdAnio and sn.IdSede = b.IdSede "
-                    + " and sn.IdNivel = b.IdNivel left join aca_Familia as fr on fr.IdEmpresa = a.IdEmpresa and fr.IdAlumno = a.IdAlumno and fr.EsRepresentante = 1 "
-                    + " left join tb_persona as pfr on pfr.IdPersona = fr.IdPersona left join aca_Familia as fc on fc.IdEmpresa = a.IdEmpresa and fc.IdAlumno = a.IdAlumno "
-                    + " and fc.SeFactura = 1 left join tb_persona as pfc on pfc.IdPersona = fc.IdPersona "
-                    + " LEFT JOIN aca_Plantilla as p on b.IdEmpresa = p.IdEmpresa and b.IdPlantilla = p.IdPlantilla "
-                    + " left join aca_PlantillaTipo as pt on pt.IdEmpresa = p.IdEmpresa and pt.IdTipoPlantilla = p.IdTipoPlantilla "
+                    + " left join aca_AnioLectivo_Sede_NivelAcademico as sn WITH (nolock) on sn.IdEmpresa = b.IdEmpresa and sn.IdAnio = b.IdAnio and sn.IdSede = b.IdSede "
+                    + " and sn.IdNivel = b.IdNivel left join aca_Familia as fr WITH (nolock) on fr.IdEmpresa = a.IdEmpresa and fr.IdAlumno = a.IdAlumno and fr.EsRepresentante = 1 "
+                    + " left join tb_persona as pfr WITH (nolock) on pfr.IdPersona = fr.IdPersona left join aca_Familia as fc on fc.IdEmpresa = a.IdEmpresa and fc.IdAlumno = a.IdAlumno "
+                    + " and fc.SeFactura = 1 left join tb_persona as pfc WITH (nolock) on pfc.IdPersona = fc.IdPersona "
+                    + " LEFT JOIN aca_Plantilla as p WITH (nolock) on b.IdEmpresa = p.IdEmpresa and b.IdPlantilla = p.IdPlantilla "
+                    + " left join aca_PlantillaTipo as pt WITH (nolock) on pt.IdEmpresa = p.IdEmpresa and pt.IdTipoPlantilla = p.IdTipoPlantilla "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
                     + " and a.IdAlumno = " + IdAlumno.ToString();
                     //+ " and not exists(select x1.IdEmpresa from aca_AlumnoRetiro as x1 where x1.IdEmpresa = b.IdEmpresa and x1.IdMatricula = b.IdMatricula and x1.Estado = 1) ";
@@ -545,10 +463,10 @@ namespace Core.Data.Academico
                     command.CommandText = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
                     + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, cm.NomCatalogo AS NomCatalogoESTMAT, "
                     + " c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, p.AsisteCentroCristiano, p.IdGrupoEtnico, a.Dificultad_Escritura, a.Dificultad_Lectura, a.Dificultad_Matematicas, a.Celular "
-                    + " FROM dbo.aca_Alumno AS a INNER JOIN "
-                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS cm ON a.IdCatalogoESTMAT = cm.IdCatalogo "
+                    + " FROM dbo.aca_Alumno AS a WITH (nolock) INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS cm WITH (nolock) ON a.IdCatalogoESTMAT = cm.IdCatalogo "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + "and a.IdAlumno = " + IdAlumno.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -603,52 +521,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_Alumno_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        pe_nombre = Entity.pe_nombre,
-                        pe_apellido = Entity.pe_apellido,
-                        pe_nombreCompleto = Entity.pe_nombreCompleto,
-                        IdAlumno = Entity.IdAlumno,
-                        IdPersona = Entity.IdPersona,
-                        IdCatalogoESTALU = Entity.IdCatalogoESTALU,
-                        IdCatalogoESTMAT = Entity.IdCatalogoESTMAT,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
-                        IdTipoDocumento = Entity.IdTipoDocumento,
-                        pe_Naturaleza = Entity.pe_Naturaleza,
-                        pe_cedulaRuc = Entity.pe_cedulaRuc,
-                        Codigo = Entity.Codigo,
-                        Estado = Entity.Estado,
-                        Correo = Entity.Correo,
-                        Direccion = Entity.Direccion,
-                        Celular = Entity.Celular,
-                        pe_sexo = Entity.pe_sexo,
-                        FechaIngreso = Entity.FechaIngreso,
-                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
-                        CodCatalogoSangre = Entity.CodCatalogoSangre,
-                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
-                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
-                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        IdPais = Entity.IdPais,
-                        Cod_Region = Entity.Cod_Region,
-                        IdProvincia = Entity.IdProvincia,
-                        IdCiudad = Entity.IdCiudad,
-                        IdParroquia = Entity.IdParroquia,
-                        Sector = Entity.Sector,
-                        LugarNacimiento = Entity.LugarNacimiento,
-                        IdReligion = Entity.IdReligion,
-                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
-                        IdGrupoEtnico = Entity.IdGrupoEtnico
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

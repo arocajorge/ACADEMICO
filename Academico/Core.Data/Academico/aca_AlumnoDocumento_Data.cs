@@ -22,8 +22,8 @@ namespace Core.Data.Academico
 
                     #region Query
                     string query = "SELECT ad.IdEmpresa, ad.IdAlumno, ad.IdDocumento, d.NomDocumento, ad.EnArchivo, d.OrdenDocumento, ad.Secuencia "
-                    + " FROM dbo.aca_AlumnoDocumento AS ad INNER JOIN "
-                    + " dbo.aca_Documento AS d ON ad.IdEmpresa = d.IdEmpresa AND ad.IdDocumento = d.IdDocumento "
+                    + " FROM dbo.aca_AlumnoDocumento AS ad WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Documento AS d WITH (nolock) ON ad.IdEmpresa = d.IdEmpresa AND ad.IdDocumento = d.IdDocumento "
                     + " WHERE ad.IdEmpresa = " + IdEmpresa.ToString() + " and ad.IdAlumno = " + IdAlumno.ToString();
                     if (MostrarEnArchivo == true)
                     {
@@ -49,20 +49,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    Lista = Context.vwaca_AlumnoDocumento.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.EnArchivo == (MostrarEnArchivo ? true : q.EnArchivo)).Select(q => new aca_AlumnoDocumento_Info
-                    {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAlumno = q.IdAlumno,
-                        IdDocumento = q.IdDocumento,
-                        Secuencia = q.Secuencia,
-                        EnArchivo = q.EnArchivo,
-                        NomDocumento = q.NomDocumento
-                    }).ToList();
-                }
-                */
+
                 return Lista;
             }
             catch (Exception)
@@ -82,8 +69,8 @@ namespace Core.Data.Academico
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT ad.IdEmpresa, ad.IdAlumno, ad.IdDocumento, d.NomDocumento, ad.EnArchivo, d.OrdenDocumento, ad.Secuencia "
-                    + " FROM dbo.aca_AlumnoDocumento AS ad INNER JOIN "
-                    + " dbo.aca_Documento AS d ON ad.IdEmpresa = d.IdEmpresa AND ad.IdDocumento = d.IdDocumento "
+                    + " FROM dbo.aca_AlumnoDocumento AS ad WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Documento AS d WITH (nolock) ON ad.IdEmpresa = d.IdEmpresa AND ad.IdDocumento = d.IdDocumento "
                     + " WHERE ad.IdEmpresa = " + IdEmpresa.ToString() + " and ad.IdAlumno = " + IdAlumno.ToString() + " and ad.IdDocumento = " + IdDocumento.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -105,24 +92,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    var Entity = Context.vwaca_AlumnoDocumento.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdDocumento == IdDocumento).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AlumnoDocumento_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAlumno = Entity.IdAlumno,
-                        IdDocumento = Entity.IdDocumento,
-                        Secuencia = Entity.Secuencia,
-                        EnArchivo = Entity.EnArchivo,
-                        NomDocumento = Entity.NomDocumento
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

@@ -20,8 +20,8 @@ namespace Core.Data.Base
         public Nullable<int> OrdenNivel { get; set; }
         public string NomJornada { get; set; }
         public Nullable<int> OrdenJornada { get; set; }
-        public Nullable<int> OrdenCurso { get; set; }
         public string NomCurso { get; set; }
+        public Nullable<int> OrdenCurso { get; set; }
         public string CodigoParalelo { get; set; }
         public string NomParalelo { get; set; }
         public Nullable<int> OrdenParalelo { get; set; }
@@ -37,10 +37,10 @@ namespace Core.Data.Base
         public int IdParalelo { get; set; }
         public System.DateTime Fecha { get; set; }
         public string NomPlantilla { get; set; }
-        public int IdPlantilla { get; set; }
+        public Nullable<int> IdPlantilla { get; set; }
         public string Descripcion { get; set; }
-        public string pe_nombreCompleto { get; set; }
         public string CodigoAlumno { get; set; }
+        public string pe_nombreCompleto { get; set; }
         public Nullable<int> IdTipoPlantilla { get; set; }
         public string NomPlantillaTipo { get; set; }
         public Nullable<decimal> IdRetiro { get; set; }

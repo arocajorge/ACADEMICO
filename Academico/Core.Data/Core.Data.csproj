@@ -483,6 +483,9 @@
     <Compile Include="Base\VWACA_009.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\VWACA_010.cs">
+      <DependentUpon>ModelReportes.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWACA_011.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>

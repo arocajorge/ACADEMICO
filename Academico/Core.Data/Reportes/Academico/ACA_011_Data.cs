@@ -77,7 +77,12 @@ namespace Core.Data.Reportes.Academico
                             ExamenSupletorio = q.ExamenSupletorio,
                             ExamenRemedial = q.ExamenRemedial,
                             ExamenGracia = q.ExamenGracia,
-                            PromedioFinal = q.PromedioFinal
+                            PromedioFinal = q.PromedioFinal,
+                            FaltaInjustificada=q.FaltaInjustificada,
+                            FaltaJustificada=q.FaltaJustificada,
+                            CondFinal=q.CondFinal,
+                            CondQ1=q.CondQ1,
+                            CondQ2=q.CondQ2
                         });
                     });
                 }
