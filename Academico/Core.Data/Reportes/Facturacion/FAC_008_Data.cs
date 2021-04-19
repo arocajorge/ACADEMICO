@@ -1,4 +1,4 @@
-﻿using Core.Erp.Info.Reportes.Facturacion;
+﻿using Core.Info.Reportes.Facturacion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Core.Data.Base;
 
-namespace Core.Erp.Data.Reportes.Facturacion
+namespace Core.Data.Reportes.Facturacion
 {
     public class FAC_008_Data
     {

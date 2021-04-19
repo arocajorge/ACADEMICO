@@ -1,5 +1,6 @@
 ﻿using Core.Data.CuentasPorCobrar;
 using Core.Info.CuentasPorCobrar;
+using System;
 using System.Collections.Generic;
 
 namespace Core.Bus.CuentasPorCobrar
@@ -75,6 +76,19 @@ namespace Core.Bus.CuentasPorCobrar
             try
             {
                 return odata.get_list_AP(IdEmpresa, IdAlumno);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<cxc_cobro_det_Info> GetListCobrosSinAplicarNC(int IdEmpresa, DateTime FechIni, DateTime FechaFin)
+        {
+            try
+            {
+                return odata.GetListCobrosSinAplicarNC(IdEmpresa, FechIni, FechaFin);
             }
             catch (System.Exception)
             {

@@ -1138,7 +1138,14 @@ namespace Core.Data.CuentasPorCobrar
                         }
                     }
 
-                    
+
+                }
+                else
+                {
+                    var ND = dbFac.fa_notaCreDeb.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega_Cbte && q.IdNota == info.IdCbte_vta_nota).FirstOrDefault();
+                    if (ND == null)
+                        return null;
+                    info.IdPuntoVta = ND.IdPuntoVta;
                 }
 
                 var TipoNota = dbFac.fa_TipoNota.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == paramCxc.IdTipoNotaProntoPago).FirstOrDefault();
@@ -1774,6 +1781,27 @@ namespace Core.Data.CuentasPorCobrar
 
                 throw;
             }
+        }
+
+        public bool ReProcesarDet(cxc_cobro_det_Info item)
+        {
+            var NotaCredito = ArmarNotaCredito(item);
+            if (NotaCredito != null)
+            {
+                if (DataNotaCredito.guardarDB(NotaCredito))
+                {
+                    item.IdNotaCredito = NotaCredito.IdNota;
+                    using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand();
+                        command.Connection = connection;
+                        command.CommandText = "update cxc_cobro_det set IdNotaCredito = "+item.IdNotaCredito.ToString()+" where IdEmpresa = "+item.IdEmpresa.ToString()+" and IdCobro = "+item.IdCobro.ToString()+" and secuencial = "+item.secuencial.ToString();
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            return true;
         }
     }
 }

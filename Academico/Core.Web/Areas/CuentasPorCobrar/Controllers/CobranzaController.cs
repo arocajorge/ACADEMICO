@@ -1034,6 +1034,12 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             List<cxc_cobro_det_Info> list = get_list(IdTransaccionSession);
             list.Remove(list.Where(m => m.secuencia == secuencia).FirstOrDefault());
         }
+
+        public cxc_cobro_det_Info GetRow(string secuencia, decimal IdTransaccionSession)
+        {
+            List<cxc_cobro_det_Info> list = get_list(IdTransaccionSession);
+            return list.Where(m => m.secuencia == secuencia).FirstOrDefault();
+        }
     }
 
     public class cxc_cobro_det_x_cruzar_List

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Erp.Info.Reportes.Facturacion
+namespace Core.Info.Reportes.Facturacion
 {
     public class FAC_008_Info
     {

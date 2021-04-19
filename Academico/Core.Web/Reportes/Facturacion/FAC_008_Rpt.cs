@@ -3,12 +3,12 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
-using Core.Erp.Bus.Reportes.Facturacion;
+using Core.Bus.Reportes.Facturacion;
 using System.Collections.Generic;
-using Core.Erp.Info.Reportes.Facturacion;
+using Core.Info.Reportes.Facturacion;
 using Core.Bus.General;
 
-namespace Core.Erp.Web.Reportes.Facturacion
+namespace Core.Web.Reportes.Facturacion
 {
     public partial class FAC_008_Rpt : DevExpress.XtraReports.UI.XtraReport
     {

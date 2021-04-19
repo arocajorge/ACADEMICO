@@ -20,7 +20,7 @@
         settings.Properties.FilterMinLength = 3;
 
     })
-    .BindList(new Core.Erp.Web.Areas.Reportes.Controllers.ContabilidadReportesController().get_list_bajo_demanda_cta, new Core.Erp.Web.Areas.Reportes.Controllers.ContabilidadReportesController().get_info_bajo_demanda_cta)
+    .BindList(new Core.Web.Areas.Reportes.Controllers.ContabilidadReportesController().get_list_bajo_demanda_cta, new Core.Web.Areas.Reportes.Controllers.ContabilidadReportesController().get_info_bajo_demanda_cta)
     .Bind(Model.IdCtaCbleFin);
 
 }

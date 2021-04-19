@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
-namespace Core.Erp.Web.Reportes.Facturacion
+namespace Core.Web.Reportes.Facturacion
 {
     public partial class FAC_006_Rpt : DevExpress.XtraReports.UI.XtraReport
     {

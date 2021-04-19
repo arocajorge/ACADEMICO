@@ -146,7 +146,7 @@ namespace Core.Web.Areas.Academico.Controllers
             Ensamblado = Assembly.GetExecutingAssembly();
 
             Object ObjFrm;
-            Type tipo = Ensamblado.GetType("Core.Erp.Web.Reportes." + Reporte);
+            Type tipo = Ensamblado.GetType("Core.Web.Reportes." + Reporte);
 
             AssemblyName assemName = Ensamblado.GetName();
 

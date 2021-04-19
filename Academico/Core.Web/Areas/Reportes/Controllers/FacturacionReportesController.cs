@@ -2,7 +2,7 @@
 using Core.Bus.Facturacion;
 using Core.Bus.General;
 using Core.Bus.Inventario;
-using Core.Erp.Web.Reportes.Facturacion;
+using Core.Web.Reportes.Facturacion;
 using Core.Info.Academico;
 using Core.Info.Facturacion;
 using Core.Info.General;
@@ -10,7 +10,6 @@ using Core.Info.Helps;
 using Core.Info.Inventario;
 using Core.Info.Reportes.Facturacion;
 using Core.Web.Helps;
-using Core.Web.Reportes.Facturacion;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;

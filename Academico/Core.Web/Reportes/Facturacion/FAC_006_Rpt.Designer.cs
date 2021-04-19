@@ -1,4 +1,4 @@
-﻿namespace Core.Erp.Web.Reportes.Facturacion
+﻿namespace Core.Web.Reportes.Facturacion
 {
     partial class FAC_006_Rpt
     {

@@ -12,6 +12,7 @@
     var selectedIDsFactura;
     var selectedIDsNota;
     var selectedIDsCobro;
+    var selectedIDsCobroDet;
     var selectedIDsConciliacionNC;
 
     function OnBeginCallbackFactura(s, e) {
@@ -39,6 +40,19 @@
     function GetSelectedFieldValuesCallbackNota(values) {
         //Capture all selected keys
         selectedIDsNota = values.join(',');
+    }
+
+    function OnBeginCallbackCobroDet(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDsCobroDet"] = selectedIDsCobroDet;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChangedCobroDet(s, e) {
+        s.GetSelectedFieldValues("secuencia", GetSelectedFieldValuesCallbackCobroDet);
+    }
+    function GetSelectedFieldValuesCallbackCobroDet(values) {
+        //Capture all selected keys
+        selectedIDsCobroDet = values.join(',');
     }
 
 
@@ -135,6 +149,30 @@
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
                    $("#myform").submit();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function GenerarNCProntoPago() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            Ids: selectedIDsCobroDet,
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+        }
+
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GenerarNCProntoPago", "AuditoriaContable", new { Area = "Contabilidad" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                $("#myform").submit();
             },
             error: function (error) {
             }
@@ -258,6 +296,9 @@
                     <li>
                         <a href="#tabConciliacion" aria-controls="Conciliacion" role="tab" data-toggle="tab">Conciliación NC</a>
                     </li>
+                    <li>
+                        <a href="#tabCobroDet" aria-controls="Conciliacion" role="tab" data-toggle="tab">Generación NC pronto pago</a>
+                    </li>
                 </ul>
                 <div class="tab-content" style="padding-top: 20px">
                     <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tabContaFactura">
@@ -360,6 +401,33 @@
                             </div>
                         </div>
                     </div>
+
+                    <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tabCobroDet">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for=""></label>
+                                        <div class="input-group">
+                                            <button type="button" title="Generar NC Pronto pago" class="btn btn-primary" id="btn_contabilizar" onclick="GenerarNCProntoPago();">
+                                                <i class="fa fa-refresh"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        @Html.Action("GridViewPartial_ValidarCobroDet")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

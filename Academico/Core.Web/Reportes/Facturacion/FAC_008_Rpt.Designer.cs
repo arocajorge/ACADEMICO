@@ -1,4 +1,4 @@
-﻿namespace Core.Erp.Web.Reportes.Facturacion
+﻿namespace Core.Web.Reportes.Facturacion
 {
     partial class FAC_008_Rpt
     {
@@ -1586,7 +1586,7 @@
             // 
             // objectDataSource1
             // 
-            this.objectDataSource1.DataSource = typeof(Core.Erp.Info.Reportes.Facturacion.FAC_008_Info);
+            this.objectDataSource1.DataSource = typeof(Core.Info.Reportes.Facturacion.FAC_008_Info);
             this.objectDataSource1.Name = "objectDataSource1";
             // 
             // FAC_008_Rpt

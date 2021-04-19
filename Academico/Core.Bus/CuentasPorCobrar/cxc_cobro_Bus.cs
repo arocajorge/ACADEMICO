@@ -208,5 +208,18 @@ namespace Core.Bus.CuentasPorCobrar
                 throw;
             }
         }
+
+        public bool ReProcesarDet(cxc_cobro_det_Info item)
+        {
+            try
+            {
+                return odata.ReProcesarDet(item);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

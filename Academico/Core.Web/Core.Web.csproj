@@ -9814,6 +9814,7 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_AnioParcial.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbSedeParcial.cshtml" />
+    <Content Include="Areas\Contabilidad\Views\AuditoriaContable\_GridViewPartial_ValidarCobroDet.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

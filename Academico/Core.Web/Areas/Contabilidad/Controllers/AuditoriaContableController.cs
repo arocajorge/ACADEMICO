@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core.Web.Controllers;
+using Core.Web.Areas.CuentasPorCobrar.Controllers;
 
 namespace Core.Web.Areas.Contabilidad.Controllers
 {
@@ -29,6 +31,8 @@ namespace Core.Web.Areas.Contabilidad.Controllers
         ct_ContabilizacionCobros_List ListaContaCobro = new ct_ContabilizacionCobros_List();
         ct_ContabilizacionNotas_List ListaContaNota = new ct_ContabilizacionNotas_List();
         ct_ContabilizacionConciliacionNC_List ListaContaConciliacion = new ct_ContabilizacionConciliacionNC_List();
+        cxc_cobro_det_List ListaCobroDet = new cxc_cobro_det_List();
+        cxc_cobro_det_Bus busCobroDet = new cxc_cobro_det_Bus();
         string mensaje = string.Empty;
         #endregion
 
@@ -52,6 +56,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             ListaContaNota.set_list(busContaNota.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             ListaContaCobro.set_list(busContaCobro.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             ListaContaConciliacion.set_list(bus_ContaConciliacionNC.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
+            ListaCobroDet.set_list(busCobroDet.GetListCobrosSinAplicarNC(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             return View(model);
         }
 
@@ -63,6 +68,7 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             ListaContaNota.set_list(busContaNota.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             ListaContaCobro.set_list(busContaCobro.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             ListaContaConciliacion.set_list(bus_ContaConciliacionNC.GetList(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
+            ListaCobroDet.set_list(busCobroDet.GetListCobrosSinAplicarNC(model.IdEmpresa, model.fecha_ini, model.fecha_fin), model.IdTransaccionSession);
             return View(model);
         }
         #endregion
@@ -94,6 +100,16 @@ namespace Core.Web.Areas.Contabilidad.Controllers
             SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
             var model = ListaContaCobro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return PartialView("_GridViewPartial_ContaCobro", model);
+        }
+        #endregion
+
+        #region Cobro Det
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_ValidarCobroDet()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            var model = ListaCobroDet.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_ValidarCobroDet", model);
         }
         #endregion
 
@@ -203,6 +219,28 @@ namespace Core.Web.Areas.Contabilidad.Controllers
                     if (!busConciNC.Contabilizar(IdEmpresa, IdConciliacion,SessionFixed.IdUsuario))
                     {
                         mensaje = "No se ha contabilizado la conciliacionc  # " + IdConciliacion.ToString();
+                        ViewBag.mensaje = mensaje;
+                        resultado = mensaje;
+                    }
+                }
+            }
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GenerarNCProntoPago(int IdEmpresa = 0, string Ids = "", decimal IdTransaccionSession = 0)
+        {
+            var resultado = "";
+            string[] array = Ids.Split(',');
+
+            if (Ids != "")
+            {
+                foreach (var item in array)
+                {
+                    var cobro = ListaCobroDet.GetRow(item, IdTransaccionSession);
+                    if (!busCobro.ReProcesarDet(cobro))
+                    {
+                        mensaje = "No se ha podido generar la NC por pronto pago " + cobro.IdCobro.ToString();
                         ViewBag.mensaje = mensaje;
                         resultado = mensaje;
                     }
