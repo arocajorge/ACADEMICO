@@ -21,7 +21,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_Jornada j "
+                    string query = "SELECT * FROM aca_Jornada j WITH (nolock) "
                     + " WHERE j.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -46,24 +46,6 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.OrdenJornada).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Jornada_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdJornada = q.IdJornada,
-                            NomJornada = q.NomJornada,
-                            OrdenJornada = q.OrdenJornada,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
 
                 return Lista;
             }
@@ -142,7 +124,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT* FROM aca_Jornada j "
+                    command.CommandText = "SELECT* FROM aca_Jornada j WITH (nolock) "
                    + " WHERE j.IdEmpresa = " + IdEmpresa.ToString() + " and j.IdJornada = " + IdJornada.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -163,23 +145,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.IdJornada == IdJornada).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_Jornada_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdJornada = Entity.IdJornada,
-                        NomJornada = Entity.NomJornada,
-                        OrdenJornada = Entity.OrdenJornada,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

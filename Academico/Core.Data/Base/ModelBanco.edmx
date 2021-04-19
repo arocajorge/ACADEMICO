@@ -1473,23 +1473,7 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBERP_LICEOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="cp_conciliacion_Caja_det_Ing_Caja">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdConciliacion_Caja" />
-            <PropertyRef Name="secuencia" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdConciliacion_Caja" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpresa_movcaj" Type="Int32" Nullable="false" />
-          <Property Name="IdCbteCble_movcaj" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdTipocbte_movcaj" Type="Int32" Nullable="false" />
-          <Property Name="valor_aplicado" Type="Double" Nullable="false" />
-          <Property Name="valor_disponible" Type="Double" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="EntitiesBanco" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cp_conciliacion_Caja_det_Ing_Caja" EntityType="Self.cp_conciliacion_Caja_det_Ing_Caja" />
           <EntitySet Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" EntityType="DBERP_LICEOModel.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito" />
           <EntitySet Name="ba_Banco_Cuenta" EntityType="DBERP_LICEOModel.ba_Banco_Cuenta" />
           <EntitySet Name="ba_Banco_Cuenta_x_tb_sucursal" EntityType="DBERP_LICEOModel.ba_Banco_Cuenta_x_tb_sucursal" />
@@ -1601,7 +1585,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <EntitySet Name="ba_Archivo_Transferencia" EntityType="DBERP_LICEOModel.ba_Archivo_Transferencia" />
           <EntitySet Name="ba_Archivo_Transferencia_Det" EntityType="DBERP_LICEOModel.ba_Archivo_Transferencia_Det" />
           <EntitySet Name="ba_archivo_transferencia_x_ba_tipo_flujo" EntityType="DBERP_LICEOModel.ba_archivo_transferencia_x_ba_tipo_flujo" />
-          <EntitySet Name="vwba_Archivo_Transferencia_Det" EntityType="DBERP_LICEOModel.vwba_Archivo_Transferencia_Det" />
           <AssociationSet Name="FK_ba_Archivo_Transferencia_ba_Banco_Cuenta" Association="DBERP_LICEOModel.FK_ba_Archivo_Transferencia_ba_Banco_Cuenta">
             <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
             <End Role="ba_Archivo_Transferencia" EntitySet="ba_Archivo_Transferencia" />
@@ -1624,11 +1607,13 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
             <End Role="ba_Banco_Cuenta" EntitySet="ba_Banco_Cuenta" />
             <End Role="ba_ArchivoRecaudacion" EntitySet="ba_ArchivoRecaudacion" />
           </AssociationSet>
-          <EntitySet Name="vwba_ArchivoRecaudacionDet_Saldos" EntityType="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet_Saldos" />
           <EntitySet Name="ba_ArchivoRecaudacionDet" EntityType="DBERP_LICEOModel.ba_ArchivoRecaudacionDet" />
-          <EntitySet Name="vwba_ArchivoRecaudacionDet" EntityType="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet" />
-          <EntitySet Name="vwba_ArchivoRecaudacion_Archivo" EntityType="DBERP_LICEOModel.vwba_ArchivoRecaudacion_Archivo" />
           <EntitySet Name="ba_parametros" EntityType="DBERP_LICEOModel.ba_parametros" />
+          <EntitySet Name="vwba_ArchivoRecaudacion_Archivo" EntityType="DBERP_LICEOModel.vwba_ArchivoRecaudacion_Archivo" />
+          <EntitySet Name="vwba_ArchivoRecaudacionDet" EntityType="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet" />
+          <EntitySet Name="vwba_ArchivoRecaudacionDet_Saldos" EntityType="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet_Saldos" />
+          <EntitySet Name="cp_conciliacion_Caja_det_Ing_Caja" EntityType="DBERP_LICEOModel.cp_conciliacion_Caja_det_Ing_Caja" />
+          <EntitySet Name="vwba_Archivo_Transferencia_Det" EntityType="DBERP_LICEOModel.vwba_Archivo_Transferencia_Det" />
         </EntityContainer>
         <EntityType Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
           <Key>
@@ -2502,54 +2487,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <NavigationProperty Name="ba_Archivo_Transferencia" Relationship="DBERP_LICEOModel.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_Archivo_Transferencia" FromRole="ba_archivo_transferencia_x_ba_tipo_flujo" ToRole="ba_Archivo_Transferencia" />
           <NavigationProperty Name="ba_TipoFlujo" Relationship="DBERP_LICEOModel.FK_ba_archivo_transferencia_x_ba_tipo_flujo_ba_TipoFlujo" FromRole="ba_archivo_transferencia_x_ba_tipo_flujo" ToRole="ba_TipoFlujo" />
         </EntityType>
-        <EntityType Name="vwba_Archivo_Transferencia_Det">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdArchivo" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdEmpresa_OP" />
-            <PropertyRef Name="IdOrdenPago" />
-            <PropertyRef Name="Secuencia_OP" />
-            <PropertyRef Name="Estado" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="Secuencial_reg_x_proceso" />
-            <PropertyRef Name="IdTipoDocumento" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="CodigoLegalBanco" />
-            <PropertyRef Name="IdTipo_Persona" />
-            <PropertyRef Name="IdPersona" />
-            <PropertyRef Name="IdEntidad" />
-            <PropertyRef Name="cb_Fecha" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdEmpresa_OP" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia_OP" Type="Int32" Nullable="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="Secuencial_reg_x_proceso" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdTipoCta_acreditacion_cat" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="num_cta_acreditacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdBanco_acreditacion" Type="Int32" />
-          <Property Name="pr_direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="pr_correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoLegalBanco" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Referencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipo_Persona" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="IdEntidad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdCtaCble_Acreedora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="pc_Cuenta" Type="String" MaxLength="523" FixedLength="false" Unicode="false" />
-          <Property Name="IdEmpresa_cxp" Type="Int32" />
-          <Property Name="IdTipoCbte_cxp" Type="Int32" />
-          <Property Name="IdCbteCble_cxp" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
         <Association Name="FK_ba_Archivo_Transferencia_ba_Banco_Cuenta">
           <End Type="DBERP_LICEOModel.ba_Banco_Cuenta" Role="ba_Banco_Cuenta" Multiplicity="1" />
           <End Type="DBERP_LICEOModel.ba_Archivo_Transferencia" Role="ba_Archivo_Transferencia" Multiplicity="*" />
@@ -2681,21 +2618,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwba_ArchivoRecaudacionDet_Saldos">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdMatricula" />
-            <PropertyRef Name="pe_nombreCompleto" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAlumno" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="CodigoAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Saldo" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="SaldoProntoPago" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="ba_ArchivoRecaudacionDet">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -2712,27 +2634,21 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <Property Name="FechaProceso" Type="DateTime" Precision="3" />
           <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="vwba_ArchivoRecaudacionDet">
+        <EntityType Name="ba_parametros">
           <Key>
             <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdArchivo" />
-            <PropertyRef Name="Secuencia" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="Valor" />
-            <PropertyRef Name="ValorProntoPago" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="IdMatricula" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Valor" Type="Double" Nullable="false" />
-          <Property Name="ValorProntoPago" Type="Double" Nullable="false" />
-          <Property Name="FechaProceso" Type="DateTime" Precision="3" />
-          <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
+          <Property Name="CiudadDefaultParaCrearCheques" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
+          <Property Name="CantidadChequesAlerta" Type="Int32" />
+          <Property Name="PermitirSobreGiro" Type="Boolean" Nullable="false" />
+          <Property Name="ValidarSoloCuentasArchivo" Type="Boolean" Nullable="false" />
+          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaTransac" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
+          <Property Name="DiasTransaccionesAPasado" Type="Int32" />
         </EntityType>
         <EntityType Name="vwba_ArchivoRecaudacion_Archivo">
           <Key>
@@ -2769,21 +2685,105 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
           <Property Name="FechaProceso" Type="DateTime" Precision="3" />
           <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityType Name="ba_parametros">
+        <EntityType Name="vwba_ArchivoRecaudacionDet">
           <Key>
             <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdAlumno" />
+            <PropertyRef Name="pe_nombreCompleto" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="ValorProntoPago" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="CiudadDefaultParaCrearCheques" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="DiasTransaccionesAFuturo" Type="Int32" Nullable="false" />
-          <Property Name="CantidadChequesAlerta" Type="Int32" />
-          <Property Name="PermitirSobreGiro" Type="Boolean" Nullable="false" />
-          <Property Name="ValidarSoloCuentasArchivo" Type="Boolean" Nullable="false" />
-          <Property Name="IdUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaTransac" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioUltMod" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaUltMod" Type="DateTime" Precision="3" />
-          <Property Name="DiasTransaccionesAPasado" Type="Int32" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdMatricula" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="ValorProntoPago" Type="Double" Nullable="false" />
+          <Property Name="FechaProceso" Type="DateTime" Precision="3" />
+          <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="vwba_ArchivoRecaudacionDet_Saldos">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdMatricula" />
+            <PropertyRef Name="pe_nombreCompleto" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdAlumno" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IdMatricula" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CodigoAlumno" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Saldo" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SaldoProntoPago" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="FechaProntoPago" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="cp_conciliacion_Caja_det_Ing_Caja">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdConciliacion_Caja" />
+            <PropertyRef Name="secuencia" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdConciliacion_Caja" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_movcaj" Type="Int32" Nullable="false" />
+          <Property Name="IdCbteCble_movcaj" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipocbte_movcaj" Type="Int32" Nullable="false" />
+          <Property Name="valor_aplicado" Type="Double" Nullable="false" />
+          <Property Name="valor_disponible" Type="Double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vwba_Archivo_Transferencia_Det">
+          <Key>
+            <PropertyRef Name="IdEmpresa" />
+            <PropertyRef Name="IdArchivo" />
+            <PropertyRef Name="Secuencia" />
+            <PropertyRef Name="IdEmpresa_OP" />
+            <PropertyRef Name="IdOrdenPago" />
+            <PropertyRef Name="Secuencia_OP" />
+            <PropertyRef Name="Estado" />
+            <PropertyRef Name="Valor" />
+            <PropertyRef Name="Secuencial_reg_x_proceso" />
+            <PropertyRef Name="IdTipoDocumento" />
+            <PropertyRef Name="pe_cedulaRuc" />
+            <PropertyRef Name="CodigoLegalBanco" />
+            <PropertyRef Name="IdTipo_Persona" />
+            <PropertyRef Name="IdPersona" />
+            <PropertyRef Name="IdEntidad" />
+            <PropertyRef Name="cb_Fecha" />
+          </Key>
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdArchivo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="IdEmpresa_OP" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdenPago" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Secuencia_OP" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Valor" Type="Double" Nullable="false" />
+          <Property Name="Secuencial_reg_x_proceso" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdTipoCta_acreditacion_cat" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="num_cta_acreditacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdBanco_acreditacion" Type="Int32" />
+          <Property Name="pr_direccion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="pr_correo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pe_nombreCompleto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoLegalBanco" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Referencia" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipo_Persona" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="IdEntidad" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cb_Fecha" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdCtaCble_Acreedora" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="pc_Cuenta" Type="String" MaxLength="523" FixedLength="false" Unicode="false" />
+          <Property Name="IdEmpresa_cxp" Type="Int32" />
+          <Property Name="IdTipoCbte_cxp" Type="Int32" />
+          <Property Name="IdCbteCble_cxp" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2791,20 +2791,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DBERP_LICEOModelStoreContainer" CdmEntityContainer="EntitiesBanco">
-          <EntitySetMapping Name="cp_conciliacion_Caja_det_Ing_Caja">
-            <EntityTypeMapping TypeName="DBERP_LICEOModel.cp_conciliacion_Caja_det_Ing_Caja">
-              <MappingFragment StoreEntitySet="cp_conciliacion_Caja_det_Ing_Caja">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
-                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
-                <ScalarProperty Name="IdEmpresa_movcaj" ColumnName="IdEmpresa_movcaj" />
-                <ScalarProperty Name="IdCbteCble_movcaj" ColumnName="IdCbteCble_movcaj" />
-                <ScalarProperty Name="IdTipocbte_movcaj" ColumnName="IdTipocbte_movcaj" />
-                <ScalarProperty Name="valor_aplicado" ColumnName="valor_aplicado" />
-                <ScalarProperty Name="valor_disponible" ColumnName="valor_disponible" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
             <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
               <MappingFragment StoreEntitySet="ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito">
@@ -3282,40 +3268,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwba_Archivo_Transferencia_Det">
-            <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_Archivo_Transferencia_Det">
-              <MappingFragment StoreEntitySet="vwba_Archivo_Transferencia_Det">
-                <ScalarProperty Name="IdCbteCble_cxp" ColumnName="IdCbteCble_cxp" />
-                <ScalarProperty Name="IdTipoCbte_cxp" ColumnName="IdTipoCbte_cxp" />
-                <ScalarProperty Name="IdEmpresa_cxp" ColumnName="IdEmpresa_cxp" />
-                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
-                <ScalarProperty Name="IdCtaCble_Acreedora" ColumnName="IdCtaCble_Acreedora" />
-                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
-                <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
-                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
-                <ScalarProperty Name="CodigoLegalBanco" ColumnName="CodigoLegalBanco" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="pr_correo" ColumnName="pr_correo" />
-                <ScalarProperty Name="pr_direccion" ColumnName="pr_direccion" />
-                <ScalarProperty Name="IdBanco_acreditacion" ColumnName="IdBanco_acreditacion" />
-                <ScalarProperty Name="num_cta_acreditacion" ColumnName="num_cta_acreditacion" />
-                <ScalarProperty Name="IdTipoCta_acreditacion_cat" ColumnName="IdTipoCta_acreditacion_cat" />
-                <ScalarProperty Name="Secuencial_reg_x_proceso" ColumnName="Secuencial_reg_x_proceso" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Secuencia_OP" ColumnName="Secuencia_OP" />
-                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
-                <ScalarProperty Name="IdEmpresa_OP" ColumnName="IdEmpresa_OP" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
             <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
               <MappingFragment StoreEntitySet="vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar">
@@ -3365,20 +3317,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwba_ArchivoRecaudacionDet_Saldos">
-            <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet_Saldos">
-              <MappingFragment StoreEntitySet="vwba_ArchivoRecaudacionDet_Saldos">
-                <ScalarProperty Name="FechaProntoPago" ColumnName="FechaProntoPago" />
-                <ScalarProperty Name="SaldoProntoPago" ColumnName="SaldoProntoPago" />
-                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ba_ArchivoRecaudacionDet">
             <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_ArchivoRecaudacionDet">
               <MappingFragment StoreEntitySet="ba_ArchivoRecaudacionDet">
@@ -3394,19 +3332,19 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vwba_ArchivoRecaudacionDet">
-            <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet">
-              <MappingFragment StoreEntitySet="vwba_ArchivoRecaudacionDet">
-                <ScalarProperty Name="FechaProntoPago" ColumnName="FechaProntoPago" />
-                <ScalarProperty Name="FechaProceso" ColumnName="FechaProceso" />
-                <ScalarProperty Name="ValorProntoPago" ColumnName="ValorProntoPago" />
-                <ScalarProperty Name="Valor" ColumnName="Valor" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+          <EntitySetMapping Name="ba_parametros">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_parametros">
+              <MappingFragment StoreEntitySet="ba_parametros">
+                <ScalarProperty Name="DiasTransaccionesAPasado" ColumnName="DiasTransaccionesAPasado" />
+                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
+                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
+                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="ValidarSoloCuentasArchivo" ColumnName="ValidarSoloCuentasArchivo" />
+                <ScalarProperty Name="PermitirSobreGiro" ColumnName="PermitirSobreGiro" />
+                <ScalarProperty Name="CantidadChequesAlerta" ColumnName="CantidadChequesAlerta" />
+                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
+                <ScalarProperty Name="CiudadDefaultParaCrearCheques" ColumnName="CiudadDefaultParaCrearCheques" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3437,19 +3375,81 @@ advertencia 6002: La tabla o vista 'DBERP.web.vwba_Talonario_cheques_x_banco_ID'
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ba_parametros">
-            <EntityTypeMapping TypeName="DBERP_LICEOModel.ba_parametros">
-              <MappingFragment StoreEntitySet="ba_parametros">
-                <ScalarProperty Name="DiasTransaccionesAPasado" ColumnName="DiasTransaccionesAPasado" />
-                <ScalarProperty Name="FechaUltMod" ColumnName="FechaUltMod" />
-                <ScalarProperty Name="IdUsuarioUltMod" ColumnName="IdUsuarioUltMod" />
-                <ScalarProperty Name="FechaTransac" ColumnName="FechaTransac" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="ValidarSoloCuentasArchivo" ColumnName="ValidarSoloCuentasArchivo" />
-                <ScalarProperty Name="PermitirSobreGiro" ColumnName="PermitirSobreGiro" />
-                <ScalarProperty Name="CantidadChequesAlerta" ColumnName="CantidadChequesAlerta" />
-                <ScalarProperty Name="DiasTransaccionesAFuturo" ColumnName="DiasTransaccionesAFuturo" />
-                <ScalarProperty Name="CiudadDefaultParaCrearCheques" ColumnName="CiudadDefaultParaCrearCheques" />
+          <EntitySetMapping Name="vwba_ArchivoRecaudacionDet">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet">
+              <MappingFragment StoreEntitySet="vwba_ArchivoRecaudacionDet">
+                <ScalarProperty Name="FechaProntoPago" ColumnName="FechaProntoPago" />
+                <ScalarProperty Name="FechaProceso" ColumnName="FechaProceso" />
+                <ScalarProperty Name="ValorProntoPago" ColumnName="ValorProntoPago" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwba_ArchivoRecaudacionDet_Saldos">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_ArchivoRecaudacionDet_Saldos">
+              <MappingFragment StoreEntitySet="vwba_ArchivoRecaudacionDet_Saldos">
+                <ScalarProperty Name="FechaProntoPago" ColumnName="FechaProntoPago" />
+                <ScalarProperty Name="SaldoProntoPago" ColumnName="SaldoProntoPago" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cp_conciliacion_Caja_det_Ing_Caja">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.cp_conciliacion_Caja_det_Ing_Caja">
+              <MappingFragment StoreEntitySet="cp_conciliacion_Caja_det_Ing_Caja">
+                <ScalarProperty Name="valor_disponible" ColumnName="valor_disponible" />
+                <ScalarProperty Name="valor_aplicado" ColumnName="valor_aplicado" />
+                <ScalarProperty Name="IdTipocbte_movcaj" ColumnName="IdTipocbte_movcaj" />
+                <ScalarProperty Name="IdCbteCble_movcaj" ColumnName="IdCbteCble_movcaj" />
+                <ScalarProperty Name="IdEmpresa_movcaj" ColumnName="IdEmpresa_movcaj" />
+                <ScalarProperty Name="secuencia" ColumnName="secuencia" />
+                <ScalarProperty Name="IdConciliacion_Caja" ColumnName="IdConciliacion_Caja" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwba_Archivo_Transferencia_Det">
+            <EntityTypeMapping TypeName="DBERP_LICEOModel.vwba_Archivo_Transferencia_Det">
+              <MappingFragment StoreEntitySet="vwba_Archivo_Transferencia_Det">
+                <ScalarProperty Name="IdCbteCble_cxp" ColumnName="IdCbteCble_cxp" />
+                <ScalarProperty Name="IdTipoCbte_cxp" ColumnName="IdTipoCbte_cxp" />
+                <ScalarProperty Name="IdEmpresa_cxp" ColumnName="IdEmpresa_cxp" />
+                <ScalarProperty Name="pc_Cuenta" ColumnName="pc_Cuenta" />
+                <ScalarProperty Name="IdCtaCble_Acreedora" ColumnName="IdCtaCble_Acreedora" />
+                <ScalarProperty Name="cb_Fecha" ColumnName="cb_Fecha" />
+                <ScalarProperty Name="IdEntidad" ColumnName="IdEntidad" />
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="IdTipo_Persona" ColumnName="IdTipo_Persona" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="CodigoLegalBanco" ColumnName="CodigoLegalBanco" />
+                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
+                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
+                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
+                <ScalarProperty Name="pr_correo" ColumnName="pr_correo" />
+                <ScalarProperty Name="pr_direccion" ColumnName="pr_direccion" />
+                <ScalarProperty Name="IdBanco_acreditacion" ColumnName="IdBanco_acreditacion" />
+                <ScalarProperty Name="num_cta_acreditacion" ColumnName="num_cta_acreditacion" />
+                <ScalarProperty Name="IdTipoCta_acreditacion_cat" ColumnName="IdTipoCta_acreditacion_cat" />
+                <ScalarProperty Name="Secuencial_reg_x_proceso" ColumnName="Secuencial_reg_x_proceso" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Secuencia_OP" ColumnName="Secuencia_OP" />
+                <ScalarProperty Name="IdOrdenPago" ColumnName="IdOrdenPago" />
+                <ScalarProperty Name="IdEmpresa_OP" ColumnName="IdEmpresa_OP" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdArchivo" ColumnName="IdArchivo" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

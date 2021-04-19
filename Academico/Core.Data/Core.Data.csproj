@@ -603,6 +603,9 @@
     <Compile Include="Base\vwba_ArchivoRecaudacion_Archivo.cs">
       <DependentUpon>ModelBanco.tt</DependentUpon>
     </Compile>
+    <Compile Include="Base\vwba_Archivo_Transferencia_Det.cs">
+      <DependentUpon>ModelBanco.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base\VWCAJ_001.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
@@ -1651,9 +1654,6 @@
     </Compile>
     <Compile Include="Base\vwaca_Profesor.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Base\vwba_Archivo_Transferencia_Det.cs">
-      <DependentUpon>ModelBanco.tt</DependentUpon>
     </Compile>
     <Compile Include="Base\vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito.cs">
       <DependentUpon>ModelBanco.tt</DependentUpon>

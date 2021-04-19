@@ -51,7 +51,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     #region Query
-                    string query = "SELECT * FROM aca_AnioLectivo a "
+                    string query = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -83,31 +83,7 @@ namespace Core.Data.Academico
                     }
                 reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q=>q.Descripcion).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivo_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            Descripcion = q.Descripcion,
-                            FechaDesde = q.FechaDesde,
-                            FechaHasta = q.FechaHasta,
-                            EnCurso = q.EnCurso,
-                            BloquearMatricula = q.BloquearMatricula,
-                            IdAnioLectivoAnterior = q.IdAnioLectivoAnterior,
-                            PromedioMinimoParcial = q.PromedioMinimoParcial,
-                            PromedioMinimoPromocion = q.PromedioMinimoPromocion,
-                            IdCursoBachiller = q.IdCursoBachiller,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -126,7 +102,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     #region Query
-                    string query = "SELECT * FROM aca_AnioLectivo a "
+                    string query = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.BloquearMatricula=0 ";
                     if (MostrarAnulados == false)
                     {
@@ -158,31 +134,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.BloquearMatricula==false && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.Descripcion).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivo_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            Descripcion = q.Descripcion,
-                            FechaDesde = q.FechaDesde,
-                            FechaHasta = q.FechaHasta,
-                            EnCurso = q.EnCurso,
-                            BloquearMatricula = q.BloquearMatricula,
-                            PromedioMinimoParcial = q.PromedioMinimoParcial,
-                            PromedioMinimoPromocion = q.PromedioMinimoPromocion,
-                            IdAnioLectivoAnterior = q.IdAnioLectivoAnterior,
-                            IdCursoBachiller = q.IdCursoBachiller,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -200,7 +152,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     #region Query
-                    string query = "SELECT * FROM aca_AnioLectivo a "
+                    string query = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.BloquearMatricula=0 "
                     + " and FechaHasta=(select MAX(FechaHasta) FechaMaxima from aca_AnioLectivo)";
                     #endregion
@@ -245,7 +197,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.IdAnio = " + IdAnio.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -292,7 +244,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     #region Query
-                    string query = "SELECT * FROM aca_AnioLectivo a "
+                    string query = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.Estado = 1 and a.BloquearMatricula = 0";
                     #endregion
 
@@ -319,25 +271,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    Lista = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && q.BloquearMatricula == false).Select(q => new aca_AnioLectivo_Info
-                    {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAnio = q.IdAnio,
-                        Descripcion = q.Descripcion,
-                        FechaDesde = q.FechaDesde,
-                        FechaHasta = q.FechaHasta,
-                        EnCurso = q.EnCurso,
-                        BloquearMatricula = q.BloquearMatricula,
-                        PromedioMinimoParcial = q.PromedioMinimoParcial,
-                        PromedioMinimoPromocion = q.PromedioMinimoPromocion,
-                        IdCursoBachiller = q.IdCursoBachiller,
-                        Estado = q.Estado
-                    }).ToList();
-                }
-                */
+
                 return Lista;
             }
             catch (Exception)
@@ -356,7 +290,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.BloquearMatricula=0 "
                     + " and FechaHasta=(select MAX(FechaHasta) FechaMaxima from aca_AnioLectivo)";
                     var ResultValue = command.ExecuteScalar();
@@ -386,31 +320,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AnioLectivo_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        Descripcion = Entity.Descripcion,
-                        FechaDesde = Entity.FechaDesde,
-                        FechaHasta = Entity.FechaHasta,
-                        EnCurso = Entity.EnCurso,
-                        BloquearMatricula = Entity.BloquearMatricula,
-                        IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
-                        PromedioMinimoParcial = Entity.PromedioMinimoParcial,
-                        PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
-                        IdCursoBachiller = Entity.IdCursoBachiller,
-                        CalificacionMaxima = Entity.CalificacionMaxima,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -429,7 +339,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and YEAR(a.FechaDesde) = " + AnioIni.ToString() + " and YEAR(a.FechaHasta)= "+ AnioFin.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -458,31 +368,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == AnioIni && q.FechaHasta.Year == AnioFin).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AnioLectivo_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        Descripcion = Entity.Descripcion,
-                        FechaDesde = Entity.FechaDesde,
-                        FechaHasta = Entity.FechaHasta,
-                        EnCurso = Entity.EnCurso,
-                        BloquearMatricula = Entity.BloquearMatricula,
-                        IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
-                        PromedioMinimoParcial = Entity.PromedioMinimoParcial,
-                        PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
-                        IdCursoBachiller = Entity.IdCursoBachiller,
-                        CalificacionMaxima = Entity.CalificacionMaxima,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -501,7 +387,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and YEAR(a.FechaDesde) = " + Anio.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -530,30 +416,6 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.FechaDesde.Year == Anio).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info = new aca_AnioLectivo_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        Descripcion = Entity.Descripcion,
-                        FechaDesde = Entity.FechaDesde,
-                        FechaHasta = Entity.FechaHasta,
-                        EnCurso = Entity.EnCurso,
-                        BloquearMatricula = Entity.BloquearMatricula,
-                        IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
-                        PromedioMinimoParcial = Entity.PromedioMinimoParcial,
-                        PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
-                        IdCursoBachiller = Entity.IdCursoBachiller,
-                        CalificacionMaxima = Entity.CalificacionMaxima,
-                        Estado = Entity.Estado
-                    };
-                }*/
 
                 return info;
             }
@@ -573,7 +435,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivo a "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.Estado = 1 and a.EnCurso=1";
                     if (IdAnio==0)
                     {
@@ -611,30 +473,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado==true && q.EnCurso==true && (IdAnio==0 ? q.IdAnio == q.IdAnio : q.IdAnio!= IdAnio)).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AnioLectivo_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        Descripcion = Entity.Descripcion,
-                        FechaDesde = Entity.FechaDesde,
-                        FechaHasta = Entity.FechaHasta,
-                        EnCurso = Entity.EnCurso,
-                        IdAnioLectivoAnterior = Entity.IdAnioLectivoAnterior,
-                        PromedioMinimoParcial = Entity.PromedioMinimoParcial,
-                        PromedioMinimoPromocion = Entity.PromedioMinimoPromocion,
-                        IdCursoBachiller = Entity.IdCursoBachiller,
-                        CalificacionMaxima = Entity.CalificacionMaxima,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

@@ -23,7 +23,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_Sede s "
+                    string query = "SELECT * FROM aca_Sede s WITH (nolock) "
                     + " WHERE s.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados==false)
                     {
@@ -54,30 +54,6 @@ namespace Core.Data.Academico
                     reader.Close();
                 }
 
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_Sede.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Sede_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdSede = q.IdSede,
-                            IdSucursal = q.IdSucursal,
-                            NomSede = q.NomSede,
-                            Direccion = q.Direccion,
-                            NombreRector = q.NombreRector,
-                            TelefonoRector = q.TelefonoRector,
-                            CelularRector=q.CelularRector,
-                            CorreoRector = q.CorreoRector,
-                            NombreSecretaria = q.NombreSecretaria,
-                            Estado = q.Estado
-                        });
-                    });
-                }*/
-
                 return Lista;
             }
             catch (Exception)
@@ -97,7 +73,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT IdSede, NomSede FROM aca_AnioLectivo_Sede_NivelAcademico "
+                    string query = "SELECT IdSede, NomSede FROM aca_AnioLectivo_Sede_NivelAcademico WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = "+IdAnio.ToString() + " GROUP BY IdSede, NomSede";
                     #endregion
 
@@ -114,21 +90,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).GroupBy(q => new { q.IdSede, q.NomSede }).Select(q => new { q.Key.IdSede, q.Key.NomSede }).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Sede_Info
-                        {
-                            IdSede = q.IdSede,
-                            NomSede = q.NomSede,
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -185,7 +147,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_Sede s ";
+                    string query = "SELECT * FROM aca_Sede s WITH (nolock) ";
                     if (mostrar_anulados == false)
                     {
                         query += " WHERE s.Estado = 1";
@@ -214,30 +176,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    var lst = Context.aca_Sede.Where(q => q.Estado == (mostrar_anulados ? q.Estado : true)).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Sede_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdSede = q.IdSede,
-                            IdSucursal = q.IdSucursal,
-                            NomSede = q.NomSede,
-                            Direccion = q.Direccion,
-                            NombreRector = q.NombreRector,
-                            NombreSecretaria = q.NombreSecretaria,
-                            TelefonoRector = q.TelefonoRector,
-                            CelularRector = q.CelularRector,
-                            CorreoRector = q.CorreoRector,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)

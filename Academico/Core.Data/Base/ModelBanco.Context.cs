@@ -25,7 +25,6 @@ namespace Core.Data.Base
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<cp_conciliacion_Caja_det_Ing_Caja> cp_conciliacion_Caja_det_Ing_Caja { get; set; }
         public virtual DbSet<ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito> ba_Caja_Movimiento_x_Cbte_Ban_x_Deposito { get; set; }
         public virtual DbSet<ba_Banco_Cuenta> ba_Banco_Cuenta { get; set; }
         public virtual DbSet<ba_Banco_Cuenta_x_tb_sucursal> ba_Banco_Cuenta_x_tb_sucursal { get; set; }
@@ -53,13 +52,14 @@ namespace Core.Data.Base
         public virtual DbSet<ba_Archivo_Transferencia> ba_Archivo_Transferencia { get; set; }
         public virtual DbSet<ba_Archivo_Transferencia_Det> ba_Archivo_Transferencia_Det { get; set; }
         public virtual DbSet<ba_archivo_transferencia_x_ba_tipo_flujo> ba_archivo_transferencia_x_ba_tipo_flujo { get; set; }
-        public virtual DbSet<vwba_Archivo_Transferencia_Det> vwba_Archivo_Transferencia_Det { get; set; }
         public virtual DbSet<vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar> vwba_Caja_Movimiento_x_Cbte_Ban_x_Deposito_x_depositar { get; set; }
         public virtual DbSet<ba_ArchivoRecaudacion> ba_ArchivoRecaudacion { get; set; }
-        public virtual DbSet<vwba_ArchivoRecaudacionDet_Saldos> vwba_ArchivoRecaudacionDet_Saldos { get; set; }
         public virtual DbSet<ba_ArchivoRecaudacionDet> ba_ArchivoRecaudacionDet { get; set; }
-        public virtual DbSet<vwba_ArchivoRecaudacionDet> vwba_ArchivoRecaudacionDet { get; set; }
-        public virtual DbSet<vwba_ArchivoRecaudacion_Archivo> vwba_ArchivoRecaudacion_Archivo { get; set; }
         public virtual DbSet<ba_parametros> ba_parametros { get; set; }
+        public virtual DbSet<vwba_ArchivoRecaudacion_Archivo> vwba_ArchivoRecaudacion_Archivo { get; set; }
+        public virtual DbSet<vwba_ArchivoRecaudacionDet> vwba_ArchivoRecaudacionDet { get; set; }
+        public virtual DbSet<vwba_ArchivoRecaudacionDet_Saldos> vwba_ArchivoRecaudacionDet_Saldos { get; set; }
+        public virtual DbSet<cp_conciliacion_Caja_det_Ing_Caja> cp_conciliacion_Caja_det_Ing_Caja { get; set; }
+        public virtual DbSet<vwba_Archivo_Transferencia_Det> vwba_Archivo_Transferencia_Det { get; set; }
     }
 }

@@ -27,12 +27,12 @@ namespace Core.Data.Academico
                     #region Query
                     string query = "SELECT a.IdEmpresa, a.IdAdmision, a.IdSede, a.IdAnio, a.IdJornada, a.IdNivel, a.IdCurso, a.CedulaRuc_Aspirante, a.NombreCompleto_Aspirante, a.IdCatalogoESTADM, an.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, "
                     + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado, a.IdUsuarioRevision, a.FechaIngreso_Aspirante "
-                    + " FROM     dbo.aca_Admision AS a LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON a.IdEmpresa = nj.IdEmpresa AND a.IdAnio = nj.IdAnio AND a.IdSede = nj.IdSede AND a.IdNivel = nj.IdNivel AND a.IdJornada = nj.IdJornada LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON a.IdEmpresa = sn.IdEmpresa AND a.IdAnio = sn.IdAnio AND a.IdSede = sn.IdSede AND a.IdNivel = sn.IdNivel LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo AS an ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
+                    + " FROM     dbo.aca_Admision AS a WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON a.IdEmpresa = nj.IdEmpresa AND a.IdAnio = nj.IdAnio AND a.IdSede = nj.IdSede AND a.IdNivel = nj.IdNivel AND a.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) ON a.IdEmpresa = sn.IdEmpresa AND a.IdAnio = sn.IdAnio AND a.IdSede = sn.IdSede AND a.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS an WITH (nolock) ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
                     + " and a.IdSede = " + IdSede.ToString()
                     +" and a.IdAnio = " + IdAnio.ToString();
@@ -91,12 +91,12 @@ namespace Core.Data.Academico
                     #region Query
                     string query = "SELECT a.IdEmpresa, a.IdAdmision, a.IdSede, a.IdAnio, a.IdJornada, a.IdNivel, a.IdCurso, a.CedulaRuc_Aspirante, a.NombreCompleto_Aspirante, a.IdCatalogoESTADM, an.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, "
                     + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, a.IdCatalogoESTADM, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado, a.IdUsuarioRevision, a.FechaIngreso_Aspirante "
-                    + " FROM     dbo.aca_Admision AS a LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON a.IdEmpresa = nj.IdEmpresa AND a.IdAnio = nj.IdAnio AND a.IdSede = nj.IdSede AND a.IdNivel = nj.IdNivel AND a.IdJornada = nj.IdJornada LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON a.IdEmpresa = sn.IdEmpresa AND a.IdAnio = sn.IdAnio AND a.IdSede = sn.IdSede AND a.IdNivel = sn.IdNivel LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo AS an ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
+                    + " FROM     dbo.aca_Admision AS a WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON a.IdEmpresa = nj.IdEmpresa AND a.IdAnio = nj.IdAnio AND a.IdSede = nj.IdSede AND a.IdNivel = nj.IdNivel AND a.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) ON a.IdEmpresa = sn.IdEmpresa AND a.IdAnio = sn.IdAnio AND a.IdSede = sn.IdSede AND a.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS an WITH (nolock) ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
                     + " and a.IdSede = " + IdSede.ToString()
                     + " and a.IdCatalogoESTADM = "+ Convert.ToInt32(cl_enumeradores.eTipoCatalogoAdmision.REGISTRADO);
@@ -155,12 +155,12 @@ namespace Core.Data.Academico
                     #region Query
                     string query = "SELECT a.IdEmpresa, a.IdAdmision, a.IdSede, a.IdAnio, a.IdJornada, a.IdNivel, a.IdCurso, a.CedulaRuc_Aspirante, a.NombreCompleto_Aspirante, a.IdCatalogoESTADM, an.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, "
                     + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, a.IdCatalogoESTADM, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado, a.IdUsuarioRevision, a.FechaIngreso_Aspirante "
-                    + " FROM     dbo.aca_Admision AS a LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON a.IdEmpresa = nj.IdEmpresa AND a.IdAnio = nj.IdAnio AND a.IdSede = nj.IdSede AND a.IdNivel = nj.IdNivel AND a.IdJornada = nj.IdJornada LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON a.IdEmpresa = sn.IdEmpresa AND a.IdAnio = sn.IdAnio AND a.IdSede = sn.IdSede AND a.IdNivel = sn.IdNivel LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo AS an ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
+                    + " FROM     dbo.aca_Admision AS a WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON a.IdEmpresa = jc.IdEmpresa AND a.IdAnio = jc.IdAnio AND a.IdSede = jc.IdSede AND a.IdNivel = jc.IdNivel AND a.IdJornada = jc.IdJornada AND a.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON a.IdEmpresa = nj.IdEmpresa AND a.IdAnio = nj.IdAnio AND a.IdSede = nj.IdSede AND a.IdNivel = nj.IdNivel AND a.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) ON a.IdEmpresa = sn.IdEmpresa AND a.IdAnio = sn.IdAnio AND a.IdSede = sn.IdSede AND a.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS an WITH (nolock) ON a.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
                     + " and a.IdSede = " + IdSede.ToString()
                     + " and a.IdAnio = " + IdAnio.ToString()
@@ -479,7 +479,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_Admision a "
+                    command.CommandText = "SELECT * FROM aca_Admision a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.CedulaRuc_Aspirante = '" + CedulaRuc_Aspirante.ToString()+"'";
                     var ResultValue = command.ExecuteScalar();
 
@@ -518,8 +518,8 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT a.IdEmpresa, a.IdAdmision, a.NombreCompleto_Aspirante, a.CedulaRuc_Aspirante, a.FechaIngreso_Aspirante,b.Codigo CodigoEstadoAdmision, b.NomCatalogo EstadoAdmision FROM aca_Admision a "
-                    + " left join aca_Catalogo b on a.IdCatalogoESTADM=b.IdCatalogo"
+                    command.CommandText = "SELECT a.IdEmpresa, a.IdAdmision, a.NombreCompleto_Aspirante, a.CedulaRuc_Aspirante, a.FechaIngreso_Aspirante,b.Codigo CodigoEstadoAdmision, b.NomCatalogo EstadoAdmision FROM aca_Admision a WITH (nolock) "
+                    + " left join aca_Catalogo b WITH (nolock) on a.IdCatalogoESTADM=b.IdCatalogo"
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.CedulaRuc_Aspirante = '" + CedulaRuc_Aspirante.ToString()+"'";
                     var ResultValue = command.ExecuteScalar();
 
@@ -560,7 +560,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_Admision a "
+                    command.CommandText = "SELECT * FROM aca_Admision a WITH (nolock) "
                     + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " and a.IdAdmision = '" + IdAdmision.ToString() + "'";
                     var ResultValue = command.ExecuteScalar();
 

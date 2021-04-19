@@ -209,6 +209,7 @@ namespace Core.Data.Reportes.Academico
                 ListaFinal.AddRange(Lista_Comportamiento);
                 ListaFinal.AddRange(Lista_Proyectos);
                 */
+                var x = Lista;
                 Lista.ForEach(q=> q.CalificacionCualitativa = (q.CalificacionNumerica==null ? "" : funciones.NumeroALetras_Certificado(q.CalificacionNumerica.ToString())) );
                 ListaObligatorias = Lista.Where(q => q.PromediarGrupo == 0 && q.IdCatalogoTipoCalificacion == Convert.ToInt32(cl_enumeradores.eCatalogoTipoCalificacion.CUANTI)).ToList();
                 var ListaObligatorias_ValidaCalificaciones = ListaObligatorias.Where(q => q.Columna == "PROMEDIO FINAL").ToList();

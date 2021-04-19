@@ -115,7 +115,7 @@ namespace Core.Info.Helps
         {
             string res, dec = "";
             Int64 entero;
-            int decimales;
+            decimal decimales;
             double nro;
             try
             {
@@ -127,13 +127,17 @@ namespace Core.Info.Helps
             }
 
             entero = Convert.ToInt64(Math.Truncate(nro));
-            decimales = Convert.ToInt32(Math.Round((nro - entero) * 100, 2));
+            var txt_entero = entero.ToString();
+            var x = Math.Round((nro - entero), 2);
+            decimales = Convert.ToDecimal(Math.Round((nro - entero) * 100, 2));
+            
             if (decimales > 0)
             {
-                dec = " COMA " + NumeroALetras(decimales);
+                var txt_decimales = decimales.ToString();
+                dec = " COMA " + NumeroALetras_Decimal(decimales);
             }
 
-            res = NumeroALetras(Convert.ToDecimal(entero)) + dec;
+            res = NumeroALetras_Promedio(entero) + dec;
             return res;
         }
 
@@ -191,23 +195,23 @@ namespace Core.Info.Helps
             value = Math.Truncate(value);
             if (value == 0) Num2Text = "CERO";
 
-            else if (value == 1) Num2Text = "CERO UNO";
+            else if (value == 1) Num2Text = "UNO";
 
-            else if (value == 2) Num2Text = "CERO DOS";
+            else if (value == 2) Num2Text = "DOS";
 
-            else if (value == 3) Num2Text = "CERO TRES";
+            else if (value == 3) Num2Text = "TRES";
 
-            else if (value == 4) Num2Text = "CERO CUATRO";
+            else if (value == 4) Num2Text = "CUATRO";
 
-            else if (value == 5) Num2Text = "CERO CINCO";
+            else if (value == 5) Num2Text = "CINCO";
 
-            else if (value == 6) Num2Text = "CERO SEIS";
+            else if (value == 6) Num2Text = "SEIS";
 
-            else if (value == 7) Num2Text = "CERO SIETE";
+            else if (value == 7) Num2Text = "SIETE";
 
-            else if (value == 8) Num2Text = "CERO OCHO";
+            else if (value == 8) Num2Text = "OCHO";
 
-            else if (value == 9) Num2Text = "CERO NUEVE";
+            else if (value == 9) Num2Text = "NUEVE";
 
             else if (value == 10) Num2Text = "DIEZ";
 
@@ -291,6 +295,143 @@ namespace Core.Info.Helps
 
                 if ((value - Math.Truncate(value / 1000000000000) * 1000000000000) > 0) Num2Text = Num2Text + " " + NumeroALetras(Convert.ToDecimal((value - Math.Truncate(value / 1000000000000) * 1000000000000)));
             }
+            return Num2Text;
+        }
+        static string NumeroALetras_Promedio(decimal value)
+        {
+            string Num2Text = "";
+            value = Math.Truncate(value);
+            if (value == 0) Num2Text = "CERO";
+
+            else if (value == 1) Num2Text = "UNO";
+
+            else if (value == 2) Num2Text = "DOS";
+
+            else if (value == 3) Num2Text = "TRES";
+
+            else if (value == 4) Num2Text = "CUATRO";
+
+            else if (value == 5) Num2Text = "CINCO";
+
+            else if (value == 6) Num2Text = "SEIS";
+
+            else if (value == 7) Num2Text = "SIETE";
+
+            else if (value == 8) Num2Text = "OCHO";
+
+            else if (value == 9) Num2Text = "NUEVE";
+
+            else if (value == 10) Num2Text = "DIEZ";
+
+            else if (value == 11) Num2Text = "ONCE";
+
+            else if (value == 12) Num2Text = "DOCE";
+
+            else if (value == 13) Num2Text = "TRECE";
+
+            else if (value == 14) Num2Text = "CATORCE";
+
+            else if (value == 15) Num2Text = "QUINCE";
+
+            else if (value < 20) Num2Text = "DIECI" + NumeroALetras_Promedio(Convert.ToDecimal((value - 10)));
+
+            else if (value == 20) Num2Text = "VEINTE";
+
+            else if (value < 30) Num2Text = "VEINTI" + NumeroALetras_Promedio(Convert.ToDecimal((value - 20)));
+
+            else if (value == 30) Num2Text = "TREINTA";
+            else if (value < 40) Num2Text = "TREINTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 30)));
+
+            else if (value == 40) Num2Text = "CUARENTA";
+            else if (value < 50) Num2Text = "CUARENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 40)));
+
+            else if (value == 50) Num2Text = "CINCUENTA";
+            else if (value < 60) Num2Text = "CINCUENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 50)));
+
+            else if (value == 60) Num2Text = "SESENTA";
+            else if (value < 60) Num2Text = "SESENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 60)));
+
+            else if (value == 70) Num2Text = "SETENTA";
+            else if (value < 70) Num2Text = "SETENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 70)));
+
+            else if (value == 80) Num2Text = "OCHENTA";
+            else if (value < 80) Num2Text = "OCHENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 80)));
+
+            else if (value == 90) Num2Text = "NOVENTA";
+
+            else if (value < 100) Num2Text = NumeroALetras(Convert.ToDecimal((Math.Truncate(value / 10) * 10))) + " Y " + NumeroALetras_Promedio(Convert.ToDecimal((value % 10)));
+
+            else if (value == 100) Num2Text = "CIEN";
+
+            return Num2Text;
+        }
+        static string NumeroALetras_Decimal(decimal value)
+        {
+            string Num2Text = "";
+            value = Math.Truncate(value);
+            //if (value == 0) Num2Text = "CERO";
+
+            //else 
+            if (value == 1) Num2Text = "CERO UNO";
+
+            else if (value == 2) Num2Text = "CERO DOS";
+
+            else if (value == 3) Num2Text = "CERO TRES";
+
+            else if (value == 4) Num2Text = "CERO CUATRO";
+
+            else if (value == 5) Num2Text = "CERO CINCO";
+
+            else if (value == 6) Num2Text = "CERO SEIS";
+
+            else if (value == 7) Num2Text = "CERO SIETE";
+
+            else if (value == 8) Num2Text = "CERO OCHO";
+
+            else if (value == 9) Num2Text = "CERO NUEVE";
+
+            else if (value == 10) Num2Text = "DIEZ";
+
+            else if (value == 11) Num2Text = "ONCE";
+
+            else if (value == 12) Num2Text = "DOCE";
+
+            else if (value == 13) Num2Text = "TRECE";
+
+            else if (value == 14) Num2Text = "CATORCE";
+
+            else if (value == 15) Num2Text = "QUINCE";
+
+            else if (value < 20) Num2Text = "DIECI" + NumeroALetras_Promedio(Convert.ToDecimal((value - 10)));
+
+            else if (value == 20) Num2Text = "VEINTE";
+
+            else if (value < 30) Num2Text = "VEINTI" + NumeroALetras_Promedio(Convert.ToDecimal((value - 20)));
+
+            else if (value == 30) Num2Text = "TREINTA";
+            else if (value < 40) Num2Text = "TREINTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 30)));
+
+            else if (value == 40) Num2Text = "CUARENTA";
+            else if (value < 50) Num2Text = "CUARENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 40)));
+
+            else if (value == 50) Num2Text = "CINCUENTA";
+            else if (value < 60) Num2Text = "CINCUENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 50)));
+
+            else if (value == 60) Num2Text = "SESENTA";
+            else if (value < 70) Num2Text = "SESENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 60)));
+
+            else if (value == 70) Num2Text = "SETENTA";
+            else if (value < 80) Num2Text = "SETENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 70)));
+
+            else if (value == 80) Num2Text = "OCHENTA";
+            else if (value < 90) Num2Text = "OCHENTA Y " + NumeroALetras_Promedio(Convert.ToDecimal((value - 80)));
+
+            else if (value == 90) Num2Text = "NOVENTA";
+
+            else if (value < 100) Num2Text = NumeroALetras(Convert.ToDecimal((Math.Truncate(value / 10) * 10))) + " Y " + NumeroALetras_Promedio(Convert.ToDecimal((value % 10)));
+
+            else if (value == 100) Num2Text = "CIEN";
+
             return Num2Text;
         }
 

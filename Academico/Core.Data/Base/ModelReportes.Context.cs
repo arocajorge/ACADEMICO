@@ -39,18 +39,12 @@ namespace Core.Data.Base
         public virtual DbSet<VWCAJ_002> VWCAJ_002 { get; set; }
         public virtual DbSet<VWCAJ_002_ingresos> VWCAJ_002_ingresos { get; set; }
         public virtual DbSet<VWCAJ_002_ValesNoConciliados> VWCAJ_002_ValesNoConciliados { get; set; }
-        public virtual DbSet<VWBAN_001> VWBAN_001 { get; set; }
-        public virtual DbSet<VWBAN_001_cancelaciones> VWBAN_001_cancelaciones { get; set; }
-        public virtual DbSet<VWBAN_002> VWBAN_002 { get; set; }
-        public virtual DbSet<VWBAN_002_cancelaciones> VWBAN_002_cancelaciones { get; set; }
-        public virtual DbSet<VWBAN_003> VWBAN_003 { get; set; }
         public virtual DbSet<VWCXC_005> VWCXC_005 { get; set; }
         public virtual DbSet<VWCXC_005_Cobros> VWCXC_005_Cobros { get; set; }
         public virtual DbSet<VWCXC_005_Diario> VWCXC_005_Diario { get; set; }
         public virtual DbSet<VWFAC_0031> VWFAC_0031 { get; set; }
         public virtual DbSet<VWFAC_007> VWFAC_007 { get; set; }
         public virtual DbSet<VWFAC_008> VWFAC_008 { get; set; }
-        public virtual DbSet<VWBAN_004> VWBAN_004 { get; set; }
         public virtual DbSet<VWFAC_002> VWFAC_002 { get; set; }
         public virtual DbSet<VWCXC_012> VWCXC_012 { get; set; }
         public virtual DbSet<VWACA_017> VWACA_017 { get; set; }
@@ -68,6 +62,12 @@ namespace Core.Data.Base
         public virtual DbSet<VWACA_011> VWACA_011 { get; set; }
         public virtual DbSet<VWACA_012> VWACA_012 { get; set; }
         public virtual DbSet<VWACA_013_EquivalenciaPromedio> VWACA_013_EquivalenciaPromedio { get; set; }
+        public virtual DbSet<VWBAN_001> VWBAN_001 { get; set; }
+        public virtual DbSet<VWBAN_001_cancelaciones> VWBAN_001_cancelaciones { get; set; }
+        public virtual DbSet<VWBAN_002> VWBAN_002 { get; set; }
+        public virtual DbSet<VWBAN_002_cancelaciones> VWBAN_002_cancelaciones { get; set; }
+        public virtual DbSet<VWBAN_003> VWBAN_003 { get; set; }
+        public virtual DbSet<VWBAN_004> VWBAN_004 { get; set; }
     
         public virtual ObjectResult<SPCXC_001_Result> SPCXC_001(Nullable<int> idEmpresa, Nullable<int> idSucursalIni, Nullable<int> idSucursalFin, Nullable<decimal> idAlumnoIni, Nullable<decimal> idAlumnoFin, Nullable<System.DateTime> fechaCorte, Nullable<bool> mostrarSaldo0)
         {

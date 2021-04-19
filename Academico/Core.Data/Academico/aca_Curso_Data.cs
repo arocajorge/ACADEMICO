@@ -22,7 +22,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_Curso c "
+                    string query = "SELECT * FROM aca_Curso c WITH (nolock) "
                     + " WHERE c.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -48,25 +48,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.OrdenCurso).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Curso_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdCurso = q.IdCurso,
-                            IdCursoAPromover = q.IdCursoAPromover,
-                            NomCurso = q.NomCurso,
-                            OrdenCurso = q.OrdenCurso,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -172,7 +154,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_Curso c "
+                    command.CommandText = "SELECT * FROM aca_Curso c WITH (nolock) "
                     + " WHERE c.IdEmpresa = " + IdEmpresa.ToString() + " and c.IdCurso = " + IdCurso.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -194,24 +176,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdCurso == IdCurso).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_Curso_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdCurso = Entity.IdCurso,
-                        IdCursoAPromover = Entity.IdCursoAPromover,
-                        NomCurso = Entity.NomCurso,
-                        OrdenCurso = Entity.OrdenCurso,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

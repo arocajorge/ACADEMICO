@@ -104,7 +104,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_Paralelo p "
+                    string query = "SELECT * FROM aca_Paralelo p WITH (nolock) "
                     + " WHERE p.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -130,25 +130,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q => q.OrdenParalelo).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Paralelo_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdParalelo = q.IdParalelo,
-                            CodigoParalelo = q.CodigoParalelo,
-                            NomParalelo = q.NomParalelo,
-                            OrdenParalelo = q.OrdenParalelo,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -194,7 +176,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_Paralelo p "
+                    command.CommandText = "SELECT * FROM aca_Paralelo p WITH (nolock) "
                     + " WHERE p.IdEmpresa = " + IdEmpresa.ToString() + " and p.IdParalelo = "+ IdParalelo.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -216,24 +198,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_Paralelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdParalelo == IdParalelo).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_Paralelo_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdParalelo = Entity.IdParalelo,
-                        CodigoParalelo = Entity.CodigoParalelo,
-                        NomParalelo = Entity.NomParalelo,
-                        OrdenParalelo = Entity.OrdenParalelo,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

@@ -295,14 +295,21 @@ namespace Core.Data.Reportes.Academico
 
                 ListaFinal.AddRange(lst_promedio_general);
 
+                Lista_Proyectos = Lista.Where(q => q.IdMateria == 0 && q.NombreGrupo == "PROYECTOS").ToList();
+                foreach (var item in Lista_Proyectos)
+                {
+                    var equivalencia = odata_proyectos_equiv.getInfo_Codigo(IdEmpresa, IdAnio, (item.Calificacion == null ? "" : Convert.ToString(item.Calificacion)));
+                    item.CalificacionCualitativa = (equivalencia == null ? null : equivalencia.DescripcionCorta);
+                }
+                ListaFinal.AddRange(Lista_Proyectos);
+
                 Lista_Comportamiento = Lista.Where(q => q.IdMateria == 0 && q.NombreGrupo == "COMPORTAMIENTO").ToList();
                 foreach (var item in Lista_Comportamiento)
                 {
                     var equivalencia = odata_conducta_equiv.getInfo_x_Letra(IdEmpresa, IdAnio, (item.Calificacion == null ? "" : Convert.ToString(item.Calificacion)));
                     item.CalificacionCualitativa = (equivalencia == null ? null : equivalencia.DescripcionEquivalencia);
                 }
-                ListaFinal.AddRange(Lista_Comportamiento);
-                
+                ListaFinal.AddRange(Lista_Comportamiento);                                
 
                 return ListaFinal;
             }

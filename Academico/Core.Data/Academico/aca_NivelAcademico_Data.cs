@@ -21,7 +21,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_NivelAcademico n "
+                    string query = "SELECT * FROM aca_NivelAcademico n WITH (nolock) "
                     + " WHERE n.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -46,24 +46,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderBy(q=>q.Orden).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_NivelAcademico_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdNivel = q.IdNivel,
-                            NomNivel = q.NomNivel,
-                            Orden = q.Orden,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -111,7 +94,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT* FROM aca_NivelAcademico n "
+                    command.CommandText = "SELECT* FROM aca_NivelAcademico n WITH (nolock) "
                    + " WHERE n.IdEmpresa = " + IdEmpresa.ToString() + " and n.IdNivel = " + IdNivel.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -132,23 +115,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdNivel == IdNivel).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_NivelAcademico_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdNivel = Entity.IdNivel,
-                        NomNivel = Entity.NomNivel,
-                        Orden = Entity.Orden,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
