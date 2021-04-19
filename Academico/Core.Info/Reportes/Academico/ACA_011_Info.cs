@@ -50,5 +50,10 @@ namespace Core.Info.Reportes.Academico
         public Nullable<decimal> ExamenRemedial { get; set; }
         public Nullable<decimal> ExamenGracia { get; set; }
         public Nullable<decimal> PromedioFinal { get; set; }
+        public Nullable<int> FaltaJustificada { get; set; }
+        public Nullable<int> FaltaInjustificada { get; set; }
+        public string CondQ1 { get; set; }
+        public string CondQ2 { get; set; }
+        public string CondFinal { get; set; }
     }
 }

@@ -66,7 +66,7 @@ namespace Core.Data.Reportes.Academico
                             IdParalelo = item.IdParalelo,
                             Fecha = item.Fecha,
                             NomPlantilla = (MostarPlantilla == true ? item.NomPlantilla : ""),
-                            IdPlantilla = item.IdPlantilla,
+                            IdPlantilla = item.IdPlantilla??0,
                             Descripcion = item.Descripcion,
                             pe_nombreCompleto = item.pe_nombreCompleto,
                             CodigoAlumno = item.CodigoAlumno,

@@ -702,8 +702,10 @@
             // 
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomNivel]")});
+            this.xrTableCell2.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
+            this.xrTableCell2.StylePriority.UseFont = false;
             this.xrTableCell2.Text = "xrTableCell2";
             this.xrTableCell2.Weight = 1.2643144723307134D;
             // 
@@ -720,8 +722,10 @@
             // 
             this.xrTableCell3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomJornada]")});
+            this.xrTableCell3.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
+            this.xrTableCell3.StylePriority.UseFont = false;
             this.xrTableCell3.Text = "xrTableCell3";
             this.xrTableCell3.Weight = 0.74662687271681982D;
             // 
@@ -748,8 +752,10 @@
             // 
             this.xrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomCurso]")});
+            this.xrTableCell7.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
+            this.xrTableCell7.StylePriority.UseFont = false;
             this.xrTableCell7.Text = "xrTableCell7";
             this.xrTableCell7.Weight = 1.2643144723307134D;
             // 
@@ -766,8 +772,10 @@
             // 
             this.xrTableCell9.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NomParalelo]")});
+            this.xrTableCell9.Font = new System.Drawing.Font("Verdana", 8F);
             this.xrTableCell9.Multiline = true;
             this.xrTableCell9.Name = "xrTableCell9";
+            this.xrTableCell9.StylePriority.UseFont = false;
             this.xrTableCell9.Text = "xrTableCell9";
             this.xrTableCell9.Weight = 0.74662736034793453D;
             // 
