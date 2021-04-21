@@ -23,14 +23,14 @@ namespace Core.Data.Academico
                     #region Query
                     string query = "SELECT h.IdEmpresa, h.IdAnio, a.Descripcion, h.IdAlumno, p.pe_nombreCompleto, h.IdCurso, h.Promedio, h.IdEquivalenciaPromedio, "
                     + " h.Conducta, h.SecuenciaConducta, ce.Letra, n.NomNivel, c.NomCurso, h.AntiguaInstitucion, h.IdNivel, ep.Codigo, h.IdMatricula "
-                    + " FROM dbo.aca_AnioLectivoCalificacionHistorico AS h INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON h.IdEmpresa = a.IdEmpresa AND h.IdAnio = a.IdAnio INNER JOIN "
-                    + " dbo.aca_Alumno AS al ON h.IdEmpresa = al.IdEmpresa AND h.IdAlumno = al.IdAlumno INNER JOIN "
-                    + " dbo.tb_persona AS p ON al.IdPersona = p.IdPersona INNER JOIN "
-                    + " dbo.aca_Curso AS c ON h.IdEmpresa = c.IdEmpresa AND h.IdCurso = c.IdCurso INNER JOIN "
-                    + " dbo.aca_NivelAcademico AS n ON h.IdEmpresa = n.IdEmpresa AND h.IdNivel = n.IdNivel LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivoEquivalenciaPromedio AS ep ON h.IdEmpresa = ep.IdEmpresa AND h.IdAnio = ep.IdAnio AND h.IdEquivalenciaPromedio = ep.IdEquivalenciaPromedio LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivoConductaEquivalencia AS ce ON h.IdEmpresa = ce.IdEmpresa AND h.IdAnio = ce.IdAnio AND h.SecuenciaConducta = ce.Secuencia "
+                    + " FROM dbo.aca_AnioLectivoCalificacionHistorico AS h WITH (nolock) INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON h.IdEmpresa = a.IdEmpresa AND h.IdAnio = a.IdAnio INNER JOIN "
+                    + " dbo.aca_Alumno AS al WITH (nolock) ON h.IdEmpresa = al.IdEmpresa AND h.IdAlumno = al.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON al.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_Curso AS c WITH (nolock) ON h.IdEmpresa = c.IdEmpresa AND h.IdCurso = c.IdCurso INNER JOIN "
+                    + " dbo.aca_NivelAcademico AS n WITH (nolock) ON h.IdEmpresa = n.IdEmpresa AND h.IdNivel = n.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoEquivalenciaPromedio AS ep WITH (nolock) ON h.IdEmpresa = ep.IdEmpresa AND h.IdAnio = ep.IdAnio AND h.IdEquivalenciaPromedio = ep.IdEquivalenciaPromedio LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS ce WITH (nolock) ON h.IdEmpresa = ce.IdEmpresa AND h.IdAnio = ce.IdAnio AND h.SecuenciaConducta = ce.Secuencia "
                     + " WHERE h.IdEmpresa = " + IdEmpresa.ToString() + " and h.IdAlumno = " + IdAlumno.ToString();
                     #endregion
 
@@ -62,36 +62,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_AnioLectivoCalificacionHistorico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivoCalificacionHistorico_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            IdAlumno = q.IdAlumno,
-                            IdCurso = q.IdCurso,
-                            IdNivel = q.IdNivel,
-                            Promedio = q.Promedio,
-                            Conducta = q.Conducta,
-                            Descripcion = q.Descripcion,
-                            NomNivel=q.NomNivel,
-                            NomCurso= q.NomCurso,
-                            IdMatricula = q.IdMatricula,
-                            Letra = q.Letra,
-                            AntiguaInstitucion = q.AntiguaInstitucion,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            IdEquivalenciaPromedio = q.IdEquivalenciaPromedio,
-                            SecuenciaConducta = q.SecuenciaConducta,
-                            Codigo = q.Codigo
-                        });
-                    });
-                }
-                */
                 Lista.ForEach(q=>q.IdString = IdEmpresa.ToString("000")+ q.IdAnio.ToString("0000") + q.IdAlumno.ToString("000000") + q.IdNivel.ToString("000") + q.IdCurso.ToString("000") );
                 return Lista;
             }
@@ -111,7 +82,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionHistorico "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionHistorico WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdAlumno = " + IdAlumno.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -138,29 +109,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivoCalificacionHistorico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno== IdAlumno).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AnioLectivoCalificacionHistorico_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdAlumno = Entity.IdAlumno,
-                        IdMatricula = Entity.IdMatricula,
-                        IdNivel = Entity.IdNivel,
-                        IdCurso = Entity.IdCurso,
-                        AntiguaInstitucion = Entity.AntiguaInstitucion,
-                        Promedio = Entity.Promedio,
-                        IdEquivalenciaPromedio = Entity.IdEquivalenciaPromedio,
-                        Conducta = Entity.Conducta,
-                        SecuenciaConducta = Entity.SecuenciaConducta
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

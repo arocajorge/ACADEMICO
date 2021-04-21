@@ -22,8 +22,8 @@ namespace Core.Data.Academico
 
                     #region Query
                     string query = "SELECT ep.IdEmpresa, ep.IdEquivalenciaPromedio, ep.IdAnio, ep.Descripcion, ep.Codigo, ep.ValorMinimo, ep.ValorMaximo, ep.Estado, a.Descripcion AS DescripcionAnio "
-                    + " FROM dbo.aca_AnioLectivoEquivalenciaPromedio AS ep LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON ep.IdEmpresa = a.IdEmpresa AND ep.IdAnio = a.IdAnio "
+                    + " FROM dbo.aca_AnioLectivoEquivalenciaPromedio AS ep WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON ep.IdEmpresa = a.IdEmpresa AND ep.IdAnio = a.IdAnio "
                     + " WHERE ep.IdEmpresa = " + IdEmpresa.ToString() + " and ep.IdAnio = " + IdAnio.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -51,28 +51,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_AnioLectivoEquivalenciaPromedio.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivoEquivalenciaPromedio_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            IdEquivalenciaPromedio = q.IdEquivalenciaPromedio,
-                            DescripcionAnio = q.DescripcionAnio,
-                            Descripcion = q.Descripcion,
-                            Codigo = q.Codigo,
-                            ValorMinimo = q.ValorMinimo,
-                            ValorMaximo = q.ValorMaximo,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -91,7 +70,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivoEquivalenciaPromedio "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoEquivalenciaPromedio WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdEquivalenciaPromedio = " + IdEquivalenciaPromedio.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -115,26 +94,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivoEquivalenciaPromedio.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdEquivalenciaPromedio == IdEquivalenciaPromedio).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AnioLectivoEquivalenciaPromedio_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdEquivalenciaPromedio = Entity.IdEquivalenciaPromedio,
-                        Descripcion = Entity.Descripcion,
-                        Codigo = Entity.Codigo,
-                        ValorMinimo = Entity.ValorMinimo,
-                        ValorMaximo = Entity.ValorMaximo,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

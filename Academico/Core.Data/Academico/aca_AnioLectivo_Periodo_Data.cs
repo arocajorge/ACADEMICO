@@ -22,8 +22,8 @@ namespace Core.Data.Academico
 
                     #region Query
                     string query = "SELECT ap.IdEmpresa, ap.IdAnio, a.Descripcion, COUNT(ap.IdPeriodo) AS NumPeriodos "
-                    + " FROM dbo.aca_AnioLectivo_Periodo AS ap INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON ap.IdEmpresa = a.IdEmpresa AND ap.IdAnio = a.IdAnio "
+                    + " FROM dbo.aca_AnioLectivo_Periodo AS ap WITH (nolock) INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON ap.IdEmpresa = a.IdEmpresa AND ap.IdAnio = a.IdAnio "
                     + " WHERE ap.IdEmpresa = " + IdEmpresa.ToString()
                     + " GROUP BY ap.IdEmpresa, ap.IdAnio, a.Descripcion ";
                     #endregion
@@ -43,18 +43,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    Lista = Context.vwaca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa).Select(q => new aca_AnioLectivo_Periodo_Info
-                    {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAnio = q.IdAnio,
-                        Descripcion = q.Descripcion,
-                        NumPeriodos = q.NumPeriodos??0
-                    }).ToList();
-                }
-                */
+
                 return Lista;
             }
             catch (Exception)
@@ -109,7 +98,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_AnioLectivo_Periodo"
+                    string query = "SELECT * FROM aca_AnioLectivo_Periodo WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = "+IdAnio.ToString();
                     if (MostrarAnulados==false)
                     {
@@ -136,21 +125,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    Lista = Context.aca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_AnioLectivo_Periodo_Info
-                    {
-                        IdEmpresa = q.IdEmpresa,
-                        IdPeriodo = q.IdPeriodo,
-                        IdAnio = q.IdAnio,
-                        IdMes = q.IdMes,
-                        FechaDesde = q.FechaDesde,
-                        FechaHasta = q.FechaHasta,
-                        FechaProntoPago = q.FechaProntoPago,
-                        Estado = q.Estado
-                    }).ToList();
-                }*/
+
                 Lista.ForEach(v => { v.NomPeriodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
                 return Lista;
             }
@@ -169,7 +144,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivo_Periodo "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivo_Periodo WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdPeriodo = " + IdPeriodo.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -194,27 +169,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivo_Periodo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPeriodo == IdPeriodo).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AnioLectivo_Periodo_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdPeriodo = Entity.IdPeriodo,
-                        IdAnio = Entity.IdAnio,
-                        IdMes = Entity.IdMes,
-                        FechaDesde = Entity.FechaDesde,
-                        FechaHasta = Entity.FechaHasta,
-                        FechaProntoPago = Entity.FechaProntoPago,
-                        Estado = Entity.Estado,
-                        Procesado = Entity.Procesado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -314,8 +269,8 @@ namespace Core.Data.Academico
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
                     command.CommandText = "SELECT COUNT(IdEmpresa) IdEmpresa "
-                                        +" FROM aca_Matricula_Rubro"
-                                        +" WHERE IdEmpresa = "+info.IdEmpresa.ToString()+" AND IdPeriodo = "+info.IdPeriodo.ToString()+" AND IdAnio = "+info.IdAnio.ToString()
+                                        + " FROM aca_Matricula_Rubro WITH (nolock) "
+                                        + " WHERE IdEmpresa = "+info.IdEmpresa.ToString()+" AND IdPeriodo = "+info.IdPeriodo.ToString()+" AND IdAnio = "+info.IdAnio.ToString()
                                         +" AND FechaFacturacion IS NULL";
                     
                     var ResultValue = command.ExecuteScalar();
@@ -333,25 +288,6 @@ namespace Core.Data.Academico
                          + " WHERE IdEmpresa = " + info.IdEmpresa.ToString() + " and IdAnio = " + info.IdAnio.ToString() + " and IdPeriodo = " + info.IdPeriodo.ToString();
                         command.ExecuteNonQuery();
 
-
-                        //using (EntitiesAcademico Context = new EntitiesAcademico())
-                        //{
-                        //    aca_AnioLectivo_Periodo Entity = Context.aca_AnioLectivo_Periodo.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdPeriodo == info.IdPeriodo);
-                        //    if (Entity == null)
-                        //        return false;
-
-                        //    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
-                        //    Entity.FechaModificacion = DateTime.Now;
-                        //    Entity.IdSucursal = info.IdSucursal;
-                        //    Entity.IdPuntoVta = info.IdPuntoVta;
-                        //    //Entity.Procesado = true;
-                        //    Entity.FechaProceso = DateTime.Now;
-                        //    Entity.TotalAlumnos = info.lst_det_fact_masiva.Count();
-                        //    Entity.TotalValorFacturado = info.lst_det_fact_masiva.Sum(q => q.Total);
-
-                        //    Context.SaveChanges();
-                        //    //command.ExecuteNonQuery();
-                        //}
                     }
                 }
 
