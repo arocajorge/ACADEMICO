@@ -3447,10 +3447,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
             <Parameter Name="MostrarAnulados" Mode="In" Type="Boolean" />
           </FunctionImport>
           <EntitySet Name="VWFAC_009" EntityType="ModelReportes.VWFAC_009" />
-          <FunctionImport Name="SPACA_001" ReturnType="Collection(ModelReportes.SPACA_001_Result)">
-            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
-            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
-          </FunctionImport>
           <FunctionImport Name="SPACA_005" ReturnType="Collection(ModelReportes.SPACA_005_Result)">
             <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
             <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
@@ -3814,6 +3810,10 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <EntitySet Name="VWBAN_002_cancelaciones" EntityType="ModelReportes.VWBAN_002_cancelaciones" />
           <EntitySet Name="VWBAN_003" EntityType="ModelReportes.VWBAN_003" />
           <EntitySet Name="VWBAN_004" EntityType="ModelReportes.VWBAN_004" />
+          <FunctionImport Name="SPACA_001" ReturnType="Collection(ModelReportes.SPACA_001_Result)">
+            <Parameter Name="IdEmpresa" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Decimal" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SPCXC_001_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
@@ -5169,65 +5169,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <Property Name="vt_fecha" Type="DateTime" Precision="3" />
           <Property Name="IdConciliacion" Type="Decimal" Precision="18" Scale="0" />
         </EntityType>
-        <ComplexType Name="SPACA_001_Result">
-          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
-          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="CodigoMatricula" Nullable="true" MaxLength="200" />
-          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomAnio" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="CodigoAlumno" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="pe_nombre" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="pe_apellido" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="pe_sexo" Nullable="false" MaxLength="9" />
-          <Property Type="String" Name="Nacionalidad" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
-          <Property Type="DateTime" Name="pe_fechaNacimiento" Nullable="true" Precision="23" />
-          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="300" />
-          <Property Type="String" Name="Celular" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="Correo" Nullable="true" MaxLength="500" />
-          <Property Type="DateTime" Name="Fecha" Nullable="false" />
-          <Property Type="String" Name="NomPlantilla" Nullable="false" MaxLength="500" />
-          <Property Type="String" Name="AntiguaInstitucion" Nullable="true" MaxLength="500" />
-          <Property Type="Decimal" Name="Conducta" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="Decimal" Name="Promedio" Nullable="true" Precision="18" Scale="2" />
-          <Property Type="String" Name="DocumentosCompletos" Nullable="false" MaxLength="2" />
-          <Property Type="String" Name="NomVivienda" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomTipoVivienda" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="NomAgua" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TieneElectricidad" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="NomGrupoEtnico" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="TieneHermanos" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="TieneConadis" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="NomConadis" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="NomViveCon" Nullable="true" MaxLength="500" />
-          <Property Type="Int32" Name="CantidadHermanos" Nullable="true" />
-          <Property Type="Double" Name="TotalGastos" Nullable="true" />
-          <Property Type="String" Name="Observacion" Nullable="true" />
-          <Property Type="String" Name="Titulo" Nullable="true" MaxLength="546" />
-          <Property Type="String" Name="NomFamiliar" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="NomEstadoCivil" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="DireccionFamiliar" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="NomInstruccion" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="EmpresaTrabajo" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="CorreoFamiliar" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="VehiculoPropio" Nullable="true" MaxLength="2" />
-          <Property Type="String" Name="Marca" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Modelo" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="AnioVehiculo" Nullable="true" />
-          <Property Type="String" Name="CedulaRucFamiliar" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="NomProfesion" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="CelularFamiliar" Nullable="true" MaxLength="500" />
-          <Property Type="Double" Name="IngresoMensual" Nullable="true" />
-          <Property Type="Double" Name="OtrosIngresos" Nullable="true" />
-          <Property Type="String" Name="IdUsuarioCreacion" Nullable="true" MaxLength="200" />
-          <Property Type="String" Name="NivelProcedencia" Nullable="true" MaxLength="500" />
-        </ComplexType>
         <ComplexType Name="SPACA_005_Result">
           <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
           <Property Type="Int32" Name="IdSocioEconomico" Nullable="false" />
@@ -7129,6 +7070,66 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="Boolean" Nullable="false" />
         </EntityType>
+        <ComplexType Name="SPACA_001_Result">
+          <Property Type="Int32" Name="IdEmpresa" Nullable="false" />
+          <Property Type="Decimal" Name="IdMatricula" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="CodigoMatricula" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="IdAlumno" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="NomSede" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomNivel" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomAnio" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CodigoAlumno" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="pe_nombre" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="pe_apellido" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="pe_sexo" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Nacionalidad" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NomJornada" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomCurso" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomParalelo" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CodigoParalelo" Nullable="true" MaxLength="10" />
+          <Property Type="DateTime" Name="pe_fechaNacimiento" Nullable="true" Precision="23" />
+          <Property Type="String" Name="LugarNacimiento" Nullable="true" MaxLength="300" />
+          <Property Type="String" Name="Celular" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Correo" Nullable="true" MaxLength="500" />
+          <Property Type="DateTime" Name="Fecha" Nullable="false" />
+          <Property Type="String" Name="NomPlantilla" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="AntiguaInstitucion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="Letra" Nullable="true" MaxLength="10" />
+          <Property Type="Decimal" Name="Conducta" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Promedio" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="String" Name="DocumentosCompletos" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="NomVivienda" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomTipoVivienda" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="NomAgua" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TieneElectricidad" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="NomGrupoEtnico" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="TieneHermanos" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="TieneConadis" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="NomConadis" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="NomViveCon" Nullable="true" MaxLength="500" />
+          <Property Type="Int32" Name="CantidadHermanos" Nullable="true" />
+          <Property Type="Double" Name="TotalGastos" Nullable="true" />
+          <Property Type="String" Name="Observacion" Nullable="true" />
+          <Property Type="String" Name="Titulo" Nullable="true" MaxLength="546" />
+          <Property Type="String" Name="NomFamiliar" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NomEstadoCivil" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="DireccionFamiliar" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="NomInstruccion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="EmpresaTrabajo" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="CorreoFamiliar" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="VehiculoPropio" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Marca" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Modelo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AnioVehiculo" Nullable="true" />
+          <Property Type="String" Name="CedulaRucFamiliar" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="NomProfesion" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="CelularFamiliar" Nullable="true" MaxLength="500" />
+          <Property Type="Double" Name="IngresoMensual" Nullable="true" />
+          <Property Type="Double" Name="OtrosIngresos" Nullable="true" />
+          <Property Type="String" Name="IdUsuarioCreacion" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="NivelProcedencia" Nullable="true" MaxLength="500" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -8234,69 +8235,6 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SPACA_001" FunctionName="ModelReportes.Store.SPACA_001">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="ModelReportes.SPACA_001_Result">
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
-                <ScalarProperty Name="CodigoMatricula" ColumnName="CodigoMatricula" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
-                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
-                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
-                <ScalarProperty Name="NomAnio" ColumnName="NomAnio" />
-                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
-                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
-                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
-                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
-                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
-                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
-                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="NomPlantilla" ColumnName="NomPlantilla" />
-                <ScalarProperty Name="AntiguaInstitucion" ColumnName="AntiguaInstitucion" />
-                <ScalarProperty Name="Conducta" ColumnName="Conducta" />
-                <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-                <ScalarProperty Name="DocumentosCompletos" ColumnName="DocumentosCompletos" />
-                <ScalarProperty Name="NomVivienda" ColumnName="NomVivienda" />
-                <ScalarProperty Name="NomTipoVivienda" ColumnName="NomTipoVivienda" />
-                <ScalarProperty Name="NomAgua" ColumnName="NomAgua" />
-                <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
-                <ScalarProperty Name="NomGrupoEtnico" ColumnName="NomGrupoEtnico" />
-                <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
-                <ScalarProperty Name="TieneConadis" ColumnName="TieneConadis" />
-                <ScalarProperty Name="NomConadis" ColumnName="NomConadis" />
-                <ScalarProperty Name="NomViveCon" ColumnName="NomViveCon" />
-                <ScalarProperty Name="CantidadHermanos" ColumnName="CantidadHermanos" />
-                <ScalarProperty Name="TotalGastos" ColumnName="TotalGastos" />
-                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
-                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
-                <ScalarProperty Name="NomFamiliar" ColumnName="NomFamiliar" />
-                <ScalarProperty Name="NomEstadoCivil" ColumnName="NomEstadoCivil" />
-                <ScalarProperty Name="DireccionFamiliar" ColumnName="DireccionFamiliar" />
-                <ScalarProperty Name="NomInstruccion" ColumnName="NomInstruccion" />
-                <ScalarProperty Name="EmpresaTrabajo" ColumnName="EmpresaTrabajo" />
-                <ScalarProperty Name="CorreoFamiliar" ColumnName="CorreoFamiliar" />
-                <ScalarProperty Name="VehiculoPropio" ColumnName="VehiculoPropio" />
-                <ScalarProperty Name="Marca" ColumnName="Marca" />
-                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
-                <ScalarProperty Name="AnioVehiculo" ColumnName="AnioVehiculo" />
-                <ScalarProperty Name="CedulaRucFamiliar" ColumnName="CedulaRucFamiliar" />
-                <ScalarProperty Name="NomProfesion" ColumnName="NomProfesion" />
-                <ScalarProperty Name="CelularFamiliar" ColumnName="CelularFamiliar" />
-                <ScalarProperty Name="IngresoMensual" ColumnName="IngresoMensual" />
-                <ScalarProperty Name="OtrosIngresos" ColumnName="OtrosIngresos" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="NivelProcedencia" ColumnName="NivelProcedencia" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SPACA_005" FunctionName="ModelReportes.Store.SPACA_005">
             <ResultMapping>
               <ComplexTypeMapping TypeName="ModelReportes.SPACA_005_Result">
@@ -10190,6 +10128,70 @@ advertencia 6002: La tabla o vista 'DBERP.web.VWFAC_003' no tiene definida ningu
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SPACA_001" FunctionName="ModelReportes.Store.SPACA_001">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelReportes.SPACA_001_Result">
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="CodigoMatricula" ColumnName="CodigoMatricula" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="NomSede" ColumnName="NomSede" />
+                <ScalarProperty Name="NomNivel" ColumnName="NomNivel" />
+                <ScalarProperty Name="NomAnio" ColumnName="NomAnio" />
+                <ScalarProperty Name="CodigoAlumno" ColumnName="CodigoAlumno" />
+                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
+                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
+                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
+                <ScalarProperty Name="Nacionalidad" ColumnName="Nacionalidad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NomJornada" ColumnName="NomJornada" />
+                <ScalarProperty Name="NomCurso" ColumnName="NomCurso" />
+                <ScalarProperty Name="NomParalelo" ColumnName="NomParalelo" />
+                <ScalarProperty Name="CodigoParalelo" ColumnName="CodigoParalelo" />
+                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
+                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="NomPlantilla" ColumnName="NomPlantilla" />
+                <ScalarProperty Name="AntiguaInstitucion" ColumnName="AntiguaInstitucion" />
+                <ScalarProperty Name="Letra" ColumnName="Letra" />
+                <ScalarProperty Name="Conducta" ColumnName="Conducta" />
+                <ScalarProperty Name="Promedio" ColumnName="Promedio" />
+                <ScalarProperty Name="DocumentosCompletos" ColumnName="DocumentosCompletos" />
+                <ScalarProperty Name="NomVivienda" ColumnName="NomVivienda" />
+                <ScalarProperty Name="NomTipoVivienda" ColumnName="NomTipoVivienda" />
+                <ScalarProperty Name="NomAgua" ColumnName="NomAgua" />
+                <ScalarProperty Name="TieneElectricidad" ColumnName="TieneElectricidad" />
+                <ScalarProperty Name="NomGrupoEtnico" ColumnName="NomGrupoEtnico" />
+                <ScalarProperty Name="TieneHermanos" ColumnName="TieneHermanos" />
+                <ScalarProperty Name="TieneConadis" ColumnName="TieneConadis" />
+                <ScalarProperty Name="NomConadis" ColumnName="NomConadis" />
+                <ScalarProperty Name="NomViveCon" ColumnName="NomViveCon" />
+                <ScalarProperty Name="CantidadHermanos" ColumnName="CantidadHermanos" />
+                <ScalarProperty Name="TotalGastos" ColumnName="TotalGastos" />
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="NomFamiliar" ColumnName="NomFamiliar" />
+                <ScalarProperty Name="NomEstadoCivil" ColumnName="NomEstadoCivil" />
+                <ScalarProperty Name="DireccionFamiliar" ColumnName="DireccionFamiliar" />
+                <ScalarProperty Name="NomInstruccion" ColumnName="NomInstruccion" />
+                <ScalarProperty Name="EmpresaTrabajo" ColumnName="EmpresaTrabajo" />
+                <ScalarProperty Name="CorreoFamiliar" ColumnName="CorreoFamiliar" />
+                <ScalarProperty Name="VehiculoPropio" ColumnName="VehiculoPropio" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="AnioVehiculo" ColumnName="AnioVehiculo" />
+                <ScalarProperty Name="CedulaRucFamiliar" ColumnName="CedulaRucFamiliar" />
+                <ScalarProperty Name="NomProfesion" ColumnName="NomProfesion" />
+                <ScalarProperty Name="CelularFamiliar" ColumnName="CelularFamiliar" />
+                <ScalarProperty Name="IngresoMensual" ColumnName="IngresoMensual" />
+                <ScalarProperty Name="OtrosIngresos" ColumnName="OtrosIngresos" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="NivelProcedencia" ColumnName="NivelProcedencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

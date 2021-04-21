@@ -37,6 +37,7 @@ namespace Core.Data.Base
         public System.DateTime Fecha { get; set; }
         public string NomPlantilla { get; set; }
         public string AntiguaInstitucion { get; set; }
+        public string Letra { get; set; }
         public Nullable<decimal> Conducta { get; set; }
         public Nullable<decimal> Promedio { get; set; }
         public string DocumentosCompletos { get; set; }

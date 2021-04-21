@@ -349,19 +349,6 @@ namespace Core.Data.Base
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPFAC_006_Result>("SPFAC_006", idEmpresaParameter, idSucursalIniParameter, idSucursalFinParameter, idAlumnoIniParameter, idAlumnoFinParameter, fechaIniParameter, fechaFinParameter, mostrarAnuladosParameter);
         }
     
-        public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
-        {
-            var idEmpresaParameter = idEmpresa.HasValue ?
-                new ObjectParameter("IdEmpresa", idEmpresa) :
-                new ObjectParameter("IdEmpresa", typeof(int));
-    
-            var idAlumnoParameter = idAlumno.HasValue ?
-                new ObjectParameter("IdAlumno", idAlumno) :
-                new ObjectParameter("IdAlumno", typeof(decimal));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_001_Result>("SPACA_001", idEmpresaParameter, idAlumnoParameter);
-        }
-    
         public virtual ObjectResult<SPACA_005_Result> SPACA_005(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
         {
             var idEmpresaParameter = idEmpresa.HasValue ?
@@ -1640,6 +1627,19 @@ namespace Core.Data.Base
                 new ObjectParameter("IdParalelo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_011_Result>("SPACA_011", idEmpresaParameter, idAnioParameter, idSedeParameter, idNivelParameter, idJornadaParameter, idCursoParameter, idParaleloParameter);
+        }
+    
+        public virtual ObjectResult<SPACA_001_Result> SPACA_001(Nullable<int> idEmpresa, Nullable<decimal> idAlumno)
+        {
+            var idEmpresaParameter = idEmpresa.HasValue ?
+                new ObjectParameter("IdEmpresa", idEmpresa) :
+                new ObjectParameter("IdEmpresa", typeof(int));
+    
+            var idAlumnoParameter = idAlumno.HasValue ?
+                new ObjectParameter("IdAlumno", idAlumno) :
+                new ObjectParameter("IdAlumno", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SPACA_001_Result>("SPACA_001", idEmpresaParameter, idAlumnoParameter);
         }
     }
 }

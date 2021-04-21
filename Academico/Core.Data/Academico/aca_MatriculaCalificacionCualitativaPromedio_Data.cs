@@ -21,7 +21,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_MatriculaCalificacionCualitativaPromedio "
+                    string query = "SELECT * FROM aca_MatriculaCalificacionCualitativaPromedio WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdMatricula = " + IdMatricula.ToString();
                     #endregion
 
@@ -46,29 +46,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_MatriculaCalificacionCualitativaPromedio.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MatriculaCalificacionCualitativaPromedio_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatricula = q.IdMatricula,
-                            IdMateria = q.IdMateria,
-                            IdProfesor = q.IdProfesor,
-                            IdCalificacionCualitativaQ1 = q.IdCalificacionCualitativaQ1,
-                            IdCalificacionCualitativaQ2 = q.IdCalificacionCualitativaQ2,
-                            IdCalificacionCualitativaFinal=q.IdCalificacionCualitativaFinal,
-                            PromedioQ1=q.PromedioQ1,
-                            PromedioQ2 = q.PromedioQ2,
-                            PromedioFinal = q.PromedioFinal
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)

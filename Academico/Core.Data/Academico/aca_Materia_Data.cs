@@ -23,10 +23,10 @@ namespace Core.Data.Academico
                     #region Query
                     string query = "SELECT m.IdEmpresa, m.IdMateria, m.IdMateriaArea, m.IdMateriaGrupo, m.OrdenMateria, ma.OrdenMateriaArea, mg.OrdenMateriaGrupo, m.NomMateria, ma.NomMateriaArea, mg.NomMateriaGrupo, mg.PromediarGrupo, m.EsObligatorio,  "
                     + " m.Estado, m.IdCatalogoTipoCalificacion, c.NomCatalogo "
-                    + " FROM dbo.aca_Materia AS m LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON m.IdCatalogoTipoCalificacion = c.IdCatalogo LEFT OUTER JOIN "
-                    + " dbo.aca_MateriaArea AS ma ON m.IdEmpresa = ma.IdEmpresa AND m.IdMateriaArea = ma.IdMateriaArea LEFT OUTER JOIN "
-                    + " dbo.aca_MateriaGrupo AS mg ON m.IdEmpresa = mg.IdEmpresa AND m.IdMateriaGrupo = mg.IdMateriaGrupo "
+                    + " FROM dbo.aca_Materia AS m WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON m.IdCatalogoTipoCalificacion = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_MateriaArea AS ma WITH (nolock) ON m.IdEmpresa = ma.IdEmpresa AND m.IdMateriaArea = ma.IdMateriaArea LEFT OUTER JOIN "
+                    + " dbo.aca_MateriaGrupo AS mg WITH (nolock) ON m.IdEmpresa = mg.IdEmpresa AND m.IdMateriaGrupo = mg.IdMateriaGrupo "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -55,28 +55,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Materia_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMateria = q.IdMateria,
-                            NomMateria = q.NomMateria,
-                            NomMateriaGrupo = q.NomMateriaGrupo,
-                            OrdenMateria = q.OrdenMateria,
-                            EsObligatorio = q.EsObligatorio,
-                            IdMateriaGrupo = q.IdMateriaGrupo,
-                            IdCatalogoTipoCalificacion = q.IdCatalogoTipoCalificacion,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -125,10 +104,10 @@ namespace Core.Data.Academico
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT m.IdEmpresa, m.IdMateria, m.IdMateriaArea, m.IdMateriaGrupo, m.OrdenMateria, ma.OrdenMateriaArea, mg.OrdenMateriaGrupo, m.NomMateria, ma.NomMateriaArea, mg.NomMateriaGrupo, mg.PromediarGrupo, m.EsObligatorio,  "
                     + " m.Estado, m.IdCatalogoTipoCalificacion, c.NomCatalogo "
-                    + " FROM dbo.aca_Materia AS m LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON m.IdCatalogoTipoCalificacion = c.IdCatalogo LEFT OUTER JOIN "
-                    + " dbo.aca_MateriaArea AS ma ON m.IdEmpresa = ma.IdEmpresa AND m.IdMateriaArea = ma.IdMateriaArea LEFT OUTER JOIN "
-                    + " dbo.aca_MateriaGrupo AS mg ON m.IdEmpresa = mg.IdEmpresa AND m.IdMateriaGrupo = mg.IdMateriaGrupo "
+                    + " FROM dbo.aca_Materia AS m WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON m.IdCatalogoTipoCalificacion = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_MateriaArea AS ma WITH (nolock) ON m.IdEmpresa = ma.IdEmpresa AND m.IdMateriaArea = ma.IdMateriaArea LEFT OUTER JOIN "
+                    + " dbo.aca_MateriaGrupo AS mg WITH (nolock) ON m.IdEmpresa = mg.IdEmpresa AND m.IdMateriaGrupo = mg.IdMateriaGrupo "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdMateria = "+ IdMateria.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -158,32 +137,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.vwaca_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdMateria == IdMateria).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_Materia_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdMateria = Entity.IdMateria,
-                        IdMateriaGrupo = Entity.IdMateriaGrupo,
-                        IdMateriaArea = Entity.IdMateriaArea,
-                        NomMateriaArea = Entity.NomMateriaArea,
-                        NomMateriaGrupo = Entity.NomMateriaGrupo,
-                        NomMateria = Entity.NomMateria,
-                        OrdenMateria = Entity.OrdenMateria,
-                        OrdenMateriaGrupo = Entity.OrdenMateriaGrupo??0,
-                        OrdenMateriaArea = Entity.OrdenMateriaArea??0,
-                        PromediarGrupo = Entity.PromediarGrupo??false,
-                        EsObligatorio = Entity.EsObligatorio,
-                        IdCatalogoTipoCalificacion = Entity.IdCatalogoTipoCalificacion,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

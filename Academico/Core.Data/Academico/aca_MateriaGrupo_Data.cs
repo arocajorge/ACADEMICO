@@ -21,7 +21,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_MateriaGrupo "
+                    string query = "SELECT * FROM aca_MateriaGrupo WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
@@ -45,24 +45,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_MateriaGrupo.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados ? q.Estado : true)).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MateriaGrupo_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMateriaGrupo = q.IdMateriaGrupo,
-                            NomMateriaGrupo = q.NomMateriaGrupo,
-                            OrdenMateriaGrupo = q.OrdenMateriaGrupo,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -81,7 +64,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_MateriaGrupo "
+                    command.CommandText = "SELECT * FROM aca_MateriaGrupo WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdMateriaGrupo = "+IdMateriaGrupo.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -103,24 +86,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_MateriaGrupo.Where(q => q.IdEmpresa == IdEmpresa && q.IdMateriaGrupo == IdMateriaGrupo).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_MateriaGrupo_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdMateriaGrupo = Entity.IdMateriaGrupo,
-                        NomMateriaGrupo = Entity.NomMateriaGrupo,
-                        OrdenMateriaGrupo = Entity.OrdenMateriaGrupo,
-                        PromediarGrupo = Entity.PromediarGrupo,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

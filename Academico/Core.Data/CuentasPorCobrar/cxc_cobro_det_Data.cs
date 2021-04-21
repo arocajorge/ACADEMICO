@@ -328,7 +328,7 @@ namespace Core.Data.CuentasPorCobrar
                             secuencial = Convert.ToInt32(reader["secuencial"]),
                             dc_TipoDocumento = Convert.ToString(reader["dc_TipoDocumento"]),
                             dc_ValorPago = Convert.ToDouble(reader["dc_ValorPago"]),
-                            dc_ValorProntoPago = Convert.ToInt32(reader["dc_ValorProntoPago"]),
+                            dc_ValorProntoPago = Convert.ToDouble(reader["dc_ValorProntoPago"]),
                             cr_fecha = Convert.ToDateTime(reader["cr_fecha"]),
                             IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
                             IdCliente = Convert.ToDecimal(reader["IdCliente"]),

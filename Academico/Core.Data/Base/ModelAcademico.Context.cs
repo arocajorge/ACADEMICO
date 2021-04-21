@@ -52,7 +52,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_AnioLectivo_Rubro> aca_AnioLectivo_Rubro { get; set; }
         public virtual DbSet<aca_AnioLectivo_Rubro_Periodo> aca_AnioLectivo_Rubro_Periodo { get; set; }
         public virtual DbSet<aca_AlumnoDocumento> aca_AlumnoDocumento { get; set; }
-        public virtual DbSet<vwaca_Hermanos> vwaca_Hermanos { get; set; }
         public virtual DbSet<aca_Reporte_x_seg_usuario> aca_Reporte_x_seg_usuario { get; set; }
         public virtual DbSet<aca_Reporte_x_tb_empresa> aca_Reporte_x_tb_empresa { get; set; }
         public virtual DbSet<aca_Reporte> aca_Reporte { get; set; }
@@ -71,7 +70,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Plantilla_Rubro> aca_Plantilla_Rubro { get; set; }
         public virtual DbSet<vwaca_Plantilla_Rubro> vwaca_Plantilla_Rubro { get; set; }
         public virtual DbSet<aca_Plantilla> aca_Plantilla { get; set; }
-        public virtual DbSet<vwaca_Matricula_Rubro_PorFacturar> vwaca_Matricula_Rubro_PorFacturar { get; set; }
         public virtual DbSet<vwaca_Plantilla_Rubro_Matricula> vwaca_Plantilla_Rubro_Matricula { get; set; }
         public virtual DbSet<aca_AnioLectivoParcial> aca_AnioLectivoParcial { get; set; }
         public virtual DbSet<vwaca_MatriculaCalificacionParcial> vwaca_MatriculaCalificacionParcial { get; set; }
@@ -79,12 +77,8 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_Matricula_AlumnosPorParalelo> vwaca_Matricula_AlumnosPorParalelo { get; set; }
         public virtual DbSet<aca_MatriculaCambios> aca_MatriculaCambios { get; set; }
         public virtual DbSet<aca_Matricula_Rubro> aca_Matricula_Rubro { get; set; }
-        public virtual DbSet<vwaca_Matricula_Rubro> vwaca_Matricula_Rubro { get; set; }
         public virtual DbSet<aca_AnioLectivo_Periodo> aca_AnioLectivo_Periodo { get; set; }
-        public virtual DbSet<vwaca_Matricula_Rubro_FacturaMasiva> vwaca_Matricula_Rubro_FacturaMasiva { get; set; }
         public virtual DbSet<aca_Familia> aca_Familia { get; set; }
-        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
-        public virtual DbSet<vwaca_Matricula_Rubro_PorFacturarMasiva> vwaca_Matricula_Rubro_PorFacturarMasiva { get; set; }
         public virtual DbSet<aca_MatriculaConducta> aca_MatriculaConducta { get; set; }
         public virtual DbSet<vwaca_MatriculaConducta> vwaca_MatriculaConducta { get; set; }
         public virtual DbSet<vwaca_MatriculaAsistencia> vwaca_MatriculaAsistencia { get; set; }
@@ -106,12 +100,10 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Sede> aca_Sede { get; set; }
         public virtual DbSet<aca_AnioLectivo_Curso_Materia> aca_AnioLectivo_Curso_Materia { get; set; }
         public virtual DbSet<aca_MateriaGrupo> aca_MateriaGrupo { get; set; }
-        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
         public virtual DbSet<aca_AnioLectivo> aca_AnioLectivo { get; set; }
         public virtual DbSet<aca_MatriculaCalificacion> aca_MatriculaCalificacion { get; set; }
         public virtual DbSet<vwaca_MatriculaCalificacion> vwaca_MatriculaCalificacion { get; set; }
         public virtual DbSet<aca_PlantillaTipo> aca_PlantillaTipo { get; set; }
-        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
         public virtual DbSet<aca_MatriculaCalificacionParticipacion> aca_MatriculaCalificacionParticipacion { get; set; }
         public virtual DbSet<aca_MecanismoDePago> aca_MecanismoDePago { get; set; }
         public virtual DbSet<aca_Alumno> aca_Alumno { get; set; }
@@ -140,6 +132,14 @@ namespace Core.Data.Base
         public virtual DbSet<vwaca_AnioLectivoConductaEquivalencia> vwaca_AnioLectivoConductaEquivalencia { get; set; }
         public virtual DbSet<vwaca_AnioLectivoEquivalenciaPromedio> vwaca_AnioLectivoEquivalenciaPromedio { get; set; }
         public virtual DbSet<vwaca_AnioLectivoParcial> vwaca_AnioLectivoParcial { get; set; }
+        public virtual DbSet<vwaca_Familia> vwaca_Familia { get; set; }
+        public virtual DbSet<vwaca_Hermanos> vwaca_Hermanos { get; set; }
+        public virtual DbSet<vwaca_Materia> vwaca_Materia { get; set; }
+        public virtual DbSet<vwaca_Matricula> vwaca_Matricula { get; set; }
+        public virtual DbSet<vwaca_Matricula_Rubro> vwaca_Matricula_Rubro { get; set; }
+        public virtual DbSet<vwaca_Matricula_Rubro_FacturaMasiva> vwaca_Matricula_Rubro_FacturaMasiva { get; set; }
+        public virtual DbSet<vwaca_Matricula_Rubro_PorFacturar> vwaca_Matricula_Rubro_PorFacturar { get; set; }
+        public virtual DbSet<vwaca_Matricula_Rubro_PorFacturarMasiva> vwaca_Matricula_Rubro_PorFacturarMasiva { get; set; }
     
         public virtual int spaca_corregir_menu(Nullable<int> idEmpresa, Nullable<int> idSede, string idUsuario)
         {
