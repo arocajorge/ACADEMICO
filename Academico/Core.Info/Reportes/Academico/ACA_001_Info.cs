@@ -68,5 +68,6 @@ namespace Core.Info.Reportes.Academico
         public string NivelProcedencia { get; set; }
         public Bitmap ImageUrl { get; set; }
         public string ImageUrlString { get; set; }
+        public string Letra { get; set; }
     }
 }

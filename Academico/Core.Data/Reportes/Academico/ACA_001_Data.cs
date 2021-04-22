@@ -79,7 +79,8 @@ namespace Core.Data.Reportes.Academico
                                 Titulo = q.Titulo,
                                 TotalGastos = q.TotalGastos,
                                 VehiculoPropio = q.VehiculoPropio,
-                                ImageUrlString = Ruta
+                                ImageUrlString = Ruta,
+                                Letra = q.Letra
                         }).ToList();
                 }
                 return Lista;

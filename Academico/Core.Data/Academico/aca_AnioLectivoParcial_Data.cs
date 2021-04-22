@@ -22,9 +22,9 @@ namespace Core.Data.Academico
 
                     #region Query
                     string query = "SELECT p.IdEmpresa, p.IdAnio, p.IdSede, p.IdCatalogoParcial, c.NomCatalogo, p.FechaInicio, p.FechaFin, p.Orden, p.EsExamen, c.IdCatalogoTipo, ct.NomCatalogoTipo, p.ValidaEstadoAlumno "
-                    + " FROM dbo.aca_AnioLectivoParcial AS p INNER JOIN "
-                    + " dbo.aca_Catalogo AS c ON p.IdCatalogoParcial = c.IdCatalogo INNER JOIN "
-                    + " dbo.aca_CatalogoTipo AS ct ON c.IdCatalogoTipo = ct.IdCatalogoTipo "
+                    + " FROM dbo.aca_AnioLectivoParcial AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON p.IdCatalogoParcial = c.IdCatalogo INNER JOIN "
+                    + " dbo.aca_CatalogoTipo AS ct WITH (nolock) ON c.IdCatalogoTipo = ct.IdCatalogoTipo "
                     + " WHERE p.IdEmpresa = " + IdEmpresa.ToString() + "and p.IdSede = " + IdSede.ToString() + "and p.IdAnio = " + IdAnio.ToString()
                     + " order by p.Orden";
                     #endregion
@@ -50,29 +50,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio).OrderBy(q => q.Orden).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivoParcial_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdSede = q.IdSede,
-                            IdAnio = q.IdAnio,
-                            IdCatalogoParcial = q.IdCatalogoParcial,
-                            NomCatalogo = q.NomCatalogo,
-                            FechaInicio = q.FechaInicio,
-                            FechaFin = q.FechaFin,
-                            EsExamen = q.EsExamen,
-                            ValidaEstadoAlumno = q.ValidaEstadoAlumno,
-                            Orden = q.Orden
-                        });
-                    });
-                }
-                */
                 Lista.ForEach(q=>q.IdString= q.IdEmpresa.ToString("0000") + q.IdAnio.ToString("0000") + q.IdCatalogoParcial.ToString("0000"));
                 return Lista;
             }
@@ -94,9 +72,9 @@ namespace Core.Data.Academico
 
                     #region Query
                     string query = "SELECT p.IdEmpresa, p.IdAnio, p.IdSede, p.IdCatalogoParcial, c.NomCatalogo, p.FechaInicio, p.FechaFin, p.Orden, p.EsExamen, c.IdCatalogoTipo, ct.NomCatalogoTipo, p.ValidaEstadoAlumno "
-                    + " FROM dbo.aca_AnioLectivoParcial AS p INNER JOIN "
-                    + " dbo.aca_Catalogo AS c ON p.IdCatalogoParcial = c.IdCatalogo INNER JOIN "
-                    + " dbo.aca_CatalogoTipo AS ct ON c.IdCatalogoTipo = ct.IdCatalogoTipo "
+                    + " FROM dbo.aca_AnioLectivoParcial AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON p.IdCatalogoParcial = c.IdCatalogo INNER JOIN "
+                    + " dbo.aca_CatalogoTipo AS ct WITH (nolock) ON c.IdCatalogoTipo = ct.IdCatalogoTipo "
                     + " WHERE p.IdEmpresa = " + IdEmpresa.ToString() + "and p.IdSede = " + IdSede.ToString() + "and p.IdAnio = " + IdAnio.ToString() + "and c.IdCatalogoTipo = " + IdCatalogoTipo.ToString()
                     + " order by p.Orden";
                     #endregion
@@ -122,30 +100,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio
-                    && q.IdCatalogoTipo == IdCatalogoTipo).OrderBy(q=>q.Orden).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivoParcial_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdSede = q.IdSede,
-                            IdAnio = q.IdAnio,
-                            IdCatalogoParcial = q.IdCatalogoParcial,
-                            NomCatalogo = q.NomCatalogo,
-                            FechaInicio = q.FechaInicio,
-                            FechaFin = q.FechaFin,
-                            EsExamen = q.EsExamen,
-                            ValidaEstadoAlumno = q.ValidaEstadoAlumno,
-                            Orden = q.Orden
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -164,7 +119,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivoParcial "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoParcial WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdSede = " + IdSede.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdCatalogoParcial = " + IdCatalogoParcial.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -189,27 +144,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var Entity = odata.aca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio
-                    && q.IdCatalogoParcial == IdCatalogoParcial).FirstOrDefault();
 
-                    if (Entity == null)
-                        return null;
-
-                    info = new aca_AnioLectivoParcial_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdSede = Entity.IdSede,
-                        IdCatalogoParcial = Entity.IdCatalogoParcial,
-                        EsExamen = Entity.EsExamen,
-                        ValidaEstadoAlumno = Entity.ValidaEstadoAlumno,
-                        Orden = Entity.Orden
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -304,9 +239,9 @@ namespace Core.Data.Academico
 
                     #region Query
                     string query = "SELECT p.IdEmpresa, p.IdAnio, p.IdSede, p.IdCatalogoParcial, c.NomCatalogo, p.FechaInicio, p.FechaFin, p.Orden, p.EsExamen, c.IdCatalogoTipo, ct.NomCatalogoTipo, p.ValidaEstadoAlumno "
-                    + " FROM dbo.aca_AnioLectivoParcial AS p INNER JOIN "
-                    + " dbo.aca_Catalogo AS c ON p.IdCatalogoParcial = c.IdCatalogo INNER JOIN "
-                    + " dbo.aca_CatalogoTipo AS ct ON c.IdCatalogoTipo = ct.IdCatalogoTipo "
+                    + " FROM dbo.aca_AnioLectivoParcial AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON p.IdCatalogoParcial = c.IdCatalogo INNER JOIN "
+                    + " dbo.aca_CatalogoTipo AS ct WITH (nolock) ON c.IdCatalogoTipo = ct.IdCatalogoTipo "
                     + " WHERE p.IdEmpresa = " + IdEmpresa.ToString() + "and p.IdSede = " + IdSede.ToString() + "and p.IdAnio = " + IdAnio.ToString() + "and c.IdCatalogoTipo = " + IdCatalogoTipo.ToString()
                     + " order by p.Orden";
                     #endregion
@@ -332,30 +267,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_AnioLectivoParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio
-                    && q.IdCatalogoTipo == IdCatalogoTipo).OrderBy(q => q.Orden).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivoParcial_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdSede = q.IdSede,
-                            IdAnio = q.IdAnio,
-                            IdCatalogoParcial = q.IdCatalogoParcial,
-                            NomCatalogo = q.NomCatalogo,
-                            FechaInicio = q.FechaInicio,
-                            FechaFin = q.FechaFin,
-                            EsExamen = q.EsExamen,
-                            ValidaEstadoAlumno = q.ValidaEstadoAlumno,
-                            Orden = q.Orden
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)

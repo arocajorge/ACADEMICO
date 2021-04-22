@@ -66,49 +66,6 @@ namespace Core.Data.Academico
             {
                 List<aca_MatriculaCalificacionParcial_Info> Lista = new List<aca_MatriculaCalificacionParcial_Info>();
 
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
-                    && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo
-                    && q.IdMateria == IdMateria && q.IdCatalogoParcial == IdCatalogoParcial && q.IdProfesor == IdProfesor).OrderBy(q => q.pe_nombreCompleto).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MatriculaCalificacionParcial_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            IdMatricula = q.IdMatricula,
-                            IdMateria = q.IdMateria,
-                            IdProfesor = q.IdProfesor,
-                            IdAlumno = q.IdAlumno,
-                            Codigo = q.Codigo,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            IdCatalogoParcial = q.IdCatalogoParcial,
-                            Calificacion1 = q.Calificacion1,
-                            Calificacion2 = q.Calificacion2,
-                            Calificacion3 = q.Calificacion3,
-                            Calificacion4 = q.Calificacion4,
-                            Evaluacion = q.Evaluacion,
-                            Remedial1 = q.Remedial1,
-                            Remedial2 = q.Remedial2,
-                            Conducta = q.Conducta,
-                            MotivoCalificacion = q.MotivoCalificacion,
-                            MotivoConducta = q.MotivoConducta,
-                            AccionRemedial = q.AccionRemedial,
-                            CalificacionP1 = q.CalificacionP1,
-                            CalificacionP2 = q.CalificacionP2,
-                            CalificacionP3 = q.CalificacionP3,
-                            CalificacionP4 = q.CalificacionP4,
-                            CalificacionP5 = q.CalificacionP5,
-                            CalificacionP6 = q.CalificacionP6,
-                            RegistroValido = true,
-                            RegistroconPromedioBajo = false
-                        });
-                    });
-                }*/
-
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -117,15 +74,15 @@ namespace Core.Data.Academico
                     string query = "SELECT mcp.IdEmpresa, mcp.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, p.pe_nombreCompleto, mcp.IdCatalogoParcial, mcp.IdProfesor, mcp.IdMateria, mcp.Calificacion1, mcp.Calificacion2, "
                     + " mcp.Calificacion3, mcp.Calificacion4, mcp.Evaluacion, mcp.Remedial1, mcp.Remedial2, mcp.Conducta, mcp.MotivoCalificacion, mcp.MotivoConducta, mcp.AccionRemedial, a.Codigo, mc.CalificacionP1, mc.CalificacionP2, mc.CalificacionP3, "
                     + " mc.CalificacionP4, mc.CalificacionP5, mc.CalificacionP6, c.Letra "
-                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp INNER JOIN "
-                    + " dbo.aca_Matricula AS m ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
-                    + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
-                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona INNER JOIN "
-                    + " dbo.aca_MatriculaCalificacion AS mc ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
+                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Matricula AS m WITH (nolock) ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
+                    + " dbo.aca_Alumno AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_MatriculaCalificacion AS mc WITH (nolock) ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c WITH (nolock) ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
                     + " WHERE(NOT EXISTS "
                     + " (SELECT IdEmpresa "
-                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f WITH (nolock) "
                     + " WHERE(IdEmpresa = mcp.IdEmpresa) AND(IdMatricula = mcp.IdMatricula) AND(Estado = 1))) "
                     + " AND mcp.IdEmpresa = " + IdEmpresa.ToString() + " AND m.IdAnio =" + IdAnio.ToString() + " AND m.IdSede = " + IdSede.ToString()
                     + " AND m.IdNivel = " + IdNivel.ToString() + " AND m.IdJornada = " + IdJornada.ToString() + " AND m.IdCurso = " + IdCurso.ToString()
@@ -200,15 +157,15 @@ namespace Core.Data.Academico
                     string query = "SELECT mcp.IdEmpresa, mcp.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, p.pe_nombreCompleto, mcp.IdCatalogoParcial, mcp.IdProfesor, mcp.IdMateria, mcp.Calificacion1, mcp.Calificacion2, "
                     + " mcp.Calificacion3, mcp.Calificacion4, mcp.Evaluacion, mcp.Remedial1, mcp.Remedial2, mcp.Conducta, mcp.MotivoCalificacion, mcp.MotivoConducta, mcp.AccionRemedial, a.Codigo, mc.CalificacionP1, mc.CalificacionP2, mc.CalificacionP3, "
                     + " mc.CalificacionP4, mc.CalificacionP5, mc.CalificacionP6, c.Letra "
-                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp INNER JOIN "
-                    + " dbo.aca_Matricula AS m ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
-                    + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
-                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona INNER JOIN "
-                    + " dbo.aca_MatriculaCalificacion AS mc ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
+                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Matricula AS m WITH (nolock) ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
+                    + " dbo.aca_Alumno AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_MatriculaCalificacion AS mc WITH (nolock) ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c WITH (nolock) ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
                     + " WHERE(NOT EXISTS "
                     + " (SELECT IdEmpresa "
-                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f WITH (nolock) "
                     + " WHERE(IdEmpresa = mcp.IdEmpresa) AND(IdMatricula = mcp.IdMatricula) AND(Estado = 1))) "
                     + " AND mcp.IdEmpresa = " + IdEmpresa.ToString() + " AND m.IdAnio =" + IdAnio.ToString() + " AND m.IdSede = " + IdSede.ToString()
                     + " AND m.IdNivel = " + IdNivel.ToString() + " AND m.IdJornada = " + IdJornada.ToString() + " AND m.IdCurso = " + IdCurso.ToString()
@@ -260,49 +217,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede
-                    && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo
-                    && q.IdMateria == IdMateria && q.IdCatalogoParcial == IdCatalogoParcial).OrderBy(q => q.pe_nombreCompleto).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MatriculaCalificacionParcial_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            IdMatricula = q.IdMatricula,
-                            IdMateria = q.IdMateria,
-                            IdProfesor = q.IdProfesor,
-                            IdAlumno = q.IdAlumno,
-                            Codigo = q.Codigo,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            IdCatalogoParcial = q.IdCatalogoParcial,
-                            Calificacion1 = q.Calificacion1,
-                            Calificacion2 = q.Calificacion2,
-                            Calificacion3 = q.Calificacion3,
-                            Calificacion4 = q.Calificacion4,
-                            Evaluacion = q.Evaluacion,
-                            Remedial1 = q.Remedial1,
-                            Remedial2 = q.Remedial2,
-                            Conducta = q.Conducta,
-                            MotivoCalificacion = q.MotivoCalificacion,
-                            MotivoConducta = q.MotivoConducta,
-                            AccionRemedial = q.AccionRemedial,
-                            CalificacionP1 = q.CalificacionP1,
-                            CalificacionP2 = q.CalificacionP2,
-                            CalificacionP3 = q.CalificacionP3,
-                            CalificacionP4 = q.CalificacionP4,
-                            CalificacionP5 = q.CalificacionP5,
-                            CalificacionP6 = q.CalificacionP6,
-                            RegistroValido = true,
-                            RegistroconPromedioBajo = false
-                        });
-                    });
-                }
-                */
+                
                 return Lista;
             }
             catch (Exception)
@@ -316,39 +231,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacionParcial_Info> Lista = new List<aca_MatriculaCalificacionParcial_Info>();
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_MatriculaCalificacionParcial.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula
-                    && q.IdCatalogoParcial == IdCatalogoParcial).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MatriculaCalificacionParcial_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatricula = q.IdMatricula,
-                            IdMateria = q.IdMateria,
-                            IdProfesor = q.IdProfesor,
-                            IdAlumno = q.IdAlumno,
-                            Codigo = q.Codigo,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            IdCatalogoParcial = q.IdCatalogoParcial,
-                            Calificacion1 = q.Calificacion1,
-                            Calificacion2 = q.Calificacion2,
-                            Calificacion3 = q.Calificacion3,
-                            Calificacion4 = q.Calificacion4,
-                            Evaluacion = q.Evaluacion,
-                            Remedial1 = q.Remedial1,
-                            Remedial2 = q.Remedial2,
-                            Conducta = q.Conducta,
-                            MotivoCalificacion = q.MotivoCalificacion,
-                            MotivoConducta = q.MotivoConducta,
-                            AccionRemedial = q.AccionRemedial
-                        });
-                    });
-                }
-                */
+                
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -357,15 +240,15 @@ namespace Core.Data.Academico
                     string query = "SELECT mcp.IdEmpresa, mcp.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, p.pe_nombreCompleto, mcp.IdCatalogoParcial, mcp.IdProfesor, mcp.IdMateria, mcp.Calificacion1, mcp.Calificacion2, "
                     + " mcp.Calificacion3, mcp.Calificacion4, mcp.Evaluacion, mcp.Remedial1, mcp.Remedial2, mcp.Conducta, mcp.MotivoCalificacion, mcp.MotivoConducta, mcp.AccionRemedial, a.Codigo, mc.CalificacionP1, mc.CalificacionP2, mc.CalificacionP3, "
                     + " mc.CalificacionP4, mc.CalificacionP5, mc.CalificacionP6, c.Letra "
-                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp INNER JOIN "
-                    + " dbo.aca_Matricula AS m ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
-                    + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
-                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona INNER JOIN "
-                    + " dbo.aca_MatriculaCalificacion AS mc ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
+                    + " FROM     dbo.aca_MatriculaCalificacionParcial AS mcp WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Matricula AS m WITH (nolock) ON mcp.IdEmpresa = m.IdEmpresa AND mcp.IdMatricula = m.IdMatricula AND mcp.IdEmpresa = m.IdEmpresa AND mcp.IdEmpresa = m.IdEmpresa INNER JOIN "
+                    + " dbo.aca_Alumno AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona INNER JOIN "
+                    + " dbo.aca_MatriculaCalificacion AS mc WITH (nolock) ON mcp.IdEmpresa = mc.IdEmpresa AND mcp.IdMatricula = mc.IdMatricula AND mcp.IdMateria = mc.IdMateria AND mcp.IdProfesor = mc.IdProfesor LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c WITH (nolock) ON m.IdAnio = c.IdAnio AND c.IdEmpresa = m.IdEmpresa AND mcp.Conducta = c.Secuencia "
                     + " WHERE(NOT EXISTS "
                     + " (SELECT IdEmpresa "
-                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f WITH (nolock) "
                     + " WHERE(IdEmpresa = mcp.IdEmpresa) AND(IdMatricula = mcp.IdMatricula) AND(Estado = 1))) "
                     + " AND mcp.IdEmpresa = " + IdEmpresa.ToString() + " AND m.IdMatricula =" + IdMatricula.ToString() + " AND mcp.IdCatalogoParcial = " + IdCatalogoParcial.ToString();
                     #endregion

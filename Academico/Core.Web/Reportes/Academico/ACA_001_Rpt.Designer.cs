@@ -1639,7 +1639,7 @@
             // xrTableCell15
             // 
             this.xrTableCell15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NacionalidadAlumno]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Nacionalidad]")});
             this.xrTableCell15.Font = new System.Drawing.Font("Verdana", 8.5F);
             this.xrTableCell15.Multiline = true;
             this.xrTableCell15.Name = "xrTableCell15";
@@ -2115,7 +2115,7 @@
             this.xrTableCell98.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell98.BorderWidth = 1.5F;
             this.xrTableCell98.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Conducta]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Letra]")});
             this.xrTableCell98.Font = new System.Drawing.Font("Verdana", 8.5F);
             this.xrTableCell98.Multiline = true;
             this.xrTableCell98.Name = "xrTableCell98";

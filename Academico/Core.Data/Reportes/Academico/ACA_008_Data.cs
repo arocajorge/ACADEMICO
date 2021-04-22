@@ -34,8 +34,9 @@ namespace Core.Data.Reportes.Academico
 
                     var lst = Context.VWACA_008.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio &&
                     q.IdSede == IdSede &&
-                    q.IdNivel == IdNivel &&
-                    q.IdJornada == IdJornada &&
+                    IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
+                    IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
+                    IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
                     IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
                     IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin
                     && (MostrarAlumnosRetirados == true ? q.IdRetiro == q.IdRetiro : q.IdRetiro == 0)).ToList();

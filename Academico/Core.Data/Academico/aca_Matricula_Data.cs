@@ -27,18 +27,18 @@ namespace Core.Data.Academico
                     string query = "SELECT m.IdEmpresa, m.IdMatricula, al.Codigo, m.IdAlumno, pa.IdPersona, pa.pe_nombreCompleto, pa.pe_cedulaRuc, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, sn.NomSede, a.Descripcion, sn.NomNivel, sn.OrdenNivel, "
                     + " nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, a.BloquearMatricula, m.IdPersonaF, m.IdPersonaR, m.IdPlantilla, m.Fecha, m.Observacion, m.IdMecanismo, m.IdEmpresa_rol, "
                     + " m.IdEmpleado, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, dbo.aca_Plantilla.NomPlantilla, c.NomCatalogo NomCatalogoESTMAT "
-                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
-                    + " dbo.aca_Plantilla ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS pa INNER JOIN "
-                    + " dbo.aca_Alumno AS al ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo c on m.IdCatalogoESTMAT = c.IdCatalogo LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
+                    + " FROM dbo.aca_Matricula AS m WITH (nolock) INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
+                    + " dbo.aca_Plantilla WITH (nolock) ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pa WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Alumno AS al WITH (nolock) ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo c WITH (nolock) on m.IdCatalogoESTMAT = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
                     + " m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
+                    + " dbo.aca_AlumnoRetiro AS r WITH (nolock) ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdAnio = " + IdAnio.ToString() + " and m.IdSede = " + IdSede.ToString() + " and al.Estado = 1 "
                     + " ORDER BY m.IdMatricula  DESC";
                     #endregion
@@ -76,39 +76,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio==IdAnio && q.IdSede == IdSede).OrderByDescending(q=>q.IdMatricula).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Matricula_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatricula = q.IdMatricula,
-                            Codigo = q.Codigo,
-                            IdAlumno = q.IdAlumno,
-                            IdAnio = q.IdAnio,
-                            IdSede = q.IdSede,
-                            IdNivel = q.IdNivel,
-                            IdJornada = q.IdJornada,
-                            IdCurso = q.IdCurso,
-                            IdParalelo = q.IdParalelo,
-                            Descripcion = q.Descripcion,
-                            NomSede = q.NomSede,
-                            NomNivel = q.NomNivel,
-                            NomJornada = q.NomJornada,
-                            NomCurso = q.NomCurso,
-                            NomParalelo = q.NomParalelo,
-                            pe_nombreCompleto =q.pe_nombreCompleto,
-                            BloquearMatricula = q.BloquearMatricula,
-                            EsRetirado = q.EsRetirado??false,
-                            NomPlantilla = q.NomPlantilla
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -131,17 +99,17 @@ namespace Core.Data.Academico
                     string query = "SELECT m.IdEmpresa, m.IdMatricula, al.Codigo, m.IdAlumno, pa.IdPersona, pa.pe_nombreCompleto, pa.pe_cedulaRuc, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, sn.NomSede, a.Descripcion, sn.NomNivel, sn.OrdenNivel, "
                     + " nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, a.BloquearMatricula, m.IdPersonaF, m.IdPersonaR, m.IdPlantilla, m.Fecha, m.Observacion, m.IdMecanismo, m.IdEmpresa_rol, "
                     + " m.IdEmpleado, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, dbo.aca_Plantilla.NomPlantilla "
-                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
-                    + " dbo.aca_Plantilla ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS pa INNER JOIN "
-                    + " dbo.aca_Alumno AS al ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
+                    + " FROM dbo.aca_Matricula AS m WITH (nolock) INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
+                    + " dbo.aca_Plantilla WITH (nolock) ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pa WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Alumno AS al WITH (nolock) ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
                     + " m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
+                    + " dbo.aca_AlumnoRetiro AS r WITH (nolock) ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdAnio = " + IdAnio.ToString() + " and m.IdSede = " + IdSede.ToString() + " and m.IdNivel = " + IdNivel.ToString() + " and m.IdJornada = " + IdJornada.ToString() + " and m.IdCurso = " + IdCurso.ToString() + " and m.IdParalelo = " + IdParalelo.ToString()
                     + " and al.Estado = 1 ORDER BY pa.pe_nombreCompleto ";
                     #endregion
@@ -178,30 +146,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    var lst = Context.vwaca_Matricula_AlumnosPorParalelo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
-                    && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo && q.EsRetirado==false).OrderBy(q => q.pe_nombreCompleto).ToList();
 
-                    foreach (var item in lst)
-                    {
-                        var info = new aca_Matricula_Info
-                         {
-                             IdEmpresa = item.IdEmpresa,
-                             IdMatricula = item.IdMatricula,
-                             Fecha = item.Fecha,
-                             pe_cedulaRuc = item.pe_cedulaRuc,
-                             IdAlumno = item.IdAlumno,
-                             Codigo = item.Codigo,
-                             pe_nombreCompleto = item.pe_nombreCompleto,
-                             EsRetirado = item.EsRetirado??false,
-                             EsRetiradoString = item.EsRetiradoString
-                        };
-                        Lista.Add(info);
-                    }
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -221,17 +166,17 @@ namespace Core.Data.Academico
                     command.CommandText = "SELECT m.IdEmpresa, m.IdMatricula, al.Codigo, m.IdAlumno, pa.IdPersona, pa.pe_nombreCompleto, pa.pe_cedulaRuc, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, sn.NomSede, a.Descripcion, sn.NomNivel, sn.OrdenNivel, "
                     + " nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, a.BloquearMatricula, m.IdPersonaF, m.IdPersonaR, m.IdPlantilla, m.Fecha, m.Observacion, m.IdMecanismo, m.IdEmpresa_rol, "
                     + " m.IdEmpleado, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, dbo.aca_Plantilla.NomPlantilla, m.EsPatrocinado "
-                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
-                    + " dbo.aca_Plantilla ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS pa INNER JOIN "
-                    + " dbo.aca_Alumno AS al ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
+                    + " FROM dbo.aca_Matricula AS m WITH (nolock) INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
+                    + " dbo.aca_Plantilla WITH (nolock) ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pa WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Alumno AS al WITH (nolock) ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
                     + " m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
+                    + " dbo.aca_AlumnoRetiro AS r WITH (nolock) ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdMatricula = " + IdMatricula.ToString() + " and al.Estado = 1 ";
                     var ResultValue = command.ExecuteScalar();
 
@@ -276,39 +221,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_Matricula_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdMatricula = Entity.IdMatricula,
-                        Codigo =Entity.Codigo,
-                        IdAlumno = Entity.IdAlumno,
-                        IdAnio = Entity.IdAnio,
-                        IdSede = Entity.IdSede,
-                        IdNivel = Entity.IdNivel,
-                        IdJornada = Entity.IdJornada,
-                        IdCurso = Entity.IdCurso,
-                        IdParalelo = Entity.IdParalelo,
-                        IdPersonaF = Entity.IdPersonaF,
-                        IdPersonaR = Entity.IdPersonaR,
-                        IdPlantilla = Entity.IdPlantilla,
-                        Observacion = Entity.Observacion,
-                        Fecha = Entity.Fecha,
-                        IdMecanismo = Entity.IdMecanismo,
-                        IdEmpresa_rol = Entity.IdEmpresa_rol,
-                        IdEmpleado = Entity.IdEmpleado,
-                        NomCurso = Entity.NomCurso,
-                        NomJornada = Entity.NomJornada,
-                        NomParalelo = Entity.NomParalelo,
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -330,17 +243,17 @@ namespace Core.Data.Academico
                     command.CommandText = "SELECT m.IdEmpresa, m.IdMatricula, al.Codigo, m.IdAlumno, pa.IdPersona, pa.pe_nombreCompleto, pa.pe_cedulaRuc, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, sn.NomSede, a.Descripcion, sn.NomNivel, sn.OrdenNivel, "
                     + " nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, a.BloquearMatricula, m.IdPersonaF, m.IdPersonaR, m.IdPlantilla, m.Fecha, m.Observacion, m.IdMecanismo, m.IdEmpresa_rol, "
                     + " m.IdEmpleado, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, dbo.aca_Plantilla.NomPlantilla, m.EsPatrocinado "
-                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
-                    + " dbo.aca_Plantilla ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS pa INNER JOIN "
-                    + " dbo.aca_Alumno AS al ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
+                    + " FROM dbo.aca_Matricula AS m WITH (nolock) INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
+                    + " dbo.aca_Plantilla WITH (nolock) ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pa WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Alumno AS al WITH (nolock) ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
                     + " m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
+                    + " dbo.aca_AlumnoRetiro AS r WITH (nolock) ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdPreMatricula = " + IdPreMatricula.ToString() + " and al.Estado = 1 ";
                     var ResultValue = command.ExecuteScalar();
 
@@ -403,7 +316,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_Matricula "
+                    command.CommandText = "SELECT * FROM aca_Matricula WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAlumno = " + IdAlumno.ToString() + " ORDER BY IdMatricula DESC";
                     var ResultValue = command.ExecuteScalar();
 
@@ -437,36 +350,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).OrderByDescending(q=> q.IdMatricula).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_Matricula_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdMatricula = Entity.IdMatricula,
-                        Codigo = Entity.Codigo,
-                        IdAlumno = Entity.IdAlumno,
-                        IdAnio = Entity.IdAnio,
-                        IdSede = Entity.IdSede,
-                        IdNivel = Entity.IdNivel,
-                        IdJornada = Entity.IdJornada,
-                        IdCurso = Entity.IdCurso,
-                        IdParalelo = Entity.IdParalelo,
-                        IdPersonaF = Entity.IdPersonaF,
-                        IdPersonaR = Entity.IdPersonaR,
-                        IdPlantilla = Entity.IdPlantilla,
-                        Observacion = Entity.Observacion,
-                        Fecha = Entity.Fecha,
-                        IdMecanismo = Entity.IdMecanismo,
-                        IdEmpresa_rol = Entity.IdEmpresa_rol,
-                        IdEmpleado = Entity.IdEmpleado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -488,17 +372,17 @@ namespace Core.Data.Academico
                     command.CommandText = "SELECT m.IdEmpresa, m.IdMatricula, al.Codigo, m.IdAlumno, pa.IdPersona, pa.pe_nombreCompleto, pa.pe_cedulaRuc, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, sn.NomSede, a.Descripcion, sn.NomNivel, sn.OrdenNivel, "
                     + " nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, a.BloquearMatricula, m.IdPersonaF, m.IdPersonaR, m.IdPlantilla, m.Fecha, m.Observacion, m.IdMecanismo, m.IdEmpresa_rol, "
                     + " m.IdEmpleado, CASE WHEN r.IdRetiro IS NULL THEN CAST(0 AS BIT) ELSE CAST(1 AS BIT) END AS EsRetirado, dbo.aca_Plantilla.NomPlantilla "
-                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
-                    + " dbo.aca_Plantilla ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS pa INNER JOIN "
-                    + " dbo.aca_Alumno AS al ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
+                    + " FROM dbo.aca_Matricula AS m WITH (nolock) INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAnio = a.IdAnio INNER JOIN "
+                    + " dbo.aca_Plantilla WITH (nolock) ON m.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND m.IdAnio = dbo.aca_Plantilla.IdAnio AND m.IdPlantilla = dbo.aca_Plantilla.IdPlantilla LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pa WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Alumno AS al WITH (nolock) ON pa.IdPersona = al.IdPersona ON m.IdEmpresa = al.IdEmpresa AND m.IdAlumno = al.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON sn.IdEmpresa = nj.IdEmpresa AND sn.IdAnio = nj.IdAnio AND sn.IdSede = nj.IdSede AND sn.IdNivel = nj.IdNivel RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
                     + " m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
+                    + " dbo.aca_AlumnoRetiro AS r WITH (nolock) ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdAnio = " + IdAnio.ToString() + " and m.IdAlumno = " + IdAlumno.ToString() + " and al.Estado = 1 ";
                     var ResultValue = command.ExecuteScalar();
 
@@ -542,39 +426,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.vwaca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_Matricula_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdMatricula = Entity.IdMatricula,
-                        Codigo = Entity.Codigo,
-                        IdAlumno = Entity.IdAlumno,
-                        IdAnio = Entity.IdAnio,
-                        IdSede = Entity.IdSede,
-                        IdNivel = Entity.IdNivel,
-                        IdJornada = Entity.IdJornada,
-                        IdCurso = Entity.IdCurso,
-                        IdParalelo = Entity.IdParalelo,
-                        IdPersonaF = Entity.IdPersonaF,
-                        IdPersonaR = Entity.IdPersonaR,
-                        IdPlantilla = Entity.IdPlantilla,
-                        Fecha = Entity.Fecha,
-                        Observacion = Entity.Observacion,
-                        NomSede = Entity.NomSede,
-                        NomJornada = Entity.NomJornada,
-                        NomCurso = Entity.NomCurso,
-                        NomNivel = Entity.NomNivel,
-                        NomParalelo = Entity.NomParalelo,
-                        pe_nombreCompleto = Entity.pe_nombreCompleto
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

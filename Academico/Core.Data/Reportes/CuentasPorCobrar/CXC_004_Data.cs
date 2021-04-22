@@ -17,30 +17,33 @@ namespace Core.Data.Reportes.CuentasPorCobrar
 
                 List <CXC_004_Info> Lista = new List<CXC_004_Info>();
 
-                using (EntitiesReportes db = new EntitiesReportes())
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
-                    db.Database.CommandTimeout = 5000;
-                    var lst = db.SPCXC_004(IdEmpresa, IdUsuario, FechaCorte).ToList();
-                    
-                    foreach (var item in lst)
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "DECLARE @Fecha date = DATEFROMPARTS(" + FechaCorte.Year.ToString() + "," + FechaCorte.Month.ToString() + "," + FechaCorte.Day.ToString() + ") "
+                        + " exec Academico.SPCXC_004 " + IdEmpresa.ToString() + ", '" + IdUsuario + "',@Fecha";
+                    command.CommandTimeout = 5000;
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
                         Lista.Add(new CXC_004_Info
                         {
-                            IdEmpresa = item.IdEmpresa,
-                            IdAlumno = item.IdAlumno,
-                            IdAnio = item.IdAnio,
-                            IdUsuario = item.IdUsuario,
-                            NomAnio = item.NomAnio,
-                            CodigoAlumno = item.CodigoAlumno,
-                            NombreAlumno = item.NombreAlumno,
-                            IdJornada = item.IdJornada,
-                            NombreJornada = item.NombreJornada,
-                            SaldoDeudor = item.SaldoDeudor,
-                            SaldoAcreedor = item.SaldoAcreedor,
-                            SaldoFinal = item.SaldoFinal,
-
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdUsuario = Convert.ToString(reader["IdUsuario"]),
+                            NomAnio = Convert.ToString(reader["NomAnio"]),
+                            CodigoAlumno = Convert.ToString(reader["CodigoAlumno"]),
+                            NombreAlumno = Convert.ToString(reader["NombreAlumno"]),
+                            SaldoDeudor = Convert.ToDecimal(reader["SaldoDeudor"]),
+                            SaldoAcreedor = Convert.ToDecimal(reader["SaldoAcreedor"]),
+                            SaldoFinal = Convert.ToDecimal(reader["SaldoFinal"]),
+                            NombreJornada = Convert.ToString(reader["NombreJornada"])
                         });
                     }
+                    reader.Close();
                 }
 
 
@@ -63,8 +66,7 @@ namespace Core.Data.Reportes.CuentasPorCobrar
                     connection.Open();
                     SqlCommand command = new SqlCommand();
                     command.Connection = connection;
-                    command.CommandText = "DECLARE @Fecha date = DATEFROMPARTS("+FechaCorte.Year.ToString()+","+FechaCorte.Month.ToString()+","+FechaCorte.Day.ToString()+")"
-                        + " exec Academico.SPCXC_004 " + IdEmpresa.ToString() + ", '" + IdUsuario + "',@fecha";
+                    command.CommandText = "SELECT IdEmpresa, IdAlumno, IdUsuario, NomAnio, CodigoAlumno, NombreAlumno, SaldoDeudor, SaldoAcreedor, SaldoFinal, NombreJornada FROM Academico.cxc_SPCXC_004 WHERE IdUsuario = '" + IdUsuario + "'";
                     command.CommandTimeout = 5000;
                     SqlDataReader reader = command.ExecuteReader();
 

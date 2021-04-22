@@ -29,9 +29,9 @@ namespace Core.Data.Academico
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
                     + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
                     + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
-                    + " FROM dbo.tb_persona AS p INNER JOIN "
-                    + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
+                    + " FROM dbo.tb_persona AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Familia AS f WITH (nolock) ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON f.IdCatalogoPAREN = c.IdCatalogo "
                     + " WHERE f.IdEmpresa = " + IdEmpresa.ToString() + "and f.IdAlumno = " + IdAlumno.ToString();
                     #endregion
 
@@ -80,53 +80,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_Familia_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAlumno = q.IdAlumno,
-                            Secuencia = q.Secuencia,
-                            IdPersona = q.IdPersona,
-                            IdCatalogoPAREN = q.IdCatalogoPAREN,
-                            NomCatalogo = q.NomCatalogo,
-                            Direccion = q.Direccion,
-                            Telefono = q.Telefono,
-                            Celular =q.Celular,
-                            Correo =q.Correo,
-                            SeFactura = q.SeFactura,
-                            EsRepresentante =q.EsRepresentante,
-                            IdCatalogoFichaInst = q.IdCatalogoFichaInst??0,
-                            EmpresaTrabajo = q.EmpresaTrabajo,
-                            DireccionTrabajo = q.DireccionTrabajo,
-                            TelefonoTrabajo = q.TelefonoTrabajo,
-                            CargoTrabajo = q.CargoTrabajo,
-                            AniosServicio = q.AniosServicio,
-                            IngresoMensual = q.IngresoMensual,
-                            VehiculoPropio = q.VehiculoPropio,
-                            Marca = q.Marca,
-                            Modelo = q.Modelo,
-                            CasaPropia = q.CasaPropia,
-                            IdTipoDocumento = q.IdTipoDocumento,
-                            pe_Naturaleza = q.pe_Naturaleza,
-                            pe_cedulaRuc = q.pe_cedulaRuc,
-                            pe_nombre = q.pe_nombre,
-                            pe_apellido = q.pe_apellido,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            pe_sexo = q.pe_sexo,
-                            IdEstadoCivil = q.IdEstadoCivil,
-                            pe_fechaNacimiento = q.pe_fechaNacimiento,
-                            EstaFallecido = q.EstaFallecido,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
+                
                 return Lista;
             }
             catch (Exception)
@@ -149,9 +103,9 @@ namespace Core.Data.Academico
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
                     + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo,f.AnioVehiculo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
                     + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
-                    + " FROM dbo.tb_persona AS p INNER JOIN "
-                    + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
+                    + " FROM dbo.tb_persona AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Familia AS f WITH (nolock) ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON f.IdCatalogoPAREN = c.IdCatalogo "
                     + " WHERE f.IdEmpresa = " + IdEmpresa.ToString() + "and f.IdAlumno = " + IdAlumno.ToString() + "and f.IdCatalogoPAREN = " + IdCatalogoPAREN.ToString() + "and f.Estado = 1 ";
                     var ResultValue = command.ExecuteScalar();
 
@@ -211,65 +165,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdCatalogoPAREN == IdCatalogoPAREN && q.Estado==true).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info_familia = new aca_Familia_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAlumno = Entity.IdAlumno,
-                        IdPersona = Entity.IdPersona,
-                        IdCatalogoPAREN = Entity.IdCatalogoPAREN,
-                        Direccion = Entity.Direccion,
-                        Telefono = Entity.Telefono,
-                        Celular = Entity.Celular,
-                        Correo = Entity.Correo,
-                        SeFactura = Entity.SeFactura,
-                        EsRepresentante = Entity.EsRepresentante,
-                        IdTipoDocumento = Entity.IdTipoDocumento,
-                        pe_Naturaleza = Entity.pe_Naturaleza,
-                        pe_cedulaRuc = Entity.pe_cedulaRuc,
-                        pe_nombre = Entity.pe_nombre,
-                        pe_apellido = Entity.pe_apellido,
-                        pe_nombreCompleto = Entity.pe_nombreCompleto,
-                        pe_razonSocial = Entity.pe_razonSocial,
-                        pe_sexo = Entity.pe_sexo,
-                        IdProfesion = Entity.IdProfesion ?? 0,
-                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst??0,
-                        EmpresaTrabajo = Entity.EmpresaTrabajo,
-                        DireccionTrabajo = Entity.DireccionTrabajo,
-                        TelefonoTrabajo = Entity.TelefonoTrabajo,
-                        CargoTrabajo = Entity.CargoTrabajo,
-                        AniosServicio = Entity.AniosServicio,
-                        IngresoMensual = Entity.IngresoMensual,
-                        VehiculoPropio = Entity.VehiculoPropio,
-                        Marca = Entity.Marca,
-                        Modelo = Entity.Modelo,
-                        AnioVehiculo = Entity.AnioVehiculo,
-                        CasaPropia = Entity.CasaPropia,
-                        IdEstadoCivil = Entity.IdEstadoCivil,
-                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
-                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
-                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
-                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
-                        IdReligion = Entity.IdReligion,
-                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
-                        IdPais = Entity.IdPais,
-                        IdProvincia = Entity.IdProvincia,
-                        IdCiudad = Entity.IdCiudad,
-                        IdParroquia = Entity.IdParroquia,
-                        Cod_Region = Entity.Cod_Region,
-                        Sector = Entity.Sector,
-                        EstaFallecido = Entity.EstaFallecido,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
+                
                 return info_familia;
             }
             catch (Exception)
@@ -292,9 +188,9 @@ namespace Core.Data.Academico
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
                     + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
                     + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
-                    + " FROM dbo.tb_persona AS p INNER JOIN "
-                    + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
+                    + " FROM dbo.tb_persona AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Familia AS f WITH (nolock) ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON f.IdCatalogoPAREN = c.IdCatalogo "
                     + " WHERE f.IdEmpresa = " + IdEmpresa.ToString() + "and f.IdAlumno = " + IdAlumno.ToString() + "and f.Estado = 1 ";
                     if (Tipo == cl_enumeradores.eTipoRepresentante.ECON.ToString())
                     {
@@ -367,66 +263,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.Estado==true 
-                    && ((Tipo == cl_enumeradores.eTipoRepresentante.ECON.ToString() ? q.SeFactura == true : q.EsRepresentante==true))).FirstOrDefault();
-
-                    if (Entity == null)
-                        return null;
-
-                    info_familia = new aca_Familia_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAlumno = Entity.IdAlumno,
-                        Secuencia = Entity.Secuencia,
-                        IdPersona = Entity.IdPersona,
-                        IdCatalogoPAREN = Entity.IdCatalogoPAREN,
-                        Direccion = Entity.Direccion,
-                        Telefono = Entity.Telefono,
-                        Celular = Entity.Celular,
-                        Correo = Entity.Correo,
-                        SeFactura = Entity.SeFactura,
-                        IdTipoDocumento = Entity.IdTipoDocumento,
-                        pe_Naturaleza = Entity.pe_Naturaleza,
-                        pe_cedulaRuc = Entity.pe_cedulaRuc,
-                        pe_nombre = Entity.pe_nombre,
-                        pe_apellido = Entity.pe_apellido,
-                        pe_nombreCompleto = Entity.pe_nombreCompleto,
-                        pe_razonSocial = Entity.pe_razonSocial,
-                        pe_sexo = Entity.pe_sexo,
-                        IdEstadoCivil = Entity.IdEstadoCivil,
-                        IdProfesion = Entity.IdProfesion ?? 0,
-                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst??0,
-                        EmpresaTrabajo = Entity.EmpresaTrabajo,
-                        DireccionTrabajo = Entity.DireccionTrabajo,
-                        TelefonoTrabajo = Entity.TelefonoTrabajo,
-                        CargoTrabajo = Entity.CargoTrabajo,
-                        AniosServicio = Entity.AniosServicio,
-                        IngresoMensual = Entity.IngresoMensual,
-                        VehiculoPropio = Entity.VehiculoPropio,
-                        Marca = Entity.Marca,
-                        Modelo = Entity.Modelo,
-                        CasaPropia = Entity.CasaPropia,
-                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
-                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
-                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
-                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
-                        IdReligion = Entity.IdReligion,
-                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
-                        IdPais = Entity.IdPais,
-                        IdProvincia = Entity.IdProvincia,
-                        IdCiudad = Entity.IdCiudad,
-                        IdParroquia = Entity.IdParroquia,
-                        Cod_Region = Entity.Cod_Region,
-                        Sector = Entity.Sector,
-                        EstaFallecido = Entity.EstaFallecido,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
+                
                 return info_familia;
             }
             catch (Exception ex)
@@ -449,9 +286,9 @@ namespace Core.Data.Academico
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
                     + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
                     + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
-                    + " FROM dbo.tb_persona AS p INNER JOIN "
-                    + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
+                    + " FROM dbo.tb_persona AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Familia AS f WITH (nolock) ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON f.IdCatalogoPAREN = c.IdCatalogo "
                     + " WHERE f.IdEmpresa = " + IdEmpresa.ToString() + "and f.IdAlumno = " + IdAlumno.ToString() + "and f.Secuencia = " + Secuencia.ToString() + "and f.Estado = 1 ";
                     var ResultValue = command.ExecuteScalar();
 
@@ -511,66 +348,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.Secuencia == Secuencia && q.Estado==true).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info_familia = new aca_Familia_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAlumno = Entity.IdAlumno,
-                        Secuencia = Entity.Secuencia,
-                        IdPersona = Entity.IdPersona,
-                        IdCatalogoPAREN = Entity.IdCatalogoPAREN,
-                        Direccion = Entity.Direccion,
-                        Telefono = Entity.Telefono,
-                        Celular = Entity.Celular,
-                        Correo = Entity.Correo,
-                        SeFactura = Entity.SeFactura,
-                        EsRepresentante = Entity.EsRepresentante,
-                        IdTipoDocumento = Entity.IdTipoDocumento,
-                        pe_Naturaleza = Entity.pe_Naturaleza,
-                        pe_cedulaRuc = Entity.pe_cedulaRuc,
-                        pe_nombre = Entity.pe_nombre,
-                        pe_apellido = Entity.pe_apellido,
-                        pe_nombreCompleto = Entity.pe_nombreCompleto,
-                        pe_razonSocial = Entity.pe_razonSocial,
-                        pe_sexo = Entity.pe_sexo,
-                        IdEstadoCivil = Entity.IdEstadoCivil,
-                        IdProfesion = Entity.IdProfesion ?? 0,
-                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst??0,
-                        EmpresaTrabajo = Entity.EmpresaTrabajo,
-                        DireccionTrabajo = Entity.DireccionTrabajo,
-                        TelefonoTrabajo = Entity.TelefonoTrabajo,
-                        CargoTrabajo = Entity.CargoTrabajo,
-                        AniosServicio = Entity.AniosServicio,
-                        IngresoMensual = Entity.IngresoMensual,
-                        VehiculoPropio = Entity.VehiculoPropio,
-                        Marca = Entity.Marca,
-                        Modelo = Entity.Modelo,
-                        AnioVehiculo = Entity.AnioVehiculo,
-                        CasaPropia = Entity.CasaPropia,
-                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
-                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
-                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
-                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
-                        IdReligion = Entity.IdReligion,
-                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
-                        EstaFallecido = Entity.EstaFallecido,
-                        IdPais = Entity.IdPais,
-                        IdProvincia = Entity.IdProvincia,
-                        IdCiudad = Entity.IdCiudad,
-                        IdParroquia = Entity.IdParroquia,
-                        Cod_Region = Entity.Cod_Region,
-                        Sector = Entity.Sector,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
+                
                 return info_familia;
             }
             catch (Exception)
@@ -593,9 +371,9 @@ namespace Core.Data.Academico
                     + " p.IdEstadoCivil, p.pe_fechaNacimiento, p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, p.pe_telfono_Contacto, f.Secuencia, f.EsRepresentante, p.pe_razonSocial, p.IdProfesion, "
                     + " f.IdCatalogoFichaInst, f.EmpresaTrabajo, f.DireccionTrabajo, f.TelefonoTrabajo, f.CargoTrabajo, f.AniosServicio, f.IngresoMensual, f.VehiculoPropio, f.Marca, f.Modelo, f.CasaPropia, f.AnioVehiculo, p.IdReligion, p.AsisteCentroCristiano, "
                     + " f.EstaFallecido, p.IdGrupoEtnico, f.IdPais, f.Cod_Region, f.IdProvincia, f.IdCiudad, f.IdParroquia, f.Sector, f.Estado, f.Telefono "
-                    + " FROM dbo.tb_persona AS p INNER JOIN "
-                    + " dbo.aca_Familia AS f ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
-                    + " dbo.aca_Catalogo AS c ON f.IdCatalogoPAREN = c.IdCatalogo "
+                    + " FROM dbo.tb_persona AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Familia AS f WITH (nolock) ON p.IdPersona = f.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH (nolock) ON f.IdCatalogoPAREN = c.IdCatalogo "
                     + " WHERE f.IdEmpresa = " + IdEmpresa.ToString() + "and f.IdAlumno = " + IdAlumno.ToString() + "and f.IdPersona = " + IdPersona.ToString() + "and f.IdCatalogoPAREN = " + IdCatalogoPAREN.ToString() + "and f.Estado = 1 ";
                     var ResultValue = command.ExecuteScalar();
 
@@ -645,65 +423,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var Entity = odata.vwaca_Familia.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno && q.IdPersona == IdPersona 
-                    && q.IdCatalogoPAREN == IdCatalogoPAREN && q.Estado ==true).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info_familia = new aca_Familia_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAlumno = Entity.IdAlumno,
-                        Secuencia = Entity.Secuencia,
-                        IdPersona = Entity.IdPersona,
-                        IdCatalogoPAREN = Entity.IdCatalogoPAREN,
-                        Direccion = Entity.Direccion,
-                        Telefono = Entity.Telefono,
-                        Celular = Entity.Celular,
-                        Correo = Entity.Correo,
-                        SeFactura = Entity.SeFactura,
-                        IdTipoDocumento = Entity.IdTipoDocumento,
-                        pe_Naturaleza = Entity.pe_Naturaleza,
-                        pe_cedulaRuc = Entity.pe_cedulaRuc,
-                        pe_nombre = Entity.pe_nombre,
-                        pe_apellido = Entity.pe_apellido,
-                        pe_nombreCompleto = Entity.pe_nombreCompleto,
-                        pe_razonSocial =Entity.pe_razonSocial,
-                        pe_sexo = Entity.pe_sexo,
-                        IdEstadoCivil = Entity.IdEstadoCivil,
-                        IdProfesion = Entity.IdProfesion??0,
-                        IdCatalogoFichaInst = Entity.IdCatalogoFichaInst??0,
-                        EmpresaTrabajo = Entity.EmpresaTrabajo,
-                        DireccionTrabajo = Entity.DireccionTrabajo,
-                        TelefonoTrabajo = Entity.TelefonoTrabajo,
-                        CargoTrabajo = Entity.CargoTrabajo,
-                        AniosServicio = Entity.AniosServicio,
-                        IngresoMensual = Entity.IngresoMensual,
-                        VehiculoPropio = Entity.VehiculoPropio,
-                        Marca = Entity.Marca,
-                        Modelo = Entity.Modelo,
-                        AnioVehiculo = Entity.AnioVehiculo,
-                        CasaPropia = Entity.CasaPropia,
-                        pe_fechaNacimiento = Entity.pe_fechaNacimiento,
-                        CodCatalogoCONADIS = Entity.CodCatalogoCONADIS,
-                        NumeroCarnetConadis = Entity.NumeroCarnetConadis,
-                        PorcentajeDiscapacidad = Entity.PorcentajeDiscapacidad,
-                        pe_telfono_Contacto = Entity.pe_telfono_Contacto,
-                        IdReligion = Entity.IdReligion,
-                        AsisteCentroCristiano = Entity.AsisteCentroCristiano,
-                        IdPais = Entity.IdPais,
-                        IdProvincia = Entity.IdProvincia,
-                        IdCiudad = Entity.IdCiudad,
-                        IdParroquia = Entity.IdParroquia,
-                        Cod_Region = Entity.Cod_Region,
-                        Sector = Entity.Sector,
-                        EstaFallecido = Entity.EstaFallecido,
-                    };
-                }
-                */
+                
                 return info_familia;
             }
             catch (Exception)

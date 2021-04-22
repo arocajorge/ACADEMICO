@@ -21,7 +21,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa "
+                    string query = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString();
                     if (MostrarAnulados==false)
                     {
@@ -48,26 +48,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Estado == (MostrarAnulados==true ? q.Estado : true)).ToList();
 
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_AnioLectivoCalificacionCualitativa_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            IdCalificacionCualitativa = q.IdCalificacionCualitativa,
-                            Codigo = q.Codigo,
-                            DescripcionCorta = q.DescripcionCorta,
-                            DescripcionLarga = q.DescripcionLarga,
-                            Estado = q.Estado
-                        });
-                    });
-                }
-                */
                 return Lista;
             }
             catch (Exception)
@@ -86,7 +67,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdCalificacionCualitativa = " + IdCalificacionCualitativa.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -110,26 +91,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdCalificacionCualitativa == IdCalificacionCualitativa).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AnioLectivoCalificacionCualitativa_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdCalificacionCualitativa = Entity.IdCalificacionCualitativa,
-                        Codigo = Entity.Codigo,
-                        DescripcionCorta = Entity.DescripcionCorta,
-                        DescripcionLarga = Entity.DescripcionLarga,
-                        Calificacion = Entity.Calificacion,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -148,7 +110,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa "
+                    command.CommandText = "SELECT * FROM aca_AnioLectivoCalificacionCualitativa WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and Codigo = " + "'" + Codigo.ToString() + "'";
                     var ResultValue = command.ExecuteScalar();
 
@@ -172,26 +134,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_AnioLectivoCalificacionCualitativa.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.Codigo == Codigo).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_AnioLectivoCalificacionCualitativa_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdAnio = Entity.IdAnio,
-                        IdCalificacionCualitativa = Entity.IdCalificacionCualitativa,
-                        Codigo = Entity.Codigo,
-                        DescripcionCorta = Entity.DescripcionCorta,
-                        DescripcionLarga = Entity.DescripcionLarga,
-                        Calificacion = Entity.Calificacion,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
