@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,21 +16,40 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MecanismoDePago_Info> Lista = new List<aca_MecanismoDePago_Info>();
-
-                using (EntitiesAcademico Context = new EntitiesAcademico())
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
-                    Lista = Context.vwaca_MecanismoDePago.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_MecanismoDePago_Info
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT mp.IdEmpresa, mp.IdMecanismo, mp.NombreMecanismo, mp.IdTerminoPago, tp.nom_TerminoPago, mp.Estado, tn.No_Descripcion "
+                    + " FROM dbo.aca_MecanismoDePago AS mp WITH (nolock) INNER JOIN "
+                    + " dbo.fa_TerminoPago AS tp WITH(nolock) ON mp.IdTerminoPago = tp.IdTerminoPago LEFT OUTER JOIN "
+                    + " dbo.fa_TipoNota AS tn WITH(nolock) ON mp.IdEmpresa = tn.IdEmpresa AND mp.IdTipoNotaDescuentoPorRol = tn.IdTipoNota "
+                    + " WHERE mp.IdEmpresa = " + IdEmpresa.ToString();
+                    if (MostrarAnulados == false)
+                    { 
+                        query += " and mp.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        IdMecanismo = q.IdMecanismo,
-                        NombreMecanismo = q.NombreMecanismo,
-                        IdTerminoPago = q.IdTerminoPago,
-                        nom_TerminoPago = q.nom_TerminoPago,
-                        //IdEmpresa_rol = q.IdEmpresa_rol,
-                        Estado = q.Estado,
-                        No_Descripcion = q.No_Descripcion
-                    }).ToList();
+                        Lista.Add(new aca_MecanismoDePago_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMecanismo = Convert.ToDecimal(reader["IdMecanismo"]),
+                            NombreMecanismo = string.IsNullOrEmpty(reader["NombreMecanismo"].ToString()) ? null : reader["NombreMecanismo"].ToString(),
+                            IdTerminoPago = string.IsNullOrEmpty(reader["IdTerminoPago"].ToString()) ? null : reader["IdTerminoPago"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            nom_TerminoPago = string.IsNullOrEmpty(reader["nom_TerminoPago"].ToString()) ? null : reader["nom_TerminoPago"].ToString(),
+                            No_Descripcion = string.IsNullOrEmpty(reader["No_Descripcion"].ToString()) ? null : reader["No_Descripcion"].ToString(),
+                        });
+                    }
+                    reader.Close();
                 }
+
                 return Lista;
             }
             catch (Exception)

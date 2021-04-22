@@ -2,6 +2,7 @@
 using Core.Info.Academico;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,22 +17,33 @@ namespace Core.Data.Academico
             {
                 List<aca_MatriculaCondicional_Det_Info> Lista = new List<aca_MatriculaCondicional_Det_Info>();
 
-                using (EntitiesAcademico odata = new EntitiesAcademico())
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
-                    var lst = odata.vwaca_MatriculaCondicional_Det.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatriculaCondicional == IdMatriculaCondicional).ToList();
+                    connection.Open();
 
-                    lst.ForEach(q =>
+                    #region Query
+                    string query = "SELECT det.IdEmpresa, det.IdMatriculaCondicional, det.Secuencia, parr.IdCatalogoCONDIC, c.NomCatalogo, det.IdParrafo, parr.Nombre"
+                    + " FROM dbo.aca_MatriculaCondicional_Det AS det WITH (nolock)INNER JOIN "
+                    + " dbo.aca_MatriculaCondicionalParrafo AS parr WITH(nolock) ON det.IdEmpresa = parr.IdEmpresa AND det.IdParrafo = parr.IdParrafo INNER JOIN "
+                    + " dbo.aca_Catalogo AS c WITH(nolock) ON parr.IdCatalogoCONDIC = c.IdCatalogo"
+                    + " WHERE det.IdEmpresa = " + IdEmpresa.ToString() + " and det.IdMatriculaCondicional = " + IdMatriculaCondicional.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
                     {
                         Lista.Add(new aca_MatriculaCondicional_Det_Info
                         {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatriculaCondicional = q.IdMatriculaCondicional,
-                            Secuencia=q.Secuencia,
-                            IdParrafo = q.IdParrafo,
-                            Nombre = q.Nombre,
-                            NomCatalogo = q.NomCatalogo
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdMatriculaCondicional = Convert.ToDecimal(reader["IdMatriculaCondicional"]),
+                            IdParrafo = Convert.ToInt32(reader["IdParrafo"]),
+                            Secuencia = Convert.ToInt32(reader["Secuencia"]),
+                            Nombre = string.IsNullOrEmpty(reader["Nombre"].ToString()) ? null : reader["Nombre"].ToString(),
+                            NomCatalogo = string.IsNullOrEmpty(reader["NomCatalogo"].ToString()) ? null : reader["NomCatalogo"].ToString(),
                         });
-                    });
+                    }
+                    reader.Close();
                 }
 
                 return Lista;

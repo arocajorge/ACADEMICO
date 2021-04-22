@@ -22,10 +22,10 @@ namespace Core.Data.Academico
 
                     #region Query
                     string query = "SELECT pm.IdEmpresa, pm.IdPermiso, pm.IdAlumno, a.IdPersona, p.pe_nombreCompleto, pm.IdAnio, an.Descripcion, pm.IdCatalogoPERNEG, pm.Fecha, pm.Observacion, pm.Estado, pm.IdUsuarioCreacion "
-                    + " FROM dbo.aca_Alumno AS a INNER JOIN "
-                    + " dbo.aca_PermisoMatricula AS pm ON a.IdEmpresa = pm.IdEmpresa AND a.IdAlumno = pm.IdAlumno INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS an ON pm.IdEmpresa = an.IdEmpresa AND pm.IdAnio = an.IdAnio INNER JOIN "
-                    + " dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
+                    + " FROM dbo.aca_Alumno AS a WITH (nolock) INNER JOIN "
+                    + " dbo.aca_PermisoMatricula AS pm WITH (nolock) ON a.IdEmpresa = pm.IdEmpresa AND a.IdAlumno = pm.IdAlumno INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS an WITH (nolock) ON pm.IdEmpresa = an.IdEmpresa AND pm.IdAnio = an.IdAnio INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona "
                     + " WHERE pm.IdEmpresa = " + IdEmpresa.ToString() + " and pm.IdAnio = " + IdAnio.ToString() + " and pm.IdCatalogoPERNEG = " + IdCatalogoPERNEG.ToString();
                     if (MostrarAnulados==false)
                     {
@@ -55,26 +55,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    Lista = Context.vwaca_PermisoMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio== IdAnio && q.IdCatalogoPERNEG == IdCatalogoPERNEG 
-                    && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_PermisoMatricula_Info
-                    {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAnio = q.IdAnio,
-                        IdPermiso = q.IdPermiso,
-                        IdAlumno = q.IdAlumno,
-                        IdCatalogoPERNEG = q.IdCatalogoPERNEG,
-                        Fecha = q.Fecha,
-                        Observacion = q.Observacion,
-                        AnioLectivo = q.Descripcion,
-                        Alumno = q.pe_nombreCompleto,
-                        Estado = q.Estado,
-                        IdUsuarioCreacion = q.IdUsuarioCreacion
-                    }).ToList();
-                }
-                */
+
                 return Lista;
             }
             catch (Exception)
@@ -93,7 +74,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_PermisoMatricula "
+                    string query = "SELECT * FROM aca_PermisoMatricula WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdAlumno = " + IdAlumno.ToString()
                     + " and IdCatalogoPERNEG = " + IdCatalogoPERNEG.ToString() + " and IdPermiso != " + IdPermiso.ToString() + " and Estado = 1";
                     #endregion
@@ -117,23 +98,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    Lista = Context.aca_PermisoMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno
-                    && q.IdCatalogoPERNEG == IdCatalogoPERNEG && q.IdPermiso != IdPermiso && q.Estado == true).Select(q => new aca_PermisoMatricula_Info
-                    {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAnio = q.IdAnio,
-                        IdPermiso = q.IdPermiso,
-                        IdAlumno = q.IdAlumno,
-                        IdCatalogoPERNEG = q.IdCatalogoPERNEG,
-                        Fecha = q.Fecha,
-                        Observacion = q.Observacion,
-                        Estado = q.Estado
-                    }).ToList();
-                }
-                */
+
                 return Lista;
             }
             catch (Exception)
@@ -151,7 +116,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_PermisoMatricula "
+                    command.CommandText = "SELECT * FROM aca_PermisoMatricula WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdPermiso = " + IdPermiso.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -175,26 +140,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_PermisoMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdPermiso == IdPermiso).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_PermisoMatricula_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdPermiso = Entity.IdPermiso,
-                        IdAnio = Entity.IdAnio,
-                        IdAlumno = Entity.IdAlumno,
-                        IdCatalogoPERNEG = Entity.IdCatalogoPERNEG,
-                        Fecha = Entity.Fecha,
-                        Observacion = Entity.Observacion,
-                        Estado = Entity.Estado
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -213,7 +159,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_PermisoMatricula "
+                    command.CommandText = "SELECT * FROM aca_PermisoMatricula WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAnio = " + IdAnio.ToString() + " and IdAlumno = " + IdAlumno.ToString() + " and IdCatalogoPERNEG = " + IdCatalogoPERNEG.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -239,28 +185,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_PermisoMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdAlumno == IdAlumno 
-                    && q.IdCatalogoPERNEG == IdCatalogoPERNEG && q.Estado == true).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_PermisoMatricula_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdPermiso = Entity.IdPermiso,
-                        IdAnio = Entity.IdAnio,
-                        IdAlumno = Entity.IdAlumno,
-                        IdCatalogoPERNEG = Entity.IdCatalogoPERNEG,
-                        Fecha = Entity.Fecha,
-                        IdUsuarioCreacion = Entity.IdUsuarioCreacion,
-                        IdUsuarioModificacion = Entity.IdUsuarioModificacion,
-                        Observacion = Entity.Observacion
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)

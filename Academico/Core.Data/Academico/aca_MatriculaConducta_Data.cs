@@ -27,7 +27,7 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT * FROM aca_MatriculaConducta "
+                    string query = "SELECT * FROM aca_MatriculaConducta WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdMatricula = " + IdMatricula.ToString();
                     #endregion
 
@@ -148,7 +148,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_MatriculaConducta "
+                    command.CommandText = "SELECT * FROM aca_MatriculaConducta WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdMatricula = " + IdMatricula.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -202,56 +202,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdMatricula == IdMatricula).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
-
-                    info = new aca_MatriculaConducta_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdMatricula = Entity.IdMatricula,
-                        SecuenciaPromedioP1 = Entity.SecuenciaPromedioP1,
-                        PromedioP1 = Entity.PromedioP1,
-                        SecuenciaPromedioFinalP1 = Entity.SecuenciaPromedioFinalP1,
-                        PromedioFinalP1 = Entity.PromedioFinalP1,
-                        SecuenciaPromedioP2 = Entity.SecuenciaPromedioP2,
-                        PromedioP2 = Entity.PromedioP2,
-                        SecuenciaPromedioFinalP2 = Entity.SecuenciaPromedioFinalP2,
-                        PromedioFinalP2 = Entity.PromedioFinalP2,
-                        SecuenciaPromedioP3 = Entity.SecuenciaPromedioP3,
-                        PromedioP3 = Entity.PromedioP3,
-                        SecuenciaPromedioFinalP3 = Entity.SecuenciaPromedioFinalP3,
-                        PromedioFinalP3 = Entity.PromedioFinalP3,
-                        SecuenciaPromedioP4 = Entity.SecuenciaPromedioP4,
-                        PromedioP4 = Entity.PromedioP4,
-                        SecuenciaPromedioFinalP4 = Entity.SecuenciaPromedioFinalP4,
-                        PromedioFinalP4 = Entity.PromedioFinalP4,
-                        SecuenciaPromedioP5 = Entity.SecuenciaPromedioP5,
-                        PromedioP5 = Entity.PromedioP5,
-                        SecuenciaPromedioFinalP5 = Entity.SecuenciaPromedioFinalP5,
-                        PromedioFinalP5 = Entity.PromedioFinalP5,
-                        SecuenciaPromedioP6 = Entity.SecuenciaPromedioP6,
-                        PromedioP6 = Entity.PromedioP6,
-                        SecuenciaPromedioFinalP6 = Entity.SecuenciaPromedioFinalP6,
-                        PromedioFinalP6 = Entity.PromedioFinalP6,
-                        SecuenciaPromedioQ1 = Entity.SecuenciaPromedioQ1,
-                        PromedioQ1 = Entity.PromedioQ1,
-                        SecuenciaPromedioFinalQ1 = Entity.SecuenciaPromedioFinalQ1,
-                        PromedioFinalQ1 = Entity.PromedioFinalQ1,
-                        SecuenciaPromedioQ2 = Entity.SecuenciaPromedioQ2,
-                        PromedioQ2 = Entity.PromedioQ2,
-                        SecuenciaPromedioFinalQ2 = Entity.SecuenciaPromedioFinalQ2,
-                        PromedioFinalQ2 = Entity.PromedioFinalQ2,
-                        SecuenciaPromedioGeneral = Entity.SecuenciaPromedioGeneral,
-                        PromedioGeneral = Entity.PromedioGeneral,
-                        SecuenciaPromedioFinal = Entity.SecuenciaPromedioFinal,
-                        PromedioFinal = Entity.PromedioFinal
-                    };
-                }
-                */
+                
                 return info;
             }
             catch (Exception)
@@ -293,18 +244,18 @@ namespace Core.Data.Academico
                     + " mc.PromedioFinalQ2, mc.SecuenciaPromedioGeneral, mc.PromedioGeneral, mc.SecuenciaPromedioFinal, mc.PromedioFinal, mc.MotivoPromedioFinalP1, mc.MotivoPromedioFinalP2, mc.MotivoPromedioFinalP3, mc.MotivoPromedioFinalQ1, "
                     + " mc.MotivoPromedioFinalP4, mc.MotivoPromedioFinalP5, mc.MotivoPromedioFinalP6, mc.MotivoPromedioFinalQ2, mc.MotivoPromedioFinal, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, "
                     + " jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo "
-                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
-                    + " dbo.aca_MatriculaConducta AS mc ON m.IdEmpresa = mc.IdEmpresa AND m.IdMatricula = mc.IdMatricula INNER JOIN "
-                    + " dbo.tb_persona AS p INNER JOIN "
-                    + " dbo.aca_Alumno AS a ON p.IdPersona = a.IdPersona ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
+                    + " FROM dbo.aca_Matricula AS m WITH (nolock) INNER JOIN "
+                    + " dbo.aca_MatriculaConducta AS mc WITH (nolock) ON m.IdEmpresa = mc.IdEmpresa AND m.IdMatricula = mc.IdMatricula INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Alumno AS a WITH (nolock) ON p.IdPersona = a.IdPersona ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
                     + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
                     + " WHERE(NOT EXISTS "
                     + " (SELECT IdEmpresa "
-                    + " FROM      dbo.aca_AlumnoRetiro AS f "
+                    + " FROM      dbo.aca_AlumnoRetiro AS f WITH (nolock) "
                     + " WHERE(IdEmpresa = mc.IdEmpresa) AND(IdMatricula = mc.IdMatricula) AND(Estado = 1))) "
                     + " AND m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdSede = " + IdSede.ToString() + " and m.IdAnio = " + IdAnio.ToString()
                     + " AND m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
@@ -372,68 +323,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede == IdSede
-                    && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin
-                    && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin
-                    && q.IdAlumno >= IdAlumnoIni && q.IdAlumno <= IdAlumnoFin).OrderBy(q => q.pe_nombreCompleto).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MatriculaConducta_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatricula = q.IdMatricula,
-                            IdAlumno = q.IdAlumno,
-                            IdAnio = q.IdAnio,
-                            IdSede = q.IdSede,
-                            IdNivel=q.IdNivel,
-                            IdJornada = q.IdJornada,
-                            IdCurso=q.IdCurso,
-                            IdParalelo = q.IdParalelo,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            SecuenciaPromedioP1 = q.SecuenciaPromedioP1,
-                            PromedioP1 = q.PromedioP1,
-                            SecuenciaPromedioFinalP1 = q.SecuenciaPromedioFinalP1,
-                            PromedioFinalP1 = q.PromedioFinalP1,
-                            SecuenciaPromedioP2 = q.SecuenciaPromedioP2,
-                            PromedioP2 = q.PromedioP2,
-                            SecuenciaPromedioFinalP2 = q.SecuenciaPromedioFinalP2,
-                            PromedioFinalP2 = q.PromedioFinalP2,
-                            SecuenciaPromedioP3 = q.SecuenciaPromedioP3,
-                            PromedioP3 = q.PromedioP3,
-                            SecuenciaPromedioFinalP3 = q.SecuenciaPromedioFinalP3,
-                            PromedioFinalP3 = q.PromedioFinalP3,
-                            SecuenciaPromedioP4 = q.SecuenciaPromedioP4,
-                            PromedioP4 = q.PromedioP4,
-                            SecuenciaPromedioFinalP4 = q.SecuenciaPromedioFinalP4,
-                            PromedioFinalP4 = q.PromedioFinalP4,
-                            SecuenciaPromedioP5 = q.SecuenciaPromedioP5,
-                            PromedioP5 = q.PromedioP5,
-                            SecuenciaPromedioFinalP5 = q.SecuenciaPromedioFinalP5,
-                            PromedioFinalP5 = q.PromedioFinalP5,
-                            SecuenciaPromedioP6 = q.SecuenciaPromedioP6,
-                            PromedioP6 = q.PromedioP6,
-                            SecuenciaPromedioFinalP6 = q.SecuenciaPromedioFinalP6,
-                            PromedioFinalP6 = q.PromedioFinalP6,
-                            SecuenciaPromedioQ1 = q.SecuenciaPromedioQ1,
-                            PromedioQ1 = q.PromedioQ1,
-                            SecuenciaPromedioFinalQ1 = q.SecuenciaPromedioFinalQ1,
-                            PromedioFinalQ1 = q.PromedioFinalQ1,
-                            SecuenciaPromedioQ2 = q.SecuenciaPromedioQ2,
-                            PromedioQ2 = q.PromedioQ2,
-                            SecuenciaPromedioFinalQ2 = q.SecuenciaPromedioFinalQ2,
-                            PromedioFinalQ2 = q.PromedioFinalQ2,
-                            SecuenciaPromedioGeneral = q.SecuenciaPromedioGeneral,
-                            PromedioGeneral = q.PromedioGeneral,
-                            SecuenciaPromedioFinal = q.SecuenciaPromedioFinal,
-                            PromedioFinal = q.PromedioFinal
-                        });
-                    });
-                }
-                */
+                
                 return Lista;
             }
             catch (Exception)
@@ -466,14 +356,14 @@ namespace Core.Data.Academico
                     #region Query
                     string query = "SELECT mc.IdEmpresa, mc.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, "
                     + " cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, cp.IdProfesorTutor, cp.IdProfesorInspector "
-                    + " FROM     dbo.aca_MatriculaConducta AS mc INNER JOIN "
-                    + " dbo.aca_Matricula AS m ON mc.IdEmpresa = m.IdEmpresa AND mc.IdMatricula = m.IdMatricula INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON m.IdAnio = a.IdAnio AND m.IdEmpresa = a.IdEmpresa LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
+                    + " FROM     dbo.aca_MatriculaConducta AS mc WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Matricula AS m WITH (nolock) ON mc.IdEmpresa = m.IdEmpresa AND mc.IdMatricula = m.IdMatricula INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON m.IdAnio = a.IdAnio AND m.IdEmpresa = a.IdEmpresa LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
                     + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
                     + " WHERE mc.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdSede = " + IdSede.ToString() + " and m.IdAnio = " + IdAnio.ToString()
                     + " AND m.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString()
                     + " AND m.IdJornada between " + IdJornadaIni.ToString() + " and " + IdJornadaFin.ToString()
@@ -516,42 +406,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_AnioLectivo_Paralelo_Conducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio==IdAnio
-                    && q.IdNivel >= IdNivelIni && q.IdNivel <= IdNivelFin && q.IdJornada >= IdJornadaIni && q.IdJornada <= IdJornadaFin
-                    && q.IdCurso >= IdCursoIni && q.IdCurso <= IdCursoFin && q.IdParalelo >= IdParaleloIni && q.IdParalelo <= IdParaleloFin).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MatriculaConducta_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatricula = q.IdMatricula,
-                            IdAnio = q.IdAnio,
-                            IdSede = q.IdSede,
-                            IdNivel = q.IdNivel,
-                            IdJornada = q.IdJornada,
-                            IdCurso = q.IdCurso,
-                            IdParalelo = q.IdParalelo,
-                            Descripcion = q.Descripcion,
-                            NomSede = q.NomSede,
-                            NomNivel = q.NomNivel,
-                            OrdenNivel = q.OrdenNivel ?? 0,
-                            NomJornada = q.NomJornada,
-                            OrdenJornada = q.OrdenJornada ?? 0,
-                            NomCurso = q.NomCurso,
-                            OrdenCurso = q.OrdenCurso ?? 0,
-                            NomParalelo = q.NomParalelo,
-                            OrdenParalelo = q.OrdenParalelo,
-                            CodigoParalelo = q.CodigoParalelo,
-                            IdProfesorTutor = q.IdProfesorTutor ?? 0,
-                            IdProfesorInspector = q.IdProfesorInspector ?? 0,
-                        });
-                    });
-                }
-                */
+               
                 return Lista;
             }
             catch (Exception)
@@ -572,15 +427,15 @@ namespace Core.Data.Academico
                     #region Query
                     string query = "SELECT mc.IdEmpresa, mc.IdMatricula, mc.IdMateria, mc.IdProfesor, c.IdAnio, c.IdSede, c.IdNivel, c.IdJornada, c.IdCurso, c.IdParalelo, a.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, "
                     + " jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo, cp.IdProfesorTutor, cp.IdProfesorInspector, cm.NomMateria, cm.EsObligatorio, cm.OrdenMateria "
-                    + " FROM     dbo.aca_MatriculaCalificacion AS mc INNER JOIN "
-                    + " dbo.aca_Matricula AS c ON mc.IdEmpresa = c.IdEmpresa AND mc.IdMatricula = c.IdMatricula INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS a ON c.IdAnio = a.IdAnio AND c.IdEmpresa = a.IdEmpresa INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Materia AS cm ON c.IdEmpresa = cm.IdEmpresa AND c.IdAnio = cm.IdAnio AND c.IdSede = cm.IdSede AND c.IdNivel = cm.IdNivel AND c.IdJornada = cm.IdJornada AND c.IdCurso = cm.IdCurso AND "
+                    + " FROM     dbo.aca_MatriculaCalificacion AS mc WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Matricula AS c WITH (nolock) ON mc.IdEmpresa = c.IdEmpresa AND mc.IdMatricula = c.IdMatricula INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS a WITH (nolock) ON c.IdAnio = a.IdAnio AND c.IdEmpresa = a.IdEmpresa INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Materia AS cm WITH (nolock) ON c.IdEmpresa = cm.IdEmpresa AND c.IdAnio = cm.IdAnio AND c.IdSede = cm.IdSede AND c.IdNivel = cm.IdNivel AND c.IdJornada = cm.IdJornada AND c.IdCurso = cm.IdCurso AND "
                     + " mc.IdMateria = cm.IdMateria LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON nj.IdEmpresa = sn.IdEmpresa AND nj.IdAnio = sn.IdAnio AND nj.IdSede = sn.IdSede AND nj.IdNivel = sn.IdNivel RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) ON nj.IdEmpresa = sn.IdEmpresa AND nj.IdAnio = sn.IdAnio AND nj.IdSede = sn.IdSede AND nj.IdNivel = sn.IdNivel RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON nj.IdEmpresa = jc.IdEmpresa AND nj.IdAnio = jc.IdAnio AND nj.IdSede = jc.IdSede AND nj.IdNivel = jc.IdNivel AND nj.IdJornada = jc.IdJornada RIGHT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON jc.IdEmpresa = cp.IdEmpresa AND jc.IdAnio = cp.IdAnio AND jc.IdSede = cp.IdSede AND jc.IdNivel = cp.IdNivel AND jc.IdJornada = cp.IdJornada AND jc.IdCurso = cp.IdCurso ON "
                     + " c.IdEmpresa = cp.IdEmpresa AND c.IdAnio = cp.IdAnio AND c.IdSede = cp.IdSede AND c.IdNivel = cp.IdNivel AND c.IdJornada = cp.IdJornada AND c.IdCurso = cp.IdCurso AND c.IdParalelo = cp.IdParalelo ";
                     if (EsSuperAdmin == false)
                     {
@@ -626,41 +481,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_AnioLectivo_Paralelo_Profesor_Calificaciones.Where(q => q.IdEmpresa == IdEmpresa
-                    && q.IdProfesorInspector == (EsSuperAdmin == true ? q.IdProfesorInspector : IdProfesor)).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MatriculaConducta_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatricula = q.IdMatricula,
-                            IdAnio = q.IdAnio,
-                            IdSede = q.IdSede,
-                            IdNivel = q.IdNivel,
-                            IdJornada = q.IdJornada,
-                            IdCurso = q.IdCurso,
-                            IdParalelo = q.IdParalelo,
-                            Descripcion = q.Descripcion,
-                            NomSede = q.NomSede,
-                            NomNivel = q.NomNivel,
-                            OrdenNivel = q.OrdenNivel ?? 0,
-                            NomJornada = q.NomJornada,
-                            OrdenJornada = q.OrdenJornada ?? 0,
-                            NomCurso = q.NomCurso,
-                            OrdenCurso = q.OrdenCurso ?? 0,
-                            NomParalelo = q.NomParalelo,
-                            OrdenParalelo = q.OrdenParalelo ?? 0,
-                            CodigoParalelo = q.CodigoParalelo,
-                            IdProfesorTutor = q.IdProfesorTutor ?? 0,
-                            IdProfesorInspector = q.IdProfesorInspector ?? 0
-                        });
-                    });
-                }
-                */
+                
                 return Lista;
             }
             catch (Exception)
@@ -686,15 +507,15 @@ namespace Core.Data.Academico
                     + " mc.PromedioFinalQ2, mc.SecuenciaPromedioGeneral, mc.PromedioGeneral, mc.SecuenciaPromedioFinal, mc.PromedioFinal, mc.MotivoPromedioFinalP1, mc.MotivoPromedioFinalP2, mc.MotivoPromedioFinalP3, mc.MotivoPromedioFinalQ1, "
                     + " mc.MotivoPromedioFinalP4, mc.MotivoPromedioFinalP5, mc.MotivoPromedioFinalP6, mc.MotivoPromedioFinalQ2, mc.MotivoPromedioFinal, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, "
                     + " jc.OrdenCurso, cp.CodigoParalelo, cp.NomParalelo, cp.OrdenParalelo "
-                    + " FROM dbo.aca_Matricula AS m INNER JOIN "
-                    + " dbo.aca_MatriculaConducta AS mc ON m.IdEmpresa = mc.IdEmpresa AND m.IdMatricula = mc.IdMatricula INNER JOIN "
+                    + " FROM dbo.aca_Matricula AS m WITH (nolock) INNER JOIN "
+                    + " dbo.aca_MatriculaConducta AS mc WITH (nolock) ON m.IdEmpresa = mc.IdEmpresa AND m.IdMatricula = mc.IdMatricula INNER JOIN "
                     + " dbo.tb_persona AS p INNER JOIN "
-                    + " dbo.aca_Alumno AS a ON p.IdPersona = a.IdPersona ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
+                    + " dbo.aca_Alumno AS a WITH (nolock) ON p.IdPersona = a.IdPersona ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
                     + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON m.IdEmpresa = jc.IdEmpresa AND m.IdAnio = jc.IdAnio AND m.IdSede = jc.IdSede AND m.IdNivel = jc.IdNivel AND m.IdJornada = jc.IdJornada AND m.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) ON m.IdEmpresa = nj.IdEmpresa AND m.IdAnio = nj.IdAnio AND m.IdSede = nj.IdSede AND m.IdNivel = nj.IdNivel AND m.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) ON m.IdEmpresa = sn.IdEmpresa AND m.IdAnio = sn.IdAnio AND m.IdSede = sn.IdSede AND m.IdNivel = sn.IdNivel "
                     + " WHERE(NOT EXISTS "
                     + " (SELECT IdEmpresa "
                     + " FROM      dbo.aca_AlumnoRetiro AS f "
@@ -773,75 +594,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico odata = new EntitiesAcademico())
-                {
-                    var lst = odata.vwaca_MatriculaConducta.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).OrderBy(q=>q.pe_nombreCompleto).ToList();
-
-                    lst.ForEach(q =>
-                    {
-                        Lista.Add(new aca_MatriculaConducta_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdMatricula = q.IdMatricula,
-                            IdAlumno = q.IdAlumno,
-                            IdAnio = q.IdAnio,
-                            IdSede = q.IdSede,
-                            IdNivel = q.IdNivel,
-                            IdJornada = q.IdJornada,
-                            IdCurso = q.IdCurso,
-                            IdParalelo = q.IdParalelo,
-                            pe_nombreCompleto = q.pe_nombreCompleto,
-                            SecuenciaPromedioP1 = q.SecuenciaPromedioP1,
-                            PromedioP1 = q.PromedioP1,
-                            SecuenciaPromedioFinalP1 = q.SecuenciaPromedioFinalP1,
-                            PromedioFinalP1 = q.PromedioFinalP1,
-                            SecuenciaPromedioP2 = q.SecuenciaPromedioP2,
-                            PromedioP2 = q.PromedioP2,
-                            SecuenciaPromedioFinalP2 = q.SecuenciaPromedioFinalP2,
-                            PromedioFinalP2 = q.PromedioFinalP2,
-                            SecuenciaPromedioP3 = q.SecuenciaPromedioP3,
-                            PromedioP3 = q.PromedioP3,
-                            SecuenciaPromedioFinalP3 = q.SecuenciaPromedioFinalP3,
-                            PromedioFinalP3 = q.PromedioFinalP3,
-                            SecuenciaPromedioP4 = q.SecuenciaPromedioP4,
-                            PromedioP4 = q.PromedioP4,
-                            SecuenciaPromedioFinalP4 = q.SecuenciaPromedioFinalP4,
-                            PromedioFinalP4 = q.PromedioFinalP4,
-                            SecuenciaPromedioP5 = q.SecuenciaPromedioP5,
-                            PromedioP5 = q.PromedioP5,
-                            SecuenciaPromedioFinalP5 = q.SecuenciaPromedioFinalP5,
-                            PromedioFinalP5 = q.PromedioFinalP5,
-                            SecuenciaPromedioP6 = q.SecuenciaPromedioP6,
-                            PromedioP6 = q.PromedioP6,
-                            SecuenciaPromedioFinalP6 = q.SecuenciaPromedioFinalP6,
-                            PromedioFinalP6 = q.PromedioFinalP6,
-                            SecuenciaPromedioQ1 = q.SecuenciaPromedioQ1,
-                            PromedioQ1 = q.PromedioQ1,
-                            SecuenciaPromedioFinalQ1 = q.SecuenciaPromedioFinalQ1,
-                            PromedioFinalQ1 = q.PromedioFinalQ1,
-                            SecuenciaPromedioQ2 = q.SecuenciaPromedioQ2,
-                            PromedioQ2 = q.PromedioQ2,
-                            SecuenciaPromedioFinalQ2 = q.SecuenciaPromedioFinalQ2,
-                            PromedioFinalQ2 = q.PromedioFinalQ2,
-                            SecuenciaPromedioGeneral = q.SecuenciaPromedioGeneral,
-                            PromedioGeneral = q.PromedioGeneral,
-                            SecuenciaPromedioFinal = q.SecuenciaPromedioFinal,
-                            PromedioFinal = q.PromedioFinal,
-                            MotivoPromedioFinalP1 = q.MotivoPromedioFinalP1,
-                            MotivoPromedioFinalP2 = q.MotivoPromedioFinalP2,
-                            MotivoPromedioFinalP3 = q.MotivoPromedioFinalP3,
-                            MotivoPromedioFinalQ1 = q.MotivoPromedioFinalQ1,
-                            MotivoPromedioFinalP4 = q.MotivoPromedioFinalP4,
-                            MotivoPromedioFinalP5 = q.MotivoPromedioFinalP5,
-                            MotivoPromedioFinalP6 = q.MotivoPromedioFinalP6,
-                            MotivoPromedioFinalQ2 = q.MotivoPromedioFinalQ2,
-                            MotivoPromedioFinal = q.MotivoPromedioFinal,
-                            ValidoImportacion=true
-                        });
-                    });
-                }
-                */
+                
                 return Lista;
             }
             catch (Exception)

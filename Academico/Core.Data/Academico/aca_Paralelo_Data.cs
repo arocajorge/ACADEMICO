@@ -108,7 +108,7 @@ namespace Core.Data.Academico
                     + " WHERE p.IdEmpresa = " + IdEmpresa.ToString();
                     if (MostrarAnulados == false)
                     {
-                        query += " and c.Estado = 1";
+                        query += " and p.Estado = 1";
                     }
                     query += " order by p.OrdenParalelo";
                     #endregion

@@ -3,6 +3,7 @@ using Core.Info.Academico;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,23 +19,41 @@ namespace Core.Data.Academico
                 var IdAnio_ini = IdAnio;
                 var IdAnio_fin = (IdAnio == 0 ? 99999999999 : IdAnio);
                 List<aca_Plantilla_Info> Lista = new List<aca_Plantilla_Info>();
-
-                using (EntitiesAcademico Context = new EntitiesAcademico())
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
-                    Lista = Context.aca_Plantilla.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio >= IdAnio_ini && q.IdAnio <= IdAnio_fin && q.Estado == (MostrarAnulados == true ? q.Estado : true)).Select(q => new aca_Plantilla_Info
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT * FROM aca_Plantilla p WITH (nolock) "
+                    + " WHERE p.IdEmpresa = " + IdEmpresa.ToString() + " and p.IdAnio between "+ IdAnio_ini.ToString() + " and "+ IdAnio_fin.ToString();
+                    if (MostrarAnulados == false)
                     {
-                        IdEmpresa = q.IdEmpresa,
-                        IdAnio = q.IdAnio,
-                        IdPlantilla = q.IdPlantilla,
-                        NomPlantilla = q.NomPlantilla,
-                        TipoDescuento = q.TipoDescuento,
-                        IdTipoNota = q.IdTipoNota,
-                        IdTipoPlantilla = q.IdTipoPlantilla,
-                        Valor = q.Valor,
-                        AplicaParaTodo = q.AplicaParaTodo,
-                        Estado = q.Estado
-                    }).ToList();
+                        query += " and p.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Plantilla_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            NomPlantilla = string.IsNullOrEmpty(reader["NomPlantilla"].ToString()) ? null : reader["NomPlantilla"].ToString(),
+                            TipoDescuento = string.IsNullOrEmpty(reader["TipoDescuento"].ToString()) ? null : reader["TipoDescuento"].ToString(),
+                            IdTipoNota = Convert.ToInt32(reader["IdTipoNota"]),
+                            IdTipoPlantilla = string.IsNullOrEmpty(reader["IdTipoPlantilla"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdTipoPlantilla"]),
+                            Valor = Convert.ToInt32(reader["Valor"]),
+                            AplicaParaTodo = string.IsNullOrEmpty(reader["AplicaParaTodo"].ToString()) ? false : Convert.ToBoolean(reader["AplicaParaTodo"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        });
+                    }
+                    reader.Close();
                 }
+
                 return Lista;
             }
             catch (Exception)
@@ -47,27 +66,37 @@ namespace Core.Data.Academico
         {
             try
             {
-                aca_Plantilla_Info info;
+                aca_Plantilla_Info info = new aca_Plantilla_Info();
 
-                using (EntitiesAcademico db = new EntitiesAcademico())
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
-                    var Entity = db.aca_Plantilla.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPlantilla == IdPlantilla).FirstOrDefault();
-                    if (Entity == null)
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT * FROM aca_Plantilla p WITH (nolock) "
+                    + " WHERE p.IdEmpresa = " + IdEmpresa.ToString() + " and p.IdAnio = " + IdAnio.ToString() + " and p.IdPlantilla = " + IdPlantilla.ToString();
+                    var ResultValue = command.ExecuteScalar();
+
+                    if (ResultValue == null)
                         return null;
 
-                    info = new aca_Plantilla_Info
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdPlantilla = Entity.IdPlantilla,
-                        IdAnio = Entity.IdAnio,
-                        NomPlantilla = Entity.NomPlantilla,
-                        IdTipoPlantilla = Entity.IdTipoPlantilla,
-                        TipoDescuento = Entity.TipoDescuento,
-                        IdTipoNota = Entity.IdTipoNota,
-                        AplicaParaTodo = Entity.AplicaParaTodo,
-                        Valor = Entity.Valor,
-                        Estado = Entity.Estado
-                    };
+                        info = new aca_Plantilla_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            NomPlantilla = string.IsNullOrEmpty(reader["NomPlantilla"].ToString()) ? null : reader["NomPlantilla"].ToString(),
+                            TipoDescuento = string.IsNullOrEmpty(reader["TipoDescuento"].ToString()) ? null : reader["TipoDescuento"].ToString(),
+                            IdTipoNota = Convert.ToInt32(reader["IdTipoNota"]),
+                            IdTipoPlantilla = string.IsNullOrEmpty(reader["IdTipoPlantilla"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdTipoPlantilla"]),
+                            Valor = Convert.ToInt32(reader["Valor"]),
+                            AplicaParaTodo = string.IsNullOrEmpty(reader["AplicaParaTodo"].ToString()) ? false : Convert.ToBoolean(reader["AplicaParaTodo"]),
+                            Estado = Convert.ToBoolean(reader["Estado"])
+                        };
+                    }
                 }
 
                 return info;

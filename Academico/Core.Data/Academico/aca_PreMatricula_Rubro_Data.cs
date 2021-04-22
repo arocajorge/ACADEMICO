@@ -29,12 +29,12 @@ namespace Core.Data.Academico
                     + " * (dbo.aca_Plantilla.Valor / 100), 2) END) ELSE(CASE WHEN dbo.aca_Plantilla_Rubro.TipoDescuento_descuentoDet = '$' THEN CAST(dbo.aca_Plantilla_Rubro.Valor_descuentoDet AS FLOAT) "
                     + " ELSE ROUND(CAST(dbo.aca_Plantilla_Rubro.Subtotal AS float) * (dbo.aca_Plantilla_Rubro.Valor_descuentoDet / 100), 2) END) END) ELSE CAST(dbo.aca_Plantilla_Rubro.Subtotal AS float)  "
                     + " + CAST(dbo.aca_Plantilla_Rubro.ValorIVA AS FLOAT) END + dbo.aca_Plantilla_Rubro.ValorIVA AS ValorProntoPago, dbo.aca_AnioLectivo_Periodo.FechaProntoPago "
-                    + " FROM dbo.aca_AnioLectivo_Rubro_Periodo AS arp INNER JOIN "
-                    + " dbo.aca_Plantilla_Rubro ON arp.IdEmpresa = dbo.aca_Plantilla_Rubro.IdEmpresa AND arp.IdAnio = dbo.aca_Plantilla_Rubro.IdAnio AND arp.IdRubro = dbo.aca_Plantilla_Rubro.IdRubro INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Periodo ON arp.IdEmpresa = dbo.aca_AnioLectivo_Periodo.IdEmpresa AND arp.IdPeriodo = dbo.aca_AnioLectivo_Periodo.IdPeriodo INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Rubro ON arp.IdEmpresa = dbo.aca_AnioLectivo_Rubro.IdEmpresa AND arp.IdAnio = dbo.aca_AnioLectivo_Rubro.IdAnio AND arp.IdRubro = dbo.aca_AnioLectivo_Rubro.IdRubro INNER JOIN "
-                    + " dbo.in_Producto AS pro ON dbo.aca_Plantilla_Rubro.IdEmpresa = pro.IdEmpresa AND dbo.aca_Plantilla_Rubro.IdProducto = pro.IdProducto INNER JOIN "
-                    + " dbo.aca_Plantilla ON dbo.aca_Plantilla_Rubro.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND dbo.aca_Plantilla_Rubro.IdAnio = dbo.aca_Plantilla.IdAnio AND dbo.aca_Plantilla_Rubro.IdPlantilla = dbo.aca_Plantilla.IdPlantilla "
+                    + " FROM dbo.aca_AnioLectivo_Rubro_Periodo AS arp WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Plantilla_Rubro WITH (nolock) ON arp.IdEmpresa = dbo.aca_Plantilla_Rubro.IdEmpresa AND arp.IdAnio = dbo.aca_Plantilla_Rubro.IdAnio AND arp.IdRubro = dbo.aca_Plantilla_Rubro.IdRubro INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Periodo WITH (nolock) ON arp.IdEmpresa = dbo.aca_AnioLectivo_Periodo.IdEmpresa AND arp.IdPeriodo = dbo.aca_AnioLectivo_Periodo.IdPeriodo INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Rubro WITH (nolock) ON arp.IdEmpresa = dbo.aca_AnioLectivo_Rubro.IdEmpresa AND arp.IdAnio = dbo.aca_AnioLectivo_Rubro.IdAnio AND arp.IdRubro = dbo.aca_AnioLectivo_Rubro.IdRubro INNER JOIN "
+                    + " dbo.in_Producto AS pro WITH (nolock) ON dbo.aca_Plantilla_Rubro.IdEmpresa = pro.IdEmpresa AND dbo.aca_Plantilla_Rubro.IdProducto = pro.IdProducto INNER JOIN "
+                    + " dbo.aca_Plantilla WITH (nolock) ON dbo.aca_Plantilla_Rubro.IdEmpresa = dbo.aca_Plantilla.IdEmpresa AND dbo.aca_Plantilla_Rubro.IdAnio = dbo.aca_Plantilla.IdAnio AND dbo.aca_Plantilla_Rubro.IdPlantilla = dbo.aca_Plantilla.IdPlantilla "
                     + " WHERE dbo.aca_Plantilla_Rubro.IdEmpresa = " + IdEmpresa.ToString() + " and dbo.aca_Plantilla_Rubro.IdAnio = " + IdAnio.ToString() + " and dbo.aca_Plantilla_Rubro.IdPlantilla = " + IdPlantilla.ToString()
                     + " ORDER BY arp.IdPeriodo ";
                     #endregion
@@ -67,35 +67,7 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                /*
-                using (EntitiesAcademico Context = new EntitiesAcademico())
-                {
-                    var lst = Context.vwaca_Plantilla_Rubro_PreMatricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdPlantilla == IdPlantilla).OrderBy(q => q.IdPeriodo).ToList();
-                    foreach (var q in lst)
-                    {
-                        Lista.Add(new aca_PreMatricula_Rubro_Info
-                        {
-                            IdEmpresa = q.IdEmpresa,
-                            IdAnio = q.IdAnio,
-                            IdPlantilla = q.IdPlantilla,
-                            IdPeriodo = q.IdPeriodo,
-                            IdRubro = q.IdRubro,
-                            IdProducto = q.IdProducto,
-                            Subtotal = q.Subtotal,
-                            IdCod_Impuesto_Iva = q.IdCod_Impuesto_Iva,
-                            ValorIVA = q.ValorIVA,
-                            Porcentaje = q.Porcentaje,
-                            Total = q.Total,
-                            NomRubro = q.NomRubro,
-                            FechaDesde = q.FechaDesde,
-                            pr_descripcion = q.pr_descripcion,
-                            AplicaProntoPago = q.AplicaProntoPago,
-                            ValorProntoPago = Convert.ToDecimal(q.ValorProntoPago ?? 0),
-                            FechaProntoPago = q.FechaProntoPago ?? DateTime.Now.Date
-                        });
-                    }    
-                }
-                */
+
                 Lista.ForEach(v => { v.Periodo = v.FechaDesde.Year.ToString("0000") + v.FechaDesde.Month.ToString("00"); });
                 Lista.ForEach(q => q.IdString = q.IdEmpresa.ToString("0000000") + q.IdPlantilla.ToString("0000000") + q.IdPeriodo.ToString("0000000") + q.IdRubro.ToString("0000000"));
                 return Lista;
@@ -128,13 +100,13 @@ namespace Core.Data.Academico
                     + " ELSE(CASE WHEN pr.TipoDescuento_descuentoDet = '$' THEN CAST(pr.Valor_descuentoDet AS FLOAT) "
                     + " ELSE ROUND(CAST(pr.Subtotal AS float) * (pr.Valor_descuentoDet / 100), 2) END) END) ELSE "
                     + " CAST(pr.Subtotal AS float) + CAST(pr.ValorIVA AS FLOAT) END + pr.ValorIVA AS ValorProntoPago "
-                    + " FROM dbo.aca_AnioLectivo_Rubro AS ar "
-                    + " INNER JOIN dbo.aca_AnioLectivo_Rubro_Periodo AS arp ON ar.IdEmpresa = arp.IdEmpresa AND ar.IdAnio = arp.IdAnio AND ar.IdRubro = arp.IdRubro "
-                    + " INNER JOIN  dbo.aca_AnioLectivo_Periodo AS ap ON arp.IdEmpresa = ap.IdEmpresa and arp.IdAnio = ar.IdAnio AND arp.IdPeriodo = ap.IdPeriodo "
-                    + " INNER JOIN  dbo.aca_PreMatricula_Rubro AS mr ON arp.IdEmpresa = mr.IdEmpresa AND arp.IdPeriodo = mr.IdPeriodo AND arp.IdRubro = mr.IdRubro "
-                    + " inner join aca_Plantilla pl on pl.IdEmpresa = mr.IdEmpresa and pl.IdAnio = ar.IdAnio and pl.IdPlantilla = mr.IdPlantilla "
-                    + " INNER JOIN aca_Plantilla_Rubro pr on pr.IdEmpresa = pl.IdEmpresa AND pr.IdAnio = pl.IdAnio AND pr.IdPlantilla = pl.IdPlantilla and pr.IdRubro = ar.IdRubro "
-                    + " INNER JOIN  dbo.in_Producto AS p ON mr.IdEmpresa = p.IdEmpresa AND mr.IdProducto = p.IdProducto  "
+                    + " FROM dbo.aca_AnioLectivo_Rubro AS ar WITH (nolock) "
+                    + " INNER JOIN dbo.aca_AnioLectivo_Rubro_Periodo AS arp WITH (nolock) ON ar.IdEmpresa = arp.IdEmpresa AND ar.IdAnio = arp.IdAnio AND ar.IdRubro = arp.IdRubro "
+                    + " INNER JOIN  dbo.aca_AnioLectivo_Periodo AS ap WITH (nolock) ON arp.IdEmpresa = ap.IdEmpresa and arp.IdAnio = ar.IdAnio AND arp.IdPeriodo = ap.IdPeriodo "
+                    + " INNER JOIN  dbo.aca_PreMatricula_Rubro AS mr WITH (nolock) ON arp.IdEmpresa = mr.IdEmpresa AND arp.IdPeriodo = mr.IdPeriodo AND arp.IdRubro = mr.IdRubro "
+                    + " inner join aca_Plantilla pl WITH (nolock) on pl.IdEmpresa = mr.IdEmpresa and pl.IdAnio = ar.IdAnio and pl.IdPlantilla = mr.IdPlantilla "
+                    + " INNER JOIN aca_Plantilla_Rubro pr WITH (nolock) on pr.IdEmpresa = pl.IdEmpresa AND pr.IdAnio = pl.IdAnio AND pr.IdPlantilla = pl.IdPlantilla and pr.IdRubro = ar.IdRubro "
+                    + " INNER JOIN  dbo.in_Producto AS p WITH (nolock) ON mr.IdEmpresa = p.IdEmpresa AND mr.IdProducto = p.IdProducto  "
                     + " WHERE mr.IdEmpresa = " + IdEmpresa.ToString() + " and mr.IdPreMatricula = " + IdPreMatricula.ToString()
                     + " ORDER BY mr.IdPeriodo ";
                     #endregion
@@ -203,11 +175,11 @@ namespace Core.Data.Academico
                     SqlCommand command = new SqlCommand("", connection);
                     command.CommandText = "SELECT mr.IdEmpresa, mr.IdPreMatricula, mr.IdPeriodo, ap.FechaDesde, mr.IdRubro, ar.NomRubro, mr.IdProducto, mr.Subtotal, mr.IdCod_Impuesto_Iva, mr.Porcentaje, mr.ValorIVA, mr.Total, p.pr_descripcion, mr.IdSucursal, mr.IdBodega, "
                     + " mr.IdCbteVta, mr.FechaFacturacion, mr.IdMecanismo, mr.EnPreMatricula, mr.IdAnio, mr.IdPlantilla, mr.IdSede, mr.IdNivel, mr.IdJornada, mr.IdCurso, mr.IdParalelo "
-                    + " FROM     dbo.aca_AnioLectivo_Rubro AS ar INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Rubro_Periodo AS arp ON ar.IdEmpresa = arp.IdEmpresa AND ar.IdAnio = arp.IdAnio AND ar.IdRubro = arp.IdRubro INNER JOIN "
-                    + " dbo.aca_AnioLectivo_Periodo AS ap ON arp.IdEmpresa = ap.IdEmpresa AND arp.IdPeriodo = ap.IdPeriodo INNER JOIN "
-                    + " dbo.aca_PreMatricula_Rubro AS mr ON arp.IdEmpresa = mr.IdEmpresa AND arp.IdPeriodo = mr.IdPeriodo AND arp.IdRubro = mr.IdRubro INNER JOIN "
-                    + " dbo.in_Producto AS p ON mr.IdEmpresa = p.IdEmpresa AND mr.IdProducto = p.IdProducto "
+                    + " FROM     dbo.aca_AnioLectivo_Rubro AS ar WITH (nolock) INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Rubro_Periodo AS arp WITH (nolock) ON ar.IdEmpresa = arp.IdEmpresa AND ar.IdAnio = arp.IdAnio AND ar.IdRubro = arp.IdRubro INNER JOIN "
+                    + " dbo.aca_AnioLectivo_Periodo AS ap WITH (nolock) ON arp.IdEmpresa = ap.IdEmpresa AND arp.IdPeriodo = ap.IdPeriodo INNER JOIN "
+                    + " dbo.aca_PreMatricula_Rubro AS mr WITH (nolock) ON arp.IdEmpresa = mr.IdEmpresa AND arp.IdPeriodo = mr.IdPeriodo AND arp.IdRubro = mr.IdRubro INNER JOIN "
+                    + " dbo.in_Producto AS p WITH (nolock) ON mr.IdEmpresa = p.IdEmpresa AND mr.IdProducto = p.IdProducto "
                     + " WHERE mr.IdEmpresa = " + IdEmpresa.ToString() + " and mr.IdPreMatricula = " + IdPreMatricula.ToString() + " and mr.IdPeriodo = " + IdPeriodo.ToString() + " and mr.IdRubro = " + IdRubro.ToString();
                     var ResultValue = command.ExecuteScalar();
 
