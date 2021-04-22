@@ -35,13 +35,6 @@ namespace Core.Data.Reportes.Academico
                 {
                     Context.Database.CommandTimeout = 5000;
                     var lst = Context.SPACA_022(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo).ToList();
-                    /*var lst = Context.VWACA_022.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio
-                    && IdSedeIni <= q.IdSede && q.IdSede <= IdSedeFin &&
-                    IdJornadaIni <= q.IdJornada && q.IdJornada <= IdJornadaFin &&
-                    IdNivelIni <= q.IdNivel && q.IdNivel <= IdNivelFin &&
-                    IdCursoIni <= q.IdCurso && q.IdCurso <= IdCursoFin &&
-                    IdParaleloIni <= q.IdParalelo && q.IdParalelo <= IdParaleloFin &&
-                    q.EsRetirado == false).ToList();*/
 
                     foreach (var q in lst)
                     {

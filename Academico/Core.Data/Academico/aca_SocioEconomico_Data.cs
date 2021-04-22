@@ -43,7 +43,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_SocioEconomico"
+                    command.CommandText = "SELECT * FROM aca_SocioEconomico WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdSocioEconomico = " + IdSocioEconomico.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -86,45 +86,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_SocioEconomico.Where(q => q.IdEmpresa == IdEmpresa && q.IdSocioEconomico == IdSocioEconomico).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_SocioEconomico_Info
-                    {
-                        IdEmpresa = Entity.IdEmpresa,
-                        IdSocioEconomico = Entity.IdSocioEconomico,
-                        IdAlumno = Entity.IdAlumno,
-                        IdCatalogoFichaVi = Entity.IdCatalogoFichaVi,
-                        IdCatalogoFichaTVi = Entity.IdCatalogoFichaTVi,
-                        IdCatalogoFichaAg = Entity.IdCatalogoFichaAg,
-                        TieneElectricidad = Entity.TieneElectricidad,
-                        TieneHermanos = Entity.TieneHermanos,
-                        CantidadHermanos = Entity.CantidadHermanos,
-                        SueldoPadre = Entity.SueldoPadre,
-                        SueldoMadre = Entity.SueldoMadre,
-                        OtroIngresoMadre = Entity.OtroIngresoMadre,
-                        OtroIngresoPadre = Entity.OtroIngresoPadre,
-                        GastoAlimentacion = Entity.GastoAlimentacion,
-                        GastoEducacion = Entity.GastoEducacion,
-                        GastoServicioBasico = Entity.GastoServicioBasico,
-                        GastoSalud = Entity.GastoSalud,
-                        GastoArriendo = Entity.GastoArriendo,
-                        GastoPrestamo = Entity.GastoPrestamo,
-                        OtroGasto = Entity.OtroGasto,
-                        IdCatalogoFichaMot = Entity.IdCatalogoFichaMot,
-                        IdCatalogoFichaIns = Entity.IdCatalogoFichaIns,
-                        IdCatalogoFichaFin = Entity.IdCatalogoFichaFin,
-                        IdCatalogoFichaVive = Entity.IdCatalogoFichaVive,
-                        OtroFinanciamiento = Entity.OtroFinanciamiento,
-                        OtroInformacionInst = Entity.OtroInformacionInst,
-                        OtroMotivoIngreso = Entity.OtroMotivoIngreso
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
@@ -143,7 +105,7 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_SocioEconomico"
+                    command.CommandText = "SELECT * FROM aca_SocioEconomico WITH (nolock) "
                     + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAlumno = " + IdAlumno.ToString();
                     var ResultValue = command.ExecuteScalar();
 
@@ -186,41 +148,7 @@ namespace Core.Data.Academico
                         };
                     }
                 }
-                /*
-                using (EntitiesAcademico db = new EntitiesAcademico())
-                {
-                    var Entity = db.aca_SocioEconomico.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno == IdAlumno).FirstOrDefault();
-                    if (Entity == null)
-                        return null;
 
-                    info = new aca_SocioEconomico_Info
-                    {
-                        IdSocioEconomico = Entity.IdSocioEconomico,
-                        IdAlumno = Entity.IdAlumno,
-                        IdCatalogoFichaVi = Entity.IdCatalogoFichaVi,
-                        IdCatalogoFichaTVi = Entity.IdCatalogoFichaTVi,
-                        IdCatalogoFichaAg = Entity.IdCatalogoFichaAg,
-                        IdCatalogoFichaVive = Entity.IdCatalogoFichaVive,
-                        TieneElectricidad = Entity.TieneElectricidad,
-                        TieneHermanos = Entity.TieneHermanos,
-                        CantidadHermanos = Entity.CantidadHermanos,
-                        SueldoPadre = Entity.SueldoPadre,
-                        SueldoMadre = Entity.SueldoMadre,
-                        OtroIngresoMadre = Entity.OtroIngresoMadre,
-                        OtroIngresoPadre = Entity.OtroIngresoPadre,
-                        GastoAlimentacion = Entity.GastoAlimentacion,
-                        GastoEducacion = Entity.GastoEducacion,
-                        GastoServicioBasico = Entity.GastoServicioBasico,
-                        GastoSalud = Entity.GastoSalud,
-                        GastoArriendo = Entity.GastoArriendo,
-                        GastoPrestamo = Entity.GastoPrestamo,
-                        OtroGasto = Entity.OtroGasto,
-                        IdCatalogoFichaMot = Entity.IdCatalogoFichaMot,
-                        IdCatalogoFichaIns = Entity.IdCatalogoFichaIns,
-                        IdCatalogoFichaFin = Entity.IdCatalogoFichaFin
-                    };
-                }
-                */
                 return info;
             }
             catch (Exception)
