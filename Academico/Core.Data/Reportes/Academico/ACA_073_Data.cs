@@ -44,19 +44,19 @@ namespace Core.Data.Reportes.Academico
                     + " SELECT m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, a.Codigo, p.pe_nombreCompleto, p.pe_cedulaRuc, "
                     + " an.Descripcion, sn.NomSede, sn.NomNivel, sn.OrdenNivel, nj.NomJornada, nj.OrdenJornada, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, "
                     + " anc.Descripcion AnioCal, n.NomNivel NivelCal, n.Orden OrdenNivelCal, c.NomCurso CursoCal, c.OrdenCurso OrdenCursoCal, h.Promedio, h.IdCurso IdCursoCal"
-                    + " FROM     dbo.aca_Matricula AS m LEFT OUTER JOIN "
-                    + " dbo.aca_Alumno AS a ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS p ON p.IdPersona = a.IdPersona  LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivoCalificacionHistorico AS h ON a.IdEmpresa = h.IdEmpresa AND a.IdAlumno = h.IdAlumno LEFT OUTER JOIN "
-                    + " dbo.aca_Curso AS c ON h.IdEmpresa = c.IdEmpresa AND h.IdCurso = c.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_NivelAcademico AS n ON h.IdEmpresa = n.IdEmpresa AND h.IdNivel = n.IdNivel "
-                    + " left join aca_AnioLectivo anc on h.IdEmpresa = anc.IdEmpresa and h.IdAnio = anc.IdAnio "
-                    + " left join aca_AnioLectivo an on m.IdEmpresa = an.IdEmpresa and m.IdAnio = an.IdAnio "
-                    + " left join aca_AnioLectivo_Sede_NivelAcademico sn on m.IdEmpresa = sn.IdEmpresa and m.IdSede = sn.IdSede and m.IdAnio = sn.IdAnio and m.IdNivel = sn.IdNivel "
-                    + " left join aca_AnioLectivo_NivelAcademico_Jornada nj on m.IdEmpresa = nj.IdEmpresa and m.IdSede = nj.IdSede and m.IdAnio = nj.IdAnio and m.IdNivel = nj.IdNivel and m.IdJornada = nj.IdJornada "
-                    + " left join aca_AnioLectivo_Jornada_Curso jc on m.IdEmpresa = jc.IdEmpresa and m.IdSede = jc.IdSede and m.IdAnio = jc.IdAnio and m.IdNivel = jc.IdNivel and m.IdJornada = jc.IdJornada and m.IdCurso = jc.IdCurso "
-                    + " left join aca_AnioLectivo_Curso_Paralelo cp on m.IdEmpresa = cp.IdEmpresa and m.IdSede = cp.IdSede and m.IdAnio = cp.IdAnio and m.IdNivel = cp.IdNivel and m.IdJornada = cp.IdJornada and m.IdCurso = cp.IdCurso and m.IdParalelo = cp.IdParalelo "
-                    + " left join aca_AlumnoRetiro AS r ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
+                    + " FROM     dbo.aca_Matricula AS m WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno AS a WITH (nolock) ON m.IdEmpresa = a.IdEmpresa AND m.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON p.IdPersona = a.IdPersona  LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoCalificacionHistorico AS h WITH (nolock) ON a.IdEmpresa = h.IdEmpresa AND a.IdAlumno = h.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.aca_Curso AS c WITH (nolock) ON h.IdEmpresa = c.IdEmpresa AND h.IdCurso = c.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_NivelAcademico AS n WITH (nolock) ON h.IdEmpresa = n.IdEmpresa AND h.IdNivel = n.IdNivel "
+                    + " left join aca_AnioLectivo anc WITH (nolock) on h.IdEmpresa = anc.IdEmpresa and h.IdAnio = anc.IdAnio "
+                    + " left join aca_AnioLectivo an WITH (nolock) on m.IdEmpresa = an.IdEmpresa and m.IdAnio = an.IdAnio "
+                    + " left join aca_AnioLectivo_Sede_NivelAcademico sn WITH (nolock) on m.IdEmpresa = sn.IdEmpresa and m.IdSede = sn.IdSede and m.IdAnio = sn.IdAnio and m.IdNivel = sn.IdNivel "
+                    + " left join aca_AnioLectivo_NivelAcademico_Jornada nj WITH (nolock) on m.IdEmpresa = nj.IdEmpresa and m.IdSede = nj.IdSede and m.IdAnio = nj.IdAnio and m.IdNivel = nj.IdNivel and m.IdJornada = nj.IdJornada "
+                    + " left join aca_AnioLectivo_Jornada_Curso jc WITH (nolock) on m.IdEmpresa = jc.IdEmpresa and m.IdSede = jc.IdSede and m.IdAnio = jc.IdAnio and m.IdNivel = jc.IdNivel and m.IdJornada = jc.IdJornada and m.IdCurso = jc.IdCurso "
+                    + " left join aca_AnioLectivo_Curso_Paralelo cp WITH (nolock) on m.IdEmpresa = cp.IdEmpresa and m.IdSede = cp.IdSede and m.IdAnio = cp.IdAnio and m.IdNivel = cp.IdNivel and m.IdJornada = cp.IdJornada and m.IdCurso = cp.IdCurso and m.IdParalelo = cp.IdParalelo "
+                    + " left join aca_AlumnoRetiro AS r WITH (nolock) ON m.IdEmpresa = r.IdEmpresa AND m.IdMatricula = r.IdMatricula AND r.Estado = 1 "
                     + " WHERE m.IdEmpresa = " + IdEmpresa.ToString()
                     + " and m.IdAnio = " + IdAnio.ToString()
                     + " and m.IdSede = " + IdSede.ToString()
@@ -267,8 +267,8 @@ namespace Core.Data.Reportes.Academico
                     {
                         #region Query
                         string query = "select a.IdEmpresa, a.IdAlumno, t.NombreTematica, count(*) NumCalificaciones, count(*) *100 NumHoras "
-                        + " from aca_MatriculaCalificacionParticipacion as a "
-                        + " left join aca_Tematica t on t.IdEmpresa = a.IdEmpresa and t.IdTematica = a.IdTematica and t.IdCampoAccion = a.IdCampoAccion "
+                        + " from aca_MatriculaCalificacionParticipacion as a WITH (nolock) "
+                        + " left join aca_Tematica t WITH (nolock) on t.IdEmpresa = a.IdEmpresa and t.IdTematica = a.IdTematica and t.IdCampoAccion = a.IdCampoAccion "
                         + " where a.IdEmpresa = " + item.IdEmpresa.ToString() + " and a.IdAlumno = " + item.IdAlumno.ToString() + " and PromedioFinal is not null "
                         + " group by a.IdEmpresa, a.IdAlumno, t.NombreTematica ";
                         #endregion

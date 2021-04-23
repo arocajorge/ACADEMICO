@@ -26,11 +26,11 @@ namespace Core.Data.Reportes.Academico
                     #region Query
                     string query = "select mc.IdEmpresa, mc.IdMatricula, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, m.IdAlumno, a.Codigo, p.pe_nombreCompleto, "
                     + " mc.IdMateria, cm.NomMateria, cm.OrdenMateriaGrupo, cm.OrdenMateria, mc.IdCalificacionCualitativaQ1, mc.PromedioQ1, mc.IdCalificacionCualitativaQ2, mc.PromedioQ2 "
-                    + " from aca_MatriculaCalificacionCualitativaPromedio mc "
-                    + " inner join aca_Matricula m on m.IdEmpresa = mc.IdEmpresa and m.IdMatricula = mc.IdMatricula "
-                    + " inner join aca_Alumno a on a.IdEmpresa = m.IdEmpresa and a.IdAlumno = m.IdAlumno "
-                    + " LEFT OUTER JOIN dbo.tb_persona AS p ON a.IdPersona = p.IdPersona "
-                    + " LEFT OUTER JOIN dbo.aca_AnioLectivo_Curso_Materia AS cm ON m.IdEmpresa = cm.IdEmpresa AND m.IdAnio = cm.IdAnio AND m.IdSede = cm.IdSede "
+                    + " from aca_MatriculaCalificacionCualitativaPromedio mc WITH (nolock) "
+                    + " inner join aca_Matricula m WITH (nolock) on m.IdEmpresa = mc.IdEmpresa and m.IdMatricula = mc.IdMatricula "
+                    + " inner join aca_Alumno a WITH (nolock) on a.IdEmpresa = m.IdEmpresa and a.IdAlumno = m.IdAlumno "
+                    + " LEFT OUTER JOIN dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona "
+                    + " LEFT OUTER JOIN dbo.aca_AnioLectivo_Curso_Materia AS cm WITH (nolock) ON m.IdEmpresa = cm.IdEmpresa AND m.IdAnio = cm.IdAnio AND m.IdSede = cm.IdSede "
                     + " AND m.IdNivel = cm.IdNivel AND m.IdJornada = cm.IdJornada AND m.IdCurso = cm.IdCurso AND mc.IdMateria = cm.IdMateria "
                     + " where mc.IdEmpresa = " + IdEmpresa
                     + " and m.IdAnio = " + IdAnio
@@ -42,7 +42,7 @@ namespace Core.Data.Reportes.Academico
                     + " and mc.IdMateria = " + IdMateria
                     + " and a.Estado = 1 "
                     + " AND NOT EXISTS( "
-                        + " SELECT f.IdEmpresa FROM aca_AlumnoRetiro AS F "
+                        + " SELECT f.IdEmpresa FROM aca_AlumnoRetiro AS F WITH (nolock) "
                         + " where mc.IdEmpresa = f.IdEmpresa and m.IdMatricula = f.IdMatricula and f.Estado = 1 "
                         + " )";
                     #endregion

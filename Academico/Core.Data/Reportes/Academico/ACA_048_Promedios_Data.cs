@@ -28,8 +28,8 @@ namespace Core.Data.Reportes.Academico
                     + " from( "
                     + " select a.IdEmpresa, a.IdAnio, a.IdSede, a.IdNivel, a.IdJornada, a.IdCurso, a.IdParalelo, d.IdMateria, "
                     + " dbo.BankersRounding(AVG(d.PromedioQ1), 2) PromedioFinalQ1, dbo.BankersRounding(AVG(d.PromedioQ2), 2) PromedioFinalQ2 "
-                    + " from aca_Matricula as a inner join  aca_Alumno as b on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno "
-                    + " inner join  tb_persona as c on b.IdPersona = c.IdPersona left join  aca_MatriculaCalificacionCualitativaPromedio as d "
+                    + " from aca_Matricula as a WITH (nolock) inner join  aca_Alumno as b WITH (nolock) on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno "
+                    + " inner join  tb_persona as c WITH (nolock) on b.IdPersona = c.IdPersona left join  aca_MatriculaCalificacionCualitativaPromedio as d WITH (nolock) "
                     + " on a.IdEmpresa = d.IdEmpresa and a.IdMatricula = d.IdMatricula "
                     + " where a.IdEmpresa = " + IdEmpresa
                     + " and a.IdAnio = " + IdAnio
@@ -40,11 +40,11 @@ namespace Core.Data.Reportes.Academico
                     + " and a.IdParalelo = " + IdParalelo
                     + " and d.IdMateria = " + IdMateria
                     + " and b.Estado = 1 "
-                    + " AND NOT EXISTS(SELECT f.IdEmpresa FROM aca_AlumnoRetiro AS F  where a.IdEmpresa = f.IdEmpresa and a.IdMatricula = f.IdMatricula and f.Estado = 1) "
+                    + " AND NOT EXISTS(SELECT f.IdEmpresa FROM aca_AlumnoRetiro AS F WITH (nolock) where a.IdEmpresa = f.IdEmpresa and a.IdMatricula = f.IdMatricula and f.Estado = 1) "
                     + " group by a.IdEmpresa, a.IdAnio, a.IdSede, a.IdNivel, a.IdJornada, a.IdCurso, a.IdParalelo, d.IdMateria "
                     + " ) x "
-                    + " left join aca_AnioLectivoCalificacionCualitativa q1 on q1.IdEmpresa = x.IdEmpresa and q1.IdAnio = x.IdAnio and q1.Calificacion >= x.PromedioFinalQ1 "
-                    + " left join aca_AnioLectivoCalificacionCualitativa q2 on q2.IdEmpresa = x.IdEmpresa and q2.IdAnio = x.IdAnio and q2.Calificacion >= x.PromedioFinalQ2";
+                    + " left join aca_AnioLectivoCalificacionCualitativa q1 WITH (nolock) on q1.IdEmpresa = x.IdEmpresa and q1.IdAnio = x.IdAnio and q1.Calificacion >= x.PromedioFinalQ1 "
+                    + " left join aca_AnioLectivoCalificacionCualitativa q2 WITH (nolock) on q2.IdEmpresa = x.IdEmpresa and q2.IdAnio = x.IdAnio and q2.Calificacion >= x.PromedioFinalQ2";
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);

@@ -23,11 +23,11 @@ namespace Core.Data.Reportes.Academico
 
                     #region Query
                     string query = "SELECT a.IdEmpresa, a.IdAnio, a.IdMatricula, a.IdAlumno, a.Promedio, a.SecuenciaConducta, c.Letra, dbo.aca_Curso.NomCurso, dbo.aca_Curso.OrdenCurso, d.Descripcion "
-                    + " FROM dbo.aca_AnioLectivoCalificacionHistorico AS a INNER JOIN "
-                    + " dbo.aca_Matricula AS b ON a.IdEmpresa = b.IdEmpresa AND a.IdMatricula = b.IdMatricula INNER JOIN "
-                    + " dbo.aca_AnioLectivo AS d ON d.IdEmpresa = b.IdEmpresa AND d.IdAnio = b.IdAnio INNER JOIN "
-                    + " dbo.aca_Curso ON a.IdEmpresa = dbo.aca_Curso.IdEmpresa AND a.IdCurso = dbo.aca_Curso.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c ON a.IdEmpresa = c.IdEmpresa AND b.IdAnio = c.IdAnio AND c.Secuencia = a.SecuenciaConducta "
+                    + " FROM dbo.aca_AnioLectivoCalificacionHistorico AS a WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Matricula AS b WITH (nolock) ON a.IdEmpresa = b.IdEmpresa AND a.IdMatricula = b.IdMatricula INNER JOIN "
+                    + " dbo.aca_AnioLectivo AS d WITH (nolock) ON d.IdEmpresa = b.IdEmpresa AND d.IdAnio = b.IdAnio INNER JOIN "
+                    + " dbo.aca_Curso WITH (nolock) ON a.IdEmpresa = dbo.aca_Curso.IdEmpresa AND a.IdCurso = dbo.aca_Curso.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivoConductaEquivalencia AS c WITH (nolock) ON a.IdEmpresa = c.IdEmpresa AND b.IdAnio = c.IdAnio AND c.Secuencia = a.SecuenciaConducta "
                     + " WHERE a.IdEmpresa = " + IdEmpresa + " AND a.IdAlumno = " + IdAlumno;
                     #endregion
 

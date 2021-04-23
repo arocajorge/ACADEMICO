@@ -33,16 +33,16 @@ namespace Core.Data.Reportes.Academico
                     #region Query
                     string query = "SELECT cp.IdEmpresa, cp.IdAnio, cp.IdSede, cp.IdNivel, cp.IdJornada, cp.IdCurso, cp.IdParalelo, cp.NomParalelo, cp.OrdenParalelo, jc.NomCurso, jc.OrdenCurso, nj.NomJornada, nj.OrdenJornada, sn.NomSede, sn.NomNivel, sn.OrdenNivel, "
                     + " al.Descripcion, ptu.pe_nombreCompleto AS Tutor, pin.pe_nombreCompleto AS Inspector, cp.IdProfesorTutor, cp.IdProfesorInspector "
-                    + " FROM     dbo.aca_AnioLectivo_Curso_Paralelo AS cp LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc ON cp.IdEmpresa = jc.IdEmpresa AND cp.IdAnio = jc.IdAnio AND cp.IdSede = jc.IdSede AND cp.IdNivel = jc.IdNivel AND cp.IdJornada = jc.IdJornada AND cp.IdCurso = jc.IdCurso LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn ON nj.IdEmpresa = sn.IdEmpresa AND nj.IdAnio = sn.IdAnio AND nj.IdSede = sn.IdSede AND nj.IdNivel = sn.IdNivel ON jc.IdEmpresa = nj.IdEmpresa AND jc.IdAnio = nj.IdAnio AND "
+                    + " FROM     dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH (nolock) ON cp.IdEmpresa = jc.IdEmpresa AND cp.IdAnio = jc.IdAnio AND cp.IdSede = jc.IdSede AND cp.IdNivel = jc.IdNivel AND cp.IdJornada = jc.IdJornada AND cp.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH (nolock) ON nj.IdEmpresa = sn.IdEmpresa AND nj.IdAnio = sn.IdAnio AND nj.IdSede = sn.IdSede AND nj.IdNivel = sn.IdNivel ON jc.IdEmpresa = nj.IdEmpresa AND jc.IdAnio = nj.IdAnio AND "
                     + " jc.IdSede = nj.IdSede AND jc.IdNivel = nj.IdNivel AND jc.IdJornada = nj.IdJornada LEFT OUTER JOIN "
-                    + " dbo.aca_AnioLectivo AS al ON al.IdEmpresa = cp.IdEmpresa AND al.IdAnio = cp.IdAnio LEFT OUTER JOIN "
-                    + " dbo.aca_Profesor AS pt ON cp.IdEmpresa = pt.IdEmpresa AND pt.IdProfesor = cp.IdProfesorTutor LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS ptu ON ptu.IdPersona = pt.IdPersona LEFT OUTER JOIN "
-                    + " dbo.aca_Profesor AS pi ON cp.IdEmpresa = pi.IdEmpresa AND pi.IdProfesor = cp.IdProfesorInspector LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS pin ON pin.IdPersona = pi.IdPersona "
+                    + " dbo.aca_AnioLectivo AS al WITH (nolock) ON al.IdEmpresa = cp.IdEmpresa AND al.IdAnio = cp.IdAnio LEFT OUTER JOIN "
+                    + " dbo.aca_Profesor AS pt WITH (nolock) ON cp.IdEmpresa = pt.IdEmpresa AND pt.IdProfesor = cp.IdProfesorTutor LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS ptu WITH (nolock) ON ptu.IdPersona = pt.IdPersona LEFT OUTER JOIN "
+                    + " dbo.aca_Profesor AS pi WITH (nolock) ON cp.IdEmpresa = pi.IdEmpresa AND pi.IdProfesor = cp.IdProfesorInspector LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS pin WITH (nolock) ON pin.IdPersona = pi.IdPersona "
                     + " WHERE cp.IdEmpresa = " + IdEmpresa.ToString()
                     + " and cp.IdAnio = " + IdAnio.ToString()
                     + " and cp.IdSede = " + IdSede.ToString()

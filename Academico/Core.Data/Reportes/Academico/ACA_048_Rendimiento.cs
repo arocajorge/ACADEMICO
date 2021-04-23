@@ -24,7 +24,7 @@ namespace Core.Data.Reportes.Academico
                     #region Query
                     string query = "select a.IdEmpresa, a.IdCalificacionCualitativa, a.IdAnio, a.Codigo, a.DescripcionCorta, a.DescripcionLarga, a.Calificacion, a.Estado, "
                     + " sum(b.ContadorTotal) ContadorTotal, sum(b.AlumnosConCalificacion) AlumnosConCalificacion, dbo.BankersRounding((sum(b.AlumnosConCalificacion) / sum(b.ContadorTotal)) * 100, 2)  Porcentaje "
-                    + " from aca_AnioLectivoCalificacionCualitativa as a left join "
+                    + " from aca_AnioLectivoCalificacionCualitativa as a WITH (nolock) left join "
                     + " ( "
                         + " SELECT B.IdEmpresa, B.IdAnio, B.IdSede, B.IdNivel, B.IdJornada, B.IdCurso, B.IdParalelo,1 AS ContadorTotal, ";
                         if (IdCatalogoParcialTipo == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademico.QUIM1))
@@ -40,8 +40,8 @@ namespace Core.Data.Reportes.Academico
                             query += " 0 as PromedioQuimestre";
                         }
                     
-                        query += " FROM aca_MatriculaCalificacionCualitativaPromedio AS A "
-                        + " INNER JOIN aca_Matricula AS B ON A.IdEmpresa = B.IdEmpresa AND A.IdMatricula = B.IdMatricula "
+                        query += " FROM aca_MatriculaCalificacionCualitativaPromedio AS A WITH (nolock) "
+                        + " INNER JOIN aca_Matricula AS B WITH (nolock) ON A.IdEmpresa = B.IdEmpresa AND A.IdMatricula = B.IdMatricula "
                         + " where b.IdEmpresa = " + IdEmpresa + " and b.IdAnio = " + IdAnio + " and b.IdSede = " + IdSede + " and b.IdJornada = " + IdJornada
                         + " and b.IdNivel = " + IdNivel + " and b.IdCurso = " + IdCurso + " and b.IdParalelo = " + IdParalelo + " and a.IdMateria = " + IdMateria
                     + " ) as b on b.IdEmpresa = a.IdEmpresa and a.IdAnio = b.IdAnio and a.Calificacion = b.PromedioQuimestre "

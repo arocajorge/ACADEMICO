@@ -21,10 +21,10 @@ namespace Core.Data.Reportes.Academico
                     #region Query
                     string query = "SELECT pr.IdEmpresa, pr.IdProfesor, pr.IdPersona, p.pe_cedulaRuc, p.pe_nombreCompleto, p.pe_fechaNacimiento, p.pe_sexo, p.IdProfesion, pr.Direccion, pr.Telefonos, pr.Correo, p.pe_celular, pr.EsProfesor, pr.EsInspector, "
                     + " c.ca_descripcion AS Sexo, pf.Descripcion AS Profesion "
-                    + " FROM     dbo.aca_Profesor AS pr INNER JOIN "
-                    + " dbo.tb_persona AS p ON pr.IdPersona = p.IdPersona LEFT OUTER JOIN "
-                    + " dbo.tb_Catalogo AS c ON c.CodCatalogo = p.pe_sexo LEFT OUTER JOIN "
-                    + " dbo.tb_profesion AS pf ON pf.IdProfesion = p.IdProfesion "
+                    + " FROM     dbo.aca_Profesor AS pr WITH (nolock) INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON pr.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                    + " dbo.tb_Catalogo AS c WITH (nolock) ON c.CodCatalogo = p.pe_sexo LEFT OUTER JOIN "
+                    + " dbo.tb_profesion AS pf WITH (nolock) ON pf.IdProfesion = p.IdProfesion "
                     + " WHERE pr.IdEmpresa = " + IdEmpresa.ToString();
                     #endregion
 
