@@ -137,7 +137,7 @@ namespace Core.Data.Reportes.Contabilidad
                         + " select a.IdEmpresa, a.IdSucursal, a.IdBodega_Cbte, a.IdCbte_vta_nota, sum(dc_ValorPago) dc_ValorPago "
                         + " from cxc_cobro_det as a inner join "
                         + " cxc_cobro as b on a.IdEmpresa = b.IdEmpresa and a.IdSucursal = b.IdSucursal and a.IdCobro = b.IdCobro "
-                        + " where a.dc_TipoDocumento = 'FACT' AND A.estado = 'A' and CAST(b.cr_fecha AS DATE) <= @FechaFin "
+                        + " where a.dc_TipoDocumento = 'FACT' AND A.estado = 'A' and CAST(b.cr_fecha AS DATE) <= @FechaFin and B.IdAlumno is not null"
                         + " GROUP BY a.IdEmpresa, a.IdSucursal, a.IdBodega_Cbte, a.IdCbte_vta_nota "
                     + " ) "
                     + " as b on a.IdEmpresa = b.IdEmpresa and a.IdSucursal = b.IdSucursal and a.IdBodega = b.IdBodega_Cbte and a.IdCbteVta = b.IdCbte_vta_nota inner join "
