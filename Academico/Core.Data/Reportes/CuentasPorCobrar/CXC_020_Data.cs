@@ -32,7 +32,16 @@ namespace Core.Data.Reportes.Contabilidad
                     + " @ONotasCreditoPagoAnticipado float, "
                     + " @oCobros float, "
                     + " @oSaldoAcreedorFinal float, "
-                    + " @oSaldoFinal float "
+                    + " @oSaldoFinal float, "
+
+                    + " @oCXCMatutina float,"
+                    + " @oCXCVespertina float,"
+                    + " @oCXCDeudasAnteriores float,"
+                    + " @oCXCAnticipados float,"
+                    + " @oINGMatutina float,"
+                    + " @oINGVespertina float"
+
+
                     + " BEGIN /*SALDO INICIAL*/ "
                     + " SELECT @oSaldoInicial = sum(a.Saldo) FROM( "
                     + " select a.IdEmpresa, DBO.BankersRounding(SUM(c.Total - isnull(b.dc_ValorPago, 0)), 2) as Saldo "
@@ -161,10 +170,30 @@ namespace Core.Data.Reportes.Contabilidad
             + " ) AS A "
             + " GROUP BY IdEmpresa "
         + " END "
-        + " select @oSaldoInicial AS SaldoInicial, @oFacturas as Facturas, @oNotasDebito as NotasDeDebito, @oSaldoInicial + @oFacturas + @oNotasDebito as SumanDebe, @oNotasCredito as NotasCredito, @ONotasCreditoPagoAnticipado as PagoAnticipado, @oNotasCredito - @ONotasCreditoPagoAnticipado as NetoNotaCredito, @oCobros as Cobros, "
+
+            + " select @oCXCMatutina = dbo.BankersRounding(sum(case when a.IdCtaCble like '0104%' then dc_Valor else 0 end), 2), "
+            + " @oCXCVespertina = dbo.BankersRounding(sum(case when a.IdCtaCble like '0105%' then dc_Valor else 0 end), 2) , "
+            + " @oCXCDeudasAnteriores = dbo.BankersRounding(sum(case when a.IdCtaCble like '0107%' then dc_Valor else 0 end), 2) , "
+            + " @oCXCAnticipados = dbo.BankersRounding(sum(case when a.IdCtaCble like '0202%' then dc_Valor else 0 end), 2) , "
+            + " @oINGMatutina = dbo.BankersRounding(sum(case when b.cb_Fecha between @FechaIni and @FechaFin and(a.IdCtaCble like '0401%' or a.IdCtaCble like '0402%' or a.IdCtaCble like '0403%' or a.IdCtaCble like '0404%') then dc_Valor else 0 end), 2) , "
+            + " @oINGVespertina = dbo.BankersRounding(sum(case when b.cb_Fecha between @FechaIni and @FechaFin and(a.IdCtaCble like '0405%' or a.IdCtaCble like '0406%') then dc_Valor else 0 end), 2) "
+            + " from ct_cbtecble_det as a with(nolock) join "
+            + " ct_cbtecble as b with(nolock) on a.IdEmpresa = b.IdEmpresa and a.IdTipoCbte = b.IdTipoCbte and a.IdCbteCble = b.IdCbteCble "
+            + " where a.IdEmpresa = @IdEmpresa and b.cb_Fecha <= @FechaFin "
+
+            + " SET @oINGMatutina = ABS(@oINGMatutina)"
+            + " SET @oINGVespertina = ABS(@oINGVespertina)"
+            + ""
+            + ""
+
+       + " select @oSaldoInicial AS SaldoInicial, @oFacturas as Facturas, @oNotasDebito as NotasDeDebito, @oSaldoInicial + @oFacturas + @oNotasDebito as SumanDebe, @oNotasCredito as NotasCredito, @ONotasCreditoPagoAnticipado as PagoAnticipado, @oNotasCredito - @ONotasCreditoPagoAnticipado as NetoNotaCredito, @oCobros as Cobros, "
         + " @oSaldoInicial + @oFacturas + @oNotasDebito - @oNotasCredito + @ONotasCreditoPagoAnticipado - @oCobros AS SaldoNeto, @oSaldoAcreedorFinal SaldoAcreedorFinal, "
         + " @oSaldoInicial + @oFacturas + @oNotasDebito - @oNotasCredito + @ONotasCreditoPagoAnticipado - @oCobros + @oSaldoAcreedorFinal as SaldoFinal, @oSaldoFinal SaldoCalculado, "
-        + " dbo.BankersRounding(@oSaldoInicial + @oFacturas + @oNotasDebito - @oNotasCredito + @ONotasCreditoPagoAnticipado - @oCobros + @oSaldoAcreedorFinal - @oSaldoFinal, 2) Diferencia ";
+        + " dbo.BankersRounding(@oSaldoInicial + @oFacturas + @oNotasDebito - @oNotasCredito + @ONotasCreditoPagoAnticipado - @oCobros + @oSaldoAcreedorFinal - @oSaldoFinal, 2) Diferencia, "
+        + " @oCXCMatutina CXCMatutina, @oCXCVespertina CXCVespertina, @oCXCDeudasAnteriores CXCDeudasAnteriores, @oCXCAnticipados CXCAnticipados, @oCXCMatutina + @oCXCVespertina + @oCXCDeudasAnteriores + @oCXCAnticipados as SaldoContableCXC,"
+        + " (@oCXCMatutina + @oCXCVespertina + @oCXCDeudasAnteriores + @oCXCAnticipados) - (@oSaldoInicial + @oFacturas + @oNotasDebito - @oNotasCredito + @ONotasCreditoPagoAnticipado - @oCobros) as DiferenciaCXC,"
+        + " @oINGMatutina oINGMatutina, @oINGVespertina oINGVespertina, @oINGMatutina + @oINGVespertina as TotalIngresos, (@oINGMatutina + @oINGVespertina) - @oFacturas as DiferenciaIngresos "
+        ;
 
                     #endregion
 
@@ -188,6 +217,17 @@ namespace Core.Data.Reportes.Contabilidad
                             SaldoFinal = reader["SaldoFinal"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SaldoFinal"]),
                             SaldoCalculado = reader["SaldoCalculado"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SaldoCalculado"]),
                             Diferencia = reader["Diferencia"] == DBNull.Value ? 0 : Convert.ToDouble(reader["Diferencia"]),
+
+                            CXCMatutina = reader["CXCMatutina"] == DBNull.Value ? 0 : Convert.ToDouble(reader["CXCMatutina"]),
+                            CXCVespertina = reader["CXCVespertina"] == DBNull.Value ? 0 : Convert.ToDouble(reader["CXCVespertina"]),
+                            CXCDeudasAnteriores = reader["CXCDeudasAnteriores"] == DBNull.Value ? 0 : Convert.ToDouble(reader["CXCDeudasAnteriores"]),
+                            CXCAnticipados = reader["CXCAnticipados"] == DBNull.Value ? 0 : Convert.ToDouble(reader["CXCAnticipados"]),
+                            SaldoContableCXC = reader["SaldoContableCXC"] == DBNull.Value ? 0 : Convert.ToDouble(reader["SaldoContableCXC"]),
+                            DiferenciaCXC = reader["DiferenciaCXC"] == DBNull.Value ? 0 : Convert.ToDouble(reader["DiferenciaCXC"]),
+                            oINGMatutina = reader["oINGMatutina"] == DBNull.Value ? 0 : Convert.ToDouble(reader["oINGMatutina"]),
+                            oINGVespertina = reader["oINGVespertina"] == DBNull.Value ? 0 : Convert.ToDouble(reader["oINGVespertina"]),
+                            TotalIngresos = reader["TotalIngresos"] == DBNull.Value ? 0 : Convert.ToDouble(reader["TotalIngresos"]),
+                            DiferenciaIngresos = reader["DiferenciaIngresos"] == DBNull.Value ? 0 : Convert.ToDouble(reader["DiferenciaIngresos"])
                         });
                     }
                     reader.Close();

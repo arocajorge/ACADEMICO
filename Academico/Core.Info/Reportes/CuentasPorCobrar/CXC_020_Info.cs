@@ -21,5 +21,15 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public double SaldoFinal { get; set; }
         public double SaldoCalculado { get; set; }
         public double Diferencia { get; set; }
+        public double CXCVespertina { get; set; }
+        public double CXCMatutina { get; set; }
+        public double CXCDeudasAnteriores { get; set; }
+        public double CXCAnticipados { get; set; }
+        public double SaldoContableCXC { get; set; }
+        public double DiferenciaCXC { get; set; }
+        public double oINGVespertina { get; set; }
+        public double TotalIngresos { get; set; }
+        public double DiferenciaIngresos { get; set; }
+        public double oINGMatutina { get; set; }
     }
 }
