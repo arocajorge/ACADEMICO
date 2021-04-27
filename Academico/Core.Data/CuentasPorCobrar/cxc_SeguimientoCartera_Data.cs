@@ -2,6 +2,7 @@
 using Core.Info.CuentasPorCobrar;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,42 @@ namespace Core.Data.CuentasPorCobrar
                 decimal IdAlumno_ini = IdAlumno;
                 decimal IdAlumno_fin = IdAlumno == 0 ? 999999 : IdAlumno;
                 List<cxc_SeguimientoCartera_Info> Lista = new List<cxc_SeguimientoCartera_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT seg.IdEmpresa, seg.IdSeguimiento, seg.IdAlumno, a.Codigo, p.pe_nombreCompleto, seg.Fecha, seg.Observacion, seg.Estado, seg.IdMatricula, seg.CorreoEnviado, seg.IdUsuarioCreacion "
+                    + " FROM dbo.aca_Alumno AS a WITH (nolock) INNER JOIN "
+                    + " dbo.cxc_SeguimientoCartera AS seg WITH (nolock) ON a.IdEmpresa = seg.IdEmpresa AND a.IdAlumno = seg.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona "
+                    + " WHERE seg.IdEmpresa=" + IdEmpresa.ToString()
+                    + " AND seg.IdAlumno BETWEEN " + IdAlumno_ini.ToString() + "and " + IdAlumno_fin.ToString();
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new cxc_SeguimientoCartera_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSeguimiento = Convert.ToInt32(reader["IdSeguimiento"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            IdMatricula = string.IsNullOrEmpty(reader["IdMatricula"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdMatricula"]),
+                            IdUsuarioCreacion = string.IsNullOrEmpty(reader["IdUsuarioCreacion"].ToString()) ? null : reader["IdUsuarioCreacion"].ToString(),
+                            NombreAlumno = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            CorreoEnviado = string.IsNullOrEmpty(reader["CorreoEnviado"].ToString()) ? false : Convert.ToBoolean(reader["CorreoEnviado"]),
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesCuentasPorCobrar odata = new EntitiesCuentasPorCobrar())
                 {
                     var lst = odata.vwcxc_SeguimientoCartera.Where(q => q.IdEmpresa == IdEmpresa && q.IdAlumno>= IdAlumno_ini && q.IdAlumno<=IdAlumno_fin && q.Fecha>=fecha_ini && q.Fecha <=fecha_fin && q.Estado == (MostrarAnulados ? q.Estado : true)).OrderByDescending(q => q.Fecha).ToList();
@@ -40,7 +76,7 @@ namespace Core.Data.CuentasPorCobrar
                         });
                     });
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)

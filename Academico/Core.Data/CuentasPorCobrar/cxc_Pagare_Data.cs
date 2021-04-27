@@ -23,10 +23,10 @@ namespace Core.Data.CuentasPorCobrar
 
                     #region Query
                     string query = "SELECT pag.IdEmpresa, pag.IdPagare, pag.IdAlumno, pag.IdMatricula, pag.IdPersonaPagare, p.pe_nombreCompleto AS PersonaPagare, pag.FechaAPagar, pag.Valor, pag.Estado, p_al.pe_nombreCompleto AS Alumno "
-                    + " FROM dbo.cxc_Pagare AS pag INNER JOIN "
-                    + " dbo.aca_Alumno AS a ON pag.IdEmpresa = a.IdEmpresa AND pag.IdAlumno = a.IdAlumno INNER JOIN "
-                    + " dbo.tb_persona AS p ON pag.IdPersonaPagare = p.IdPersona LEFT OUTER JOIN "
-                    + " dbo.tb_persona AS p_al ON a.IdPersona = p_al.IdPersona "
+                    + " FROM dbo.cxc_Pagare AS pag WITH (nolock) INNER JOIN "
+                    + " dbo.aca_Alumno AS a WITH (nolock) ON pag.IdEmpresa = a.IdEmpresa AND pag.IdAlumno = a.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON pag.IdPersonaPagare = p.IdPersona LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS p_al WITH (nolock) ON a.IdPersona = p_al.IdPersona "
                     + " WHERE pag.IdEmpresa = " + IdEmpresa + " and pag.FechaAPagar between DATEFROMPARTS("+fecha_ini.Year.ToString()+","+fecha_ini.Month.ToString()+","+fecha_ini.Day.ToString()+ ") and DATEFROMPARTS(" + fecha_fin.Year.ToString() + "," + fecha_fin.Month.ToString() + "," + fecha_fin.Day.ToString() + ")";
                     #endregion
 

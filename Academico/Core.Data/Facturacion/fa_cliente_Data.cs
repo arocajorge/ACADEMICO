@@ -1,7 +1,9 @@
 ﻿using Core.Data.Base;
 using Core.Info.Facturacion;
+using Core.Info.General;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,47 @@ namespace Core.Data.Facturacion
         {
             try
             {
-                List<fa_cliente_Info> Lista;
+                List<fa_cliente_Info> Lista = new List<fa_cliente_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT c.IdEmpresa, c.IdCliente, c.Codigo, c.IdPersona, p.pe_nombreCompleto, c.Idtipo_cliente, p.pe_cedulaRuc, c.Estado, ct.Descripcion_tip_cliente "
+                    + " FROM dbo.tb_persona AS p RIGHT OUTER JOIN "
+                    + " dbo.fa_cliente AS c ON p.IdPersona = c.IdPersona LEFT OUTER JOIN "
+                    + " dbo.fa_cliente_tipo AS ct ON c.IdEmpresa = ct.IdEmpresa AND c.Idtipo_cliente = ct.Idtipo_cliente "
+                    + " WHERE c.IdEmpresa=" + IdEmpresa.ToString();
+                    if (mostrar_anulados==false)
+                    {
+                        query += " and c.Estado == 'A' ";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new fa_cliente_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? null : reader["Estado"].ToString(),
+                            IdCliente = Convert.ToDecimal(reader["IdCliente"]),
+                            Descripcion_tip_cliente = string.IsNullOrEmpty(reader["Descripcion_tip_cliente"].ToString()) ? null : reader["Descripcion_tip_cliente"].ToString(),
+                            info_persona = new tb_persona_Info
+                            {
+                                IdPersona = Convert.ToDecimal(reader["IdPersona"]),
+                                pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                                pe_cedulaRuc = string.IsNullOrEmpty(reader["pe_cedulaRuc"].ToString()) ? null : reader["pe_cedulaRuc"].ToString(),
+                            },
+                            EstadoBool = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : (reader["Estado"].ToString() == "A" ? true : false),                           
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesFacturacion Context = new EntitiesFacturacion())
                 {
                     if (mostrar_anulados)
@@ -61,9 +103,8 @@ namespace Core.Data.Facturacion
 
                                      EstadoBool = q.Estado == "A" ? true : false
                                  }).ToList();
-
                 }
-                
+                */
                 return Lista;
             }
             catch (Exception)

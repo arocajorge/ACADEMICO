@@ -24,10 +24,10 @@ namespace Core.Data.CuentasPorCobrar
                     #region Query
                     string query = "SELECT Conv.IdEmpresa, Conv.IdConvenio, Conv.IdAlumno, al.Codigo, pa.pe_nombreCompleto AS Alumno, Conv.IdMatricula, Conv.IdPersonaConvenio, pg.pe_nombreCompleto AS PersonaConvenio, Conv.Fecha, Conv.FechaPrimerPago, "
                     + " Conv.Valor, Conv.NumCuotas, Conv.Estado, Conv.Observacion "
-                    + " FROM     dbo.cxc_Convenio AS Conv "
-                    + " INNER JOIN dbo.aca_Alumno AS al ON al.IdEmpresa = Conv.IdEmpresa and al.IdAlumno = Conv.IdAlumno "
-                    + " LEFT JOIN dbo.tb_persona AS pa ON pa.IdPersona = al.IdPersona "
-                    + " LEFT JOIN dbo.tb_persona AS pg ON Conv.IdPersonaConvenio = pg.IdPersona "
+                    + " FROM     dbo.cxc_Convenio AS Conv WITH (nolock) "
+                    + " INNER JOIN dbo.aca_Alumno AS al WITH (nolock) ON al.IdEmpresa = Conv.IdEmpresa and al.IdAlumno = Conv.IdAlumno "
+                    + " LEFT JOIN dbo.tb_persona AS pa WITH (nolock) ON pa.IdPersona = al.IdPersona "
+                    + " LEFT JOIN dbo.tb_persona AS pg WITH (nolock) ON Conv.IdPersonaConvenio = pg.IdPersona "
                     + " WHERE Conv.IdEmpresa = " + IdEmpresa + " and Conv.Fecha between DATEFROMPARTS(" + fecha_ini.Year.ToString() + "," + fecha_ini.Month.ToString() + "," + fecha_ini.Day.ToString() + ") and DATEFROMPARTS(" + fecha_fin.Year.ToString() + "," + fecha_fin.Month.ToString() + "," + fecha_fin.Day.ToString() + ")";
                     #endregion
 

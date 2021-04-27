@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Core.Data.Base;
 using Core.Info.Contabilidad;
 using Core.Data.Contabilidad;
+using System.Data.SqlClient;
 
 namespace Core.Data.CuentasPorCobrar
 {
@@ -23,7 +24,51 @@ namespace Core.Data.CuentasPorCobrar
                 FechaIni = FechaIni.Date;
                 FechaFin = FechaFin.Date;
                 List<cxc_ConciliacionNotaCredito_Info> Lista = new List<cxc_ConciliacionNotaCredito_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
 
+                    #region Query
+                    string query = "SELECT conciliacion.IdEmpresa, conciliacion.IdConciliacion, conciliacion.IdSucursal, conciliacion.IdBodega, conciliacion.IdNota, conciliacion.IdCobro, conciliacion.Fecha, conciliacion.Valor, conciliacion.Observacion, conciliacion.Estado, "
+                    + " CASE WHEN fa_notaCreDeb.NaturalezaNota = 'SRI' THEN fa_notaCreDeb.Serie1 + '-' + fa_notaCreDeb.Serie2 + '-' + fa_notaCreDeb.NumNota_Impresa ELSE CAST(fa_notaCreDeb.IdNota AS varchar) END AS Referencia, "
+                    + " p.pe_nombreCompleto, conciliacion.IdTipoCbte, conciliacion.IdCbteCble, conciliacion.IdAlumno, a.Codigo "
+                    + " FROM dbo.tb_persona AS p WITH(nolock)INNER JOIN "
+                    + " dbo.aca_Alumno AS a WITH(nolock) ON p.IdPersona = a.IdPersona INNER JOIN "
+                    + " dbo.cxc_ConciliacionNotaCredito AS conciliacion WITH(nolock) INNER JOIN "
+                    + " dbo.fa_notaCreDeb ON conciliacion.IdEmpresa = dbo.fa_notaCreDeb.IdEmpresa AND conciliacion.IdSucursal = dbo.fa_notaCreDeb.IdSucursal AND conciliacion.IdBodega = dbo.fa_notaCreDeb.IdBodega AND "
+                    + " conciliacion.IdNota = dbo.fa_notaCreDeb.IdNota ON a.IdEmpresa = conciliacion.IdEmpresa AND a.IdAlumno = conciliacion.IdAlumno "
+                    + " WHERE conciliacion.IdEmpresa=" + IdEmpresa.ToString()
+                    + " AND conciliacion.Fecha BETWEEN DATEFROMPARTS(" + FechaIni.Year.ToString() + "," + FechaIni.Month.ToString() + "," + FechaIni.Day.ToString() + ") and DATEFROMPARTS(" + FechaFin.Year.ToString() + "," + FechaFin.Month.ToString() + "," + FechaFin.Day.ToString() + ")";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new cxc_ConciliacionNotaCredito_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            IdBodega = Convert.ToInt32(reader["IdBodega"]),
+                            IdConciliacion = Convert.ToDecimal(reader["IdConciliacion"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdNota = Convert.ToDecimal(reader["IdNota"]),
+                            IdCobro = Convert.ToDecimal(reader["IdCobro"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Valor = Convert.ToDouble(reader["Valor"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            IdTipoCbte = string.IsNullOrEmpty(reader["IdTipoCbte"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdTipoCbte"]),
+                            IdCbteCble = string.IsNullOrEmpty(reader["IdCbteCble"].ToString()) ? (decimal?)null : Convert.ToDecimal(reader["IdCbteCble"]),
+                            Referencia = string.IsNullOrEmpty(reader["Referencia"].ToString()) ? null : reader["Referencia"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString()
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
                 {
                     var lst = db.vwcxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == IdEmpresa && FechaIni <= q.Fecha && q.Fecha <= FechaFin).ToList();
@@ -50,7 +95,7 @@ namespace Core.Data.CuentasPorCobrar
                         });
                     }
                 }
-
+                */
                 return Lista;
             }
             catch (Exception)

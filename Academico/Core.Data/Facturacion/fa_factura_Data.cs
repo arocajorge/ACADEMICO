@@ -6,6 +6,7 @@ using Core.Info.Facturacion;
 using Core.Info.General;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,85 @@ namespace Core.Data.Facturacion
         {
             try
             {
-                List<fa_factura_consulta_Info> Lista;
+                List<fa_factura_consulta_Info> Lista=new List<fa_factura_consulta_Info>();
                 Fecha_ini = Fecha_ini.Date;
                 Fecha_fin = Fecha_fin.Date;
                 int IdSucursalIni = IdSucursal;
                 int IdSucursalFin = IdSucursal == 0 ? 999 : IdSucursal;
+
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT dbo.fa_factura.IdEmpresa, dbo.fa_factura.IdSucursal, dbo.fa_factura.IdBodega, dbo.fa_factura.IdCbteVta, dbo.fa_factura.vt_NumFactura, dbo.fa_factura.vt_fecha, dbo.tb_persona.pe_nombreCompleto AS Nombres, "
+                    + " dbo.fa_Vendedor.Ve_Vendedor, det.vt_Subtotal0, det.vt_SubtotalIVA, det.vt_iva, det.vt_total, dbo.fa_factura.Estado, dbo.fa_factura.esta_impresa, dbo.fa_factura_x_in_Ing_Egr_Inven.IdEmpresa_in_eg_x_inv, "
+                    + " dbo.fa_factura_x_in_Ing_Egr_Inven.IdSucursal_in_eg_x_inv, dbo.fa_factura_x_in_Ing_Egr_Inven.IdMovi_inven_tipo_in_eg_x_inv, dbo.fa_factura_x_in_Ing_Egr_Inven.IdNumMovi_in_eg_x_inv, dbo.fa_factura.Fecha_Autorizacion, "
+                    + " dbo.fa_factura.vt_autorizacion, dbo.fa_factura.IdAlumno, tb_persona_1.pe_nombreCompleto AS NombresAlumno, dbo.fa_factura.IdUsuario "
+                    + " FROM dbo.tb_persona AS tb_persona_1 WITH (nolock)INNER JOIN "
+                    + " dbo.aca_Alumno WITH(nolock) ON tb_persona_1.IdPersona = dbo.aca_Alumno.IdPersona RIGHT OUTER JOIN "
+                    + " dbo.fa_factura WITH(nolock) INNER JOIN "
+                    + " dbo.fa_Vendedor WITH(nolock) ON dbo.fa_factura.IdEmpresa = dbo.fa_Vendedor.IdEmpresa AND dbo.fa_factura.IdVendedor = dbo.fa_Vendedor.IdVendedor LEFT OUTER JOIN "
+                    + " ( "
+                    + " SELECT IdEmpresa, IdSucursal, IdBodega, IdCbteVta, SUM(vt_Subtotal0) AS vt_Subtotal0, SUM(vt_SubtotalIVA) AS vt_SubtotalIVA, SUM(vt_iva) AS vt_iva, SUM(vt_total) AS vt_total "
+                    + " FROM( "
+                        + " SELECT IdEmpresa, IdSucursal, IdBodega, IdCbteVta, CASE WHEN vt_por_iva = 0 THEN vt_Subtotal ELSE 0 END AS vt_Subtotal0, CASE WHEN vt_por_iva > 0 THEN vt_Subtotal ELSE 0 END AS vt_SubtotalIVA, vt_iva, "
+                        + " vt_total "
+                    + " FROM dbo.fa_factura_det WITH(nolock) "
+                    + " ) AS A "
+                    + " GROUP BY IdEmpresa, IdSucursal, IdBodega, IdCbteVta) AS det ON dbo.fa_factura.IdCbteVta = det.IdCbteVta AND dbo.fa_factura.IdBodega = det.IdBodega AND dbo.fa_factura.IdSucursal = det.IdSucursal AND "
+                    + " dbo.fa_factura.IdEmpresa = det.IdEmpresa LEFT OUTER JOIN "
+                    + " dbo.fa_cliente_contactos ON dbo.fa_factura.IdEmpresa = dbo.fa_cliente_contactos.IdEmpresa AND dbo.fa_factura.IdCliente = dbo.fa_cliente_contactos.IdCliente LEFT OUTER JOIN "
+                    + " dbo.fa_factura_x_in_Ing_Egr_Inven ON dbo.fa_factura.IdEmpresa = dbo.fa_factura_x_in_Ing_Egr_Inven.IdEmpresa_fa AND dbo.fa_factura.IdSucursal = dbo.fa_factura_x_in_Ing_Egr_Inven.IdSucursal_fa AND "
+                    + " dbo.fa_factura.IdBodega = dbo.fa_factura_x_in_Ing_Egr_Inven.IdBodega_fa AND dbo.fa_factura.IdCbteVta = dbo.fa_factura_x_in_Ing_Egr_Inven.IdCbteVta_fa INNER JOIN "
+                    + " dbo.fa_cliente ON dbo.fa_factura.IdEmpresa = dbo.fa_cliente.IdEmpresa AND dbo.fa_factura.IdCliente = dbo.fa_cliente.IdCliente INNER JOIN "
+                    + " dbo.tb_persona ON dbo.fa_cliente.IdPersona = dbo.tb_persona.IdPersona ON dbo.aca_Alumno.IdEmpresa = dbo.fa_factura.IdEmpresa AND dbo.aca_Alumno.IdAlumno = dbo.fa_factura.IdAlumno "
+                    + " WHERE dbo.fa_factura.IdEmpresa=" + IdEmpresa.ToString() + " AND dbo.fa_factura.IdSucursal BETWEEN " + IdSucursalIni + " AND " + IdSucursalFin.ToString()
+                    + " AND dbo.fa_factura.vt_fecha BETWEEN DATEFROMPARTS(" + Fecha_ini.Year.ToString() + "," + Fecha_ini.Month.ToString() + "," + Fecha_ini.Day.ToString() + ") and DATEFROMPARTS(" + Fecha_fin.Year.ToString() + "," + Fecha_fin.Month.ToString() + "," + Fecha_fin.Day.ToString() + ")"
+                    + " AND dbo.fa_factura.IdAlumno > 0 "
+                    + " order by dbo.fa_factura.IdCbteVta desc";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new fa_factura_consulta_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            IdBodega = Convert.ToInt32(reader["IdBodega"]),
+                            IdCbteVta = Convert.ToDecimal(reader["IdCbteVta"]),
+
+                            vt_NumFactura = string.IsNullOrEmpty(reader["vt_NumFactura"].ToString()) ? null : reader["vt_NumFactura"].ToString(),
+                            vt_fecha = Convert.ToDateTime(reader["vt_fecha"]),
+                            NomContacto = string.IsNullOrEmpty(reader["Nombres"].ToString()) ? null : reader["Nombres"].ToString(),
+                            Ve_Vendedor = string.IsNullOrEmpty(reader["Ve_Vendedor"].ToString()) ? null : reader["Ve_Vendedor"].ToString(),
+                            vt_Subtotal0 = string.IsNullOrEmpty(reader["vt_Subtotal0"].ToString()) ? (double?)null : Convert.ToDouble(reader["vt_Subtotal0"]),
+                            vt_SubtotalIVA = string.IsNullOrEmpty(reader["vt_SubtotalIVA"].ToString()) ? (double?)null : Convert.ToDouble(reader["vt_SubtotalIVA"]),
+                            vt_iva = string.IsNullOrEmpty(reader["vt_iva"].ToString()) ? (double?)null : Convert.ToDouble(reader["vt_iva"]),
+                            vt_total = string.IsNullOrEmpty(reader["vt_total"].ToString()) ? (double?)null : Convert.ToDouble(reader["vt_total"]),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? null : reader["Estado"].ToString(),
+                            esta_impresa = string.IsNullOrEmpty(reader["esta_impresa"].ToString()) ? false : Convert.ToBoolean(reader["esta_impresa"]),
+
+                            IdEmpresa_in_eg_x_inv = string.IsNullOrEmpty(reader["IdEmpresa_in_eg_x_inv"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpresa_in_eg_x_inv"]),
+                            IdSucursal_in_eg_x_inv = string.IsNullOrEmpty(reader["IdSucursal_in_eg_x_inv"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdSucursal_in_eg_x_inv"]),
+                            IdMovi_inven_tipo_in_eg_x_inv = string.IsNullOrEmpty(reader["IdMovi_inven_tipo_in_eg_x_inv"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdMovi_inven_tipo_in_eg_x_inv"]),
+                            IdNumMovi_in_eg_x_inv = string.IsNullOrEmpty(reader["IdNumMovi_in_eg_x_inv"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdNumMovi_in_eg_x_inv"]),
+
+                            vt_autorizacion = string.IsNullOrEmpty(reader["vt_autorizacion"].ToString()) ? null : reader["vt_autorizacion"].ToString(),
+                            Fecha_Autorizacion = string.IsNullOrEmpty(reader["Fecha_Autorizacion"].ToString()) ? (DateTime?)null : Convert.ToDateTime(reader["Fecha_Autorizacion"]),
+                            NombresAlumno = string.IsNullOrEmpty(reader["NombresAlumno"].ToString()) ? null : reader["NombresAlumno"].ToString(),
+                            EstadoBool = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : (reader["Estado"].ToString()=="A" ? true : false),
+
+                            IdUsuario = string.IsNullOrEmpty(reader["IdUsuario"].ToString()) ? null : reader["IdUsuario"].ToString(),
+                        });
+                    }
+                    reader.Close();
+                }
+
+                /*
                 using (EntitiesFacturacion Context = new EntitiesFacturacion())
                 {
                     Lista = (from q in Context.vwfa_factura
@@ -64,7 +139,7 @@ namespace Core.Data.Facturacion
                                  IdUsuario=q.IdUsuario
                              }).ToList();
                 }
-
+                */
                 return Lista;
             }
             catch (Exception ex)
