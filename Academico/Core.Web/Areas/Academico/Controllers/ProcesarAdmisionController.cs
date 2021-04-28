@@ -73,6 +73,7 @@ namespace Core.Web.Areas.Academico.Controllers
         fa_notaCreDeb_Bus bus_notaDebCre = new fa_notaCreDeb_Bus();
         cxc_cobro_Bus bus_cobro = new cxc_cobro_Bus();
         aca_MatriculaCondicional_Bus bus_matricula_condicional = new aca_MatriculaCondicional_Bus();
+        aca_Matricula_PorParalelo_List List_Matricula_PorParalelo = new aca_Matricula_PorParalelo_List();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         string mensajeInfo = string.Empty;
@@ -124,6 +125,53 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_Admision_Info> model = Lista_ProcesarAdmision.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_ProcesarAdmision", model);
+        }
+        #endregion
+
+        #region IndexPrematricula
+        public ActionResult IndexPrematricula()
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            var IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
+            var info_anio = bus_anio.GetInfo_AnioAdmision(IdEmpresa);
+
+            var model = new aca_Admision_Info
+            {
+                IdEmpresa = IdEmpresa,
+                IdAnio = (info_anio == null ? 0 : info_anio.IdAnio),
+                IdSede = Convert.ToInt32(SessionFixed.IdSede),
+                IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession)
+            };
+
+            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_PreMatriculaAcademico(model.IdEmpresa, model.IdSede, model.IdAnio);
+            Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            cargar_combos(model);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult IndexPrematricula(aca_Admision_Info model)
+        {
+            List<aca_Admision_Info> lst_admisiones = bus_admision.GetList_PreMatriculaAcademico(model.IdEmpresa, model.IdSede, model.IdAnio);
+            Lista_ProcesarAdmision.set_list(lst_admisiones, Convert.ToDecimal(SessionFixed.IdTransaccionSession));
+            cargar_combos(model);
+            return View(model);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_Prematricula()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List<aca_Admision_Info> model = Lista_ProcesarAdmision.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return PartialView("_GridViewPartial_Prematricula", model);
         }
         #endregion
 
@@ -393,8 +441,7 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_Documentos", model);
         }
         #endregion
-
-        #region Grid documentos
+        #region Grid documentos admision
         [ValidateInput(false)]
         public ActionResult GridViewPartial_DocumentosAdmision()
         {
@@ -402,6 +449,17 @@ namespace Core.Web.Areas.Academico.Controllers
             List<aca_AlumnoDocumento_Info> model = Lista_DocAdmision.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             return PartialView("_GridViewPartial_DocumentosAdmision", model);
+        }
+        #endregion
+
+        #region GridDetalle alumnos paralelo
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_AlumnosPorParalelo()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+
+            List<aca_Matricula_Info> model = List_Matricula_PorParalelo.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_AlumnosPorParalelo", model);
         }
         #endregion
         #region DetallePlantilla (nuevo)
@@ -442,7 +500,13 @@ namespace Core.Web.Areas.Academico.Controllers
             return PartialView("_GridViewPartial_DetallePlantilla", model);
         }
         #endregion
-
+        [ValidateInput(false)]
+        public ActionResult GridViewPartial_PreMatriculaRubro()
+        {
+            SessionFixed.IdTransaccionSessionActual = Request.Params["TransaccionFixed"] != null ? Request.Params["TransaccionFixed"].ToString() : SessionFixed.IdTransaccionSessionActual;
+            List<aca_PreMatricula_Rubro_Info> model = ListaPreMatriculaRubro.get_list(Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+            return PartialView("_GridViewPartial_PreMatriculaRubro", model);
+        }
         #region Acciones
         public ActionResult Consultar(int IdEmpresa = 0, decimal IdAdmision = 0)
         {
@@ -698,6 +762,58 @@ namespace Core.Web.Areas.Academico.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ConsultarPrematricula(int IdEmpresa = 0, decimal IdPreMatricula = 0)
+        {
+            #region Validar Session
+            if (string.IsNullOrEmpty(SessionFixed.IdTransaccionSession))
+                return RedirectToAction("Login", new { Area = "", Controller = "Account" });
+            SessionFixed.IdTransaccionSession = (Convert.ToDecimal(SessionFixed.IdTransaccionSession) + 1).ToString();
+            SessionFixed.IdTransaccionSessionActual = SessionFixed.IdTransaccionSession;
+            #endregion
+
+            aca_PreMatricula_Info model = bus_prematricula.GetInfo(IdEmpresa, IdPreMatricula);
+            if (model == null)
+                return RedirectToAction("Index");
+
+            model.IdComboCurso = model.IdEmpresa.ToString("0000") + model.IdAnio.ToString("0000") + model.IdSede.ToString("0000") + model.IdNivel.ToString("0000") + model.IdJornada.ToString("0000") + model.IdCurso.ToString("0000");
+            model.IdEmpresa_rol = (model.IdEmpresa_rol == null ? IdEmpresa : model.IdEmpresa_rol);
+            model.IdTransaccionSession = Convert.ToDecimal(SessionFixed.IdTransaccionSession);
+            model.lst_matricula_curso = new List<aca_Matricula_Info>();
+            model.lst_matricula_curso = bus_matricula.GetList_PorCurso(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdNivel, model.IdJornada, model.IdCurso, model.IdParalelo);
+            List_Matricula_PorParalelo.set_list(model.lst_matricula_curso, model.IdTransaccionSession);
+
+            model.lst_PreMatriculaRubro = new List<aca_PreMatricula_Rubro_Info>();
+            model.lst_PreMatriculaRubro = bus_prematricula_rubro.GetList(model.IdEmpresa, model.IdPreMatricula);
+            ListaPreMatriculaRubro.set_list(model.lst_PreMatriculaRubro, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            model.lst_alumnoDocumentos = new List<aca_AnioLectivo_Curso_Documento_Info>();
+            var lst_doc_curso = bus_curso_documento.GetList_Matricula(model.IdEmpresa, model.IdSede, model.IdAnio, model.IdNivel, model.IdJornada, model.IdCurso);
+            var lst_doc_alumno = bus_alumno_documento.GetList(IdEmpresa, model.IdAlumno, true);
+
+            if (lst_doc_curso != null && lst_doc_curso.Count > 0)
+            {
+                foreach (var item in lst_doc_curso)
+                {
+                    item.seleccionado = false;
+                    item.IdStringDoc = Convert.ToString(item.IdDocumento);
+
+                    foreach (var item1 in lst_doc_alumno)
+                    {
+                        if (item.IdDocumento == item1.IdDocumento)
+                        {
+                            item.seleccionado = true;
+                            break;
+                        }
+                    }
+                    model.lst_alumnoDocumentos.Add(item);
+                }
+            }
+
+            Lista_DocumentosMatricula.set_list(model.lst_alumnoDocumentos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return View(model);
         }
         #endregion
 
@@ -2179,6 +2295,26 @@ namespace Core.Web.Areas.Academico.Controllers
             
             return Json(mensaje, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult SetMatricula_PorCurso(int IdEmpresa = 0, int IdAnio = 0, string IdComboCurso = "", int IdParalelo = 0)
+        {
+            int IdSede = 0;
+            int IdNivel = 0;
+            int IdJornada = 0;
+            int IdCurso = 0;
+
+            //public JsonResult SetMatricula_PorCurso(int IdEmpresa=0, int IdAnio = 0, int IdSede = 0, int IdNivel = 0, int IdJornada = 0, int IdCurso = 0, int IdParalelo = 0, decimal IdTransaccionSession = 0)
+            //IdEmpresa = Convert.ToInt32(model.IdComboCurso.Substring(0, 4));
+            //IdAnio = Convert.ToInt32(model.IdComboCurso.Substring(4, 4));
+            IdSede = Convert.ToInt32(IdComboCurso.Substring(8, 4));
+            IdNivel = Convert.ToInt32(IdComboCurso.Substring(12, 4));
+            IdJornada = Convert.ToInt32(IdComboCurso.Substring(16, 4));
+            IdCurso = Convert.ToInt32(IdComboCurso.Substring(20, 4));
+
+            var lista_PorCurso = bus_matricula.GetList_PorCurso(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo);
+            List_Matricula_PorParalelo.set_list(lista_PorCurso, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
+
+            return Json(lista_PorCurso, JsonRequestBehavior.AllowGet);
+        }
         #endregion
     }
 }
@@ -2203,6 +2339,25 @@ public class aca_ProcesarAdmision_List
     }
 }
 
+public class aca_Matricula_PorParalelo_List
+{
+    string Variable = "aca_Matricula_PorParalelo_Info";
+    public List<aca_Matricula_Info> get_list(decimal IdTransaccionSession)
+    {
+        if (HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] == null)
+        {
+            List<aca_Matricula_Info> list = new List<aca_Matricula_Info>();
+
+            HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+        }
+        return (List<aca_Matricula_Info>)HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()];
+    }
+
+    public void set_list(List<aca_Matricula_Info> list, decimal IdTransaccionSession)
+    {
+        HttpContext.Current.Session[Variable + IdTransaccionSession.ToString()] = list;
+    }
+}
 public class aca_AlumnoDocumentoAdmision_List
 {
     string Variable = "aca_AlumnoDocumentoAdmision_Info";

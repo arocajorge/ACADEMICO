@@ -210,6 +210,78 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public List<aca_Admision_Info> getList_PreMatriculaAcademico(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                List<aca_Admision_Info> Lista = new List<aca_Admision_Info>();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    #region Query
+                    string query = "SELECT p.IdEmpresa, p.IdPreMatricula, a.IdAdmision, a.IdSede, a.IdAnio, a.IdJornada, a.IdNivel, a.IdCurso, pe.pe_cedulaRuc CedulaRuc_Aspirante, pe.pe_nombreCompleto NombreCompleto_Aspirante, a.IdCatalogoESTADM, an.Descripcion, sn.NomSede, nj.NomJornada, nj.OrdenJornada, sn.NomNivel, "
+                    + " sn.OrdenNivel, jc.NomCurso, jc.OrdenCurso, cp.NomParalelo, cp.OrdenParalelo, a.IdCatalogoESTADM, c.Codigo EstadoAdmision, c.NomCatalogo, a.Estado, a.IdUsuarioRevision, a.FechaIngreso_Aspirante "
+                    + " FROM dbo.aca_PreMatricula as p LEFT OUTER JOIN "
+                    + " dbo.aca_Admision AS a WITH (nolock)ON p.IdEmpresa = 1 and p.IdAdmision = a.IdAdmision LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno al WITH(nolock) ON al.IdEmpresa = p.IdEmpresa and al.IdAlumno = p.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona pe WITH(nolock) ON pe.IdPersona = al.IdPersona LEFT OUTER JOIN "
+                   + " dbo.aca_Catalogo AS c WITH(nolock) ON a.IdCatalogoESTADM = c.IdCatalogo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH(nolock) ON p.IdEmpresa = cp.IdEmpresa AND p.IdAnio = cp.IdAnio AND p.IdSede = cp.IdSede AND p.IdNivel = cp.IdNivel AND p.IdJornada = cp.IdJornada AND p.IdCurso = cp.IdCurso AND p.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Jornada_Curso AS jc WITH(nolock) ON p.IdEmpresa = jc.IdEmpresa AND p.IdAnio = jc.IdAnio AND p.IdSede = jc.IdSede AND p.IdNivel = jc.IdNivel AND p.IdJornada = jc.IdJornada AND p.IdCurso = jc.IdCurso LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_NivelAcademico_Jornada AS nj WITH(nolock) ON p.IdEmpresa = nj.IdEmpresa AND p.IdAnio = nj.IdAnio AND p.IdSede = nj.IdSede AND p.IdNivel = nj.IdNivel AND p.IdJornada = nj.IdJornada LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo_Sede_NivelAcademico AS sn WITH(nolock) ON p.IdEmpresa = sn.IdEmpresa AND p.IdAnio = sn.IdAnio AND p.IdSede = sn.IdSede AND p.IdNivel = sn.IdNivel LEFT OUTER JOIN "
+                    + " dbo.aca_AnioLectivo AS an WITH(nolock) ON p.IdEmpresa = an.IdEmpresa AND a.IdAnio = an.IdAnio "
+                    + " WHERE a.IdEmpresa = " + IdEmpresa.ToString()
+                    + " and a.IdSede = " + IdSede.ToString()
+                    + " and a.IdAnio = " + IdAnio.ToString()
+                    + " order by p.IdPreMatricula desc";
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new aca_Admision_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdPreMatricula = Convert.ToDecimal(reader["IdPreMatricula"]),
+                            IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            CedulaRuc_Aspirante = reader["CedulaRuc_Aspirante"].ToString(),
+                            NombreCompleto_Aspirante = string.IsNullOrEmpty(reader["NombreCompleto_Aspirante"].ToString()) ? null : reader["NombreCompleto_Aspirante"].ToString(),
+                            Descripcion = string.IsNullOrEmpty(reader["Descripcion"].ToString()) ? null : reader["Descripcion"].ToString(),
+                            NomSede = string.IsNullOrEmpty(reader["NomSede"].ToString()) ? null : reader["NomSede"].ToString(),
+                            NomJornada = string.IsNullOrEmpty(reader["NomJornada"].ToString()) ? null : reader["NomJornada"].ToString(),
+                            NomNivel = string.IsNullOrEmpty(reader["NomNivel"].ToString()) ? null : reader["NomNivel"].ToString(),
+                            NomCurso = string.IsNullOrEmpty(reader["NomCurso"].ToString()) ? null : reader["NomCurso"].ToString(),
+                            NomParalelo = string.IsNullOrEmpty(reader["NomParalelo"].ToString()) ? null : reader["NomParalelo"].ToString(),
+                            OrdenJornada = string.IsNullOrEmpty(reader["OrdenJornada"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenJornada"]),
+                            OrdenNivel = string.IsNullOrEmpty(reader["OrdenNivel"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenNivel"]),
+                            OrdenCurso = string.IsNullOrEmpty(reader["OrdenCurso"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenCurso"]),
+                            OrdenParalelo = string.IsNullOrEmpty(reader["OrdenParalelo"].ToString()) ? 0 : Convert.ToInt32(reader["OrdenParalelo"]),
+                            Estado = string.IsNullOrEmpty(reader["Estado"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            EstadoAdmision = string.IsNullOrEmpty(reader["EstadoAdmision"].ToString()) ? null : reader["EstadoAdmision"].ToString(),
+                            IdCatalogoESTADM = Convert.ToInt32(reader["IdCatalogoESTADM"]),
+                            IdUsuarioRevision = string.IsNullOrEmpty(reader["IdUsuarioRevision"].ToString()) ? null : reader["IdUsuarioRevision"].ToString(),
+                            FechaIngreso_Aspirante = Convert.ToDateTime(reader["FechaIngreso_Aspirante"].ToString()),
+                        });
+                    }
+                    reader.Close();
+                }
+
+                return Lista;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public decimal getId(int IdEmpresa)
         {
             try

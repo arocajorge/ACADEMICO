@@ -205,6 +205,72 @@ namespace Core.Data.Academico
                 throw;
             }
         }
+        public aca_PreMatricula_Info getInfo(int IdEmpresa, decimal IdPreMatricula)
+        {
+            try
+            {
+                aca_PreMatricula_Info info = new aca_PreMatricula_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand("", connection);
+                    command.CommandText = "SELECT pm.IdEmpresa, pm.IdPreMatricula, pm.IdAdmision, pm.Codigo, pm.IdAlumno, pm.IdAnio, pm.IdSede, pm.IdNivel, pm.IdJornada, "
+                    + " pm.IdCurso, pm.IdParalelo, pm.IdPersonaF, pm.IdPersonaR, pm.IdPlantilla, pm.IdMecanismo, pm.IdCatalogoESTPREMAT, pm.Fecha, pm.Observacion, a.Codigo AS CodigoAlumno, p.pe_cedulaRuc, p.pe_nombreCompleto, "
+                    + "pm.IdSucursal, pm.IdPuntoVta, pm.Valor, pm.ValorProntoPago, pm.IdEmpresa_rol, pm.IdEmpleado, pm.EsPatrocinado"
+                    + " FROM dbo.aca_PreMatricula AS pm WITH (nolock) LEFT OUTER JOIN "
+                    + " dbo.aca_Alumno AS a WITH (nolock) ON pm.IdEmpresa = a.IdEmpresa AND pm.IdAlumno = a.IdAlumno LEFT OUTER JOIN "
+                    + " dbo.tb_persona AS p WITH (nolock) ON a.IdPersona = p.IdPersona "
+                    + " WHERE pm.IdEmpresa = " + IdEmpresa.ToString() + " and pm.IdPreMatricula = '" + IdPreMatricula.ToString() + "'";
+                    var ResultValue = command.ExecuteScalar();
+
+                    if (ResultValue == null)
+                        return null;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        info = new aca_PreMatricula_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdPreMatricula = Convert.ToDecimal(reader["IdPreMatricula"]),
+                            IdAdmision = Convert.ToDecimal(reader["IdAdmision"]),
+                            IdAlumno = Convert.ToDecimal(reader["IdAlumno"]),
+                            IdSede = Convert.ToInt32(reader["IdSede"]),
+                            IdAnio = Convert.ToInt32(reader["IdAnio"]),
+                            IdJornada = Convert.ToInt32(reader["IdJornada"]),
+                            IdNivel = Convert.ToInt32(reader["IdNivel"]),
+                            IdCurso = Convert.ToInt32(reader["IdCurso"]),
+                            IdParalelo = Convert.ToInt32(reader["IdParalelo"]),
+                            Codigo = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                            CodigoAlumno = string.IsNullOrEmpty(reader["CodigoAlumno"].ToString()) ? null : reader["CodigoAlumno"].ToString(),
+                            pe_cedulaRuc = string.IsNullOrEmpty(reader["pe_cedulaRuc"].ToString()) ? null : reader["pe_cedulaRuc"].ToString(),
+                            pe_nombreCompleto = string.IsNullOrEmpty(reader["pe_nombreCompleto"].ToString()) ? null : reader["pe_nombreCompleto"].ToString(),
+                            IdPersonaF = Convert.ToInt32(reader["IdPersonaF"]),
+                            IdPersonaR = Convert.ToInt32(reader["IdPersonaR"]),
+                            IdPlantilla = Convert.ToInt32(reader["IdPlantilla"]),
+                            IdMecanismo = Convert.ToInt32(reader["IdMecanismo"]),
+                            IdCatalogoESTPREMAT = Convert.ToInt32(reader["IdCatalogoESTPREMAT"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            IdPuntoVta = Convert.ToInt32(reader["IdPuntoVta"]),
+                            Valor = Convert.ToDecimal(reader["Valor"]),
+                            ValorProntoPago = Convert.ToDecimal(reader["ValorProntoPago"]),
+                            IdEmpresa_rol = string.IsNullOrEmpty(reader["IdEmpresa_rol"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpresa_rol"]),
+                            IdEmpleado = string.IsNullOrEmpty(reader["IdEmpleado"].ToString()) ? (int?)null : Convert.ToInt32(reader["IdEmpleado"]),
+                            EsPatrocinado = string.IsNullOrEmpty(reader["EsPatrocinado"].ToString()) ? false : Convert.ToBoolean(reader["EsPatrocinado"]),
+                        };
+                    }
+                }
+                return info;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public aca_PreMatricula_Info getInfo_PorIdAdmision(int IdEmpresa, decimal IdAdmision)
         {
             try

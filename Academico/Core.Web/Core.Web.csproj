@@ -9787,7 +9787,6 @@
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_CmbEmpleado.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_Documentos.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_DetallePlantilla.cshtml" />
-    <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_PreMatriculaRubro.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_ComboBoxPartial_Anio.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\ACA_073.cshtml" />
     <Content Include="Areas\Academico\Views\ImportarPreMatricula\Index.cshtml" />
@@ -9815,6 +9814,12 @@
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_ComboBoxPartial_AnioParcial.cshtml" />
     <Content Include="Areas\Reportes\Views\AcademicoReportes\_CmbSedeParcial.cshtml" />
     <Content Include="Areas\Contabilidad\Views\AuditoriaContable\_GridViewPartial_ValidarCobroDet.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_AlumnosPorParalelo.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\ConsultarPrematricula.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\IndexPrematricula.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_Prematricula.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_PreMatriculaRubro.cshtml" />
+    <Content Include="Areas\Academico\Views\ProcesarAdmision\_CmbAlumno_ReadOnly.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

@@ -388,9 +388,11 @@ namespace Core.Info.Academico
         public string NomNivel { get; set; }
         public string NomJornada { get; set; }
         public string NomCurso { get; set; }
+        public string NomParalelo { get; set; }
         public int OrdenCurso { get; set; }
         public int OrdenNivel { get; set; }
         public int OrdenJornada { get; set; }
+        public int OrdenParalelo { get; set; }
         public string Representante { get; set; }
         [Required(ErrorMessage = "El campo foto del aspirante es obligatorio")]
         public HttpPostedFileBase FotoAspirante { get; set; }
@@ -405,6 +407,7 @@ namespace Core.Info.Academico
         #endregion
 
         #region PreMatricula
+        public decimal IdPreMatricula { get; set; }
         public decimal IdAlumno { get; set; }
         public decimal IdPersona_Aspirante { get; set; }
         public decimal IdPersona_Padre { get; set; }
@@ -435,6 +438,8 @@ namespace Core.Info.Academico
         public double ValorPlantilla { get; set; }
         public double ValorPlantillaProntoPago { get; set; }
         public List<aca_AnioLectivo_Curso_Documento_Info> lst_documentos { get; set; }
+        public List<aca_Matricula_Info> lst_matricula_curso { get; set; }
+        public List<aca_PreMatricula_Rubro_Info> lst_PreMatriculaDet { get; set; }
         public int IdCatalogoPAREN_OtroFamiliar { get; set; }
 
         public string IdUsuarioSesion { get; set; }

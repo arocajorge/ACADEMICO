@@ -25,7 +25,7 @@ namespace Core.Data.Reportes.Contabilidad
                     string query = "select m.IdEmpresa, m.IdMatricula, m.IdAnio, m.IdSede,m.IdPreMatricula, m.IdAlumno, m.Fecha, deuda.pe_nombreCompleto NomAlumno, deuda.Referencia,  "
                     + " deuda.vt_Subtotal, deuda.vt_total, deuda.ValorProntoPago, deuda.FechaProntoPago, deuda.Saldo, deuda.SaldoProntoPago, deuda.vt_NunDocumento,deuda.IdComprobante "
                     + " from aca_Matricula m "
-                    + " LEFT JOIN "
+                    + " INNER JOIN "
                     + " ("
                     + " SELECT cabfac.IdEmpresa, cabfac.IdSucursal, cabfac.IdBodega, cabfac.vt_tipoDoc, cabfac.vt_tipoDoc + '-' + CAST(CAST(cabfac.vt_NumFactura AS int) AS varchar(20)) AS vt_NunDocumento, cabfac.vt_Observacion AS Referencia, "
                     + " cabfac.IdCbteVta AS IdComprobante, cabfac.CodCbteVta AS CodComprobante, Sucu.Su_Descripcion, cabfac.IdCliente, cabfac.IdAlumno, dbo.aca_Alumno.Codigo, pal.pe_nombreCompleto, cabfac.vt_fecha, CAST(detfac.Total AS FLOAT) AS vt_total, "

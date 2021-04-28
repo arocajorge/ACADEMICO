@@ -1,0 +1,469 @@
+﻿@model Core.Info.Academico.aca_PreMatricula_Info
+@{
+    ViewBag.Title = "Consultar Pre matrícula";
+    if (string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdUsuario) || string.IsNullOrEmpty(Core.Web.Helps.SessionFixed.IdEmpresa))
+    {
+        Response.Redirect("~/Account/Login");
+    }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/ValidacionBotonSubmit.js"></script>
+<script type="text/javascript">
+    var selectedIDs;
+    function OnBeginCallback(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["selectedIDs"] = selectedIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged(s, e) {
+        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallback);
+        s.GetSelectedFieldValues("IdString", GetSelectedFieldValuesCallback_Total);
+    }
+    function GetSelectedFieldValuesCallback(values) {
+        //Capture all selected keys
+        selectedIDs = values.join(',');
+    }
+
+
+    var documentoIDs;
+    function OnBeginCallback_Doc(s, e) {
+        //Pass all selected keys to GridView callback action
+        e.customArgs["documentoIDs"] = documentoIDs;
+        e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val();
+    }
+    function OnSelectionChanged_Doc(s, e) {
+        s.GetSelectedFieldValues("IdStringDoc", GetSelectedFieldValuesCallback_Doc);
+    }
+    function GetSelectedFieldValuesCallback_Doc(values) {
+        //Capture all selected keys
+        documentoIDs = values.join(',');
+    }
+
+
+    var exp = false;
+    var ind;
+    var visibleIndex = -1;
+    function OnGetRowValues(Value){
+        console.log(Value);
+        if(Value == null){
+
+            exp = true;
+            ind = visibleIndex;
+        }
+    }
+
+    function OnRowClick (s, e) {
+        visibleIndex = e.visibleIndex;
+        s.GetRowValues(e.visibleIndex, 'FechaFacturacion', OnGetRowValues);
+        if(exp == true){
+            s.StartEditRow(visibleIndex);
+        }
+
+    }
+
+    function OnEndCallback(s, e) {
+        if (exp == true) {
+            exp = false;
+            s.ExpandDetailRow(ind);
+        }
+    }
+</script>
+@using (Html.BeginForm("ConsultarPrematricula", "ProcesarAdmision", FormMethod.Post, new { @role = "form", @class = "form" }))
+{
+    @Html.HiddenFor(q => q.IdEmpresa, new { @id = "IdEmpresa" })
+    @Html.HiddenFor(q => q.IdPreMatricula, new { @id = "IdMatricula" })
+    @Html.HiddenFor(q => q.IdMecanismo, new { @id = "IdMecanismo" })
+    @Html.HiddenFor(q => q.IdTransaccionSession, new { @id = "IdTransaccionSession" })
+    if (ViewBag.mensaje != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-warning"></i> @ViewBag.mensaje
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.MensajeSuccess != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success alert-dismissible">
+                    <h4>
+                        <i class="icon fa fa-check"></i> @ViewBag.MensajeSuccess
+                    </h4>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row" id="MensajeError" hidden>
+        <div class="col-md-12">
+            <div class="alert alert-warning alert-dismissible">
+                <h4>
+                    <i class="icon fa fa-warning"></i> <label id="Mensaje"></label>
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Año Lectivo*</label>
+                    @Html.Partial("_ComboBoxPartial_Anio", Model)
+                    @Html.ValidationMessageFor(q => q.IdAnio, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="IdCliente">Estudiante*</label>
+                    @Html.Partial("_CmbAlumno_ReadOnly", Model.IdAlumno)
+                    @Html.ValidationMessageFor(q => q.IdAlumno, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-2">
+                <div class="form-group">
+                    <label for="pf_fecha">Fecha*</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        @Html.DevExpress().DateEditFor(q => q.Fecha, settings =>
+                            {
+                                settings.Name = "Fecha";
+                                settings.Properties.UseMaskBehavior = true;
+                                settings.Properties.EditFormat = EditFormat.Date;
+                                settings.Properties.EditFormatString = "dd/MM/yyyy";
+                                settings.Properties.TimeSectionProperties.TimeEditProperties.EditFormat = EditFormat.Date;
+                                settings.Properties.AllowMouseWheel = false;
+                                settings.Width = System.Web.UI.WebControls.Unit.Percentage(100);
+                                settings.Properties.AllowMouseWheel = false;
+                            }).GetHtml()
+                        @Html.ValidationMessageFor(q => q.Fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="IdEmpresa">Curso*</label>
+                    @Html.Partial("_ComboBoxPartial_Curso", Model)
+                    @Html.ValidationMessageFor(q => q.IdComboCurso, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="IdEmpresa">Paralelo*</label>
+                    @Html.Partial("_ComboBoxPartial_Paralelo", Model)
+                    @Html.ValidationMessageFor(q => q.IdParalelo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label for="IdEmpresa">Plantilla*</label>
+                    @Html.Partial("_ComboBoxPartial_Plantilla", Model)
+                    @Html.ValidationMessageFor(q => q.IdPlantilla, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label for="obligatorio"></label>
+                    @Html.DevExpress().CheckBoxFor(q => q.EsPatrocinado, settings =>
+                            {
+                                settings.Name = "EsPatrocinado";
+                                settings.Text = "Es Patrocinado";
+                            }).GetHtml()
+                    @Html.ValidationMessageFor(q => q.EsPatrocinado, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="Empleado" hidden>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <label for="IdEmpresa">Empleado</label>
+                @Html.Partial("_CmbEmpleado", Model)
+                @Html.ValidationMessageFor(q => q.IdEmpleado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="IdEmpresa">Observación</label>
+                    @Html.TextBoxFor(q => q.Observacion, new { @class = "form-control", id = "Observacion" })
+                    @Html.ValidationMessageFor(q => q.Observacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div id="Tabs" role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+                <a href="#tb_matricula_paralelo" aria-controls="general" role="tab" data-toggle="tab">Alumnos por paralelo</a>
+            </li>
+            <li>
+                <a href="#tb_plantilla_detalle" aria-controls="otros" role="tab" data-toggle="tab">Detalle de plantilla</a>
+            </li>
+            <li>
+                <a href="#tb_documento" aria-controls="otros" role="tab" data-toggle="tab">Documentos por curso</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" style="padding-top: 20px">
+
+            <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_matricula_paralelo">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.Action("GridViewPartial_AlumnosPorParalelo")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_plantilla_detalle">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_PreMatriculaRubro")
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_documento">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            @Html.Action("GridViewPartial_Documentos")
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="box-footer">
+        <a class="btn btn-default" href="@Url.Action("IndexPrematricula","ProcesarAdmision", new { Area = "Academico" })">Cancelar</a>
+    </div>
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+}
+
+<script>
+    $(function ()
+    {
+        VerDatosEmpleado();
+        $("#MensajeError").hide();
+    });
+
+    function VerDatosEmpleado() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMecanismo: $("#IdMecanismo").val(),
+            IdMecanismoOtros: $("#IdMecanismoDet").val()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("GetDatosMecanismo", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if(data == true){
+                    $("#Empleado").show();
+                }
+                else{
+                    $("#Empleado").hide();
+                }
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function CrearModificarAlumno() {
+        var location = GetPathServer();
+        if(IdAlumno.GetValue() > 0)
+        {
+            var win = window.open(location + "/Academico/Alumno/Modificar?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdAlumno=" + IdAlumno.GetValue(), '_blank');
+            win.focus();
+        }else
+        {
+            var win = window.open(location + "/Academico/Alumno/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa, '_blank');
+            win.focus();
+        }
+    }
+
+    function SetMatricula_PorCurso() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdComboCurso: IdComboCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetMatricula_PorCurso", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_AlumnosPorParalelo.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function ValidarCurso() {
+        if(IdAlumno.GetValue() == 0){
+            alert("Debe seleccionar un alumno");
+        }
+        else{
+            $("#Validar").val("N");
+            IdComboCurso.PerformCallback();
+        }
+    }
+
+    function SetMatriculaRubro(){
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdPlantilla: IdPlantilla.GetValue(),
+            IdMatricula: $("#IdMatricula").val(),
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetMatriculaRubro", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_MatriculaRubro.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function actualizar() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdMatricula: $("#IdMatricula").val(),
+            Observacion: $("#Observacion").val(),
+            IdTransaccionSession: $("#IdTransaccionSession").val()
+
+        }
+        $("#btn_guardar").attr("disabled", true);
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("actualizar", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.msg == "") {
+                    var url = '@Url.Action("Modificar", "Matricula")' + '?IdEmpresa=' + data.IdEmpresa + '&IdMatricula=' + data.IdMatricula + '&Exito=true';
+                    window.location.href = url;
+                }
+                else {
+                    $("#MensajeError").show();
+                    $("#Mensaje").html(data.msg);
+                }
+                $("#btn_guardar").attr("disabled", false);
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function SetAlumnoDocumentos(){
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdCurso: IdComboCurso.GetValue(),
+            IdAlumno: IdAlumno.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetAlumnoDocumentos", "Matricula", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_AlumnoDocumentos.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
+    }
+
+    function VerFichaSocioEconomica() {
+        var location = GetPathServer();
+        if(IdAlumno.GetValue() != 0 || IdAlumno.GetValue()!=""){
+            var datos = {
+                IdEmpresa: $("#IdEmpresa").val(),
+                IdAlumno: IdAlumno.GetValue()
+            }
+            $.ajax({
+                type: 'POST',
+                data: JSON.stringify(datos),
+                url: '@Url.Action("VerFichaSocioEconomica", "Alumno", new { Area = "Academico" })',
+                async: false,
+                bDeferRender: true,
+                bProcessing: true,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    console.log(data);
+                    if(data.SocioEconomico != 0){
+                        var win = window.open(location + "/Academico/SocioEconomico/Modificar?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdSocioEconomico=" + data.SocioEconomico+"&IdSocioEconomico=false", '_blank');
+                        win.focus();
+                    }
+                    else{
+                        var win = window.open(location + "/Academico/SocioEconomico/Nuevo?IdEmpresa=" +@Core.Web.Helps.SessionFixed.IdEmpresa+"&IdAlumno=" + IdAlumno.GetValue(), '_blank');
+                        win.focus();
+                    }
+                },
+                error: function (error) {
+                }
+            });
+        }
+        else{
+            alert("Debe seleccionar alumno");
+        }
+    }
+</script>
+

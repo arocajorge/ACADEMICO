@@ -1,9 +1,9 @@
 @using System.Web.UI.WebControls;
 @{
     var grid = Html.DevExpress().GridView(settings => {
-        settings.Name = "GridViewPartial_ProcesarAdmision";
-        settings.CallbackRouteValues = new { Controller = "ProcesarAdmision", Action = "GridViewPartial_ProcesarAdmision",  Nuevo = ViewBag.Nuevo, Modificar = ViewBag.Modificar, Anular = ViewBag.Anular };
-        settings.KeyFieldName = "IdAdmision";
+        settings.Name = "GridViewPartial_Prematricula";
+        settings.CallbackRouteValues = new { Controller = "ProcesarAdmision", Action = "GridViewPartial_Prematricula" };
+        settings.KeyFieldName = "IdPreMatricula";
         settings.Width = Unit.Percentage(100);
         //Configuración para que la grilla no muestre texto completo
         settings.SettingsBehavior.AllowEllipsisInText = true;
@@ -60,54 +60,22 @@
             c.Caption = "#";
             c.SetDataItemTemplateContent(tc =>
             {
-                if (string.IsNullOrEmpty(Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioRevision"))))
-                {
-                    ViewContext.Writer.Write(
-                        Html.ActionLink("Consultar", "Consultar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAdmision = DataBinder.Eval(tc.DataItem, "IdAdmision") }) + "&nbsp;"
-                    );
-                }
-                else
-                {
-                    if (Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioRevision")) == Convert.ToString(DataBinder.Eval(tc.DataItem, "IdUsuarioSesion")))
-                    {
-                        if (Convert.ToInt32(DataBinder.Eval(tc.DataItem, "IdCatalogoESTADM")) ==48)
-                        {
-                            ViewContext.Writer.Write(
-                                Html.ActionLink("Modificar", "Modificar", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAdmision = DataBinder.Eval(tc.DataItem, "IdAdmision") }) + "&nbsp;"
-                            );
-                        }
-                        else
-                        {
-                            ViewContext.Writer.Write(
-                                Html.ActionLink("ConsultarPrematricula", "ConsultarPrematricula", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdAdmision = DataBinder.Eval(tc.DataItem, "IdAdmision") }) + "&nbsp;"
-                            );
-                        }
-                    }
-                }
+                ViewContext.Writer.Write(
+                    Html.ActionLink("Consultar", "ConsultarPrematricula", new { IdEmpresa = DataBinder.Eval(tc.DataItem, "IdEmpresa"), IdPreMatricula = DataBinder.Eval(tc.DataItem, "IdPreMatricula") }) + "&nbsp;"
+                );
             });
             c.Settings.AllowDragDrop = DefaultBoolean.False;
             c.Settings.AllowSort = DefaultBoolean.False;
             c.Width = Unit.Pixel(100);
         });
 
-        settings.Columns.Add("IdAdmision", "ID").Width = Unit.Percentage(8);
+        settings.Columns.Add("IdPreMatricula", "ID").Width = Unit.Percentage(8);
         settings.Columns.Add("NombreCompleto_Aspirante", "Aspirante").Width = Unit.Percentage(20);
         settings.Columns.Add("CedulaRuc_Aspirante", "Cédula Aspirante").Width = Unit.Percentage(10);
         settings.Columns.Add("NomJornada", "Jornada").Width = Unit.Percentage(10);
         settings.Columns.Add("NomNivel", "Nivel").Width = Unit.Percentage(10);
         settings.Columns.Add("NomCurso", "Curso").Width = Unit.Percentage(10);
-        settings.Columns.Add(column =>
-        {
-            column.Width = Unit.Percentage(8);
-            column.FieldName = "FechaIngreso_Aspirante";
-            column.Caption = "Fecha Registro";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.EditorProperties().DateEdit(sp =>
-            {
-
-            });
-            column.EditFormSettings.Visible = DefaultBoolean.True;
-        });
+        settings.Columns.Add("NomParalelo", "Paralelo").Width = Unit.Percentage(10);
         settings.Columns.Add("EstadoAdmision", "Estado").Width = Unit.Percentage(8);
         settings.Columns.Add("IdUsuarioRevision", "Usuario Revisión").Width = Unit.Percentage(10);
         settings.ClientSideEvents.BeginCallback = "function(s, e) { e.customArgs['TransaccionFixed'] = $('#IdTransaccionSession').val(); }";

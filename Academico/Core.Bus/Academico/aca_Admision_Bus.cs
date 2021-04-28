@@ -50,6 +50,19 @@ namespace Core.Bus.Academico
             }
         }
 
+        public List<aca_Admision_Info> GetList_PreMatriculaAcademico(int IdEmpresa, int IdSede, int IdAnio)
+        {
+            try
+            {
+                return odata.getList_PreMatriculaAcademico(IdEmpresa, IdSede, IdAnio);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool GuardarDB(aca_Admision_Info info)
         {
             try

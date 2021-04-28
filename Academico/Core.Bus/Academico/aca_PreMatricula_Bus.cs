@@ -660,7 +660,18 @@ namespace Core.Bus.Academico
                 throw;
             }
         }
+        public aca_PreMatricula_Info GetInfo(int IdEmpresa, decimal IdPreMatricula)
+        {
+            try
+            {
+                return odata_prematricula.getInfo(IdEmpresa, IdPreMatricula);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public aca_PreMatricula_Info GetInfo_PorIdAdmision(int IdEmpresa, decimal IdAdmision)
         {
             try

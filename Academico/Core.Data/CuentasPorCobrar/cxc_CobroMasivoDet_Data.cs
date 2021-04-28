@@ -16,18 +16,16 @@ namespace Core.Data.CuentasPorCobrar
             try
             {
                 List<cxc_CobroMasivoDet_Info> Lista = new List<cxc_CobroMasivoDet_Info>(); ;
-                /*using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT Conv.IdEmpresa, Conv.IdConvenio, Conv.IdAlumno, al.Codigo, pa.pe_nombreCompleto AS Alumno, Conv.IdMatricula, Conv.IdPersonaConvenio, pg.pe_nombreCompleto AS PersonaConvenio, Conv.Fecha, Conv.FechaPrimerPago, "
-                    + " Conv.Valor, Conv.NumCuotas, Conv.Estado, Conv.Observacion "
-                    + " FROM     dbo.cxc_Convenio AS Conv WITH (nolock) "
-                    + " INNER JOIN dbo.aca_Alumno AS al WITH (nolock) ON al.IdEmpresa = Conv.IdEmpresa and al.IdAlumno = Conv.IdAlumno "
-                    + " LEFT JOIN dbo.tb_persona AS pa WITH (nolock) ON pa.IdPersona = al.IdPersona "
-                    + " LEFT JOIN dbo.tb_persona AS pg WITH (nolock) ON Conv.IdPersonaConvenio = pg.IdPersona "
-                    + " WHERE Conv.IdEmpresa = " + IdEmpresa + " and Conv.Fecha between DATEFROMPARTS(" + fecha_ini.Year.ToString() + "," + fecha_ini.Month.ToString() + "," + fecha_ini.Day.ToString() + ") and DATEFROMPARTS(" + fecha_fin.Year.ToString() + "," + fecha_fin.Month.ToString() + "," + fecha_fin.Day.ToString() + ")";
+                    string query = "SELECT det.IdEmpresa, det.IdCobroMasivo, det.Secuencia, det.IdAlumno, al.Codigo, p.pe_nombreCompleto, det.Valor, det.Fecha, det.IdSucursal, det.IdCobro "
+                    + " FROM dbo.aca_Alumno AS al WITH (nolock) INNER JOIN "
+                    + " dbo.cxc_CobroMasivoDet AS det WITH(nolock) ON al.IdEmpresa = det.IdEmpresa AND al.IdAlumno = det.IdAlumno INNER JOIN "
+                    + " dbo.tb_persona AS p WITH(nolock) ON al.IdPersona = p.IdPersona "
+                    + " WHERE det.IdEmpresa = " + IdEmpresa + " and det.IdCobroMasivo =" + IdCobroMasivo.ToString();
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -53,8 +51,8 @@ namespace Core.Data.CuentasPorCobrar
                         });
                     }
                     reader.Close();
-                }*/
-                
+                }
+                /*
                 using (EntitiesCuentasPorCobrar Context = new EntitiesCuentasPorCobrar())
                 {
                     var lst = Context.vwcxc_CobroMasivoDet.Where(q => q.IdEmpresa == IdEmpresa && q.IdCobroMasivo == IdCobroMasivo).ToList();
@@ -80,7 +78,7 @@ namespace Core.Data.CuentasPorCobrar
                         Lista.Add(info);
                     }                    
                 }
-                
+                */
                 return Lista;
             }
             catch (Exception)

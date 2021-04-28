@@ -86,7 +86,30 @@
             error: function (error) {
             }
         });
+    }
 
+    function SetMatricula_PorCurso() {
+        var datos = {
+            IdEmpresa: $("#IdEmpresa").val(),
+            IdAnio: IdAnio.GetValue(),
+            IdComboCurso: IdComboCurso.GetValue(),
+            IdParalelo: IdParalelo.GetValue()
+        }
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify(datos),
+            url: '@Url.Action("SetMatricula_PorCurso", "ProcesarAdmision", new { Area = "Academico" })',
+            async: false,
+            bDeferRender: true,
+            bProcessing: true,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                GridViewPartial_AlumnosPorParalelo.PerformCallback();
+            },
+            error: function (error) {
+            }
+        });
     }
 </script>
 @using (Html.BeginForm("Modificar", "ProcesarAdmision", FormMethod.Post, new { @role = "form", @class = "form" }))
@@ -2330,10 +2353,10 @@
                 <div id="Tabs" role="tabpanel">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        @*<li class="active">
-                            <a href="#tb_matricula_paralelo" aria-controls="general" role="tab" data-toggle="tab">Alumnos por paralelo</a>
-                        </li>*@
                         <li class="active">
+                            <a href="#tb_matricula_paralelo" aria-controls="general" role="tab" data-toggle="tab">Alumnos por paralelo</a>
+                        </li>
+                        <li>
                             <a href="#tb_plantilla_detalle" aria-controls="otros" role="tab" data-toggle="tab">Detalle de plantilla</a>
                         </li>
                         <li>
@@ -2342,6 +2365,17 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content" style="padding-top: 20px">
+                        <div role="tabpanel" class="tab-pane active" style="margin-left: 2em;" id="tb_matricula_paralelo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            @Html.Action("GridViewPartial_AlumnosPorParalelo")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div role="tabpanel" class="tab-pane" style="margin-left: 2em;" id="tb_plantilla_detalle">
                             <div class="row">
                                 <div class="col-md-12">
@@ -3204,7 +3238,6 @@
         };
 
         function actualizar_nombre_completo_padre(Tipo) {
-            console.log(Tipo);
             if (Tipo == "N") {
                 var apellido = $("#Apellidos_Padre").val();
                 var nombre = $("#Nombres_Padre").val();
@@ -3338,7 +3371,6 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                console.log(data);
                 $("#ValorPlantilla").val(data.Valor);
                 $("#ValorPlantillaProntoPago").val(data.ProntoPago);
 
@@ -3370,7 +3402,6 @@
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                console.log(data);
                 $("#ValorPlantilla").val(data.Valor);
                 $("#ValorPlantillaProntoPago").val(data.ProntoPago);
                 GridViewPartial_DetallePlantilla.PerformCallback();

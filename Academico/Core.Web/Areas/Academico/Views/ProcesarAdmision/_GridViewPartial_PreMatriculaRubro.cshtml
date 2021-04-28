@@ -2,8 +2,8 @@
 @{
     var grid = Html.DevExpress().GridView(settings =>
     {
-        settings.Name = "GridViewPartial_MatriculaRubro";
-        settings.CallbackRouteValues = new { Controller = "Matricula", Action = "GridViewPartial_MatriculaRubro" };
+        settings.Name = "GridViewPartial_PreMatriculaRubro";
+        settings.CallbackRouteValues = new { Controller = "ProcesarAdmision", Action = "GridViewPartial_PreMatriculaRubro" };
         settings.Width = Unit.Percentage(100);
         settings.KeyFieldName = "IdString";
 
@@ -47,29 +47,14 @@
         {
             column.FieldName = "NomRubro";
             column.Caption = "Rubro";
-            column.Width = Unit.Percentage(20);
+            column.Width = Unit.Percentage(25);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
         {
             column.FieldName = "pr_descripcion";
             column.Caption = "Producto";
-            column.Width = Unit.Percentage(20);
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-        });
-        settings.Columns.Add(column =>
-        {
-            column.FieldName = "IdMecanismo";
-            column.Caption = "Mecanismo de pago";
-            column.Width = Unit.Percentage(20);
-            column.EditorProperties().ComboBox(p =>
-            {
-                p.Columns.Add("NombreMecanismo", "Descripción").Width = Unit.Percentage(100);
-                p.TextField = "NombreMecanismo";
-                p.ValueField = "IdMecanismo";
-                p.ValueType = typeof(decimal);
-                p.DataSource = ViewBag.lst_mecanismo;
-            });
+            column.Width = Unit.Percentage(30);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
         settings.Columns.Add(column =>
@@ -77,32 +62,20 @@
             column.FieldName = "Total";
             column.Caption = "Total";
             column.PropertiesEdit.DisplayFormatString = "{0:n2}";
-            column.Width = Unit.Percentage(10);
+            column.Width = Unit.Percentage(15);
             column.EditFormSettings.Visible = DefaultBoolean.False;
         });
-        settings.Columns.Add(column =>
-        {
-            column.Width = Unit.Percentage(10);
-            column.FieldName = "FechaFacturacion";
-            column.Caption = "Fecha Facturación";
-            column.PropertiesEdit.DisplayFormatString = "{0:dd/MM/yyyy}";
-            column.EditFormSettings.Visible = DefaultBoolean.False;
-            column.EditorProperties().DateEdit(sp =>
-            {
+        //settings.AfterPerformCallback = (sender, e) =>
+        //{
+        //    string[] array = ViewData["selectedIDs"].ToString().Split(',');
+        //    var gridView = sender as MVCxGridView;
+        //    for (int i = 0; i < gridView.VisibleRowCount; i++)
+        //    {
+        //        if (array.Where(q => q == (string)gridView.GetRowValues(i, "IdString")).Count() > 0)
+        //            gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
+        //    }
+        //};
 
-            });
-
-        });
-        settings.AfterPerformCallback = (sender, e) =>
-        {
-            string[] array = ViewData["selectedIDs"].ToString().Split(',');
-            var gridView = sender as MVCxGridView;
-            for (int i = 0; i < gridView.VisibleRowCount; i++)
-            {
-                if (array.Where(q => q == (string)gridView.GetRowValues(i, "IdString")).Count() > 0)
-                    gridView.Selection.SetSelection(i, (bool)gridView.GetRowValues(i, "seleccionado"));
-            }
-        };
         //settings.ClientSideEvents.RowClick = "OnRowClick";
         //settings.ClientSideEvents.EndCallback = "OnEndCallback";
         settings.ClientSideEvents.SelectionChanged = "OnSelectionChanged";

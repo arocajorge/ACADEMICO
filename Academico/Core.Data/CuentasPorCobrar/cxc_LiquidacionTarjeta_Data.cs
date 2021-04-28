@@ -9,6 +9,7 @@ using Core.Info.CuentasPorCobrar;
 using Core.Info.General;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,45 @@ namespace Core.Data.CuentasPorCobrar
                 var IdSucursalIni = IdSucursal == 0 ? 0 : IdSucursal;
                 var IdSucursalFin = IdSucursal == 0 ? 99999 : IdSucursal;
 
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+
+                    #region Query
+                    string query = "SELECT lt.IdEmpresa, lt.IdSucursal, lt.IdLiquidacion, lt.Lote, lt.Fecha, lt.IdBanco, lt.Observacion, lt.Estado, lt.IdEmpresa_ct, lt.IdTipoCbte_ct, lt.IdCbteCble_ct, lt.Valor, b.ba_descripcion, s.Su_Descripcion "
+                    + " FROM dbo.cxc_LiquidacionTarjeta AS lt WITH (nolock) INNER JOIN "
+                    + " dbo.ba_Banco_Cuenta AS b WITH (nolock) ON lt.IdEmpresa = b.IdEmpresa AND lt.IdBanco = b.IdBanco INNER JOIN "
+                    + " dbo.tb_sucursal AS s WITH (nolock) ON lt.IdEmpresa = s.IdEmpresa AND lt.IdSucursal = s.IdSucursal "
+                    + " WHERE lt.IdEmpresa = " + IdEmpresa.ToString() + " and lt.IdSucursal = " + IdSucursal.ToString();
+                    if (MostrarAnulados==false)
+                    {
+                        query += "lt.Estado = 1";
+                    }
+                    #endregion
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.CommandTimeout = 0;
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new cxc_LiquidacionTarjeta_Info
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            IdLiquidacion = Convert.ToDecimal(reader["IdLiquidacion"]),
+                            Valor = Convert.ToDouble(reader["Valor"]),
+                            Fecha = Convert.ToDateTime(reader["Fecha"]),
+                            Su_Descripcion = reader["Su_Descripcion"].ToString(),
+                            ba_descripcion = reader["ba_descripcion"].ToString(),
+                            Estado = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? false : Convert.ToBoolean(reader["Estado"]),
+                            IdBanco = Convert.ToInt32(reader["IdBanco"]),
+                            Observacion = string.IsNullOrEmpty(reader["Observacion"].ToString()) ? null : reader["Observacion"].ToString(),
+                            Lote = string.IsNullOrEmpty(reader["Lote"].ToString()) ? null : reader["Lote"].ToString(),
+                        });
+                    }
+                    reader.Close();
+                }
+                /*
                 using (EntitiesCuentasPorCobrar db = new EntitiesCuentasPorCobrar())
                 {
                     if (MostrarAnulados)
@@ -73,6 +113,7 @@ namespace Core.Data.CuentasPorCobrar
                                      ba_descripcion = q.ba_descripcion
                                  }).ToList();
                 }
+                */
                 return Lista;
             }
             catch (Exception)

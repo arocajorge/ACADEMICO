@@ -44,9 +44,13 @@ namespace Core.Info.Academico
 
         #region Campos que no existen en la tabla
         public bool ExisteAlumno { get; set; }
+        public string IdComboCurso { get; set; }
+        public aca_Admision_Info info_admision { get; set; }
         public aca_Alumno_Info info_alumno { get; set; }
+        public List<aca_Matricula_Info> lst_matricula_curso { get; set; }
         public List<aca_PreMatricula_Rubro_Info> lst_PreMatriculaRubro { get; set; }
         public List<aca_AlumnoDocumento_Info> lst_Documentos { get; set; }
+        public List<aca_AnioLectivo_Curso_Documento_Info> lst_alumnoDocumentos { get; set; }
         public aca_SocioEconomico_Info info_socioeconomico { get; set; }
         public bool info_valido_padre { get; set; }
         public bool info_valido_madre { get; set; }
