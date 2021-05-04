@@ -507,9 +507,6 @@
     <Compile Include="Base\VWACA_021.cs">
       <DependentUpon>ModelReportes.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base\vwaca_Alumno.cs">
-      <DependentUpon>ModelAcademico.tt</DependentUpon>
-    </Compile>
     <Compile Include="Base\vwaca_Alumno_PeriodoActual.cs">
       <DependentUpon>ModelAcademico.tt</DependentUpon>
     </Compile>

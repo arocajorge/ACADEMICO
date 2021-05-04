@@ -247,7 +247,6 @@
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_NivelAcademico" />
         <AssociationConnector Association="ModelAcademico.FK_aca_Admision_aca_Sede" />
         <AssociationConnector Association="ModelAcademico.FK_aca_PreMatricula_aca_Admision" />
-        <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno" Width="1.5" PointX="30.375" PointY="40.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_Alumno_PeriodoActual" Width="1.5" PointX="15.375" PointY="27.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AlumnoDocumento" Width="1.5" PointX="13.375" PointY="7.75" />
         <EntityTypeShape EntityType="ModelAcademico.vwaca_AlumnoRetiro" Width="1.5" PointX="36.375" PointY="8.75" />

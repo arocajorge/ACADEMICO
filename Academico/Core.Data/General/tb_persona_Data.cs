@@ -5,6 +5,7 @@ using Core.Info.Helps;
 using DevExpress.Web;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -473,6 +474,37 @@ namespace Core.Data.General
                         }
                         break;
                     case "ALUMNO":
+                        using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                        {
+                            connection.Open();
+                            string query = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
+                            + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, "
+                            + " aca_Catalogo_1.NomCatalogo AS NomCatalogoESTMAT, c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, "
+                            + " p.AsisteCentroCristiano, p.IdGrupoEtnico, a.Dificultad_Lectura, a.Dificultad_Escritura, a.Dificultad_Matematicas "
+                            + " FROM     dbo.aca_Alumno AS a WITH (nolock)INNER JOIN "
+                            + " dbo.tb_persona AS p WITH(nolock) ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                            + " dbo.aca_Catalogo AS c WITH(nolock) ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
+                            + " dbo.aca_Catalogo AS aca_Catalogo_1 WITH(nolock) ON a.IdCatalogoESTMAT = aca_Catalogo_1.IdCatalogo "
+                            + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " AND a.Estado = 1 AND (cast(a.IdAlumno as varchar) + a.Codigo + p.pe_cedulaRuc + p.pe_nombreCompleto) LIKE '%" + filter + "%'"
+                            + " ORDER BY a.IdAlumno"
+                            + " OFFSET " + skip.ToString() + " ROWS FETCH NEXT " + take.ToString() + " ROWS ONLY";
+
+                            SqlCommand command = new SqlCommand(query, connection);
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                Lista.Add(new tb_persona_Info
+                                {
+                                    IdPersona = Convert.ToDecimal(reader["IdPersona"]),
+                                    IdEntidad = Convert.ToDecimal(reader["IdAlumno"]),
+                                    CodAlumno = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                                    pe_nombreCompleto = Convert.ToString(reader["pe_nombreCompleto"]),
+                                    pe_cedulaRuc = Convert.ToString(reader["pe_cedulaRuc"])
+                                });
+                            }
+                            reader.Close();
+                        }
+                        /*
                         EntitiesAcademico context_a = new EntitiesAcademico();
                         var lst_al = context_a.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.Estado == true && (q.IdAlumno.ToString() + " " + q.Codigo + " " + " " + q.pe_cedulaRuc + " " + q.pe_nombreCompleto).Contains(filter)).OrderBy(q => q.IdAlumno).Skip(skip).Take(take);
                         foreach (var q in lst_al)
@@ -487,8 +519,41 @@ namespace Core.Data.General
                             });
                         }
                         context_a.Dispose();
+                        */
                         break;
                     case "ALUMNO_MATRICULA":
+                        using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                        {
+                            connection.Open();
+                            var IdCatalogoRetirado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO);
+                            string query = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
+                            + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, "
+                            + " aca_Catalogo_1.NomCatalogo AS NomCatalogoESTMAT, c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, "
+                            + " p.AsisteCentroCristiano, p.IdGrupoEtnico, a.Dificultad_Lectura, a.Dificultad_Escritura, a.Dificultad_Matematicas "
+                            + " FROM     dbo.aca_Alumno AS a WITH (nolock)INNER JOIN "
+                            + " dbo.tb_persona AS p WITH(nolock) ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                            + " dbo.aca_Catalogo AS c WITH(nolock) ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
+                            + " dbo.aca_Catalogo AS aca_Catalogo_1 WITH(nolock) ON a.IdCatalogoESTMAT = aca_Catalogo_1.IdCatalogo "
+                            + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " AND a.Estado = 1 AND a.IdCatalogoESTALU != " + IdCatalogoRetirado .ToString() + " AND(cast(a.IdAlumno as varchar) + a.Codigo + p.pe_cedulaRuc + p.pe_nombreCompleto) LIKE '%" + filter + "%'"
+                            + " ORDER BY a.IdAlumno"
+                            + " OFFSET " + skip.ToString() + " ROWS FETCH NEXT " + take.ToString() + " ROWS ONLY";
+
+                            SqlCommand command = new SqlCommand(query, connection);
+                            SqlDataReader reader = command.ExecuteReader();
+                            while (reader.Read())
+                            {
+                                Lista.Add(new tb_persona_Info
+                                {
+                                    IdPersona = Convert.ToDecimal(reader["IdPersona"]),
+                                    IdEntidad = Convert.ToDecimal(reader["IdAlumno"]),
+                                    CodAlumno = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                                    pe_nombreCompleto = Convert.ToString(reader["pe_nombreCompleto"]),
+                                    pe_cedulaRuc = Convert.ToString(reader["pe_cedulaRuc"])
+                                });
+                            }
+                            reader.Close();
+                        }
+                        /*
                         EntitiesAcademico context_mat = new EntitiesAcademico();
                         var IdCatalogoRetirado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO);
                         var lst_mat = context_mat.vwaca_Alumno.Where(q => q.IdEmpresa == IdEmpresa && q.IdCatalogoESTALU != IdCatalogoRetirado && q.Estado == true 
@@ -505,6 +570,7 @@ namespace Core.Data.General
                             });
                         }
                         context_mat.Dispose();
+                        */
                         break;
                     case "ALUMNO_MATRICULADOS":
                         EntitiesAcademico context_matriculados = new EntitiesAcademico();
@@ -649,6 +715,39 @@ namespace Core.Data.General
                             }).FirstOrDefault();
                     break;
                 case "ALUMNO":
+                    using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("", connection);
+                        command.CommandText = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
+                            + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, "
+                            + " aca_Catalogo_1.NomCatalogo AS NomCatalogoESTMAT, c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, "
+                            + " p.AsisteCentroCristiano, p.IdGrupoEtnico, a.Dificultad_Lectura, a.Dificultad_Escritura, a.Dificultad_Matematicas "
+                            + " FROM     dbo.aca_Alumno AS a WITH (nolock)INNER JOIN "
+                            + " dbo.tb_persona AS p WITH(nolock) ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                            + " dbo.aca_Catalogo AS c WITH(nolock) ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
+                            + " dbo.aca_Catalogo AS aca_Catalogo_1 WITH(nolock) ON a.IdCatalogoESTMAT = aca_Catalogo_1.IdCatalogo "                            
+                            + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " AND a.Estado = 1 AND a.IdAlumno = " + IdEntidad.ToString();
+                        var ResultValue = command.ExecuteScalar();
+
+                        if (ResultValue == null)
+                            return null;
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            info = new tb_persona_Info
+                            {
+                                IdPersona = Convert.ToDecimal(reader["IdPersona"]),
+                                IdEntidad = Convert.ToDecimal(reader["IdAlumno"]),
+                                CodAlumno = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                                pe_nombreCompleto = Convert.ToString(reader["pe_nombreCompleto"]),
+                                pe_cedulaRuc = Convert.ToString(reader["pe_cedulaRuc"])
+                            };
+                        }
+                    }
+                    /*
                     EntitiesAcademico context_aca = new EntitiesAcademico();
                     info = (from q in context_aca.vwaca_Alumno
                             where q.Estado == true
@@ -663,8 +762,43 @@ namespace Core.Data.General
                                 CodAlumno = q.Codigo
                             }).FirstOrDefault();
                     context_aca.Dispose();
+                    */
                     break;
                 case "ALUMNO_MATRICULA":
+                    using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                    {
+                        connection.Open();
+                        SqlCommand command = new SqlCommand("", connection);
+                        var IdCatalogoRetirado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO);
+                        command.CommandText = "SELECT a.IdEmpresa, a.IdAlumno, a.Codigo, a.IdPersona, p.pe_Naturaleza, p.pe_nombreCompleto, p.pe_apellido, p.pe_nombre, p.IdTipoDocumento, p.pe_cedulaRuc, a.Direccion, a.Celular, a.Correo, p.pe_sexo, p.pe_fechaNacimiento, "
+                            + " p.CodCatalogoSangre, p.CodCatalogoCONADIS, p.PorcentajeDiscapacidad, p.NumeroCarnetConadis, a.Estado, a.IdCatalogoESTMAT, a.IdCurso, a.IdCatalogoESTALU, p.pe_telfono_Contacto, "
+                            + " aca_Catalogo_1.NomCatalogo AS NomCatalogoESTMAT, c.NomCatalogo AS NomCatalogoESTALU, a.FechaIngreso, a.LugarNacimiento, a.IdPais, a.Cod_Region, a.IdProvincia, a.IdCiudad, a.IdParroquia, a.Sector, p.IdReligion, "
+                            + " p.AsisteCentroCristiano, p.IdGrupoEtnico, a.Dificultad_Lectura, a.Dificultad_Escritura, a.Dificultad_Matematicas "
+                            + " FROM     dbo.aca_Alumno AS a WITH (nolock)INNER JOIN "
+                            + " dbo.tb_persona AS p WITH(nolock) ON a.IdPersona = p.IdPersona LEFT OUTER JOIN "
+                            + " dbo.aca_Catalogo AS c WITH(nolock) ON a.IdCatalogoESTALU = c.IdCatalogo LEFT OUTER JOIN "
+                            + " dbo.aca_Catalogo AS aca_Catalogo_1 WITH(nolock) ON a.IdCatalogoESTMAT = aca_Catalogo_1.IdCatalogo "
+                            + " WHERE a.IdEmpresa = " + IdEmpresa.ToString() + " AND a.Estado = 1 and a.IdAlumno = " + IdEntidad.ToString();
+                        var ResultValue = command.ExecuteScalar();
+
+                        if (ResultValue == null)
+                            return null;
+
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            info = new tb_persona_Info
+                            {
+                                IdPersona = Convert.ToDecimal(reader["IdPersona"]),
+                                IdEntidad = Convert.ToDecimal(reader["IdAlumno"]),
+                                CodAlumno = string.IsNullOrEmpty(reader["Codigo"].ToString()) ? null : reader["Codigo"].ToString(),
+                                pe_nombreCompleto = Convert.ToString(reader["pe_nombreCompleto"]),
+                                pe_cedulaRuc = Convert.ToString(reader["pe_cedulaRuc"])
+                            };
+                        }
+                    }
+                    /*
                     EntitiesAcademico context_mat = new EntitiesAcademico();
                     var IdCatalogoRetirado = Convert.ToInt32(cl_enumeradores.eCatalogoAcademicoAlumno.RETIRADO);
                     info = (from q in context_mat.vwaca_Alumno
@@ -681,6 +815,7 @@ namespace Core.Data.General
                                 CodAlumno = q.Codigo
                             }).FirstOrDefault();
                     context_mat.Dispose();
+                    */
                     break;
                 case "ALUMNO_MATRICULADOS":
                     EntitiesAcademico context_matriculados = new EntitiesAcademico();

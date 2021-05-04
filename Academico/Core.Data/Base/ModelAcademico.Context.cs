@@ -112,7 +112,6 @@ namespace Core.Data.Base
         public virtual DbSet<aca_Matricula> aca_Matricula { get; set; }
         public virtual DbSet<aca_PreMatricula> aca_PreMatricula { get; set; }
         public virtual DbSet<aca_Admision> aca_Admision { get; set; }
-        public virtual DbSet<vwaca_Alumno> vwaca_Alumno { get; set; }
         public virtual DbSet<vwaca_Alumno_PeriodoActual> vwaca_Alumno_PeriodoActual { get; set; }
         public virtual DbSet<vwaca_AlumnoDocumento> vwaca_AlumnoDocumento { get; set; }
         public virtual DbSet<vwaca_AlumnoRetiro> vwaca_AlumnoRetiro { get; set; }

@@ -8,6 +8,7 @@ using Core.Data.Base;
 using Core.Info.Contabilidad;
 using Core.Data.Contabilidad;
 using System.Data.SqlClient;
+using Core.Data.Academico;
 
 namespace Core.Data.CuentasPorCobrar
 {
@@ -16,7 +17,7 @@ namespace Core.Data.CuentasPorCobrar
         cxc_cobro_Data odataCobro = new cxc_cobro_Data();
         ct_cbtecble_Data odataCt = new ct_cbtecble_Data();
         cxc_ConciliacionNotaCreditoDet_Data odataDet = new cxc_ConciliacionNotaCreditoDet_Data();
-
+        aca_Alumno_Data DataAlumno = new aca_Alumno_Data();
         public List<cxc_ConciliacionNotaCredito_Info> GetList(int IdEmpresa, DateTime FechaIni, DateTime FechaFin)
         {
             try
@@ -611,7 +612,8 @@ namespace Core.Data.CuentasPorCobrar
                 if (ParamCxc.IdTipoCbte_ConciliacionNC == null)
                     return null;
 
-                var Alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                //var Alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                var Alumno = DataAlumno.getInfo(info.IdEmpresa, Convert.ToDecimal(info.IdAlumno));
                 if (Alumno == null)
                     return null;
 

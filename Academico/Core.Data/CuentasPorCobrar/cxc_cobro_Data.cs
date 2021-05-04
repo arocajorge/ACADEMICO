@@ -1,4 +1,5 @@
-﻿using Core.Data.Base;
+﻿using Core.Data.Academico;
+using Core.Data.Base;
 using Core.Data.Caja;
 using Core.Data.Contabilidad;
 using Core.Data.Facturacion;
@@ -22,6 +23,7 @@ namespace Core.Data.CuentasPorCobrar
         ct_cbtecble_Data DataContable = new ct_cbtecble_Data();
         fa_notaCreDeb_Data DataNotaCredito = new fa_notaCreDeb_Data();
         cxc_cobro_det_Data DataDet = new cxc_cobro_det_Data();
+        aca_Alumno_Data DataAlumno = new aca_Alumno_Data();
 
         public List<cxc_cobro_Info> get_list(int IdEmpresa, int IdSucursal, DateTime Fecha_ini, DateTime Fecha_fin)
         {
@@ -940,7 +942,8 @@ namespace Core.Data.CuentasPorCobrar
                 if (cliente == null)
                     return null;
 
-                var alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                //var alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                var alumno = DataAlumno.getInfo(info.IdEmpresa, Convert.ToDecimal(info.IdAlumno));
                 if (alumno == null)
                     return null;
 
@@ -1047,7 +1050,8 @@ namespace Core.Data.CuentasPorCobrar
                 if (cliente == null)
                     return null;
 
-                var alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                //var alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                var alumno = DataAlumno.getInfo(info.IdEmpresa, Convert.ToDecimal(info.IdAlumno));
                 if (alumno == null)
                     return null;
 
@@ -1313,7 +1317,8 @@ namespace Core.Data.CuentasPorCobrar
                 if (TipoNota.IdProducto == null)
                     return null;
 
-                var Alumno = dbACA.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                //var Alumno = dbACA.vwaca_Alumno.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAlumno == info.IdAlumno).FirstOrDefault();
+                var Alumno = DataAlumno.getInfo(info.IdEmpresa, Convert.ToDecimal(info.IdAlumno));
                 if (Alumno == null)
                     return null;
 

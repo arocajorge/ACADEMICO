@@ -1747,60 +1747,6 @@
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Alumno' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="vwaca_Alumno">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdPersona" />
-            <PropertyRef Name="pe_Naturaleza" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="IdTipoDocumento" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdCatalogoESTMAT" />
-            <PropertyRef Name="IdCatalogoESTALU" />
-            <PropertyRef Name="FechaIngreso" />
-          </Key>
-          <Property Name="IdEmpresa" Type="int" Nullable="false" />
-          <Property Name="IdAlumno" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Codigo" Type="varchar" MaxLength="200" />
-          <Property Name="IdPersona" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="pe_Naturaleza" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="pe_nombreCompleto" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="pe_apellido" Type="varchar" MaxLength="100" />
-          <Property Name="pe_nombre" Type="varchar" MaxLength="100" />
-          <Property Name="IdTipoDocumento" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="pe_cedulaRuc" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Direccion" Type="varchar" MaxLength="1000" />
-          <Property Name="Celular" Type="varchar" MaxLength="500" />
-          <Property Name="Correo" Type="varchar" MaxLength="500" />
-          <Property Name="pe_sexo" Type="varchar" MaxLength="25" />
-          <Property Name="pe_fechaNacimiento" Type="datetime" />
-          <Property Name="CodCatalogoSangre" Type="varchar" MaxLength="25" />
-          <Property Name="CodCatalogoCONADIS" Type="varchar" MaxLength="25" />
-          <Property Name="PorcentajeDiscapacidad" Type="float" />
-          <Property Name="NumeroCarnetConadis" Type="varchar" MaxLength="200" />
-          <Property Name="Estado" Type="bit" />
-          <Property Name="IdCatalogoESTMAT" Type="int" Nullable="false" />
-          <Property Name="IdCurso" Type="int" />
-          <Property Name="IdCatalogoESTALU" Type="int" Nullable="false" />
-          <Property Name="pe_telfono_Contacto" Type="varchar" MaxLength="50" />
-          <Property Name="NomCatalogoESTMAT" Type="varchar" MaxLength="500" />
-          <Property Name="NomCatalogoESTALU" Type="varchar" MaxLength="500" />
-          <Property Name="FechaIngreso" Type="date" Nullable="false" />
-          <Property Name="LugarNacimiento" Type="varchar" MaxLength="300" />
-          <Property Name="IdPais" Type="varchar" MaxLength="10" />
-          <Property Name="Cod_Region" Type="varchar" MaxLength="10" />
-          <Property Name="IdProvincia" Type="varchar" MaxLength="25" />
-          <Property Name="IdCiudad" Type="varchar" MaxLength="25" />
-          <Property Name="IdParroquia" Type="varchar" MaxLength="25" />
-          <Property Name="Sector" Type="varchar" MaxLength="500" />
-          <Property Name="IdReligion" Type="int" />
-          <Property Name="AsisteCentroCristiano" Type="bit" />
-          <Property Name="IdGrupoEtnico" Type="int" />
-          <Property Name="Dificultad_Lectura" Type="bit" />
-          <Property Name="Dificultad_Escritura" Type="bit" />
-          <Property Name="Dificultad_Matematicas" Type="bit" />
-        </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Alumno_PeriodoActual' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vwaca_Alumno_PeriodoActual">
@@ -5588,50 +5534,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
           <EntitySet Name="aca_Sede" EntityType="Self.aca_Sede" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_SocioEconomico" EntityType="Self.aca_SocioEconomico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="aca_Tematica" EntityType="Self.aca_Tematica" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="vwaca_Alumno" EntityType="Self.vwaca_Alumno" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [vwaca_Alumno].[IdEmpresa] AS [IdEmpresa], 
-    [vwaca_Alumno].[IdAlumno] AS [IdAlumno], 
-    [vwaca_Alumno].[Codigo] AS [Codigo], 
-    [vwaca_Alumno].[IdPersona] AS [IdPersona], 
-    [vwaca_Alumno].[pe_Naturaleza] AS [pe_Naturaleza], 
-    [vwaca_Alumno].[pe_nombreCompleto] AS [pe_nombreCompleto], 
-    [vwaca_Alumno].[pe_apellido] AS [pe_apellido], 
-    [vwaca_Alumno].[pe_nombre] AS [pe_nombre], 
-    [vwaca_Alumno].[IdTipoDocumento] AS [IdTipoDocumento], 
-    [vwaca_Alumno].[pe_cedulaRuc] AS [pe_cedulaRuc], 
-    [vwaca_Alumno].[Direccion] AS [Direccion], 
-    [vwaca_Alumno].[Celular] AS [Celular], 
-    [vwaca_Alumno].[Correo] AS [Correo], 
-    [vwaca_Alumno].[pe_sexo] AS [pe_sexo], 
-    [vwaca_Alumno].[pe_fechaNacimiento] AS [pe_fechaNacimiento], 
-    [vwaca_Alumno].[CodCatalogoSangre] AS [CodCatalogoSangre], 
-    [vwaca_Alumno].[CodCatalogoCONADIS] AS [CodCatalogoCONADIS], 
-    [vwaca_Alumno].[PorcentajeDiscapacidad] AS [PorcentajeDiscapacidad], 
-    [vwaca_Alumno].[NumeroCarnetConadis] AS [NumeroCarnetConadis], 
-    [vwaca_Alumno].[Estado] AS [Estado], 
-    [vwaca_Alumno].[IdCatalogoESTMAT] AS [IdCatalogoESTMAT], 
-    [vwaca_Alumno].[IdCurso] AS [IdCurso], 
-    [vwaca_Alumno].[IdCatalogoESTALU] AS [IdCatalogoESTALU], 
-    [vwaca_Alumno].[pe_telfono_Contacto] AS [pe_telfono_Contacto], 
-    [vwaca_Alumno].[NomCatalogoESTMAT] AS [NomCatalogoESTMAT], 
-    [vwaca_Alumno].[NomCatalogoESTALU] AS [NomCatalogoESTALU], 
-    [vwaca_Alumno].[FechaIngreso] AS [FechaIngreso], 
-    [vwaca_Alumno].[LugarNacimiento] AS [LugarNacimiento], 
-    [vwaca_Alumno].[IdPais] AS [IdPais], 
-    [vwaca_Alumno].[Cod_Region] AS [Cod_Region], 
-    [vwaca_Alumno].[IdProvincia] AS [IdProvincia], 
-    [vwaca_Alumno].[IdCiudad] AS [IdCiudad], 
-    [vwaca_Alumno].[IdParroquia] AS [IdParroquia], 
-    [vwaca_Alumno].[Sector] AS [Sector], 
-    [vwaca_Alumno].[IdReligion] AS [IdReligion], 
-    [vwaca_Alumno].[AsisteCentroCristiano] AS [AsisteCentroCristiano], 
-    [vwaca_Alumno].[IdGrupoEtnico] AS [IdGrupoEtnico], 
-    [vwaca_Alumno].[Dificultad_Lectura] AS [Dificultad_Lectura], 
-    [vwaca_Alumno].[Dificultad_Escritura] AS [Dificultad_Escritura], 
-    [vwaca_Alumno].[Dificultad_Matematicas] AS [Dificultad_Matematicas]
-    FROM [dbo].[vwaca_Alumno] AS [vwaca_Alumno]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="vwaca_Alumno_PeriodoActual" EntityType="Self.vwaca_Alumno_PeriodoActual" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vwaca_Alumno_PeriodoActual].[IdEmpresa] AS [IdEmpresa], 
@@ -7979,7 +7881,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             <End Role="aca_Admision" EntitySet="aca_Admision" />
             <End Role="aca_PreMatricula" EntitySet="aca_PreMatricula" />
           </AssociationSet>
-          <EntitySet Name="vwaca_Alumno" EntityType="ModelAcademico.vwaca_Alumno" />
           <EntitySet Name="vwaca_Alumno_PeriodoActual" EntityType="ModelAcademico.vwaca_Alumno_PeriodoActual" />
           <EntitySet Name="vwaca_AlumnoDocumento" EntityType="ModelAcademico.vwaca_AlumnoDocumento" />
           <EntitySet Name="vwaca_AlumnoRetiro" EntityType="ModelAcademico.vwaca_AlumnoRetiro" />
@@ -12781,60 +12682,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vwaca_Alumno">
-          <Key>
-            <PropertyRef Name="IdEmpresa" />
-            <PropertyRef Name="IdAlumno" />
-            <PropertyRef Name="IdPersona" />
-            <PropertyRef Name="pe_Naturaleza" />
-            <PropertyRef Name="pe_nombreCompleto" />
-            <PropertyRef Name="IdTipoDocumento" />
-            <PropertyRef Name="pe_cedulaRuc" />
-            <PropertyRef Name="IdCatalogoESTMAT" />
-            <PropertyRef Name="IdCatalogoESTALU" />
-            <PropertyRef Name="FechaIngreso" />
-          </Key>
-          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
-          <Property Name="IdAlumno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Codigo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="IdPersona" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="pe_Naturaleza" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="pe_apellido" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="pe_nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoDocumento" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_cedulaRuc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Direccion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="Correo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="pe_sexo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="pe_fechaNacimiento" Type="DateTime" Precision="3" />
-          <Property Name="CodCatalogoSangre" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CodCatalogoCONADIS" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="PorcentajeDiscapacidad" Type="Double" />
-          <Property Name="NumeroCarnetConadis" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" />
-          <Property Name="IdCatalogoESTMAT" Type="Int32" Nullable="false" />
-          <Property Name="IdCurso" Type="Int32" />
-          <Property Name="IdCatalogoESTALU" Type="Int32" Nullable="false" />
-          <Property Name="pe_telfono_Contacto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NomCatalogoESTMAT" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="NomCatalogoESTALU" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="LugarNacimiento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="IdPais" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Cod_Region" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IdProvincia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdCiudad" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="IdParroquia" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Sector" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdReligion" Type="Int32" />
-          <Property Name="AsisteCentroCristiano" Type="Boolean" />
-          <Property Name="IdGrupoEtnico" Type="Int32" />
-          <Property Name="Dificultad_Lectura" Type="Boolean" />
-          <Property Name="Dificultad_Escritura" Type="Boolean" />
-          <Property Name="Dificultad_Matematicas" Type="Boolean" />
-        </EntityType>
         <EntityType Name="vwaca_Alumno_PeriodoActual">
           <Key>
             <PropertyRef Name="IdEmpresa" />
@@ -15835,52 +15682,6 @@ advertencia 6002: La tabla o vista 'DBERP.dbo.vwaca_Tematica' no tiene definida 
                 <ScalarProperty Name="IdAnio" ColumnName="IdAnio" />
                 <ScalarProperty Name="IdSede" ColumnName="IdSede" />
                 <ScalarProperty Name="IdAdmision" ColumnName="IdAdmision" />
-                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vwaca_Alumno">
-            <EntityTypeMapping TypeName="ModelAcademico.vwaca_Alumno">
-              <MappingFragment StoreEntitySet="vwaca_Alumno">
-                <ScalarProperty Name="Dificultad_Matematicas" ColumnName="Dificultad_Matematicas" />
-                <ScalarProperty Name="Dificultad_Escritura" ColumnName="Dificultad_Escritura" />
-                <ScalarProperty Name="Dificultad_Lectura" ColumnName="Dificultad_Lectura" />
-                <ScalarProperty Name="IdGrupoEtnico" ColumnName="IdGrupoEtnico" />
-                <ScalarProperty Name="AsisteCentroCristiano" ColumnName="AsisteCentroCristiano" />
-                <ScalarProperty Name="IdReligion" ColumnName="IdReligion" />
-                <ScalarProperty Name="Sector" ColumnName="Sector" />
-                <ScalarProperty Name="IdParroquia" ColumnName="IdParroquia" />
-                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
-                <ScalarProperty Name="Cod_Region" ColumnName="Cod_Region" />
-                <ScalarProperty Name="IdPais" ColumnName="IdPais" />
-                <ScalarProperty Name="LugarNacimiento" ColumnName="LugarNacimiento" />
-                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
-                <ScalarProperty Name="NomCatalogoESTALU" ColumnName="NomCatalogoESTALU" />
-                <ScalarProperty Name="NomCatalogoESTMAT" ColumnName="NomCatalogoESTMAT" />
-                <ScalarProperty Name="pe_telfono_Contacto" ColumnName="pe_telfono_Contacto" />
-                <ScalarProperty Name="IdCatalogoESTALU" ColumnName="IdCatalogoESTALU" />
-                <ScalarProperty Name="IdCurso" ColumnName="IdCurso" />
-                <ScalarProperty Name="IdCatalogoESTMAT" ColumnName="IdCatalogoESTMAT" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="NumeroCarnetConadis" ColumnName="NumeroCarnetConadis" />
-                <ScalarProperty Name="PorcentajeDiscapacidad" ColumnName="PorcentajeDiscapacidad" />
-                <ScalarProperty Name="CodCatalogoCONADIS" ColumnName="CodCatalogoCONADIS" />
-                <ScalarProperty Name="CodCatalogoSangre" ColumnName="CodCatalogoSangre" />
-                <ScalarProperty Name="pe_fechaNacimiento" ColumnName="pe_fechaNacimiento" />
-                <ScalarProperty Name="pe_sexo" ColumnName="pe_sexo" />
-                <ScalarProperty Name="Correo" ColumnName="Correo" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="pe_cedulaRuc" ColumnName="pe_cedulaRuc" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="pe_nombre" ColumnName="pe_nombre" />
-                <ScalarProperty Name="pe_apellido" ColumnName="pe_apellido" />
-                <ScalarProperty Name="pe_nombreCompleto" ColumnName="pe_nombreCompleto" />
-                <ScalarProperty Name="pe_Naturaleza" ColumnName="pe_Naturaleza" />
-                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
                 <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
               </MappingFragment>
             </EntityTypeMapping>

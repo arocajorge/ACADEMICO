@@ -1,4 +1,5 @@
-﻿using Core.Data.Base;
+﻿using Core.Data.Academico;
+using Core.Data.Base;
 using Core.Data.Caja;
 using Core.Data.Contabilidad;
 using Core.Data.CuentasPorCobrar;
@@ -24,6 +25,7 @@ namespace Core.Data.Facturacion
         ct_cbtecble_Data odata_ct = new ct_cbtecble_Data();
         fa_notaCreDeb_det_Data odata_Det = new fa_notaCreDeb_det_Data();
         fa_notaCreDeb_x_fa_factura_NotaDeb_Data odata_DetNDFac = new fa_notaCreDeb_x_fa_factura_NotaDeb_Data();
+        aca_Alumno_Data DataAlumno = new aca_Alumno_Data();
         #endregion
 
         caj_Caja_Movimiento_Data odataMovCaja = new caj_Caja_Movimiento_Data();
@@ -1103,7 +1105,8 @@ namespace Core.Data.Facturacion
                 if (ptoVta == null)
                     return null;
 
-                var Alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == infoNC.IdEmpresa && q.IdAlumno == infoNC.IdAlumno).FirstOrDefault();
+                //var Alumno = dbAca.vwaca_Alumno.Where(q => q.IdEmpresa == infoNC.IdEmpresa && q.IdAlumno == infoNC.IdAlumno).FirstOrDefault();
+                var Alumno = DataAlumno.getInfo(infoNC.IdEmpresa, Convert.ToDecimal(infoNC.IdAlumno));
                 if (Alumno == null)
                     return null;
 
