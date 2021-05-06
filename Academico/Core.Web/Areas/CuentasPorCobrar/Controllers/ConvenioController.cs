@@ -60,7 +60,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
         }
         public List<tb_persona_Info> get_list_bajo_demanda_alumno(ListEditItemsRequestedByFilterConditionEventArgs args)
         {
-            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO_MATRICULADOS.ToString());
+            return bus_persona.get_list_bajo_demanda(args, Convert.ToInt32(SessionFixed.IdEmpresa), cl_enumeradores.eTipoPersona.ALUMNO.ToString());
         }
         public tb_persona_Info get_info_bajo_demanda_alumno(ListEditItemRequestedByValueEventArgs args)
         {
@@ -394,7 +394,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
 
             var info_anio = bus_anio.GetInfo_AnioEnCurso(IdEmpresa,0);
             var info_matricula = bus_matricula.GetInfo_ExisteMatricula(IdEmpresa, info_anio.IdAnio,IdAlumno);
-            IdMatricula = info_matricula.IdMatricula;
+            IdMatricula = info_matricula == null ? (decimal?)null : info_matricula.IdMatricula;
 
             return Json(new { Saldo = Saldo, IdPersonaFactura = IdPersonaFactura, IdMatricula = IdMatricula }, JsonRequestBehavior.AllowGet);
         }
