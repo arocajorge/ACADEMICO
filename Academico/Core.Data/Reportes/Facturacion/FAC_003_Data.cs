@@ -36,6 +36,7 @@ namespace Core.Data.Reportes.Facturacion
                                  lote_num_lote = q.lote_num_lote,
                                  sc_cantidad = q.sc_cantidad,
                                  sc_descUni = q.sc_descUni,
+                                 sc_total = q.sc_total,
                                  sc_iva = q.sc_iva,
                                  sc_PordescUni = q.sc_PordescUni,
                                  sc_Precio = q.sc_Precio,
