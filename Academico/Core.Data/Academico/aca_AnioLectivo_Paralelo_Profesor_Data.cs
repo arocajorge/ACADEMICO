@@ -90,30 +90,30 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_MateriaProfesor = Context.aca_AnioLectivo_Paralelo_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
-                    Context.aca_AnioLectivo_Paralelo_Profesor.RemoveRange(lst_MateriaProfesor);
-                    
                     if (lista.Count > 0)
                     {
-                        foreach (var info in lista)
+                        var info_anio_curso = Context.aca_AnioLectivo.Where(q=> q.IdEmpresa==IdEmpresa && q.IdAnio== IdAnio && q.EnCurso==true).FirstOrDefault();
+                        if (info_anio_curso!=null)
                         {
-                            aca_AnioLectivo_Paralelo_Profesor Entity = new aca_AnioLectivo_Paralelo_Profesor
+                            var lst_MateriaProfesor = Context.aca_AnioLectivo_Paralelo_Profesor.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso && q.IdParalelo == IdParalelo).ToList();
+                            Context.aca_AnioLectivo_Paralelo_Profesor.RemoveRange(lst_MateriaProfesor);
+
+                            foreach (var info in lista)
                             {
-                                IdEmpresa = info.IdEmpresa,
-                                IdAnio = info.IdAnio,
-                                IdSede = info.IdSede,
-                                IdNivel = info.IdNivel,
-                                IdJornada = info.IdJornada,
-                                IdCurso = info.IdCurso,
-                                IdMateria = info.IdMateria,
-                                IdParalelo = info.IdParalelo,
-                                IdProfesor = info.IdProfesor
-                            };
-                            Context.aca_AnioLectivo_Paralelo_Profesor.Add(Entity);
-                        
-                            var info_anio_curso = Context.aca_AnioLectivo.Where(q=> q.IdEmpresa==IdEmpresa && q.EnCurso==true).FirstOrDefault();
-                            if (info_anio_curso!=null)
-                            {
+                                aca_AnioLectivo_Paralelo_Profesor Entity = new aca_AnioLectivo_Paralelo_Profesor
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAnio = info.IdAnio,
+                                    IdSede = info.IdSede,
+                                    IdNivel = info.IdNivel,
+                                    IdJornada = info.IdJornada,
+                                    IdCurso = info.IdCurso,
+                                    IdMateria = info.IdMateria,
+                                    IdParalelo = info.IdParalelo,
+                                    IdProfesor = info.IdProfesor
+                                };
+                                Context.aca_AnioLectivo_Paralelo_Profesor.Add(Entity);
+
                                 var lst_matricula = Context.aca_Matricula.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.IdSede==info.IdSede
                                 && q.IdNivel ==info.IdNivel && q.IdJornada==IdJornada && q.IdCurso ==IdCurso && q.IdParalelo==IdParalelo).ToList();
 

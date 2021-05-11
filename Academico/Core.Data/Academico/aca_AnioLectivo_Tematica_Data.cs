@@ -103,29 +103,33 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_Tematica_x_Anio= Context.aca_AnioLectivo_Tematica.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
-                    Context.aca_AnioLectivo_Tematica.RemoveRange(lst_Tematica_x_Anio);
-
-                    if (lista.Count > 0)
+                    var info_anio_curso = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.EnCurso == true).FirstOrDefault();
+                    if (info_anio_curso != null)
                     {
-                        foreach (var info in lista)
+                        var lst_Tematica_x_Anio = Context.aca_AnioLectivo_Tematica.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio).ToList();
+                        Context.aca_AnioLectivo_Tematica.RemoveRange(lst_Tematica_x_Anio);
+
+                        if (lista.Count > 0)
                         {
-                            aca_AnioLectivo_Tematica Entity = new aca_AnioLectivo_Tematica
+                            foreach (var info in lista)
                             {
-                                IdEmpresa = info.IdEmpresa,
-                                IdAnio = info.IdAnio,
-                                IdTematica = info.IdTematica,
-                                IdCampoAccion = info.IdCampoAccion,
-                                NombreCampoAccion = info.NombreCampoAccion,
-                                NombreTematica = info.NombreTematica,
-                                OrdenCampoAccion = info.OrdenCampoAccion,
-                                OrdenTematica = info.OrdenTematica,
-                                FechaModificacion = DateTime.Now
-                            };
-                            Context.aca_AnioLectivo_Tematica.Add(Entity);
+                                aca_AnioLectivo_Tematica Entity = new aca_AnioLectivo_Tematica
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAnio = info.IdAnio,
+                                    IdTematica = info.IdTematica,
+                                    IdCampoAccion = info.IdCampoAccion,
+                                    NombreCampoAccion = info.NombreCampoAccion,
+                                    NombreTematica = info.NombreTematica,
+                                    OrdenCampoAccion = info.OrdenCampoAccion,
+                                    OrdenTematica = info.OrdenTematica,
+                                    FechaModificacion = DateTime.Now
+                                };
+                                Context.aca_AnioLectivo_Tematica.Add(Entity);
+                            }
                         }
+                        Context.SaveChanges();
                     }
-                    Context.SaveChanges();
                 }
                 return true;
             }

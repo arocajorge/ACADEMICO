@@ -232,7 +232,7 @@ namespace Core.Web.Areas.Academico.Controllers
                 IdCurso = IdCurso,
             };
             model.lst_detalle = new List<aca_AnioLectivo_Curso_Paralelo_Info>();
-            model.lst_detalle = bus_ParaleloPorCurso.GetListByCurso(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso);
+            model.lst_detalle = bus_ParaleloPorCurso.GetListByCurso(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso);
 
             if (model == null)
                 return RedirectToAction("Index");

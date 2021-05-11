@@ -122,26 +122,31 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_SedePorNivel = Context.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio).ToList();
-                    Context.aca_AnioLectivo_Sede_NivelAcademico.RemoveRange(lst_SedePorNivel);
-
-                    if (lista.Count > 0)
+                    var info_anio_curso = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.EnCurso == true).FirstOrDefault();
+                    if (info_anio_curso != null)
                     {
-                        foreach (var info in lista)
+                        var lst_SedePorNivel = Context.aca_AnioLectivo_Sede_NivelAcademico.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio).ToList();
+                        Context.aca_AnioLectivo_Sede_NivelAcademico.RemoveRange(lst_SedePorNivel);
+
+                        if (lista.Count > 0)
                         {
-                            aca_AnioLectivo_Sede_NivelAcademico Entity = new aca_AnioLectivo_Sede_NivelAcademico
+                            foreach (var info in lista)
                             {
-                                IdEmpresa = info.IdEmpresa,
-                                IdAnio = info.IdAnio,
-                                IdSede = info.IdSede,
-                                IdNivel = info.IdNivel,
-                                NomSede = info.NomSede,
-                                NomNivel = info.NomNivel,
-                                OrdenNivel = info.OrdenNivel
-                            };
-                            Context.aca_AnioLectivo_Sede_NivelAcademico.Add(Entity);     
+                                aca_AnioLectivo_Sede_NivelAcademico Entity = new aca_AnioLectivo_Sede_NivelAcademico
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAnio = info.IdAnio,
+                                    IdSede = info.IdSede,
+                                    IdNivel = info.IdNivel,
+                                    NomSede = info.NomSede,
+                                    NomNivel = info.NomNivel,
+                                    OrdenNivel = info.OrdenNivel
+                                };
+                                Context.aca_AnioLectivo_Sede_NivelAcademico.Add(Entity);
+                            }
                         }
                     }
+                    
                     Context.SaveChanges();
                 }
                 return true;

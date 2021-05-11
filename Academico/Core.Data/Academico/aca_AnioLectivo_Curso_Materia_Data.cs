@@ -118,34 +118,39 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_MateriaPorCurso = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
-                    Context.aca_AnioLectivo_Curso_Materia.RemoveRange(lst_MateriaPorCurso);
-
-                    if (lista.Count > 0)
+                    var info_anio_curso = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.EnCurso == true).FirstOrDefault();
+                    if (info_anio_curso != null)
                     {
-                        foreach (var info in lista)
+                        var lst_MateriaPorCurso = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();
+                        Context.aca_AnioLectivo_Curso_Materia.RemoveRange(lst_MateriaPorCurso);
+
+                        if (lista.Count > 0)
                         {
-                            aca_AnioLectivo_Curso_Materia Entity = new aca_AnioLectivo_Curso_Materia
+                            foreach (var info in lista)
                             {
-                                IdEmpresa = info.IdEmpresa,
-                                IdAnio = info.IdAnio,
-                                IdSede = info.IdSede,
-                                IdNivel = info.IdNivel,
-                                IdJornada = info.IdJornada,
-                                IdCurso = info.IdCurso,
-                                IdMateria = info.IdMateria,
-                                NomMateria = info.NomMateria,
-                                NomMateriaArea = info.NomMateriaArea,
-                                NomMateriaGrupo = info.NomMateriaGrupo,
-                                OrdenMateria = info.OrdenMateria,
-                                OrdenMateriaArea = (info.NomMateriaArea==null ? null : info.OrdenMateriaArea),
-                                OrdenMateriaGrupo = (info.NomMateriaGrupo==null ? null : info.OrdenMateriaGrupo),
-                                EsObligatorio = info.EsObligatorio,
-                                IdCatalogoTipoCalificacion = info.IdCatalogoTipoCalificacion
-                            };
-                            Context.aca_AnioLectivo_Curso_Materia.Add(Entity);    
+                                aca_AnioLectivo_Curso_Materia Entity = new aca_AnioLectivo_Curso_Materia
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAnio = info.IdAnio,
+                                    IdSede = info.IdSede,
+                                    IdNivel = info.IdNivel,
+                                    IdJornada = info.IdJornada,
+                                    IdCurso = info.IdCurso,
+                                    IdMateria = info.IdMateria,
+                                    NomMateria = info.NomMateria,
+                                    NomMateriaArea = info.NomMateriaArea,
+                                    NomMateriaGrupo = info.NomMateriaGrupo,
+                                    OrdenMateria = info.OrdenMateria,
+                                    OrdenMateriaArea = (info.NomMateriaArea == null ? null : info.OrdenMateriaArea),
+                                    OrdenMateriaGrupo = (info.NomMateriaGrupo == null ? null : info.OrdenMateriaGrupo),
+                                    EsObligatorio = info.EsObligatorio,
+                                    IdCatalogoTipoCalificacion = info.IdCatalogoTipoCalificacion
+                                };
+                                Context.aca_AnioLectivo_Curso_Materia.Add(Entity);
+                            }
                         }
                     }
+                    
                     Context.SaveChanges();
 
                     //var lst_GuardadaMateriaPorCurso = Context.aca_AnioLectivo_Curso_Materia.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada && q.IdCurso == IdCurso).ToList();

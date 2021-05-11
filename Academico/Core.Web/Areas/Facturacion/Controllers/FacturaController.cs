@@ -317,6 +317,18 @@ namespace Core.Web.Areas.Facturacion.Controllers
             i_validar.IdCliente = info_cliente.IdCliente;
             #endregion
 
+            #region Termino de pago
+            var info_termino_pago = bus_termino_pago.get_info(i_validar.vt_tipo_venta);
+            var info_mecanismo = bus_mecanismo.GetInfo_ByTermino(i_validar.IdEmpresa, i_validar.vt_tipo_venta);
+            if (info_termino_pago != null && info_termino_pago.AplicaDescuentoNomina == true)
+            {
+                if ((i_validar.IdEmpresa_rol==null || i_validar.IdEmpresa_rol == 0 ) || (i_validar.IdEmpleado== null || i_validar.IdEmpleado ==0))
+                {
+                    msg = "Debe seleccionar la empresa y el empleado al que se le aplicará el descuento por rol";
+                    return false;
+                }
+            }
+            #endregion
             return true;
         }
         #endregion

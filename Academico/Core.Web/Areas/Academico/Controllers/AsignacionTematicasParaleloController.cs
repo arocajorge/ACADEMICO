@@ -182,6 +182,7 @@ namespace Core.Web.Areas.Academico.Controllers
         string Variable = "aca_MatriculaCalificacionParticipacion_Info";
         aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         aca_Profesor_Bus bus_profesor = new aca_Profesor_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
         aca_AnioLectivo_Tematica_Bus bus_anio_tematica = new aca_AnioLectivo_Tematica_Bus();
         aca_MatriculaCalificacionParticipacion_Bus bus_participacion = new aca_MatriculaCalificacionParticipacion_Bus();
         public List<aca_MatriculaCalificacionParticipacion_Info> get_list(decimal IdTransaccionSession)
@@ -205,53 +206,55 @@ namespace Core.Web.Areas.Academico.Controllers
             aca_MatriculaCalificacionParticipacion_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdString == info_det.IdString).FirstOrDefault();
             //info_det.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
 
-            var anio_tematica = bus_anio_tematica.getInfo(edited_info.IdEmpresa, edited_info.IdAnio, Convert.ToInt32(info_det.IdTematicaParticipacion));
-            edited_info.IdProfesor = info_det.IdProfesor;
-            edited_info.IdCampoAccion = anio_tematica.IdCampoAccion;
-            edited_info.IdTematica = anio_tematica.IdTematica;
-            edited_info.IdTematicaParticipacion = anio_tematica.IdTematica;
-            var info_profesor = bus_profesor.GetInfo(edited_info.IdEmpresa, edited_info.IdProfesor??0);
-            edited_info.NombreProfesor = (info_profesor == null ? "" : info_profesor.pe_nombreCompleto);
-            //var info_tematica = bus_anio_tematica.getInfo(edited_info.IdEmpresa, edited_info.IdAnio, edited_info.IdTematica);
-            //edited_info.NombreCampoAccion = (info_tematica==null ? null : info_tematica.NombreCampoAccion);
-            //edited_info.NombreTematica = (info_tematica == null ? null : info_tematica.NombreTematica);
-            var lst_calificacion_participacion = new List<aca_MatriculaCalificacionParticipacion_Info>();
-
-            var lst_matricula = bus_matricula.GetList_PorCurso(edited_info.IdEmpresa,edited_info.IdAnio, edited_info.IdSede,edited_info.IdNivel, edited_info.IdJornada,edited_info.IdCurso,edited_info.IdParalelo);
-            foreach (var item in lst_matricula)
+            var info_anio_curso = bus_anio.GetInfo_AnioEnCurso(edited_info.IdEmpresa, 0);
+            if (info_anio_curso != null && info_anio_curso.IdAnio == edited_info.IdAnio)
             {
-                var existe_participacion = bus_participacion.GetInfo_X_Matricula(edited_info.IdEmpresa, Convert.ToDecimal(item.IdMatricula));
-                var info = new aca_MatriculaCalificacionParticipacion_Info
+                var anio_tematica = bus_anio_tematica.getInfo(edited_info.IdEmpresa, edited_info.IdAnio, Convert.ToInt32(info_det.IdTematicaParticipacion));
+                edited_info.IdProfesor = info_det.IdProfesor;
+                edited_info.IdCampoAccion = anio_tematica.IdCampoAccion;
+                edited_info.IdTematica = anio_tematica.IdTematica;
+                edited_info.IdTematicaParticipacion = anio_tematica.IdTematica;
+                var info_profesor = bus_profesor.GetInfo(edited_info.IdEmpresa, edited_info.IdProfesor??0);
+                edited_info.NombreProfesor = (info_profesor == null ? "" : info_profesor.pe_nombreCompleto);
+                //var info_tematica = bus_anio_tematica.getInfo(edited_info.IdEmpresa, edited_info.IdAnio, edited_info.IdTematica);
+                //edited_info.NombreCampoAccion = (info_tematica==null ? null : info_tematica.NombreCampoAccion);
+                //edited_info.NombreTematica = (info_tematica == null ? null : info_tematica.NombreTematica);
+                var lst_calificacion_participacion = new List<aca_MatriculaCalificacionParticipacion_Info>();
+
+                var lst_matricula = bus_matricula.GetList_PorCurso(edited_info.IdEmpresa, edited_info.IdAnio, edited_info.IdSede, edited_info.IdNivel, edited_info.IdJornada, edited_info.IdCurso, edited_info.IdParalelo);
+                foreach (var item in lst_matricula)
                 {
-                    IdEmpresa = edited_info.IdEmpresa,
-                    IdAnio = edited_info.IdAnio,
-                    IdMatricula = item.IdMatricula,
-                    IdAlumno = item.IdAlumno,
-                    IdTematica = edited_info.IdTematica,
-                    IdCampoAccion = edited_info.IdCampoAccion,
-                    IdProfesor = edited_info.IdProfesor,
-                    CalificacionP1 = existe_participacion==null ? null : existe_participacion.CalificacionP1,
-                    CalificacionP2= existe_participacion == null ? null : existe_participacion.CalificacionP2,
-                    CalificacionP3= existe_participacion == null ? null : existe_participacion.CalificacionP3,
-                    CalificacionP4 = existe_participacion == null ? null : existe_participacion.CalificacionP4,
-                    PromedioQ1 = existe_participacion == null ? null : existe_participacion.PromedioQ1,
-                    PromedioQ2 = existe_participacion == null ? null : existe_participacion.PromedioQ2,
-                    PromedioFinal = existe_participacion == null ? null : existe_participacion.PromedioFinal,
-                    IdUsuarioCreacion = existe_participacion==null ? SessionFixed.IdUsuario : existe_participacion.IdUsuarioCreacion,
-                    FechaCreacion = existe_participacion == null ? DateTime.Now : existe_participacion.FechaCreacion,
-                    IdUsuarioModificacion = existe_participacion==null ? null :SessionFixed.IdUsuario,
-                    FechaModificacion = existe_participacion == null ? (DateTime?)null : DateTime.Now
-                };
+                    var existe_participacion = bus_participacion.GetInfo_X_Matricula(edited_info.IdEmpresa, Convert.ToDecimal(item.IdMatricula));
+                    var info = new aca_MatriculaCalificacionParticipacion_Info
+                    {
+                        IdEmpresa = edited_info.IdEmpresa,
+                        IdAnio = edited_info.IdAnio,
+                        IdMatricula = item.IdMatricula,
+                        IdAlumno = item.IdAlumno,
+                        IdTematica = edited_info.IdTematica,
+                        IdCampoAccion = edited_info.IdCampoAccion,
+                        IdProfesor = edited_info.IdProfesor,
+                        CalificacionP1 = existe_participacion == null ? null : existe_participacion.CalificacionP1,
+                        CalificacionP2 = existe_participacion == null ? null : existe_participacion.CalificacionP2,
+                        CalificacionP3 = existe_participacion == null ? null : existe_participacion.CalificacionP3,
+                        CalificacionP4 = existe_participacion == null ? null : existe_participacion.CalificacionP4,
+                        PromedioQ1 = existe_participacion == null ? null : existe_participacion.PromedioQ1,
+                        PromedioQ2 = existe_participacion == null ? null : existe_participacion.PromedioQ2,
+                        PromedioFinal = existe_participacion == null ? null : existe_participacion.PromedioFinal,
+                        IdUsuarioCreacion = existe_participacion == null ? SessionFixed.IdUsuario : existe_participacion.IdUsuarioCreacion,
+                        FechaCreacion = existe_participacion == null ? DateTime.Now : existe_participacion.FechaCreacion,
+                        IdUsuarioModificacion = existe_participacion == null ? null : SessionFixed.IdUsuario,
+                        FechaModificacion = existe_participacion == null ? (DateTime?)null : DateTime.Now
+                    };
 
-                lst_calificacion_participacion.Add(info);
-            }
+                    lst_calificacion_participacion.Add(info);
+                }
 
-            if (bus_participacion.Guardar(lst_calificacion_participacion))
-            {
+                if (bus_participacion.Guardar(lst_calificacion_participacion))
+                {
 
-            }
-
-
+                }
+            }           
         }
     }
 }

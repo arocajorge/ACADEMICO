@@ -98,26 +98,31 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_NivelPorJornada = Context.aca_AnioLectivo_NivelAcademico_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel).ToList();
-                    Context.aca_AnioLectivo_NivelAcademico_Jornada.RemoveRange(lst_NivelPorJornada);
-
-                    if (lista.Count > 0)
+                    var info_anio_curso = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.EnCurso == true).FirstOrDefault();
+                    if (info_anio_curso != null)
                     {
-                        foreach (var info in lista)
+                        var lst_NivelPorJornada = Context.aca_AnioLectivo_NivelAcademico_Jornada.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel).ToList();
+                        Context.aca_AnioLectivo_NivelAcademico_Jornada.RemoveRange(lst_NivelPorJornada);
+
+                        if (lista.Count > 0)
                         {
-                            aca_AnioLectivo_NivelAcademico_Jornada Entity = new aca_AnioLectivo_NivelAcademico_Jornada
+                            foreach (var info in lista)
                             {
-                                IdEmpresa = info.IdEmpresa,
-                                IdAnio = info.IdAnio,
-                                IdSede = info.IdSede,
-                                IdNivel = info.IdNivel,
-                                IdJornada = info.IdJornada,
-                                NomJornada = info.NomJornada,
-                                OrdenJornada = info.OrdenJornada
-                            };
-                            Context.aca_AnioLectivo_NivelAcademico_Jornada.Add(Entity);
+                                aca_AnioLectivo_NivelAcademico_Jornada Entity = new aca_AnioLectivo_NivelAcademico_Jornada
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAnio = info.IdAnio,
+                                    IdSede = info.IdSede,
+                                    IdNivel = info.IdNivel,
+                                    IdJornada = info.IdJornada,
+                                    NomJornada = info.NomJornada,
+                                    OrdenJornada = info.OrdenJornada
+                                };
+                                Context.aca_AnioLectivo_NivelAcademico_Jornada.Add(Entity);
+                            }
                         }
                     }
+                    
                     Context.SaveChanges();
                 }
                 return true;

@@ -159,6 +159,7 @@ namespace Core.Web.Areas.Academico.Controllers
     public class aca_AnioLectivoParcial_List
     {
         aca_AnioLectivoParcial_Bus bus_parcial = new aca_AnioLectivoParcial_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
 
         string Variable = "aca_AnioLectivoParcial_Info";
         public List<aca_AnioLectivoParcial_Info> get_list(decimal IdTransaccionSession)
@@ -180,8 +181,8 @@ namespace Core.Web.Areas.Academico.Controllers
         public void UpdateRow(aca_AnioLectivoParcial_Info info_det, decimal IdTransaccionSession)
         {
             int IdEmpresa = string.IsNullOrEmpty(SessionFixed.IdEmpresa) ? 0 : Convert.ToInt32(SessionFixed.IdEmpresa);
-
             aca_AnioLectivoParcial_Info edited_info = get_list(IdTransaccionSession).Where(m => m.IdString == info_det.IdString).FirstOrDefault();
+             
             edited_info.FechaInicio = info_det.FechaInicio;
             edited_info.FechaFin = info_det.FechaFin;
             edited_info.EsExamen = info_det.EsExamen;

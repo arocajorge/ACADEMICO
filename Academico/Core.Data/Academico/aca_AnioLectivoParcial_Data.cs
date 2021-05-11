@@ -319,19 +319,23 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_AnioLectivoParcial Entity = Context.aca_AnioLectivoParcial.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio== info.IdAnio && q.IdSede == info.IdSede && q.IdCatalogoParcial== info.IdCatalogoParcial);
-                    if (Entity == null)
-                        return false;
+                    //var info_anio_curso = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.EnCurso == true).FirstOrDefault();
+                    //if (info_anio_curso != null)
+                    //{
+                        aca_AnioLectivoParcial Entity = Context.aca_AnioLectivoParcial.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdSede == info.IdSede && q.IdCatalogoParcial == info.IdCatalogoParcial);
+                        if (Entity == null)
+                            return false;
 
-                    Entity.FechaInicio = info.FechaInicio;
-                    Entity.FechaFin = info.FechaFin;
-                    Entity.EsExamen = info.EsExamen;
-                    Entity.ValidaEstadoAlumno = info.ValidaEstadoAlumno;
-                    Entity.Orden = info.Orden;
-                    Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
-                    Entity.FechaModificacion = DateTime.Now;
+                        Entity.FechaInicio = info.FechaInicio;
+                        Entity.FechaFin = info.FechaFin;
+                        Entity.EsExamen = info.EsExamen;
+                        Entity.ValidaEstadoAlumno = info.ValidaEstadoAlumno;
+                        Entity.Orden = info.Orden;
+                        Entity.IdUsuarioModificacion = info.IdUsuarioModificacion;
+                        Entity.FechaModificacion = DateTime.Now;
 
-                    Context.SaveChanges();
+                        Context.SaveChanges();
+                    //}            
                 }
 
                 return true;

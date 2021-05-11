@@ -73,27 +73,32 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    var lst_JornadaPorCurso = Context.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada).ToList();
-                    Context.aca_AnioLectivo_Jornada_Curso.RemoveRange(lst_JornadaPorCurso);
-
-                    if (lista.Count > 0)
+                    var info_anio_curso = Context.aca_AnioLectivo.Where(q => q.IdEmpresa == IdEmpresa && q.IdAnio == IdAnio && q.EnCurso == true).FirstOrDefault();
+                    if (info_anio_curso != null)
                     {
-                        foreach (var info in lista)
+                        var lst_JornadaPorCurso = Context.aca_AnioLectivo_Jornada_Curso.Where(q => q.IdEmpresa == IdEmpresa && q.IdSede == IdSede && q.IdAnio == IdAnio && q.IdNivel == IdNivel && q.IdJornada == IdJornada).ToList();
+                        Context.aca_AnioLectivo_Jornada_Curso.RemoveRange(lst_JornadaPorCurso);
+
+                        if (lista.Count > 0)
                         {
-                            aca_AnioLectivo_Jornada_Curso Entity = new aca_AnioLectivo_Jornada_Curso
+                            foreach (var info in lista)
                             {
-                                IdEmpresa = info.IdEmpresa,
-                                IdAnio = info.IdAnio,
-                                IdSede = info.IdSede,
-                                IdNivel = info.IdNivel,
-                                IdJornada = info.IdJornada,
-                                IdCurso = info.IdCurso,
-                                NomCurso = info.NomCurso,
-                                OrdenCurso = info.OrdenCurso
-                            };
-                            Context.aca_AnioLectivo_Jornada_Curso.Add(Entity);
+                                aca_AnioLectivo_Jornada_Curso Entity = new aca_AnioLectivo_Jornada_Curso
+                                {
+                                    IdEmpresa = info.IdEmpresa,
+                                    IdAnio = info.IdAnio,
+                                    IdSede = info.IdSede,
+                                    IdNivel = info.IdNivel,
+                                    IdJornada = info.IdJornada,
+                                    IdCurso = info.IdCurso,
+                                    NomCurso = info.NomCurso,
+                                    OrdenCurso = info.OrdenCurso
+                                };
+                                Context.aca_AnioLectivo_Jornada_Curso.Add(Entity);
+                            }
                         }
                     }
+                    
                     Context.SaveChanges();
                 }
                 return true;
