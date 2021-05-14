@@ -43,6 +43,8 @@ namespace Core.Web.Areas.Academico.Controllers
         tb_Religion_Bus bus_religion = new tb_Religion_Bus();
         tb_GrupoEtnico_Bus bus_grupoetnico = new tb_GrupoEtnico_Bus();
         aca_parametro_Bus bus_parametro = new aca_parametro_Bus();
+        aca_AnioLectivo_Bus bus_anio = new aca_AnioLectivo_Bus();
+        aca_Matricula_Bus bus_matricula = new aca_Matricula_Bus();
         string MensajeSuccess = "La transacción se ha realizado con éxito";
         string mensaje = string.Empty;
         public static UploadedFile file { get; set; }
@@ -1240,14 +1242,29 @@ namespace Core.Web.Areas.Academico.Controllers
             model.IdUsuarioAnulacion = SessionFixed.IdUsuario;
             model.IdUsuario = SessionFixed.IdUsuario;
 
+            var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
+            var info_matricula = bus_matricula.GetInfo_ExisteMatricula(model.IdEmpresa, (info_anio==null ?0: info_anio.IdAnio), model.IdAlumno);
+
             if (model.alu_foto == null)
                 model.alu_foto = new byte[0];
 
-            if (!bus_alumno.AnularDB(model))
+            if (info_matricula==null || (info_matricula.IdMatricula != 0 && info_matricula.EsRetirado == true))
             {
-                ViewBag.mensaje = "No se ha podido anular el registro";
-                cargar_combos();
-                return View(model);
+                if (!bus_alumno.AnularDB(model))
+                {
+                    ViewBag.mensaje = "No se ha podido anular el registro";
+                    cargar_combos();
+                    return View(model);
+                }
+            }
+            else
+            {
+                if(info_matricula.IdMatricula!=0 && info_matricula.EsRetirado==false)
+                {
+                    ViewBag.mensaje = "Existe una matricula activa para el año lectivo en curso, realice el retiro del estudiante y luego proceda con la anulación";
+                    cargar_combos();
+                    return View(model);
+                }
             }
 
             return RedirectToAction("Index");
