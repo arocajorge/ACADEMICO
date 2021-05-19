@@ -147,7 +147,7 @@ namespace Core.Data.Reportes.Academico
                     + " from aca_matricula a WITH (nolock) join "
                     + " aca_MatriculaCalificacionParticipacion as b WITH (nolock) on a.IdEmpresa = b.IdEmpresa and a.IdAlumno = b.IdAlumno join "
                     + " aca_AnioLectivo_Jornada_Curso as jc WITH (nolock) on a.IdEmpresa = jc.IdEmpresa and a.IdAnio = jc.IdAnio and a.IdSede = jc.IdSede and a.IdNivel = jc.IdNivel and a.IdJornada = jc.IdJornada and a.IdCurso = jc.IdCurso "
-                    + " where a.IdEmpresa = @IdEmpresa and a.IdNivel = @wIdNivel and jc.OrdenCurso in (@wOrden1, @wOrden2, @wOrden3) "
+                    + " where a.IdEmpresa = @IdEmpresa and a.IdAnio= @IdAnio and a.IdNivel = @wIdNivel and jc.OrdenCurso in (@wOrden1, @wOrden2, @wOrden3) "
                     + " ) a "
                     + " group by a.IdEmpresa, a.IdAlumno";
                     #endregion
