@@ -176,7 +176,7 @@ namespace Core.Data.Reportes.Contabilidad
             + " @oCXCDeudasAnteriores = dbo.BankersRounding(sum(case when a.IdCtaCble like '0107%' then dc_Valor else 0 end), 2) , "
             + " @oCXCAnticipados = dbo.BankersRounding(sum(case when a.IdCtaCble like '0202%' then dc_Valor else 0 end), 2) , "
             + " @oINGMatutina = dbo.BankersRounding(sum(case when b.cb_Fecha between @FechaIni and @FechaFin and(a.IdCtaCble like '0401%' or a.IdCtaCble like '0402%' or a.IdCtaCble like '0403%' or a.IdCtaCble like '0404%') then dc_Valor else 0 end), 2) , "
-            + " @oINGVespertina = dbo.BankersRounding(sum(case when b.cb_Fecha between @FechaIni and @FechaFin and(a.IdCtaCble like '0405%' or a.IdCtaCble like '0406%') then dc_Valor else 0 end), 2) "
+            + " @oINGVespertina = dbo.BankersRounding(sum(case when b.cb_Fecha between @FechaIni and @FechaFin and(a.IdCtaCble like '0405%' or a.IdCtaCble like '0406%' or a.IdCtaCble like '0407%') then dc_Valor else 0 end), 2) "
             + " from ct_cbtecble_det as a with(nolock) join "
             + " ct_cbtecble as b with(nolock) on a.IdEmpresa = b.IdEmpresa and a.IdTipoCbte = b.IdTipoCbte and a.IdCbteCble = b.IdCbteCble "
             + " where a.IdEmpresa = @IdEmpresa and b.cb_Fecha <= @FechaFin "

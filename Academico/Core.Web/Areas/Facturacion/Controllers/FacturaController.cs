@@ -1161,7 +1161,7 @@ namespace Core.Web.Areas.Facturacion.Controllers
             HttpContext.Current.Session[variable + IdTransaccionSession.ToString()] = list;
         }
     }
-
+    /*
     public class fa_factura_det_List
     {
         tb_sis_Impuesto_Bus bus_impuesto = new tb_sis_Impuesto_Bus();
@@ -1226,4 +1226,5 @@ namespace Core.Web.Areas.Facturacion.Controllers
             list.Remove(list.Where(m => m.Secuencia == Secuencia).First());
         }
     }
+    */
 }
