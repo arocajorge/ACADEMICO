@@ -38,7 +38,7 @@ namespace Core.Data.Academico
 
                     Lista.AddRange((from q in Context.aca_NivelAcademico
                                     where !Context.aca_AnioLectivo_Sede_NivelAcademico.Any(n => n.IdNivel == q.IdNivel && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio==IdAnio)
-                                    && q.Estado == true
+                                    && q.Estado == true && q.IdEmpresa==IdEmpresa
                                     select new aca_AnioLectivo_Sede_NivelAcademico_Info
                                     {
                                         seleccionado = false,

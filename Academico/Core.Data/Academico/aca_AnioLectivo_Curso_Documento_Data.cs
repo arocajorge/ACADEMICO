@@ -44,7 +44,7 @@ namespace Core.Data.Academico
 
                     Lista.AddRange((from j in Context.aca_Documento
                                     where !Context.aca_AnioLectivo_Curso_Documento.Any(n => n.IdDocumento == j.IdDocumento && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio == IdAnio && n.IdNivel == IdNivel && n.IdJornada == IdJornada && n.IdCurso == IdCurso)
-                                    && j.Estado == true
+                                    && j.Estado == true && j.IdEmpresa == IdEmpresa
                                     select new aca_AnioLectivo_Curso_Documento_Info
                                     {
                                         seleccionado = false,

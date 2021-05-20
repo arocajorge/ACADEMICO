@@ -919,7 +919,7 @@ namespace Core.Data.Academico
 
                     Lista.AddRange((from j in Context.aca_Paralelo
                                     where !Context.aca_AnioLectivo_Curso_Paralelo.Any(n => n.IdParalelo == j.IdParalelo && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio == IdAnio && n.IdNivel == IdNivel && n.IdJornada == IdJornada && n.IdCurso == IdCurso)
-                                    && j.Estado == true
+                                    && j.Estado == true && j.IdEmpresa==IdEmpresa
                                     select new aca_AnioLectivo_Curso_Paralelo_Info
                                     {
                                         seleccionado = false,

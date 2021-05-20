@@ -40,7 +40,7 @@ namespace Core.Data.Academico
                                     join r in Context.aca_CampoAccion
                                     on new { q.IdEmpresa, q.IdCampoAccion } equals new { r.IdEmpresa, r.IdCampoAccion }
                                     where !Context.aca_AnioLectivo_Tematica.Any(n => n.IdTematica == q.IdTematica && n.IdEmpresa == IdEmpresa && n.IdAnio == IdAnio)
-                                    && q.Estado == true
+                                    && q.Estado == true && q.IdEmpresa== IdEmpresa
                                     select new aca_AnioLectivo_Tematica_Info
                                     {
                                         seleccionado = false,
