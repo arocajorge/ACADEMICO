@@ -63,7 +63,7 @@ namespace Core.Data.Academico
 
                     Lista.AddRange((from j in Context.aca_AnioLectivo_Periodo
                                     where !Context.aca_AnioLectivo_Rubro_Periodo.Any(n => n.IdPeriodo == j.IdPeriodo && n.IdEmpresa == IdEmpresa && n.IdAnio == IdAnio && n.IdRubro == IdRubro)
-                                    && j.Estado == true && j.IdAnio == IdAnio
+                                    && j.Estado == true && j.IdEmpresa==IdEmpresa && j.IdAnio == IdAnio
                                     select new aca_AnioLectivo_Rubro_Periodo_Info
                                     {
                                         seleccionado = false,

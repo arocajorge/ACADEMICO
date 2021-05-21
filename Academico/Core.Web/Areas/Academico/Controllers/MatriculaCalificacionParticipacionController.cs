@@ -602,7 +602,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             List<aca_MatriculaCalificacionParticipacion_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParticipacion_Info>();
             ListaCalificaciones = bus_calificacion_participacion.GetList_Calificaciones(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCampoAccion, IdTematica, IdCatalogoParcialTipo, IdProfesor);
-
+            ListaCalificaciones.ForEach(q=>q.IdCatalogoParcialTipo = IdCatalogoParcialTipo);
             Lista_CalificacionParticipacion.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos(model);
