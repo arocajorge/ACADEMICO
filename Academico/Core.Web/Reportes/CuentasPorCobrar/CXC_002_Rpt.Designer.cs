@@ -804,8 +804,8 @@
             this.lblReemplaza.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.lblReemplaza.SizeF = new System.Drawing.SizeF(443.625F, 37.74994F);
             this.lblReemplaza.StylePriority.UseFont = false;
-            this.lblReemplaza.Text = "Usted podrá consultar su factura electrónica en el portal web: ww.Facturacionlcg." +
-    "com\r\nEl usuario es: {0} y la clave es {0}\r\nCliente: {1}";
+            this.lblReemplaza.Text = "Usted podrá consultar su factura electrónica en el portal web: www.facturacionlcg" +
+    ".com\r\nEl usuario es: {0} y la clave es {0}\r\nCliente: {1}";
             // 
             // xrLabel1
             // 

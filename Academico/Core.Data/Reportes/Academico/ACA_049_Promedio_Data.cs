@@ -296,7 +296,7 @@ namespace Core.Data.Reportes.Academico
                     });
                 }
                 lst_promedio_complementarias_PromFinal.ForEach(q => q.CalificacionCualitativa = (q.CalificacionNumerica == null ? "" : funciones.NumeroALetras_Certificado(q.CalificacionNumerica.ToString())));
-                //ListaFinal.AddRange(lst_promedio_complementarias_PromFinal);
+                ListaObligatorias_ValidaCalificaciones.AddRange(lst_promedio_complementarias_PromFinal);
                 ListaFinal.ForEach(q => q.NoTieneCalificacion = (q.Calificacion == null ? 1 : 0));
                 #endregion
                 
