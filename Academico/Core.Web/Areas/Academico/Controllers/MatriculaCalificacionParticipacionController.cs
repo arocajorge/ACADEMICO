@@ -535,8 +535,8 @@ namespace Core.Web.Areas.Academico.Controllers
                 if (Calificacion1 != null && Calificacion2 != null)
                 {
                     decimal suma_calificaciones = Convert.ToDecimal(Calificacion1) + Convert.ToDecimal(Calificacion2);
-                    decimal promedio = suma_calificaciones / 2;
-                    resultado = (decimal)Math.Round(promedio, 2, MidpointRounding.AwayFromZero);
+                    //decimal promedio = suma_calificaciones / 2;
+                    resultado = (decimal)Math.Round(suma_calificaciones, 2, MidpointRounding.AwayFromZero);
                 }
             }
 
@@ -602,7 +602,7 @@ namespace Core.Web.Areas.Academico.Controllers
             ListaCombos.set_list(lst_combos, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             List<aca_MatriculaCalificacionParticipacion_Info> ListaCalificaciones = new List<aca_MatriculaCalificacionParticipacion_Info>();
             ListaCalificaciones = bus_calificacion_participacion.GetList_Calificaciones(IdEmpresa, IdSede, IdAnio, IdNivel, IdJornada, IdCurso, IdParalelo, IdCampoAccion, IdTematica, IdCatalogoParcialTipo, IdProfesor);
-
+            ListaCalificaciones.ForEach(q=>q.IdCatalogoParcialTipo = IdCatalogoParcialTipo);
             Lista_CalificacionParticipacion.set_list(ListaCalificaciones, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
 
             cargar_combos(model);
@@ -762,7 +762,8 @@ namespace Core.Web.Areas.Academico.Controllers
                         bool EsSuperAdmin = Convert.ToBoolean(SessionFixed.EsSuperAdmin);
                         var info_profesor = bus_profesor.GetInfo_x_Usuario(IdEmpresa, IdUsuario);
                         var IdProfesor = (info_profesor == null ? 0 : info_profesor.IdProfesor);
-                        var Promedio = (Calificacion1 == null || Calificacion2 == null ? (decimal?)null : Math.Round(((Convert.ToDecimal(Calificacion1 + Calificacion2) / 2)),2,MidpointRounding.AwayFromZero));
+                        //var Promedio = (Calificacion1 == null || Calificacion2 == null ? (decimal?)null : Math.Round(((Convert.ToDecimal(Calificacion1 + Calificacion2) / 2)),2,MidpointRounding.AwayFromZero));
+                        var Promedio = (Calificacion1 == null || Calificacion2 == null ? (decimal?)null : (Convert.ToDecimal(Calificacion1) + Convert.ToDecimal(Calificacion2)) );
                         aca_MatriculaCalificacionParticipacion_Info info = new aca_MatriculaCalificacionParticipacion_Info
                         {
                             IdEmpresa = IdEmpresa,

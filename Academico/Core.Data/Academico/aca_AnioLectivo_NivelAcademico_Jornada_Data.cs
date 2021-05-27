@@ -40,7 +40,7 @@ namespace Core.Data.Academico
 
                     Lista.AddRange((from j in Context.aca_Jornada
                                     where !Context.aca_AnioLectivo_NivelAcademico_Jornada.Any(n => n.IdJornada == j.IdJornada && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio == IdAnio && n.IdNivel == IdNivel)
-                                    && j.Estado == true
+                                    && j.Estado == true && j.IdEmpresa == IdEmpresa
                                     select new aca_AnioLectivo_NivelAcademico_Jornada_Info
                                     {
                                         seleccionado = false,

@@ -43,6 +43,7 @@ namespace Core.Data.Academico
 
                     Lista.AddRange((from j in Context.aca_Plantilla
                                     where !Context.aca_AnioLectivo_Curso_Plantilla.Any(n => n.IdPlantilla == j.IdPlantilla && n.IdEmpresa == IdEmpresa && n.IdSede == IdSede && n.IdAnio == IdAnio && n.IdNivel == IdNivel && n.IdJornada == IdJornada && n.IdCurso == IdCurso)
+                                    && j.IdEmpresa==IdEmpresa
                                     && j.Estado == true
                                     && j.IdAnio == IdAnio
                                     select new aca_AnioLectivo_Curso_Plantilla_Info
