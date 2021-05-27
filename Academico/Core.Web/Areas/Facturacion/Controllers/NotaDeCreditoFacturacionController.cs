@@ -459,10 +459,10 @@ namespace Core.Web.Areas.Facturacion.Controllers
 
             if (i_validar.lst_cruce.Count() > 0)
             {
-                foreach (var item in i_validar.lst_cruce)
+                foreach (var item in i_validar.lst_cruce.Where(q=> q.TieneSaldo0 == false).ToList())
                 {
                     var info_documento = bus_cruce.Get_info_SaldoDocumento(i_validar.IdEmpresa, i_validar.IdSucursal, item.IdBodega_fac_nd_doc_mod, i_validar.IdCliente, Convert.ToDecimal(i_validar.IdAlumno), item.IdCbteVta_fac_nd_doc_mod, item.vt_tipoDoc);
-                    if (item.Valor_Aplicado<=info_documento.Saldo)
+                    if (info_documento != null && item.Valor_Aplicado<=info_documento.Saldo)
                     {
 
                     }
