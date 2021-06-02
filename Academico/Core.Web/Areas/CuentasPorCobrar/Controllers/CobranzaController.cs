@@ -200,7 +200,7 @@ namespace Core.Web.Areas.CuentasPorCobrar.Controllers
             }
 
             var Cliente = bus_cliente.get_info_x_num_cedula(i_validar.IdEmpresa, familia.pe_cedulaRuc);
-            if (Cliente == null)
+            if (Cliente == null || Cliente.IdCliente==0)
             {
                 msg = "El familiar destinado a ser un cliente no existe en el módulo de clientes";
                 return false;
