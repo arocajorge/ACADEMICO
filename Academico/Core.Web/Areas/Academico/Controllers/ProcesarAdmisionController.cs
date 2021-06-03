@@ -744,7 +744,6 @@ namespace Core.Web.Areas.Academico.Controllers
 
             //info_prematricula.lst_PreMatriculaRubro = lst_DetallePlantilla;
             info_prematricula.lst_Documentos = lst_alumno_documentos;
-
             if (!validar_PreMatricula(info_prematricula, ref mensaje))
             {
                 ViewBag.mensaje = mensaje;
@@ -1282,6 +1281,61 @@ namespace Core.Web.Areas.Academico.Controllers
                     return false;
                 }
             }
+
+            //var info_rep_economico = bus_familia.GetInfo_Representante(info.IdEmpresa, info.IdAlumno,cl_enumeradores.eTipoRepresentante.ECON.ToString());
+            //var info_rep_legal = bus_familia.GetInfo_Representante(info.IdEmpresa, info.IdAlumno, cl_enumeradores.eTipoRepresentante.LEGAL.ToString());
+            //var info_cat_economico = bus_aca_catalogo.GetInfo((info_rep_economico==null ? 0 : info_rep_economico.IdCatalogoPAREN));
+            //var info_cat_legal = bus_aca_catalogo.GetInfo((info_rep_legal == null ? 0 : info_rep_legal.IdCatalogoPAREN));
+
+            //if (info.info_alumno.SeFactura_madre==true)
+            //{
+            //    if (info_rep_economico!= null && info_rep_economico.IdCatalogoPAREN!= info.info_alumno.IdCatalogo_madre && info_rep_economico.pe_cedulaRuc== info.info_alumno.pe_cedulaRuc_madre)
+            //    {
+            //        msg = "La persona registrada como representante económico ya está asignada con otro tipo de familiar - " + (info_cat_economico == null ? "" : info_cat_economico.NomCatalogo);
+            //        return false;
+            //    }
+            //}
+            //if (info.info_alumno.SeFactura_padre == true)
+            //{
+            //    if (info_rep_economico != null && info_rep_economico.IdCatalogoPAREN != info.info_alumno.IdCatalogo_padre && info_rep_economico.pe_cedulaRuc == info.info_alumno.pe_cedulaRuc_padre)
+            //    {
+            //        msg = "La persona registrada como representante económico ya está asignada con otro tipo de familiar - " + (info_cat_economico == null ? "" : info_cat_economico.NomCatalogo);
+            //        return false;
+            //    }
+            //}
+            //if (info.info_alumno.SeFactura_representante == true)
+            //{
+            //    if (info_rep_economico != null && info_rep_economico.IdCatalogoPAREN != info.info_alumno.IdCatalogo_representante && info_rep_economico.pe_cedulaRuc == info.info_alumno.pe_cedulaRuc_representante)
+            //    {
+            //        msg = "La persona registrada como representante económico ya está asignada con otro tipo de familiar - " + (info_cat_economico == null ? "" : info_cat_economico.NomCatalogo);
+            //        return false;
+            //    }
+            //}
+
+            //if (info.info_alumno.EsRepresentante_madre == true)
+            //{
+            //    if (info_rep_legal != null && info_rep_legal.IdCatalogoPAREN != info.info_alumno.IdCatalogo_madre && info_rep_legal.pe_cedulaRuc == info.info_alumno.pe_cedulaRuc_madre)
+            //    {
+            //        msg = "La persona registrada como representante legal ya está asignada con otro tipo de familiar - " + (info_cat_legal == null ? "" : info_cat_legal.NomCatalogo);
+            //        return false;
+            //    }
+            //}
+            //if (info.info_alumno.EsRepresentante_padre == true)
+            //{
+            //    if (info_rep_legal != null && info_rep_legal.IdCatalogoPAREN != info.info_alumno.IdCatalogo_padre && info_rep_legal.pe_cedulaRuc == info.info_alumno.pe_cedulaRuc_padre)
+            //    {
+            //        msg = "La persona registrada como representante legal ya está asignada con otro tipo de familiar - " + (info_cat_legal == null ? "" : info_cat_legal.NomCatalogo);
+            //        return false;
+            //    }
+            //}
+            //if (info.info_alumno.EsRepresentante_representante == true)
+            //{
+            //    if (info_rep_legal != null && info_rep_legal.IdCatalogoPAREN != info.info_alumno.IdCatalogo_representante && info_rep_legal.pe_cedulaRuc == info.info_alumno.pe_cedulaRuc_representante)
+            //    {
+            //        msg = "La persona registrada como representante legal ya está asignada con otro tipo de familiar - " + (info_cat_legal == null ? "" : info_cat_legal.NomCatalogo);
+            //        return false;
+            //    }
+            //}
 
             if (info.IdCurso==0)
             {

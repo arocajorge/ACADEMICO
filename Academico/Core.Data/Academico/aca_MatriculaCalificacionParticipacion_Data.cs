@@ -23,7 +23,19 @@ namespace Core.Data.Academico
                     connection.Open();
 
                     #region Query
-                    string query = "SELECT m.IdEmpresa, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, cp.NomParalelo, cp.OrdenParalelo, mp.IdCampoAccion, mp.IdTematica, t.NombreCampoAccion, t.NombreTematica, mp.IdProfesor, pe.pe_nombreCompleto NombreProfesor "
+                    string query = "SELECT m.IdEmpresa, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, cp.NomParalelo, cp.OrdenParalelo, "
+                    + " mp.IdCampoAccion, mp.IdTematica,mp.IdProfesor,pe.pe_nombreCompleto NombreProfesor, t.NombreCampoAccion, t.NombreTematica "
+                    + " FROM     dbo.aca_Matricula AS m WITH (nolock)"
+                    + " INNER JOIN  dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH(nolock) ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede "
+                    + " AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND  m.IdParalelo = cp.IdParalelo "
+                    + " INNER JOIN  dbo.aca_MatriculaCalificacionParticipacion AS mp WITH(nolock) ON m.IdEmpresa = mp.IdEmpresa AND m.IdMatricula = mp.IdMatricula "
+                    + " LEFT OUTER JOIN aca_AnioLectivo_Tematica t WITH(nolock) on t.IdEmpresa = mp.IdEmpresa and t.IdAnio = m.IdAnio and t.IdCampoAccion = mp.IdCampoAccion and t.IdTematica = mp.IdTematica "
+                    + " LEFT OUTER JOIN aca_Profesor p WITH(nolock) on p.IdEmpresa = mp.IdEmpresa and p.IdProfesor = mp.IdProfesor "
+                    + " LEFT OUTER JOIN tb_persona pe WITH(nolock) on pe.IdPersona = p.IdPersona "
+                    + " where m.IdEmpresa = " + IdEmpresa.ToString() + " and m.IdAnio = " + IdAnio.ToString() + " and m.IdSede = 1 and m.IdNivel = " + IdNivel.ToString() + " and m.IdJornada = " + IdJornada.ToString() + " and m.IdCurso = " + IdCurso.ToString()
+                    + " group by m.IdEmpresa, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, cp.NomParalelo, cp.OrdenParalelo, "
+                    + " mp.IdCampoAccion, mp.IdTematica,mp.IdProfesor,pe.pe_nombreCompleto, t.NombreCampoAccion, t.NombreTematica ";
+                    /*string query = "SELECT m.IdEmpresa, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, cp.NomParalelo, cp.OrdenParalelo, mp.IdCampoAccion, mp.IdTematica, t.NombreCampoAccion, t.NombreTematica, mp.IdProfesor, pe.pe_nombreCompleto NombreProfesor "
                     + " FROM     dbo.aca_Matricula AS m WITH (nolock) INNER JOIN "
                     + " dbo.aca_AnioLectivo_Curso_Paralelo AS cp WITH (nolock) ON m.IdEmpresa = cp.IdEmpresa AND m.IdAnio = cp.IdAnio AND m.IdSede = cp.IdSede AND m.IdNivel = cp.IdNivel AND m.IdJornada = cp.IdJornada AND m.IdCurso = cp.IdCurso AND "
                     + " m.IdParalelo = cp.IdParalelo LEFT OUTER JOIN "
@@ -32,7 +44,7 @@ namespace Core.Data.Academico
                     + " LEFT OUTER JOIN aca_Profesor p WITH (nolock) on p.IdEmpresa=mp.IdEmpresa and p.IdProfesor=mp.IdProfesor "
                     + " LEFT OUTER JOIN tb_persona pe WITH (nolock) on pe.IdPersona = p.IdPersona "
                     + " where m.IdEmpresa = " + IdEmpresa + " and m.IdAnio = " + IdAnio + " and m.IdSede = " + IdSede + " and m.IdNivel = " + IdNivel + " and m.IdJornada = " + IdJornada + " and m.IdCurso = " + IdCurso
-                    + " group by m.IdEmpresa, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, cp.NomParalelo, cp.OrdenParalelo, mp.IdCampoAccion, mp.IdTematica, t.NombreCampoAccion, t.NombreTematica, mp.IdProfesor, pe.pe_nombreCompleto ";
+                    + " group by m.IdEmpresa, m.IdAnio, m.IdSede, m.IdNivel, m.IdJornada, m.IdCurso, m.IdParalelo, cp.NomParalelo, cp.OrdenParalelo, mp.IdCampoAccion, mp.IdTematica, t.NombreCampoAccion, t.NombreTematica, mp.IdProfesor, pe.pe_nombreCompleto ";*/
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);

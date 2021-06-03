@@ -120,6 +120,7 @@ namespace Core.Bus.Academico
                             IdAlumno = info.IdAlumno,
                             IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.eTipoParentezco.PAPA),
                             IdPersona = info.info_alumno.info_persona_padre.IdPersona,
+                            pe_cedulaRuc = info.info_alumno.info_persona_padre.pe_cedulaRuc,
                             Direccion = info.info_alumno.Direccion_padre,
                             Telefono = info.info_alumno.pe_telfono_Contacto_padre,
                             Celular = info.info_alumno.Celular_padre,
@@ -149,8 +150,8 @@ namespace Core.Bus.Academico
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
 
-                        var info_padre_familia = odata_fam.getInfo_ExistePersonaParentezco(info_fam_padre.IdEmpresa, info_fam_padre.IdAlumno, info_fam_padre.IdPersona, info_fam_padre.IdCatalogoPAREN);
-                        if (info_padre_familia == null)
+                        var info_padre_familia = odata_fam.get_info_x_num_cedula(info_fam_padre.IdEmpresa, info_fam_padre.IdAlumno, info_fam_padre.pe_cedulaRuc);
+                        if (info_padre_familia == null || info_padre_familia.Secuencia == 0)
                         {
                             if (odata_fam.guardarDB(info_fam_padre))
                             {
@@ -282,6 +283,7 @@ namespace Core.Bus.Academico
                             IdAlumno = info.IdAlumno,
                             IdCatalogoPAREN = Convert.ToInt32(cl_enumeradores.eTipoParentezco.MAMA),
                             IdPersona = info.info_alumno.info_persona_madre.IdPersona,
+                            pe_cedulaRuc = info.info_alumno.info_persona_madre.pe_cedulaRuc,
                             Direccion = info.info_alumno.Direccion_madre,
                             Telefono = info.info_alumno.pe_telfono_Contacto_madre,
                             Celular = info.info_alumno.Celular_madre,
@@ -311,8 +313,8 @@ namespace Core.Bus.Academico
                             FechaCreacion = info.FechaCreacion = DateTime.Now
                         };
 
-                        var info_madre_familia = odata_fam.getInfo_ExistePersonaParentezco(info_fam_madre.IdEmpresa, info_fam_madre.IdAlumno, info_fam_madre.IdPersona, info_fam_madre.IdCatalogoPAREN);
-                        if (info_madre_familia == null)
+                        var info_madre_familia = odata_fam.get_info_x_num_cedula(info_fam_madre.IdEmpresa, info_fam_madre.IdAlumno, info_fam_madre.pe_cedulaRuc);
+                        if (info_madre_familia == null || info_madre_familia.Secuencia == 0)
                         {
                             odata_fam.guardarDB(info_fam_madre);
                         }
@@ -441,6 +443,7 @@ namespace Core.Bus.Academico
                             IdAlumno = info.IdAlumno,
                             IdCatalogoPAREN = info.IdCatalogoPAREN_OtroFamiliar,
                             IdPersona = info.info_alumno.info_persona_representante.IdPersona,
+                            pe_cedulaRuc = info.info_alumno.info_persona_representante.pe_cedulaRuc,
                             Direccion = info.info_alumno.DireccionTrabajo_representante,
                             Telefono = info.info_alumno.TelefonoRepresentante,
                             Celular = info.info_alumno.Celular_representante,
@@ -470,8 +473,8 @@ namespace Core.Bus.Academico
                             FechaCreacion = info.FechaCreacion = DateTime.Now,
                         };
 
-                        var info_otro_familia = odata_fam.getInfo_ExistePersonaParentezco(info_fam_otro_familiar.IdEmpresa, info_fam_otro_familiar.IdAlumno, info_fam_otro_familiar.IdPersona, info.IdCatalogoPAREN_OtroFamiliar);
-                        if (info_otro_familia == null)
+                        var info_otro_familia = odata_fam.get_info_x_num_cedula(info_fam_otro_familiar.IdEmpresa, info_fam_otro_familiar.IdAlumno, info_fam_otro_familiar.pe_cedulaRuc);
+                        if (info_otro_familia == null || info_otro_familia.Secuencia==0)
                         {
                             odata_fam.guardarDB(info_fam_otro_familiar);
                         }
