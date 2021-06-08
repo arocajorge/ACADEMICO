@@ -418,8 +418,8 @@ namespace Core.Data.Facturacion
                     #endregion
 
                     #region Contabilidad
-
-                    var TipoCobro = odat_TipoCobro.get_info(info.IdCobro_tipo);
+                    info.IdCobro_tipo = info.CreDeb == "D" ? "NTDB" : (info.IdCobro_tipo ?? "NTCR");
+                    var TipoCobro = odat_TipoCobro.get_info( info.IdCobro_tipo);
                     if (TipoCobro != null)
                     {
                         ct_cbtecble_Info diario = armar_diario(info);

@@ -480,9 +480,7 @@ namespace Core.Data.Facturacion
 
                 #region Contabilidad
                 var parametro = db_f.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
-
-                if (!string.IsNullOrEmpty(cliente.IdCtaCble_cxc_Credito))
-                {
+                
                     ct_cbtecble_Info diario = armar_diario(info, Convert.ToInt32(parametro.IdTipoCbteCble_Factura));
                     if (diario != null)
                         if (data_ct.guardarDB(diario))
@@ -500,7 +498,6 @@ namespace Core.Data.Facturacion
                             });
                             db_f.SaveChanges();
                         }
-                }
                 #endregion
 
                 #region Descuento por rol
