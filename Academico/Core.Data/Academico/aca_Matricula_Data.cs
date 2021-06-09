@@ -317,8 +317,17 @@ namespace Core.Data.Academico
                 {
                     connection.Open();
                     SqlCommand command = new SqlCommand("", connection);
-                    command.CommandText = "SELECT * FROM aca_Matricula WITH (nolock) "
-                    + " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAlumno = " + IdAlumno.ToString() + " ORDER BY IdMatricula DESC";
+                    command.CommandText = "select * from aca_matricula ma WITH (nolock) "
+                    + " inner join "
+                    + " ("
+                    + " SELECT m.IdEmpresa, MAX(m.IdMatricula) IdMatricula FROM aca_Matricula m WITH(nolock) "
+                    + " WHERE m.IdEmpresa = " + IdEmpresa.ToString() +" and m.IdAlumno = " + IdAlumno.ToString()
+                    + " group by m.IdEmpresa, m.IdAlumno "
+                    + " ) m "
+                    + " ON ma.IdEmpresa = m.IdEmpresa and ma.IdMatricula = m.IdMatricula "
+                    + " where ma.IdEmpresa = " + IdEmpresa.ToString() + " and ma.IdAlumno = " + IdAlumno.ToString();
+                    //command.CommandText = "SELECT * FROM aca_Matricula WITH (nolock) "
+                    //+ " WHERE IdEmpresa = " + IdEmpresa.ToString() + " and IdAlumno = " + IdAlumno.ToString() + " ORDER BY IdMatricula DESC";
                     var ResultValue = command.ExecuteScalar();
 
                     if (ResultValue == null)
