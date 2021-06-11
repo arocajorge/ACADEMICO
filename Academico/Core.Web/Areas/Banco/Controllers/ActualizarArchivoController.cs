@@ -50,7 +50,7 @@ namespace Core.Web.Areas.Banco.Controllers
             string fileName = Guid.NewGuid() + ".txt";
             string filePath = "~/Content/UploadedFiles/Reports/" + fileName;
             StreamWriter sw = new StreamWriter(Server.MapPath(filePath));
-            sw.WriteLine("9990940           "+new DateTime(DateTime.Now.Date.Year,DateTime.Now.Month,1).ToString("MM/dd/yyyy"));
+            sw.WriteLine("9990940           "+new DateTime(DateTime.Now.Date.Year,DateTime.Now.Month,1).ToString("dd/MM/yyyy"));
             var lst = Lista.get_list(IdTransaccion);
             foreach (var item in lst)
             {

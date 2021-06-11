@@ -65,7 +65,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacionParcial_Info> Lista = new List<aca_MatriculaCalificacionParcial_Info>();
-
+                List<aca_MatriculaCalificacionParcial_Info> ListaFinal = new List<aca_MatriculaCalificacionParcial_Info>();
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -134,8 +134,8 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-
-                return Lista;
+                ListaFinal = Lista.OrderBy(q => q.pe_nombreCompleto).ToList();
+                return ListaFinal;
             }
             catch (Exception)
             {
@@ -148,6 +148,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacionParcial_Info> Lista = new List<aca_MatriculaCalificacionParcial_Info>();
+                List<aca_MatriculaCalificacionParcial_Info> ListaFinal = new List<aca_MatriculaCalificacionParcial_Info>();
 
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
@@ -169,7 +170,7 @@ namespace Core.Data.Academico
                     + " WHERE(IdEmpresa = mcp.IdEmpresa) AND(IdMatricula = mcp.IdMatricula) AND(Estado = 1))) "
                     + " AND mcp.IdEmpresa = " + IdEmpresa.ToString() + " AND m.IdAnio =" + IdAnio.ToString() + " AND m.IdSede = " + IdSede.ToString()
                     + " AND m.IdNivel = " + IdNivel.ToString() + " AND m.IdJornada = " + IdJornada.ToString() + " AND m.IdCurso = " + IdCurso.ToString()
-                    +" AND m.IdParalelo = " + IdParalelo.ToString() + " AND mcp.IdMateria = " + IdMateria.ToString() + " AND mcp.IdCatalogoParcial = " + IdCatalogoParcial.ToString();
+                    + " AND m.IdParalelo = " + IdParalelo.ToString() + " AND mcp.IdMateria = " + IdMateria.ToString() + " AND mcp.IdCatalogoParcial = " + IdCatalogoParcial.ToString();
                     #endregion
 
                     SqlCommand command = new SqlCommand(query, connection);
@@ -217,8 +218,8 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                
-                return Lista;
+                ListaFinal = Lista.OrderBy(q => q.pe_nombreCompleto).ToList();
+                return ListaFinal;
             }
             catch (Exception)
             {

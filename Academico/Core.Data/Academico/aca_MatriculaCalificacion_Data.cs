@@ -305,6 +305,7 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacion_Info> Lista = new List<aca_MatriculaCalificacion_Info>();
+                List<aca_MatriculaCalificacion_Info> ListaFinal = new List<aca_MatriculaCalificacion_Info>();
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -394,8 +395,9 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                
-                return Lista;
+
+                ListaFinal = Lista.OrderBy(q => q.pe_nombreCompleto).ToList();
+                return ListaFinal;
             }
             catch (Exception)
             {
@@ -408,6 +410,8 @@ namespace Core.Data.Academico
             try
             {
                 List<aca_MatriculaCalificacion_Info> Lista = new List<aca_MatriculaCalificacion_Info>();
+                List<aca_MatriculaCalificacion_Info> ListaFinal = new List<aca_MatriculaCalificacion_Info>();
+
                 using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
                 {
                     connection.Open();
@@ -497,8 +501,8 @@ namespace Core.Data.Academico
                     }
                     reader.Close();
                 }
-                
-                return Lista;
+                ListaFinal = Lista.OrderBy(q => q.pe_nombreCompleto).ToList();
+                return ListaFinal;
             }
             catch (Exception)
             {
