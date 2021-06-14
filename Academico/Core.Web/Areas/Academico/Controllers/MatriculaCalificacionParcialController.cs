@@ -1142,51 +1142,58 @@ namespace Core.Web.Areas.Academico.Controllers
             #endregion
 
             var info_parcial = bus_parcial.GetInfo(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, info.IdCatalogoParcial);
-            if ((info_parcial.Orden - 1) != 0)
+            if (info_parcial != null && info_parcial.Orden != null)
             {
-                var OrdenAnterior = info_parcial.Orden - 1;
-                var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
-                var info_cal_anteriores = bus_calificacion.GetInfo_X_Matricula(info.IdEmpresa, info.IdMatricula, info.IdMateria);
-                decimal? Promedio_CatalogoParcial = null;
-                
-                if (info_cal_anteriores!=null)
+                if ((info_parcial.Orden - 1) != 0)
                 {
-                    if (info_parcial_anterior != null)
-                    {
-                        if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
-                        {
-                            Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP1;
-                        }
-                        if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
-                        {
-                            Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP2;
-                        }
-                        if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
-                        {
-                            Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP3;
-                        }
-                        if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
-                        {
-                            Promedio_CatalogoParcial = info_cal_anteriores.ExamenQ1;
-                        }
-                        if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
-                        {
-                            Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP4;
-                        }
-                        if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
-                        {
-                            Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP5;
-                        }
-                        if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
-                        {
-                            Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP6;
-                        }
-                        if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
-                        {
-                            Promedio_CatalogoParcial = info_cal_anteriores.ExamenQ2;
-                        }
+                    var OrdenAnterior = info_parcial.Orden - 1;
+                    var info_parcial_anterior = bus_parcial.GetInfo_x_Orden(info_matricula.IdEmpresa, info_matricula.IdSede, info_matricula.IdAnio, Convert.ToInt32(OrdenAnterior));
+                    var info_cal_anteriores = bus_calificacion.GetInfo_X_Matricula(info.IdEmpresa, info.IdMatricula, info.IdMateria);
+                    decimal? Promedio_CatalogoParcial = null;
 
-                        if (Promedio_CatalogoParcial==null)
+                    if (info_cal_anteriores != null)
+                    {
+                        if (info_parcial_anterior != null)
+                        {
+                            if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P1))
+                            {
+                                Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP1;
+                            }
+                            if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P2))
+                            {
+                                Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP2;
+                            }
+                            if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P3))
+                            {
+                                Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP3;
+                            }
+                            if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI1))
+                            {
+                                Promedio_CatalogoParcial = info_cal_anteriores.ExamenQ1;
+                            }
+                            if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P4))
+                            {
+                                Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP4;
+                            }
+                            if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P5))
+                            {
+                                Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP5;
+                            }
+                            if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoParcial.P6))
+                            {
+                                Promedio_CatalogoParcial = info_cal_anteriores.CalificacionP6;
+                            }
+                            if (info_parcial_anterior.IdCatalogoParcial == Convert.ToInt32(cl_enumeradores.eTipoCatalogoAcademicoExamen.EXQUI2))
+                            {
+                                Promedio_CatalogoParcial = info_cal_anteriores.ExamenQ2;
+                            }
+
+                            if (Promedio_CatalogoParcial == null)
+                            {
+                                RegistroValidoCalificacion = false;
+                            }
+                        }
+                        else
                         {
                             RegistroValidoCalificacion = false;
                         }
@@ -1196,12 +1203,8 @@ namespace Core.Web.Areas.Academico.Controllers
                         RegistroValidoCalificacion = false;
                     }
                 }
-                else
-                {
-                    RegistroValidoCalificacion = false;
-                }
             }
-
+            
             if ((info.Calificacion1 != null && info.Calificacion1 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
             (info.Calificacion2 != null && info.Calificacion2 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
             (info.Calificacion3 != null && info.Calificacion3 > Convert.ToDecimal(info_anio.CalificacionMaxima)) ||
