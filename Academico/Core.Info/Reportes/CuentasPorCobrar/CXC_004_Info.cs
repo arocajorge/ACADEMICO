@@ -16,5 +16,12 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public decimal SaldoDeudor { get; set; }
         public decimal SaldoAcreedor { get; set; }
         public decimal SaldoFinal { get; set; }
+
+
+        public string IdCtaCbleDebe { get; set; }
+        public string pc_Cuenta { get; set; }
+        public decimal Debe { get; set; }
+        public decimal Haber { get; set; }
+
     }
 }

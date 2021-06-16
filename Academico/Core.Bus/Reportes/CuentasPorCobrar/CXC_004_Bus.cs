@@ -44,5 +44,17 @@ namespace Core.Bus.Reportes.CuentasPorCobrar
                 throw;
             }
         }
+
+        public List<CXC_004_Info> Getlist_Saldo(int IdEmpresa, DateTime FechaCorte)
+        {
+            try
+            {
+                return odata.Getlist_Saldo(IdEmpresa, FechaCorte);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

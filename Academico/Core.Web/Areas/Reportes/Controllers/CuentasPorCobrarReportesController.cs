@@ -269,9 +269,17 @@ namespace Core.Web.Areas.Reportes.Controllers
             report2.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report2.usuario = SessionFixed.IdUsuario;
             report2.empresa = SessionFixed.NomEmpresa;
-            report.p_FechaCorte.Value = model.fecha_corte;
+            report2.p_FechaCorte.Value = model.fecha_corte;
             ViewBag.ReportResumen = report2;
 
+
+            CXC_004_Saldo_Rpt report3 = new CXC_004_Saldo_Rpt();
+
+            report3.p_IdEmpresa.Value = model.IdEmpresa;
+            report3.usuario = SessionFixed.IdUsuario;
+            report3.empresa = SessionFixed.NomEmpresa;
+            report3.p_FechaCorte.Value = model.fecha_corte;
+            ViewBag.ReportSaldoEsperado = report3;
             return View(model);
         }
         [HttpPost]
@@ -291,9 +299,17 @@ namespace Core.Web.Areas.Reportes.Controllers
             report2.p_IdEmpresa.Value = model.IdEmpresa;
             report2.p_IdUsuario.Value = SessionFixed.IdUsuario;
             report2.usuario = SessionFixed.IdUsuario;
-            report.p_FechaCorte.Value = model.fecha_corte;
+            report2.p_FechaCorte.Value = model.fecha_corte;
             report2.empresa = SessionFixed.NomEmpresa;
             ViewBag.ReportResumen = report2;
+
+            CXC_004_Saldo_Rpt report3 = new CXC_004_Saldo_Rpt();
+
+            report3.p_IdEmpresa.Value = model.IdEmpresa;
+            report3.usuario = SessionFixed.IdUsuario;
+            report3.empresa = SessionFixed.NomEmpresa;
+            report3.p_FechaCorte.Value = model.fecha_corte;
+            ViewBag.ReportSaldoEsperado = report3;
 
             return View(model);
         }

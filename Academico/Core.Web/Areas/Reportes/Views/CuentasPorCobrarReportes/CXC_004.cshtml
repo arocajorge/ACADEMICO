@@ -70,6 +70,9 @@
                 <li>
                     <a href="#tab_solicitud_matricula" aria-controls="listado" role="tab" data-toggle="tab">Resumen</a>
                 </li>
+                <li>
+                    <a href="#tab_saldo_esperado" aria-controls="listado" role="tab" data-toggle="tab">Saldo Contable Esperado</a>
+                </li>
             </ul>
             <div class="tab-content" style="padding-top: 20px">
                 <div role="tabpanel" class="tab-pane active" style="margin-left: 1em;" id="tab_hoja_matricula">
@@ -89,6 +92,15 @@
                    settings.MobileMode = false;
                    settings.Name = "webDocumentViewer2";
                }).Bind(ViewBag.ReportResumen).GetHtml()
+                </div>
+
+                <div role="tabpanel" class="tab-pane" style="margin-left: 1em;" id="tab_saldo_esperado">
+                    @Html.DevExpress().WebDocumentViewer(settings =>
+                   {
+                       settings.ClientSideEvents.Init = "function(s, e) {s.previewModel.reportPreview.zoom(1);}";
+                       settings.MobileMode = false;
+                       settings.Name = "webDocumentViewer3";
+                   }).Bind(ViewBag.ReportSaldoEsperado).GetHtml()
                 </div>
             </div>
             <!-- /.box-body -->
