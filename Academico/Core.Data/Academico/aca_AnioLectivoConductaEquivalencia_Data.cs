@@ -467,10 +467,10 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_AnioLectivoConductaEquivalencia Entity = Context.aca_AnioLectivoConductaEquivalencia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.Secuencia == info.Secuencia);
+                    aca_AnioLectivoConductaEquivalencia Entity = Context.aca_AnioLectivoConductaEquivalencia.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio==info.IdAnio && q.Secuencia == info.Secuencia);
                     if (Entity == null)
                         return false;
-                    Entity.IdAnio = info.IdAnio;
+                    //Entity.IdAnio = info.IdAnio;
                     Entity.Letra = info.Letra;
                     Entity.Calificacion = info.Calificacion;
                     Entity.IngresaMotivo = (info.IngresaMotivo == null ? false : info.IngresaMotivo);
@@ -484,7 +484,7 @@ namespace Core.Data.Academico
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 throw;

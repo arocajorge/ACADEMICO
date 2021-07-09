@@ -266,10 +266,10 @@ namespace Core.Data.Reportes.Academico
                     foreach (var item in ListaAlumos)
                     {
                         #region Query
-                        string query = "select a.IdEmpresa, a.IdAlumno, t.NombreTematica, count(*) NumCalificaciones, count(*) *100 NumHoras "
-                        + " from aca_MatriculaCalificacionParticipacion as a WITH (nolock) "
-                        + " left join aca_Tematica t WITH (nolock) on t.IdEmpresa = a.IdEmpresa and t.IdTematica = a.IdTematica and t.IdCampoAccion = a.IdCampoAccion "
-                        + " where a.IdEmpresa = " + item.IdEmpresa.ToString() + " and a.IdAlumno = " + item.IdAlumno.ToString() + " and PromedioFinal is not null "
+                        string query = "select a.IdEmpresa, a.IdAlumno, t.NombreTematica, count(IdMatricula) NumCalificaciones, count(*) *100 NumHoras, SUM(a.PromedioFinal)/count(*) Promedio "
+                        + " from aca_MatriculaCalificacionParticipacion as a WITH(nolock) "
+                        + " left join aca_Tematica t WITH(nolock) on t.IdEmpresa = a.IdEmpresa and t.IdTematica = a.IdTematica and t.IdCampoAccion = a.IdCampoAccion "
+                        + " where a.IdEmpresa = " + item.IdEmpresa.ToString() + " and a.IdAlumno = " + item.IdAlumno.ToString()
                         + " group by a.IdEmpresa, a.IdAlumno, t.NombreTematica ";
                         #endregion
 
@@ -390,7 +390,7 @@ namespace Core.Data.Reportes.Academico
                                 OrdenJornada = item.OrdenJornada,
                                 OrdenCurso = item.OrdenCurso,
                                 OrdenParalelo = item.OrdenParalelo,
-                                Promedio = (decimal?)null,
+                                Promedio = Convert.ToDecimal(reader["Promedio"]),
                                 PromedioString = reader["NombreTematica"].ToString(),
                                 NivelCal = "PARTICIPACION ESTUDIANTIL",
                                 OrdenNivelCal = 999999

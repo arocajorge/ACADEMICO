@@ -9827,6 +9827,8 @@
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_Prematricula.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_GridViewPartial_PreMatriculaRubro.cshtml" />
     <Content Include="Areas\Academico\Views\ProcesarAdmision\_CmbAlumno_ReadOnly.cshtml" />
+    <Content Include="Areas\Academico\Views\ConductaEquivalencia\_ComboBoxPartial_AnioModificar.cshtml" />
+    <Content Include="Areas\Academico\Views\EquivalenciaPromedio\_ComboBoxPartial_AnioModificar.cshtml" />
     <None Include="Properties\PublishProfiles\p1.pubxml" />
     <None Include="Properties\PublishProfiles\Publicacion.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
