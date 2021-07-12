@@ -224,6 +224,44 @@ namespace Core.Data.Facturacion
             }
         }
 
+        public fa_factura_Info GetCtaCbleDebe(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdCbteVta)
+        {
+            try
+            {
+                fa_factura_Info info = new fa_factura_Info();
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "select a.IdEmpresa, a.IdSucursal, a.IdBodega, a.IdCbteVta, a.vt_tipoDoc,case when d.EnCurso = 1 then e.IdCtaCbleDebe else d.IdCtaCbleCierre end as IdCtaCbleDebe, a.vt_serie1+'-'+a.vt_serie2+'-'+a.vt_NumFactura vt_NumFactura"
+                                        + " from fa_factura  as a with(nolock) join"
+                                        +" fa_factura_resumen as b with(nolock) on a.IdEmpresa = b.IdEmpresa and a.IdSucursal = b.IdSucursal and a.IdBodega = b.IdBodega and a.IdCbteVta = b.IdCbteVta join"
+                                        +" aca_Matricula_Rubro as c with(nolock) on b.IdEmpresa = c.IdEmpresa and b.IdSucursal = c.IdSucursal and b.IdBodega = c.IdBodega and b.IdCbteVta = c.IdCbteVta join"
+                                        +" aca_AnioLectivo as d with(nolock) on c.IdEmpresa = d.IdEmpresa and c.IdAnio = d.IdAnio join"
+                                        +" aca_AnioLectivo_Curso_Plantilla_Parametrizacion as e with(nolock) on c.IdEmpresa = e.IdEmpresa and c.IdAnio = e.IdAnio and c.IdSede = e.IdSede and c.IdNivel = e.IdNivel and c.IdJornada = e.IdJornada and c.IdCurso = e.IdCurso and c.IdPlantilla = e.IdPlantilla and c.IdRubro = e.IdRubro"
+                                        +" where a.IdEmpresa = "+IdEmpresa.ToString()+" and a.IdSucursal = "+IdSucursal.ToString()+" and a.IdBodega = "+IdBodega.ToString()+" and a.IdCbteVta = "+IdCbteVta.ToString();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        info = new fa_factura_Info
+                        {
+                            IdCtaCble = reader["IdCtaCbleDebe"].ToString(),
+                            vt_NumFactura = reader["vt_NumFactura"].ToString()
+                        };                        
+                    }
+                    reader.Close();
+                }
+                return info;
+            }
+            catch (Exception ex)
+            {
+                tb_LogError_Data LogData = new tb_LogError_Data();
+                LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message, Clase = "fa_factura_Data", Metodo = "GetCtaCbleDebe" });
+                return new fa_factura_Info();
+            }
+        }
+
         public fa_factura_Info get_info(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdAlumno, string Serie1, string Serie2, string NumFact)
         {
             try

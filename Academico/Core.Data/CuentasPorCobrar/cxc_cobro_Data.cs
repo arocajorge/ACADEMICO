@@ -991,13 +991,14 @@ namespace Core.Data.CuentasPorCobrar
                 {
                     if (item.dc_TipoDocumento == "FACT")
                     {
-                        var infoFact = dbFac.vwfa_factura_ParaContabilizarAcademico.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal && q.IdBodega == item.IdBodega_Cbte && q.IdCbteVta == item.IdCbte_vta_nota).FirstOrDefault();
+                        fa_factura_Data odataf = new fa_factura_Data();
+                        var infoFact = odataf.GetCtaCbleDebe(item.IdEmpresa, item.IdSucursal, item.IdBodega_Cbte ?? 0, item.IdCbte_vta_nota);                        
                         if (infoFact != null)
                         {
                             retorno.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
                             {
                                 secuencia = Secuencia++,
-                                IdCtaCble = infoFact.IdCtaCbleDebe,
+                                IdCtaCble = infoFact.IdCtaCble,
                                 dc_Valor = Math.Round(item.dc_ValorPago,2,MidpointRounding.AwayFromZero) *-1,
                                 dc_Observacion = infoFact.vt_NumFactura
                             });
@@ -1087,13 +1088,15 @@ namespace Core.Data.CuentasPorCobrar
                                 dc_Observacion = TipoCobroCtaFACT.IdCobro_tipo
                             });
                         }
-                        var infoFact = dbFac.vwfa_factura_ParaContabilizarAcademico.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal && q.IdBodega == item.IdBodega_Cbte && q.IdCbteVta == item.IdCbte_vta_nota).FirstOrDefault();
+
+                        fa_factura_Data odataf = new fa_factura_Data();
+                        var infoFact = odataf.GetCtaCbleDebe(item.IdEmpresa, item.IdSucursal, item.IdBodega_Cbte ?? 0, item.IdCbte_vta_nota);                        
                         if (infoFact != null)
                         {
                             retorno.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
                             {
                                 secuencia = Secuencia++,
-                                IdCtaCble = infoFact.IdCtaCbleDebe,
+                                IdCtaCble = infoFact.IdCtaCble,
                                 dc_Valor = Math.Round(item.dc_ValorPago, 2, MidpointRounding.AwayFromZero) * -1,
                                 dc_Observacion = infoFact.vt_NumFactura
                             });

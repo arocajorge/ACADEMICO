@@ -93,4 +93,21 @@ namespace Core.Info.Facturacion
         public DateTime? Fecha_Autorizacion { get; set; }
         public string IdUsuario { get; set; }
     }
+
+    public class fa_notaCreDeb_ParaContabilizar
+    {
+        public int IdEmpresa { get; set; }
+        public int IdSucursal { get; set; }
+        public int IdBodega { get; set; }
+        public decimal IdNota { get; set; }
+        public int QueryNumber { get; set; }
+        public string Tipo { get; set; }
+        public string IdCtaCbleDebe { get; set; }
+        public string IdCtaCbleHaber { get; set; }
+        public string DocumentoCruce { get; set; }
+        public double Valor { get; set; }
+        public string Observacion { get; set; }
+
+    }
+
 }

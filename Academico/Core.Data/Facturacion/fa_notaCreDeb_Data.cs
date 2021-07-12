@@ -912,13 +912,11 @@ namespace Core.Data.Facturacion
                 EntitiesCuentasPorCobrar dbCxc = new EntitiesCuentasPorCobrar();
                 EntitiesFacturacion db = new EntitiesFacturacion();
                 
-                    var lst = db.spfa_notaCreDeb_ParaContabilizarAcademico(info.IdEmpresa, info.IdSucursal, info.IdBodega, info.IdNota).ToList();
+                    var lst = GetCtaCbleNCND(info.IdEmpresa,info.IdSucursal,info.IdBodega,info.IdNota);
                     var NCND = lst.Count > 0 ? lst[0] : null;
                     if (NCND == null)
                         return null;
-
-                    var EnConciliacion = dbCxc.cxc_ConciliacionNotaCredito.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdSucursal == info.IdSucursal && q.IdBodega == info.IdBodega && q.IdNota == info.IdNota && q.Estado == true).Count();
-
+                    
                     var paramFac = db.fa_parametro.Where(q => q.IdEmpresa == info.IdEmpresa).FirstOrDefault();
                     if (paramFac == null)
                         return null;
@@ -938,39 +936,7 @@ namespace Core.Data.Facturacion
                     var Caja = dbCaj.caj_Caja.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdCaja == ptoVta.IdCaja).FirstOrDefault();
                     if (Caja == null)
                         return null;
-
-                    if (EnConciliacion > 0)
-                    {
-                        var TipoNota = db.fa_TipoNota.Where(q => q.IdEmpresa == info.IdEmpresa && q.IdTipoNota == info.IdTipoNota).FirstOrDefault();
-                        if (TipoNota == null)
-                            return null;
-
-                        NCND.IdCtaCbleDebe = TipoNota.IdCtaCbleCXC;
-                        NCND.IdCtaCbleHaber = TipoNota.IdCtaCble;
-                    }
-
-                if (NCND.CreDeb.Trim() == "C")
-                {
-                    using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
-                    {
-                        connection.Open();
-                        SqlCommand command = new SqlCommand();
-                        command.Connection = connection;
-                        command.CommandText = "select a.IdEmpresa, a.IdSucursal, a.IdBodega, a.IdNota, cs.IdCtaCble from fa_notaCreDeb as a join"
-                            + " fa_notaCreDeb_x_cxc_cobro as b on a.IdEmpresa = b.IdEmpresa_nt and a.IdSucursal = b.IdSucursal_nt and a.IdBodega = b.IdBodega_nt and a.IdNota = b.IdNota_nt join"
-                            + " cxc_cobro as c on b.IdEmpresa_cbr = c.IdEmpresa and b.IdSucursal_cbr = c.IdSucursal and b.IdCobro_cbr = c.IdCobro left join"
-                            + " cxc_cobro_det as d on c.IdEmpresa = d.IdEmpresa and c.IdSucursal = d.IdSucursal and c.IdCobro = d.IdCobro join"
-                            + " cxc_cobro_tipo_Param_conta_x_sucursal as cs on cs.IdEmpresa = c.IdEmpresa and cs.IdCobro_tipo = c.IdCobro_tipo"
-                            + " where a.IdEmpresa = " + info.IdEmpresa.ToString() + " and a.IdSucursal = " + info.IdSucursal.ToString() + " and a.IdBodega = " + info.IdBodega.ToString() + " and a.IdNota = " + info.IdNota.ToString() + " and d.IdCobro is null ";
-                        SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            NCND.IdCtaCbleDebe = reader["IdCtaCble"].ToString();
-                        }
-                    }
-                }
-                
-
+                    
                     #region Cabecera
                     ct_cbtecble_Info diario = new ct_cbtecble_Info
                     {
@@ -982,7 +948,7 @@ namespace Core.Data.Facturacion
                         IdPeriodo = Convert.ToInt32(info.no_fecha.ToString("yyyyMM")),
                         IdUsuario = info.IdUsuario,
                         IdUsuarioUltModi = info.IdUsuarioUltMod,
-                        cb_Observacion = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? ("-" + info.Serie1 + "-" + info.Serie2 + "-" + info.NumNota_Impresa) : info.IdNota.ToString()) +" CLIENTE: "+NCND.NomCliente+" ALUMNO: "+NCND.NomAlumno + " " + info.sc_observacion,
+                        cb_Observacion = NCND.Observacion,
                         CodCbteCble = info.CodDocumentoTipo + (info.NaturalezaNota == "SRI" ? info.NumNota_Impresa : info.IdNota.ToString()),
                         cb_Valor = 0,
                         lst_ct_cbtecble_det = new List<ct_cbtecble_det_Info>()
@@ -991,81 +957,35 @@ namespace Core.Data.Facturacion
 
                     int secuencia = 1;
 
-                    if (NCND.CreDeb.Trim() == "C")
+                #region Debe
+                diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
+                {
+                    IdEmpresa = diario.IdEmpresa,
+                    IdTipoCbte = diario.IdTipoCbte,
+                    IdCbteCble = diario.IdCbteCble,
+                    secuencia = secuencia++,
+                    IdCtaCble = TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA" ? Caja.IdCtaCble : NCND.IdCtaCbleDebe,
+                    dc_Valor = Math.Round(lst.Sum(q => q.Valor),2,MidpointRounding.AwayFromZero),
+                });
+                #endregion
+
+                #region Haber
+                foreach (var item in lst)
+                {
+                    diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
                     {
-                        #region Debe
-                        diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
-                        {
-                            IdEmpresa = diario.IdEmpresa,
-                            IdTipoCbte = diario.IdTipoCbte,
-                            IdCbteCble = diario.IdCbteCble,
-                            secuencia = secuencia++,
-                            IdCtaCble = TipoCobro.tc_Tomar_Cta_Cble_De == "CAJA" ? Caja.IdCtaCble : NCND.IdCtaCbleDebe,
-                            dc_Observacion = NCND.vt_NumFactura,
-                            dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero)
-                        });
-                        #endregion
+                        IdEmpresa = diario.IdEmpresa,
+                        IdTipoCbte = diario.IdTipoCbte,
+                        IdCbteCble = diario.IdCbteCble,
+                        IdCtaCble = item.IdCtaCbleHaber,
+                        secuencia = secuencia++,
+                        dc_Valor = Math.Round(item.Valor, 2, MidpointRounding.AwayFromZero)*-1,
+                        dc_Observacion = item.DocumentoCruce
+                    });
+                }
+                #endregion
 
-                        if (lst.Where(q => q.Valor_Aplicado != null && q.Valor_Aplicado != 0).Count() > 0 && EnConciliacion == 0)
-                        {
-                            foreach (var item in lst)
-                            {
-                                #region Haber
-                                diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
-                                {
-                                    IdEmpresa = diario.IdEmpresa,
-                                    IdTipoCbte = diario.IdTipoCbte,
-                                    IdCbteCble = diario.IdCbteCble,
-                                    secuencia = secuencia++,
-                                    IdCtaCble = NCND.IdCtaCbleHaber,
-                                    dc_Observacion = NCND.vt_NumFactura,
-                                    dc_Valor = Math.Round(item.Valor_Aplicado ?? 0, 2, MidpointRounding.AwayFromZero) * -1
-                                });
-                                #endregion
-                            }
-                        }else
-                        {
-                            diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
-                            {
-                                IdEmpresa = diario.IdEmpresa,
-                                IdTipoCbte = diario.IdTipoCbte,
-                                IdCbteCble = diario.IdCbteCble,
-                                secuencia = secuencia++,
-                                IdCtaCble = NCND.IdCtaCbleHaber,
-                                dc_Observacion = NCND.vt_NumFactura,
-                                dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero) * -1
-                            });
-                        }
-                    }else
-                    {
-                        #region Debe
-                        diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
-                        {
-                            IdEmpresa = diario.IdEmpresa,
-                            IdTipoCbte = diario.IdTipoCbte,
-                            IdCbteCble = diario.IdCbteCble,
-                            secuencia = secuencia++,
-                            IdCtaCble = NCND.IdCtaCbleDebe,
-                            dc_Observacion = NCND.vt_NumFactura,
-                            dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero)
-                        });
-                        #endregion
-
-                        #region Debe
-                        diario.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
-                        {
-                            IdEmpresa = diario.IdEmpresa,
-                            IdTipoCbte = diario.IdTipoCbte,
-                            IdCbteCble = diario.IdCbteCble,
-                            secuencia = secuencia++,
-                            IdCtaCble = NCND.IdCtaCbleHaber,
-                            dc_Observacion = NCND.vt_NumFactura,
-                            dc_Valor = Math.Round(Convert.ToDouble(NCND.Total), 2, MidpointRounding.AwayFromZero)*-1
-                        });
-                        #endregion
-                    }
-
-                    if (diario.lst_ct_cbtecble_det.Count == 0)
+                if (diario.lst_ct_cbtecble_det.Count == 0)
                         return null;
 
                     if (Math.Round(diario.lst_ct_cbtecble_det.Sum(q => q.dc_Valor), 2, MidpointRounding.AwayFromZero) != 0)
@@ -1078,10 +998,11 @@ namespace Core.Data.Facturacion
             
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                tb_LogError_Data LogData = new tb_LogError_Data();
+                LogData.GuardarDB(new tb_LogError_Info { Descripcion = ex.Message, InnerException = ex.InnerException == null ? null : ex.InnerException.Message, Clase = "fa_notaCreDeb", Metodo = "armar_diario", IdUsuario = info.IdUsuario });
+                return null;
             }
         }
         private caj_Caja_Movimiento_Info armar_movimiendoCaja(fa_notaCreDeb_Info infoNC, ct_cbtecble_Info infoCT)
@@ -1414,6 +1335,131 @@ namespace Core.Data.Facturacion
                     }
                 }
                 return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<fa_notaCreDeb_ParaContabilizar> GetCtaCbleNCND(int IdEmpresa, int IdSucursal, int IdBodega, decimal IdNota)
+        {
+            try
+            {
+                List<fa_notaCreDeb_ParaContabilizar> Lista = new List<fa_notaCreDeb_ParaContabilizar>();
+
+                using (SqlConnection connection = new SqlConnection(CadenaDeConexion.GetConnectionString()))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "DECLARE @IdEmpresa int = "+IdEmpresa.ToString()+", @IdSucursal int = "+IdSucursal.ToString()+", @IdBodega int = "+IdBodega.ToString()+", @IdNota numeric = "+IdNota.ToString()
+                    + " SELECT A.IdEmpresa, A.IdSucursal, A.IdBodega, A.IdNota, 1 QueryNumber, 'NC CON CRUCE CON CONCILIACION' Tipo, c.IdCtaCbleCXC IdCtaCbleDebe, c.IdCtaCble IdCtaCbleHaber, '' DocumentoCruce, d.Total as Valor,"
+                    + " case when A.NaturalezaNota = 'INT' then 'NTCR ID ' + cast(A.IdNota as varchar) ELSE ISNULL(A.CodDocumentoTipo,'') + ' ' + ISNULL(A.Serie1,'') + '-' + ISNULL(A.Serie2,'') + '-' + ISNULL(A.NumNota_Impresa,'') END +"
+                    + " ' CLIENTE: ' + l.pe_nombreCompleto + ' ALUMNO: ' + n.pe_nombreCompleto + ' OBS: ' + isnull(a.sc_observacion, '') as Observacion"
+                    + " FROM fa_notaCreDeb AS A WITH(NOLOCK) join"
+                    + " fa_notaCreDeb_x_fa_factura_NotaDeb as b WITH(NOLOCK) on a.IdEmpresa = b.IdEmpresa_nt and a.IdSucursal = b.IdSucursal_nt and a.IdBodega = b.IdBodega_nt and a.IdNota = b.IdNota_nt left join"
+                    + " fa_TipoNota as c WITH(NOLOCK) on a.IdEmpresa = c.IdEmpresa and a.IdTipoNota = c.IdTipoNota  LEFT JOIN"
+                    + " fa_notaCreDeb_resumen as d WITH(NOLOCK) on a.IdEmpresa = d.IdEmpresa and a.IdSucursal = d.IdSucursal and a.IdBodega = d.IdBodega and a.IdNota = d.IdNota LEFT JOIN"
+                    + " fa_cliente as k WITH(NOLOCK) on a.IdEmpresa = k.IdEmpresa and a.IdCliente = k.IdCliente LEFT JOIN"
+                    + " tb_persona as l WITH(NOLOCK) on l.IdPersona = k.IdPersona LEFT JOIN"
+                    + " aca_Alumno as m WITH(NOLOCK) on a.IdEmpresa = m.IdEmpresa and a.IdAlumno = m.IdAlumno LEFT JOIN"
+                    + " tb_persona as n WITH(NOLOCK) on m.IdPersona = n.IdPersona"
+                    + " where a.CreDeb = 'C'"
+                    + " and exists("
+                    + " select x.IdEmpresa from cxc_ConciliacionNotaCredito as x WITH(NOLOCK)"
+                    + " where a.IdEmpresa = x.IdEmpresa and a.IdSucursal = x.IdSucursal and a.IdBodega = x.IdBodega and a.IdNota = x.IdNota"
+                    + " and x.Estado = 1"
+                    + " )"
+                    + " and a.IdEmpresa = @IdEmpresa and a.IdSucursal = @IdSucursal and a.IdBodega = @IdBodega and a.IdNota = @IdNota"
+                    + " GROUP BY A.IdEmpresa, A.IdSucursal, A.IdBodega, A.IdNota,c.IdCtaCbleCXC, c.IdCtaCble,d.Total, l.pe_nombreCompleto, n.pe_nombreCompleto, a.sc_observacion,"
+                    + " A.NaturalezaNota, A.CodDocumentoTipo, A.Serie1, A.Serie2, A.NumNota_Impresa"
+                    + " UNION ALL"
+                    + " SELECT A.IdEmpresa, A.IdSucursal, A.IdBodega, A.IdNota, 2, 'NC CON CRUCE SIN CONCILIACION', j.IdCtaCbleCXC, "
+                    + " CASE WHEN b.vt_tipoDoc = 'FACT'"
+                    + " THEN CASE WHEN G.EnCurso = 1 THEN F.IdCtaCbleDebe ELSE G.IdCtaCbleCierre END"
+                    + " WHEN b.vt_tipoDoc = 'NTDB'"
+                    + " THEN H.IdCtaCble_TipoNota"
+                    + " END,"
+                    + " CASE WHEN b.vt_tipoDoc = 'FACT'"
+                    + " THEN 'FACT ' + d.vt_serie1 + '-' + d.vt_serie2 + '-' + d.vt_NumFactura"
+                    + " WHEN b.vt_tipoDoc = 'NTDB'"
+                    + " THEN case when h.NaturalezaNota = 'INT' then 'NTDB ID ' + cast(h.IdNota as varchar) ELSE ISNULL(H.CodDocumentoTipo,'') + ' ' + ISNULL(H.Serie1,'') + '-' + ISNULL(H.Serie2,'') + '-' + ISNULL(H.NumNota_Impresa,'') END"
+                    + " END DocumentoCruce,"
+                    + " b.Valor_Aplicado,"
+                    + " case when A.NaturalezaNota = 'INT' then 'NTCR ID ' + cast(A.IdNota as varchar) ELSE ISNULL(A.CodDocumentoTipo,'') + ' ' + ISNULL(A.Serie1,'') + '-' + ISNULL(A.Serie2,'') + '-' + ISNULL(A.NumNota_Impresa,'') END +"
+                    + " ' CLIENTE: ' + l.pe_nombreCompleto + ' ALUMNO: ' + n.pe_nombreCompleto + ' OBS: ' + isnull(a.sc_observacion, '') as Observacion"
+                    + " FROM fa_notaCreDeb AS A WITH(NOLOCK) join"
+                    + " fa_notaCreDeb_x_fa_factura_NotaDeb as b WITH(NOLOCK) on a.IdEmpresa = b.IdEmpresa_nt and a.IdSucursal = b.IdSucursal_nt and a.IdBodega = b.IdBodega_nt and a.IdNota = b.IdNota_nt LEFT JOIN"
+                    + " fa_factura as d WITH(NOLOCK) on b.IdEmpresa_fac_nd_doc_mod = d.IdEmpresa and b.IdSucursal_fac_nd_doc_mod = d.IdSucursal and b.IdBodega_fac_nd_doc_mod = d.IdBodega and b.IdCbteVta_fac_nd_doc_mod = d.IdCbteVta and b.vt_tipoDoc = d.vt_tipoDoc left join"
+                    + " aca_Matricula_Rubro as e WITH(NOLOCK) on e.IdEmpresa = d.IdEmpresa and e.IdSucursal = d.IdSucursal and e.IdBodega = d.IdBodega and e.IdCbteVta = d.IdCbteVta left join"
+                    + " aca_AnioLectivo_Curso_Plantilla_Parametrizacion as f WITH(NOLOCK)on f.IdEmpresa = e.IdEmpresa and f.IdAnio = e.IdAnio and f.IdSede = e.IdSede and f.IdNivel = e.IdNivel and f.IdJornada = e.IdJornada and f.IdCurso = e.IdCurso and f.IdPlantilla = e.IdPlantilla and f.IdRubro = e.IdRubro left join"
+                    + " aca_AnioLectivo as g WITH(NOLOCK) on e.IdEmpresa = g.IdEmpresa and e.IdAnio = g.IdAnio left join"
+                    + " fa_notaCreDeb as h WITH(NOLOCK) on b.IdEmpresa_fac_nd_doc_mod = h.IdEmpresa and b.IdSucursal_fac_nd_doc_mod = h.IdSucursal and b.IdBodega_fac_nd_doc_mod = h.IdBodega and b.IdCbteVta_fac_nd_doc_mod = h.IdNota and b.vt_tipoDoc = h.CodDocumentoTipo left join"
+                    + " fa_TipoNota as j WITH(NOLOCK) on a.IdEmpresa = j.IdEmpresa and a.IdTipoNota = j.IdTipoNota LEFT JOIN"
+                    + " fa_cliente as k WITH(NOLOCK) on a.IdEmpresa = k.IdEmpresa and a.IdCliente = k.IdCliente LEFT JOIN"
+                    + " tb_persona as l WITH(NOLOCK) on l.IdPersona = k.IdPersona LEFT JOIN"
+                    + " aca_Alumno as m WITH(NOLOCK) on a.IdEmpresa = m.IdEmpresa and a.IdAlumno = m.IdAlumno LEFT JOIN"
+                    + " tb_persona as n WITH(NOLOCK) on m.IdPersona = n.IdPersona"
+                    + " where a.CreDeb = 'C' and NOT exists("
+                    + "     select x.IdEmpresa from cxc_ConciliacionNotaCredito as x WITH(NOLOCK)"
+                    + "     where a.IdEmpresa = x.IdEmpresa and a.IdSucursal = x.IdSucursal and a.IdBodega = x.IdBodega and a.IdNota = x.IdNota"
+                        + " and x.Estado = 1"
+                    + " ) and a.IdEmpresa = @IdEmpresa and a.IdSucursal = @IdSucursal and a.IdBodega = @IdBodega and a.IdNota = @IdNota"
+                    + " UNION ALL"
+                    + " SELECT A.IdEmpresa, A.IdSucursal, A.IdBodega, A.IdNota, 3, 'NC SIN CRUCE',c.IdCtaCbleCXC IdCtaCbleDebe, c.IdCtaCble IdCtaCbleHaber,"
+                    + " '' DocumentoCruce, d.Total, "
+                    + " case when A.NaturalezaNota = 'INT' then 'NTCR ID ' + cast(A.IdNota as varchar) ELSE ISNULL(A.CodDocumentoTipo,'') + ' ' + ISNULL(A.Serie1,'') + '-' + ISNULL(A.Serie2,'') + '-' + ISNULL(A.NumNota_Impresa,'') END +"
+                    + " ' CLIENTE: ' + l.pe_nombreCompleto + ' ALUMNO: ' + n.pe_nombreCompleto + ' OBS: ' + isnull(a.sc_observacion, '') as Observacion"
+                    + " FROM fa_notaCreDeb AS A WITH(NOLOCK) LEFT join"
+                    + " fa_notaCreDeb_x_fa_factura_NotaDeb as b WITH(NOLOCK) on a.IdEmpresa = b.IdEmpresa_nt and a.IdSucursal = b.IdSucursal_nt and a.IdBodega = b.IdBodega_nt and a.IdNota = b.IdNota_nt left join"
+                    + " fa_TipoNota as c WITH(NOLOCK) on a.IdEmpresa = c.IdEmpresa and a.IdTipoNota = c.IdTipoNota LEFT JOIN"
+                    + " fa_notaCreDeb_resumen as d WITH(NOLOCK) on a.IdEmpresa = d.IdEmpresa and a.IdSucursal = d.IdSucursal and a.IdBodega = d.IdBodega and a.IdNota = d.IdNota left join"
+                    + " fa_cliente as k WITH(NOLOCK) on a.IdEmpresa = k.IdEmpresa and a.IdCliente = k.IdCliente LEFT JOIN"
+                    + " tb_persona as l WITH(NOLOCK) on l.IdPersona = k.IdPersona LEFT JOIN"
+                    + " aca_Alumno as m WITH(NOLOCK) on a.IdEmpresa = m.IdEmpresa and a.IdAlumno = m.IdAlumno LEFT JOIN"
+                    + " tb_persona as n WITH(NOLOCK) on m.IdPersona = n.IdPersona"
+                    + " where a.CreDeb = 'C' and b.IdNota_nt is null"
+                    + " and a.IdEmpresa = @IdEmpresa and a.IdSucursal = @IdSucursal and a.IdBodega = @IdBodega and a.IdNota = @IdNota"
+                    + " GROUP BY A.IdEmpresa, A.IdSucursal, A.IdBodega, A.IdNota,c.IdCtaCbleCXC, c.IdCtaCble,d.Total, l.pe_nombreCompleto, n.pe_nombreCompleto, a.sc_observacion,"
+                    + " A.NaturalezaNota, A.CodDocumentoTipo, A.Serie1, A.Serie2, A.NumNota_Impresa"
+                    + " UNION ALL"
+                    + " SELECT a.IdEmpresa, a.IdSucursal, a.IdBodega, a.IdNota, 4, 'ND', c.IdCtaCbleCXC, c.IdCtaCble, '',b.Total,"
+                    + " case when A.NaturalezaNota = 'INT' then 'NTDB ID ' + cast(A.IdNota as varchar) ELSE ISNULL(A.CodDocumentoTipo,'') + ' ' + ISNULL(A.Serie1,'') + '-' + ISNULL(A.Serie2,'') + '-' + ISNULL(A.NumNota_Impresa,'') END +"
+                    + " ' CLIENTE: ' + l.pe_nombreCompleto + ' ALUMNO: ' + n.pe_nombreCompleto + ' OBS: ' + isnull(a.sc_observacion, '') as Observacion"
+                    + " FROM fa_notaCreDeb as a WITH(NOLOCK) LEFT JOIN"
+                    + " fa_notaCreDeb_resumen as b WITH(NOLOCK) on a.IdEmpresa = b.IdEmpresa and a.IdSucursal = b.IdSucursal and a.IdBodega = b.IdBodega and a.IdNota = b.IdNota LEFT JOIN"
+                    + " fa_TipoNota as c WITH(NOLOCK) on a.IdEmpresa = c.IdEmpresa and a.IdTipoNota = c.IdTipoNota LEFT JOIN"
+                    + " fa_cliente as k WITH(NOLOCK) on a.IdEmpresa = k.IdEmpresa and a.IdCliente = k.IdCliente LEFT join"
+                    + " tb_persona as l WITH(NOLOCK) on l.IdPersona = k.IdPersona LEFT JOIN"
+                    + " aca_Alumno as m WITH(NOLOCK) on a.IdEmpresa = m.IdEmpresa and a.IdAlumno = m.IdAlumno LEFT join"
+                    + " tb_persona as n WITH(NOLOCK) on m.IdPersona = n.IdPersona"
+                    + " where a.CreDeb = 'D' and a.IdEmpresa = @IdEmpresa and a.IdSucursal = @IdSucursal and a.IdBodega = @IdBodega and a.IdNota = @IdNota"
+                    + " group by a.IdEmpresa, a.IdSucursal, a.IdBodega, a.IdNota, c.IdCtaCbleCXC, c.IdCtaCble, b.Total,l.pe_nombreCompleto, n.pe_nombreCompleto, a.sc_observacion,"
+                    + " A.NaturalezaNota, A.CodDocumentoTipo, A.Serie1, A.Serie2, A.NumNota_Impresa";
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Lista.Add(new fa_notaCreDeb_ParaContabilizar
+                        {
+                            IdEmpresa = Convert.ToInt32(reader["IdEmpresa"]),
+                            IdSucursal = Convert.ToInt32(reader["IdSucursal"]),
+                            IdBodega = Convert.ToInt32(reader["IdBodega"]),
+                            IdNota = Convert.ToDecimal(reader["IdNota"]),
+                            QueryNumber = Convert.ToInt32(reader["QueryNumber"]),
+                            Tipo = Convert.ToString(reader["Tipo"]),
+                            IdCtaCbleDebe = Convert.ToString(reader["IdCtaCbleDebe"]),
+                            IdCtaCbleHaber = Convert.ToString(reader["IdCtaCbleHaber"]),
+                            DocumentoCruce = Convert.ToString(reader["DocumentoCruce"]),
+                            Valor = Convert.ToDouble(reader["Valor"]),
+                            Observacion = Convert.ToString(reader["Observacion"])
+                        });
+                    }
+                    reader.Close();
+                }
+
+                return Lista;
             }
             catch (Exception)
             {

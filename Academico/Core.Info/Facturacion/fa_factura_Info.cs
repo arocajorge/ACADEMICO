@@ -91,6 +91,7 @@ namespace Core.Info.Facturacion
         public string IdUsuarioAut { get; set; }
         public string contrasena_admin { get; set; }
         public bool PedirDesbloqueo { get; set; }
+        public string IdCtaCble { get; set; }
         #endregion
     }
 

@@ -9,6 +9,7 @@ using Core.Info.Contabilidad;
 using Core.Data.Contabilidad;
 using System.Data.SqlClient;
 using Core.Data.Academico;
+using Core.Data.Facturacion;
 
 namespace Core.Data.CuentasPorCobrar
 {
@@ -650,13 +651,14 @@ namespace Core.Data.CuentasPorCobrar
                 {
                     if (item.vt_TipoDoc == "FACT")
                     {
-                        var Factura = dbFac.vwfa_factura_ParaContabilizarAcademico.Where(q => q.IdEmpresa == item.IdEmpresa && q.IdSucursal == item.IdSucursal && q.IdBodega == item.IdBodega && q.IdCbteVta == item.IdCbteVtaNota).FirstOrDefault();
+                        fa_factura_Data odataf = new fa_factura_Data();
+                        var Factura = odataf.GetCtaCbleDebe(item.IdEmpresa, item.IdSucursal, item.IdBodega, item.IdCbteVtaNota);
                         if (Factura == null)
                             return null;
 
                         retorno.lst_ct_cbtecble_det.Add(new ct_cbtecble_det_Info
                         {
-                            IdCtaCble = Factura.IdCtaCbleDebe,
+                            IdCtaCble = Factura.IdCtaCble,
                             dc_Valor = Math.Round(item.Valor, 2, MidpointRounding.AwayFromZero) *-1
                         });
                     }else
