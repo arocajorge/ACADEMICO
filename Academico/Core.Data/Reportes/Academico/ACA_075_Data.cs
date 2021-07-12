@@ -200,7 +200,7 @@ namespace Core.Data.Reportes.Academico
                         Promedio = (item.PromedioCalculado == null ? (decimal?)null : Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero)),
                         PromedioString = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
                         AnioCal = "",
-                        NivelCal = "PROM "+item.NivelCal,
+                        NivelCal = item.NivelCal + "PROM ",
                         OrdenNivelCal = item.OrdenNivelCal,
                         //NivelCal = "PROMEDIO",
                         //OrdenNivelCal = 999,
@@ -230,10 +230,7 @@ namespace Core.Data.Reportes.Academico
                     q.NomJornada,
                     q.NomCurso,
                     q.NomParalelo,
-                    q.OrdenNivel,
-                    q.OrdenJornada,
-                    q.OrdenCurso,
-                    q.OrdenParalelo,
+                    q.OrdenNivelCal,
                 }).Select(q => new ACA_075_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,
@@ -253,10 +250,7 @@ namespace Core.Data.Reportes.Academico
                     NomJornada = q.Key.NomJornada,
                     NomCurso = q.Key.NomCurso,
                     NomParalelo = q.Key.NomParalelo,
-                    OrdenNivel = q.Key.OrdenNivel,
-                    OrdenJornada = q.Key.OrdenJornada,
-                    OrdenCurso = q.Key.OrdenCurso,
-                    OrdenParalelo = q.Key.OrdenParalelo,
+                    OrdenNivelCal = q.Key.OrdenNivelCal,
                     CalificacionNull = q.Sum(g => g.CalificacionNull),
                     SumaGeneral = q.Sum(g => Convert.ToDecimal(g.Promedio)),
                     PromedioCalculado = q.Max(g => g.Promedio) == null ? (decimal?)null : q.Sum(g => Convert.ToDecimal(g.Promedio)) / q.Count(g => !string.IsNullOrEmpty(g.Promedio.ToString()))
@@ -293,12 +287,123 @@ namespace Core.Data.Reportes.Academico
                         PromedioString = (item.PromedioCalculado == null ? null : Convert.ToString(Math.Round(Convert.ToDecimal(item.PromedioCalculado), 2, MidpointRounding.AwayFromZero))),
                         AnioCal = "",
                         NivelCal = "PROMEDIO",
-                        OrdenNivelCal = 999,
+                        OrdenNivelCal = item.OrdenNivelCal,
                     });
                 }
-                ListaPromedio.AddRange(lst_PromedioFinal);
 
-                #region Secuencial
+                #region PROMEDIOS 30% Y 40%
+                var lst_PromPorNiveles = lst_PromedioFinal.GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.IdAlumno,
+                    q.pe_cedulaRuc,
+                    q.pe_nombreCompleto,
+                    q.Codigo,
+                    q.IdAnio,
+                    q.IdSede,
+                    q.IdJornada,
+                    q.IdCurso,
+                    q.IdParalelo,
+                    q.IdNivel,
+                    q.Descripcion,
+                    q.NomSede,
+                    q.NomNivel,
+                    q.NomJornada,
+                    q.NomCurso,
+                    q.NomParalelo,
+                    q.OrdenNivelCal,
+                    q.Promedio,
+                }).Select(q => new ACA_075_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdAlumno = q.Key.IdAlumno,
+                    pe_cedulaRuc = q.Key.pe_cedulaRuc,
+                    pe_nombreCompleto = q.Key.pe_nombreCompleto,
+                    Codigo = q.Key.Codigo,
+                    IdAnio = q.Key.IdAnio,
+                    IdSede = q.Key.IdSede,
+                    IdJornada = q.Key.IdJornada,
+                    IdCurso = q.Key.IdCurso,
+                    IdParalelo = q.Key.IdParalelo,
+                    IdNivel = q.Key.IdNivel,
+                    Descripcion = q.Key.Descripcion,
+                    NomSede = q.Key.NomSede,
+                    NomNivel = q.Key.NomNivel,
+                    NomJornada = q.Key.NomJornada,
+                    NomCurso = q.Key.NomCurso,
+                    NomParalelo = q.Key.NomParalelo,
+                    OrdenNivelCal = q.Key.OrdenNivelCal,
+                    NivelCal = (q.Key.OrdenNivelCal == 5 ? "30%" : "40%"),
+                    CalificacionNull = 0,
+                    SumaGeneral = (decimal?)null,
+                    PromedioCalculado = (decimal?)null,
+                    Promedio = (q.Key.IdNivel == 5 ? Math.Round((Convert.ToDecimal(q.Key.Promedio) * Convert.ToDecimal(0.30)), 2,MidpointRounding.AwayFromZero ) : Math.Round((Convert.ToDecimal(q.Key.Promedio) * Convert.ToDecimal(0.40)), 2, MidpointRounding.AwayFromZero)),
+                    PromedioString = (q.Key.IdNivel == 5 ? Convert.ToString(Math.Round((Convert.ToDecimal(q.Key.Promedio) * Convert.ToDecimal(0.30)), 2, MidpointRounding.AwayFromZero)) : Convert.ToString(Math.Round((Convert.ToDecimal(q.Key.Promedio) * Convert.ToDecimal(0.40)), 2, MidpointRounding.AwayFromZero)))
+                }).ToList();
+                ListaPromedio.AddRange(lst_PromPorNiveles);
+                #endregion
+
+                #region GRADO --solo columna
+                var ListaGrado = ListaPromedio.GroupBy(q => new
+                {
+                    q.IdEmpresa,
+                    q.IdMatricula,
+                    q.IdAlumno,
+                    q.pe_cedulaRuc,
+                    q.pe_nombreCompleto,
+                    q.Codigo,
+                    q.IdAnio,
+                    q.IdSede,
+                    q.IdJornada,
+                    q.IdCurso,
+                    q.IdParalelo,
+                    q.IdNivel,
+                    q.Descripcion,
+                    q.NomSede,
+                    q.NomNivel,
+                    q.NomJornada,
+                    q.NomCurso,
+                    q.NomParalelo,
+                    q.OrdenJornada,
+                    q.OrdenNivel,
+                    q.OrdenCurso,
+                    q.OrdenParalelo
+                }).Select(q => new ACA_075_Info
+                {
+                    IdEmpresa = q.Key.IdEmpresa,
+                    IdAlumno = q.Key.IdAlumno,
+                    pe_cedulaRuc = q.Key.pe_cedulaRuc,
+                    pe_nombreCompleto = q.Key.pe_nombreCompleto,
+                    Codigo = q.Key.Codigo,
+                    IdAnio = q.Key.IdAnio,
+                    IdSede = q.Key.IdSede,
+                    IdJornada = q.Key.IdJornada,
+                    IdCurso = q.Key.IdCurso,
+                    IdParalelo = q.Key.IdParalelo,
+                    IdNivel = q.Key.IdNivel,
+                    Descripcion = q.Key.Descripcion,
+                    NomSede = q.Key.NomSede,
+                    NomNivel = q.Key.NomNivel,
+                    NomJornada = q.Key.NomJornada,
+                    NomCurso = q.Key.NomCurso,
+                    NomParalelo = q.Key.NomParalelo,
+                    OrdenJornada = q.Key.OrdenJornada,
+                    OrdenNivel = q.Key.OrdenNivel,
+                    OrdenCurso = q.Key.OrdenCurso,
+                    OrdenParalelo = q.Key.OrdenParalelo,
+                    CalificacionNull = 0,
+                    SumaGeneral = (decimal?)null,
+                    PromedioCalculado = (decimal?)null,
+                    Promedio=(decimal?)null,
+                    OrdenNivelCal=99,
+                    NivelCal="GRADO"
+                }).ToList();
+                //ListaPromedio.AddRange(ListaGrado);
+                #endregion
+
+
+                #region Secuencial de Reporte  
                 var lstParalelos = ListaPromedio.GroupBy(q => new { q.IdEmpresa, q.IdSede, q.IdAnio, q.IdJornada, q.IdNivel, q.IdCurso, q.IdParalelo }).Select(q => new ACA_073_Info
                 {
                     IdEmpresa = q.Key.IdEmpresa,

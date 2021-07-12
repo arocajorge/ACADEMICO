@@ -59,6 +59,7 @@ namespace Core.Web.Areas.Academico.Controllers
         public ActionResult Index(aca_Alumno_Info model)
         {
             List<aca_Alumno_Info> lista = new List<aca_Alumno_Info>();
+            model.IdCurso = Convert.ToInt32(model.IdCurso);
             lista = bus_alumno.GetList_PeriodoActual(model.IdEmpresa, model.IdAnio, model.IdSede, model.IdJornada, model.IdNivel, Convert.ToInt32(model.IdCurso), model.IdParalelo);
             List_AlumnosPeriodoActual.set_list(lista, Convert.ToDecimal(SessionFixed.IdTransaccionSessionActual));
             return View(model);
@@ -94,8 +95,8 @@ namespace Core.Web.Areas.Academico.Controllers
         {
             int IdAnio = !string.IsNullOrEmpty(Request.Params["IdAnio"]) ? int.Parse(Request.Params["IdAnio"]) : -1;
             int IdSede = !string.IsNullOrEmpty(Request.Params["IdSede"]) ? int.Parse(Request.Params["IdSede"]) : -1;
-            int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
-            return PartialView("_ComboBoxPartial_Jornada", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede, IdJornada = IdJornada });
+            //int IdJornada = !string.IsNullOrEmpty(Request.Params["IdJornada"]) ? int.Parse(Request.Params["IdJornada"]) : -1;
+            return PartialView("_ComboBoxPartial_Jornada", new aca_AnioLectivo_Jornada_Curso_Info { IdAnio = IdAnio, IdSede = IdSede});
         }
 
         public ActionResult ComboBoxPartial_Curso()
