@@ -316,7 +316,7 @@ namespace Core.Data.Academico
                     + " tb_persona as pfc WITH (nolock) on pfc.IdPersona = fc.IdPersona LEFT JOIN"
                     + " aca_Plantilla as p WITH (nolock) on b.IdEmpresa = p.IdEmpresa and b.IdPlantilla = p.IdPlantilla left join"
                     + " aca_PlantillaTipo as pt WITH (nolock) on pt.IdEmpresa = p.IdEmpresa and pt.IdTipoPlantilla = p.IdTipoPlantilla"
-                    + " where a.IdEmpresa = "+IdEmpresa.ToString()+" and d.EnCurso = 1 and not exists("
+                    + " where a.IdEmpresa = "+IdEmpresa.ToString()+" and b.IdAnio = "+ IdAnio.ToString() + " and not exists("
                     + " select x1.IdEmpresa from aca_AlumnoRetiro as x1 WITH (nolock) "
                     + " where x1.IdEmpresa = b.IdEmpresa and x1.IdMatricula = b.IdMatricula and x1.Estado = 1)"
                     + " and b.IdSede between " + IdSedeIni.ToString() + " and " + IdSedeFin.ToString() + " and b.IdNivel between " + IdNivelIni.ToString() + " and " + IdNivelFin.ToString() + " and b.IdJornada between " + IdJornadaIni.ToString() + " and " + IdJornadaFin.ToString() + " and b.IdCurso between " + IdCursoIni.ToString() + " and " + IdCursoFin.ToString() + " and b.IdParalelo between " + IdParaleloIni.ToString() + " and " + IdParaleloFin.ToString();
