@@ -232,11 +232,11 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_AnioLectivoEquivalenciaPromedio Entity = Context.aca_AnioLectivoEquivalenciaPromedio.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEquivalenciaPromedio == info.IdEquivalenciaPromedio);
+                    aca_AnioLectivoEquivalenciaPromedio Entity = Context.aca_AnioLectivoEquivalenciaPromedio.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio==info.IdAnio && q.IdEquivalenciaPromedio == info.IdEquivalenciaPromedio);
                     if (Entity == null)
                         return false;
 
-                    Entity.IdAnio = info.IdAnio;
+                    //Entity.IdAnio = info.IdAnio;
                     Entity.Descripcion = info.Descripcion;
                     Entity.Codigo = info.Codigo;
                     Entity.ValorMinimo = info.ValorMinimo;
@@ -262,7 +262,7 @@ namespace Core.Data.Academico
             {
                 using (EntitiesAcademico Context = new EntitiesAcademico())
                 {
-                    aca_AnioLectivoEquivalenciaPromedio Entity = Context.aca_AnioLectivoEquivalenciaPromedio.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdEquivalenciaPromedio == info.IdEquivalenciaPromedio);
+                    aca_AnioLectivoEquivalenciaPromedio Entity = Context.aca_AnioLectivoEquivalenciaPromedio.FirstOrDefault(q => q.IdEmpresa == info.IdEmpresa && q.IdAnio == info.IdAnio && q.IdEquivalenciaPromedio == info.IdEquivalenciaPromedio);
                     if (Entity == null)
                         return false;
 

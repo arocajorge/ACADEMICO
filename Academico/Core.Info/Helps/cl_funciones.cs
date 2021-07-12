@@ -135,9 +135,12 @@ namespace Core.Info.Helps
             {
                 var txt_decimales = decimales.ToString();
                 dec = " COMA " + NumeroALetras_Decimal(decimales);
+                res = NumeroALetras_Promedio(entero) + dec;
             }
-
-            res = NumeroALetras_Promedio(entero) + dec;
+            else
+            {
+                res = NumeroALetras_Promedio(entero) + " COMA CERO";
+            }
             return res;
         }
 
@@ -335,7 +338,7 @@ namespace Core.Info.Helps
 
             else if (value < 20) Num2Text = "DIECI" + NumeroALetras_Promedio(Convert.ToDecimal((value - 10)));
 
-            else if (value == 20) Num2Text = "VEINTE";
+            else if (value == 20) Num2Text = "VEINTE COMA CERO";
 
             else if (value < 30) Num2Text = "VEINTI" + NumeroALetras_Promedio(Convert.ToDecimal((value - 20)));
 
@@ -361,7 +364,7 @@ namespace Core.Info.Helps
 
             else if (value < 100) Num2Text = NumeroALetras(Convert.ToDecimal((Math.Truncate(value / 10) * 10))) + " Y " + NumeroALetras_Promedio(Convert.ToDecimal((value % 10)));
 
-            else if (value == 100) Num2Text = "CIEN";
+            else if (value == 100) Num2Text = "CIEN COMA CERO";
 
             return Num2Text;
         }
