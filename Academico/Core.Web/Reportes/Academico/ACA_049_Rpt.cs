@@ -31,6 +31,7 @@ namespace Core.Web.Reportes.Academico
             int IdParalelo = string.IsNullOrEmpty(p_IdParalelo.Value.ToString()) ? 0 : Convert.ToInt32(p_IdParalelo.Value);
             decimal IdAlumno = string.IsNullOrEmpty(p_IdAlumno.Value.ToString()) ? 0 : Convert.ToInt32(p_IdAlumno.Value);
             bool MostrarRetirados = string.IsNullOrEmpty(p_MostrarRetirados.Value.ToString()) ? false : Convert.ToBoolean(p_MostrarRetirados.Value);
+            DateTime Fecha = string.IsNullOrEmpty(p_Fecha.Value.ToString()) ? DateTime.Now : Convert.ToDateTime(p_Fecha.Value);
 
             ACA_049_Bus bus_rpt = new ACA_049_Bus();
             tb_empresa_Bus bus_empresa = new tb_empresa_Bus();
@@ -38,6 +39,8 @@ namespace Core.Web.Reportes.Academico
             lst_rpt = bus_rpt.GetList(IdEmpresa, IdAnio, IdSede, IdNivel, IdJornada, IdCurso, IdParalelo, IdAlumno, MostrarRetirados);
             Usuario.Text = "Elaborado por: "+usuario;
             this.DataSource = lst_rpt;
+            lst_rpt.ForEach(q => q.FechaActual = Fecha.ToString("d' de 'MMMM' de 'yyyy"));
+
             var emp = bus_empresa.get_info(IdEmpresa);
             if (emp != null)
             {

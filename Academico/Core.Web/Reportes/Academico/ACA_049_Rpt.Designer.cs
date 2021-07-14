@@ -80,6 +80,7 @@
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow7 = new DevExpress.XtraReports.UI.XRTableRow();
             this.Usuario = new DevExpress.XtraReports.UI.XRTableCell();
+            this.p_Fecha = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtSolicitud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrRichText1)).BeginInit();
@@ -581,6 +582,11 @@
             this.Usuario.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.Usuario.Weight = 9.8973699907279684D;
             // 
+            // p_Fecha
+            // 
+            this.p_Fecha.Name = "p_Fecha";
+            this.p_Fecha.Visible = false;
+            // 
             // ACA_049_Rpt
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -607,7 +613,8 @@
             this.p_IdCurso,
             this.p_IdParalelo,
             this.p_IdAlumno,
-            this.p_MostrarRetirados});
+            this.p_MostrarRetirados,
+            this.p_Fecha});
             this.Version = "20.1";
             this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.ACA_049_Rpt_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -672,5 +679,6 @@
         private DevExpress.XtraReports.UI.XRTable xrTable2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow7;
         private DevExpress.XtraReports.UI.XRTableCell Usuario;
+        public DevExpress.XtraReports.Parameters.Parameter p_Fecha;
     }
 }

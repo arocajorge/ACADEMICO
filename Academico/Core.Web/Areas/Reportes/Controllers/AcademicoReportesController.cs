@@ -3415,6 +3415,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             cl_filtros_Info model = new cl_filtros_Info();
             model.IdEmpresa = Convert.ToInt32(SessionFixed.IdEmpresa);
             model.IdSede = Convert.ToInt32(SessionFixed.IdSede);
+            model.fecha_ini = DateTime.Now;
             var info_anio = bus_anio.GetInfo_AnioEnCurso(model.IdEmpresa, 0);
             model.IdAnio = (info_anio == null ? 0 : info_anio.IdAnio);
             model.mostrarAnulados = false;
@@ -3430,6 +3431,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_MostrarRetirados.Value = model.mostrarAnulados;
+            report.p_Fecha.Value = model.fecha_ini;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
@@ -3443,6 +3445,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             reportGeneral.p_IdParalelo.Value = model.IdParalelo;
             reportGeneral.p_IdAlumno.Value = model.IdAlumno;
             reportGeneral.p_MostrarRetirados.Value = model.mostrarAnulados;
+            reportGeneral.p_Fecha.Value = model.fecha_ini;
             reportGeneral.usuario = SessionFixed.IdUsuario;
             reportGeneral.empresa = SessionFixed.NomEmpresa;
             ViewBag.ReportGeneral = reportGeneral;
@@ -3464,6 +3467,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             report.p_IdParalelo.Value = model.IdParalelo;
             report.p_IdAlumno.Value = model.IdAlumno;
             report.p_MostrarRetirados.Value = model.mostrarAnulados;
+            report.p_Fecha.Value = model.fecha_ini;
             report.usuario = SessionFixed.IdUsuario;
             report.empresa = SessionFixed.NomEmpresa;
             ViewBag.Report = report;
@@ -3477,6 +3481,7 @@ namespace Core.Web.Areas.Reportes.Controllers
             reportGeneral.p_IdParalelo.Value = model.IdParalelo;
             reportGeneral.p_IdAlumno.Value = model.IdAlumno;
             reportGeneral.p_MostrarRetirados.Value = model.mostrarAnulados;
+            reportGeneral.p_Fecha.Value = model.fecha_ini;
             reportGeneral.usuario = SessionFixed.IdUsuario;
             reportGeneral.empresa = SessionFixed.NomEmpresa;
             ViewBag.ReportGeneral = reportGeneral;
