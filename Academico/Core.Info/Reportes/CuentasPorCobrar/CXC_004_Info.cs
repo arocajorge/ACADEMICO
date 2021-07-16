@@ -22,6 +22,6 @@ namespace Core.Info.Reportes.CuentasPorCobrar
         public string pc_Cuenta { get; set; }
         public decimal Debe { get; set; }
         public decimal Haber { get; set; }
-
+        public string Padre { get; set; }
     }
 }
