@@ -174,7 +174,7 @@ namespace Core.Data.Reportes.Contabilidad
             + " select @oCXCMatutina = dbo.BankersRounding(sum(case when a.IdCtaCble like '0104%' then dc_Valor else 0 end), 2), "
             + " @oCXCVespertina = dbo.BankersRounding(sum(case when a.IdCtaCble like '0105%' then dc_Valor else 0 end), 2) , "
             + " @oCXCDeudasAnteriores = dbo.BankersRounding(sum(case when a.IdCtaCble like '0107%' then dc_Valor else 0 end), 2) , "
-            + " @oCXCAnticipados = dbo.BankersRounding(sum(case when a.IdCtaCble like '0202%' then dc_Valor else 0 end), 2) , "
+            + " @oCXCAnticipados = dbo.BankersRounding(sum(case when a.IdCtaCble = '0202002001' then dc_Valor else 0 end), 2) , "
             + " @oINGMatutina = dbo.BankersRounding(sum(case when b.cb_Fecha between @FechaIni and @FechaFin and(a.IdCtaCble like '0401%' or a.IdCtaCble like '0402%' or a.IdCtaCble like '0403%' or a.IdCtaCble like '0404%') then dc_Valor else 0 end), 2) , "
             + " @oINGVespertina = dbo.BankersRounding(sum(case when b.cb_Fecha between @FechaIni and @FechaFin and(a.IdCtaCble like '0405%' or a.IdCtaCble like '0406%' or a.IdCtaCble like '0407%') then dc_Valor else 0 end), 2) "
             + " from ct_cbtecble_det as a with(nolock) join "
